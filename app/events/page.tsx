@@ -3,7 +3,7 @@
 import { useRef, useState, useEffect, useCallback, useMemo } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { AnnualTimeline, NetworkFirst, Footer } from "@/components/sections";
+import { NetworkFirst, Footer } from "@/components/sections";
 import SectionTransition from "@/components/effects/SectionTransition";
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -19,96 +19,198 @@ const PAD = "0 clamp(20px, 4vw, 60px)";
 // ─────────────────────────────────────────────────────────────────────────────
 
 const impactStats = [
-  { value: 15, suffix: "+", label: "Events in 2026", comma: false },
-  { value: 8, suffix: "", label: "Cities", comma: false },
+  { value: 9, suffix: "", label: "Events in 2026", comma: false },
+  { value: 5, suffix: "", label: "Cities", comma: false },
   { value: 5000, suffix: "+", label: "Leaders Reached", comma: true },
   { value: 4, suffix: "", label: "Distinct Series", comma: false },
-  { value: 92, suffix: "%", label: "Return Rate", comma: false },
 ];
 
 const cities = [
-  "Dubai",
-  "Riyadh",
   "Kuwait City",
-  "Doha",
-  "Muscat",
   "Jubail",
-  "Abu Dhabi",
-  "Jeddah",
+  "Doha",
+  "Riyadh",
+  "Muscat",
 ];
 
 type SeriesStatus = "open" | "soon";
 
-const seriesData = [
+const allEvents = [
   {
-    id: "cyber-first",
-    title: "Cyber First",
+    id: "cyber-first-kuwait",
+    category: "cyber-first",
+    title: "Cyber First Kuwait",
     tagline: "Defending the Digital Frontier",
     description:
-      "Where the region's CISOs, security architects, and cyber leaders gather to shape enterprise defense.",
+      "The GCC's premier cybersecurity leadership summit — bringing together CISOs, government cyber leaders, and security innovators.",
     color: "#01BBF5",
     image:
       "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80",
     href: "/events/cyber-first",
+    date: "2026-04-21",
     nextDate: "21 Apr 2026",
     nextCity: "Kuwait City",
-    editions: "5 Editions",
-    regions: "Kuwait, Qatar, KSA, Oman",
+    editions: "3rd Edition",
+    regions: "Kuwait",
     attendees: "500+",
     status: "open" as SeriesStatus,
   },
   {
-    id: "data-ai-first",
-    title: "Data & AI First",
+    id: "data-first-kuwait",
+    category: "data-ai-first",
+    title: "Data First Kuwait",
     tagline: "Intelligence at Scale",
     description:
-      "Data strategy, AI, and machine learning — for the leaders building the intelligent enterprise.",
+      "Data strategy, AI, and machine learning — for the leaders building the intelligent enterprise in Kuwait.",
     color: "#11A385",
     image:
       "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80",
     href: "/events/data-ai-first",
+    date: "2026-05-18",
     nextDate: "18 May 2026",
     nextCity: "Kuwait City",
-    editions: "2 Editions",
-    regions: "Kuwait, Qatar",
+    editions: "1st Edition",
+    regions: "Kuwait",
     attendees: "500+",
     status: "soon" as SeriesStatus,
   },
   {
-    id: "ot-security-first",
-    title: "OT Security First",
+    id: "ot-security-jubail",
+    category: "ot-security-first",
+    title: "OT Security Jubail",
     tagline: "Securing Critical Infrastructure",
     description:
-      "Bridging IT and OT security for the industries that keep the world running.",
+      "Bridging IT and OT security for the industries that keep the world running — focused on Jubail's industrial heartland.",
     color: "#D34B9A",
     image:
       "https://images.unsplash.com/photo-1513828583688-c52646db42da?w=800&q=80",
     href: "/events/ot-security-first",
+    date: "2026-06-15",
     nextDate: "15 Jun 2026",
     nextCity: "Jubail, KSA",
-    editions: "3 Editions",
-    regions: "Saudi Arabia, Oman",
+    editions: "2nd Edition",
+    regions: "Saudi Arabia",
     attendees: "300+",
     status: "soon" as SeriesStatus,
   },
   {
-    id: "opex-first",
-    title: "Opex First",
+    id: "digital-first-qatar",
+    category: "data-ai-first",
+    title: "Digital First Qatar",
+    tagline: "Intelligence at Scale",
+    description:
+      "AI governance, data platforms, and enterprise intelligence — built for Qatar's digital vision.",
+    color: "#11A385",
+    image:
+      "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80",
+    href: "/events/data-ai-first",
+    date: "2026-09-15",
+    nextDate: "15 Sep 2026",
+    nextCity: "Doha, Qatar",
+    editions: "2nd Edition",
+    regions: "Qatar",
+    attendees: "500+",
+    status: "soon" as SeriesStatus,
+  },
+  {
+    id: "cyber-first-qatar",
+    category: "cyber-first",
+    title: "Cyber First Qatar",
+    tagline: "Defending the Digital Frontier",
+    description:
+      "Qatar's leading cybersecurity platform for CISOs, government security leaders, and enterprise defenders.",
+    color: "#01BBF5",
+    image:
+      "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80",
+    href: "/events/cyber-first",
+    date: "2026-09-16",
+    nextDate: "16 Sep 2026",
+    nextCity: "Doha, Qatar",
+    editions: "4th Edition",
+    regions: "Qatar",
+    attendees: "500+",
+    status: "soon" as SeriesStatus,
+  },
+  {
+    id: "opex-first-saudi",
+    category: "opex-first",
+    title: "OPEX First Saudi",
     tagline: "Engineering Operational Excellence",
     description:
-      "Process transformation, automation, and the frameworks driving efficiency at scale.",
+      "Process transformation, automation, and the frameworks driving efficiency at scale across Saudi Arabia.",
     color: "#7C3AED",
     image:
       "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&q=80",
     href: "/events/opex-first",
+    date: "2026-09-20",
     nextDate: "20 Sep 2026",
     nextCity: "Riyadh, KSA",
-    editions: "3 Editions",
-    regions: "Dubai, Doha, Riyadh",
+    editions: "3rd Edition",
+    regions: "Saudi Arabia",
     attendees: "400+",
     status: "soon" as SeriesStatus,
   },
+  {
+    id: "digital-resilience-ksa",
+    category: "cyber-first",
+    title: "Digital Resilience KSA",
+    tagline: "Resilience Beyond Defence",
+    description:
+      "Saudi Arabia's inaugural digital resilience summit — national strategy, threat intelligence, and enterprise continuity.",
+    color: "#01BBF5",
+    image:
+      "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80",
+    href: "/events/cyber-first",
+    date: "2026-09-22",
+    nextDate: "22 Sep 2026",
+    nextCity: "Riyadh, KSA",
+    editions: "1st Edition",
+    regions: "Saudi Arabia",
+    attendees: "400+",
+    status: "soon" as SeriesStatus,
+  },
+  {
+    id: "cyber-first-oman",
+    category: "cyber-first",
+    title: "Cyber First Oman",
+    tagline: "Defending the Digital Frontier",
+    description:
+      "Oman's premier cybersecurity summit bringing together CISOs, regulators, and security leaders.",
+    color: "#01BBF5",
+    image:
+      "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80",
+    href: "/events/cyber-first",
+    date: "2026-10-12",
+    nextDate: "12 Oct 2026",
+    nextCity: "Muscat, Oman",
+    editions: "5th Edition",
+    regions: "Oman",
+    attendees: "400+",
+    status: "soon" as SeriesStatus,
+  },
+  {
+    id: "ot-security-oman",
+    category: "ot-security-first",
+    title: "OT Security Oman",
+    tagline: "Securing Critical Infrastructure",
+    description:
+      "Protecting Oman's energy, utilities, and industrial sectors through IT/OT convergence.",
+    color: "#D34B9A",
+    image:
+      "https://images.unsplash.com/photo-1513828583688-c52646db42da?w=800&q=80",
+    href: "/events/ot-security-first",
+    date: "2026-10-13",
+    nextDate: "13 Oct 2026",
+    nextCity: "Muscat, Oman",
+    editions: "3rd Edition",
+    regions: "Oman",
+    attendees: "300+",
+    status: "soon" as SeriesStatus,
+  },
 ];
+
+// Backward-compat alias for components that reference seriesData (e.g. EventsCTA dots)
+const seriesData = allEvents;
 
 const NEXT_EVENT = {
   series: "Cyber First",
@@ -353,7 +455,12 @@ function CountdownDisplay({
 
 function EventsHero() {
   const handleScrollToCalendar = () => {
-    const el = document.getElementById("calendar");
+    const el = document.getElementById("upcoming-events");
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const handleScrollToForm = () => {
+    const el = document.getElementById("get-involved");
     if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -402,8 +509,8 @@ function EventsHero() {
           maxWidth: MAX_W,
           margin: "0 auto",
           padding: PAD,
-          paddingTop: "clamp(130px, 16vw, 200px)",
-          paddingBottom: "clamp(80px, 10vw, 120px)",
+          paddingTop: "clamp(100px, 12vw, 150px)",
+          paddingBottom: "clamp(48px, 6vw, 72px)",
           position: "relative",
           zIndex: 10,
         }}
@@ -480,7 +587,7 @@ function EventsHero() {
           {[
             "Invite-only rooms with 15–20 leaders",
             "Speaker lineups drop first to subscribers",
-            "8 cities, GCC-wide",
+            "6 cities, GCC-wide",
           ].map((bullet) => (
             <div
               key={bullet}
@@ -582,7 +689,7 @@ function EventsHero() {
           style={{ margin: "clamp(32px, 4vw, 44px) 0 0" }}
         >
           <button
-            onClick={handleScrollToCalendar}
+            onClick={handleScrollToForm}
             style={{
               padding: "15px 36px",
               borderRadius: 60,
@@ -610,13 +717,10 @@ function EventsHero() {
               e.currentTarget.style.boxShadow = "none";
             }}
           >
-            Request Invite / Get Tickets <span>↓</span>
+            Get Involved <span>↓</span>
           </button>
           <button
-            onClick={() => {
-              const el = document.getElementById("past-events");
-              if (el) el.scrollIntoView({ behavior: "smooth" });
-            }}
+            onClick={handleScrollToCalendar}
             style={{
               padding: "15px 36px",
               borderRadius: 60,
@@ -638,7 +742,7 @@ function EventsHero() {
               e.currentTarget.style.borderColor = "rgba(255,255,255,0.12)";
             }}
           >
-            View Past Highlights
+            Browse Events
           </button>
         </motion.div>
 
@@ -653,7 +757,6 @@ function EventsHero() {
           {[
             "Trusted by 60+ partners",
             "5,000+ leaders reached",
-            "92% return rate",
           ].map((stat, i) => (
             <div key={stat} className="flex items-center">
               {i > 0 && (
@@ -841,7 +944,7 @@ function SeriesCard({
   series,
   index,
 }: {
-  series: (typeof seriesData)[0];
+  series: (typeof allEvents)[0];
   index: number;
 }) {
   const [hovered, setHovered] = useState(false);
@@ -851,16 +954,16 @@ function SeriesCard({
       href={series.href}
       className="events-series-card group relative block overflow-hidden"
       style={{
-        borderRadius: 22,
+        borderRadius: 16,
         border: hovered
           ? `1px solid ${series.color}33`
           : "1px solid rgba(255, 255, 255, 0.05)",
-        aspectRatio: "3 / 2",
+        aspectRatio: "5 / 4",
         transition:
           "border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
-        transform: hovered ? "translateY(-8px) scale(1.01)" : "none",
+        transform: hovered ? "translateY(-6px) scale(1.01)" : "none",
         boxShadow: hovered
-          ? `0 20px 60px rgba(0,0,0,0.4), 0 0 40px ${series.color}12`
+          ? `0 16px 48px rgba(0,0,0,0.4), 0 0 32px ${series.color}12`
           : "none",
         textDecoration: "none",
       }}
@@ -907,11 +1010,11 @@ function SeriesCard({
       <div
         className="absolute pointer-events-none"
         style={{
-          width: 200,
-          height: 200,
+          width: 140,
+          height: 140,
           borderRadius: "50%",
           background: series.color,
-          filter: "blur(60px)",
+          filter: "blur(48px)",
           bottom: "5%",
           left: "50%",
           transform: "translateX(-50%)",
@@ -934,12 +1037,12 @@ function SeriesCard({
       {/* Status badge — top right */}
       <div
         className="absolute z-10"
-        style={{ top: 20, right: 20 }}
+        style={{ top: 12, right: 12 }}
       >
         <span
-          className="flex items-center gap-2"
+          className="flex items-center gap-1.5"
           style={{
-            padding: "6px 14px",
+            padding: "4px 10px",
             borderRadius: 40,
             background:
               series.status === "open"
@@ -952,13 +1055,13 @@ function SeriesCard({
           }}
         >
           {series.status === "open" && (
-            <span className="relative flex h-1.5 w-1.5">
+            <span className="relative flex h-1 w-1">
               <span
                 className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75"
                 style={{ background: "#22C55E" }}
               />
               <span
-                className="relative inline-flex rounded-full h-1.5 w-1.5"
+                className="relative inline-flex rounded-full h-1 w-1"
                 style={{ background: "#22C55E" }}
               />
             </span>
@@ -966,9 +1069,9 @@ function SeriesCard({
           <span
             style={{
               fontFamily: "var(--font-outfit)",
-              fontSize: 10,
+              fontSize: 9,
               fontWeight: 600,
-              letterSpacing: "1px",
+              letterSpacing: "0.8px",
               textTransform: "uppercase",
               color:
                 series.status === "open" ? "#22C55E" : series.color,
@@ -982,15 +1085,15 @@ function SeriesCard({
       {/* Content — bottom */}
       <div
         className="absolute bottom-0 left-0 right-0 z-10"
-        style={{ padding: "clamp(24px, 3vw, 36px)" }}
+        style={{ padding: "clamp(14px, 2vw, 22px)" }}
       >
         {/* Series color accent line */}
         <div
           style={{
-            width: hovered ? 40 : 24,
+            width: hovered ? 32 : 18,
             height: 2,
             background: series.color,
-            marginBottom: 16,
+            marginBottom: 10,
             transition: "width 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
           }}
         />
@@ -999,11 +1102,11 @@ function SeriesCard({
         <h3
           style={{
             fontFamily: "var(--font-display)",
-            fontSize: "clamp(22px, 2.5vw, 30px)",
+            fontSize: "clamp(15px, 1.4vw, 20px)",
             fontWeight: 800,
-            letterSpacing: "-0.5px",
+            letterSpacing: "-0.3px",
             color: "var(--white)",
-            lineHeight: 1.15,
+            lineHeight: 1.2,
             margin: 0,
           }}
         >
@@ -1014,11 +1117,11 @@ function SeriesCard({
         <p
           style={{
             fontFamily: "var(--font-outfit)",
-            fontSize: 13,
+            fontSize: 11,
             fontWeight: 500,
             color: series.color,
-            letterSpacing: "0.5px",
-            margin: "10px 0 0",
+            letterSpacing: "0.4px",
+            margin: "6px 0 0",
           }}
         >
           {series.tagline}
@@ -1027,7 +1130,7 @@ function SeriesCard({
         {/* Description — reveal on hover */}
         <div
           style={{
-            maxHeight: hovered ? 60 : 0,
+            maxHeight: hovered ? 48 : 0,
             opacity: hovered ? 1 : 0,
             overflow: "hidden",
             transition:
@@ -1037,11 +1140,11 @@ function SeriesCard({
           <p
             style={{
               fontFamily: "var(--font-outfit)",
-              fontSize: 13,
+              fontSize: 11,
               fontWeight: 300,
               color: "rgba(255,255,255,0.5)",
-              lineHeight: 1.55,
-              margin: "8px 0 0",
+              lineHeight: 1.5,
+              margin: "6px 0 0",
             }}
           >
             {series.description}
@@ -1050,22 +1153,22 @@ function SeriesCard({
 
         {/* Next event + meta row */}
         <div
-          className="flex items-center flex-wrap gap-2"
-          style={{ marginTop: 16 }}
+          className="flex items-center flex-wrap gap-1.5"
+          style={{ marginTop: 10 }}
         >
           {/* Next event date */}
           <span
-            className="flex items-center gap-1.5"
+            className="flex items-center gap-1"
             style={{
               fontFamily: "var(--font-outfit)",
-              fontSize: 11,
+              fontSize: 10,
               fontWeight: 500,
               color: "rgba(255,255,255,0.45)",
             }}
           >
             <svg
-              width="10"
-              height="10"
+              width="9"
+              height="9"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -1091,17 +1194,17 @@ function SeriesCard({
 
           {/* City */}
           <span
-            className="flex items-center gap-1.5"
+            className="flex items-center gap-1"
             style={{
               fontFamily: "var(--font-outfit)",
-              fontSize: 11,
+              fontSize: 10,
               fontWeight: 400,
               color: "rgba(255,255,255,0.35)",
             }}
           >
             <svg
-              width="9"
-              height="9"
+              width="8"
+              height="8"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -1127,24 +1230,24 @@ function SeriesCard({
           <span
             style={{
               fontFamily: "var(--font-outfit)",
-              fontSize: 11,
+              fontSize: 10,
               fontWeight: 400,
               color: "rgba(255,255,255,0.3)",
             }}
           >
-            {series.attendees} Attendees
+            {series.attendees}
           </span>
         </div>
       </div>
 
-      {/* Arrow top-right */}
+      {/* Arrow top-left */}
       <div
         className="absolute z-10 flex items-center justify-center"
         style={{
-          top: 20,
-          left: 20,
-          width: 36,
-          height: 36,
+          top: 12,
+          left: 12,
+          width: 28,
+          height: 28,
           borderRadius: "50%",
           background: hovered
             ? "rgba(255,255,255,0.1)"
@@ -1157,7 +1260,7 @@ function SeriesCard({
       >
         <span
           style={{
-            fontSize: 12,
+            fontSize: 10,
             color: hovered ? series.color : "white",
             opacity: hovered ? 1 : 0.4,
             display: "inline-block",
@@ -1181,23 +1284,6 @@ const INTEREST_FILTERS = [
   { label: "Opex", value: "opex-first", color: "#7C3AED" },
 ] as const;
 
-const CITY_FILTERS = [
-  { label: "All Cities", value: "all" },
-  { label: "Kuwait City", value: "Kuwait City" },
-  { label: "Riyadh", value: "Riyadh" },
-  { label: "Jubail", value: "Jubail" },
-  { label: "Doha", value: "Doha" },
-  { label: "Dubai", value: "Dubai" },
-] as const;
-
-const MONTH_FILTERS = [
-  { label: "All Months", value: "all" },
-  { label: "Apr", value: "Apr" },
-  { label: "May", value: "May" },
-  { label: "Jun", value: "Jun" },
-  { label: "Sep", value: "Sep" },
-] as const;
-
 function EventsSeriesGrid() {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
@@ -1206,18 +1292,55 @@ function EventsSeriesGrid() {
   const [city, setCity] = useState("all");
   const [month, setMonth] = useState("all");
 
+  // Only show future events
+  const futureEvents = useMemo(() => {
+    const today = new Date().toISOString().split("T")[0];
+    return allEvents
+      .filter((e) => e.date >= today)
+      .sort((a, b) => a.date.localeCompare(b.date));
+  }, []);
+
+  // Derive city filters from actual event data
+  const cityFilters = useMemo(() => {
+    const cities = new Set<string>();
+    futureEvents.forEach((e) => {
+      const city = e.nextCity.split(",")[0].trim();
+      cities.add(city);
+    });
+    return [
+      { label: "All Cities", value: "all" },
+      ...[...cities].sort().map((c) => ({ label: c, value: c })),
+    ];
+  }, [futureEvents]);
+
+  // Derive month filters from actual event data
+  const monthFilters = useMemo(() => {
+    const months = new Map<string, string>();
+    futureEvents.forEach((e) => {
+      const parts = e.nextDate.split(" ");
+      const mon = parts[1]; // "Apr", "May", etc.
+      if (!months.has(mon)) months.set(mon, mon);
+    });
+    return [
+      { label: "All Months", value: "all" },
+      ...[...months.entries()].map(([key, val]) => ({
+        label: key,
+        value: val,
+      })),
+    ];
+  }, [futureEvents]);
+
   const filtered = useMemo(() => {
-    return seriesData.filter((s) => {
-      if (interest !== "all" && s.id !== interest) return false;
+    return futureEvents.filter((e) => {
+      if (interest !== "all" && e.category !== interest) return false;
       if (city !== "all") {
-        const cityMatch =
-          s.nextCity.includes(city) || s.regions.includes(city);
-        if (!cityMatch) return false;
+        if (!e.nextCity.includes(city) && !e.regions.includes(city))
+          return false;
       }
-      if (month !== "all" && !s.nextDate.includes(month)) return false;
+      if (month !== "all" && !e.nextDate.includes(month)) return false;
       return true;
     });
-  }, [interest, city, month]);
+  }, [interest, city, month, futureEvents]);
 
   const activeCount =
     (interest !== "all" ? 1 : 0) +
@@ -1226,10 +1349,11 @@ function EventsSeriesGrid() {
 
   return (
     <section
+      id="upcoming-events"
       ref={ref}
       style={{
         background: "var(--black)",
-        padding: "clamp(56px, 7vw, 90px) 0 clamp(80px, 10vw, 120px)",
+        padding: "clamp(48px, 6vw, 72px) 0",
       }}
     >
       <div style={{ maxWidth: MAX_W, margin: "0 auto", padding: PAD }}>
@@ -1240,7 +1364,7 @@ function EventsSeriesGrid() {
           transition={{ duration: 0.7, ease: EASE }}
           style={{ textAlign: "center", marginBottom: 40 }}
         >
-          <SectionLabel text="Our Event Series" centered />
+          <SectionLabel text="Events Calendar" centered />
           <h2
             style={{
               fontFamily: "var(--font-display)",
@@ -1252,7 +1376,7 @@ function EventsSeriesGrid() {
               margin: 0,
             }}
           >
-            Four Focused Communities. Four Event Worlds.
+            Upcoming Events
           </h2>
           <p
             style={{
@@ -1265,8 +1389,8 @@ function EventsSeriesGrid() {
               margin: "14px auto 0",
             }}
           >
-            Each EFG event series is designed for a specific leadership
-            community — no generic conferences, no mixed rooms.
+            Browse every upcoming EFG event — filter by interest, city, or
+            month to find the right room for you.
           </p>
         </motion.div>
 
@@ -1305,7 +1429,7 @@ function EventsSeriesGrid() {
 
             {/* City dropdown */}
             <FilterDropdown
-              options={CITY_FILTERS}
+              options={cityFilters}
               value={city}
               onChange={setCity}
               icon="location"
@@ -1313,7 +1437,7 @@ function EventsSeriesGrid() {
 
             {/* Month dropdown */}
             <FilterDropdown
-              options={MONTH_FILTERS}
+              options={monthFilters}
               value={month}
               onChange={setMonth}
               icon="calendar"
@@ -1351,13 +1475,16 @@ function EventsSeriesGrid() {
           </div>
         </motion.div>
 
-        {/* 2×2 Grid with AnimatePresence */}
+        {/* Events Grid with AnimatePresence */}
         <div
           className="events-series-grid"
           style={{
             display: "grid",
-            gridTemplateColumns: filtered.length === 1 ? "1fr" : "1fr 1fr",
-            gap: 16,
+            gridTemplateColumns:
+              filtered.length === 1
+                ? "1fr"
+                : "repeat(auto-fill, minmax(min(100%, 260px), 1fr))",
+            gap: 14,
             minHeight: 200,
           }}
         >
@@ -1437,6 +1564,11 @@ function EventsSeriesGrid() {
       </div>
 
       <style jsx global>{`
+        @media (max-width: 1024px) {
+          .events-series-grid {
+            grid-template-columns: repeat(3, 1fr) !important;
+          }
+        }
         @media (max-width: 768px) {
           .events-series-grid {
             grid-template-columns: 1fr !important;
@@ -1619,7 +1751,7 @@ function EventsUpNext() {
       ref={ref}
       style={{
         background: "var(--black)",
-        padding: "clamp(56px, 7vw, 90px) 0",
+        padding: "clamp(48px, 6vw, 72px) 0",
       }}
     >
       <div
@@ -2359,7 +2491,7 @@ const flagshipEvents = [
     venue: "Riyadh Airport Marriott",
     highlight: "Celonis Lead Sponsor · OELeap Launch",
     audience: "COOs & Process Leaders",
-    metric: "92% attendee satisfaction",
+    metric: "200+ attendees",
     stats: { speakers: "20+", attendees: "200+", sponsors: "10+" },
   },
   {
@@ -2396,7 +2528,7 @@ function PastEvents() {
       ref={ref}
       style={{
         background: "var(--black-light)",
-        padding: "clamp(80px, 10vw, 120px) 0",
+        padding: "clamp(48px, 6vw, 72px) 0",
         position: "relative",
         overflow: "hidden",
       }}
@@ -3548,113 +3680,354 @@ function MediaCoverage() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// SECTION: NEWSLETTER — Email capture
+// SECTION: INQUIRY FORM — Split Layout (Left editorial + Right form)
 // ─────────────────────────────────────────────────────────────────────────────
 
-const interestPills = [
-  { label: "Cybersecurity", color: "#01BBF5" },
-  { label: "OT Security", color: "#D34B9A" },
-  { label: "Data & AI", color: "#11A385" },
-  { label: "Opex", color: "#7C3AED" },
-  { label: "All Events", color: "#E8651A" },
+const INQUIRY_TABS = [
+  {
+    key: "sponsor",
+    label: "Sponsor",
+    heading: "Partner with\nEFG Events",
+    description:
+      "Put your brand in the room with the region\u2019s top decision-makers. Sponsorship packages are designed for maximum visibility and qualified lead generation.",
+    perks: [
+      { icon: "layers", text: "Boardroom hosting & keynote slots" },
+      { icon: "target", text: "Qualified lead generation" },
+      { icon: "eye", text: "Premium brand visibility across GCC" },
+    ],
+    trust: "Trusted by 80+ sponsors across 5 GCC markets",
+    fields: [
+      { name: "name", label: "Full Name", type: "text", placeholder: "Your full name" },
+      { name: "email", label: "Work Email", type: "email", placeholder: "you@company.com" },
+      { name: "company", label: "Company", type: "text", placeholder: "Company name" },
+      { name: "title", label: "Job Title", type: "text", placeholder: "Your role" },
+      { name: "interest", label: "Event Interest", type: "select", placeholder: "Select an event series", options: ["Cyber First", "OT Security First", "Data & AI First", "Opex First", "Multiple Events"] },
+      { name: "message", label: "Message (Optional)", type: "textarea", placeholder: "Tell us about your sponsorship goals..." },
+    ],
+    cta: "Request Sponsorship Info",
+  },
+  {
+    key: "pass",
+    label: "Attend",
+    heading: "Request Your\nEvent Pass",
+    description:
+      "Our events are curated for senior leaders \u2014 CISOs, CIOs, CTOs, COOs, and VP-level executives. Submit your details and we\u2019ll match you to the right room.",
+    perks: [
+      { icon: "users", text: "Invite-only, C-suite audience" },
+      { icon: "calendar", text: "9 events across 5 GCC cities" },
+      { icon: "shield", text: "Chatham House Rule sessions" },
+    ],
+    trust: "5,000+ senior leaders attended EFG events since 2023",
+    fields: [
+      { name: "name", label: "Full Name", type: "text", placeholder: "Your full name" },
+      { name: "email", label: "Work Email", type: "email", placeholder: "you@company.com" },
+      { name: "company", label: "Company", type: "text", placeholder: "Company name" },
+      { name: "title", label: "Job Title", type: "text", placeholder: "Your role" },
+      { name: "event", label: "Preferred Event", type: "select", placeholder: "Select an event", options: ["Cyber First", "OT Security First", "Data & AI First", "Opex First"] },
+      { name: "city", label: "Preferred City", type: "select", placeholder: "Select a city", options: ["Kuwait City", "Riyadh", "Doha", "Muscat", "Jubail"] },
+    ],
+    cta: "Request Pass",
+  },
+  {
+    key: "speaker",
+    label: "Speak",
+    heading: "Share Your\nExpertise",
+    description:
+      "We platform practitioners, not salespeople. If you\u2019re a hands-on leader with real-world experience, we want you on stage.",
+    perks: [
+      { icon: "mic", text: "Keynote & panel opportunities" },
+      { icon: "globe", text: "Reach 5,000+ senior leaders" },
+      { icon: "award", text: "Join our speaker alumni network" },
+    ],
+    trust: "200+ practitioners have spoken at EFG events since 2023",
+    fields: [
+      { name: "name", label: "Full Name", type: "text", placeholder: "Your full name" },
+      { name: "email", label: "Work Email", type: "email", placeholder: "you@company.com" },
+      { name: "company", label: "Company / Organization", type: "text", placeholder: "Company name" },
+      { name: "title", label: "Job Title", type: "text", placeholder: "Your role" },
+      { name: "topic", label: "Proposed Topic", type: "text", placeholder: "Brief topic or area of expertise" },
+      { name: "bio", label: "Short Bio", type: "textarea", placeholder: "2\u20133 sentences about your background and expertise..." },
+    ],
+    cta: "Submit Speaker Proposal",
+  },
 ];
 
-const NEWSLETTER_CITIES = [
-  "Kuwait City",
-  "Riyadh",
-  "Abu Dhabi",
-  "Dubai",
-  "Doha",
-  "Muscat",
-  "Manama",
-  "Jubail",
-];
+function InquiryPerkIcon({ type }: { type: string }) {
+  const s: React.CSSProperties = { opacity: 0.7 };
+  const props = { width: 16, height: 16, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 1.5, strokeLinecap: "round" as const, strokeLinejoin: "round" as const, style: s };
+  if (type === "layers") return <svg {...props}><path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5" /><path d="M2 12l10 5 10-5" /></svg>;
+  if (type === "target") return <svg {...props}><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" /></svg>;
+  if (type === "eye") return <svg {...props}><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" /></svg>;
+  if (type === "users") return <svg {...props}><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>;
+  if (type === "calendar") return <svg {...props}><rect x="3" y="4" width="18" height="18" rx="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" /></svg>;
+  if (type === "shield") return <svg {...props}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>;
+  if (type === "mic") return <svg {...props}><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" /><path d="M19 10v2a7 7 0 0 1-14 0v-2" /><line x1="12" y1="19" x2="12" y2="23" /></svg>;
+  if (type === "globe") return <svg {...props}><circle cx="12" cy="12" r="10" /><line x1="2" y1="12" x2="22" y2="12" /><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" /></svg>;
+  return <svg {...props}><circle cx="12" cy="8" r="7" /><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88" /></svg>;
+}
 
-function EventsNewsletter() {
+function EventsInquiryForm() {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
-  const [email, setEmail] = useState("");
-  const [selected, setSelected] = useState<string[]>(["All Events"]);
+  const [activeTab, setActiveTab] = useState<string>("sponsor");
   const [submitted, setSubmitted] = useState(false);
-  const [selectedCity, setSelectedCity] = useState<string | null>(null);
+  const [formData, setFormData] = useState<Record<string, string>>({});
 
-  const toggleInterest = (label: string) => {
-    if (label === "All Events") {
-      setSelected(["All Events"]);
-      return;
-    }
-    setSelected((prev) => {
-      const next = prev.filter((s) => s !== "All Events");
-      if (next.includes(label)) {
-        const filtered = next.filter((s) => s !== label);
-        return filtered.length === 0 ? ["All Events"] : filtered;
-      }
-      return [...next, label];
-    });
-  };
+  const tab = INQUIRY_TABS.find((t) => t.key === activeTab)!;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (email.includes("@")) {
-      setSubmitted(true);
-    }
+    setSubmitted(true);
+  };
+
+  const handleChange = (name: string, value: string) => {
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const resetForm = () => {
+    setSubmitted(false);
+    setFormData({});
+  };
+
+  const inputStyle: React.CSSProperties = {
+    width: "100%",
+    padding: "11px 14px",
+    borderRadius: 10,
+    border: "1px solid rgba(255,255,255,0.08)",
+    background: "rgba(255,255,255,0.04)",
+    color: "white",
+    fontFamily: "var(--font-outfit)",
+    fontSize: 13.5,
+    fontWeight: 400,
+    outline: "none",
+    transition: "border-color 0.3s ease",
+  };
+
+  const labelStyle: React.CSSProperties = {
+    fontFamily: "var(--font-outfit)",
+    fontSize: 11,
+    fontWeight: 500,
+    color: "rgba(255,255,255,0.4)",
+    marginBottom: 5,
+    display: "block",
+    letterSpacing: "0.3px",
   };
 
   return (
     <section
+      id="get-involved"
       ref={ref}
       style={{
         background: "var(--black)",
-        padding: "clamp(56px, 7vw, 80px) 0",
+        padding: "clamp(48px, 6vw, 72px) 0",
+        position: "relative",
+        overflow: "hidden",
       }}
     >
-      <div style={{ maxWidth: MAX_W, margin: "0 auto", padding: PAD }}>
+      {/* Atmospheric background */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: `
+            radial-gradient(ellipse 700px 500px at 20% 40%, rgba(232,101,26,0.04) 0%, transparent 70%),
+            radial-gradient(ellipse 500px 400px at 80% 60%, rgba(232,101,26,0.03) 0%, transparent 70%)
+          `,
+        }}
+      />
+
+      <div style={{ maxWidth: MAX_W, margin: "0 auto", padding: PAD, position: "relative" }}>
+        {/* Tab pills — top of section */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: EASE }}
+          transition={{ duration: 0.6, ease: EASE }}
+          style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 48 }}
+        >
+          <SectionLabel text="Get Involved" />
+          <div style={{ flex: 1 }} />
+          <div style={{ display: "flex", gap: 6 }}>
+            {INQUIRY_TABS.map((t) => {
+              const isActive = activeTab === t.key;
+              return (
+                <button
+                  key={t.key}
+                  onClick={() => {
+                    setActiveTab(t.key);
+                    if (submitted) resetForm();
+                  }}
+                  style={{
+                    padding: "8px 20px",
+                    borderRadius: 40,
+                    fontFamily: "var(--font-outfit)",
+                    fontSize: 13,
+                    fontWeight: isActive ? 600 : 400,
+                    color: isActive ? "white" : "rgba(255,255,255,0.4)",
+                    background: isActive ? "var(--orange)" : "rgba(255,255,255,0.04)",
+                    border: isActive
+                      ? "1px solid var(--orange)"
+                      : "1px solid rgba(255,255,255,0.08)",
+                    cursor: "pointer",
+                    transition: "all 0.35s cubic-bezier(0.16, 1, 0.3, 1)",
+                    letterSpacing: "0.2px",
+                  }}
+                >
+                  {t.label}
+                </button>
+              );
+            })}
+          </div>
+        </motion.div>
+
+        {/* Split layout */}
+        <div
+          className="inquiry-split"
           style={{
-            borderRadius: 24,
-            border: "1px solid rgba(232,101,26,0.08)",
-            background:
-              "linear-gradient(135deg, rgba(232,101,26,0.03) 0%, rgba(10,10,10,0.5) 50%, rgba(232,101,26,0.02) 100%)",
-            padding: "clamp(36px, 5vw, 56px) clamp(28px, 5vw, 48px)",
-            textAlign: "center",
-            position: "relative",
-            overflow: "hidden",
+            display: "grid",
+            gridTemplateColumns: "1fr 1.25fr",
+            gap: "clamp(32px, 4vw, 64px)",
+            alignItems: "start",
           }}
         >
-          {/* Ambient glow */}
-          <div
-            className="absolute pointer-events-none"
-            style={{
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              width: 500,
-              height: 250,
-              borderRadius: "50%",
-              background:
-                "radial-gradient(ellipse, rgba(232,101,26,0.05) 0%, transparent 70%)",
-            }}
-          />
+          {/* ── LEFT COLUMN: Editorial ── */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={`left-${activeTab}`}
+              initial={{ opacity: 0, x: -16 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -16 }}
+              transition={{ duration: 0.4, ease: EASE }}
+              style={{ paddingTop: 8 }}
+            >
+              {/* Headline */}
+              <h2
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontWeight: 800,
+                  fontSize: "clamp(32px, 3.5vw, 50px)",
+                  letterSpacing: "-2px",
+                  color: "var(--white)",
+                  lineHeight: 1.08,
+                  margin: 0,
+                  whiteSpace: "pre-line",
+                }}
+              >
+                {tab.heading}
+              </h2>
 
-          <div style={{ position: "relative", zIndex: 1 }}>
+              {/* Description */}
+              <p
+                style={{
+                  fontFamily: "var(--font-outfit)",
+                  fontWeight: 300,
+                  fontSize: "clamp(14px, 1.2vw, 16px)",
+                  color: "rgba(255,255,255,0.45)",
+                  lineHeight: 1.7,
+                  margin: "20px 0 0",
+                  maxWidth: 440,
+                }}
+              >
+                {tab.description}
+              </p>
+
+              {/* Perks */}
+              <div style={{ marginTop: 36, display: "flex", flexDirection: "column", gap: 18 }}>
+                {tab.perks.map((perk) => (
+                  <div key={perk.text} className="flex items-center gap-3">
+                    <div
+                      style={{
+                        width: 36,
+                        height: 36,
+                        borderRadius: 10,
+                        background: "rgba(232,101,26,0.06)",
+                        border: "1px solid rgba(232,101,26,0.1)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        color: "var(--orange)",
+                        flexShrink: 0,
+                      }}
+                    >
+                      <InquiryPerkIcon type={perk.icon} />
+                    </div>
+                    <span
+                      style={{
+                        fontFamily: "var(--font-outfit)",
+                        fontSize: 14,
+                        fontWeight: 400,
+                        color: "rgba(255,255,255,0.55)",
+                      }}
+                    >
+                      {perk.text}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Trust line */}
+              <div
+                style={{
+                  marginTop: 40,
+                  paddingTop: 24,
+                  borderTop: "1px solid rgba(255,255,255,0.06)",
+                }}
+              >
+                <p
+                  style={{
+                    fontFamily: "var(--font-outfit)",
+                    fontSize: 12,
+                    fontWeight: 400,
+                    color: "rgba(255,255,255,0.25)",
+                    letterSpacing: "0.3px",
+                    margin: 0,
+                  }}
+                >
+                  {tab.trust}
+                </p>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+
+          {/* ── RIGHT COLUMN: Form card ── */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.15, ease: EASE }}
+            style={{
+              borderRadius: 20,
+              border: "1px solid rgba(255,255,255,0.06)",
+              background: "rgba(255,255,255,0.02)",
+              padding: "clamp(24px, 3vw, 36px)",
+              position: "relative",
+              overflow: "hidden",
+            }}
+          >
+            {/* Card ambient glow */}
+            <div
+              className="absolute pointer-events-none"
+              style={{
+                top: -40,
+                right: -40,
+                width: 200,
+                height: 200,
+                borderRadius: "50%",
+                background: "radial-gradient(ellipse, rgba(232,101,26,0.05) 0%, transparent 70%)",
+              }}
+            />
+
             <AnimatePresence mode="wait">
               {submitted ? (
-                /* ── Post-submit state ── */
                 <motion.div
                   key="success"
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.4, ease: EASE }}
+                  style={{ textAlign: "center", padding: "40px 0" }}
                 >
-                  {/* Checkmark */}
                   <div
                     style={{
-                      width: 48,
-                      height: 48,
+                      width: 52,
+                      height: 52,
                       borderRadius: "50%",
                       background: "rgba(34,197,94,0.12)",
                       border: "1px solid rgba(34,197,94,0.25)",
@@ -3664,14 +4037,7 @@ function EventsNewsletter() {
                       margin: "0 auto 20px",
                     }}
                   >
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="#22C55E"
-                      strokeWidth="2.5"
-                    >
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="2.5">
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
                   </div>
@@ -3679,320 +4045,131 @@ function EventsNewsletter() {
                     style={{
                       fontFamily: "var(--font-display)",
                       fontWeight: 800,
-                      fontSize: "clamp(22px, 3vw, 32px)",
-                      letterSpacing: "-1px",
+                      fontSize: "clamp(20px, 2.5vw, 26px)",
+                      letterSpacing: "-0.5px",
                       color: "white",
                       margin: "0 0 8px",
                     }}
                   >
-                    You&apos;re In
+                    Inquiry Submitted
                   </h3>
                   <p
                     style={{
                       fontFamily: "var(--font-outfit)",
                       fontWeight: 300,
-                      fontSize: 15,
+                      fontSize: 14,
                       color: "#A0A0A0",
-                      margin: "0 0 32px",
+                      margin: "0 0 20px",
+                      lineHeight: 1.6,
                     }}
                   >
-                    We&apos;ll keep you in the loop on everything EFG.
+                    Our team will review your submission and get back
+                    to you within 2 business days.
                   </p>
-
-                  {/* ── Next steps ── */}
-                  <div
+                  <button
+                    onClick={resetForm}
                     style={{
-                      display: "flex",
-                      flexWrap: "wrap",
-                      gap: 16,
-                      justifyContent: "center",
-                      maxWidth: 600,
-                      margin: "0 auto",
+                      fontFamily: "var(--font-outfit)",
+                      fontSize: 13,
+                      fontWeight: 500,
+                      color: "var(--orange)",
+                      background: "none",
+                      border: "none",
+                      cursor: "pointer",
+                      padding: 0,
                     }}
                   >
-                    {/* Option A — Choose your city */}
-                    <div
-                      style={{
-                        flex: "1 1 260px",
-                        maxWidth: 280,
-                        padding: "24px 20px",
-                        borderRadius: 16,
-                        border: "1px solid rgba(255,255,255,0.06)",
-                        background: "rgba(255,255,255,0.02)",
-                        textAlign: "center",
-                      }}
-                    >
-                      <div
-                        style={{
-                          width: 36,
-                          height: 36,
-                          borderRadius: 10,
-                          background: "rgba(232,101,26,0.08)",
-                          border: "1px solid rgba(232,101,26,0.15)",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          margin: "0 auto 14px",
-                          color: "var(--orange)",
-                        }}
-                      >
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                          <circle cx="12" cy="10" r="3" />
-                        </svg>
-                      </div>
-                      <p
-                        style={{
-                          fontFamily: "var(--font-display)",
-                          fontSize: 14,
-                          fontWeight: 700,
-                          color: "white",
-                          margin: "0 0 12px",
-                        }}
-                      >
-                        Choose Your City
-                      </p>
-                      <div
-                        className="flex flex-wrap justify-center gap-2"
-                      >
-                        {NEWSLETTER_CITIES.map((city) => {
-                          const isActive = selectedCity === city;
-                          return (
-                            <button
-                              key={city}
-                              onClick={() =>
-                                setSelectedCity(isActive ? null : city)
-                              }
-                              style={{
-                                fontFamily: "var(--font-outfit)",
-                                fontSize: 10.5,
-                                fontWeight: isActive ? 600 : 400,
-                                padding: "4px 12px",
-                                borderRadius: 40,
-                                border: isActive
-                                  ? "1px solid rgba(232,101,26,0.35)"
-                                  : "1px solid rgba(255,255,255,0.06)",
-                                background: isActive
-                                  ? "rgba(232,101,26,0.12)"
-                                  : "rgba(255,255,255,0.03)",
-                                color: isActive
-                                  ? "var(--orange)"
-                                  : "rgba(255,255,255,0.4)",
-                                cursor: "pointer",
-                                transition: "all 0.2s ease",
-                              }}
-                            >
-                              {city}
-                            </button>
-                          );
-                        })}
-                      </div>
-                      {selectedCity && (
-                        <p
-                          style={{
-                            fontFamily: "var(--font-outfit)",
-                            fontSize: 11,
-                            fontWeight: 400,
-                            color: "rgba(255,255,255,0.3)",
-                            margin: "10px 0 0",
-                          }}
-                        >
-                          We&apos;ll prioritize {selectedCity} events for you.
-                        </p>
-                      )}
-                    </div>
-
-                    {/* Divider */}
-                    <div
-                      className="hidden sm:flex items-center"
-                      style={{ padding: "0 4px" }}
-                    >
-                      <span
-                        style={{
-                          fontFamily: "var(--font-outfit)",
-                          fontSize: 12,
-                          fontWeight: 500,
-                          color: "rgba(255,255,255,0.15)",
-                          textTransform: "uppercase",
-                          letterSpacing: "1px",
-                        }}
-                      >
-                        or
-                      </span>
-                    </div>
-
-                    {/* Option B — Download calendar */}
-                    <div
-                      style={{
-                        flex: "1 1 260px",
-                        maxWidth: 280,
-                        padding: "24px 20px",
-                        borderRadius: 16,
-                        border: "1px solid rgba(255,255,255,0.06)",
-                        background: "rgba(255,255,255,0.02)",
-                        textAlign: "center",
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <div
-                        style={{
-                          width: 36,
-                          height: 36,
-                          borderRadius: 10,
-                          background: "rgba(232,101,26,0.08)",
-                          border: "1px solid rgba(232,101,26,0.15)",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          margin: "0 auto 14px",
-                          color: "var(--orange)",
-                        }}
-                      >
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                          <polyline points="7 10 12 15 17 10" />
-                          <line x1="12" y1="15" x2="12" y2="3" />
-                        </svg>
-                      </div>
-                      <p
-                        style={{
-                          fontFamily: "var(--font-display)",
-                          fontSize: 14,
-                          fontWeight: 700,
-                          color: "white",
-                          margin: "0 0 12px",
-                        }}
-                      >
-                        2026 Events Calendar
-                      </p>
-                      <button
-                        onClick={() => {
-                          // Placeholder — would trigger PDF download
-                          alert("Calendar PDF download coming soon.");
-                        }}
-                        style={{
-                          fontFamily: "var(--font-outfit)",
-                          fontSize: 12,
-                          fontWeight: 600,
-                          color: "var(--orange)",
-                          background: "rgba(232,101,26,0.08)",
-                          border: "1px solid rgba(232,101,26,0.2)",
-                          borderRadius: 40,
-                          padding: "8px 22px",
-                          cursor: "pointer",
-                          display: "inline-flex",
-                          alignItems: "center",
-                          gap: 6,
-                          transition: "all 0.25s ease",
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.background =
-                            "rgba(232,101,26,0.15)";
-                          e.currentTarget.style.borderColor =
-                            "rgba(232,101,26,0.35)";
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.background =
-                            "rgba(232,101,26,0.08)";
-                          e.currentTarget.style.borderColor =
-                            "rgba(232,101,26,0.2)";
-                        }}
-                      >
-                        Download PDF
-                        <span style={{ fontSize: 14 }}>↓</span>
-                      </button>
-                      <p
-                        style={{
-                          fontFamily: "var(--font-outfit)",
-                          fontSize: 10.5,
-                          fontWeight: 400,
-                          color: "rgba(255,255,255,0.2)",
-                          margin: "10px 0 0",
-                        }}
-                      >
-                        All dates, cities & formats at a glance
-                      </p>
-                    </div>
-                  </div>
+                    Submit another inquiry &rarr;
+                  </button>
                 </motion.div>
               ) : (
-                /* ── Form state ── */
                 <motion.div
-                  key="form"
-                  initial={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
+                  key={`form-${activeTab}`}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.3, ease: EASE }}
                 >
-                  <h3
-                    style={{
-                      fontFamily: "var(--font-display)",
-                      fontWeight: 800,
-                      fontSize: "clamp(26px, 3.5vw, 40px)",
-                      letterSpacing: "-1.5px",
-                      color: "white",
-                      lineHeight: 1.15,
-                      margin: "0 0 12px",
-                    }}
-                  >
-                    Stay Inside the EFG Event Ecosystem
-                  </h3>
-                  <p
-                    style={{
-                      fontFamily: "var(--font-outfit)",
-                      fontWeight: 300,
-                      fontSize: "clamp(14px, 1.3vw, 16px)",
-                      color: "#A0A0A0",
-                      lineHeight: 1.65,
-                      maxWidth: 500,
-                      margin: "0 auto 28px",
-                    }}
-                  >
-                    Get early access to agendas, speaker announcements, and
-                    invitation-only events across every EFG series.
-                  </p>
-
-                  {/* Email form */}
-                  <form
-                    onSubmit={handleSubmit}
-                    className="flex items-center justify-center flex-wrap gap-3"
-                    style={{ marginBottom: 20 }}
-                  >
-                    <input
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="your@email.com"
-                      required
+                  <form onSubmit={handleSubmit}>
+                    <div
+                      className="inquiry-form-grid"
                       style={{
-                        padding: "14px 24px",
-                        borderRadius: 60,
-                        border: "1px solid rgba(255,255,255,0.08)",
-                        background: "rgba(255,255,255,0.04)",
-                        color: "white",
-                        fontFamily: "var(--font-outfit)",
-                        fontSize: 14,
-                        fontWeight: 400,
-                        width: "clamp(240px, 30vw, 320px)",
-                        outline: "none",
-                        transition: "border-color 0.3s ease",
+                        display: "grid",
+                        gridTemplateColumns: "1fr 1fr",
+                        gap: 14,
                       }}
-                      onFocus={(e) => {
-                        e.currentTarget.style.borderColor =
-                          "rgba(232,101,26,0.3)";
-                      }}
-                      onBlur={(e) => {
-                        e.currentTarget.style.borderColor =
-                          "rgba(255,255,255,0.08)";
-                      }}
-                    />
+                    >
+                      {tab.fields.map((field) => {
+                        const isFullWidth = field.type === "textarea";
+                        return (
+                          <div
+                            key={field.name}
+                            style={{
+                              gridColumn: isFullWidth ? "1 / -1" : undefined,
+                            }}
+                          >
+                            <label style={labelStyle}>{field.label}</label>
+                            {field.type === "textarea" ? (
+                              <textarea
+                                value={formData[field.name] || ""}
+                                onChange={(e) => handleChange(field.name, e.target.value)}
+                                placeholder={field.placeholder}
+                                rows={3}
+                                style={{
+                                  ...inputStyle,
+                                  resize: "vertical",
+                                  minHeight: 72,
+                                }}
+                                onFocus={(e) => { e.currentTarget.style.borderColor = "rgba(232,101,26,0.3)"; }}
+                                onBlur={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"; }}
+                              />
+                            ) : field.type === "select" ? (
+                              <select
+                                value={formData[field.name] || ""}
+                                onChange={(e) => handleChange(field.name, e.target.value)}
+                                required
+                                style={{
+                                  ...inputStyle,
+                                  appearance: "none",
+                                  WebkitAppearance: "none",
+                                  cursor: "pointer",
+                                  color: formData[field.name] ? "white" : "rgba(255,255,255,0.3)",
+                                }}
+                              >
+                                <option value="" style={{ color: "#222", background: "#fff" }}>
+                                  {field.placeholder}
+                                </option>
+                                {field.options?.map((opt) => (
+                                  <option key={opt} value={opt} style={{ color: "#222", background: "#fff" }}>
+                                    {opt}
+                                  </option>
+                                ))}
+                              </select>
+                            ) : (
+                              <input
+                                type={field.type}
+                                value={formData[field.name] || ""}
+                                onChange={(e) => handleChange(field.name, e.target.value)}
+                                placeholder={field.placeholder}
+                                required
+                                style={inputStyle}
+                                onFocus={(e) => { e.currentTarget.style.borderColor = "rgba(232,101,26,0.3)"; }}
+                                onBlur={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"; }}
+                              />
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+
+                    {/* Submit */}
                     <button
                       type="submit"
                       style={{
-                        padding: "14px 32px",
-                        borderRadius: 60,
+                        width: "100%",
+                        marginTop: 20,
+                        padding: "13px 28px",
+                        borderRadius: 10,
                         background: "var(--orange)",
                         color: "white",
                         fontFamily: "var(--font-outfit)",
@@ -4001,53 +4178,25 @@ function EventsNewsletter() {
                         border: "none",
                         cursor: "pointer",
                         transition: "all 0.3s ease",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        gap: 8,
                       }}
                       onMouseEnter={(e) => {
-                        e.currentTarget.style.background =
-                          "var(--orange-bright)";
+                        e.currentTarget.style.background = "var(--orange-bright)";
                         e.currentTarget.style.transform = "translateY(-2px)";
+                        e.currentTarget.style.boxShadow = "0 12px 40px var(--orange-glow)";
                       }}
                       onMouseLeave={(e) => {
                         e.currentTarget.style.background = "var(--orange)";
                         e.currentTarget.style.transform = "translateY(0)";
+                        e.currentTarget.style.boxShadow = "none";
                       }}
                     >
-                      Get Early Access
+                      {tab.cta} <span>→</span>
                     </button>
                   </form>
-
-                  {/* Interest pills */}
-                  <div
-                    className="flex items-center justify-center flex-wrap gap-2"
-                    style={{ marginBottom: 16 }}
-                  >
-                    {interestPills.map((pill) => {
-                      const isActive = selected.includes(pill.label);
-                      return (
-                        <button
-                          key={pill.label}
-                          onClick={() => toggleInterest(pill.label)}
-                          className="transition-all"
-                          style={{
-                            padding: "6px 16px",
-                            borderRadius: 40,
-                            border: `1px solid ${isActive ? pill.color + "40" : "rgba(255,255,255,0.06)"}`,
-                            background: isActive
-                              ? `${pill.color}15`
-                              : "transparent",
-                            color: isActive ? pill.color : "#606060",
-                            fontFamily: "var(--font-outfit)",
-                            fontSize: 11,
-                            fontWeight: 500,
-                            cursor: "pointer",
-                            transitionDuration: "0.2s",
-                          }}
-                        >
-                          {pill.label}
-                        </button>
-                      );
-                    })}
-                  </div>
 
                   {/* Privacy note */}
                   <p
@@ -4056,17 +4205,32 @@ function EventsNewsletter() {
                       fontSize: 11,
                       fontWeight: 400,
                       color: "#3A3A3A",
-                      margin: 0,
+                      textAlign: "center",
+                      margin: "14px 0 0",
                     }}
                   >
-                    No spam, ever. Unsubscribe anytime.
+                    Your information is kept confidential. We&apos;ll only use
+                    it to respond to your inquiry.
                   </p>
                 </motion.div>
               )}
             </AnimatePresence>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
+
+      <style jsx global>{`
+        @media (max-width: 860px) {
+          .inquiry-split {
+            grid-template-columns: 1fr !important;
+          }
+        }
+        @media (max-width: 500px) {
+          .inquiry-form-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }
@@ -4077,8 +4241,11 @@ function EventsNewsletter() {
 
 const differentiators = [
   {
-    title: "Curated Rooms",
-    description: "We design who's in the room.",
+    title: "Curated Rooms, Not Crowded Halls",
+    description:
+      "Every seat is intentional. We hand-select CISOs, CIOs, CTOs, and VP-level leaders \u2014 no open registration, no trade-show crowds. The result is a room where every conversation moves the needle.",
+    metric: "15\u201320",
+    metricLabel: "Leaders per boardroom",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
@@ -4089,8 +4256,11 @@ const differentiators = [
     ),
   },
   {
-    title: "Executive Formats",
-    description: "Summits, closed-door boardrooms, workshops & awards.",
+    title: "Executive-Only Formats",
+    description:
+      "Summits, closed-door boardrooms, practitioner workshops, and leadership awards \u2014 designed for decision-makers who don\u2019t have time for filler. Every format is built to deliver signal, not noise.",
+    metric: "4",
+    metricLabel: "Distinct event formats",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
@@ -4100,8 +4270,11 @@ const differentiators = [
     ),
   },
   {
-    title: "Practitioner-Led Content",
-    description: "Less selling. More real-world experience.",
+    title: "Practitioners on Stage, Not Salespeople",
+    description:
+      "Our speaker lineups are built on one rule: real-world experience only. No vendor pitches, no pay-to-play slots. Every keynote and panel features hands-on leaders sharing what actually worked \u2014 and what didn\u2019t.",
+    metric: "0%",
+    metricLabel: "Vendor pitches on stage",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 20h9" />
@@ -4110,8 +4283,11 @@ const differentiators = [
     ),
   },
   {
-    title: "Regional Focus",
-    description: "Built for GCC realities.",
+    title: "Built for the GCC, Not Imported",
+    description:
+      "These aren\u2019t repackaged global conferences dropped into a Gulf hotel. Every agenda, speaker brief, and format is designed ground-up for the region\u2019s regulatory landscape, talent market, and digital ambitions.",
+    metric: "5",
+    metricLabel: "GCC markets covered",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="12" cy="12" r="10" />
@@ -4131,7 +4307,7 @@ function HowDifferent() {
       ref={ref}
       style={{
         background: "var(--black)",
-        padding: "clamp(64px, 8vw, 100px) 0",
+        padding: "clamp(48px, 6vw, 72px) 0",
         position: "relative",
       }}
     >
@@ -4141,7 +4317,7 @@ function HowDifferent() {
           initial={{ opacity: 0, y: 16 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, ease: EASE }}
-          style={{ textAlign: "center", marginBottom: 48 }}
+          style={{ textAlign: "center", marginBottom: 20 }}
         >
           <SectionLabel text="The EFG Difference" centered />
           <h2
@@ -4159,12 +4335,33 @@ function HowDifferent() {
           </h2>
         </motion.div>
 
-        {/* Cards */}
+        {/* Lead-in */}
+        <motion.p
+          initial={{ opacity: 0, y: 12 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.1, ease: EASE }}
+          style={{
+            fontFamily: "var(--font-outfit)",
+            fontSize: "clamp(15px, 1.3vw, 17px)",
+            fontWeight: 300,
+            color: "rgba(255,255,255,0.45)",
+            lineHeight: 1.65,
+            textAlign: "center",
+            maxWidth: 680,
+            margin: "0 auto 56px",
+          }}
+        >
+          Most tech events are trade shows in disguise. EFG designs invite-only
+          rooms where senior leaders exchange real insight — no expo halls, no
+          badge scanners, no filler.
+        </motion.p>
+
+        {/* Cards — 2x2 grid */}
         <div
           className="how-diff-grid"
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(4, 1fr)",
+            gridTemplateColumns: "repeat(2, 1fr)",
             gap: 16,
           }}
         >
@@ -4173,7 +4370,7 @@ function HowDifferent() {
               key={item.title}
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.1 + i * 0.08, ease: EASE }}
+              transition={{ duration: 0.5, delay: 0.15 + i * 0.1, ease: EASE }}
             >
               <DifferentiatorCard {...item} />
             </motion.div>
@@ -4182,12 +4379,7 @@ function HowDifferent() {
       </div>
 
       <style jsx global>{`
-        @media (max-width: 1024px) {
-          .how-diff-grid {
-            grid-template-columns: repeat(2, 1fr) !important;
-          }
-        }
-        @media (max-width: 600px) {
+        @media (max-width: 700px) {
           .how-diff-grid {
             grid-template-columns: 1fr !important;
           }
@@ -4200,10 +4392,14 @@ function HowDifferent() {
 function DifferentiatorCard({
   title,
   description,
+  metric,
+  metricLabel,
   icon,
 }: {
   title: string;
   description: string;
+  metric: string;
+  metricLabel: string;
   icon: React.ReactNode;
 }) {
   const [hovered, setHovered] = useState(false);
@@ -4213,50 +4409,92 @@ function DifferentiatorCard({
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
-        padding: "32px 28px",
-        borderRadius: 16,
+        padding: "clamp(28px, 3vw, 40px) clamp(24px, 2.5vw, 36px)",
+        borderRadius: 20,
         border: hovered
           ? "1px solid rgba(232,101,26,0.18)"
           : "1px solid rgba(255,255,255,0.05)",
         background: hovered
           ? "rgba(232,101,26,0.03)"
           : "rgba(255,255,255,0.02)",
-        transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+        transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
         height: "100%",
+        display: "flex",
+        flexDirection: "column" as const,
       }}
     >
-      {/* Icon */}
+      {/* Top row: Icon + Metric */}
       <div
         style={{
-          width: 44,
-          height: 44,
-          borderRadius: 12,
-          background: hovered
-            ? "rgba(232,101,26,0.10)"
-            : "rgba(255,255,255,0.04)",
-          border: hovered
-            ? "1px solid rgba(232,101,26,0.15)"
-            : "1px solid rgba(255,255,255,0.06)",
           display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          color: hovered ? "var(--orange)" : "rgba(255,255,255,0.35)",
-          transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
-          marginBottom: 20,
+          alignItems: "flex-start",
+          justifyContent: "space-between",
+          marginBottom: 24,
         }}
       >
-        {icon}
+        {/* Icon */}
+        <div
+          style={{
+            width: 48,
+            height: 48,
+            borderRadius: 14,
+            background: hovered
+              ? "rgba(232,101,26,0.10)"
+              : "rgba(255,255,255,0.04)",
+            border: hovered
+              ? "1px solid rgba(232,101,26,0.15)"
+              : "1px solid rgba(255,255,255,0.06)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            color: hovered ? "var(--orange)" : "rgba(255,255,255,0.35)",
+            transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+            flexShrink: 0,
+          }}
+        >
+          {icon}
+        </div>
+
+        {/* Metric */}
+        <div style={{ textAlign: "right", flexShrink: 0 }}>
+          <div
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(28px, 2.5vw, 36px)",
+              fontWeight: 800,
+              letterSpacing: "-1px",
+              lineHeight: 1,
+              color: hovered ? "var(--orange)" : "rgba(255,255,255,0.15)",
+              transition: "color 0.4s ease",
+            }}
+          >
+            {metric}
+          </div>
+          <div
+            style={{
+              fontFamily: "var(--font-outfit)",
+              fontSize: 11,
+              fontWeight: 400,
+              color: "rgba(255,255,255,0.3)",
+              marginTop: 4,
+              letterSpacing: "0.3px",
+            }}
+          >
+            {metricLabel}
+          </div>
+        </div>
       </div>
 
       {/* Title */}
       <h3
         style={{
           fontFamily: "var(--font-display)",
-          fontSize: 17,
+          fontSize: "clamp(17px, 1.5vw, 20px)",
           fontWeight: 700,
           color: "var(--white)",
-          letterSpacing: "-0.3px",
-          margin: "0 0 8px",
+          letterSpacing: "-0.4px",
+          lineHeight: 1.25,
+          margin: "0 0 12px",
         }}
       >
         {title}
@@ -4266,10 +4504,10 @@ function DifferentiatorCard({
       <p
         style={{
           fontFamily: "var(--font-outfit)",
-          fontSize: 13.5,
+          fontSize: 14,
           fontWeight: 300,
           color: "rgba(255,255,255,0.4)",
-          lineHeight: 1.6,
+          lineHeight: 1.65,
           margin: 0,
         }}
       >
@@ -4467,12 +4705,91 @@ function EventsCTA() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// FLOATING CTA — Always-visible pill that scrolls to the inquiry form
+// ─────────────────────────────────────────────────────────────────────────────
+
+function FloatingCTA() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const formSection = document.getElementById("get-involved");
+    if (!formSection) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // Hide when form is in viewport, show otherwise
+        setVisible(!entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+
+    // Small delay so the hero is past before showing
+    const timer = setTimeout(() => {
+      observer.observe(formSection);
+    }, 2000);
+
+    return () => {
+      clearTimeout(timer);
+      observer.disconnect();
+    };
+  }, []);
+
+  const scrollToForm = useCallback(() => {
+    document.getElementById("get-involved")?.scrollIntoView({ behavior: "smooth" });
+  }, []);
+
+  return (
+    <AnimatePresence>
+      {visible && (
+        <motion.button
+          initial={{ opacity: 0, y: 20, scale: 0.9 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: 20, scale: 0.9 }}
+          transition={{ duration: 0.35, ease: EASE }}
+          onClick={scrollToForm}
+          className="floating-cta-btn"
+          style={{
+            position: "fixed",
+            bottom: 28,
+            right: 28,
+            zIndex: 999,
+            padding: "12px 24px",
+            borderRadius: 50,
+            background: "var(--orange)",
+            color: "white",
+            fontFamily: "var(--font-outfit)",
+            fontSize: 13,
+            fontWeight: 600,
+            border: "none",
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            gap: 8,
+            boxShadow: "0 8px 32px rgba(232,101,26,0.3), 0 2px 8px rgba(0,0,0,0.3)",
+            letterSpacing: "0.2px",
+          }}
+          whileHover={{ scale: 1.05, boxShadow: "0 12px 40px rgba(232,101,26,0.4), 0 2px 8px rgba(0,0,0,0.3)" }}
+          whileTap={{ scale: 0.97 }}
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+            <polyline points="22,6 12,13 2,6" />
+          </svg>
+          Get Involved
+        </motion.button>
+      )}
+    </AnimatePresence>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // PAGE
 // ─────────────────────────────────────────────────────────────────────────────
 
 export default function EventsPage() {
   return (
     <div>
+      <FloatingCTA />
       <EventsHero />
       <EventsSeriesGrid />
       <SectionTransition variant="expand" />
@@ -4484,20 +4801,10 @@ export default function EventsPage() {
       <SectionTransition variant="expand" />
       <EventsUpNext />
       <SectionTransition variant="sweep" />
-      <div id="calendar">
-        <AnnualTimeline />
-      </div>
-      <SectionTransition variant="expand" />
       <PastEvents />
       <SectionTransition variant="sweep" />
-      <Voices />
-      <SectionTransition variant="expand" />
       <MediaCoverage />
-      <EventsNewsletter />
-      <SectionTransition variant="sweep" />
-      <NetworkFirst />
-      <SectionTransition variant="pulse" />
-      <EventsCTA />
+      <EventsInquiryForm />
       <SectionTransition variant="sweep" />
       <Footer />
     </div>

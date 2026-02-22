@@ -83,25 +83,25 @@ const departments: { label: string; members: Member[] }[] = [
       { name: "Mohammed Sahil",  initials: "MS", photo: "https://efg-final.s3.eu-north-1.amazonaws.com/about-us-photos/sahil.jpeg" },
       { name: "Mohammed Danish", initials: "MD", photo: "https://efg-final.s3.eu-north-1.amazonaws.com/about-us-photos/Danish.jpg" },
       { name: "Mayur Methi",     initials: "MM", photo: "https://efg-final.s3.eu-north-1.amazonaws.com/about-us-photos/Mayur-Methi.png" },
-      { name: "Kausar Noor",     initials: "KN" },
+      { name: "Kausar Noor",     initials: "KN", photo: "https://efg-final.s3.eu-north-1.amazonaws.com/about-us-photos/Kausar-Noor.jpg" },
     ],
   },
   {
     label: "Delegate Acquisition",
     members: [
-      { name: "Mary",                 initials: "M"  },
+      { name: "Mary",                 initials: "M", photo: "https://efg-final.s3.eu-north-1.amazonaws.com/about-us-photos/Mary.jpg" },
       { name: "Rajan",                initials: "R", photo: "https://efg-final.s3.eu-north-1.amazonaws.com/about-us-photos/Rajan.jpg" },
       { name: "Afra Sait",            initials: "AS", photo: "https://efg-final.s3.eu-north-1.amazonaws.com/about-us-photos/Afra-Sait.jpeg" },
       { name: "Mriggashi Mohini",     initials: "MM", photo: "https://efg-final.s3.eu-north-1.amazonaws.com/about-us-photos/Mriggashi-Mohini.jpeg" },
       { name: "Stephen D'Souza",      initials: "SD" },
-      { name: "Jacqueline Fernandez", initials: "JF" },
+      { name: "Jacqueline Fernandez", initials: "JF", photo: "https://efg-final.s3.eu-north-1.amazonaws.com/about-us-photos/Jacqueline-Fernandez.jpg" },
       { name: "Nadim Pirani",         initials: "NP", photo: "https://efg-final.s3.eu-north-1.amazonaws.com/about-us-photos/Nadim-Pirani.jpg" },
     ],
   },
   {
     label: "Operations",
     members: [
-      { name: "Mini", initials: "M" },
+      { name: "Mini", initials: "M", photo: "https://efg-final.s3.eu-north-1.amazonaws.com/about-us-photos/Mini.jpg" },
     ],
   },
   {
