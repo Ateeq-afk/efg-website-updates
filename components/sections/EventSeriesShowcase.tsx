@@ -1,0 +1,517 @@
+"use client";
+
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import Link from "next/link";
+
+// Event series data
+const eventSeries = [
+  {
+    id: "cyber-first",
+    title: "Cyber First",
+    tagline: "Defending the Digital Frontier",
+    description:
+      "Where the region's CISOs, security architects, and cyber leaders gather to shape the future of enterprise defense.",
+    stats: "5 Editions · Kuwait, Qatar, KSA, Oman",
+    color: "#01BBF5",
+    image:
+      "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80",
+    href: "/events/cyber-first",
+  },
+  {
+    id: "ot-security-first",
+    title: "OT Security First",
+    tagline: "Securing Critical Infrastructure",
+    description:
+      "Bridging IT and OT security for the industries that keep the world running — energy, manufacturing, utilities.",
+    stats: "3 Editions · Saudi Arabia, Oman",
+    color: "#D34B9A",
+    image:
+      "https://images.unsplash.com/photo-1513828583688-c52646db42da?w=800&q=80",
+    href: "/events/ot-security-first",
+  },
+  {
+    id: "opex-first",
+    title: "Opex First",
+    tagline: "Engineering Operational Excellence",
+    description:
+      "Process transformation, automation, and the frameworks driving efficiency at scale across the modern enterprise.",
+    stats: "3 Editions · Dubai, Doha, Riyadh",
+    color: "#7C3AED",
+    image:
+      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&q=80",
+    href: "/events/opex-first",
+  },
+  {
+    id: "data-ai-first",
+    title: "Data & AI First",
+    tagline: "Intelligence at Scale",
+    description:
+      "Data strategy, artificial intelligence, and machine learning — for the leaders building the intelligent, autonomous enterprise.",
+    stats: "2 Editions · Kuwait, Qatar",
+    color: "#11A385",
+    image:
+      "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80",
+    href: "/events/data-ai-first",
+  },
+];
+
+// Animation variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const cardVariants = [
+  {
+    hidden: { opacity: 0, y: 40, x: 30, scale: 0.97 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      x: 0,
+      scale: 1,
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const },
+    },
+  },
+  {
+    hidden: { opacity: 0, y: 40, x: 10, scale: 0.97 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      x: 0,
+      scale: 1,
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const },
+    },
+  },
+  {
+    hidden: { opacity: 0, y: 40, x: -10, scale: 0.97 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      x: 0,
+      scale: 1,
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const },
+    },
+  },
+  {
+    hidden: { opacity: 0, y: 40, x: -30, scale: 0.97 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      x: 0,
+      scale: 1,
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const },
+    },
+  },
+];
+
+const headerVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.7,
+      delay: i * 0.1,
+      ease: [0.16, 1, 0.3, 1] as const,
+    },
+  }),
+};
+
+export default function EventSeriesShowcase() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+
+  return (
+    <section
+      ref={sectionRef}
+      className="relative"
+      style={{
+        background: "var(--black)",
+        padding: "clamp(100px, 12vw, 160px) 0 clamp(120px, 14vw, 180px)",
+      }}
+    >
+      {/* Gradient fade to next section */}
+      <div
+        className="absolute bottom-0 left-0 right-0 pointer-events-none"
+        style={{
+          height: 120,
+          background: "linear-gradient(to bottom, transparent 0%, var(--black-light) 100%)",
+        }}
+      />
+      <div
+        style={{
+          maxWidth: 1320,
+          margin: "0 auto",
+          padding: "0 clamp(20px, 4vw, 60px)",
+        }}
+      >
+        {/* ═══════════════════════════════════════════════════════════════
+            SECTION HEADER — Centered Grand Reveal
+            ═══════════════════════════════════════════════════════════════ */}
+        <div style={{ textAlign: "center", marginBottom: 64 }}>
+          {/* Label */}
+          <motion.div
+            custom={0}
+            variants={headerVariants}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+            className="flex items-center justify-center gap-3"
+            style={{ marginBottom: 16 }}
+          >
+            <span
+              style={{
+                width: 30,
+                height: 1,
+                background: "var(--orange)",
+              }}
+            />
+            <span
+              style={{
+                fontSize: 11,
+                fontWeight: 600,
+                letterSpacing: "2.5px",
+                textTransform: "uppercase",
+                color: "var(--orange)",
+                fontFamily: "var(--font-outfit)",
+              }}
+            >
+              Our Event Series
+            </span>
+            <span
+              style={{
+                width: 30,
+                height: 1,
+                background: "var(--orange)",
+              }}
+            />
+          </motion.div>
+
+          {/* Title */}
+          <motion.h2
+            custom={1}
+            variants={headerVariants}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+            style={{
+              fontFamily: "var(--font-display)",
+              fontWeight: 800,
+              fontSize: "clamp(36px, 5vw, 60px)",
+              letterSpacing: "-2px",
+              color: "var(--white)",
+              lineHeight: 1.1,
+              margin: 0,
+            }}
+          >
+            Four Worlds. One Stage.
+          </motion.h2>
+
+          {/* Description */}
+          <motion.p
+            custom={2}
+            variants={headerVariants}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+            style={{
+              fontFamily: "var(--font-outfit)",
+              fontWeight: 300,
+              fontSize: "clamp(15px, 1.4vw, 17.5px)",
+              color: "#A0A0A0",
+              lineHeight: 1.65,
+              maxWidth: 600,
+              margin: "14px auto 0",
+            }}
+          >
+            Each series is a universe of its own — built for a specific
+            community, sharpened around a specific mission, alive with the
+            people who are shaping that industry's future.
+          </motion.p>
+        </div>
+
+        {/* ═══════════════════════════════════════════════════════════════
+            THE FOUR PORTAL CARDS
+            ═══════════════════════════════════════════════════════════════ */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          className="grid gap-6"
+          style={{
+            gridTemplateColumns: "repeat(4, 1fr)",
+          }}
+        >
+          {eventSeries.map((series, index) => (
+            <motion.div
+              key={series.id}
+              variants={cardVariants[index]}
+              custom={index}
+              style={{
+                marginTop: index % 2 === 1 ? 40 : 0, // Stagger effect: Push down odd items
+              }}
+            >
+              <PortalCard series={series} />
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+
+      {/* Responsive grid styles */}
+      <style jsx global>{`
+        @media (max-width: 1024px) {
+          .grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+        }
+        @media (max-width: 640px) {
+          .grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
+    </section>
+  );
+}
+
+/**
+ * PortalCard — A cinematic gateway into each event series
+ */
+function PortalCard({
+  series,
+}: {
+  series: (typeof eventSeries)[0];
+}) {
+  const accentColor = series.color;
+  const glowOpacity = 0.08;
+
+  return (
+    <Link
+      href={series.href}
+      className="portal-card group relative block overflow-hidden cursor-pointer transition-all duration-500"
+      style={{
+        borderRadius: 22,
+        border: "1px solid rgba(255, 255, 255, 0.05)",
+        aspectRatio: "3 / 4",
+      }}
+    >
+      {/* LAYER 1 — THE PHOTOGRAPH */}
+      <div
+        className="absolute inset-0 transition-all duration-800"
+        style={{
+          transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
+        }}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={series.image}
+          alt=""
+          className="w-full h-full object-cover transition-all duration-800 group-hover:scale-108"
+          style={{
+            filter: "brightness(0.15) saturate(0.6)",
+            transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
+          }}
+        />
+      </div>
+
+      {/* LAYER 2 — THE COLOR WASH */}
+      <div
+        className="absolute inset-0 transition-opacity duration-800 opacity-100 group-hover:opacity-100"
+        style={{
+          background: `linear-gradient(160deg, ${accentColor}08 0%, transparent 50%)`,
+          transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
+        }}
+      />
+
+      {/* LAYER 3 — THE DARKNESS GRADIENT */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: `linear-gradient(to top,
+            rgba(10, 10, 10, 0.97) 0%,
+            rgba(10, 10, 10, 0.7) 35%,
+            rgba(10, 10, 10, 0.2) 70%,
+            rgba(10, 10, 10, 0.4) 100%
+          )`,
+        }}
+      />
+
+      {/* LAYER 4 — THE AMBIENT GLOW */}
+      <div
+        className="absolute pointer-events-none transition-opacity duration-800 opacity-0 group-hover:opacity-100"
+        style={{
+          width: 250,
+          height: 250,
+          borderRadius: "50%",
+          background: accentColor,
+          filter: "blur(60px)",
+          bottom: "10%",
+          left: "50%",
+          transform: "translateX(-50%)",
+          opacity: 0,
+          ["--glow-opacity" as string]: glowOpacity,
+        }}
+      />
+
+      {/* LAYER 5 — THE CONTENT */}
+      <div
+        className="absolute bottom-0 left-0 right-0 z-10"
+        style={{ padding: 32 }}
+      >
+        {/* Series Marker Line */}
+        <div
+          className="transition-all duration-400 group-hover:w-10"
+          style={{
+            width: 24,
+            height: 2,
+            background: accentColor,
+            marginBottom: 16,
+          }}
+        />
+
+        {/* Title */}
+        <h3
+          style={{
+            fontFamily: "var(--font-display)",
+            fontSize: 26,
+            fontWeight: 800,
+            letterSpacing: "-0.5px",
+            color: "var(--white)",
+            lineHeight: 1.15,
+            margin: 0,
+          }}
+        >
+          {series.title}
+        </h3>
+
+        {/* Tagline */}
+        <p
+          style={{
+            fontFamily: "var(--font-outfit)",
+            fontSize: 13,
+            fontWeight: 500,
+            color: accentColor,
+            letterSpacing: "0.5px",
+            margin: "12px 0 8px",
+          }}
+        >
+          {series.tagline}
+        </p>
+
+        {/* Description — Hidden by default, reveals on hover */}
+        <div
+          className="overflow-hidden transition-all duration-600 max-h-0 opacity-0 group-hover:max-h-24 group-hover:opacity-100"
+          style={{
+            transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
+          }}
+        >
+          <p
+            style={{
+              fontFamily: "var(--font-outfit)",
+              fontSize: 13.5,
+              fontWeight: 300,
+              color: "rgba(255, 255, 255, 0.5)",
+              lineHeight: 1.55,
+              margin: 0,
+            }}
+          >
+            {series.description}
+          </p>
+        </div>
+
+        {/* Stats Line */}
+        <div
+          className="flex items-center gap-1.5"
+          style={{ marginTop: 16 }}
+        >
+          <svg
+            width="10"
+            height="10"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            style={{ opacity: 0.3, color: "white" }}
+          >
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+            <circle cx="12" cy="10" r="3" />
+          </svg>
+          <span
+            style={{
+              fontFamily: "var(--font-outfit)",
+              fontSize: 11,
+              fontWeight: 400,
+              color: "rgba(255, 255, 255, 0.3)",
+              letterSpacing: "0.3px",
+            }}
+          >
+            {series.stats}
+          </span>
+        </div>
+      </div>
+
+      {/* LAYER 6 — THE TOP CORNER ARROW */}
+      <div
+        className="arrow-container absolute top-6 right-6 z-10 flex items-center justify-center transition-all duration-400"
+        style={{
+          width: 36,
+          height: 36,
+          borderRadius: "50%",
+          background: "rgba(255, 255, 255, 0.04)",
+          border: "1px solid rgba(255, 255, 255, 0.06)",
+        }}
+      >
+        <span
+          className="transition-all duration-400 group-hover:-rotate-45 group-hover:opacity-100"
+          style={{
+            fontSize: 12,
+            color: "white",
+            opacity: 0.4,
+            display: "inline-block",
+          }}
+        >
+          →
+        </span>
+      </div>
+
+      {/* Hover styles */}
+      <style jsx>{`
+        .portal-card:hover {
+          transform: translateY(-8px) scale(1.02);
+          border-color: ${accentColor}33 !important;
+          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 40px ${accentColor}15;
+        }
+        .portal-card:hover img {
+          filter: brightness(0.28) saturate(0.9) !important;
+          transform: scale(1.12);
+        }
+        .portal-card:hover > div:nth-child(2) {
+          background: linear-gradient(160deg, ${accentColor}1A 0%, transparent 50%) !important;
+        }
+        .portal-card:hover > div:nth-child(4) {
+          opacity: ${glowOpacity} !important;
+        }
+        .portal-card:hover .arrow-container {
+          background: rgba(255, 255, 255, 0.1) !important;
+          border-color: ${accentColor}66 !important;
+        }
+        .portal-card:hover .arrow-container span {
+          color: ${accentColor} !important;
+        }
+        @media (max-width: 640px) {
+          .portal-card {
+            aspect-ratio: auto !important;
+            min-height: 400px;
+          }
+          .portal-card:hover {
+            transform: translateY(-4px) scale(1.01);
+          }
+        }
+      `}</style>
+    </Link>
+  );
+}
