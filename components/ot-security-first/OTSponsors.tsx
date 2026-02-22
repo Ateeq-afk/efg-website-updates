@@ -389,7 +389,7 @@ function SponsorCTA() {
 
   return (
     <Link
-      href="/sponsors"
+      href="/sponsors-and-partners"
       className="inline-flex items-center gap-2 transition-all"
       style={{
         padding: "14px 28px",

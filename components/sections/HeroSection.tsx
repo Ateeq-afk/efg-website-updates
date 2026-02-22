@@ -312,7 +312,7 @@ export default function HeroSection() {
 
             {/* Ghost Button */}
             <Link
-              href="/partners"
+              href="/sponsors-and-partners"
               className="transition-all duration-300"
               style={{
                 padding: "16px 36px",

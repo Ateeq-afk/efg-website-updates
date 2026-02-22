@@ -113,7 +113,7 @@ export async function SponsorsFromCMS({
         {/* CTA */}
         <div style={{ marginTop: 40, textAlign: "center" }}>
           <a
-            href="/sponsors"
+            href="/sponsors-and-partners"
             className="inline-flex items-center gap-2"
             style={{
               padding: "14px 28px",

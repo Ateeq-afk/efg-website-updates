@@ -206,7 +206,7 @@ function Hero() {
           <HeroButton primary href="#editions">
             View Upcoming Edition →
           </HeroButton>
-          <HeroButton href="/sponsors">Become a Sponsor →</HeroButton>
+          <HeroButton href="/sponsors-and-partners">Become a Sponsor →</HeroButton>
         </motion.div>
 
         {/* Stats */}
@@ -1454,7 +1454,7 @@ function Sponsors() {
         ))}
 
         <Link
-          href="/sponsors"
+          href="/sponsors-and-partners"
           style={{
             display: "inline-flex",
             alignItems: "center",
@@ -1914,7 +1914,7 @@ function CTA() {
             Download Post-Event Report
           </Link>
           <Link
-            href="/sponsors"
+            href="/sponsors-and-partners"
             style={{
               padding: "14px 28px",
               borderRadius: 10,

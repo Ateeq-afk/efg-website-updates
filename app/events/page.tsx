@@ -940,6 +940,29 @@ function EventsImpact() {
 // SECTION 3 — EVENT SERIES GRID (brand new, not reused)
 // ─────────────────────────────────────────────────────────────────────────────
 
+function useCountdown(targetDate: string) {
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0 });
+
+  useEffect(() => {
+    const target = new Date(targetDate + "T09:00:00").getTime();
+    const calc = () => {
+      const diff = target - Date.now();
+      if (diff > 0) {
+        setTimeLeft({
+          days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
+          minutes: Math.floor((diff / 1000 / 60) % 60),
+        });
+      }
+    };
+    calc();
+    const timer = setInterval(calc, 60000);
+    return () => clearInterval(timer);
+  }, [targetDate]);
+
+  return timeLeft;
+}
+
 function SeriesCard({
   series,
   index,
@@ -948,6 +971,7 @@ function SeriesCard({
   index: number;
 }) {
   const [hovered, setHovered] = useState(false);
+  const countdown = useCountdown(series.date);
 
   return (
     <Link
@@ -1034,7 +1058,7 @@ function SeriesCard({
         }}
       />
 
-      {/* Status badge — top right */}
+      {/* Countdown badge — top right */}
       <div
         className="absolute z-10"
         style={{ top: 12, right: 12 }}
@@ -1077,7 +1101,11 @@ function SeriesCard({
                 series.status === "open" ? "#22C55E" : series.color,
             }}
           >
-            {series.status === "open" ? "Registration Open" : "Coming Soon"}
+            {countdown.days > 0
+              ? `${countdown.days}d ${countdown.hours}h ${countdown.minutes}m`
+              : series.status === "open"
+                ? "Today"
+                : "Coming Soon"}
           </span>
         </span>
       </div>
@@ -1481,9 +1509,7 @@ function EventsSeriesGrid() {
           style={{
             display: "grid",
             gridTemplateColumns:
-              filtered.length === 1
-                ? "1fr"
-                : "repeat(auto-fill, minmax(min(100%, 260px), 1fr))",
+              "repeat(auto-fill, minmax(min(100%, 260px), 1fr))",
             gap: 14,
             minHeight: 200,
           }}

@@ -216,7 +216,7 @@ export default function SeriesHero() {
               <span>→</span>
             </Link>
             <Link
-              href="/sponsors"
+              href="/sponsors-and-partners"
               className="inline-flex items-center gap-2 transition-all duration-300"
               style={{
                 padding: "12px 28px",

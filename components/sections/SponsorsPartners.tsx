@@ -243,7 +243,7 @@ function PartnerCTA() {
 
   return (
     <Link
-      href="/partners"
+      href="/sponsors-and-partners"
       className="inline-flex items-center gap-2 transition-all duration-400"
       style={{
         padding: "14px 32px",

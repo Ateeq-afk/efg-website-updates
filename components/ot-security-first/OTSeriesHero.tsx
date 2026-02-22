@@ -218,7 +218,7 @@ export default function OTSeriesHero() {
           <CTAButton primary href="/events/ot-security-first/abu-dhabi-2026">
             View Latest Edition →
           </CTAButton>
-          <CTAButton href="/sponsors">Become a Sponsor →</CTAButton>
+          <CTAButton href="/sponsors-and-partners">Become a Sponsor →</CTAButton>
         </motion.div>
 
         {/* Stats Row - Floating in content area */}

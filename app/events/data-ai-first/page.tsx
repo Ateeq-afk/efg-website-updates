@@ -1322,7 +1322,7 @@ function InauguralCTA() {
             Download Brochure
           </Link>
           <Link
-            href="/sponsors"
+            href="/sponsors-and-partners"
             style={{
               padding: "16px 36px",
               borderRadius: 50,
