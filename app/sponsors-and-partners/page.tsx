@@ -15,26 +15,24 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 const MAX_W = 1320;
 const PAD = "0 clamp(20px, 4vw, 60px)";
 
+function tierToLabel(tier: string): string {
+  const lower = tier.toLowerCase();
+  if (lower === "media" || lower === "media-partner") return "Media Partner";
+  if (lower.includes("partner")) {
+    return tier
+      .split("-")
+      .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+      .join(" ");
+  }
+  return `${tier.split("-").map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ")} Sponsor`;
+}
+
 const EVENT_FILTERS = [
   "All",
   "OPEX First UAE",
   "Cyber First UAE",
   "OT Security First",
 ] as const;
-
-const TIER_COLORS: Record<string, { bg: string; text: string; border: string }> = {
-  platinum: { bg: "rgba(180,180,200,0.1)", text: "#B4B4C8", border: "rgba(180,180,200,0.2)" },
-  gold: { bg: "rgba(218,165,32,0.1)", text: "#DAA520", border: "rgba(218,165,32,0.2)" },
-  silver: { bg: "rgba(170,170,180,0.1)", text: "#AAAAB4", border: "rgba(170,170,180,0.2)" },
-  bronze: { bg: "rgba(176,141,87,0.1)", text: "#B08D57", border: "rgba(176,141,87,0.2)" },
-};
-
-function tierLabel(tier: string): string {
-  return tier
-    .split("-")
-    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-    .join(" ");
-}
 
 // ─────────────────────────────────────────────────────────────────────────────
 // SECTION LABEL
@@ -75,65 +73,45 @@ function SkeletonCard() {
   return (
     <div
       style={{
-        padding: "clamp(20px, 2.5vw, 28px)",
-        borderRadius: 16,
-        border: "1px solid rgba(255,255,255,0.06)",
+        width: 172,
+        borderRadius: 14,
+        border: "1px solid rgba(255,255,255,0.08)",
         background: "rgba(255,255,255,0.02)",
+        overflow: "hidden",
+        flexShrink: 0,
       }}
     >
-      {/* Avatar skeleton */}
-      <div
-        className="skeleton-pulse"
-        style={{
-          width: 48,
-          height: 48,
-          borderRadius: "50%",
-          background: "rgba(255,255,255,0.04)",
-          marginBottom: 16,
-        }}
-      />
-      {/* Title skeleton */}
-      <div
-        className="skeleton-pulse"
-        style={{
-          width: "70%",
-          height: 16,
-          borderRadius: 8,
-          background: "rgba(255,255,255,0.04)",
-          marginBottom: 10,
-        }}
-      />
-      {/* Description skeleton */}
+      {/* Logo area skeleton */}
       <div
         className="skeleton-pulse"
         style={{
           width: "100%",
-          height: 12,
-          borderRadius: 6,
-          background: "rgba(255,255,255,0.04)",
-          marginBottom: 6,
-        }}
-      />
-      <div
-        className="skeleton-pulse"
-        style={{
-          width: "85%",
-          height: 12,
-          borderRadius: 6,
-          background: "rgba(255,255,255,0.04)",
-          marginBottom: 20,
-        }}
-      />
-      {/* Footer skeleton */}
-      <div
-        className="skeleton-pulse"
-        style={{
-          width: "50%",
-          height: 10,
-          borderRadius: 5,
+          aspectRatio: "4/3",
           background: "rgba(255,255,255,0.04)",
         }}
       />
+      {/* Info skeleton */}
+      <div style={{ padding: "12px 14px 16px" }}>
+        <div
+          className="skeleton-pulse"
+          style={{
+            width: "75%",
+            height: 13,
+            borderRadius: 6,
+            background: "rgba(255,255,255,0.04)",
+            marginBottom: 8,
+          }}
+        />
+        <div
+          className="skeleton-pulse"
+          style={{
+            width: "55%",
+            height: 10,
+            borderRadius: 5,
+            background: "rgba(255,255,255,0.04)",
+          }}
+        />
+      </div>
     </div>
   );
 }
@@ -158,55 +136,52 @@ function SponsorCard({
     .join("")
     .toUpperCase();
 
-  const eventCount = sponsor.sponsor_events?.length || 0;
+  const tierText = sponsor.tier ? tierToLabel(sponsor.tier) : "Partner";
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.1 + index * 0.04, ease: EASE }}
     >
       <Link
         href={`/sponsors-and-partners/${sponsor.slug}`}
-        style={{ textDecoration: "none", display: "block", height: "100%" }}
+        style={{ textDecoration: "none", display: "block" }}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
         <div
           style={{
-            padding: "clamp(20px, 2.5vw, 28px)",
-            borderRadius: 16,
+            width: 172,
+            borderRadius: 14,
             border: hovered
-              ? "1px solid rgba(232,101,26,0.3)"
-              : "1px solid rgba(255,255,255,0.06)",
-            background: hovered
-              ? "rgba(232,101,26,0.03)"
-              : "rgba(255,255,255,0.02)",
-            transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
-            transform: hovered ? "translateY(-2px)" : "none",
-            boxShadow: hovered
-              ? "0 8px 32px rgba(232,101,26,0.12)"
-              : "none",
-            height: "100%",
-            display: "flex",
-            flexDirection: "column",
+              ? "1px solid rgba(232,101,26,0.18)"
+              : "1px solid rgba(255,255,255,0.08)",
+            background: "rgba(255,255,255,0.02)",
+            overflow: "hidden",
+            flexShrink: 0,
+            transition: "border-color 0.3s ease, transform 0.3s ease",
+            transform: hovered ? "translateY(-4px)" : "translateY(0)",
           }}
         >
-          {/* Avatar */}
+          {/* Logo area */}
           <div
             style={{
-              width: 48,
-              height: 48,
-              borderRadius: "50%",
-              background: hovered
-                ? "rgba(232,101,26,0.15)"
-                : "rgba(232,101,26,0.1)",
+              width: "100%",
+              aspectRatio: "4/3",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              marginBottom: 16,
+              padding: 14,
+              borderBottom: "1px solid rgba(255,255,255,0.06)",
+              position: "relative",
+              overflow: "hidden",
+              background: sponsor.logo_url
+                ? "rgba(255,255,255,0.95)"
+                : hovered
+                  ? "linear-gradient(160deg, rgba(232,101,26,0.10) 0%, rgba(10,10,10,0.85) 100%)"
+                  : "linear-gradient(160deg, rgba(232,101,26,0.05) 0%, rgba(10,10,10,0.90) 100%)",
               transition: "background 0.3s ease",
-              flexShrink: 0,
             }}
           >
             {sponsor.logo_url ? (
@@ -215,110 +190,72 @@ function SponsorCard({
                 src={sponsor.logo_url}
                 alt={sponsor.name}
                 style={{
-                  width: 32,
-                  height: 32,
+                  maxWidth: "90%",
+                  maxHeight: "85%",
                   objectFit: "contain",
-                  borderRadius: 4,
                 }}
               />
             ) : (
-              <span
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontSize: 15,
-                  fontWeight: 800,
-                  color: "#E8651A",
-                  letterSpacing: "-0.5px",
-                }}
-              >
-                {initials}
-              </span>
+              <>
+                <span
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontWeight: 800,
+                    fontSize: 32,
+                    color: "rgba(232,101,26,0.14)",
+                    userSelect: "none",
+                  }}
+                >
+                  {initials}
+                </span>
+                <span
+                  style={{
+                    position: "absolute",
+                    bottom: 8,
+                    right: 10,
+                    fontFamily: "var(--font-outfit)",
+                    fontSize: 8,
+                    letterSpacing: "1px",
+                    textTransform: "uppercase",
+                    color: "rgba(255,255,255,0.1)",
+                  }}
+                >
+                  Logo soon
+                </span>
+              </>
             )}
           </div>
 
-          {/* Tier badge */}
-          {sponsor.tier && (
-            <div
-              style={{
-                display: "inline-flex",
-                alignSelf: "flex-start",
-                padding: "3px 10px",
-                borderRadius: 40,
-                background:
-                  TIER_COLORS[sponsor.tier.toLowerCase()]?.bg ||
-                  "rgba(232,101,26,0.08)",
-                border: `1px solid ${TIER_COLORS[sponsor.tier.toLowerCase()]?.border || "rgba(232,101,26,0.15)"}`,
-                marginBottom: 10,
-              }}
-            >
-              <span
-                style={{
-                  fontFamily: "var(--font-outfit)",
-                  fontSize: 10,
-                  fontWeight: 600,
-                  color:
-                    TIER_COLORS[sponsor.tier.toLowerCase()]?.text || "#E8651A",
-                  letterSpacing: "0.5px",
-                  textTransform: "uppercase",
-                }}
-              >
-                {tierLabel(sponsor.tier)}
-              </span>
-            </div>
-          )}
-
-          {/* Name */}
-          <h3
-            style={{
-              fontFamily: "var(--font-outfit)",
-              fontSize: 15,
-              fontWeight: 600,
-              color: "#FFFFFF",
-              letterSpacing: "-0.2px",
-              margin: "0 0 6px",
-              lineHeight: 1.3,
-            }}
-          >
-            {sponsor.name}
-          </h3>
-
-          {/* Description */}
-          {sponsor.short_description && (
+          {/* Info */}
+          <div style={{ padding: "12px 14px 16px" }}>
             <p
-              className="sponsor-desc-clamp"
               style={{
-                fontFamily: "var(--font-outfit)",
+                fontFamily: "var(--font-display)",
+                fontWeight: 700,
                 fontSize: 13,
-                fontWeight: 300,
-                color: "#A0A0A0",
-                lineHeight: 1.55,
-                margin: "0 0 auto",
-                paddingBottom: 16,
+                letterSpacing: "-0.2px",
+                color: "#FFFFFF",
+                margin: 0,
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
               }}
             >
-              {sponsor.short_description}
+              {sponsor.name}
             </p>
-          )}
-
-          {/* Footer */}
-          <div
-            style={{
-              borderTop: "1px solid rgba(255,255,255,0.04)",
-              paddingTop: 12,
-              marginTop: sponsor.short_description ? 0 : "auto",
-            }}
-          >
-            <span
+            <p
               style={{
                 fontFamily: "var(--font-outfit)",
-                fontSize: 11,
                 fontWeight: 400,
-                color: "#707070",
-                letterSpacing: "0.3px",
+                fontSize: 10,
+                color: "#E8651A",
+                letterSpacing: "1px",
+                textTransform: "uppercase",
+                margin: "4px 0 0",
               }}
             >
-              Partnered at {eventCount} {eventCount === 1 ? "event" : "events"}
-            </span>
+              {tierText}
+            </p>
           </div>
         </div>
       </Link>
@@ -611,11 +548,11 @@ export default function SponsorsPage() {
         <div style={{ maxWidth: MAX_W, margin: "0 auto", padding: PAD }}>
           {loading ? (
             <div
-              className="sponsors-grid"
               style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(4, 1fr)",
-                gap: "clamp(12px, 2vw, 20px)",
+                display: "flex",
+                flexWrap: "wrap",
+                gap: 14,
+                justifyContent: "center",
               }}
             >
               {Array.from({ length: 12 }).map((_, i) => (
@@ -684,11 +621,11 @@ export default function SponsorsPage() {
             </motion.div>
           ) : (
             <div
-              className="sponsors-grid"
               style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(4, 1fr)",
-                gap: "clamp(12px, 2vw, 20px)",
+                display: "flex",
+                flexWrap: "wrap",
+                gap: 14,
+                justifyContent: "center",
               }}
             >
               {filtered.map((sponsor, i) => (
@@ -824,13 +761,6 @@ export default function SponsorsPage() {
           border-color: rgba(232, 101, 26, 0.3) !important;
           color: #ffffff !important;
         }
-        .sponsor-desc-clamp {
-          display: -webkit-box;
-          -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-        }
-
         @keyframes skeletonPulse {
           0%,
           100% {
@@ -842,27 +772,6 @@ export default function SponsorsPage() {
         }
         .skeleton-pulse {
           animation: skeletonPulse 1.5s ease-in-out infinite;
-        }
-
-        @media (max-width: 1320px) {
-          .sponsors-grid {
-            grid-template-columns: repeat(3, 1fr) !important;
-          }
-        }
-        @media (max-width: 1024px) {
-          .sponsors-grid {
-            grid-template-columns: repeat(3, 1fr) !important;
-          }
-        }
-        @media (max-width: 768px) {
-          .sponsors-grid {
-            grid-template-columns: repeat(2, 1fr) !important;
-          }
-        }
-        @media (max-width: 600px) {
-          .sponsors-grid {
-            grid-template-columns: 1fr !important;
-          }
         }
       `}</style>
     </div>

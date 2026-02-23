@@ -504,37 +504,50 @@ export default function SponsorDetailPage() {
                   </Link>
                 </motion.div>
 
-                {/* Avatar */}
+                {/* Logo / Avatar */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.1, ease: EASE }}
                 >
-                  <div
-                    style={{
-                      width: 80,
-                      height: 80,
-                      borderRadius: "50%",
-                      background: "rgba(232,101,26,0.1)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      marginBottom: 24,
-                    }}
-                  >
-                    {sponsor.logo_url ? (
-                      // eslint-disable-next-line @next/next/no-img-element
+                  {sponsor.logo_url ? (
+                    <div
+                      style={{
+                        width: 120,
+                        height: 120,
+                        borderRadius: 16,
+                        background: "rgba(255,255,255,0.95)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        padding: 16,
+                        marginBottom: 28,
+                      }}
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={sponsor.logo_url}
                         alt={sponsor.name}
                         style={{
-                          width: 52,
-                          height: 52,
+                          maxWidth: "100%",
+                          maxHeight: "100%",
                           objectFit: "contain",
-                          borderRadius: 6,
                         }}
                       />
-                    ) : (
+                    </div>
+                  ) : (
+                    <div
+                      style={{
+                        width: 80,
+                        height: 80,
+                        borderRadius: "50%",
+                        background: "rgba(232,101,26,0.1)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        marginBottom: 24,
+                      }}
+                    >
                       <span
                         style={{
                           fontFamily: "var(--font-display)",
@@ -546,8 +559,8 @@ export default function SponsorDetailPage() {
                       >
                         {initials}
                       </span>
-                    )}
-                  </div>
+                    </div>
+                  )}
                 </motion.div>
 
                 {/* Name */}
