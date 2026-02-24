@@ -4,50 +4,51 @@ import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 
 const CYBER_BLUE = "#01BBF5";
+const EASE = [0.16, 1, 0.3, 1] as const;
 
-// Conference elements data
+// Conference elements with background images
 const elements = [
   {
     id: "keynotes",
-    icon: "microphone",
     title: "Keynotes & Panels",
     description:
       "High-level presentations and moderated discussions featuring CISOs, government leaders, and security practitioners.",
+    image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80",
   },
   {
     id: "awards",
-    icon: "trophy",
     title: "Awards Ceremony",
     description:
-      "Recognizing excellence in cybersecurity — from innovative defenders to visionary leaders shaping the region's security posture.",
+      "Recognizing excellence in cybersecurity — from innovative defenders to visionary leaders shaping the region.",
+    image: "https://images.unsplash.com/photo-1531545514256-b1400bc00f31?w=600&q=80",
   },
   {
     id: "meetings",
-    icon: "users",
     title: "1-on-1 Meetings",
     description:
-      "Pre-scheduled face-to-face meetings between enterprise buyers and solution providers. Every meeting is curated for relevance.",
+      "Pre-scheduled face-to-face meetings between enterprise buyers and solution providers. Every meeting is curated.",
+    image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=80",
   },
   {
     id: "hackathon",
-    icon: "code",
     title: "Hackathon & CTF",
     description:
-      "Hands-on cybersecurity challenges testing real-world skills — from penetration testing to incident response scenarios.",
+      "Hands-on cybersecurity challenges testing real-world skills — from penetration testing to incident response.",
+    image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&q=80",
   },
   {
     id: "networking",
-    icon: "coffee",
     title: "Networking & Luncheons",
     description:
-      "Structured networking sessions, coffee breaks, and sit-down luncheons designed to build lasting professional relationships.",
+      "Structured networking sessions and sit-down luncheons designed to build lasting professional relationships.",
+    image: "https://images.unsplash.com/photo-1511578314322-379afb476865?w=600&q=80",
   },
   {
     id: "media",
-    icon: "camera",
     title: "Media & Live Broadcast",
     description:
       "Full media coverage including live streaming, post-event highlights, and industry press engagement.",
+    image: "https://images.unsplash.com/photo-1478147427282-58a87a120781?w=600&q=80",
   },
 ];
 
@@ -60,7 +61,7 @@ export default function ConferenceElements() {
       ref={sectionRef}
       style={{
         background: "var(--black)",
-        padding: "clamp(80px, 10vw, 130px) 0",
+        padding: "clamp(48px, 6vw, 80px) 0",
       }}
     >
       <div
@@ -74,10 +75,9 @@ export default function ConferenceElements() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.7, ease: EASE }}
           style={{ textAlign: "center", marginBottom: 48 }}
         >
-          {/* Label */}
           <div className="flex items-center justify-center gap-3">
             <span style={{ width: 30, height: 1, background: CYBER_BLUE }} />
             <span
@@ -95,7 +95,6 @@ export default function ConferenceElements() {
             <span style={{ width: 30, height: 1, background: CYBER_BLUE }} />
           </div>
 
-          {/* Title */}
           <h2
             style={{
               fontFamily: "var(--font-display)",
@@ -109,6 +108,21 @@ export default function ConferenceElements() {
           >
             More Than a Conference
           </h2>
+
+          <p
+            style={{
+              fontFamily: "var(--font-outfit)",
+              fontWeight: 300,
+              fontSize: 16,
+              color: "#707070",
+              maxWidth: 520,
+              margin: "14px auto 0",
+              lineHeight: 1.7,
+            }}
+          >
+            Every element is designed for one outcome — that the right people
+            leave with the right connections, insights, and momentum.
+          </p>
         </motion.div>
 
         {/* Elements Grid */}
@@ -128,7 +142,7 @@ export default function ConferenceElements() {
               transition={{
                 duration: 0.5,
                 delay: 0.2 + index * 0.08,
-                ease: [0.16, 1, 0.3, 1],
+                ease: EASE,
               }}
             >
               <ElementCard element={element} />
@@ -154,7 +168,7 @@ export default function ConferenceElements() {
 }
 
 /**
- * ElementCard — Individual conference element card
+ * ElementCard — Photo-backed conference element card
  */
 function ElementCard({
   element,
@@ -165,180 +179,100 @@ function ElementCard({
 
   return (
     <div
-      className="transition-all duration-400"
+      className="relative overflow-hidden"
       style={{
-        background: isHovered ? "#171717" : "#141414",
-        border: `1px solid ${isHovered ? "rgba(1, 187, 245, 0.08)" : "rgba(255, 255, 255, 0.04)"}`,
         borderRadius: 16,
-        padding: 32,
-        transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
+        border: `1px solid ${isHovered ? "rgba(1, 187, 245, 0.1)" : "rgba(255, 255, 255, 0.04)"}`,
+        transform: isHovered ? "translateY(-3px)" : "translateY(0)",
+        boxShadow: isHovered ? "0 16px 48px rgba(0, 0, 0, 0.3)" : "none",
+        transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
+        cursor: "default",
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Icon */}
+      {/* Background Image */}
       <div
-        className="transition-opacity duration-300"
-        style={{ opacity: isHovered ? 0.8 : 0.5 }}
+        className="absolute inset-0"
+        style={{
+          zIndex: 0,
+        }}
       >
-        <ElementIcon icon={element.icon} />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={element.image}
+          alt=""
+          className="w-full h-full object-cover"
+          style={{
+            filter: isHovered
+              ? "brightness(0.25) saturate(0.6)"
+              : "brightness(0.15) saturate(0.4)",
+            transform: isHovered ? "scale(1.06)" : "scale(1)",
+            transition: "all 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
+          }}
+        />
       </div>
 
-      {/* Title */}
-      <h3
+      {/* Gradient overlay */}
+      <div
+        className="absolute inset-0 pointer-events-none"
         style={{
-          fontFamily: "var(--font-display)",
-          fontSize: 18,
-          fontWeight: 700,
-          color: "var(--white)",
-          marginTop: 16,
+          background: `linear-gradient(to top, rgba(10,10,10,0.95) 10%, rgba(10,10,10,0.5) 60%, rgba(10,10,10,0.7) 100%)`,
+          zIndex: 1,
         }}
-      >
-        {element.title}
-      </h3>
+      />
 
-      {/* Description */}
-      <p
+      {/* Content */}
+      <div
+        className="relative"
         style={{
-          fontFamily: "var(--font-outfit)",
-          fontSize: 14.5,
-          fontWeight: 300,
-          color: "#707070",
-          lineHeight: 1.65,
-          marginTop: 8,
+          zIndex: 2,
+          padding: 32,
+          minHeight: 220,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-end",
         }}
       >
-        {element.description}
-      </p>
+        <h3
+          style={{
+            fontFamily: "var(--font-display)",
+            fontSize: 20,
+            fontWeight: 700,
+            color: "var(--white)",
+            margin: 0,
+            letterSpacing: "-0.3px",
+          }}
+        >
+          {element.title}
+        </h3>
+
+        <p
+          style={{
+            fontFamily: "var(--font-outfit)",
+            fontSize: 14,
+            fontWeight: 300,
+            color: isHovered ? "#999" : "#707070",
+            lineHeight: 1.65,
+            marginTop: 8,
+            transition: "color 0.3s",
+          }}
+        >
+          {element.description}
+        </p>
+      </div>
+
+      {/* Bottom accent line on hover */}
+      <div
+        className="absolute bottom-0 left-0 right-0"
+        style={{
+          height: 2,
+          background: CYBER_BLUE,
+          opacity: isHovered ? 0.6 : 0,
+          transition: "opacity 0.4s",
+          zIndex: 3,
+        }}
+      />
     </div>
   );
-}
-
-/**
- * ElementIcon — SVG icons for each element
- */
-function ElementIcon({ icon }: { icon: string }) {
-  const style = {
-    width: 28,
-    height: 28,
-    color: CYBER_BLUE,
-  };
-
-  switch (icon) {
-    case "microphone":
-      return (
-        <svg
-          width="28"
-          height="28"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          style={style}
-        >
-          <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
-          <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
-          <line x1="12" y1="19" x2="12" y2="23" />
-          <line x1="8" y1="23" x2="16" y2="23" />
-        </svg>
-      );
-    case "trophy":
-      return (
-        <svg
-          width="28"
-          height="28"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          style={style}
-        >
-          <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
-          <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
-          <path d="M4 22h16" />
-          <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" />
-          <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" />
-          <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" />
-        </svg>
-      );
-    case "users":
-      return (
-        <svg
-          width="28"
-          height="28"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          style={style}
-        >
-          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-          <circle cx="9" cy="7" r="4" />
-          <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-          <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-        </svg>
-      );
-    case "code":
-      return (
-        <svg
-          width="28"
-          height="28"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          style={style}
-        >
-          <polyline points="16 18 22 12 16 6" />
-          <polyline points="8 6 2 12 8 18" />
-        </svg>
-      );
-    case "coffee":
-      return (
-        <svg
-          width="28"
-          height="28"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          style={style}
-        >
-          <path d="M17 8h1a4 4 0 1 1 0 8h-1" />
-          <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8z" />
-          <line x1="6" y1="2" x2="6" y2="4" />
-          <line x1="10" y1="2" x2="10" y2="4" />
-          <line x1="14" y1="2" x2="14" y2="4" />
-        </svg>
-      );
-    case "camera":
-      return (
-        <svg
-          width="28"
-          height="28"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          style={style}
-        >
-          <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
-          <circle cx="12" cy="13" r="4" />
-        </svg>
-      );
-    default:
-      return null;
-  }
 }

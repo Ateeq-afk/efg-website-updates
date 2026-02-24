@@ -63,7 +63,7 @@ export default function EditionsMap() {
       ref={sectionRef}
       style={{
         background: "var(--black-light)",
-        padding: "clamp(80px, 10vw, 130px) 0",
+        padding: "clamp(48px, 6vw, 80px) 0",
       }}
     >
       <div
@@ -122,7 +122,7 @@ export default function EditionsMap() {
               margin: "16px 0 0",
             }}
           >
-            Four Cities. One Mission.
+            Four Nations. Total Coverage.
           </h2>
         </motion.div>
 

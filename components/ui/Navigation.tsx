@@ -17,10 +17,9 @@ const navLinks = [
 
 const eventSeries = [
   { href: "/events/cyber-first", label: "Cyber First", color: "var(--cyber-first)" },
-  { href: "/events/ot-first", label: "OT First Security", color: "var(--ot-first)" },
-  { href: "/events/digital-ai", label: "Digital & AI First", color: "var(--digital-ai)" },
-  { href: "/events/cloud-first", label: "Cloud First", color: "var(--cloud-first)" },
-  { href: "/events/data-first", label: "Data First", color: "var(--data-first)" },
+  { href: "/events/ot-security-first", label: "OT Security First", color: "var(--ot-first)" },
+  { href: "/events/data-ai-first", label: "Data & AI First", color: "var(--digital-ai)" },
+  { href: "/events/opex-first", label: "Opex First", color: "var(--cloud-first)" },
 ];
 
 /**

@@ -9,21 +9,19 @@ import Image from "next/image";
 const footerLinks = {
   events: [
     { label: "Cyber First", href: "/events/cyber-first" },
-    { label: "OT Security First", href: "/events/ot-security" },
+    { label: "OT Security First", href: "/events/ot-security-first" },
+    { label: "Data & AI First", href: "/events/data-ai-first" },
     { label: "Opex First", href: "/events/opex-first" },
-    { label: "Data & AI First", href: "/events/data-ai" },
   ],
   company: [
     { label: "About", href: "/about" },
-    { label: "Team", href: "/team" },
-    { label: "Careers", href: "/careers" },
-    { label: "Press", href: "/press" },
+    { label: "Careers", href: "/about#careers" },
     { label: "Contact", href: "/contact" },
   ],
   resources: [
     { label: "Insights & Blog", href: "/insights" },
     { label: "Media Kit", href: "/media-kit" },
-    { label: "Sponsorship Deck", href: "/sponsorship" },
+    { label: "Sponsorship Deck", href: "/sponsors-and-partners" },
     { label: "Privacy Policy", href: "/privacy" },
     { label: "Terms of Use", href: "/terms" },
   ],

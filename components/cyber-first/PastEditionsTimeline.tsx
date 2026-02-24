@@ -1,63 +1,32 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 
 const CYBER_BLUE = "#01BBF5";
+const EASE = [0.16, 1, 0.3, 1] as const;
 
-// Edition timeline data
-const editions = [
-  {
-    id: 1,
-    year: "2025",
-    name: "Cyber First Kuwait",
-    edition: "1st Edition",
-    date: "Apr 2025",
-    city: "Kuwait City",
-    venue: "Radisson Blu",
-    status: "completed",
-  },
-  {
-    id: 2,
-    year: "2026",
-    name: "Cyber First UAE",
-    edition: "2nd Edition",
-    date: "Feb 3, 2026",
-    city: "Abu Dhabi",
-    venue: "Rosewood Abu Dhabi",
-    status: "completed",
-  },
-  {
-    id: 3,
-    year: "2026",
-    name: "Cyber First Kuwait",
-    edition: "3rd Edition",
-    date: "Apr 21, 2026",
-    city: "Kuwait City",
-    venue: "Radisson Blu",
-    status: "upcoming",
-  },
-  {
-    id: 4,
-    year: "2026",
-    name: "Cyber First KSA",
-    edition: "4th Edition",
-    date: "TBA",
-    city: "Riyadh",
-    venue: null,
-    status: "tba",
-  },
-  {
-    id: 5,
-    year: "2026",
-    name: "Cyber First Qatar",
-    edition: "5th Edition",
-    date: "TBA",
-    city: "Doha",
-    venue: null,
-    status: "tba",
-  },
+// Who's in the room — role breakdown
+const roles = [
+  { title: "CISOs & CSOs", percentage: 32, description: "Chief Information Security Officers leading enterprise cyber strategy" },
+  { title: "CTO & CIO", percentage: 22, description: "Technology executives driving digital transformation securely" },
+  { title: "Government Cyber Leaders", percentage: 18, description: "National cybersecurity authority heads and policy makers" },
+  { title: "Security Architects", percentage: 15, description: "Hands-on leaders designing defence frameworks" },
+  { title: "Vendor & Solution Leads", percentage: 13, description: "Technology partners showcasing next-gen security solutions" },
 ];
+
+// Big proof numbers
+const proofStats = [
+  { value: 1500, suffix: "+", label: "Senior Security Leaders" },
+  { value: 4, suffix: "", label: "GCC Nations" },
+  { value: 120, suffix: "+", label: "Organisations Represented" },
+  { value: 92, suffix: "%", label: "Director-Level & Above" },
+];
+
+// Easing function: easeOutExpo
+const easeOutExpo = (t: number): number => {
+  return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+};
 
 export default function PastEditionsTimeline() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -68,7 +37,7 @@ export default function PastEditionsTimeline() {
       ref={sectionRef}
       style={{
         background: "var(--black)",
-        padding: "clamp(60px, 8vw, 100px) 0",
+        padding: "clamp(48px, 6vw, 80px) 0",
       }}
     >
       <div
@@ -82,18 +51,12 @@ export default function PastEditionsTimeline() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          style={{ marginBottom: 40 }}
+          transition={{ duration: 0.7, ease: EASE }}
+          style={{ textAlign: "center", marginBottom: 56 }}
         >
           {/* Label */}
-          <div className="flex items-center gap-3">
-            <span
-              style={{
-                width: 30,
-                height: 1,
-                background: CYBER_BLUE,
-              }}
-            />
+          <div className="flex items-center justify-center gap-3">
+            <span style={{ width: 30, height: 1, background: CYBER_BLUE }} />
             <span
               style={{
                 fontSize: 11,
@@ -104,8 +67,9 @@ export default function PastEditionsTimeline() {
                 fontFamily: "var(--font-outfit)",
               }}
             >
-              Series History
+              The Room
             </span>
+            <span style={{ width: 30, height: 1, background: CYBER_BLUE }} />
           </div>
 
           {/* Title */}
@@ -113,97 +77,102 @@ export default function PastEditionsTimeline() {
             style={{
               fontFamily: "var(--font-display)",
               fontWeight: 800,
-              fontSize: "clamp(28px, 3vw, 40px)",
-              letterSpacing: "-1px",
+              fontSize: "clamp(30px, 3.5vw, 48px)",
+              letterSpacing: "-1.5px",
               color: "var(--white)",
-              lineHeight: 1.15,
+              lineHeight: 1.1,
               margin: "16px 0 0",
             }}
           >
-            A Growing Legacy
+            You&rsquo;ll Know the People in This Room
           </h2>
-        </motion.div>
 
-        {/* Timeline Container */}
-        <div
-          className="timeline-scroll-container"
-          style={{
-            position: "relative",
-            overflowX: "auto",
-            overflowY: "visible",
-            paddingBottom: 20,
-          }}
-        >
-          {/* Timeline Line */}
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
-            transition={{ duration: 1.2, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          <p
             style={{
-              position: "absolute",
-              top: 6,
-              left: 0,
-              right: 0,
-              height: 1,
-              background: `rgba(1, 187, 245, 0.12)`,
-              transformOrigin: "left",
-              minWidth: editions.length * 220,
-            }}
-          />
-
-          {/* Timeline Nodes */}
-          <div
-            className="flex gap-4"
-            style={{
-              minWidth: editions.length * 220,
-              paddingTop: 0,
+              fontFamily: "var(--font-outfit)",
+              fontWeight: 300,
+              fontSize: 16,
+              color: "#707070",
+              maxWidth: 600,
+              margin: "16px auto 0",
+              lineHeight: 1.7,
             }}
           >
-            {editions.map((edition, index) => (
-              <motion.div
-                key={edition.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{
-                  duration: 0.5,
-                  delay: 0.5 + index * 0.08,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-                style={{
-                  position: "relative",
-                  minWidth: 200,
-                  maxWidth: 240,
-                  flex: "0 0 auto",
-                }}
-              >
-                <TimelineNode edition={edition} />
-              </motion.div>
-            ))}
-          </div>
-        </div>
+            Cyber First doesn&rsquo;t fill seats — it curates a room. Every
+            attendee is a decision-maker shaping cybersecurity across the GCC.
+          </p>
+        </motion.div>
+
+        {/* Proof Stats Row */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.7, delay: 0.15, ease: EASE }}
+          className="the-room-stats"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(4, 1fr)",
+            gap: 24,
+            marginBottom: 56,
+          }}
+        >
+          {proofStats.map((stat, i) => (
+            <ProofStat key={stat.label} stat={stat} delay={i * 120} isInView={isInView} />
+          ))}
+        </motion.div>
+
+        {/* Role Breakdown */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.7, delay: 0.3, ease: EASE }}
+          className="the-room-roles"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(5, 1fr)",
+            gap: 12,
+          }}
+        >
+          {roles.map((role, i) => (
+            <RoleCard key={role.title} role={role} index={i} isInView={isInView} />
+          ))}
+        </motion.div>
+
+        {/* Bottom Statement */}
+        <motion.p
+          initial={{ opacity: 0, y: 12 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
+          transition={{ duration: 0.7, delay: 0.5, ease: EASE }}
+          style={{
+            fontFamily: "var(--font-outfit)",
+            fontWeight: 400,
+            fontSize: 14,
+            color: "#505050",
+            textAlign: "center",
+            marginTop: 40,
+            letterSpacing: "0.3px",
+          }}
+        >
+          This is not a conference audience. This is your peer group.
+        </motion.p>
       </div>
 
       <style jsx global>{`
-        .timeline-scroll-container {
-          scrollbar-width: thin;
-          scrollbar-color: rgba(1, 187, 245, 0.2) transparent;
-        }
-        .timeline-scroll-container::-webkit-scrollbar {
-          height: 4px;
-        }
-        .timeline-scroll-container::-webkit-scrollbar-track {
-          background: transparent;
-        }
-        .timeline-scroll-container::-webkit-scrollbar-thumb {
-          background: rgba(1, 187, 245, 0.2);
-          border-radius: 2px;
-        }
-        @media (max-width: 768px) {
-          .timeline-scroll-container {
-            scroll-snap-type: x mandatory;
+        @media (max-width: 1024px) {
+          .the-room-stats {
+            grid-template-columns: repeat(2, 1fr) !important;
           }
-          .timeline-scroll-container > div > div {
-            scroll-snap-align: start;
+          .the-room-roles {
+            grid-template-columns: repeat(3, 1fr) !important;
+          }
+        }
+        @media (max-width: 640px) {
+          .the-room-stats {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 16px !important;
+          }
+          .the-room-roles {
+            grid-template-columns: 1fr !important;
           }
         }
       `}</style>
@@ -212,138 +181,195 @@ export default function PastEditionsTimeline() {
 }
 
 /**
- * TimelineNode — Individual edition node on timeline
+ * ProofStat — Animated counting stat
  */
-function TimelineNode({ edition }: { edition: (typeof editions)[0] }) {
-  const isCompleted = edition.status === "completed";
-  const isUpcoming = edition.status === "upcoming";
-  const isTba = edition.status === "tba";
+function ProofStat({
+  stat,
+  delay,
+  isInView,
+}: {
+  stat: { value: number; suffix: string; label: string };
+  delay: number;
+  isInView: boolean;
+}) {
+  const [displayValue, setDisplayValue] = useState(0);
+  const [showSuffix, setShowSuffix] = useState(false);
+  const [started, setStarted] = useState(false);
+
+  useEffect(() => {
+    if (!isInView || started) return;
+    setStarted(true);
+
+    const startTime = Date.now() + delay;
+    const duration = 1800;
+
+    const animate = () => {
+      const now = Date.now();
+      const elapsed = now - startTime;
+
+      if (elapsed < 0) {
+        requestAnimationFrame(animate);
+        return;
+      }
+
+      const progress = Math.min(elapsed / duration, 1);
+      const easedProgress = easeOutExpo(progress);
+      setDisplayValue(Math.floor(easedProgress * stat.value));
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      } else {
+        setDisplayValue(stat.value);
+        if (stat.suffix) setTimeout(() => setShowSuffix(true), 50);
+      }
+    };
+
+    requestAnimationFrame(animate);
+  }, [isInView, started, stat.value, stat.suffix, delay]);
 
   return (
-    <div style={{ position: "relative" }}>
-      {/* Dot on timeline */}
-      <div
-        className={`${isUpcoming ? "animate-pulse" : ""}`}
-        style={{
-          width: 12,
-          height: 12,
-          borderRadius: "50%",
-          background: isCompleted
-            ? `rgba(1, 187, 245, 0.6)`
-            : "transparent",
-          border: isUpcoming
-            ? `2px solid ${CYBER_BLUE}`
-            : isTba
-              ? "1px solid rgba(255, 255, 255, 0.1)"
-              : "none",
-          boxShadow: isUpcoming ? `0 0 12px rgba(1, 187, 245, 0.4)` : "none",
-          marginBottom: 0,
-        }}
-      />
-
-      {/* Vertical connector line */}
+    <div
+      style={{
+        textAlign: "center",
+        padding: "28px 16px",
+        background: "#111111",
+        border: "1px solid rgba(1, 187, 245, 0.06)",
+        borderRadius: 14,
+      }}
+    >
       <div
         style={{
-          width: 1,
-          height: 20,
-          background: isTba
-            ? "rgba(255, 255, 255, 0.06)"
-            : `rgba(1, 187, 245, 0.15)`,
-          marginLeft: 5.5,
-        }}
-      />
-
-      {/* Card */}
-      <div
-        style={{
-          background: "#141414",
-          border: isTba
-            ? "1px dashed rgba(255, 255, 255, 0.08)"
-            : "1px solid rgba(255, 255, 255, 0.05)",
-          borderRadius: 12,
-          padding: 20,
-          opacity: isTba ? 0.5 : 1,
+          fontFamily: "var(--font-display)",
+          fontWeight: 800,
+          fontSize: "clamp(28px, 3vw, 36px)",
+          color: "var(--white)",
+          lineHeight: 1,
         }}
       >
-        {/* Year */}
-        <p
-          style={{
-            fontFamily: "var(--font-display)",
-            fontSize: 11,
-            fontWeight: 700,
-            color: `rgba(1, 187, 245, 0.5)`,
-            margin: 0,
-          }}
-        >
-          {edition.year}
-        </p>
-
-        {/* Edition Name */}
-        <h3
-          style={{
-            fontFamily: "var(--font-display)",
-            fontSize: 16,
-            fontWeight: 700,
-            color: "var(--white)",
-            margin: "6px 0 0",
-          }}
-        >
-          {edition.name}
-        </h3>
-
-        {/* Details */}
-        <p
-          style={{
-            fontFamily: "var(--font-outfit)",
-            fontSize: 12,
-            color: "#606060",
-            margin: "6px 0 0",
-          }}
-        >
-          {edition.edition} · {edition.date}
-        </p>
-
-        {/* Venue */}
-        {edition.venue && (
-          <p
+        {displayValue.toLocaleString()}
+        {stat.suffix && (
+          <span
             style={{
-              fontFamily: "var(--font-outfit)",
-              fontSize: 12,
-              color: "#505050",
-              margin: "2px 0 0",
+              color: CYBER_BLUE,
+              display: "inline-block",
+              transform: showSuffix ? "scale(1)" : "scale(1.3)",
+              opacity: showSuffix ? 1 : 0,
+              transition: "transform 0.2s ease-out, opacity 0.2s ease-out",
             }}
           >
-            {edition.venue}
-          </p>
+            {stat.suffix}
+          </span>
         )}
-
-        {/* Status Badge */}
-        <div
-          style={{
-            display: "inline-block",
-            marginTop: 10,
-            padding: "3px 8px",
-            borderRadius: 4,
-            background: isCompleted
-              ? "rgba(1, 187, 245, 0.08)"
-              : isUpcoming
-                ? "rgba(1, 187, 245, 0.12)"
-                : "rgba(255, 255, 255, 0.03)",
-            fontFamily: "var(--font-outfit)",
-            fontSize: 9,
-            fontWeight: 600,
-            letterSpacing: "1.5px",
-            textTransform: "uppercase",
-            color: isCompleted || isUpcoming ? CYBER_BLUE : "#404040",
-          }}
-        >
-          {edition.status === "completed"
-            ? "Completed"
-            : edition.status === "upcoming"
-              ? "Upcoming"
-              : "Announcing Soon"}
-        </div>
       </div>
+      <p
+        style={{
+          fontFamily: "var(--font-outfit)",
+          fontSize: 12,
+          fontWeight: 500,
+          color: "#505050",
+          marginTop: 8,
+          letterSpacing: "0.5px",
+        }}
+      >
+        {stat.label}
+      </p>
     </div>
+  );
+}
+
+/**
+ * RoleCard — Audience role breakdown with bar
+ */
+function RoleCard({
+  role,
+  index,
+  isInView,
+}: {
+  role: { title: string; percentage: number; description: string };
+  index: number;
+  isInView: boolean;
+}) {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+      transition={{ duration: 0.5, delay: 0.35 + index * 0.07, ease: EASE }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        padding: "24px 20px",
+        background: hovered ? "#161616" : "#111111",
+        border: `1px solid ${hovered ? "rgba(1, 187, 245, 0.1)" : "rgba(255, 255, 255, 0.04)"}`,
+        borderRadius: 14,
+        transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+        cursor: "default",
+      }}
+    >
+      {/* Percentage */}
+      <p
+        style={{
+          fontFamily: "var(--font-display)",
+          fontWeight: 800,
+          fontSize: 28,
+          color: CYBER_BLUE,
+          margin: 0,
+          lineHeight: 1,
+        }}
+      >
+        {role.percentage}%
+      </p>
+
+      {/* Title */}
+      <h3
+        style={{
+          fontFamily: "var(--font-display)",
+          fontWeight: 700,
+          fontSize: 15,
+          color: "var(--white)",
+          margin: "12px 0 0",
+          lineHeight: 1.3,
+        }}
+      >
+        {role.title}
+      </h3>
+
+      {/* Description */}
+      <p
+        style={{
+          fontFamily: "var(--font-outfit)",
+          fontWeight: 300,
+          fontSize: 13,
+          color: "#606060",
+          margin: "8px 0 0",
+          lineHeight: 1.6,
+        }}
+      >
+        {role.description}
+      </p>
+
+      {/* Percentage Bar */}
+      <div
+        style={{
+          marginTop: 16,
+          height: 3,
+          background: "rgba(255, 255, 255, 0.04)",
+          borderRadius: 2,
+          overflow: "hidden",
+        }}
+      >
+        <motion.div
+          initial={{ width: 0 }}
+          animate={isInView ? { width: `${role.percentage}%` } : { width: 0 }}
+          transition={{ duration: 1.2, delay: 0.5 + index * 0.1, ease: EASE }}
+          style={{
+            height: "100%",
+            background: `linear-gradient(90deg, ${CYBER_BLUE}, rgba(1, 187, 245, 0.4))`,
+            borderRadius: 2,
+          }}
+        />
+      </div>
+    </motion.div>
   );
 }

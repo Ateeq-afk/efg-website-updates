@@ -70,7 +70,7 @@ export default function CyberFirstGallery() {
       ref={sectionRef}
       style={{
         background: "var(--black)",
-        padding: "clamp(80px, 10vw, 120px) 0 clamp(60px, 8vw, 100px)",
+        padding: "clamp(48px, 6vw, 80px) 0",
       }}
     >
       <div

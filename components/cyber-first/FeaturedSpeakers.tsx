@@ -5,64 +5,65 @@ import { motion, useInView } from "framer-motion";
 import Link from "next/link";
 
 const CYBER_BLUE = "#01BBF5";
+const EASE = [0.16, 1, 0.3, 1] as const;
 
-// Speaker data
+// Speaker data with portrait images
 const speakers = [
   {
     id: 1,
     name: "H.E. Dr. Mohamed Al Kuwaiti",
     title: "Head of Cybersecurity",
     organization: "UAE Government",
-    initials: "MA",
+    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80",
   },
   {
     id: 2,
     name: "Sara Al Hosani",
     title: "Director Cyber Threat Intelligence",
     organization: "Department of Government Enablement",
-    initials: "SA",
+    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80",
   },
   {
     id: 3,
     name: "Hussain Al Khalsan",
     title: "CISO",
     organization: "Zand Bank",
-    initials: "HA",
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80",
   },
   {
     id: 4,
     name: "Bernard Assaf",
     title: "Regional CISO",
     organization: "Airbus",
-    initials: "BA",
+    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80",
   },
   {
     id: 5,
     name: "James Wiles",
     title: "Head of Cyber Security MEA",
     organization: "Cigna Healthcare",
-    initials: "JW",
+    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&q=80",
   },
   {
     id: 6,
     name: "Prof. Khalid Al-Begain",
     title: "President",
     organization: "Kuwait College of Science & Technology",
-    initials: "KA",
+    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80",
   },
   {
     id: 7,
     name: "Mohamed Rushdhi",
     title: "Head of Information Security",
     organization: "Industrial Bank of Kuwait",
-    initials: "MR",
+    image: "https://images.unsplash.com/photo-1556157382-97eda2d62296?w=400&q=80",
   },
   {
     id: 8,
     name: "Abdulwahab Algamhi",
     title: "Senior Director Information Security",
     organization: "Miral",
-    initials: "AA",
+    image: "https://images.unsplash.com/photo-1580518337843-f959e992563b?w=400&q=80",
   },
 ];
 
@@ -75,7 +76,7 @@ export default function FeaturedSpeakers() {
       ref={sectionRef}
       style={{
         background: "var(--black-light)",
-        padding: "clamp(80px, 10vw, 130px) 0",
+        padding: "clamp(48px, 6vw, 80px) 0",
       }}
     >
       <div
@@ -89,7 +90,7 @@ export default function FeaturedSpeakers() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.7, ease: EASE }}
           style={{ textAlign: "center", marginBottom: 48 }}
         >
           {/* Label */}
@@ -105,7 +106,7 @@ export default function FeaturedSpeakers() {
                 fontFamily: "var(--font-outfit)",
               }}
             >
-              Speakers & Advisors
+              Speakers
             </span>
             <span style={{ width: 30, height: 1, background: CYBER_BLUE }} />
           </div>
@@ -122,7 +123,7 @@ export default function FeaturedSpeakers() {
               margin: "16px 0 0",
             }}
           >
-            Voices That Shape Cybersecurity
+            The Leaders Setting the Agenda
           </h2>
 
           {/* Description */}
@@ -131,14 +132,14 @@ export default function FeaturedSpeakers() {
               fontFamily: "var(--font-outfit)",
               fontWeight: 300,
               fontSize: 16,
-              color: "#808080",
+              color: "#707070",
               lineHeight: 1.6,
-              maxWidth: 480,
+              maxWidth: 520,
               margin: "14px auto 0",
             }}
           >
-            CISOs, government cyber leaders, and security innovators from
-            across the GCC and beyond.
+            Government heads, enterprise CISOs, and global security architects
+            — the people who don&rsquo;t just attend conferences, they define them.
           </p>
         </motion.div>
 
@@ -159,7 +160,7 @@ export default function FeaturedSpeakers() {
               transition={{
                 duration: 0.5,
                 delay: 0.2 + index * 0.06,
-                ease: [0.16, 1, 0.3, 1],
+                ease: EASE,
               }}
             >
               <SpeakerCard speaker={speaker} />
@@ -171,7 +172,7 @@ export default function FeaturedSpeakers() {
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
-          transition={{ duration: 0.6, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.6, delay: 0.8, ease: EASE }}
           className="text-center"
           style={{ marginTop: 32 }}
         >
@@ -196,7 +197,7 @@ export default function FeaturedSpeakers() {
 }
 
 /**
- * SpeakerCard — Individual speaker card
+ * SpeakerCard — Premium speaker card with photo
  */
 function SpeakerCard({
   speaker,
@@ -207,50 +208,61 @@ function SpeakerCard({
 
   return (
     <div
-      className="transition-all duration-400"
+      className="transition-all"
       style={{
         background: "#141414",
         border: `1px solid ${isHovered ? "rgba(1, 187, 245, 0.1)" : "rgba(255, 255, 255, 0.05)"}`,
         borderRadius: 16,
         overflow: "hidden",
         transform: isHovered ? "translateY(-4px)" : "translateY(0)",
-        boxShadow: isHovered ? "0 12px 40px rgba(0, 0, 0, 0.2)" : "none",
+        boxShadow: isHovered ? "0 12px 40px rgba(0, 0, 0, 0.3)" : "none",
+        transitionDuration: "0.5s",
         transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Photo Placeholder */}
+      {/* Photo */}
       <div
-        className="relative flex items-center justify-center"
-        style={{
-          aspectRatio: "1 / 1",
-          background: "#1A1A1A",
-        }}
+        className="relative overflow-hidden"
+        style={{ aspectRatio: "1 / 1" }}
       >
-        <span
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={speaker.image}
+          alt={speaker.name}
+          className="w-full h-full object-cover"
           style={{
-            fontFamily: "var(--font-display)",
-            fontSize: 32,
-            fontWeight: 800,
-            color: `rgba(1, 187, 245, 0.15)`,
+            filter: isHovered
+              ? "brightness(0.9) saturate(1)"
+              : "brightness(0.7) saturate(0)",
+            transform: isHovered ? "scale(1.05)" : "scale(1)",
+            transition: "all 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
           }}
-        >
-          {speaker.initials}
-        </span>
+        />
 
-        {/* Blue overlay on hover */}
+        {/* Gradient overlay */}
         <div
-          className="absolute inset-0 transition-opacity duration-300"
+          className="absolute inset-0 pointer-events-none"
           style={{
-            background: `rgba(1, 187, 245, 0.05)`,
-            opacity: isHovered ? 1 : 0,
+            background: `linear-gradient(to top, rgba(20,20,20,1) 0%, rgba(20,20,20,0.4) 40%, transparent 70%)`,
+          }}
+        />
+
+        {/* Blue accent line at bottom on hover */}
+        <div
+          className="absolute bottom-0 left-0 right-0 transition-opacity"
+          style={{
+            height: 2,
+            background: CYBER_BLUE,
+            opacity: isHovered ? 0.8 : 0,
+            transitionDuration: "0.4s",
           }}
         />
       </div>
 
       {/* Info */}
-      <div style={{ padding: 20 }}>
+      <div style={{ padding: "16px 20px 20px" }}>
         <h3
           style={{
             fontFamily: "var(--font-display)",
@@ -266,9 +278,9 @@ function SpeakerCard({
         <p
           style={{
             fontFamily: "var(--font-outfit)",
-            fontSize: 13.5,
+            fontSize: 13,
             fontWeight: 400,
-            color: "#707070",
+            color: "#606060",
             lineHeight: 1.4,
             marginTop: 4,
           }}
@@ -278,7 +290,7 @@ function SpeakerCard({
         <p
           style={{
             fontFamily: "var(--font-outfit)",
-            fontSize: 13.5,
+            fontSize: 13,
             fontWeight: 500,
             color: `rgba(1, 187, 245, 0.7)`,
             marginTop: 4,
@@ -299,7 +311,7 @@ function ViewAllLink() {
 
   return (
     <Link
-      href="/events/cyber-first/speakers"
+      href="/speakers"
       className="inline-flex items-center gap-1.5 transition-colors"
       style={{
         fontFamily: "var(--font-outfit)",

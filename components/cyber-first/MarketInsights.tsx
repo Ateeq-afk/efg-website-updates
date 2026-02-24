@@ -42,13 +42,6 @@ const marketStats = [
     suffix: "B+",
     label: "Projected UAE cybersecurity market value by 2026",
   },
-  {
-    id: 6,
-    value: 1,
-    prefix: "#",
-    suffix: "",
-    label: "UAE ranked in the 2024 Global Cybersecurity Index with a 100% score",
-  },
 ];
 
 // Easing function
@@ -65,7 +58,7 @@ export default function MarketInsights() {
       ref={sectionRef}
       style={{
         background: "var(--black-light)",
-        padding: "clamp(80px, 10vw, 130px) 0",
+        padding: "clamp(48px, 6vw, 80px) 0",
       }}
     >
       <div
@@ -121,7 +114,7 @@ export default function MarketInsights() {
               margin: "16px 0 0",
             }}
           >
-            The Threat Landscape Demands Action
+            This Is the Landscape. We Built the Room.
           </h2>
 
           {/* Paragraph */}
@@ -135,11 +128,11 @@ export default function MarketInsights() {
               margin: "16px 0 0",
             }}
           >
-            The GCC's digital transformation is accelerating — and so are the
-            threats targeting it. As organizations invest billions in cloud, AI,
-            and smart infrastructure, the attack surface expands exponentially.
-            Cyber First exists because the region's leaders need a dedicated
-            space to address these challenges together.
+            The GCC is investing billions in digital transformation — and
+            adversaries know it. The attack surface is expanding faster than
+            most organisations can defend. These aren&rsquo;t statistics to
+            worry about in isolation. They&rsquo;re the reason 1,500+
+            security leaders gather at Cyber First every year.
           </p>
         </motion.div>
 

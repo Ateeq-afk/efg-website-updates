@@ -2256,93 +2256,6 @@ function SeriesCard({
 // =============================================================================
 // MODULE 13: NEWSLETTER
 // =============================================================================
-
-function Newsletter() {
-  const ref = useRef<HTMLElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
-  const [email, setEmail] = useState("");
-  const [isFocused, setIsFocused] = useState(false);
-
-  return (
-    <section
-      ref={ref}
-      style={{
-        background: "#0A0A0A",
-        padding: "80px 24px",
-      }}
-    >
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.7, ease: EASE }}
-        style={{ maxWidth: 500, margin: "0 auto", textAlign: "center" }}
-      >
-        <h3
-          style={{
-            fontFamily: "var(--font-display)",
-            fontSize: 20,
-            fontWeight: 700,
-            color: "var(--white)",
-            margin: 0,
-          }}
-        >
-          Stay updated on Opex First
-        </h3>
-        <p
-          style={{
-            fontFamily: "var(--font-outfit)",
-            fontSize: 14,
-            color: "#606060",
-            marginTop: 12,
-            marginBottom: 28,
-          }}
-        >
-          Get updates on editions, speakers, and early-bird access.
-        </p>
-        <form className="flex justify-center gap-3">
-          <input
-            type="email"
-            placeholder="Your email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            style={{
-              flex: 1,
-              background: "#111111",
-              border: `1px solid ${isFocused ? `${VIOLET}50` : "rgba(255,255,255,0.06)"}`,
-              borderRadius: 10,
-              padding: "14px 20px",
-              fontFamily: "var(--font-outfit)",
-              fontSize: 14,
-              color: "var(--white)",
-              outline: "none",
-              transition: "border-color 0.2s",
-            }}
-            onFocus={() => setIsFocused(true)}
-            onBlur={() => setIsFocused(false)}
-          />
-          <button
-            type="submit"
-            style={{
-              background: VIOLET,
-              border: "none",
-              borderRadius: 10,
-              padding: "14px 24px",
-              fontFamily: "var(--font-outfit)",
-              fontSize: 14,
-              fontWeight: 600,
-              color: "var(--white)",
-              cursor: "pointer",
-            }}
-          >
-            Subscribe
-          </button>
-        </form>
-      </motion.div>
-    </section>
-  );
-}
-
-// =============================================================================
 // MAIN PAGE
 // =============================================================================
 
@@ -2362,7 +2275,6 @@ export default function OpexFirstPage() {
       <CTA />
       <Registration />
       <OtherSeries />
-      <Newsletter />
       <Footer />
     </div>
   );

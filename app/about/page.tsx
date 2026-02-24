@@ -1,8 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-import { motion, useInView } from "framer-motion";
-import Link from "next/link";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 import { Footer } from "@/components/sections";
 import SectionTransition from "@/components/effects/SectionTransition";
 
@@ -115,7 +114,6 @@ const departments: { label: string; members: Member[] }[] = [
   {
     label: "Marketing & Tech",
     members: [
-      { name: "Mohammed Ateeq", initials: "MA" },
       { name: "Syed Asad",      initials: "SA", photo: "https://efg-final.s3.eu-north-1.amazonaws.com/about-us-photos/Syed-Asad.jpg" },
       { name: "Mannan Akhtar",  initials: "MA", linkedin: "https://www.linkedin.com/in/mannaan-akhtar/", photo: "/team/mannaan.PNG" },
     ],
@@ -1018,60 +1016,281 @@ function AboutTeam() {
 // SECTION 6 — CTA
 // ─────────────────────────────────────────────────────────────────────────────
 
-function AboutCTA() {
+function CareersSection() {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const [submitted, setSubmitted] = useState(false);
+  const [fileName, setFileName] = useState("");
+  const [dragOver, setDragOver] = useState(false);
+  const fileRef = useRef<HTMLInputElement>(null);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitted(true);
+  };
+
+  const handleFile = (file: File | undefined) => {
+    if (file && file.type === "application/pdf") {
+      setFileName(file.name);
+    }
+  };
+
+  const inputStyle: React.CSSProperties = {
+    width: "100%",
+    padding: "13px 16px",
+    borderRadius: 10,
+    border: "1px solid rgba(255,255,255,0.08)",
+    background: "rgba(255,255,255,0.03)",
+    color: "#fff",
+    fontFamily: "var(--font-outfit)",
+    fontSize: 14,
+    outline: "none",
+    transition: "border-color 0.2s",
+  };
+
+  const labelStyle: React.CSSProperties = {
+    fontFamily: "var(--font-outfit)",
+    fontSize: 12,
+    fontWeight: 500,
+    letterSpacing: "1px",
+    textTransform: "uppercase" as const,
+    color: "#606060",
+    margin: "0 0 8px",
+    display: "block",
+  };
 
   return (
-    <section ref={ref} style={{ background: "var(--black)", padding: "clamp(56px,7vw,90px) 0" }}>
+    <section ref={ref} id="careers" style={{ background: "var(--black)", padding: "clamp(56px,7vw,90px) 0" }}>
       <div style={{ maxWidth: MAX_W, margin: "0 auto", padding: PAD }}>
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: EASE }}
-          style={{
-            borderRadius: 28,
-            border: "1px solid rgba(232,101,26,0.12)",
-            background: "rgba(232,101,26,0.04)",
-            padding: "clamp(40px,5vw,64px) clamp(28px,5vw,56px)",
-            textAlign: "center",
-            position: "relative",
-            overflow: "hidden",
-          }}
+        <div
+          className="careers-split"
+          style={{ display: "grid", gridTemplateColumns: "1fr 1.2fr", gap: "clamp(40px,5vw,80px)", alignItems: "start" }}
         >
-          <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", width: 600, height: 300, borderRadius: "50%", background: "radial-gradient(ellipse, rgba(232,101,26,0.07) 0%, transparent 70%)", pointerEvents: "none" }} />
-          <div style={{ position: "relative", zIndex: 1 }}>
-            <p style={{ fontFamily: "var(--font-outfit)", fontSize: 11, fontWeight: 600, letterSpacing: "3px", textTransform: "uppercase", color: "var(--orange)", margin: "0 0 20px" }}>
-              Don&apos;t Just Take Our Word For It
+          {/* LEFT — Info */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, ease: EASE }}
+          >
+            <p style={{ fontFamily: "var(--font-outfit)", fontSize: 11, fontWeight: 600, letterSpacing: "3px", textTransform: "uppercase", color: "var(--orange)", margin: "0 0 16px" }}>
+              Join Our Team
             </p>
-            <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(28px,4vw,52px)", letterSpacing: "-1.5px", color: "var(--white)", lineHeight: 1.1, margin: 0 }}>
-              Meet Us at the Next Event
+            <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(28px,4vw,48px)", letterSpacing: "-1.5px", color: "#fff", lineHeight: 1.1, margin: "0 0 20px" }}>
+              Careers at EFG
             </h2>
-            <p style={{ fontFamily: "var(--font-outfit)", fontWeight: 300, fontSize: "clamp(14px,1.3vw,17px)", lineHeight: 1.7, color: "var(--white-dim)", maxWidth: 500, margin: "18px auto 40px" }}>
-              The best way to understand what we build is to experience it.
-              Join 5,000+ technology leaders at our next edition.
+            <p style={{ fontFamily: "var(--font-outfit)", fontWeight: 300, fontSize: "clamp(14px,1.2vw,16px)", color: "#888", lineHeight: 1.75, margin: "0 0 28px" }}>
+              We&apos;re always looking for sharp, driven people who want to shape the future of technology events in the GCC. If you thrive in fast-paced environments and care about creating experiences that matter — we&apos;d love to hear from you.
             </p>
-            <div className="flex items-center justify-center flex-wrap gap-4">
-              <Link
-                href="/events"
-                style={{ padding: "15px 36px", borderRadius: 60, background: "var(--orange)", color: "white", fontFamily: "var(--font-outfit)", fontSize: 15, fontWeight: 600, textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 8, transition: "all 0.3s ease" }}
-                onMouseEnter={(e) => { e.currentTarget.style.background = "var(--orange-bright)"; e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 12px 40px var(--orange-glow)"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.background = "var(--orange)"; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}
-              >
-                View Upcoming Events <span>→</span>
-              </Link>
-              <Link
-                href="/contact"
-                style={{ padding: "15px 36px", borderRadius: 60, background: "transparent", color: "var(--white)", border: "1px solid rgba(255,255,255,0.12)", fontFamily: "var(--font-outfit)", fontSize: 15, fontWeight: 600, textDecoration: "none", transition: "all 0.3s ease" }}
-                onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.05)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.22)"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.12)"; }}
-              >
-                Get in Touch
-              </Link>
+            <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+              {[
+                { icon: "◆", text: "Work with the region's top technology leaders" },
+                { icon: "◆", text: "Fast-growing team with real ownership" },
+                { icon: "◆", text: "Based in Dubai, operating across the GCC" },
+              ].map((item, i) => (
+                <div key={i} className="flex items-start gap-3">
+                  <span style={{ color: "#E8651A", fontSize: 8, marginTop: 6, flexShrink: 0 }}>{item.icon}</span>
+                  <span style={{ fontFamily: "var(--font-outfit)", fontSize: 14, color: "#707070", lineHeight: 1.6 }}>{item.text}</span>
+                </div>
+              ))}
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
+
+          {/* RIGHT — Form */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.15, ease: EASE }}
+            style={{
+              borderRadius: 20,
+              border: "1px solid rgba(255,255,255,0.06)",
+              background: "rgba(255,255,255,0.02)",
+              padding: "clamp(24px,3vw,36px)",
+            }}
+          >
+            <AnimatePresence mode="wait">
+              {submitted ? (
+                <motion.div
+                  key="success"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.3, ease: EASE }}
+                  style={{ textAlign: "center", padding: "40px 20px" }}
+                >
+                  <div style={{ width: 56, height: 56, borderRadius: "50%", background: "rgba(232,101,26,0.1)", margin: "0 auto 20px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <span style={{ fontSize: 24 }}>✓</span>
+                  </div>
+                  <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: 22, color: "#fff", margin: "0 0 8px" }}>
+                    Application Received
+                  </h3>
+                  <p style={{ fontFamily: "var(--font-outfit)", fontSize: 14, color: "#707070", lineHeight: 1.6, maxWidth: 320, margin: "0 auto" }}>
+                    Thank you for your interest in joining EFG. We&apos;ll review your application and get back to you shortly.
+                  </p>
+                  <button
+                    onClick={() => { setSubmitted(false); setFileName(""); }}
+                    style={{ fontFamily: "var(--font-outfit)", fontSize: 13, color: "#E8651A", background: "none", border: "none", cursor: "pointer", marginTop: 20, padding: 0 }}
+                  >
+                    Submit another application →
+                  </button>
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="form"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.3, ease: EASE }}
+                >
+                  <form onSubmit={handleSubmit}>
+                    <div
+                      className="careers-form-grid"
+                      style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}
+                    >
+                      <div>
+                        <label style={labelStyle}>Full Name</label>
+                        <input type="text" placeholder="Your full name" required style={inputStyle} onFocus={(e) => (e.currentTarget.style.borderColor = "rgba(232,101,26,0.4)")} onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)")} />
+                      </div>
+                      <div>
+                        <label style={labelStyle}>Email</label>
+                        <input type="email" placeholder="you@company.com" required style={inputStyle} onFocus={(e) => (e.currentTarget.style.borderColor = "rgba(232,101,26,0.4)")} onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)")} />
+                      </div>
+                    </div>
+
+                    <div style={{ marginBottom: 16 }}>
+                      <label style={labelStyle}>Role you&apos;re interested in</label>
+                      <input type="text" placeholder="e.g. Event Manager, Marketing, Sales..." required style={inputStyle} onFocus={(e) => (e.currentTarget.style.borderColor = "rgba(232,101,26,0.4)")} onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)")} />
+                    </div>
+
+                    <div style={{ marginBottom: 16 }}>
+                      <label style={labelStyle}>Cover Message</label>
+                      <textarea
+                        placeholder="Tell us a bit about yourself — your experience, what excites you about EFG, and why you'd be a great fit..."
+                        rows={4}
+                        required
+                        style={{ ...inputStyle, resize: "vertical", minHeight: 100 }}
+                        onFocus={(e) => (e.currentTarget.style.borderColor = "rgba(232,101,26,0.4)")}
+                        onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)")}
+                      />
+                    </div>
+
+                    {/* PDF Upload */}
+                    <div style={{ marginBottom: 24 }}>
+                      <label style={labelStyle}>Resume / CV (PDF)</label>
+                      <input
+                        ref={fileRef}
+                        type="file"
+                        accept=".pdf"
+                        onChange={(e) => handleFile(e.target.files?.[0])}
+                        style={{ display: "none" }}
+                      />
+                      <div
+                        onClick={() => fileRef.current?.click()}
+                        onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
+                        onDragLeave={() => setDragOver(false)}
+                        onDrop={(e) => {
+                          e.preventDefault();
+                          setDragOver(false);
+                          handleFile(e.dataTransfer.files?.[0]);
+                        }}
+                        style={{
+                          border: `1px dashed ${dragOver ? "rgba(232,101,26,0.6)" : "rgba(255,255,255,0.1)"}`,
+                          borderRadius: 12,
+                          padding: "24px 20px",
+                          textAlign: "center",
+                          cursor: "pointer",
+                          background: dragOver ? "rgba(232,101,26,0.04)" : "rgba(255,255,255,0.015)",
+                          transition: "all 0.2s ease",
+                        }}
+                      >
+                        {fileName ? (
+                          <div className="flex items-center justify-center gap-2">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E8651A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                              <polyline points="14 2 14 8 20 8" />
+                            </svg>
+                            <span style={{ fontFamily: "var(--font-outfit)", fontSize: 13, color: "#E8651A" }}>{fileName}</span>
+                            <button
+                              type="button"
+                              onClick={(e) => { e.stopPropagation(); setFileName(""); if (fileRef.current) fileRef.current.value = ""; }}
+                              style={{ background: "none", border: "none", color: "#606060", cursor: "pointer", fontSize: 16, padding: "0 0 0 4px", lineHeight: 1 }}
+                            >
+                              ×
+                            </button>
+                          </div>
+                        ) : (
+                          <>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#505050" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ margin: "0 auto 8px", display: "block" }}>
+                              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                              <polyline points="17 8 12 3 7 8" />
+                              <line x1="12" y1="3" x2="12" y2="15" />
+                            </svg>
+                            <p style={{ fontFamily: "var(--font-outfit)", fontSize: 13, color: "#505050", margin: 0 }}>
+                              Click to upload or drag &amp; drop your PDF
+                            </p>
+                            <p style={{ fontFamily: "var(--font-outfit)", fontSize: 11, color: "#353535", margin: "4px 0 0" }}>
+                              PDF only, max 5MB
+                            </p>
+                          </>
+                        )}
+                      </div>
+                    </div>
+
+                    <button
+                      type="submit"
+                      style={{
+                        width: "100%",
+                        padding: "14px 32px",
+                        borderRadius: 12,
+                        background: "#E8651A",
+                        color: "#fff",
+                        fontFamily: "var(--font-outfit)",
+                        fontSize: 15,
+                        fontWeight: 600,
+                        border: "none",
+                        cursor: "pointer",
+                        transition: "all 0.3s ease",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        gap: 8,
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.background = "#FF7A2E";
+                        e.currentTarget.style.transform = "translateY(-2px)";
+                        e.currentTarget.style.boxShadow = "0 12px 40px rgba(232,101,26,0.25)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.background = "#E8651A";
+                        e.currentTarget.style.transform = "translateY(0)";
+                        e.currentTarget.style.boxShadow = "none";
+                      }}
+                    >
+                      Submit Application <span>→</span>
+                    </button>
+                  </form>
+
+                  <p style={{ fontFamily: "var(--font-outfit)", fontSize: 12, color: "#353535", lineHeight: 1.5, textAlign: "center", margin: "14px 0 0" }}>
+                    Your information is kept confidential. We only use it to evaluate your application.
+                  </p>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+        </div>
       </div>
+
+      <style jsx global>{`
+        @media (max-width: 860px) {
+          .careers-split {
+            grid-template-columns: 1fr !important;
+          }
+        }
+        @media (max-width: 500px) {
+          .careers-form-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }
@@ -1092,7 +1311,7 @@ export default function AboutPage() {
       <SectionTransition variant="sweep" />
       <AboutTeam />
       <SectionTransition variant="pulse" />
-      <AboutCTA />
+      <CareersSection />
       <SectionTransition variant="sweep" />
       <Footer />
     </div>

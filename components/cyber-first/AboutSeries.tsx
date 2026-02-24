@@ -4,44 +4,51 @@ import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 
 const CYBER_BLUE = "#01BBF5";
+const EASE = [0.16, 1, 0.3, 1] as const;
 
-// Key themes data
-const themes = [
+// Outcome cards — what attendees walk away with
+const outcomes = [
   {
-    id: "ai-defense",
-    title: "AI-Driven Cyber Defense",
+    id: "intelligence",
+    number: "01",
+    title: "Threat Intelligence You Can Act On",
     description:
-      "Threat detection, response strategies, behavioral analytics, and adaptive security models powered by artificial intelligence.",
+      "Not theory — real threat briefings from practitioners defending GCC networks right now. Walk out with a playbook, not just notes.",
   },
   {
-    id: "zero-trust",
-    title: "Zero Trust & Cloud Security",
+    id: "peer-access",
+    number: "02",
+    title: "Direct Access to Your Peers",
     description:
-      "Securing hybrid and cloud environments through zero-trust architecture, identity management, and data protection.",
+      "Structured roundtables and closed-door sessions with CISOs who face the same regulatory, cultural, and operational challenges you do.",
   },
   {
-    id: "critical-infrastructure",
-    title: "Critical Infrastructure Protection",
+    id: "vendor-clarity",
+    number: "03",
+    title: "Vendor Clarity, Not Noise",
     description:
-      "Safeguarding OT/ICS systems, energy grids, financial networks, and government digital infrastructure.",
+      "Curated solution showcases from vetted partners. No expo-floor chaos — just focused demonstrations matched to real GCC use cases.",
   },
   {
-    id: "compliance",
-    title: "Regulatory Compliance & Governance",
+    id: "regulatory",
+    number: "04",
+    title: "Regulatory Foresight",
     description:
-      "Navigating evolving UAE, Saudi, Kuwait, and GCC-wide cybersecurity frameworks and data privacy regulations.",
+      "Hear directly from national cyber authorities. Understand what's coming before it's mandated — from UAE's NESA to Saudi's NCA and beyond.",
   },
   {
-    id: "leadership",
-    title: "CISO Leadership & Resilience",
+    id: "partnerships",
+    number: "05",
+    title: "Partnerships That Last",
     description:
-      "How security leaders drive organizational resilience, manage boards, and build security culture at scale.",
+      "Every edition is a reunion. The relationships built at Cyber First compound over years, creating a regional security network that works.",
   },
   {
-    id: "talent",
-    title: "Cyber Talent & Workforce Development",
+    id: "strategy",
+    number: "06",
+    title: "Board-Ready Strategy",
     description:
-      "Closing the cybersecurity skills gap through training, certification, and public-private partnerships.",
+      "Sessions designed for leaders who report to boards. Take back frameworks, metrics, and narratives that translate security into business language.",
   },
 ];
 
@@ -54,41 +61,26 @@ export default function AboutSeries() {
       ref={sectionRef}
       style={{
         background: "var(--black)",
-        padding: "clamp(80px, 10vw, 130px) 0",
+        padding: "clamp(48px, 6vw, 80px) 0",
       }}
     >
       <div
-        className="about-container"
         style={{
           maxWidth: 1320,
           margin: "0 auto",
           padding: "0 clamp(20px, 4vw, 60px)",
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: 80,
-          alignItems: "start",
         }}
       >
-        {/* Left Column — The Pitch (Sticky) */}
+        {/* Header */}
         <motion.div
-          className="about-left"
-          initial={{ opacity: 0, y: 25 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 25 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          style={{
-            position: "sticky",
-            top: 140,
-          }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.7, ease: EASE }}
+          style={{ textAlign: "center", marginBottom: 56 }}
         >
           {/* Label */}
-          <div className="flex items-center gap-3">
-            <span
-              style={{
-                width: 30,
-                height: 1,
-                background: CYBER_BLUE,
-              }}
-            />
+          <div className="flex items-center justify-center gap-3">
+            <span style={{ width: 30, height: 1, background: CYBER_BLUE }} />
             <span
               style={{
                 fontSize: 11,
@@ -99,8 +91,9 @@ export default function AboutSeries() {
                 fontFamily: "var(--font-outfit)",
               }}
             >
-              About Cyber First
+              Outcomes
             </span>
+            <span style={{ width: 30, height: 1, background: CYBER_BLUE }} />
           </div>
 
           {/* Title */}
@@ -108,78 +101,68 @@ export default function AboutSeries() {
             style={{
               fontFamily: "var(--font-display)",
               fontWeight: 800,
-              fontSize: "clamp(28px, 3vw, 40px)",
-              letterSpacing: "-1px",
+              fontSize: "clamp(30px, 3.5vw, 48px)",
+              letterSpacing: "-1.5px",
               color: "var(--white)",
-              lineHeight: 1.15,
+              lineHeight: 1.1,
               margin: "16px 0 0",
             }}
           >
-            Building Cyber Resilience Across the GCC
+            What You Walk Away With
           </h2>
 
-          {/* Paragraphs */}
           <p
             style={{
               fontFamily: "var(--font-outfit)",
               fontWeight: 300,
-              fontSize: 16.5,
-              color: "#808080",
-              lineHeight: 1.8,
-              margin: "20px 0 0",
+              fontSize: 16,
+              color: "#707070",
+              maxWidth: 580,
+              margin: "16px auto 0",
+              lineHeight: 1.7,
             }}
           >
-            The Cyber First series is a high-level platform that convenes
-            CISOs, cybersecurity executives, government officials, and
-            technology pioneers to strengthen regional cyber resilience. As GCC
-            nations advance their digital economy agendas, cybersecurity has
-            become a defining pillar of national development.
-          </p>
-          <p
-            style={{
-              fontFamily: "var(--font-outfit)",
-              fontWeight: 300,
-              fontSize: 16.5,
-              color: "#808080",
-              lineHeight: 1.8,
-              margin: "16px 0 0",
-            }}
-          >
-            Each edition is aligned with the host nation's cybersecurity
-            strategy and regulatory landscape, bringing together the specific
-            stakeholders, challenges, and opportunities unique to that market.
-            From the UAE's National Cybersecurity Strategy to Kuwait's Vision
-            2035, Cyber First speaks the language of every stage it stands on.
+            Every element of Cyber First is designed for one thing — giving
+            senior security leaders something they can use the moment they
+            return to their desks.
           </p>
         </motion.div>
 
-        {/* Right Column — Themes */}
-        <div className="flex flex-col gap-1.5">
-          {themes.map((theme, index) => (
+        {/* Outcomes Grid */}
+        <div
+          className="outcomes-grid"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(3, 1fr)",
+            gap: 16,
+          }}
+        >
+          {outcomes.map((outcome, index) => (
             <motion.div
-              key={theme.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              key={outcome.id}
+              initial={{ opacity: 0, y: 24 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
               transition={{
                 duration: 0.6,
-                delay: 0.2 + index * 0.08,
-                ease: [0.16, 1, 0.3, 1],
+                delay: 0.15 + index * 0.07,
+                ease: EASE,
               }}
             >
-              <ThemeBlock theme={theme} />
+              <OutcomeCard outcome={outcome} />
             </motion.div>
           ))}
         </div>
       </div>
 
       <style jsx global>{`
-        @media (max-width: 768px) {
-          .about-container {
-            grid-template-columns: 1fr !important;
-            gap: 48px !important;
+        @media (max-width: 1024px) {
+          .outcomes-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
           }
-          .about-left {
-            position: static !important;
+        }
+        @media (max-width: 640px) {
+          .outcomes-grid {
+            grid-template-columns: 1fr !important;
           }
         }
       `}</style>
@@ -188,49 +171,71 @@ export default function AboutSeries() {
 }
 
 /**
- * ThemeBlock — Individual theme with hover effect
+ * OutcomeCard — Single outcome with hover effect
  */
-function ThemeBlock({
-  theme,
+function OutcomeCard({
+  outcome,
 }: {
-  theme: { id: string; title: string; description: string };
+  outcome: { number: string; title: string; description: string };
 }) {
-  const [isHovered, setIsHovered] = useState(false);
+  const [hovered, setHovered] = useState(false);
 
   return (
     <div
-      className="transition-all duration-300"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
       style={{
-        padding: "20px 24px",
-        borderLeft: `2px solid ${isHovered ? `rgba(1, 187, 245, 0.5)` : `rgba(1, 187, 245, 0.1)`}`,
+        padding: "32px 28px",
+        background: hovered ? "#141414" : "#111111",
+        border: `1px solid ${hovered ? "rgba(1, 187, 245, 0.1)" : "rgba(255, 255, 255, 0.04)"}`,
+        borderRadius: 16,
+        transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+        transform: hovered ? "translateY(-2px)" : "translateY(0)",
+        cursor: "default",
+        height: "100%",
       }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
     >
-      <h3
-        className="transition-colors duration-300"
+      {/* Number */}
+      <span
         style={{
           fontFamily: "var(--font-display)",
-          fontSize: 17,
-          fontWeight: 700,
-          color: isHovered ? CYBER_BLUE : "var(--white)",
-          letterSpacing: "-0.2px",
-          margin: 0,
+          fontWeight: 800,
+          fontSize: 13,
+          color: hovered ? CYBER_BLUE : "rgba(1, 187, 245, 0.35)",
+          transition: "color 0.3s",
+          letterSpacing: "1px",
         }}
       >
-        {theme.title}
+        {outcome.number}
+      </span>
+
+      {/* Title */}
+      <h3
+        style={{
+          fontFamily: "var(--font-display)",
+          fontWeight: 700,
+          fontSize: 18,
+          color: "var(--white)",
+          letterSpacing: "-0.3px",
+          lineHeight: 1.3,
+          margin: "14px 0 0",
+        }}
+      >
+        {outcome.title}
       </h3>
+
+      {/* Description */}
       <p
         style={{
           fontFamily: "var(--font-outfit)",
-          fontSize: 14.5,
           fontWeight: 300,
+          fontSize: 14,
           color: "#707070",
-          lineHeight: 1.65,
-          margin: "4px 0 0",
+          lineHeight: 1.7,
+          margin: "10px 0 0",
         }}
       >
-        {theme.description}
+        {outcome.description}
       </p>
     </div>
   );

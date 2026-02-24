@@ -153,22 +153,6 @@ function ContactHero() {
           >
             Get in Touch
           </h1>
-          {/* Animated underline */}
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 1.2, delay: 0.8, ease: EASE }}
-            style={{
-              position: "absolute",
-              bottom: -4,
-              left: "10%",
-              width: "80%",
-              height: 3,
-              borderRadius: 2,
-              background: "linear-gradient(90deg, transparent, var(--orange), var(--orange-bright), var(--orange), transparent)",
-              transformOrigin: "center",
-            }}
-          />
         </motion.div>
 
         {/* Subtitle */}

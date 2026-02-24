@@ -2,17 +2,17 @@ import { Metadata } from "next";
 import {
   SeriesHero,
   EditionsMap,
+  SeriesTimeline,
   PastEditionsTimeline,
   AboutSeries,
   MarketInsights,
   FeaturedSpeakers,
   ConferenceElements,
-  WhoShouldAttend,
   SponsorsWall,
   CyberFirstGallery,
   VideoHighlight,
+  YouTubeShorts,
   UpcomingEditionCTA,
-  RegistrationForm,
   ExploreOtherSeries,
 } from "@/components/cyber-first";
 import { Footer } from "@/components/sections";
@@ -20,7 +20,7 @@ import SectionTransition from "@/components/effects/SectionTransition";
 
 // Page Metadata
 export const metadata: Metadata = {
-  title: "Cyber First Series | The GCC's Premier Cybersecurity Leadership Summit",
+  title: "Cyber First Series | The GCC's Definitive Cybersecurity Summit",
   description:
     "Cyber First brings together CISOs, government cyber leaders, and security innovators across Abu Dhabi, Kuwait, Riyadh, and Doha. Register for the next edition.",
 };
@@ -31,91 +31,75 @@ const CYBER_BLUE = "#01BBF5";
 export default function CyberFirstPage() {
   return (
     <div>
-      {/* 1. Series Hero — 85vh dramatic introduction */}
+      {/* 1. Hero — Dominant tagline, 4 edition badges, stats, CTA, ticker */}
       <SeriesHero />
 
-      {/* Section Transition - Sweep */}
       <SectionTransition variant="sweep" color={CYBER_BLUE} />
 
-      {/* 2. Editions Map — Four city cards */}
+      {/* 2. Editions Map — Four nation city cards */}
       <EditionsMap />
 
-      {/* Section Transition - Expand */}
       <SectionTransition variant="expand" color={CYBER_BLUE} />
 
-      {/* 3. Past Editions Timeline — Series history */}
+      {/* 3. Series Timeline — Past history + future commitment */}
+      <SeriesTimeline />
+
+      <SectionTransition variant="pulse" color={CYBER_BLUE} />
+
+      {/* 4. The Room — Peer group social proof & role breakdown */}
       <PastEditionsTimeline />
 
-      {/* Section Transition - Pulse */}
-      <SectionTransition variant="pulse" color={CYBER_BLUE} />
+      <SectionTransition variant="sweep" color={CYBER_BLUE} />
 
-      {/* 4. About the Series — Two-column with themes */}
+      {/* 5. Outcomes — What attendees walk away with */}
       <AboutSeries />
 
-      {/* Section Transition - Sweep */}
-      <SectionTransition variant="sweep" color={CYBER_BLUE} />
+      <SectionTransition variant="expand" color={CYBER_BLUE} />
 
-      {/* 5. Market Insights — The urgency engine with stats */}
+      {/* 6. Market Insights — The urgency engine with stats */}
       <MarketInsights />
 
-      {/* Section Transition - Expand */}
-      <SectionTransition variant="expand" color={CYBER_BLUE} />
+      <SectionTransition variant="pulse" color={CYBER_BLUE} />
 
-      {/* 6. Featured Speakers — 8-card grid */}
+      {/* 7. Speakers — Premium cards with grayscale-to-color photos */}
       <FeaturedSpeakers />
 
-      {/* Section Transition - Pulse */}
-      <SectionTransition variant="pulse" color={CYBER_BLUE} />
+      <SectionTransition variant="sweep" color={CYBER_BLUE} />
 
-      {/* 7. Conference Elements — 6 cards */}
+      {/* 8. The Experience — Photo-backed conference elements */}
       <ConferenceElements />
 
-      {/* Section Transition - Sweep */}
-      <SectionTransition variant="sweep" color={CYBER_BLUE} />
-
-      {/* 8. Who Should Attend — Self-qualification */}
-      <WhoShouldAttend />
-
-      {/* Section Transition - Expand */}
       <SectionTransition variant="expand" color={CYBER_BLUE} />
 
-      {/* 9. Sponsors Wall + Media Partners */}
+      {/* 9. Sponsors — S3 logos with grayscale hover */}
       <SponsorsWall />
 
-      {/* Section Transition - Pulse */}
       <SectionTransition variant="pulse" color={CYBER_BLUE} />
 
-      {/* 10. Photo Gallery — Masonry grid */}
+      {/* 10. Gallery — Photo grid */}
       <CyberFirstGallery />
 
-      {/* Section Transition - Sweep */}
       <SectionTransition variant="sweep" color={CYBER_BLUE} />
 
-      {/* 11. Video Highlight — Emotional proof */}
+      {/* 11. Video — Series highlights */}
       <VideoHighlight />
 
-      {/* Section Transition - Expand */}
+      {/* 12. YouTube Shorts — Quick clips & reels */}
+      <YouTubeShorts />
+
       <SectionTransition variant="expand" color={CYBER_BLUE} />
 
-      {/* 12. Upcoming Edition CTA */}
+      {/* 13. Register — Unified closer with countdown + form */}
       <UpcomingEditionCTA />
 
-      {/* Section Transition - Pulse */}
-      <SectionTransition variant="pulse" color={CYBER_BLUE} />
-
-      {/* 13. Registration Form — Short version */}
-      <RegistrationForm />
-
-      {/* Section Transition - Sweep */}
       <SectionTransition variant="sweep" color={CYBER_BLUE} />
 
       {/* 14. Explore Other Series — Cross-sell */}
       <ExploreOtherSeries />
 
-      {/* Section Transition - Sweep */}
       <SectionTransition variant="sweep" color={CYBER_BLUE} />
 
-      {/* 15. Footer */}
+      {/* Footer */}
       <Footer />
     </div>
   );

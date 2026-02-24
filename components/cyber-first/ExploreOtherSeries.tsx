@@ -46,7 +46,7 @@ export default function ExploreOtherSeries() {
       ref={sectionRef}
       style={{
         background: "var(--black)",
-        padding: "clamp(60px, 8vw, 100px) 0",
+        padding: "clamp(48px, 6vw, 80px) 0",
       }}
     >
       <div

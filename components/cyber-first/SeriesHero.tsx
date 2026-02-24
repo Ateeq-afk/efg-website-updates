@@ -18,10 +18,10 @@ const editions = [
 
 // Stats data
 const stats = [
-  { value: 1500, suffix: "+", label: "ATTENDEES" },
-  { value: 4, suffix: "", label: "CITIES" },
-  { value: 2, suffix: "", label: "EDITIONS" },
+  { value: 1500, suffix: "+", label: "SECURITY LEADERS" },
+  { value: 4, suffix: "", label: "NATIONS" },
   { value: 80, suffix: "+", label: "SPEAKERS" },
+  { value: 50, suffix: "+", label: "SPONSORS" },
 ];
 
 // Easing function: easeOutExpo
@@ -149,7 +149,7 @@ export default function SeriesHero() {
               marginTop: 6,
             }}
           >
-            Defending the Digital Frontier
+            The GCC&rsquo;s Definitive Cybersecurity Summit
           </motion.p>
 
           {/* Description */}
@@ -167,9 +167,9 @@ export default function SeriesHero() {
               margin: "20px auto 0",
             }}
           >
-            The GCC's premier cybersecurity leadership summit. Bringing together
-            CISOs, government cyber leaders, and security innovators across four
-            cities to strengthen regional cyber resilience.
+            Where the region&rsquo;s CISOs, government cyber leaders, and security
+            architects convene. Four nations. One platform. The conversations
+            that define GCC cybersecurity happen here.
           </motion.p>
 
           {/* Edition Badges */}
@@ -212,7 +212,7 @@ export default function SeriesHero() {
                 e.currentTarget.style.background = CYBER_BLUE;
               }}
             >
-              <span>View Upcoming Edition</span>
+              <span>Next Edition — Kuwait</span>
               <span>→</span>
             </Link>
             <Link

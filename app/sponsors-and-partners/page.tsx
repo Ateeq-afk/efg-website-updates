@@ -176,8 +176,8 @@ function SponsorCard({
               borderBottom: "1px solid rgba(255,255,255,0.06)",
               position: "relative",
               overflow: "hidden",
-              background: sponsor.logo_url
-                ? "rgba(255,255,255,0.95)"
+              background: sponsor.logo_url && hovered
+                ? "rgba(255,255,255,0.9)"
                 : hovered
                   ? "linear-gradient(160deg, rgba(232,101,26,0.10) 0%, rgba(10,10,10,0.85) 100%)"
                   : "linear-gradient(160deg, rgba(232,101,26,0.05) 0%, rgba(10,10,10,0.90) 100%)",
@@ -193,6 +193,9 @@ function SponsorCard({
                   maxWidth: "90%",
                   maxHeight: "85%",
                   objectFit: "contain",
+                  filter: hovered ? "none" : "brightness(0) invert(1)",
+                  opacity: hovered ? 1 : 0.5,
+                  transition: "filter 0.3s ease, opacity 0.3s ease",
                 }}
               />
             ) : (
@@ -844,24 +847,69 @@ export default function SponsorsPage() {
             Sponsors &amp; Partners
           </motion.h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={heroInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.3, ease: EASE }}
+          <div
+            className="sponsors-hero-subtitle-row"
             style={{
-              fontFamily: "var(--font-outfit)",
-              fontWeight: 300,
-              fontSize: "clamp(15px, 1.3vw, 18px)",
-              color: "#A0A0A0",
-              lineHeight: 1.65,
-              maxWidth: 560,
+              display: "flex",
+              alignItems: "center",
+              gap: 28,
+            }}
+          >
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={heroInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.7, delay: 0.3, ease: EASE }}
+              style={{
+                fontFamily: "var(--font-outfit)",
+                fontWeight: 300,
+                fontSize: "clamp(15px, 1.3vw, 18px)",
+                color: "#A0A0A0",
+                lineHeight: 1.65,
+                maxWidth: 560,
               margin: 0,
             }}
           >
-            The organizations powering EFG events across cybersecurity, OT
-            security, and operational excellence — from global technology leaders
-            to regional innovators.
-          </motion.p>
+              The organizations powering EFG events across cybersecurity, OT
+              security, and operational excellence — from global technology leaders
+              to regional innovators.
+            </motion.p>
+
+            <motion.button
+              initial={{ opacity: 0, y: 12 }}
+              animate={heroInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.4, ease: EASE }}
+              onClick={() => {
+                document
+                  .getElementById("become-a-sponsor")
+                  ?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="sponsors-hero-cta"
+              style={{
+                padding: "11px 26px",
+                borderRadius: 100,
+                background: "transparent",
+                border: "1px solid rgba(232, 101, 26, 0.5)",
+                color: "#E8651A",
+                fontFamily: "var(--font-outfit)",
+                fontSize: 14,
+                fontWeight: 500,
+                cursor: "pointer",
+                whiteSpace: "nowrap",
+                transition: "all 0.3s ease",
+                flexShrink: 0,
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "rgba(232, 101, 26, 0.1)";
+                e.currentTarget.style.borderColor = "#E8651A";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "transparent";
+                e.currentTarget.style.borderColor = "rgba(232, 101, 26, 0.5)";
+              }}
+            >
+              Become a Partner
+            </motion.button>
+          </div>
         </div>
       </section>
 
@@ -1108,6 +1156,17 @@ export default function SponsorsPage() {
         }
         .skeleton-pulse {
           animation: skeletonPulse 1.5s ease-in-out infinite;
+        }
+        @media (max-width: 600px) {
+          .sponsors-hero-subtitle-row {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 18px !important;
+          }
+          .sponsors-hero-cta {
+            width: 100% !important;
+            text-align: center !important;
+          }
         }
       `}</style>
     </div>

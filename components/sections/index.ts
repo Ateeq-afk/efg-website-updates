@@ -7,6 +7,5 @@ export { default as PhotoGallery } from "./PhotoGallery";
 export { default as WhyEFG } from "./WhyEFG";
 export { default as Testimonials } from "./Testimonials";
 export { default as SponsorsPartners } from "./SponsorsPartners";
-export { default as Newsletter } from "./Newsletter";
 export { default as InquiryForm } from "./InquiryForm";
 export { default as Footer } from "./Footer";

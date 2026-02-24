@@ -4,37 +4,26 @@ import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 
 const CYBER_BLUE = "#01BBF5";
+const EASE = [0.16, 1, 0.3, 1] as const;
 
-// Video data
+// Main video
 const mainVideo = {
   id: "XHOmBV4js_E",
   title: "Cyber First Series Highlights",
   thumbnail: "https://img.youtube.com/vi/XHOmBV4js_E/maxresdefault.jpg",
 };
 
-// Additional video placeholders
-const additionalVideos = [
-  { id: "kuwait-2025", title: "Kuwait 2025 Highlights", comingSoon: true },
-  { id: "qatar-edition", title: "Qatar Edition", comingSoon: true },
-  { id: "uae-2024", title: "UAE 2024", comingSoon: true },
-];
-
 export default function VideoHighlight() {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
   const [isPlaying, setIsPlaying] = useState(false);
-  const [activeVideoId, setActiveVideoId] = useState(mainVideo.id);
-
-  const handlePlay = () => {
-    setIsPlaying(true);
-  };
 
   return (
     <section
       ref={sectionRef}
       style={{
         background: "var(--black)",
-        padding: "clamp(60px, 8vw, 100px) 0",
+        padding: "clamp(48px, 6vw, 80px) 0",
       }}
     >
       <div
@@ -48,10 +37,9 @@ export default function VideoHighlight() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.7, ease: EASE }}
           style={{ textAlign: "center", marginBottom: 40 }}
         >
-          {/* Label */}
           <div className="flex items-center justify-center gap-3">
             <span style={{ width: 30, height: 1, background: CYBER_BLUE }} />
             <span
@@ -69,7 +57,6 @@ export default function VideoHighlight() {
             <span style={{ width: 30, height: 1, background: CYBER_BLUE }} />
           </div>
 
-          {/* Title */}
           <h2
             style={{
               fontFamily: "var(--font-display)",
@@ -89,7 +76,7 @@ export default function VideoHighlight() {
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.8, delay: 0.2, ease: EASE }}
           style={{
             maxWidth: 900,
             margin: "0 auto",
@@ -108,13 +95,13 @@ export default function VideoHighlight() {
             {!isPlaying ? (
               <VideoThumbnail
                 thumbnail={mainVideo.thumbnail}
-                onPlay={handlePlay}
+                onPlay={() => setIsPlaying(true)}
               />
             ) : (
               <iframe
                 width="100%"
                 height="100%"
-                src={`https://www.youtube.com/embed/${activeVideoId}?autoplay=1&rel=0`}
+                src={`https://www.youtube.com/embed/${mainVideo.id}?autoplay=1&rel=0`}
                 title="Cyber First Highlights"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -123,19 +110,6 @@ export default function VideoHighlight() {
               />
             )}
           </div>
-        </motion.div>
-
-        {/* Additional Videos */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
-          transition={{ duration: 0.6, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-wrap items-center justify-center gap-4"
-          style={{ marginTop: 24 }}
-        >
-          {additionalVideos.map((video) => (
-            <VideoThumbnailSmall key={video.id} video={video} />
-          ))}
         </motion.div>
       </div>
     </section>
@@ -161,7 +135,6 @@ function VideoThumbnail({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Background Image */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={thumbnail}
@@ -192,7 +165,6 @@ function VideoThumbnail({
             transitionDuration: "0.3s",
           }}
         >
-          {/* Play Triangle */}
           <svg
             width="24"
             height="28"
@@ -222,96 +194,6 @@ function VideoThumbnail({
         >
           Watch the Highlights
         </p>
-      </div>
-    </div>
-  );
-}
-
-/**
- * VideoThumbnailSmall — Small video card placeholder
- */
-function VideoThumbnailSmall({
-  video,
-}: {
-  video: { id: string; title: string; comingSoon?: boolean };
-}) {
-  const [isHovered, setIsHovered] = useState(false);
-
-  return (
-    <div
-      className="relative flex items-center justify-center transition-all"
-      style={{
-        width: 160,
-        height: 90,
-        borderRadius: 10,
-        background: "#1A1A1A",
-        border: isHovered
-          ? "1px solid rgba(1, 187, 245, 0.2)"
-          : "1px solid rgba(255, 255, 255, 0.06)",
-        overflow: "hidden",
-        cursor: video.comingSoon ? "default" : "pointer",
-        opacity: isHovered ? 0.9 : 0.6,
-        transitionDuration: "0.3s",
-      }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <div className="flex flex-col items-center justify-center text-center p-3">
-        {video.comingSoon ? (
-          <>
-            <span
-              style={{
-                fontFamily: "var(--font-outfit)",
-                fontSize: 9,
-                fontWeight: 600,
-                letterSpacing: "1.5px",
-                textTransform: "uppercase",
-                color: "#404040",
-              }}
-            >
-              Coming Soon
-            </span>
-            <span
-              style={{
-                fontFamily: "var(--font-outfit)",
-                fontSize: 11,
-                fontWeight: 500,
-                color: "#606060",
-                marginTop: 4,
-              }}
-            >
-              {video.title}
-            </span>
-          </>
-        ) : (
-          <>
-            {/* Mini play icon */}
-            <div
-              className="flex items-center justify-center"
-              style={{
-                width: 28,
-                height: 28,
-                borderRadius: "50%",
-                background: "rgba(1, 187, 245, 0.2)",
-              }}
-            >
-              <svg width="10" height="12" viewBox="0 0 10 12" fill="none">
-                <path d="M9 6L1 11V1L9 6Z" fill={CYBER_BLUE} />
-              </svg>
-            </div>
-            <span
-              style={{
-                fontFamily: "var(--font-outfit)",
-                fontSize: 11,
-                fontWeight: 500,
-                color: "#808080",
-                marginTop: 6,
-              }}
-            >
-              {video.title}
-            </span>
-          </>
-        )}
       </div>
     </div>
   );

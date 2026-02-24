@@ -1037,19 +1037,6 @@ function ComingSoon({ isInView }: { isInView: boolean }) {
       >
         More events and dates to be confirmed soon.
       </p>
-      <Link
-        href="#newsletter"
-        style={{
-          fontFamily: "var(--font-outfit)",
-          fontSize: 12,
-          fontWeight: 400,
-          color: "rgba(232, 101, 26, 0.6)",
-          textAlign: "center",
-          marginTop: 8,
-        }}
-      >
-        Want early access? Subscribe to our newsletter.
-      </Link>
     </motion.div>
   );
 }
