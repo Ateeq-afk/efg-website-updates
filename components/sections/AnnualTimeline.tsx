@@ -269,7 +269,7 @@ export default function AnnualTimeline() {
       className="relative"
       style={{
         background: "var(--black-light)",
-        padding: "clamp(80px, 10vw, 140px) 0 clamp(100px, 12vw, 160px)",
+        padding: "clamp(48px, 5vw, 72px) 0 clamp(48px, 5vw, 72px)",
       }}
     >
       {/* Gradient fade to next section — seamless scene transition */}

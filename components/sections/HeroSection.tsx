@@ -148,7 +148,7 @@ export default function HeroSection() {
           LAYER 5: HERO CONTENT — VERTICALLY CENTERED
           ═══════════════════════════════════════════════════════════════ */}
       <div
-        className="relative z-10 flex items-center justify-center px-6"
+        className="relative z-10 flex items-center justify-center px-6 hero-content-wrapper"
         style={{
           height: "100%",
           paddingTop: 80,
@@ -472,6 +472,11 @@ export default function HeroSection() {
         @keyframes shimmer {
           0% { background-position: 100% 50%; }
           100% { background-position: 0% 50%; }
+        }
+        @media (max-width: 768px) {
+          .hero-content-wrapper {
+            padding-bottom: 140px !important;
+          }
         }
       `}</style>
     </section>

@@ -41,7 +41,7 @@ export default function WhyEFG() {
       ref={sectionRef}
       style={{
         background: "var(--black)",
-        padding: "clamp(56px, 7vw, 96px) 0",
+        padding: "clamp(40px, 5vw, 64px) 0",
         position: "relative",
         overflow: "hidden",
       }}

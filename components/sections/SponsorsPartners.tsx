@@ -10,192 +10,118 @@ import Link from "next/link";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
+const S3 = "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo";
+
 // ─────────────────────────────────────────────────────────────────────────────
-// SPONSOR LOGOS — 80 logos from S3
+// ALL SPONSOR LOGOS — 99 logos from S3
 // ─────────────────────────────────────────────────────────────────────────────
 
-const LOGOS: { src: string; name: string }[] = [
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/abu-dhabi-university.png", name: "Abu Dhabi University" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/Acronis.png", name: "Acronis" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/adgm-academy.png", name: "ADGM Academy" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/advenica.png", name: "Advenica" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/agile.png", name: "Agile" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/AIQS.png", name: "AIQS" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/Akamai.png", name: "Akamai" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/AmiViz.png", name: "AmiViz" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/Anomali.png", name: "Anomali" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/appknox.png", name: "Appknox" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/aris.png", name: "ARIS" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/beacon-red.png", name: "Beacon Red" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/bitdefender.png", name: "Bitdefender" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/BOT-teq.png", name: "BOT-teq" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/bureau-veritas.png", name: "Bureau Veritas" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/Celonis.png", name: "Celonis" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/CEREBRA.png", name: "Cerebra" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/Claroty.png", name: "Claroty" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/corelight.png", name: "Corelight" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/cortelion.png", name: "Cortelion" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/CPX.png", name: "CPX" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/cyber-shield.png", name: "Cyber Shield" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/cyber-talents.png", name: "CyberTalents" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/Cybere71.png", name: "Cyber E71" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/cyberknight.png", name: "CyberKnight" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/cyberwise.png", name: "Cyberwise" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/Cyborg-automation-hub.png", name: "Cyborg Automation Hub" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/Deepinfo.png", name: "Deepinfo" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/Dragos.png", name: "Dragos" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/DREAM.png", name: "DREAM" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/DTS-solutions.png", name: "DTS Solutions" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/edge-group.png", name: "Edge Group" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/EY.png", name: "EY" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/filigran.png", name: "Filigran" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/fortinet.png", name: "Fortinet" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/GBM.png", name: "GBM" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/Gen-x-systems.png", name: "Gen-X Systems" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/Gorilla.png", name: "Gorilla" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/Group-IB.png", name: "Group-IB" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/gtb-technologies.png", name: "GTB Technologies" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/hackmanac.png", name: "Hackmanac" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/hwg-here-we-go.png", name: "HWG" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/isaca-uae-chapter.png", name: "ISACA UAE Chapter" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/ISRAR.png", name: "ISRAR" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/KAfaa.png", name: "KAfaa" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/kaspersky.png", name: "Kaspersky" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/keysight-technologies.png", name: "Keysight Technologies" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/kron-technologies.png", name: "Kron Technologies" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/ManageEngine.png", name: "ManageEngine" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/MCS.png", name: "MCS" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/microsec.png", name: "Microsec" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/minds-advisory.png", name: "Minds Advisory" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/moxo.png", name: "Moxo" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/nozomi-networks.png", name: "Nozomi Networks" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/OPSWAT-logo.png", name: "OPSWAT" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/ot-security-professionals.png", name: "OT Security Professionals" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/paloalto.png", name: "Palo Alto Networks" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/Paramount.png", name: "Paramount" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/PENTERA.png", name: "Pentera" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/profit.co.png", name: "Profit.co" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/redsand.png", name: "Red Sand" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/RICS.png", name: "RICS" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/sahara-net.png", name: "Sahara Net" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/sap-signavio.png", name: "SAP Signavio" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/sechard.png", name: "Sechard" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/seclab.png", name: "SecLab" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/secureb4.png", name: "SecureB4" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/secureworks.png", name: "Secureworks" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/securonix-logo.png", name: "Securonix" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/sentinelone.png", name: "SentinelOne" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/sis.png", name: "SIS" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/Sonicwall.png", name: "SonicWall" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/SS%26C.png", name: "SS&C" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/Tenable-logo.png", name: "Tenable" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/threatlocker.png", name: "ThreatLocker" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/VDITS.png", name: "VDITS" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/Wallix.png", name: "Wallix" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/Xage.png", name: "Xage" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/XONA.png", name: "XONA" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/YOKOGAWA.png", name: "Yokogawa" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/EC-Council.png", name: "EC-Council" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/GAFAI.png", name: "GAFAI" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/Google-Cloud-Security.png", name: "Google Cloud Security" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/IPC.png", name: "IPC" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/UAE-Cyber-Security-Council.png", name: "UAE Cyber Security Council" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/Control-Engineering.png", name: "Control Engineering" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/Women-in-Cybersecurity.png", name: "Women in Cybersecurity" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/Zanda.png", name: "Zanda" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/CSO-Online.png", name: "CSO Online" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/Cyber-Defense-Magazi.png", name: "Cyber Defense Magazine" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/Cybersecurity-Insiders.png", name: "Cybersecurity Insiders" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/Dark-Reading.png", name: "Dark Reading" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/Help-Net-Security.png", name: "Help Net Security" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/Industrial-Cyber.png", name: "Industrial Cyber" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/Industry-Events.png", name: "Industry Events" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/Infosecurity-Magazine.png", name: "Infosecurity Magazine" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/SC-Media.png", name: "SC Media" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/Security-Middle-East.png", name: "Security Middle East" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/The-Hacker-News.jpg", name: "The Hacker News" },
+const ALL_LOGOS = [
+  { src: `${S3}/abu-dhabi-university.png`, name: "Abu Dhabi University" },
+  { src: `${S3}/Acronis.png`, name: "Acronis" },
+  { src: `${S3}/adgm-academy.png`, name: "ADGM Academy" },
+  { src: `${S3}/advenica.png`, name: "Advenica" },
+  { src: `${S3}/agile.png`, name: "Agile" },
+  { src: `${S3}/AIQS.png`, name: "AIQS" },
+  { src: `${S3}/Akamai.png`, name: "Akamai" },
+  { src: `${S3}/AmiViz.png`, name: "AmiViz" },
+  { src: `${S3}/Anomali.png`, name: "Anomali" },
+  { src: `${S3}/appknox.png`, name: "Appknox" },
+  { src: `${S3}/aris.png`, name: "ARIS" },
+  { src: `${S3}/beacon-red.png`, name: "Beacon Red" },
+  { src: `${S3}/bitdefender.png`, name: "Bitdefender" },
+  { src: `${S3}/BOT-teq.png`, name: "BOT-teq" },
+  { src: `${S3}/bureau-veritas.png`, name: "Bureau Veritas" },
+  { src: `${S3}/Celonis.png`, name: "Celonis" },
+  { src: `${S3}/CEREBRA.png`, name: "Cerebra" },
+  { src: `${S3}/Claroty.png`, name: "Claroty" },
+  { src: `${S3}/corelight.png`, name: "Corelight" },
+  { src: `${S3}/cortelion.png`, name: "Cortelion" },
+  { src: `${S3}/CPX.png`, name: "CPX" },
+  { src: `${S3}/cyber-shield.png`, name: "Cyber Shield" },
+  { src: `${S3}/cyber-talents.png`, name: "CyberTalents" },
+  { src: `${S3}/Cybere71.png`, name: "Cyber E71" },
+  { src: `${S3}/cyberknight.png`, name: "CyberKnight" },
+  { src: `${S3}/cyberwise.png`, name: "Cyberwise" },
+  { src: `${S3}/Cyborg-automation-hub.png`, name: "Cyborg Automation Hub" },
+  { src: `${S3}/Deepinfo.png`, name: "Deepinfo" },
+  { src: `${S3}/Dragos.png`, name: "Dragos" },
+  { src: `${S3}/DREAM.png`, name: "DREAM" },
+  { src: `${S3}/DTS-solutions.png`, name: "DTS Solutions" },
+  { src: `${S3}/edge-group.png`, name: "Edge Group" },
+  { src: `${S3}/EY.png`, name: "EY" },
+  { src: `${S3}/filigran.png`, name: "Filigran" },
+  { src: `${S3}/fortinet.png`, name: "Fortinet" },
+  { src: `${S3}/GBM.png`, name: "GBM" },
+  { src: `${S3}/Gen-x-systems.png`, name: "Gen-X Systems" },
+  { src: `${S3}/Gorilla.png`, name: "Gorilla" },
+  { src: `${S3}/Group-IB.png`, name: "Group-IB" },
+  { src: `${S3}/gtb-technologies.png`, name: "GTB Technologies" },
+  { src: `${S3}/hackmanac.png`, name: "Hackmanac" },
+  { src: `${S3}/hwg-here-we-go.png`, name: "HWG" },
+  { src: `${S3}/isaca-uae-chapter.png`, name: "ISACA UAE Chapter" },
+  { src: `${S3}/ISRAR.png`, name: "ISRAR" },
+  { src: `${S3}/KAfaa.png`, name: "KAfaa" },
+  { src: `${S3}/kaspersky.png`, name: "Kaspersky" },
+  { src: `${S3}/keysight-technologies.png`, name: "Keysight Technologies" },
+  { src: `${S3}/kron-technologies.png`, name: "Kron Technologies" },
+  { src: `${S3}/ManageEngine.png`, name: "ManageEngine" },
+  { src: `${S3}/MCS.png`, name: "MCS" },
+  { src: `${S3}/microsec.png`, name: "Microsec" },
+  { src: `${S3}/minds-advisory.png`, name: "Minds Advisory" },
+  { src: `${S3}/moxo.png`, name: "Moxo" },
+  { src: `${S3}/nozomi-networks.png`, name: "Nozomi Networks" },
+  { src: `${S3}/OPSWAT-logo.png`, name: "OPSWAT" },
+  { src: `${S3}/ot-security-professionals.png`, name: "OT Security Professionals" },
+  { src: `${S3}/paloalto.png`, name: "Palo Alto Networks" },
+  { src: `${S3}/Paramount.png`, name: "Paramount" },
+  { src: `${S3}/PENTERA.png`, name: "Pentera" },
+  { src: `${S3}/profit.co.png`, name: "Profit.co" },
+  { src: `${S3}/redsand.png`, name: "Red Sand" },
+  { src: `${S3}/RICS.png`, name: "RICS" },
+  { src: `${S3}/sahara-net.png`, name: "Sahara Net" },
+  { src: `${S3}/sap-signavio.png`, name: "SAP Signavio" },
+  { src: `${S3}/sechard.png`, name: "Sechard" },
+  { src: `${S3}/seclab.png`, name: "SecLab" },
+  { src: `${S3}/secureb4.png`, name: "SecureB4" },
+  { src: `${S3}/secureworks.png`, name: "Secureworks" },
+  { src: `${S3}/Securonix-logo.png`, name: "Securonix" },
+  { src: `${S3}/sentinelone.png`, name: "SentinelOne" },
+  { src: `${S3}/sis.png`, name: "SIS" },
+  { src: `${S3}/Sonicwall.png`, name: "SonicWall" },
+  { src: `${S3}/SS%26C.png`, name: "SS&C" },
+  { src: `${S3}/Tenable-logo.png`, name: "Tenable" },
+  { src: `${S3}/threatlocker.png`, name: "ThreatLocker" },
+  { src: `${S3}/VDITS.png`, name: "VDITS" },
+  { src: `${S3}/Wallix.png`, name: "Wallix" },
+  { src: `${S3}/Xage.png`, name: "Xage" },
+  { src: `${S3}/XONA.png`, name: "XONA" },
+  { src: `${S3}/YOKOGAWA.png`, name: "Yokogawa" },
+  { src: `${S3}/EC-Council.png`, name: "EC-Council" },
+  { src: `${S3}/GAFAI.png`, name: "GAFAI" },
+  { src: `${S3}/Google-Cloud-Security.png`, name: "Google Cloud Security" },
+  { src: `${S3}/IPC.png`, name: "IPC" },
+  { src: `${S3}/UAE-Cyber-Security-Council.png`, name: "UAE Cyber Security Council" },
+  { src: `${S3}/Control-Engineering.png`, name: "Control Engineering" },
+  { src: `${S3}/Women-in-Cybersecurity.png`, name: "Women in Cybersecurity" },
+  { src: `${S3}/Zanda.png`, name: "Zanda" },
+  { src: `${S3}/CSO-Online.png`, name: "CSO Online" },
+  { src: `${S3}/Cyber-Defense-Magazi.png`, name: "Cyber Defense Magazine" },
+  { src: `${S3}/Cybersecurity-Insiders.png`, name: "Cybersecurity Insiders" },
+  { src: `${S3}/Dark-Reading.png`, name: "Dark Reading" },
+  { src: `${S3}/Help-Net-Security.png`, name: "Help Net Security" },
+  { src: `${S3}/Industrial-Cyber.png`, name: "Industrial Cyber" },
+  { src: `${S3}/Industry-Events.png`, name: "Industry Events" },
+  { src: `${S3}/Infosecurity-Magazine.png`, name: "Infosecurity Magazine" },
+  { src: `${S3}/SC-Media.png`, name: "SC Media" },
+  { src: `${S3}/Security-Middle-East.png`, name: "Security Middle East" },
+  { src: `${S3}/The-Hacker-News.jpg`, name: "The Hacker News" },
 ];
 
 // Split into 3 rows
-const ROW_1 = LOGOS.slice(0, 33);
-const ROW_2 = LOGOS.slice(33, 66);
-const ROW_3 = LOGOS.slice(66);
-
-// ─────────────────────────────────────────────────────────────────────────────
-// MARQUEE ROW
-// ─────────────────────────────────────────────────────────────────────────────
-
-function MarqueeRow({
-  logos,
-  direction = "left",
-  duration = 60,
-}: {
-  logos: { src: string; name: string }[];
-  direction?: "left" | "right";
-  duration?: number;
-}) {
-  const animClass =
-    direction === "left" ? "marquee-scroll-left" : "marquee-scroll-right";
-
-  return (
-    <div
-      className="marquee-row"
-      style={{
-        overflow: "hidden",
-        position: "relative",
-        width: "100%",
-      }}
-    >
-      {/* Fade edges */}
-      <div className="marquee-fade-left" />
-      <div className="marquee-fade-right" />
-
-      <div
-        className={animClass}
-        style={{
-          display: "flex",
-          gap: 16,
-          width: "max-content",
-          animationDuration: `${duration}s`,
-        }}
-      >
-        {/* Original + duplicate for seamless loop */}
-        {[...logos, ...logos].map((logo, i) => (
-          <div
-            key={`${logo.name}-${i}`}
-            className="sponsor-logo-card"
-            style={{
-              flexShrink: 0,
-              width: 160,
-              height: 80,
-              borderRadius: 12,
-              border: "none",
-              background: "rgba(255,255,255,0.95)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              padding: "8px 14px",
-              transition: "all 0.3s ease",
-            }}
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={logo.src}
-              alt={logo.name}
-              loading="lazy"
-              style={{
-                maxWidth: "90%",
-                maxHeight: "85%",
-                objectFit: "contain",
-                transition: "transform 0.3s ease",
-              }}
-            />
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
+const ROW_1 = ALL_LOGOS.slice(0, 33);
+const ROW_2 = ALL_LOGOS.slice(33, 66);
+const ROW_3 = ALL_LOGOS.slice(66);
 
 // ─────────────────────────────────────────────────────────────────────────────
 // MAIN COMPONENT
@@ -209,25 +135,19 @@ export default function SponsorsPartners() {
     <section
       ref={sectionRef}
       style={{
-        background: "var(--black-light)",
-        padding: "clamp(80px, 10vw, 140px) 0 clamp(60px, 8vw, 100px)",
+        background: "var(--black)",
+        padding: "clamp(48px, 5vw, 72px) 0 clamp(40px, 4vw, 60px)",
+        position: "relative",
         overflow: "hidden",
       }}
     >
-      {/* ── HEADER ── */}
-      <div
-        style={{
-          maxWidth: 1320,
-          margin: "0 auto",
-          padding: "0 clamp(20px, 4vw, 60px)",
-        }}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : {}}
+        transition={{ duration: 0.8, ease: EASE }}
       >
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.7, ease: EASE }}
-          style={{ textAlign: "center", marginBottom: 48 }}
-        >
+        {/* ── HEADER ── */}
+        <div style={{ textAlign: "center", marginBottom: 28 }}>
           <div
             className="flex items-center justify-center gap-3"
             style={{ marginBottom: 16 }}
@@ -245,55 +165,166 @@ export default function SponsorsPartners() {
                 fontFamily: "var(--font-outfit)",
               }}
             >
-              Partners & Sponsors
+              Trusted By Industry Leaders
             </span>
             <span
               style={{ width: 30, height: 1, background: "var(--orange)" }}
             />
           </div>
 
-          <h2
-            style={{
-              fontFamily: "var(--font-display)",
-              fontWeight: 800,
-              fontSize: "clamp(32px, 4vw, 52px)",
-              letterSpacing: "-1.5px",
-              color: "var(--white)",
-              lineHeight: 1.1,
-              margin: 0,
-            }}
-          >
-            The Companies Powering Our Events
-          </h2>
-
           <p
             style={{
               fontFamily: "var(--font-outfit)",
               fontWeight: 300,
-              fontSize: 16,
-              color: "#808080",
+              fontSize: "clamp(13px, 1.2vw, 15px)",
+              color: "rgba(255,255,255,0.3)",
               lineHeight: 1.6,
-              maxWidth: 580,
-              margin: "14px auto 0",
+              margin: "8px auto 0",
+              letterSpacing: "0.2px",
             }}
           >
-            From global cybersecurity leaders to regional technology pioneers —
-            the organizations that partner with EFG reach the GCC&apos;s most
-            influential decision-makers.
+            Trusted by global technology leaders and regional enterprises
           </p>
-        </motion.div>
-      </div>
+        </div>
 
-      {/* ── MARQUEE ROWS — full-bleed ── */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-        transition={{ duration: 0.8, delay: 0.3, ease: EASE }}
-        style={{ display: "flex", flexDirection: "column", gap: 16 }}
-      >
-        <MarqueeRow logos={ROW_1} direction="left" duration={55} />
-        <MarqueeRow logos={ROW_2} direction="right" duration={65} />
-        <MarqueeRow logos={ROW_3} direction="left" duration={50} />
+        {/* ── MARQUEE — with edge fades ── */}
+        <div style={{ position: "relative" }}>
+          {/* Left fade */}
+          <div
+            className="absolute left-0 top-0 bottom-0 z-10 pointer-events-none"
+            style={{
+              width: "clamp(60px, 10vw, 120px)",
+              background:
+                "linear-gradient(to right, var(--black) 0%, transparent 100%)",
+            }}
+          />
+          {/* Right fade */}
+          <div
+            className="absolute right-0 top-0 bottom-0 z-10 pointer-events-none"
+            style={{
+              width: "clamp(60px, 10vw, 120px)",
+              background:
+                "linear-gradient(to left, var(--black) 0%, transparent 100%)",
+            }}
+          />
+
+          {/* Row 1 — scrolls left */}
+          <div className="sp-marquee-track" style={{ marginBottom: 16 }}>
+            <div className="sp-marquee-inner sp-scroll-left" style={{ animationDuration: "80s" }}>
+              {[...ROW_1, ...ROW_1].map((logo, i) => (
+                <div
+                  key={`r1-${i}`}
+                  className="sp-logo-item"
+                  style={{
+                    width: 140,
+                    height: 44,
+                    margin: "0 clamp(14px, 2vw, 28px)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    opacity: 0.5,
+                    cursor: "default",
+                    flexShrink: 0,
+                    borderRadius: 8,
+                    transition: "opacity 0.4s ease, background 0.4s ease",
+                  }}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={logo.src}
+                    alt={logo.name}
+                    loading="lazy"
+                    style={{
+                      maxHeight: "100%",
+                      maxWidth: "100%",
+                      objectFit: "contain",
+                      filter: "brightness(0) invert(1)",
+                      transition: "filter 0.4s ease",
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Row 2 — scrolls right */}
+          <div className="sp-marquee-track" style={{ marginBottom: 16 }}>
+            <div className="sp-marquee-inner sp-scroll-right" style={{ animationDuration: "90s" }}>
+              {[...ROW_2, ...ROW_2].map((logo, i) => (
+                <div
+                  key={`r2-${i}`}
+                  className="sp-logo-item"
+                  style={{
+                    width: 140,
+                    height: 44,
+                    margin: "0 clamp(14px, 2vw, 28px)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    opacity: 0.5,
+                    cursor: "default",
+                    flexShrink: 0,
+                    borderRadius: 8,
+                    transition: "opacity 0.4s ease, background 0.4s ease",
+                  }}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={logo.src}
+                    alt={logo.name}
+                    loading="lazy"
+                    style={{
+                      maxHeight: "100%",
+                      maxWidth: "100%",
+                      objectFit: "contain",
+                      filter: "brightness(0) invert(1)",
+                      transition: "filter 0.4s ease",
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Row 3 — scrolls left */}
+          <div className="sp-marquee-track">
+            <div className="sp-marquee-inner sp-scroll-left" style={{ animationDuration: "85s" }}>
+              {[...ROW_3, ...ROW_3].map((logo, i) => (
+                <div
+                  key={`r3-${i}`}
+                  className="sp-logo-item"
+                  style={{
+                    width: 140,
+                    height: 44,
+                    margin: "0 clamp(14px, 2vw, 28px)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    opacity: 0.5,
+                    cursor: "default",
+                    flexShrink: 0,
+                    borderRadius: 8,
+                    transition: "opacity 0.4s ease, background 0.4s ease",
+                  }}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={logo.src}
+                    alt={logo.name}
+                    loading="lazy"
+                    style={{
+                      maxHeight: "100%",
+                      maxWidth: "100%",
+                      objectFit: "contain",
+                      filter: "brightness(0) invert(1)",
+                      transition: "filter 0.4s ease",
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </motion.div>
 
       {/* ── CTA ── */}
@@ -323,7 +354,7 @@ export default function SponsorsPartners() {
           </p>
           <Link
             href="/sponsors-and-partners"
-            className="sponsor-cta-link"
+            className="sp-cta-link"
             style={{
               display: "inline-flex",
               alignItems: "center",
@@ -348,8 +379,20 @@ export default function SponsorsPartners() {
 
       {/* ── STYLES ── */}
       <style jsx global>{`
-        /* Marquee scroll animations */
-        @keyframes marqueeLeft {
+        .sp-marquee-track {
+          overflow: hidden;
+        }
+        .sp-marquee-inner {
+          display: flex;
+          width: max-content;
+        }
+        .sp-scroll-left {
+          animation: spScrollLeft linear infinite;
+        }
+        .sp-scroll-right {
+          animation: spScrollRight linear infinite;
+        }
+        @keyframes spScrollLeft {
           0% {
             transform: translateX(0);
           }
@@ -357,7 +400,7 @@ export default function SponsorsPartners() {
             transform: translateX(-50%);
           }
         }
-        @keyframes marqueeRight {
+        @keyframes spScrollRight {
           0% {
             transform: translateX(-50%);
           }
@@ -366,81 +409,23 @@ export default function SponsorsPartners() {
           }
         }
 
-        .marquee-scroll-left {
-          animation: marqueeLeft linear infinite;
+        /* Hover — reveal original color + white pill behind dark logos */
+        .sp-logo-item:hover {
+          opacity: 1 !important;
+          background: rgba(255, 255, 255, 0.9) !important;
+          padding: 6px 10px;
         }
-        .marquee-scroll-right {
-          animation: marqueeRight linear infinite;
-        }
-
-        /* Pause on hover */
-        .marquee-row:hover .marquee-scroll-left,
-        .marquee-row:hover .marquee-scroll-right {
-          animation-play-state: paused;
-        }
-
-        /* Logo card hover */
-        .sponsor-logo-card:hover {
-          box-shadow: 0 4px 20px rgba(232, 101, 26, 0.2);
-          transform: scale(1.05);
-        }
-        .sponsor-logo-card:hover img {
-          transform: scale(1.05);
-        }
-
-        /* Fade edges */
-        .marquee-row {
-          position: relative;
-        }
-        .marquee-fade-left,
-        .marquee-fade-right {
-          position: absolute;
-          top: 0;
-          bottom: 0;
-          width: clamp(40px, 6vw, 80px);
-          z-index: 2;
-          pointer-events: none;
-        }
-        .marquee-fade-left {
-          left: 0;
-          background: linear-gradient(
-            to right,
-            var(--black-light),
-            transparent
-          );
-        }
-        .marquee-fade-right {
-          right: 0;
-          background: linear-gradient(
-            to left,
-            var(--black-light),
-            transparent
-          );
+        .sp-logo-item:hover img {
+          filter: none !important;
         }
 
         /* CTA hover */
-        .sponsor-cta-link:hover {
+        .sp-cta-link:hover {
           border-color: #e8651a !important;
           background: rgba(232, 101, 26, 0.08) !important;
         }
-        .sponsor-cta-link:hover span {
+        .sp-cta-link:hover span {
           transform: translateX(4px);
-        }
-
-        /* Responsive logo cards */
-        @media (max-width: 768px) {
-          .sponsor-logo-card {
-            width: 130px !important;
-            height: 65px !important;
-            padding: 10px 16px !important;
-          }
-        }
-        @media (max-width: 480px) {
-          .sponsor-logo-card {
-            width: 110px !important;
-            height: 56px !important;
-            padding: 8px 12px !important;
-          }
         }
       `}</style>
     </section>

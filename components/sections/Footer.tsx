@@ -53,7 +53,7 @@ export default function Footer() {
       style={{
         background: "var(--black)",
         borderTop: "1px solid rgba(255, 255, 255, 0.06)",
-        padding: "80px 0 40px",
+        padding: "52px 0 32px",
       }}
     >
       <div
@@ -175,13 +175,21 @@ export default function Footer() {
       <style jsx global>{`
         @media (max-width: 768px) {
           .footer-grid {
-            grid-template-columns: 1fr !important;
-            gap: 40px !important;
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 32px 20px !important;
+          }
+          .footer-grid > div:first-child {
+            grid-column: 1 / -1;
           }
           .footer-bottom {
             flex-direction: column !important;
             gap: 12px !important;
             text-align: center !important;
+          }
+        }
+        @media (max-width: 400px) {
+          .footer-grid {
+            gap: 28px 14px !important;
           }
         }
       `}</style>

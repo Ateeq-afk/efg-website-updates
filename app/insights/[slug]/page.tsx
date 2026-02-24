@@ -842,7 +842,7 @@ function ArticleSkeleton() {
       <section
         style={{
           background: "#0A0A0A",
-          padding: "clamp(100px, 12vw, 150px) 0 clamp(48px, 6vw, 72px)",
+          padding: "clamp(80px, 9vw, 110px) 0 clamp(48px, 6vw, 72px)",
         }}
       >
         <div
@@ -1000,9 +1000,7 @@ export default function ArticleDetailPage() {
   const params = useParams();
   const slug = params?.slug as string;
 
-  const headerRef = useRef<HTMLDivElement>(null);
   const relatedRef = useRef<HTMLDivElement>(null);
-  const headerInView = useInView(headerRef, { once: true, margin: "-60px" });
   const relatedInView = useInView(relatedRef, { once: true, margin: "-60px" });
 
   const [post, setPost] = useState<PostWithAuthor | null>(null);
@@ -1224,7 +1222,7 @@ export default function ArticleDetailPage() {
       <section
         style={{
           background: "#0A0A0A",
-          padding: "clamp(100px, 12vw, 150px) 0 0",
+          padding: "clamp(80px, 9vw, 110px) 0 0",
         }}
       >
         {/* Back link */}
@@ -1276,7 +1274,6 @@ export default function ArticleDetailPage() {
 
         {/* Article header */}
         <div
-          ref={headerRef}
           style={{
             maxWidth: READING_W,
             margin: "0 auto",
@@ -1285,7 +1282,7 @@ export default function ArticleDetailPage() {
         >
           <motion.div
             initial={{ opacity: 0, y: 16 }}
-            animate={headerInView ? { opacity: 1, y: 0 } : {}}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: EASE }}
           >
             <CategoryPill category={post.category} />
@@ -1293,7 +1290,7 @@ export default function ArticleDetailPage() {
 
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
-            animate={headerInView ? { opacity: 1, y: 0 } : {}}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1, ease: EASE }}
             style={{
               fontFamily: "var(--font-display)",
@@ -1311,7 +1308,7 @@ export default function ArticleDetailPage() {
           {post.subtitle && (
             <motion.p
               initial={{ opacity: 0, y: 16 }}
-              animate={headerInView ? { opacity: 1, y: 0 } : {}}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2, ease: EASE }}
               style={{
                 fontFamily: "var(--font-outfit)",
@@ -1329,7 +1326,7 @@ export default function ArticleDetailPage() {
           {/* Metadata row */}
           <motion.div
             initial={{ opacity: 0, y: 12 }}
-            animate={headerInView ? { opacity: 1, y: 0 } : {}}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3, ease: EASE }}
             className="flex items-center gap-4 flex-wrap"
             style={{ marginTop: 28 }}
@@ -1411,7 +1408,7 @@ export default function ArticleDetailPage() {
           {/* Tags + Share */}
           <motion.div
             initial={{ opacity: 0 }}
-            animate={headerInView ? { opacity: 1 } : {}}
+            animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.4, ease: EASE }}
             className="flex items-center justify-between flex-wrap gap-4"
             style={{ marginTop: 16 }}
@@ -1448,7 +1445,7 @@ export default function ArticleDetailPage() {
         {post.cover_image_url && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            animate={headerInView ? { opacity: 1, y: 0 } : {}}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.35, ease: EASE }}
             style={{
               maxWidth: MAX_W,

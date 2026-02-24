@@ -68,7 +68,7 @@ export default function PhotoGallery() {
       ref={sectionRef}
       style={{
         background: "var(--black)",
-        padding: "clamp(80px, 10vw, 120px) 0 clamp(60px, 8vw, 100px)",
+        padding: "clamp(48px, 5vw, 72px) 0 clamp(40px, 4vw, 60px)",
       }}
     >
       <div

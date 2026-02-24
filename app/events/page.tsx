@@ -509,8 +509,8 @@ function EventsHero() {
           maxWidth: MAX_W,
           margin: "0 auto",
           padding: PAD,
-          paddingTop: "clamp(100px, 12vw, 150px)",
-          paddingBottom: "clamp(48px, 6vw, 72px)",
+          paddingTop: "clamp(90px, 10vw, 130px)",
+          paddingBottom: "clamp(32px, 4vw, 48px)",
           position: "relative",
           zIndex: 10,
         }}
@@ -1381,7 +1381,7 @@ function EventsSeriesGrid() {
       ref={ref}
       style={{
         background: "var(--black)",
-        padding: "clamp(48px, 6vw, 72px) 0",
+        padding: "clamp(36px, 4.5vw, 52px) 0",
       }}
     >
       <div style={{ maxWidth: MAX_W, margin: "0 auto", padding: PAD }}>
@@ -1777,7 +1777,7 @@ function EventsUpNext() {
       ref={ref}
       style={{
         background: "var(--black)",
-        padding: "clamp(48px, 6vw, 72px) 0",
+        padding: "clamp(36px, 4.5vw, 52px) 0",
       }}
     >
       <div
@@ -2298,25 +2298,33 @@ function EventsUpNext() {
 // SECTION: TRUSTED BY — Scrolling logo marquee
 // ─────────────────────────────────────────────────────────────────────────────
 
+const S3 = "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo";
+
 const trustedLogos = [
-  "Palo Alto Networks",
-  "Google Cloud",
-  "SentinelOne",
-  "IBM",
-  "SAP",
-  "Kaspersky",
-  "Cisco",
-  "Fortinet",
-  "Celonis",
-  "Zoho",
-  "Freshworks",
-  "OutSystems",
-  "Confluent",
-  "Yokogawa",
-  "Dragos",
-  "Coursera",
-  "Boomi",
-  "Akamai",
+  { src: `${S3}/paloalto.png`, name: "Palo Alto Networks" },
+  { src: `${S3}/Google-Cloud-Security.png`, name: "Google Cloud Security" },
+  { src: `${S3}/sentinelone.png`, name: "SentinelOne" },
+  { src: `${S3}/kaspersky.png`, name: "Kaspersky" },
+  { src: `${S3}/fortinet.png`, name: "Fortinet" },
+  { src: `${S3}/Celonis.png`, name: "Celonis" },
+  { src: `${S3}/YOKOGAWA.png`, name: "Yokogawa" },
+  { src: `${S3}/Dragos.png`, name: "Dragos" },
+  { src: `${S3}/Akamai.png`, name: "Akamai" },
+  { src: `${S3}/EY.png`, name: "EY" },
+  { src: `${S3}/Claroty.png`, name: "Claroty" },
+  { src: `${S3}/GBM.png`, name: "GBM" },
+  { src: `${S3}/Group-IB.png`, name: "Group-IB" },
+  { src: `${S3}/nozomi-networks.png`, name: "Nozomi Networks" },
+  { src: `${S3}/OPSWAT-logo.png`, name: "OPSWAT" },
+  { src: `${S3}/Tenable-logo.png`, name: "Tenable" },
+  { src: `${S3}/ManageEngine.png`, name: "ManageEngine" },
+  { src: `${S3}/secureworks.png`, name: "Secureworks" },
+  { src: `${S3}/Sonicwall.png`, name: "SonicWall" },
+  { src: `${S3}/CPX.png`, name: "CPX" },
+  { src: `${S3}/PENTERA.png`, name: "Pentera" },
+  { src: `${S3}/Securonix-logo.png`, name: "Securonix" },
+  { src: `${S3}/Wallix.png`, name: "Wallix" },
+  { src: `${S3}/EC-Council.png`, name: "EC-Council" },
 ];
 
 function TrustedBy() {
@@ -2328,7 +2336,7 @@ function TrustedBy() {
       ref={ref}
       style={{
         background: "var(--black)",
-        padding: "clamp(40px, 5vw, 56px) 0",
+        padding: "clamp(28px, 3.5vw, 40px) 0",
         position: "relative",
         overflow: "hidden",
       }}
@@ -2378,28 +2386,37 @@ function TrustedBy() {
           />
 
           {/* Row 1 — scrolls left */}
-          <div className="trusted-marquee-track" style={{ marginBottom: 12 }}>
+          <div className="trusted-marquee-track" style={{ marginBottom: 16 }}>
             <div className="trusted-marquee-inner trusted-scroll-left">
-              {[...trustedLogos, ...trustedLogos].map((name, i) => (
-                <span
+              {[...trustedLogos, ...trustedLogos].map((logo, i) => (
+                <div
                   key={`r1-${i}`}
                   className="trusted-logo-item"
                   style={{
-                    fontFamily: "var(--font-display)",
-                    fontSize: "clamp(13px, 1.3vw, 16px)",
-                    fontWeight: 700,
-                    letterSpacing: "1px",
-                    textTransform: "uppercase",
-                    color: "white",
-                    opacity: 0.2,
-                    whiteSpace: "nowrap",
-                    padding: "0 clamp(20px, 3vw, 40px)",
+                    width: 140,
+                    height: 44,
+                    margin: "0 clamp(14px, 2vw, 28px)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    opacity: 0.5,
                     transition: "opacity 0.3s ease",
                     cursor: "default",
+                    flexShrink: 0,
                   }}
                 >
-                  {name}
-                </span>
+                  <img
+                    src={logo.src}
+                    alt={logo.name}
+                    loading="lazy"
+                    style={{
+                      maxHeight: "100%",
+                      maxWidth: "100%",
+                      objectFit: "contain",
+                      filter: "brightness(0) invert(1)",
+                    }}
+                  />
+                </div>
               ))}
             </div>
           </div>
@@ -2407,27 +2424,36 @@ function TrustedBy() {
           {/* Row 2 — scrolls right */}
           <div className="trusted-marquee-track">
             <div className="trusted-marquee-inner trusted-scroll-right">
-              {[...trustedLogos.slice(9), ...trustedLogos.slice(0, 9), ...trustedLogos.slice(9), ...trustedLogos.slice(0, 9)].map(
-                (name, i) => (
-                  <span
+              {[...trustedLogos.slice(12), ...trustedLogos.slice(0, 12), ...trustedLogos.slice(12), ...trustedLogos.slice(0, 12)].map(
+                (logo, i) => (
+                  <div
                     key={`r2-${i}`}
                     className="trusted-logo-item"
                     style={{
-                      fontFamily: "var(--font-display)",
-                      fontSize: "clamp(13px, 1.3vw, 16px)",
-                      fontWeight: 700,
-                      letterSpacing: "1px",
-                      textTransform: "uppercase",
-                      color: "white",
-                      opacity: 0.15,
-                      whiteSpace: "nowrap",
-                      padding: "0 clamp(20px, 3vw, 40px)",
+                      width: 140,
+                      height: 44,
+                      margin: "0 clamp(14px, 2vw, 28px)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      opacity: 0.5,
                       transition: "opacity 0.3s ease",
                       cursor: "default",
+                      flexShrink: 0,
                     }}
                   >
-                    {name}
-                  </span>
+                    <img
+                      src={logo.src}
+                      alt={logo.name}
+                      loading="lazy"
+                      style={{
+                        maxHeight: "100%",
+                        maxWidth: "100%",
+                        objectFit: "contain",
+                        filter: "brightness(0) invert(1)",
+                      }}
+                    />
+                  </div>
                 )
               )}
             </div>
@@ -2554,7 +2580,7 @@ function PastEvents() {
       ref={ref}
       style={{
         background: "var(--black-light)",
-        padding: "clamp(48px, 6vw, 72px) 0",
+        padding: "clamp(36px, 4.5vw, 52px) 0",
         position: "relative",
         overflow: "hidden",
       }}
@@ -3288,7 +3314,7 @@ function Voices() {
       ref={ref}
       style={{
         background: "var(--black)",
-        padding: "clamp(80px, 10vw, 120px) 0",
+        padding: "clamp(40px, 5vw, 60px) 0",
         position: "relative",
         overflow: "hidden",
       }}
@@ -3598,14 +3624,16 @@ function Voices() {
 // ─────────────────────────────────────────────────────────────────────────────
 
 const mediaPartners = [
-  "Kuwait Times",
-  "Industrial Cyber",
-  "SC Media",
-  "Dark Reading",
-  "The Hacker News",
-  "InfoSecurity Magazine",
-  "CSO Online",
-  "Cyber Defense Magazine",
+  { src: `${S3}/Industrial-Cyber.png`, name: "Industrial Cyber" },
+  { src: `${S3}/SC-Media.png`, name: "SC Media" },
+  { src: `${S3}/Dark-Reading.png`, name: "Dark Reading" },
+  { src: `${S3}/CSO-Online.png`, name: "CSO Online" },
+  { src: `${S3}/Cyber-Defense-Magazi.png`, name: "Cyber Defense Magazine" },
+  { src: `${S3}/Help-Net-Security.png`, name: "Help Net Security" },
+  { src: `${S3}/Security-Middle-East.png`, name: "Security Middle East" },
+  { src: `${S3}/Cybersecurity-Insiders.png`, name: "Cybersecurity Insiders" },
+  { src: `${S3}/Control-Engineering.png`, name: "Control Engineering" },
+  { src: `${S3}/Industry-Events.png`, name: "Industry Events" },
 ];
 
 function MediaCoverage() {
@@ -3617,7 +3645,7 @@ function MediaCoverage() {
       ref={ref}
       style={{
         background: "var(--black)",
-        padding: "clamp(36px, 5vw, 52px) 0",
+        padding: "clamp(28px, 3.5vw, 40px) 0",
         borderTop: "1px solid var(--gray-border)",
         borderBottom: "1px solid var(--gray-border)",
       }}
@@ -3661,35 +3689,34 @@ function MediaCoverage() {
           {/* Media logos row */}
           <div
             className="flex items-center justify-center flex-wrap"
-            style={{ gap: "clamp(16px, 3vw, 40px)" }}
+            style={{ gap: "16px clamp(20px, 3vw, 36px)" }}
           >
-            {mediaPartners.map((name, i) => (
-              <div key={name} className="flex items-center">
-                {i > 0 && (
-                  <div
-                    className="hidden md:block"
-                    style={{
-                      width: 1,
-                      height: 16,
-                      background: "rgba(255,255,255,0.04)",
-                      marginRight: "clamp(16px, 3vw, 40px)",
-                    }}
-                  />
-                )}
-                <span
-                  className="media-logo-name"
+            {mediaPartners.map((partner) => (
+              <div
+                key={partner.name}
+                className="media-logo-item"
+                style={{
+                  width: 120,
+                  height: 36,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  opacity: 0.45,
+                  transition: "opacity 0.3s ease",
+                  cursor: "default",
+                }}
+              >
+                <img
+                  src={partner.src}
+                  alt={partner.name}
+                  loading="lazy"
                   style={{
-                    fontFamily: "var(--font-outfit)",
-                    fontSize: "clamp(11px, 1.1vw, 13px)",
-                    fontWeight: 500,
-                    color: "rgba(255,255,255,0.2)",
-                    whiteSpace: "nowrap",
-                    transition: "color 0.3s ease",
-                    cursor: "default",
+                    maxHeight: "100%",
+                    maxWidth: "100%",
+                    objectFit: "contain",
+                    filter: "brightness(0) invert(1)",
                   }}
-                >
-                  {name}
-                </span>
+                />
               </div>
             ))}
           </div>
@@ -3697,8 +3724,8 @@ function MediaCoverage() {
       </div>
 
       <style jsx global>{`
-        .media-logo-name:hover {
-          color: rgba(255, 255, 255, 0.5) !important;
+        .media-logo-item:hover {
+          opacity: 0.75 !important;
         }
       `}</style>
     </section>
@@ -3845,7 +3872,7 @@ function EventsInquiryForm() {
       ref={ref}
       style={{
         background: "var(--black)",
-        padding: "clamp(48px, 6vw, 72px) 0",
+        padding: "clamp(36px, 4.5vw, 52px) 0",
         position: "relative",
         overflow: "hidden",
       }}
@@ -4333,7 +4360,7 @@ function HowDifferent() {
       ref={ref}
       style={{
         background: "var(--black)",
-        padding: "clamp(48px, 6vw, 72px) 0",
+        padding: "clamp(36px, 4.5vw, 52px) 0",
         position: "relative",
       }}
     >
@@ -4809,6 +4836,297 @@ function FloatingCTA() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// EVENT HIGHLIGHTS — Long-form video section
+// ─────────────────────────────────────────────────────────────────────────────
+
+const HIGHLIGHT_VIDEOS = [
+  { id: "JA1X4cN2-t0", title: "Event Highlights" },
+  { id: "-a481Lbz55o", title: "Event Highlights" },
+  { id: "dbL42utoYW4", title: "Event Highlights" },
+  { id: "gR-IUI7yJLg", title: "Event Highlights" },
+  { id: "0d_2Itsg6ec", title: "Event Highlights" },
+  { id: "wcEeU0UEl0o", title: "Event Highlights" },
+  { id: "Bc3L3iTsaIg", title: "Event Highlights" },
+  { id: "3uvw31I1tq8", title: "Event Highlights" },
+  { id: "6H11mOM-aJc", title: "Event Highlights" },
+  { id: "kjro4AVXUhM", title: "Event Highlights" },
+  { id: "8xluYDV_07g", title: "Event Highlights" },
+  { id: "ktsauwzmb-Q", title: "Event Highlights" },
+  { id: "iFVU9upOXyM", title: "Event Highlights" },
+  { id: "_ogyuzwQWYo", title: "Event Highlights" },
+  { id: "j7g0eRb7hsQ", title: "Event Highlights" },
+  { id: "Klt-iNu1g4g", title: "Event Highlights" },
+];
+
+const HIGHLIGHTS_INITIAL_SHOW = 6;
+
+function HighlightVideoCard({
+  videoId,
+  index,
+}: {
+  videoId: string;
+  index: number;
+}) {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const inView = useInView(cardRef, { once: true, margin: "-40px" });
+
+  return (
+    <motion.div
+      ref={cardRef}
+      initial={{ opacity: 0, y: 24 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6, delay: index * 0.06, ease: EASE }}
+      style={{
+        position: "relative",
+        borderRadius: 14,
+        overflow: "hidden",
+        aspectRatio: "16 / 9",
+        background: "#111",
+        cursor: isPlaying ? "default" : "pointer",
+      }}
+      onClick={() => !isPlaying && setIsPlaying(true)}
+    >
+      {isPlaying ? (
+        <iframe
+          src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1`}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100%",
+            height: "100%",
+            border: "none",
+          }}
+        />
+      ) : (
+        <>
+          <img
+            src={`https://img.youtube.com/vi/${videoId}/hqdefault.jpg`}
+            alt="Video thumbnail"
+            style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+            }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              background:
+                "linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.15) 50%, rgba(0,0,0,0.3) 100%)",
+            }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <div
+              style={{
+                width: 56,
+                height: 56,
+                borderRadius: "50%",
+                background: "rgba(232, 101, 26, 0.9)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                transition: "transform 0.3s, background 0.3s",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "scale(1.1)";
+                e.currentTarget.style.background = "rgba(255, 122, 46, 0.95)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "scale(1)";
+                e.currentTarget.style.background = "rgba(232, 101, 26, 0.9)";
+              }}
+            >
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="white"
+                style={{ marginLeft: 2 }}
+              >
+                <polygon points="6,3 20,12 6,21" />
+              </svg>
+            </div>
+          </div>
+        </>
+      )}
+    </motion.div>
+  );
+}
+
+function EventHighlights() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const inView = useInView(sectionRef, { once: true, margin: "-80px" });
+  const [showAll, setShowAll] = useState(false);
+
+  const visibleVideos = showAll
+    ? HIGHLIGHT_VIDEOS
+    : HIGHLIGHT_VIDEOS.slice(0, HIGHLIGHTS_INITIAL_SHOW);
+
+  return (
+    <section
+      ref={sectionRef}
+      style={{
+        background: "var(--black)",
+        padding: "clamp(36px, 4.5vw, 52px) 0",
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse 60% 40% at 50% 0%, rgba(232,101,26,0.03) 0%, transparent 60%)",
+        }}
+      />
+
+      <div
+        style={{
+          maxWidth: MAX_W,
+          margin: "0 auto",
+          padding: PAD,
+          position: "relative",
+        }}
+      >
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, ease: EASE }}
+        >
+          <SectionLabel text="From the Stage" />
+        </motion.div>
+
+        <motion.h2
+          initial={{ opacity: 0, y: 24 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.1, ease: EASE }}
+          style={{
+            fontFamily: "var(--font-display)",
+            fontWeight: 800,
+            fontSize: "clamp(28px, 3.5vw, 44px)",
+            letterSpacing: "-1.5px",
+            color: "var(--white)",
+            lineHeight: 1.15,
+            margin: "0 0 8px",
+          }}
+        >
+          Event Highlights
+        </motion.h2>
+
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.15, ease: EASE }}
+          style={{
+            fontFamily: "var(--font-outfit)",
+            fontWeight: 300,
+            fontSize: "clamp(14px, 1.2vw, 16px)",
+            color: "#707070",
+            lineHeight: 1.7,
+            margin: "0 0 clamp(28px, 3.5vw, 44px)",
+            maxWidth: 540,
+          }}
+        >
+          Keynotes, panels, and conversations captured live from our events
+          across the GCC.
+        </motion.p>
+
+        <div
+          className="events-highlights-grid"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(3, 1fr)",
+            gap: "clamp(12px, 2vw, 20px)",
+          }}
+        >
+          <AnimatePresence mode="popLayout">
+            {visibleVideos.map((video, i) => (
+              <HighlightVideoCard
+                key={video.id}
+                videoId={video.id}
+                index={i}
+              />
+            ))}
+          </AnimatePresence>
+        </div>
+
+        {HIGHLIGHT_VIDEOS.length > HIGHLIGHTS_INITIAL_SHOW && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.5, delay: 0.4, ease: EASE }}
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "clamp(28px, 3vw, 40px)",
+            }}
+          >
+            <button
+              onClick={() => setShowAll(!showAll)}
+              style={{
+                fontFamily: "var(--font-outfit)",
+                fontSize: 14,
+                fontWeight: 500,
+                color: "#E8651A",
+                background: "rgba(232, 101, 26, 0.08)",
+                border: "1px solid rgba(232, 101, 26, 0.2)",
+                borderRadius: 100,
+                padding: "12px 32px",
+                cursor: "pointer",
+                transition: "all 0.3s",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background =
+                  "rgba(232, 101, 26, 0.14)";
+                e.currentTarget.style.borderColor =
+                  "rgba(232, 101, 26, 0.35)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background =
+                  "rgba(232, 101, 26, 0.08)";
+                e.currentTarget.style.borderColor =
+                  "rgba(232, 101, 26, 0.2)";
+              }}
+            >
+              {showAll
+                ? "Show Less"
+                : `Show All ${HIGHLIGHT_VIDEOS.length} Videos`}
+            </button>
+          </motion.div>
+        )}
+      </div>
+
+      <style jsx global>{`
+        @media (max-width: 900px) {
+          .events-highlights-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+        }
+        @media (max-width: 560px) {
+          .events-highlights-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
+    </section>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // PAGE
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -4830,6 +5148,8 @@ export default function EventsPage() {
       <PastEvents />
       <SectionTransition variant="sweep" />
       <MediaCoverage />
+      <SectionTransition variant="expand" />
+      <EventHighlights />
       <EventsInquiryForm />
       <SectionTransition variant="sweep" />
       <Footer />

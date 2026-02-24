@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useMemo, useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { supabase } from "@/lib/supabase";
 import type { SpeakerWithEvents } from "@/lib/supabase";
@@ -368,6 +368,754 @@ function SpeakerCard({
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// SPEAKER INQUIRY FORM
+// ─────────────────────────────────────────────────────────────────────────────
+
+const SPEAKER_FORM = {
+  heading: "Share Your\nExpertise",
+  description:
+    "We platform practitioners, not salespeople. If you\u2019re a hands-on leader with real-world experience, we want you on stage.",
+  perks: [
+    { icon: "mic", text: "Keynote & panel opportunities" },
+    { icon: "globe", text: "Reach 5,000+ senior leaders" },
+    { icon: "award", text: "Join our speaker alumni network" },
+  ],
+  trust: "200+ practitioners have spoken at EFG events since 2023",
+  fields: [
+    { name: "name", label: "Full Name", type: "text", placeholder: "Your full name" },
+    { name: "email", label: "Work Email", type: "email", placeholder: "you@company.com" },
+    { name: "company", label: "Company / Organization", type: "text", placeholder: "Company name" },
+    { name: "title", label: "Job Title", type: "text", placeholder: "Your role" },
+    { name: "topic", label: "Proposed Topic", type: "text", placeholder: "Brief topic or area of expertise" },
+    { name: "bio", label: "Short Bio", type: "textarea", placeholder: "2\u20133 sentences about your background and expertise..." },
+  ],
+  cta: "Submit Speaker Proposal",
+};
+
+function InquiryPerkIcon({ type }: { type: string }) {
+  const s: React.CSSProperties = { opacity: 0.7 };
+  const props = { width: 16, height: 16, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 1.5, strokeLinecap: "round" as const, strokeLinejoin: "round" as const, style: s };
+  if (type === "mic") return <svg {...props}><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" /><path d="M19 10v2a7 7 0 0 1-14 0v-2" /><line x1="12" y1="19" x2="12" y2="23" /></svg>;
+  if (type === "globe") return <svg {...props}><circle cx="12" cy="12" r="10" /><line x1="2" y1="12" x2="22" y2="12" /><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" /></svg>;
+  return <svg {...props}><circle cx="12" cy="8" r="7" /><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88" /></svg>;
+}
+
+function SpeakerInquiryForm() {
+  const ref = useRef<HTMLElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const [submitted, setSubmitted] = useState(false);
+  const [formData, setFormData] = useState<Record<string, string>>({});
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitted(true);
+  };
+
+  const handleChange = (name: string, value: string) => {
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const resetForm = () => {
+    setSubmitted(false);
+    setFormData({});
+  };
+
+  const inputStyle: React.CSSProperties = {
+    width: "100%",
+    padding: "11px 14px",
+    borderRadius: 10,
+    border: "1px solid rgba(255,255,255,0.08)",
+    background: "rgba(255,255,255,0.04)",
+    color: "white",
+    fontFamily: "var(--font-outfit)",
+    fontSize: 13.5,
+    fontWeight: 400,
+    outline: "none",
+    transition: "border-color 0.3s ease",
+  };
+
+  const labelStyle: React.CSSProperties = {
+    fontFamily: "var(--font-outfit)",
+    fontSize: 11,
+    fontWeight: 500,
+    color: "rgba(255,255,255,0.4)",
+    marginBottom: 5,
+    display: "block",
+    letterSpacing: "0.3px",
+  };
+
+  const tab = SPEAKER_FORM;
+
+  return (
+    <section
+      id="speak-at-efg"
+      ref={ref}
+      style={{
+        background: "#0A0A0A",
+        padding: "clamp(36px, 4.5vw, 52px) 0",
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: `
+            radial-gradient(ellipse 700px 500px at 20% 40%, rgba(232,101,26,0.04) 0%, transparent 70%),
+            radial-gradient(ellipse 500px 400px at 80% 60%, rgba(232,101,26,0.03) 0%, transparent 70%)
+          `,
+        }}
+      />
+
+      <div style={{ maxWidth: MAX_W, margin: "0 auto", padding: PAD, position: "relative" }}>
+        {/* Section label */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, ease: EASE }}
+          style={{ marginBottom: 48 }}
+        >
+          <div className="flex items-center gap-3" style={{ marginBottom: 16 }}>
+            <span style={{ width: 30, height: 1, background: "#E8651A", flexShrink: 0 }} />
+            <span
+              style={{
+                fontSize: 11,
+                fontWeight: 600,
+                letterSpacing: "3px",
+                textTransform: "uppercase",
+                color: "#E8651A",
+                fontFamily: "var(--font-outfit)",
+              }}
+            >
+              Speak at EFG
+            </span>
+          </div>
+        </motion.div>
+
+        {/* Split layout */}
+        <div
+          className="speaker-inquiry-split"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1.25fr",
+            gap: "clamp(32px, 4vw, 64px)",
+            alignItems: "start",
+          }}
+        >
+          {/* LEFT: Editorial */}
+          <motion.div
+            initial={{ opacity: 0, x: -16 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.1, ease: EASE }}
+            style={{ paddingTop: 8 }}
+          >
+            <h2
+              style={{
+                fontFamily: "var(--font-display)",
+                fontWeight: 800,
+                fontSize: "clamp(32px, 3.5vw, 50px)",
+                letterSpacing: "-2px",
+                color: "#FFFFFF",
+                lineHeight: 1.08,
+                margin: 0,
+                whiteSpace: "pre-line",
+              }}
+            >
+              {tab.heading}
+            </h2>
+            <p
+              style={{
+                fontFamily: "var(--font-outfit)",
+                fontWeight: 300,
+                fontSize: "clamp(14px, 1.2vw, 16px)",
+                color: "rgba(255,255,255,0.45)",
+                lineHeight: 1.7,
+                margin: "20px 0 0",
+                maxWidth: 440,
+              }}
+            >
+              {tab.description}
+            </p>
+
+            <div style={{ marginTop: 36, display: "flex", flexDirection: "column", gap: 18 }}>
+              {tab.perks.map((perk) => (
+                <div key={perk.text} className="flex items-center gap-3">
+                  <div
+                    style={{
+                      width: 36,
+                      height: 36,
+                      borderRadius: 10,
+                      background: "rgba(232,101,26,0.06)",
+                      border: "1px solid rgba(232,101,26,0.1)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: "#E8651A",
+                      flexShrink: 0,
+                    }}
+                  >
+                    <InquiryPerkIcon type={perk.icon} />
+                  </div>
+                  <span
+                    style={{
+                      fontFamily: "var(--font-outfit)",
+                      fontSize: 14,
+                      fontWeight: 400,
+                      color: "rgba(255,255,255,0.55)",
+                    }}
+                  >
+                    {perk.text}
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            <div
+              style={{
+                marginTop: 40,
+                paddingTop: 24,
+                borderTop: "1px solid rgba(255,255,255,0.06)",
+              }}
+            >
+              <p
+                style={{
+                  fontFamily: "var(--font-outfit)",
+                  fontSize: 12,
+                  fontWeight: 400,
+                  color: "rgba(255,255,255,0.25)",
+                  letterSpacing: "0.3px",
+                  margin: 0,
+                }}
+              >
+                {tab.trust}
+              </p>
+            </div>
+          </motion.div>
+
+          {/* RIGHT: Form card */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.15, ease: EASE }}
+            style={{
+              borderRadius: 20,
+              border: "1px solid rgba(255,255,255,0.06)",
+              background: "rgba(255,255,255,0.02)",
+              padding: "clamp(24px, 3vw, 36px)",
+              position: "relative",
+              overflow: "hidden",
+            }}
+          >
+            <div
+              className="absolute pointer-events-none"
+              style={{
+                top: -40,
+                right: -40,
+                width: 200,
+                height: 200,
+                borderRadius: "50%",
+                background: "radial-gradient(ellipse, rgba(232,101,26,0.05) 0%, transparent 70%)",
+              }}
+            />
+
+            <AnimatePresence mode="wait">
+              {submitted ? (
+                <motion.div
+                  key="success"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.4, ease: EASE }}
+                  style={{ textAlign: "center", padding: "40px 0" }}
+                >
+                  <div
+                    style={{
+                      width: 52,
+                      height: 52,
+                      borderRadius: "50%",
+                      background: "rgba(34,197,94,0.12)",
+                      border: "1px solid rgba(34,197,94,0.25)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      margin: "0 auto 20px",
+                    }}
+                  >
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="2.5">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  </div>
+                  <h3
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      fontWeight: 800,
+                      fontSize: "clamp(20px, 2.5vw, 26px)",
+                      letterSpacing: "-0.5px",
+                      color: "white",
+                      margin: "0 0 8px",
+                    }}
+                  >
+                    Proposal Submitted
+                  </h3>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-outfit)",
+                      fontWeight: 300,
+                      fontSize: 14,
+                      color: "#A0A0A0",
+                      margin: "0 0 20px",
+                      lineHeight: 1.6,
+                    }}
+                  >
+                    Our team will review your submission and get back
+                    to you within 2 business days.
+                  </p>
+                  <button
+                    onClick={resetForm}
+                    style={{
+                      fontFamily: "var(--font-outfit)",
+                      fontSize: 13,
+                      fontWeight: 500,
+                      color: "#E8651A",
+                      background: "none",
+                      border: "none",
+                      cursor: "pointer",
+                      padding: 0,
+                    }}
+                  >
+                    Submit another proposal &rarr;
+                  </button>
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="form"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.3, ease: EASE }}
+                >
+                  <form onSubmit={handleSubmit}>
+                    <div
+                      className="speaker-inquiry-form-grid"
+                      style={{
+                        display: "grid",
+                        gridTemplateColumns: "1fr 1fr",
+                        gap: 14,
+                      }}
+                    >
+                      {tab.fields.map((field) => {
+                        const isFullWidth = field.type === "textarea";
+                        return (
+                          <div
+                            key={field.name}
+                            style={{
+                              gridColumn: isFullWidth ? "1 / -1" : undefined,
+                            }}
+                          >
+                            <label style={labelStyle}>{field.label}</label>
+                            {field.type === "textarea" ? (
+                              <textarea
+                                value={formData[field.name] || ""}
+                                onChange={(e) => handleChange(field.name, e.target.value)}
+                                placeholder={field.placeholder}
+                                rows={3}
+                                style={{
+                                  ...inputStyle,
+                                  resize: "vertical",
+                                  minHeight: 72,
+                                }}
+                                onFocus={(e) => { e.currentTarget.style.borderColor = "rgba(232,101,26,0.3)"; }}
+                                onBlur={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"; }}
+                              />
+                            ) : (
+                              <input
+                                type={field.type}
+                                value={formData[field.name] || ""}
+                                onChange={(e) => handleChange(field.name, e.target.value)}
+                                placeholder={field.placeholder}
+                                required
+                                style={inputStyle}
+                                onFocus={(e) => { e.currentTarget.style.borderColor = "rgba(232,101,26,0.3)"; }}
+                                onBlur={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"; }}
+                              />
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+
+                    <button
+                      type="submit"
+                      style={{
+                        width: "100%",
+                        marginTop: 20,
+                        padding: "13px 28px",
+                        borderRadius: 10,
+                        background: "#E8651A",
+                        color: "white",
+                        fontFamily: "var(--font-outfit)",
+                        fontSize: 14,
+                        fontWeight: 600,
+                        border: "none",
+                        cursor: "pointer",
+                        transition: "all 0.3s ease",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        gap: 8,
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.background = "#FF7A2E";
+                        e.currentTarget.style.transform = "translateY(-2px)";
+                        e.currentTarget.style.boxShadow = "0 12px 40px rgba(232,101,26,0.25)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.background = "#E8651A";
+                        e.currentTarget.style.transform = "translateY(0)";
+                        e.currentTarget.style.boxShadow = "none";
+                      }}
+                    >
+                      {tab.cta} <span>→</span>
+                    </button>
+                  </form>
+
+                  <p
+                    style={{
+                      fontFamily: "var(--font-outfit)",
+                      fontSize: 11,
+                      fontWeight: 400,
+                      color: "#3A3A3A",
+                      textAlign: "center",
+                      margin: "14px 0 0",
+                    }}
+                  >
+                    Your information is kept confidential. We&apos;ll only use
+                    it to respond to your inquiry.
+                  </p>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+        </div>
+      </div>
+
+      <style jsx global>{`
+        @media (max-width: 860px) {
+          .speaker-inquiry-split {
+            grid-template-columns: 1fr !important;
+          }
+        }
+        @media (max-width: 500px) {
+          .speaker-inquiry-form-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
+    </section>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// EVENT HIGHLIGHTS — Long-form video section
+// ─────────────────────────────────────────────────────────────────────────────
+
+const HIGHLIGHT_VIDEOS = [
+  { id: "JA1X4cN2-t0", title: "Event Highlights" },
+  { id: "-a481Lbz55o", title: "Event Highlights" },
+  { id: "dbL42utoYW4", title: "Event Highlights" },
+  { id: "gR-IUI7yJLg", title: "Event Highlights" },
+  { id: "0d_2Itsg6ec", title: "Event Highlights" },
+  { id: "wcEeU0UEl0o", title: "Event Highlights" },
+  { id: "Bc3L3iTsaIg", title: "Event Highlights" },
+  { id: "3uvw31I1tq8", title: "Event Highlights" },
+  { id: "6H11mOM-aJc", title: "Event Highlights" },
+  { id: "kjro4AVXUhM", title: "Event Highlights" },
+  { id: "8xluYDV_07g", title: "Event Highlights" },
+  { id: "ktsauwzmb-Q", title: "Event Highlights" },
+  { id: "iFVU9upOXyM", title: "Event Highlights" },
+  { id: "_ogyuzwQWYo", title: "Event Highlights" },
+  { id: "j7g0eRb7hsQ", title: "Event Highlights" },
+  { id: "Klt-iNu1g4g", title: "Event Highlights" },
+];
+
+const INITIAL_SHOW = 6;
+
+function HighlightVideoCard({
+  videoId,
+  index,
+}: {
+  videoId: string;
+  index: number;
+}) {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const inView = useInView(cardRef, { once: true, margin: "-40px" });
+
+  return (
+    <motion.div
+      ref={cardRef}
+      initial={{ opacity: 0, y: 24 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6, delay: index * 0.06, ease: EASE }}
+      style={{
+        position: "relative",
+        borderRadius: 14,
+        overflow: "hidden",
+        aspectRatio: "16 / 9",
+        background: "#111",
+        cursor: isPlaying ? "default" : "pointer",
+      }}
+      onClick={() => !isPlaying && setIsPlaying(true)}
+    >
+      {isPlaying ? (
+        <iframe
+          src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1`}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100%",
+            height: "100%",
+            border: "none",
+          }}
+        />
+      ) : (
+        <>
+          {/* Thumbnail */}
+          <img
+            src={`https://img.youtube.com/vi/${videoId}/hqdefault.jpg`}
+            alt="Video thumbnail"
+            style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+            }}
+          />
+
+          {/* Dark overlay */}
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              background:
+                "linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.15) 50%, rgba(0,0,0,0.3) 100%)",
+            }}
+          />
+
+          {/* Play button */}
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <div
+              style={{
+                width: 56,
+                height: 56,
+                borderRadius: "50%",
+                background: "rgba(232, 101, 26, 0.9)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                transition: "transform 0.3s, background 0.3s",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "scale(1.1)";
+                e.currentTarget.style.background = "rgba(255, 122, 46, 0.95)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "scale(1)";
+                e.currentTarget.style.background = "rgba(232, 101, 26, 0.9)";
+              }}
+            >
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="white"
+                style={{ marginLeft: 2 }}
+              >
+                <polygon points="6,3 20,12 6,21" />
+              </svg>
+            </div>
+          </div>
+        </>
+      )}
+    </motion.div>
+  );
+}
+
+function EventHighlights() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const inView = useInView(sectionRef, { once: true, margin: "-80px" });
+  const [showAll, setShowAll] = useState(false);
+
+  const visibleVideos = showAll
+    ? HIGHLIGHT_VIDEOS
+    : HIGHLIGHT_VIDEOS.slice(0, INITIAL_SHOW);
+
+  return (
+    <section
+      ref={sectionRef}
+      style={{
+        background: "var(--black)",
+        padding: "clamp(36px, 4.5vw, 52px) 0",
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
+      {/* Subtle atmospheric gradient */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse 60% 40% at 50% 0%, rgba(232,101,26,0.03) 0%, transparent 60%)",
+        }}
+      />
+
+      <div
+        style={{
+          maxWidth: MAX_W,
+          margin: "0 auto",
+          padding: PAD,
+          position: "relative",
+        }}
+      >
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, ease: EASE }}
+        >
+          <SectionLabel text="From the Stage" />
+        </motion.div>
+
+        <motion.h2
+          initial={{ opacity: 0, y: 24 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.1, ease: EASE }}
+          style={{
+            fontFamily: "var(--font-display)",
+            fontWeight: 800,
+            fontSize: "clamp(28px, 3.5vw, 44px)",
+            letterSpacing: "-1.5px",
+            color: "var(--white)",
+            lineHeight: 1.15,
+            margin: "0 0 8px",
+          }}
+        >
+          Event Highlights
+        </motion.h2>
+
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.15, ease: EASE }}
+          style={{
+            fontFamily: "var(--font-outfit)",
+            fontWeight: 300,
+            fontSize: "clamp(14px, 1.2vw, 16px)",
+            color: "#707070",
+            lineHeight: 1.7,
+            margin: "0 0 clamp(28px, 3.5vw, 44px)",
+            maxWidth: 540,
+          }}
+        >
+          Keynotes, panels, and conversations captured live from our events
+          across the GCC.
+        </motion.p>
+
+        {/* Video Grid */}
+        <div
+          className="highlights-grid"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(3, 1fr)",
+            gap: "clamp(12px, 2vw, 20px)",
+          }}
+        >
+          <AnimatePresence mode="popLayout">
+            {visibleVideos.map((video, i) => (
+              <HighlightVideoCard
+                key={video.id}
+                videoId={video.id}
+                index={i}
+              />
+            ))}
+          </AnimatePresence>
+        </div>
+
+        {/* Show More / Show Less */}
+        {HIGHLIGHT_VIDEOS.length > INITIAL_SHOW && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.5, delay: 0.4, ease: EASE }}
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "clamp(28px, 3vw, 40px)",
+            }}
+          >
+            <button
+              onClick={() => setShowAll(!showAll)}
+              style={{
+                fontFamily: "var(--font-outfit)",
+                fontSize: 14,
+                fontWeight: 500,
+                color: "#E8651A",
+                background: "rgba(232, 101, 26, 0.08)",
+                border: "1px solid rgba(232, 101, 26, 0.2)",
+                borderRadius: 100,
+                padding: "12px 32px",
+                cursor: "pointer",
+                transition: "all 0.3s",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background =
+                  "rgba(232, 101, 26, 0.14)";
+                e.currentTarget.style.borderColor =
+                  "rgba(232, 101, 26, 0.35)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background =
+                  "rgba(232, 101, 26, 0.08)";
+                e.currentTarget.style.borderColor =
+                  "rgba(232, 101, 26, 0.2)";
+              }}
+            >
+              {showAll
+                ? "Show Less"
+                : `Show All ${HIGHLIGHT_VIDEOS.length} Videos`}
+            </button>
+          </motion.div>
+        )}
+      </div>
+
+      <style jsx global>{`
+        @media (max-width: 900px) {
+          .highlights-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+        }
+        @media (max-width: 560px) {
+          .highlights-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
+    </section>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // PAGE
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -381,6 +1129,8 @@ export default function SpeakersPage() {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [eventFilter, setEventFilter] = useState("All");
+  const [page, setPage] = useState(1);
+  const PER_PAGE = 12;
 
   // Fetch speakers on mount
   useEffect(() => {
@@ -395,6 +1145,11 @@ export default function SpeakersPage() {
     }
     fetchSpeakers();
   }, []);
+
+  // Reset page when filters change
+  useEffect(() => {
+    setPage(1);
+  }, [search, eventFilter]);
 
   // Filter logic
   const filtered = useMemo(() => {
@@ -418,6 +1173,9 @@ export default function SpeakersPage() {
     });
   }, [speakers, search, eventFilter]);
 
+  const totalPages = Math.ceil(filtered.length / PER_PAGE);
+  const paginatedSpeakers = filtered.slice((page - 1) * PER_PAGE, page * PER_PAGE);
+
   return (
     <div>
       {/* ── HERO ── */}
@@ -427,7 +1185,7 @@ export default function SpeakersPage() {
           background: "#0A0A0A",
           position: "relative",
           overflow: "hidden",
-          padding: "clamp(100px, 12vw, 150px) 0 clamp(48px, 6vw, 72px)",
+          padding: "clamp(90px, 10vw, 130px) 0 clamp(32px, 4vw, 48px)",
         }}
       >
         {/* Ambient gradient */}
@@ -477,23 +1235,70 @@ export default function SpeakersPage() {
             <SectionLabel text="Our Experts" />
           </motion.div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 28 }}
-            animate={heroInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.15, ease: EASE }}
+          <div
+            className="speakers-hero-title-row"
             style={{
-              fontFamily: "var(--font-display)",
-              fontWeight: 800,
-              fontSize: "clamp(40px, 6vw, 80px)",
-              letterSpacing: "-3px",
-              color: "#FFFFFF",
-              lineHeight: 1.05,
+              display: "flex",
+              alignItems: "baseline",
+              justifyContent: "flex-start",
+              gap: 28,
               margin: "0 0 20px",
-              maxWidth: 700,
             }}
           >
-            Speakers
-          </motion.h1>
+            <motion.h1
+              initial={{ opacity: 0, y: 28 }}
+              animate={heroInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.15, ease: EASE }}
+              style={{
+                fontFamily: "var(--font-display)",
+                fontWeight: 800,
+                fontSize: "clamp(40px, 6vw, 80px)",
+                letterSpacing: "-3px",
+                color: "#FFFFFF",
+                lineHeight: 1.05,
+                margin: 0,
+              }}
+            >
+              Speakers
+            </motion.h1>
+
+            <motion.button
+              initial={{ opacity: 0, y: 12 }}
+              animate={heroInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.35, ease: EASE }}
+              onClick={() => {
+                document
+                  .getElementById("speak-at-efg")
+                  ?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="speakers-hero-cta"
+              style={{
+                padding: "11px 26px",
+                borderRadius: 100,
+                background: "transparent",
+                border: "1px solid rgba(232, 101, 26, 0.5)",
+                color: "#E8651A",
+                fontFamily: "var(--font-outfit)",
+                fontSize: 14,
+                fontWeight: 600,
+                cursor: "pointer",
+                transition: "all 0.3s ease",
+                letterSpacing: "0.2px",
+                whiteSpace: "nowrap",
+                flexShrink: 0,
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "rgba(232, 101, 26, 0.1)";
+                e.currentTarget.style.borderColor = "#E8651A";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "transparent";
+                e.currentTarget.style.borderColor = "rgba(232, 101, 26, 0.5)";
+              }}
+            >
+              Apply to Speak
+            </motion.button>
+          </div>
 
           <motion.p
             initial={{ opacity: 0, y: 16 }}
@@ -635,7 +1440,7 @@ export default function SpeakersPage() {
                 marginLeft: "auto",
               }}
             >
-              Showing {filtered.length} of {speakers.length} speakers
+              Page {page} of {totalPages || 1} · {filtered.length} speakers
             </span>
           )}
         </div>
@@ -646,7 +1451,7 @@ export default function SpeakersPage() {
         ref={gridRef}
         style={{
           background: "#0A0A0A",
-          padding: "clamp(32px, 4vw, 48px) 0 clamp(48px, 6vw, 72px)",
+          padding: "clamp(24px, 3vw, 36px) 0 clamp(32px, 4vw, 48px)",
           minHeight: 400,
         }}
       >
@@ -725,111 +1530,154 @@ export default function SpeakersPage() {
               </p>
             </motion.div>
           ) : (
-            <div
-              className="speakers-grid"
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(4, 1fr)",
-                gap: "clamp(12px, 2vw, 20px)",
-              }}
-            >
-              {filtered.map((speaker, i) => (
-                <SpeakerCard key={speaker.id} speaker={speaker} index={i} />
-              ))}
-            </div>
+            <>
+              <div
+                className="speakers-grid"
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(4, 1fr)",
+                  gap: "clamp(12px, 2vw, 20px)",
+                }}
+              >
+                {paginatedSpeakers.map((speaker, i) => (
+                  <SpeakerCard key={speaker.id} speaker={speaker} index={i} />
+                ))}
+              </div>
+
+              {/* Pagination controls */}
+              {totalPages > 1 && (
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: 6,
+                    marginTop: 32,
+                  }}
+                >
+                  {/* Prev */}
+                  <button
+                    onClick={() => {
+                      setPage((p) => Math.max(1, p - 1));
+                      gridRef.current?.scrollIntoView({ behavior: "smooth" });
+                    }}
+                    disabled={page === 1}
+                    style={{
+                      width: 36,
+                      height: 36,
+                      borderRadius: 10,
+                      border: "1px solid rgba(255,255,255,0.06)",
+                      background: "rgba(255,255,255,0.02)",
+                      color: page === 1 ? "#353535" : "#A0A0A0",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      cursor: page === 1 ? "default" : "pointer",
+                      transition: "all 0.2s ease",
+                    }}
+                  >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                      <polyline points="15 18 9 12 15 6" />
+                    </svg>
+                  </button>
+
+                  {/* Page numbers */}
+                  {Array.from({ length: totalPages }, (_, i) => i + 1)
+                    .filter((p) => {
+                      if (totalPages <= 7) return true;
+                      if (p === 1 || p === totalPages) return true;
+                      if (Math.abs(p - page) <= 1) return true;
+                      return false;
+                    })
+                    .reduce<(number | "dots")[]>((acc, p, idx, arr) => {
+                      if (idx > 0 && p - (arr[idx - 1] as number) > 1) acc.push("dots");
+                      acc.push(p);
+                      return acc;
+                    }, [])
+                    .map((item, idx) =>
+                      item === "dots" ? (
+                        <span
+                          key={`dots-${idx}`}
+                          style={{
+                            width: 36,
+                            height: 36,
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            color: "#505050",
+                            fontFamily: "var(--font-outfit)",
+                            fontSize: 13,
+                          }}
+                        >
+                          …
+                        </span>
+                      ) : (
+                        <button
+                          key={item}
+                          onClick={() => {
+                            setPage(item);
+                            gridRef.current?.scrollIntoView({ behavior: "smooth" });
+                          }}
+                          style={{
+                            width: 36,
+                            height: 36,
+                            borderRadius: 10,
+                            border: page === item
+                              ? "1px solid #E8651A"
+                              : "1px solid rgba(255,255,255,0.06)",
+                            background: page === item
+                              ? "rgba(232, 101, 26, 0.12)"
+                              : "rgba(255,255,255,0.02)",
+                            color: page === item ? "#E8651A" : "#707070",
+                            fontFamily: "var(--font-outfit)",
+                            fontSize: 13,
+                            fontWeight: page === item ? 600 : 400,
+                            cursor: "pointer",
+                            transition: "all 0.2s ease",
+                          }}
+                        >
+                          {item}
+                        </button>
+                      )
+                    )}
+
+                  {/* Next */}
+                  <button
+                    onClick={() => {
+                      setPage((p) => Math.min(totalPages, p + 1));
+                      gridRef.current?.scrollIntoView({ behavior: "smooth" });
+                    }}
+                    disabled={page === totalPages}
+                    style={{
+                      width: 36,
+                      height: 36,
+                      borderRadius: 10,
+                      border: "1px solid rgba(255,255,255,0.06)",
+                      background: "rgba(255,255,255,0.02)",
+                      color: page === totalPages ? "#353535" : "#A0A0A0",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      cursor: page === totalPages ? "default" : "pointer",
+                      transition: "all 0.2s ease",
+                    }}
+                  >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                      <polyline points="9 18 15 12 9 6" />
+                    </svg>
+                  </button>
+                </div>
+              )}
+            </>
           )}
         </div>
       </section>
 
-      {/* ── NOMINATE A SPEAKER CTA ── */}
-      <section
-        style={{
-          background: "#111111",
-          position: "relative",
-          overflow: "hidden",
-          padding: "clamp(48px, 6vw, 72px) 0",
-        }}
-      >
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(232,101,26,0.04) 0%, transparent 60%)",
-          }}
-        />
-        <div
-          style={{
-            maxWidth: 560,
-            margin: "0 auto",
-            padding: PAD,
-            position: "relative",
-            zIndex: 10,
-            textAlign: "center",
-          }}
-        >
-          <h2
-            style={{
-              fontFamily: "var(--font-display)",
-              fontWeight: 800,
-              fontSize: "clamp(24px, 3vw, 36px)",
-              letterSpacing: "-1px",
-              color: "#FFFFFF",
-              lineHeight: 1.1,
-              margin: "0 0 14px",
-            }}
-          >
-            Know a Great Speaker?
-          </h2>
-          <p
-            style={{
-              fontFamily: "var(--font-outfit)",
-              fontWeight: 300,
-              fontSize: "clamp(14px, 1.2vw, 16px)",
-              color: "#A0A0A0",
-              lineHeight: 1.65,
-              margin: "0 0 28px",
-            }}
-          >
-            Help us bring the best voices to our stage. Nominate an industry
-            leader or expert you&apos;d like to see at an upcoming EFG event.
-          </p>
-          <a
-            href="mailto:speakers@eventsfirstgroup.com?subject=Speaker%20Nomination"
-            className="nominate-speaker-btn"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 8,
-              padding: "14px 32px",
-              borderRadius: 50,
-              background: "#E8651A",
-              color: "#FFFFFF",
-              fontFamily: "var(--font-outfit)",
-              fontSize: 14,
-              fontWeight: 600,
-              textDecoration: "none",
-              transition: "all 0.3s ease",
-            }}
-          >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-              <circle cx="8.5" cy="7" r="4" />
-              <line x1="20" y1="8" x2="20" y2="14" />
-              <line x1="23" y1="11" x2="17" y2="11" />
-            </svg>
-            Nominate a Speaker
-          </a>
-        </div>
-      </section>
+      {/* ── EVENT HIGHLIGHTS — Video Section ── */}
+      <EventHighlights />
+
+      {/* ── SPEAKER INQUIRY FORM ── */}
+      <SpeakerInquiryForm />
 
       <Footer />
 
@@ -840,12 +1688,6 @@ export default function SpeakersPage() {
           -webkit-line-clamp: 1;
           -webkit-box-orient: vertical;
           overflow: hidden;
-        }
-
-        .nominate-speaker-btn:hover {
-          background: #ff7a2e !important;
-          transform: translateY(-2px);
-          box-shadow: 0 8px 32px rgba(232, 101, 26, 0.25);
         }
 
         @keyframes skeletonPulse {
@@ -879,6 +1721,15 @@ export default function SpeakersPage() {
         @media (max-width: 600px) {
           .speakers-grid {
             grid-template-columns: 1fr !important;
+          }
+          .speakers-hero-title-row {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 14px !important;
+          }
+          .speakers-hero-cta {
+            width: 100% !important;
+            justify-content: center !important;
           }
         }
       `}</style>

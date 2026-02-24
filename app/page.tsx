@@ -8,7 +8,7 @@ import {
   WhyEFG,
   Testimonials,
   SponsorsPartners,
-  Newsletter,
+  InquiryForm,
   Footer,
 } from "@/components/sections";
 import SectionTransition from "@/components/effects/SectionTransition";
@@ -61,8 +61,8 @@ export default function Home() {
       {/* Section Transition - Pulse */}
       <SectionTransition variant="pulse" />
 
-      {/* Newsletter — The Connection */}
-      <Newsletter />
+      {/* Get Involved — Inquiry Form */}
+      <InquiryForm />
 
       {/* Section Transition - Sweep */}
       <SectionTransition variant="sweep" />

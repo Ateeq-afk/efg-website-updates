@@ -1,313 +1,319 @@
 "use client";
 
-import { useRef, useState, useEffect, useCallback } from "react";
-import { motion, useInView, AnimatePresence } from "framer-motion";
+import { useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
 
-// Testimonial data
-const testimonials = [
-  {
-    id: 1,
-    quote:
-      "This isn't your typical industry event. Every person I spoke with was a decision-maker. The conversations were real, the connections were lasting, and I left with three partnerships that we're still building on today.",
-    name: "Sarah Al-Rashid",
-    title: "VP of Information Security, Saudi Telecom",
-    badge: "Cyber First Dubai",
-    badgeColor: "#01BBF5",
-  },
-  {
-    id: 2,
-    quote:
-      "We've sponsored technology events across the globe. Nothing matches the quality of audience that EFG delivers in the GCC. These are the people who sign the purchase orders.",
-    name: "Mark Henderson",
-    title: "Regional Director, Palo Alto Networks",
-    badge: "Sponsor — Cyber First",
-    badgeColor: "#E8651A",
-  },
-  {
-    id: 3,
-    quote:
-      "The NetworkFirst boardroom was the most productive two hours of my quarter. Fifteen CISOs, no cameras, no agenda — just honest conversation about the problems we're all facing.",
-    name: "Dr. Fatima Al-Kuwari",
-    title: "CISO, Qatar National Bank",
-    badge: "NetworkFirst Boardroom",
-    badgeColor: "#E8651A",
-  },
+const EASE = [0.16, 1, 0.3, 1] as const;
+
+// ─────────────────────────────────────────────────────────────────────────────
+// VIDEO SHORTS DATA
+// ─────────────────────────────────────────────────────────────────────────────
+
+const videoShorts = [
+  { id: "SH9Z1U2_rAM", label: "Voices of Excellence" },
+  { id: "wLgYOHHB6o4", label: "Voices of Excellence" },
+  { id: "2jpIlqo0HSY", label: "Voices of Excellence" },
+  { id: "SLkj5gO-LQ8", label: "Voices of Excellence" },
 ];
 
-const ROTATION_INTERVAL = 6000; // 6 seconds
+// ─────────────────────────────────────────────────────────────────────────────
+// VIDEO CARD — YouTube Shorts inline player
+// ─────────────────────────────────────────────────────────────────────────────
+
+function VideoCard({
+  videoId,
+  label,
+  index,
+  isInView,
+}: {
+  videoId: string;
+  label: string;
+  index: number;
+  isInView: boolean;
+}) {
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6, delay: 0.08 + index * 0.1, ease: EASE }}
+      style={{
+        borderRadius: 16,
+        border: "1px solid rgba(255,255,255,0.06)",
+        background: "rgba(255,255,255,0.02)",
+        overflow: "hidden",
+        position: "relative",
+      }}
+    >
+      {/* Video container — 9:16 aspect for Shorts */}
+      <div
+        style={{
+          position: "relative",
+          aspectRatio: "9 / 16",
+          background: "#0A0A0A",
+          cursor: isPlaying ? "default" : "pointer",
+        }}
+        onClick={() => !isPlaying && setIsPlaying(true)}
+      >
+        {isPlaying ? (
+          <iframe
+            src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1`}
+            title={label}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              border: "none",
+            }}
+          />
+        ) : (
+          <>
+            {/* Thumbnail */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={`https://img.youtube.com/vi/${videoId}/oar2.jpg`}
+              alt={label}
+              style={{
+                position: "absolute",
+                inset: 0,
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+              }}
+              onError={(e) => {
+                (e.target as HTMLImageElement).src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+              }}
+            />
+
+            {/* Dark overlay */}
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                background: "linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.5) 100%)",
+              }}
+            />
+
+            {/* Play button */}
+            <div
+              style={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                width: 52,
+                height: 52,
+                borderRadius: "50%",
+                background: "rgba(232,101,26,0.9)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                boxShadow: "0 8px 32px rgba(232,101,26,0.3)",
+              }}
+            >
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="white"
+                style={{ marginLeft: 2 }}
+              >
+                <polygon points="5,3 19,12 5,21" />
+              </svg>
+            </div>
+
+            {/* Label at bottom */}
+            <div
+              style={{
+                position: "absolute",
+                bottom: 0,
+                left: 0,
+                right: 0,
+                padding: 14,
+              }}
+            >
+              <p
+                style={{
+                  fontFamily: "var(--font-outfit)",
+                  fontSize: 11,
+                  fontWeight: 500,
+                  color: "rgba(255,255,255,0.7)",
+                  margin: 0,
+                  letterSpacing: "0.3px",
+                }}
+              >
+                {label}
+              </p>
+            </div>
+          </>
+        )}
+      </div>
+    </motion.div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// MAIN SECTION
+// ─────────────────────────────────────────────────────────────────────────────
 
 export default function Testimonials() {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
-  const [activeIndex, setActiveIndex] = useState(0);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
-
-  // Start/restart auto-rotation
-  const startRotation = useCallback(() => {
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-    }
-    intervalRef.current = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % testimonials.length);
-    }, ROTATION_INTERVAL);
-  }, []);
-
-  // Handle dot click
-  const handleDotClick = (index: number) => {
-    setActiveIndex(index);
-    startRotation(); // Reset timer
-  };
-
-  // Auto-rotation effect
-  useEffect(() => {
-    startRotation();
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
-    };
-  }, [startRotation]);
-
-  const activeTestimonial = testimonials[activeIndex];
+  const isInView = useInView(sectionRef, { once: true, margin: "-80px" });
 
   return (
     <section
       ref={sectionRef}
       className="relative overflow-hidden"
       style={{
-        background: "var(--black-light)",
-        padding: "clamp(80px, 10vw, 130px) 0",
+        background: "var(--black)",
+        padding: "clamp(40px, 5vw, 64px) 0",
       }}
     >
-      {/* ═══════════════════════════════════════════════════════════════
-          BACKGROUND TEXTURE LAYERS
-          ═══════════════════════════════════════════════════════════════ */}
-      {/* Subtle ambient glow */}
+      {/* Ambient background */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background: `
-            radial-gradient(ellipse 100% 80% at 50% 100%, rgba(232, 101, 26, 0.04) 0%, transparent 60%),
-            radial-gradient(ellipse 60% 40% at 0% 50%, rgba(232, 101, 26, 0.02) 0%, transparent 50%),
-            radial-gradient(ellipse 60% 40% at 100% 50%, rgba(232, 101, 26, 0.02) 0%, transparent 50%)
+            radial-gradient(ellipse 80% 60% at 50% 100%, rgba(232,101,26,0.03) 0%, transparent 60%),
+            radial-gradient(ellipse 50% 40% at 0% 50%, rgba(232,101,26,0.02) 0%, transparent 50%),
+            radial-gradient(ellipse 50% 40% at 100% 30%, rgba(232,101,26,0.02) 0%, transparent 50%)
           `,
         }}
       />
 
-      {/* Diagonal line pattern */}
       <div
-        className="absolute inset-0 pointer-events-none"
         style={{
-          opacity: 0.012,
-          backgroundImage: `
-            repeating-linear-gradient(
-              -45deg,
-              transparent,
-              transparent 40px,
-              rgba(255,255,255,0.15) 40px,
-              rgba(255,255,255,0.15) 41px
-            )
-          `,
-        }}
-      />
-
-      {/* Film grain overlay */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          opacity: 0.025,
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-          backgroundRepeat: "repeat",
-        }}
-      />
-
-      {/* Background Quote Mark */}
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none select-none"
-        style={{
-          fontFamily: "var(--font-display)",
-          fontSize: "400px",
-          color: "rgba(255, 255, 255, 0.02)",
-          fontWeight: 800,
-          zIndex: 0,
-        }}
-      >
-        "
-      </div>
-
-      {/* ═══════════════════════════════════════════════════════════════
-          CONTENT
-          ═══════════════════════════════════════════════════════════════ */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="relative z-10 text-center"
-        style={{
-          maxWidth: 800,
+          maxWidth: 1320,
           margin: "0 auto",
           padding: "0 clamp(20px, 4vw, 60px)",
+          position: "relative",
         }}
       >
-        {/* Label with lines */}
-        <div className="flex items-center justify-center gap-4">
-          <span
-            style={{
-              width: 40,
-              height: 1,
-              background: "rgba(232, 101, 26, 0.4)",
-            }}
-          />
-          <span
-            style={{
-              fontSize: 11,
-              fontWeight: 600,
-              letterSpacing: "2.5px",
-              textTransform: "uppercase",
-              color: "var(--orange)",
-              fontFamily: "var(--font-outfit)",
-            }}
+        {/* ── HEADER ── */}
+        <div style={{ marginBottom: "clamp(32px, 4vw, 48px)" }}>
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, ease: EASE }}
           >
-            What People Say
-          </span>
-          <span
-            style={{
-              width: 40,
-              height: 1,
-              background: "rgba(232, 101, 26, 0.4)",
-            }}
-          />
-        </div>
-
-        {/* Quote Mark */}
-        <div
-          style={{
-            fontFamily: "var(--font-display)",
-            fontSize: 72,
-            fontWeight: 800,
-            color: "rgba(232,101,26,0.15)",
-            lineHeight: 1,
-            marginTop: 24,
-            marginBottom: 8,
-          }}
-        >
-          "
-        </div>
-
-        {/* Quote Display Area */}
-        <div style={{ minHeight: 200, position: "relative" }}>
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeTestimonial.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            >
-              {/* Quote Text */}
-              <p
+            <div className="flex items-center gap-3">
+              <span
                 style={{
-                  fontFamily: "var(--font-dm-sans)",
-                  fontStyle: "italic",
-                  fontSize: "clamp(20px, 2.5vw, 28px)",
-                  fontWeight: 400,
-                  color: "rgba(255,255,255,0.85)",
-                  lineHeight: 1.6,
-                  letterSpacing: "-0.3px",
-                  margin: 0,
+                  width: 30,
+                  height: 1,
+                  background: "var(--orange)",
+                  flexShrink: 0,
+                }}
+              />
+              <span
+                style={{
+                  fontSize: 11,
+                  fontWeight: 600,
+                  letterSpacing: "3px",
+                  textTransform: "uppercase",
+                  color: "var(--orange)",
+                  fontFamily: "var(--font-outfit)",
                 }}
               >
-                {activeTestimonial.quote}
-              </p>
+                Voices from the Room
+              </span>
+            </div>
+          </motion.div>
 
-              {/* Attribution */}
-              <div style={{ marginTop: 28 }}>
-                {/* Name */}
-                <p
-                  style={{
-                    fontFamily: "var(--font-display)",
-                    fontSize: 15,
-                    fontWeight: 700,
-                    color: "white",
-                    letterSpacing: "0.2px",
-                    margin: 0,
-                  }}
-                >
-                  {activeTestimonial.name}
-                </p>
+          <div
+            className="testimonials-header-row"
+            style={{
+              display: "flex",
+              alignItems: "flex-end",
+              justifyContent: "space-between",
+              gap: 24,
+              marginTop: 14,
+            }}
+          >
+            <motion.h2
+              initial={{ opacity: 0, y: 24 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.1, ease: EASE }}
+              style={{
+                fontFamily: "var(--font-display)",
+                fontWeight: 800,
+                fontSize: "clamp(30px, 3.5vw, 48px)",
+                letterSpacing: "-2px",
+                color: "var(--white)",
+                lineHeight: 1.1,
+                margin: 0,
+              }}
+            >
+              Trusted by{" "}
+              <span style={{ color: "var(--orange)" }}>5,000+</span>{" "}
+              Executives
+            </motion.h2>
 
-                {/* Title */}
-                <p
-                  style={{
-                    fontFamily: "var(--font-outfit)",
-                    fontSize: 13,
-                    fontWeight: 400,
-                    color: "#606060",
-                    marginTop: 4,
-                  }}
-                >
-                  {activeTestimonial.title}
-                </p>
-
-                {/* Series Badge */}
-                <div
-                  className="inline-flex items-center justify-center"
-                  style={{
-                    marginTop: 10,
-                    padding: "4px 12px",
-                    borderRadius: 50,
-                    background: `${activeTestimonial.badgeColor}14`,
-                    border: `1px solid ${activeTestimonial.badgeColor}26`,
-                  }}
-                >
-                  <span
-                    style={{
-                      fontFamily: "var(--font-outfit)",
-                      fontSize: 10,
-                      fontWeight: 600,
-                      textTransform: "uppercase",
-                      letterSpacing: "1px",
-                      color: activeTestimonial.badgeColor,
-                    }}
-                  >
-                    {activeTestimonial.badge}
-                  </span>
-                </div>
-              </div>
-            </motion.div>
-          </AnimatePresence>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : {}}
+              transition={{ duration: 0.7, delay: 0.3, ease: EASE }}
+              className="testimonials-stat-line"
+              style={{
+                fontFamily: "var(--font-outfit)",
+                fontWeight: 300,
+                fontSize: 14,
+                color: "#505050",
+                margin: 0,
+                whiteSpace: "nowrap",
+                flexShrink: 0,
+              }}
+            >
+              Sponsors, delegates & speakers across 5 GCC markets
+            </motion.p>
+          </div>
         </div>
 
-        {/* Navigation Dots */}
+        {/* ── VIDEO SHORTS GRID ── */}
         <div
-          className="flex items-center justify-center gap-2.5"
-          style={{ marginTop: 32 }}
+          className="testimonials-video-grid"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(4, 1fr)",
+            gap: "clamp(12px, 1.5vw, 18px)",
+          }}
         >
-          {testimonials.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => handleDotClick(index)}
-              className="transition-all"
-              style={{
-                width: 8,
-                height: 8,
-                borderRadius: "50%",
-                background:
-                  index === activeIndex ? "#E8651A" : "rgba(255,255,255,0.15)",
-                boxShadow:
-                  index === activeIndex
-                    ? "0 0 8px rgba(232, 101, 26, 0.3)"
-                    : "none",
-                border: "none",
-                cursor: "pointer",
-                padding: 0,
-                transitionDuration: "0.4s",
-              }}
-              aria-label={`Go to testimonial ${index + 1}`}
+          {videoShorts.map((v, i) => (
+            <VideoCard
+              key={v.id}
+              videoId={v.id}
+              label={v.label}
+              index={i}
+              isInView={isInView}
             />
           ))}
         </div>
-      </motion.div>
+      </div>
+
+      {/* Responsive */}
+      <style jsx global>{`
+        @media (max-width: 960px) {
+          .testimonials-video-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+        }
+        @media (max-width: 600px) {
+          .testimonials-video-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+          .testimonials-header-row {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+          }
+          .testimonials-stat-line {
+            white-space: normal !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

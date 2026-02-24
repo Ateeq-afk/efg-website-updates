@@ -96,6 +96,7 @@ const departments: { label: string; members: Member[] }[] = [
       { name: "Stephen D'Souza",      initials: "SD" },
       { name: "Jacqueline Fernandez", initials: "JF", photo: "https://efg-final.s3.eu-north-1.amazonaws.com/about-us-photos/Jacqueline-Fernandez.jpg" },
       { name: "Nadim Pirani",         initials: "NP", photo: "https://efg-final.s3.eu-north-1.amazonaws.com/about-us-photos/Nadim-Pirani.jpg" },
+      { name: "Neha Gokarn",          initials: "NG", photo: "https://efg-final.s3.eu-north-1.amazonaws.com/about-us-photos/Neha-Gokarn.jpg" },
     ],
   },
   {
@@ -105,7 +106,7 @@ const departments: { label: string; members: Member[] }[] = [
     ],
   },
   {
-    label: "Producers",
+    label: "Producer",
     members: [
       { name: "Sanjana Venugopal", initials: "SV", photo: "https://efg-final.s3.eu-north-1.amazonaws.com/about-us-photos/Sanjana-Venugopal.jpg" },
       { name: "Harini",            initials: "H", photo: "https://efg-final.s3.eu-north-1.amazonaws.com/about-us-photos/Harini.jpg" },
@@ -678,104 +679,20 @@ function AboutStory() {
             minHeight: 440,
             borderRadius: 24,
             border: "1px solid var(--gray-border-hover)",
-            background: "linear-gradient(160deg, rgba(232,101,26,0.07) 0%, rgba(18,18,18,0.6) 50%, rgba(10,10,10,0.97) 100%)",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: 20,
+            background: "var(--black-card)",
             position: "relative",
             overflow: "hidden",
           }}
         >
-          {/* Ghost "TEAM" watermark */}
-          <span
+          <img
+            src="https://efg-final.s3.eu-north-1.amazonaws.com/about-us-photos/team-photo.png"
+            alt="Events First Group Team"
             style={{
-              position: "absolute",
-              fontFamily: "var(--font-display)",
-              fontWeight: 800,
-              fontSize: "clamp(80px, 14vw, 160px)",
-              letterSpacing: "-6px",
-              color: "rgba(255,255,255,0.022)",
-              userSelect: "none",
-              pointerEvents: "none",
-            }}
-          >
-            TEAM
-          </span>
-
-          {/* Icon */}
-          <div
-            style={{
-              width: 60,
-              height: 60,
-              borderRadius: "50%",
-              border: "1px solid rgba(232,101,26,0.2)",
-              background: "rgba(232,101,26,0.07)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              position: "relative",
-              zIndex: 1,
-            }}
-          >
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#E8651A"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              style={{ opacity: 0.7 }}
-            >
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-              <circle cx="9" cy="7" r="4" />
-              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-            </svg>
-          </div>
-
-          {/* Label */}
-          <div style={{ textAlign: "center", position: "relative", zIndex: 1 }}>
-            <p
-              style={{
-                fontFamily: "var(--font-display)",
-                fontWeight: 700,
-                fontSize: 16,
-                color: "rgba(255,255,255,0.35)",
-                margin: 0,
-                letterSpacing: "-0.3px",
-              }}
-            >
-              Team Photo
-            </p>
-            <p
-              style={{
-                fontFamily: "var(--font-outfit)",
-                fontSize: 10,
-                fontWeight: 500,
-                letterSpacing: "2.5px",
-                textTransform: "uppercase",
-                color: "rgba(255,255,255,0.18)",
-                margin: "8px 0 0",
-              }}
-            >
-              Coming Soon
-            </p>
-          </div>
-
-          {/* Subtle corner accent */}
-          <div
-            style={{
-              position: "absolute",
-              bottom: 0,
-              right: 0,
-              width: 120,
-              height: 120,
-              background: "radial-gradient(ellipse at bottom right, rgba(232,101,26,0.06) 0%, transparent 70%)",
-              pointerEvents: "none",
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "center top",
+              display: "block",
             }}
           />
         </motion.div>

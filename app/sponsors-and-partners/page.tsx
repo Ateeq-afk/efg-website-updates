@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useMemo, useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { supabase } from "@/lib/supabase";
 import type { SponsorWithEvents } from "@/lib/supabase";
@@ -260,6 +260,460 @@ function SponsorCard({
         </div>
       </Link>
     </motion.div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SPONSOR INQUIRY FORM
+// ─────────────────────────────────────────────────────────────────────────────
+
+const SPONSOR_FORM = {
+  heading: "Partner with\nEFG Events",
+  description:
+    "Put your brand in the room with the region\u2019s top decision-makers. Sponsorship packages are designed for maximum visibility and qualified lead generation.",
+  perks: [
+    { icon: "layers", text: "Boardroom hosting & keynote slots" },
+    { icon: "target", text: "Qualified lead generation" },
+    { icon: "eye", text: "Premium brand visibility across GCC" },
+  ],
+  trust: "Trusted by 80+ sponsors across 5 GCC markets",
+  fields: [
+    { name: "name", label: "Full Name", type: "text", placeholder: "Your full name" },
+    { name: "email", label: "Work Email", type: "email", placeholder: "you@company.com" },
+    { name: "company", label: "Company", type: "text", placeholder: "Company name" },
+    { name: "title", label: "Job Title", type: "text", placeholder: "Your role" },
+    { name: "interest", label: "Event Interest", type: "select", placeholder: "Select an event series", options: ["Cyber First", "OT Security First", "Data & AI First", "Opex First", "Multiple Events"] },
+    { name: "message", label: "Message (Optional)", type: "textarea", placeholder: "Tell us about your sponsorship goals..." },
+  ],
+  cta: "Request Sponsorship Info",
+};
+
+function SponsorPerkIcon({ type }: { type: string }) {
+  const s: React.CSSProperties = { opacity: 0.7 };
+  const props = { width: 16, height: 16, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 1.5, strokeLinecap: "round" as const, strokeLinejoin: "round" as const, style: s };
+  if (type === "layers") return <svg {...props}><path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5" /><path d="M2 12l10 5 10-5" /></svg>;
+  if (type === "target") return <svg {...props}><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" /></svg>;
+  return <svg {...props}><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" /></svg>;
+}
+
+function SponsorInquiryForm() {
+  const ref = useRef<HTMLElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const [submitted, setSubmitted] = useState(false);
+  const [formData, setFormData] = useState<Record<string, string>>({});
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitted(true);
+  };
+
+  const handleChange = (name: string, value: string) => {
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const resetForm = () => {
+    setSubmitted(false);
+    setFormData({});
+  };
+
+  const inputStyle: React.CSSProperties = {
+    width: "100%",
+    padding: "11px 14px",
+    borderRadius: 10,
+    border: "1px solid rgba(255,255,255,0.08)",
+    background: "rgba(255,255,255,0.04)",
+    color: "white",
+    fontFamily: "var(--font-outfit)",
+    fontSize: 13.5,
+    fontWeight: 400,
+    outline: "none",
+    transition: "border-color 0.3s ease",
+  };
+
+  const labelStyle: React.CSSProperties = {
+    fontFamily: "var(--font-outfit)",
+    fontSize: 11,
+    fontWeight: 500,
+    color: "rgba(255,255,255,0.4)",
+    marginBottom: 5,
+    display: "block",
+    letterSpacing: "0.3px",
+  };
+
+  const tab = SPONSOR_FORM;
+
+  return (
+    <section
+      id="become-a-sponsor"
+      ref={ref}
+      style={{
+        background: "#0A0A0A",
+        padding: "clamp(48px, 6vw, 72px) 0",
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: `
+            radial-gradient(ellipse 700px 500px at 20% 40%, rgba(232,101,26,0.04) 0%, transparent 70%),
+            radial-gradient(ellipse 500px 400px at 80% 60%, rgba(232,101,26,0.03) 0%, transparent 70%)
+          `,
+        }}
+      />
+
+      <div style={{ maxWidth: MAX_W, margin: "0 auto", padding: PAD, position: "relative" }}>
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, ease: EASE }}
+          style={{ marginBottom: 48 }}
+        >
+          <SectionLabel text="Become a Sponsor" />
+        </motion.div>
+
+        <div
+          className="sponsor-inquiry-split"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1.25fr",
+            gap: "clamp(32px, 4vw, 64px)",
+            alignItems: "start",
+          }}
+        >
+          {/* LEFT: Editorial */}
+          <motion.div
+            initial={{ opacity: 0, x: -16 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.1, ease: EASE }}
+            style={{ paddingTop: 8 }}
+          >
+            <h2
+              style={{
+                fontFamily: "var(--font-display)",
+                fontWeight: 800,
+                fontSize: "clamp(32px, 3.5vw, 50px)",
+                letterSpacing: "-2px",
+                color: "#FFFFFF",
+                lineHeight: 1.08,
+                margin: 0,
+                whiteSpace: "pre-line",
+              }}
+            >
+              {tab.heading}
+            </h2>
+            <p
+              style={{
+                fontFamily: "var(--font-outfit)",
+                fontWeight: 300,
+                fontSize: "clamp(14px, 1.2vw, 16px)",
+                color: "rgba(255,255,255,0.45)",
+                lineHeight: 1.7,
+                margin: "20px 0 0",
+                maxWidth: 440,
+              }}
+            >
+              {tab.description}
+            </p>
+
+            <div style={{ marginTop: 36, display: "flex", flexDirection: "column", gap: 18 }}>
+              {tab.perks.map((perk) => (
+                <div key={perk.text} className="flex items-center gap-3">
+                  <div
+                    style={{
+                      width: 36,
+                      height: 36,
+                      borderRadius: 10,
+                      background: "rgba(232,101,26,0.06)",
+                      border: "1px solid rgba(232,101,26,0.1)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: "#E8651A",
+                      flexShrink: 0,
+                    }}
+                  >
+                    <SponsorPerkIcon type={perk.icon} />
+                  </div>
+                  <span
+                    style={{
+                      fontFamily: "var(--font-outfit)",
+                      fontSize: 14,
+                      fontWeight: 400,
+                      color: "rgba(255,255,255,0.55)",
+                    }}
+                  >
+                    {perk.text}
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            <div
+              style={{
+                marginTop: 40,
+                paddingTop: 24,
+                borderTop: "1px solid rgba(255,255,255,0.06)",
+              }}
+            >
+              <p
+                style={{
+                  fontFamily: "var(--font-outfit)",
+                  fontSize: 12,
+                  fontWeight: 400,
+                  color: "rgba(255,255,255,0.25)",
+                  letterSpacing: "0.3px",
+                  margin: 0,
+                }}
+              >
+                {tab.trust}
+              </p>
+            </div>
+          </motion.div>
+
+          {/* RIGHT: Form card */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.15, ease: EASE }}
+            style={{
+              borderRadius: 20,
+              border: "1px solid rgba(255,255,255,0.06)",
+              background: "rgba(255,255,255,0.02)",
+              padding: "clamp(24px, 3vw, 36px)",
+              position: "relative",
+              overflow: "hidden",
+            }}
+          >
+            <div
+              className="absolute pointer-events-none"
+              style={{
+                top: -40,
+                right: -40,
+                width: 200,
+                height: 200,
+                borderRadius: "50%",
+                background: "radial-gradient(ellipse, rgba(232,101,26,0.05) 0%, transparent 70%)",
+              }}
+            />
+
+            <AnimatePresence mode="wait">
+              {submitted ? (
+                <motion.div
+                  key="success"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.4, ease: EASE }}
+                  style={{ textAlign: "center", padding: "40px 0" }}
+                >
+                  <div
+                    style={{
+                      width: 52,
+                      height: 52,
+                      borderRadius: "50%",
+                      background: "rgba(34,197,94,0.12)",
+                      border: "1px solid rgba(34,197,94,0.25)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      margin: "0 auto 20px",
+                    }}
+                  >
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="2.5">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  </div>
+                  <h3
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      fontWeight: 800,
+                      fontSize: "clamp(20px, 2.5vw, 26px)",
+                      letterSpacing: "-0.5px",
+                      color: "white",
+                      margin: "0 0 8px",
+                    }}
+                  >
+                    Inquiry Submitted
+                  </h3>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-outfit)",
+                      fontWeight: 300,
+                      fontSize: 14,
+                      color: "#A0A0A0",
+                      margin: "0 0 20px",
+                      lineHeight: 1.6,
+                    }}
+                  >
+                    Our team will review your submission and get back
+                    to you within 2 business days.
+                  </p>
+                  <button
+                    onClick={resetForm}
+                    style={{
+                      fontFamily: "var(--font-outfit)",
+                      fontSize: 13,
+                      fontWeight: 500,
+                      color: "#E8651A",
+                      background: "none",
+                      border: "none",
+                      cursor: "pointer",
+                      padding: 0,
+                    }}
+                  >
+                    Submit another inquiry &rarr;
+                  </button>
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="form"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.3, ease: EASE }}
+                >
+                  <form onSubmit={handleSubmit}>
+                    <div
+                      className="sponsor-inquiry-form-grid"
+                      style={{
+                        display: "grid",
+                        gridTemplateColumns: "1fr 1fr",
+                        gap: 14,
+                      }}
+                    >
+                      {tab.fields.map((field) => {
+                        const isFullWidth = field.type === "textarea";
+                        return (
+                          <div
+                            key={field.name}
+                            style={{
+                              gridColumn: isFullWidth ? "1 / -1" : undefined,
+                            }}
+                          >
+                            <label style={labelStyle}>{field.label}</label>
+                            {field.type === "textarea" ? (
+                              <textarea
+                                value={formData[field.name] || ""}
+                                onChange={(e) => handleChange(field.name, e.target.value)}
+                                placeholder={field.placeholder}
+                                rows={3}
+                                style={{
+                                  ...inputStyle,
+                                  resize: "vertical",
+                                  minHeight: 72,
+                                }}
+                                onFocus={(e) => { e.currentTarget.style.borderColor = "rgba(232,101,26,0.3)"; }}
+                                onBlur={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"; }}
+                              />
+                            ) : field.type === "select" ? (
+                              <select
+                                value={formData[field.name] || ""}
+                                onChange={(e) => handleChange(field.name, e.target.value)}
+                                required
+                                style={{
+                                  ...inputStyle,
+                                  appearance: "none",
+                                  WebkitAppearance: "none",
+                                  cursor: "pointer",
+                                  color: formData[field.name] ? "white" : "rgba(255,255,255,0.3)",
+                                }}
+                              >
+                                <option value="" style={{ color: "#222", background: "#fff" }}>
+                                  {field.placeholder}
+                                </option>
+                                {field.options?.map((opt) => (
+                                  <option key={opt} value={opt} style={{ color: "#222", background: "#fff" }}>
+                                    {opt}
+                                  </option>
+                                ))}
+                              </select>
+                            ) : (
+                              <input
+                                type={field.type}
+                                value={formData[field.name] || ""}
+                                onChange={(e) => handleChange(field.name, e.target.value)}
+                                placeholder={field.placeholder}
+                                required
+                                style={inputStyle}
+                                onFocus={(e) => { e.currentTarget.style.borderColor = "rgba(232,101,26,0.3)"; }}
+                                onBlur={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"; }}
+                              />
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+
+                    <button
+                      type="submit"
+                      style={{
+                        width: "100%",
+                        marginTop: 20,
+                        padding: "13px 28px",
+                        borderRadius: 10,
+                        background: "#E8651A",
+                        color: "white",
+                        fontFamily: "var(--font-outfit)",
+                        fontSize: 14,
+                        fontWeight: 600,
+                        border: "none",
+                        cursor: "pointer",
+                        transition: "all 0.3s ease",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        gap: 8,
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.background = "#FF7A2E";
+                        e.currentTarget.style.transform = "translateY(-2px)";
+                        e.currentTarget.style.boxShadow = "0 12px 40px rgba(232,101,26,0.25)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.background = "#E8651A";
+                        e.currentTarget.style.transform = "translateY(0)";
+                        e.currentTarget.style.boxShadow = "none";
+                      }}
+                    >
+                      {tab.cta} <span>→</span>
+                    </button>
+                  </form>
+
+                  <p
+                    style={{
+                      fontFamily: "var(--font-outfit)",
+                      fontSize: 11,
+                      fontWeight: 400,
+                      color: "#3A3A3A",
+                      textAlign: "center",
+                      margin: "14px 0 0",
+                    }}
+                  >
+                    Your information is kept confidential. We&apos;ll only use
+                    it to respond to your inquiry.
+                  </p>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+        </div>
+      </div>
+
+      <style jsx global>{`
+        @media (max-width: 860px) {
+          .sponsor-inquiry-split {
+            grid-template-columns: 1fr !important;
+          }
+        }
+        @media (max-width: 500px) {
+          .sponsor-inquiry-form-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
+    </section>
   );
 }
 
@@ -636,131 +1090,13 @@ export default function SponsorsPage() {
         </div>
       </section>
 
-      {/* ── BECOME A SPONSOR CTA ── */}
-      <section
-        style={{
-          background: "#111111",
-          position: "relative",
-          overflow: "hidden",
-          padding: "clamp(48px, 6vw, 72px) 0",
-        }}
-      >
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(232,101,26,0.04) 0%, transparent 60%)",
-          }}
-        />
-        <div
-          style={{
-            maxWidth: 640,
-            margin: "0 auto",
-            padding: PAD,
-            position: "relative",
-            zIndex: 10,
-            textAlign: "center",
-          }}
-        >
-          <h2
-            style={{
-              fontFamily: "var(--font-display)",
-              fontWeight: 800,
-              fontSize: "clamp(24px, 3vw, 36px)",
-              letterSpacing: "-1px",
-              color: "#FFFFFF",
-              lineHeight: 1.1,
-              margin: "0 0 14px",
-            }}
-          >
-            Partner With Us
-          </h2>
-          <p
-            style={{
-              fontFamily: "var(--font-outfit)",
-              fontWeight: 300,
-              fontSize: "clamp(14px, 1.2vw, 16px)",
-              color: "#A0A0A0",
-              lineHeight: 1.65,
-              margin: "0 0 32px",
-            }}
-          >
-            Position your brand alongside the GCC&apos;s most influential
-            technology decision-makers. Sponsorship opportunities are available
-            across all EFG event series.
-          </p>
-          <div className="flex justify-center gap-3 flex-wrap">
-            <a
-              href="mailto:partnerships@eventsfirstgroup.com?subject=Sponsorship%20Inquiry"
-              className="sponsor-cta-btn"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                padding: "14px 32px",
-                borderRadius: 50,
-                background: "#E8651A",
-                color: "#FFFFFF",
-                fontFamily: "var(--font-outfit)",
-                fontSize: 14,
-                fontWeight: 600,
-                textDecoration: "none",
-                transition: "all 0.3s ease",
-              }}
-            >
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
-                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
-              </svg>
-              Become a Sponsor
-            </a>
-            <Link
-              href="/events"
-              className="sponsor-events-link"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                padding: "14px 32px",
-                borderRadius: 50,
-                background: "transparent",
-                border: "1px solid rgba(255,255,255,0.1)",
-                color: "#A0A0A0",
-                fontFamily: "var(--font-outfit)",
-                fontSize: 14,
-                fontWeight: 500,
-                textDecoration: "none",
-                transition: "all 0.3s ease",
-              }}
-            >
-              View Upcoming Events
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* ── SPONSOR INQUIRY FORM ── */}
+      <SponsorInquiryForm />
 
       <Footer />
 
       {/* ── STYLES ── */}
       <style jsx global>{`
-        .sponsor-cta-btn:hover {
-          background: #ff7a2e !important;
-          transform: translateY(-2px);
-          box-shadow: 0 8px 32px rgba(232, 101, 26, 0.25);
-        }
-        .sponsor-events-link:hover {
-          border-color: rgba(232, 101, 26, 0.3) !important;
-          color: #ffffff !important;
-        }
         @keyframes skeletonPulse {
           0%,
           100% {
