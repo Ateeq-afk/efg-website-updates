@@ -8,9 +8,9 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 
 // Main video
 const mainVideo = {
-  id: "XHOmBV4js_E",
+  id: "gR-IUI7yJLg",
   title: "Cyber First Series Highlights",
-  thumbnail: "https://img.youtube.com/vi/XHOmBV4js_E/maxresdefault.jpg",
+  thumbnail: "https://img.youtube.com/vi/gR-IUI7yJLg/maxresdefault.jpg",
 };
 
 export default function VideoHighlight() {

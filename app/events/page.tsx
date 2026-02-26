@@ -58,14 +58,14 @@ const allEvents = [
   {
     id: "data-first-kuwait",
     category: "data-ai-first",
-    title: "Data First Kuwait",
+    title: "Data & AI First Kuwait",
     tagline: "Intelligence at Scale",
     description:
       "Data strategy, AI, and machine learning — for the leaders building the intelligent enterprise in Kuwait.",
-    color: "#11A385",
+    color: "#0F735E",
     image:
       "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80",
-    href: "/events/data-ai-first",
+    href: "/events/data-ai-first/kuwait-may-2026",
     date: "2026-05-18",
     nextDate: "18 May 2026",
     nextCity: "Kuwait City",
@@ -100,7 +100,7 @@ const allEvents = [
     tagline: "Intelligence at Scale",
     description:
       "AI governance, data platforms, and enterprise intelligence — built for Qatar's digital vision.",
-    color: "#11A385",
+    color: "#0F735E",
     image:
       "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80",
     href: "/events/data-ai-first",
@@ -1308,7 +1308,7 @@ const INTEREST_FILTERS = [
   { label: "All", value: "all" },
   { label: "Cybersecurity", value: "cyber-first", color: "#01BBF5" },
   { label: "OT Security", value: "ot-security-first", color: "#D34B9A" },
-  { label: "Data & AI", value: "data-ai-first", color: "#11A385" },
+  { label: "Data & AI", value: "data-ai-first", color: "#0F735E" },
   { label: "Opex", value: "opex-first", color: "#7C3AED" },
 ] as const;
 
@@ -2549,7 +2549,7 @@ const flagshipEvents = [
   {
     id: "digital-first-qatar",
     series: "Data & AI First",
-    seriesColor: "#11A385",
+    seriesColor: "#0F735E",
     title: "Digital First Qatar",
     edition: "1ST EDITION",
     date: "February 20, 2024",
@@ -2904,7 +2904,7 @@ function PastEvents() {
                   { label: "CyberFirst UAE — Keynote Stage", color: "#01BBF5" },
                   { label: "OT Security MENA — Awards Ceremony", color: "#D34B9A" },
                   { label: "OPEX First KSA — Panel Discussion", color: "#7C3AED" },
-                  { label: "Digital First Qatar — Networking", color: "#11A385" },
+                  { label: "Digital First Qatar — Networking", color: "#0F735E" },
                   { label: "Executive Boardroom — In Session", color: "#C9935A" },
                   { label: "Sponsor Exhibition Hall", color: "#E8651A" },
                 ].map((item) => (

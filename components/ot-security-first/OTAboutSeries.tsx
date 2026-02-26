@@ -4,9 +4,9 @@ import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 
 const OT_CRIMSON = "#D34B9A";
-const OT_FIREBRICK = "#E86BB8";
+const EASE = [0.16, 1, 0.3, 1] as const;
 
-// 10 themes from the spec
+// 10 themes
 const themes = [
   {
     id: 1,
@@ -79,7 +79,7 @@ export default function OTAboutSeries() {
       ref={sectionRef}
       style={{
         background: "#0A0A0A",
-        padding: "clamp(80px, 10vw, 130px) 0",
+        padding: "clamp(48px, 6vw, 80px) 0",
       }}
     >
       <div
@@ -89,132 +89,138 @@ export default function OTAboutSeries() {
           padding: "0 clamp(20px, 4vw, 60px)",
         }}
       >
+        {/* Header — Centered */}
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 25 }}
+          transition={{ duration: 0.7, ease: EASE }}
+          style={{ textAlign: "center", marginBottom: 48 }}
+        >
+          {/* Label */}
+          <div className="flex items-center justify-center gap-3">
+            <span style={{ width: 30, height: 1, background: OT_CRIMSON }} />
+            <span
+              style={{
+                fontFamily: "var(--font-outfit)",
+                fontSize: 11,
+                fontWeight: 600,
+                letterSpacing: "2.5px",
+                textTransform: "uppercase",
+                color: OT_CRIMSON,
+              }}
+            >
+              About OT Security First
+            </span>
+            <span style={{ width: 30, height: 1, background: OT_CRIMSON }} />
+          </div>
+
+          {/* Title */}
+          <h2
+            style={{
+              fontFamily: "var(--font-display)",
+              fontWeight: 800,
+              fontSize: "clamp(30px, 3.5vw, 48px)",
+              letterSpacing: "-1.5px",
+              color: "var(--white)",
+              lineHeight: 1.1,
+              margin: "20px 0 0",
+            }}
+          >
+            Where IT Meets the Physical World
+          </h2>
+
+          {/* Description */}
+          <p
+            style={{
+              fontFamily: "var(--font-outfit)",
+              fontSize: 16,
+              fontWeight: 300,
+              lineHeight: 1.8,
+              color: "#808080",
+              marginTop: 20,
+              maxWidth: 680,
+              marginLeft: "auto",
+              marginRight: "auto",
+            }}
+          >
+            The only platform in the MENA region dedicated exclusively to
+            operational technology security — integrating cutting-edge
+            technologies, fostering regional expertise, and driving actionable
+            strategies to protect ICS, SCADA, and Industrial IoT environments.
+          </p>
+
+          <p
+            style={{
+              fontFamily: "var(--font-outfit)",
+              fontSize: 15,
+              fontWeight: 300,
+              lineHeight: 1.7,
+              color: "#606060",
+              marginTop: 12,
+              maxWidth: 580,
+              marginLeft: "auto",
+              marginRight: "auto",
+            }}
+          >
+            This isn&rsquo;t cybersecurity in the abstract. This is about protecting
+            the systems that keep the lights on, the oil flowing, and the water
+            clean.
+          </p>
+        </motion.div>
+
+        {/* Themes label */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
+          transition={{ duration: 0.5, delay: 0.15, ease: EASE }}
+          style={{ textAlign: "center", marginBottom: 24 }}
+        >
+          <span
+            style={{
+              fontFamily: "var(--font-outfit)",
+              fontSize: 10,
+              fontWeight: 600,
+              letterSpacing: "3px",
+              textTransform: "uppercase",
+              color: "#404040",
+            }}
+          >
+            10 Key Themes
+          </span>
+        </motion.div>
+
+        {/* Themes Grid — 2 columns */}
         <div
-          className="about-layout"
+          className="about-themes-grid"
           style={{
             display: "grid",
             gridTemplateColumns: "1fr 1fr",
-            gap: 60,
+            gap: 12,
           }}
         >
-          {/* LEFT - Sticky on desktop */}
-          <motion.div
-            initial={{ opacity: 0, y: 25 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 25 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="about-left-sticky"
-            style={{
-              position: "sticky",
-              top: 140,
-              alignSelf: "start",
-            }}
-          >
-            {/* Label */}
-            <div className="flex items-center gap-3">
-              <span style={{ width: 30, height: 1, background: OT_CRIMSON }} />
-              <span
-                style={{
-                  fontFamily: "var(--font-outfit)",
-                  fontSize: 11,
-                  fontWeight: 600,
-                  letterSpacing: "2.5px",
-                  textTransform: "uppercase",
-                  color: OT_CRIMSON,
-                }}
-              >
-                About OT Security First
-              </span>
-            </div>
-
-            {/* Title */}
-            <h2
-              style={{
-                fontFamily: "var(--font-display)",
-                fontWeight: 800,
-                fontSize: "clamp(30px, 3.5vw, 44px)",
-                letterSpacing: "-1.5px",
-                color: "var(--white)",
-                lineHeight: 1.1,
-                margin: "20px 0 0",
+          {themes.map((theme, index) => (
+            <motion.div
+              key={theme.id}
+              initial={{ opacity: 0, y: 15 }}
+              animate={
+                isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }
+              }
+              transition={{
+                duration: 0.5,
+                delay: 0.2 + index * 0.05,
+                ease: EASE,
               }}
             >
-              Where IT Meets the Physical World
-            </h2>
-
-            {/* Paragraphs */}
-            <p
-              style={{
-                fontFamily: "var(--font-outfit)",
-                fontSize: 16.5,
-                fontWeight: 300,
-                lineHeight: 1.8,
-                color: "#808080",
-                marginTop: 24,
-              }}
-            >
-              In an era of rapid digital transformation, safeguarding critical
-              infrastructure across energy and utilities is paramount to
-              economic stability and national security. OT Security First is the
-              only platform in the MENA region dedicated exclusively to
-              operational technology security — integrating cutting-edge
-              technologies, fostering regional expertise, and driving actionable
-              strategies to protect ICS, SCADA, and Industrial IoT environments.
-            </p>
-
-            <p
-              style={{
-                fontFamily: "var(--font-outfit)",
-                fontSize: 16.5,
-                fontWeight: 300,
-                lineHeight: 1.8,
-                color: "#606060",
-                marginTop: 16,
-              }}
-            >
-              This isn't cybersecurity in the abstract. This is about protecting
-              the systems that keep the lights on, the oil flowing, and the
-              water clean. When these systems fail, the consequences aren't
-              digital — they're physical, immediate, and potentially
-              catastrophic.
-            </p>
-          </motion.div>
-
-          {/* RIGHT - Themes */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <div className="flex flex-col gap-3">
-              {themes.map((theme, index) => (
-                <motion.div
-                  key={theme.id}
-                  initial={{ opacity: 0, x: 15 }}
-                  animate={
-                    isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 15 }
-                  }
-                  transition={{
-                    duration: 0.5,
-                    delay: 0.3 + index * 0.06,
-                    ease: [0.16, 1, 0.3, 1],
-                  }}
-                >
-                  <ThemeBlock theme={theme} />
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+              <ThemeCard theme={theme} index={index} />
+            </motion.div>
+          ))}
         </div>
       </div>
 
       <style jsx global>{`
-        @media (max-width: 900px) {
-          .about-layout {
+        @media (max-width: 768px) {
+          .about-themes-grid {
             grid-template-columns: 1fr !important;
-            gap: 40px !important;
-          }
-          .about-left-sticky {
-            position: static !important;
           }
         }
       `}</style>
@@ -223,47 +229,84 @@ export default function OTAboutSeries() {
 }
 
 /**
- * ThemeBlock — Individual theme with left border
+ * ThemeCard — Individual theme card with left-edge crimson bar
  */
-function ThemeBlock({ theme }: { theme: (typeof themes)[0] }) {
+function ThemeCard({
+  theme,
+  index,
+}: {
+  theme: (typeof themes)[0];
+  index: number;
+}) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
     <div
-      className="transition-all"
+      className="relative transition-all"
       style={{
-        paddingLeft: 20,
-        borderLeft: `2px solid rgba(139, 0, 0, ${isHovered ? 0.5 : 0.1})`,
+        background: "#141414",
+        border: `1px solid ${isHovered ? `${OT_CRIMSON}20` : "rgba(255, 255, 255, 0.04)"}`,
+        borderRadius: 8,
+        padding: "20px 24px",
         transitionDuration: "0.4s",
         transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <h3
+      {/* Left edge bar */}
+      <div
+        className="absolute left-0 top-3 bottom-3 transition-all"
         style={{
-          fontFamily: "var(--font-display)",
-          fontSize: 15,
-          fontWeight: 700,
-          color: isHovered ? "var(--white)" : "#d0d0d0",
-          margin: 0,
-          transition: "color 0.3s",
+          width: 3,
+          background: OT_CRIMSON,
+          opacity: isHovered ? 1 : 0,
+          borderRadius: 2,
+          transitionDuration: "0.3s",
         }}
-      >
-        {theme.title}
-      </h3>
-      <p
-        style={{
-          fontFamily: "var(--font-outfit)",
-          fontSize: 13.5,
-          fontWeight: 300,
-          lineHeight: 1.6,
-          color: "#606060",
-          marginTop: 6,
-        }}
-      >
-        {theme.description}
-      </p>
+      />
+
+      {/* Number + Title row */}
+      <div className="flex items-start gap-3">
+        <span
+          style={{
+            fontFamily: "var(--font-display)",
+            fontSize: 12,
+            fontWeight: 800,
+            color: isHovered ? OT_CRIMSON : "#353535",
+            minWidth: 20,
+            transition: "color 0.3s",
+          }}
+        >
+          {String(index + 1).padStart(2, "0")}
+        </span>
+        <div>
+          <h3
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: 15,
+              fontWeight: 700,
+              color: isHovered ? "var(--white)" : "#d0d0d0",
+              margin: 0,
+              transition: "color 0.3s",
+            }}
+          >
+            {theme.title}
+          </h3>
+          <p
+            style={{
+              fontFamily: "var(--font-outfit)",
+              fontSize: 13,
+              fontWeight: 300,
+              lineHeight: 1.6,
+              color: "#606060",
+              marginTop: 6,
+            }}
+          >
+            {theme.description}
+          </p>
+        </div>
+      </div>
     </div>
   );
 }

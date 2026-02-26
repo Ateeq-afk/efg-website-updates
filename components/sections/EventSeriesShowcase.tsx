@@ -12,7 +12,9 @@ const eventSeries = [
     tagline: "Defending the Digital Frontier",
     description:
       "Where the region's CISOs, security architects, and cyber leaders gather to shape the future of enterprise defense.",
-    stats: "5 Editions · Kuwait, Qatar, KSA, Oman",
+    editions: 6,
+    nations: 4,
+    stats: "Kuwait · Qatar · KSA · UAE",
     color: "#01BBF5",
     image:
       "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80",
@@ -24,7 +26,9 @@ const eventSeries = [
     tagline: "Securing Critical Infrastructure",
     description:
       "Bridging IT and OT security for the industries that keep the world running — energy, manufacturing, utilities.",
-    stats: "3 Editions · Saudi Arabia, Oman",
+    editions: 3,
+    nations: 2,
+    stats: "Saudi Arabia · Oman",
     color: "#D34B9A",
     image:
       "https://images.unsplash.com/photo-1513828583688-c52646db42da?w=800&q=80",
@@ -36,7 +40,9 @@ const eventSeries = [
     tagline: "Engineering Operational Excellence",
     description:
       "Process transformation, automation, and the frameworks driving efficiency at scale across the modern enterprise.",
-    stats: "3 Editions · Dubai, Doha, Riyadh",
+    editions: 3,
+    nations: 3,
+    stats: "Dubai · Doha · Riyadh",
     color: "#7C3AED",
     image:
       "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&q=80",
@@ -48,8 +54,10 @@ const eventSeries = [
     tagline: "Intelligence at Scale",
     description:
       "Data strategy, artificial intelligence, and machine learning — for the leaders building the intelligent, autonomous enterprise.",
-    stats: "2 Editions · Kuwait, Qatar",
-    color: "#11A385",
+    editions: 2,
+    nations: 2,
+    stats: "Kuwait · Qatar",
+    color: "#0F735E",
     image:
       "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80",
     href: "/events/data-ai-first",
@@ -296,7 +304,7 @@ function PortalCard({
       style={{
         borderRadius: 22,
         border: "1px solid rgba(255, 255, 255, 0.05)",
-        aspectRatio: "3 / 4",
+        aspectRatio: "3 / 4.5",
       }}
     >
       {/* LAYER 1 — THE PHOTOGRAPH */}
@@ -312,7 +320,7 @@ function PortalCard({
           alt=""
           className="w-full h-full object-cover transition-all duration-800 group-hover:scale-108"
           style={{
-            filter: "brightness(0.15) saturate(0.6)",
+            filter: "brightness(0.30) saturate(0.8)",
             transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
           }}
         />
@@ -320,9 +328,9 @@ function PortalCard({
 
       {/* LAYER 2 — THE COLOR WASH */}
       <div
-        className="absolute inset-0 transition-opacity duration-800 opacity-100 group-hover:opacity-100"
+        className="absolute inset-0 transition-all duration-800"
         style={{
-          background: `linear-gradient(160deg, ${accentColor}08 0%, transparent 50%)`,
+          background: `linear-gradient(160deg, ${accentColor}30 0%, ${accentColor}10 40%, transparent 70%)`,
           transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
         }}
       />
@@ -452,30 +460,103 @@ function PortalCard({
             {series.stats}
           </span>
         </div>
-      </div>
 
-      {/* LAYER 6 — THE TOP CORNER ARROW */}
-      <div
-        className="arrow-container absolute top-6 right-6 z-10 flex items-center justify-center transition-all duration-400"
-        style={{
-          width: 36,
-          height: 36,
-          borderRadius: "50%",
-          background: "rgba(255, 255, 255, 0.04)",
-          border: "1px solid rgba(255, 255, 255, 0.06)",
-        }}
-      >
-        <span
-          className="transition-all duration-400 group-hover:-rotate-45 group-hover:opacity-100"
+        {/* Explore Series — Reveals on hover */}
+        <div
+          className="overflow-hidden transition-all duration-600 max-h-0 opacity-0 group-hover:max-h-10 group-hover:opacity-100"
           style={{
-            fontSize: 12,
-            color: "white",
-            opacity: 0.4,
-            display: "inline-block",
+            transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
+            marginTop: 12,
           }}
         >
-          →
-        </span>
+          <span
+            className="inline-flex items-center gap-1"
+            style={{
+              fontFamily: "var(--font-outfit)",
+              fontSize: 12,
+              fontWeight: 600,
+              color: accentColor,
+            }}
+          >
+            Explore Series <span>→</span>
+          </span>
+        </div>
+      </div>
+
+      {/* LAYER 6 — TOP BADGES & ARROW */}
+      <div
+        className="absolute top-0 left-0 right-0 z-10 flex items-center justify-between"
+        style={{ padding: "18px 20px" }}
+      >
+        {/* Edition & Nation badges */}
+        <div className="flex items-center gap-2">
+          <span
+            className="flex items-center gap-1.5"
+            style={{
+              background: "rgba(0, 0, 0, 0.5)",
+              backdropFilter: "blur(8px)",
+              borderRadius: 20,
+              padding: "5px 10px",
+              fontSize: 9,
+              fontWeight: 700,
+              letterSpacing: "1.2px",
+              textTransform: "uppercase",
+              color: "var(--white)",
+              fontFamily: "var(--font-outfit)",
+            }}
+          >
+            <span
+              style={{
+                width: 6,
+                height: 6,
+                borderRadius: "50%",
+                background: accentColor,
+                flexShrink: 0,
+              }}
+            />
+            {series.editions} EDITIONS
+          </span>
+          <span
+            style={{
+              background: "rgba(0, 0, 0, 0.5)",
+              backdropFilter: "blur(8px)",
+              borderRadius: 20,
+              padding: "5px 10px",
+              fontSize: 9,
+              fontWeight: 700,
+              letterSpacing: "1.2px",
+              textTransform: "uppercase",
+              color: accentColor,
+              fontFamily: "var(--font-outfit)",
+            }}
+          >
+            {series.nations} NATIONS
+          </span>
+        </div>
+
+        {/* Arrow */}
+        <div
+          className="arrow-container flex items-center justify-center transition-all duration-400"
+          style={{
+            width: 36,
+            height: 36,
+            borderRadius: "50%",
+            background: "rgba(255, 255, 255, 0.04)",
+            border: "1px solid rgba(255, 255, 255, 0.06)",
+          }}
+        >
+          <span
+            className="transition-all duration-400 group-hover:-rotate-45 group-hover:opacity-100"
+            style={{
+              fontSize: 12,
+              color: "white",
+              opacity: 0.4,
+              display: "inline-block",
+            }}
+          >
+            →
+          </span>
+        </div>
       </div>
 
       {/* Hover styles */}
@@ -486,11 +567,11 @@ function PortalCard({
           box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 40px ${accentColor}15;
         }
         .portal-card:hover img {
-          filter: brightness(0.28) saturate(0.9) !important;
+          filter: brightness(0.70) saturate(1) !important;
           transform: scale(1.12);
         }
         .portal-card:hover > div:nth-child(2) {
-          background: linear-gradient(160deg, ${accentColor}1A 0%, transparent 50%) !important;
+          background: linear-gradient(160deg, ${accentColor}50 0%, ${accentColor}20 40%, transparent 70%) !important;
         }
         .portal-card:hover > div:nth-child(4) {
           opacity: ${glowOpacity} !important;

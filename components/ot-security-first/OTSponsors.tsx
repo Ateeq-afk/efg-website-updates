@@ -84,7 +84,7 @@ export default function OTSponsors() {
       ref={sectionRef}
       style={{
         background: "var(--black)",
-        padding: "clamp(80px, 10vw, 130px) 0",
+        padding: "clamp(48px, 6vw, 80px) 0",
       }}
     >
       <div
@@ -197,42 +197,50 @@ export default function OTSponsors() {
           </motion.div>
         ))}
 
-        {/* Media Partners */}
+        {/* As Featured In — Press & Media */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.5, delay: 0.7 }}
-          style={{ marginTop: 40 }}
+          style={{
+            marginTop: 48,
+            padding: "32px 0",
+            borderTop: `1px solid ${OT_CRIMSON}10`,
+          }}
         >
-          <p
-            style={{
-              fontFamily: "var(--font-outfit)",
-              fontSize: 10,
-              fontWeight: 600,
-              letterSpacing: "3px",
-              textTransform: "uppercase",
-              color: "#353535",
-              marginBottom: 16,
-            }}
-          >
-            Media Partners
-          </p>
+          <div className="flex items-center justify-center gap-3" style={{ marginBottom: 24 }}>
+            <span style={{ width: 30, height: 1, background: `${OT_CRIMSON}40` }} />
+            <span
+              style={{
+                fontFamily: "var(--font-outfit)",
+                fontSize: 10,
+                fontWeight: 600,
+                letterSpacing: "3px",
+                textTransform: "uppercase",
+                color: "#404040",
+              }}
+            >
+              As Featured In
+            </span>
+            <span style={{ width: 30, height: 1, background: `${OT_CRIMSON}40` }} />
+          </div>
           <div
             className="media-grid"
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(4, 1fr)",
-              gap: 10,
+              gap: 12,
             }}
           >
             {mediaPartners.map((partner, index) => (
               <motion.div
                 key={partner.name}
-                initial={{ opacity: 0 }}
-                animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+                initial={{ opacity: 0, y: 8 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
                 transition={{
-                  duration: 0.3,
-                  delay: 0.8 + index * 0.03,
+                  duration: 0.4,
+                  delay: 0.8 + index * 0.05,
+                  ease: [0.16, 1, 0.3, 1],
                 }}
               >
                 <MediaPartnerCard partner={partner} />

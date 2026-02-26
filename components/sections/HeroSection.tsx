@@ -23,8 +23,8 @@ const nextEvent = {
 };
 
 // Slideshow timing
-const SLIDE_DURATION = 6000; // 6 seconds per image
-const CROSSFADE_DURATION = 1.5; // 1.5 second crossfade
+const SLIDE_DURATION = 3500; // 3.5 seconds per image
+const CROSSFADE_DURATION = 1.2; // 1.2 second crossfade
 
 export default function HeroSection() {
   const [scrollY, setScrollY] = useState(0);
@@ -65,7 +65,7 @@ export default function HeroSection() {
       ref={heroRef}
       className="relative w-full overflow-hidden"
       style={{
-        height: "92vh",
+        height: "100vh",
         background: "transparent",
       }}
     >
@@ -108,13 +108,22 @@ export default function HeroSection() {
       <div
         className="absolute inset-0 pointer-events-none z-1"
         style={{
-          background: `linear-gradient(
-            to bottom,
-            rgba(10, 10, 10, 0.8) 0%,
-            rgba(10, 10, 10, 0.45) 35%,
-            rgba(10, 10, 10, 0.5) 65%,
-            rgba(10, 10, 10, 0.97) 100%
-          )`,
+          background: `
+            linear-gradient(
+              to right,
+              rgba(10, 10, 10, 0.85) 0%,
+              rgba(10, 10, 10, 0.6) 45%,
+              rgba(10, 10, 10, 0.25) 75%,
+              rgba(10, 10, 10, 0.15) 100%
+            ),
+            linear-gradient(
+              to bottom,
+              rgba(10, 10, 10, 0.5) 0%,
+              rgba(10, 10, 10, 0.1) 35%,
+              rgba(10, 10, 10, 0.15) 65%,
+              rgba(10, 10, 10, 0.95) 100%
+            )
+          `,
         }}
       />
 
@@ -148,58 +157,30 @@ export default function HeroSection() {
           LAYER 5: HERO CONTENT — VERTICALLY CENTERED
           ═══════════════════════════════════════════════════════════════ */}
       <div
-        className="relative z-10 flex items-center justify-center px-6 hero-content-wrapper"
+        className="relative z-10 flex items-center px-6 hero-content-wrapper"
         style={{
           height: "100%",
-          paddingTop: 80,
+          paddingTop: 160,
           paddingBottom: 100,
         }}
       >
-        <div className="text-center max-w-4xl mx-auto">
-          {/* Badge — A whisper, not an announcement */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
-            style={{ marginBottom: 32 }}
-          >
-            <div
-              className="inline-flex items-center gap-2.5"
+        <div style={{ maxWidth: 1320, margin: "0 auto", padding: "0 clamp(20px, 4vw, 60px)", width: "100%" }}>
+          {/* Main Headline — Geometric, Bold, Left-aligned with accent bar */}
+          <div style={{ marginBottom: 24, display: "flex", gap: 20 }}>
+            {/* Orange vertical accent bar */}
+            <motion.div
+              initial={{ scaleY: 0, opacity: 0 }}
+              animate={{ scaleY: 1, opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
               style={{
-                padding: "8px 20px",
-                borderRadius: 50,
-                background: "rgba(232, 101, 26, 0.08)",
-                border: "1px solid rgba(232, 101, 26, 0.2)",
+                width: 4,
+                background: "linear-gradient(to bottom, var(--orange), var(--orange-bright))",
+                borderRadius: 2,
+                transformOrigin: "top",
+                flexShrink: 0,
+                alignSelf: "stretch",
               }}
-            >
-              {/* Pulsing dot */}
-              <span className="relative flex h-1.5 w-1.5">
-                <span
-                  className="absolute inline-flex h-full w-full rounded-full opacity-75 animate-ping"
-                  style={{ background: "#FF7A2E" }}
-                />
-                <span
-                  className="relative inline-flex rounded-full h-1.5 w-1.5"
-                  style={{ background: "#FF7A2E" }}
-                />
-              </span>
-              <span
-                style={{
-                  fontSize: 11,
-                  fontWeight: 500,
-                  letterSpacing: "2.5px",
-                  textTransform: "uppercase",
-                  color: "#FF7A2E",
-                  fontFamily: "var(--font-outfit)",
-                }}
-              >
-                2026 Event Series · 8 Cities · 5 Conferences
-              </span>
-            </div>
-          </motion.div>
-
-          {/* Main Headline — Geometric, Bold, Upright */}
-          <div style={{ marginBottom: 24 }}>
+            />
             <h1
               style={{
                 fontFamily: "var(--font-display), sans-serif",
@@ -209,7 +190,7 @@ export default function HeroSection() {
                 lineHeight: 1.05,
                 letterSpacing: "-2px",
                 color: "var(--white)",
-                textAlign: "center",
+                textAlign: "left",
               }}
             >
               <motion.span
@@ -219,7 +200,7 @@ export default function HeroSection() {
                 className="block"
                 style={{ fontStyle: "normal" }}
               >
-                Where the Region&apos;s
+                Built for the
               </motion.span>
               <motion.span
                 initial={{ opacity: 0, y: 30 }}
@@ -228,7 +209,16 @@ export default function HeroSection() {
                 className="block"
                 style={{ fontStyle: "normal" }}
               >
-                Technology Leaders
+                Leaders
+              </motion.span>
+              <motion.span
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.8 }}
+                className="block"
+                style={{ fontStyle: "normal" }}
+              >
+                Who Build
               </motion.span>
               <motion.span
                 initial={{ opacity: 0, y: 30 }}
@@ -245,7 +235,7 @@ export default function HeroSection() {
                   animation: "shimmer 5s ease-in-out infinite alternate",
                 }}
               >
-                Converge
+                the Region.
               </motion.span>
             </h1>
           </div>
@@ -262,8 +252,7 @@ export default function HeroSection() {
               lineHeight: 1.7,
               color: "#A0A0A0",
               maxWidth: 560,
-              margin: "0 auto",
-              marginBottom: 38,
+              marginBottom: 48,
             }}
           >
             Curating world-class events that drive industry transformation
@@ -275,7 +264,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 1.3 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+            className="flex flex-col sm:flex-row items-start gap-4"
           >
             {/* Primary Button */}
             <Link
@@ -347,8 +336,8 @@ export default function HeroSection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 2 }}
-          className="absolute left-1/2 -translate-x-1/2 flex items-center gap-2 z-10"
-          style={{ bottom: 80 }}
+          className="absolute flex flex-col items-center gap-2 z-10"
+          style={{ bottom: 100, right: 40 }}
         >
           {imageSources.map((_, index) => (
             <div
@@ -446,7 +435,7 @@ export default function HeroSection() {
             <CountdownDisplay date={nextEvent.date} />
 
             <Link
-              href="/events/cyber-first-kuwait"
+              href="/events/cyber-first/kuwait-april-2026"
               className="transition-colors duration-300 flex items-center gap-1"
               style={{
                 fontSize: 13,
@@ -493,7 +482,7 @@ function HeroImage({
   src: string;
   isActive: boolean;
 }) {
-  // Ken Burns: scale from 1.0 to 1.05 over 6 seconds while active
+  // Ken Burns: scale from 1.0 to 1.05 over slide duration while active
   return (
     <div
       className="absolute inset-0 overflow-hidden"
@@ -508,7 +497,7 @@ function HeroImage({
         alt=""
         className="w-full h-[120%] object-cover"
         style={{
-          filter: "brightness(0.18)",
+          filter: "brightness(0.6)",
           transition: "filter 0.5s ease",
         }}
       />

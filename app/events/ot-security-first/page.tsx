@@ -4,14 +4,15 @@ import {
   OTEditionsMap,
   OTChairQuote,
   OTAboutSeries,
+  OTOutcomesStrip,
   OTMarketInsights,
   OTFeaturedSpeakers,
   OTExperience,
   OTWhoShouldAttend,
   OTSponsors,
   OTGallery,
-  OTNextEditionCTA,
-  OTRegistrationForm,
+  OTFAQ,
+  OTUpcomingEditionCTA,
   OTExploreOtherSeries,
 } from "@/components/ot-security-first";
 import { Footer } from "@/components/sections";
@@ -36,13 +37,13 @@ export default function OTSecurityFirstPage() {
       {/* Section Transition - Sweep */}
       <SectionTransition variant="sweep" color={OT_CRIMSON} />
 
-      {/* 2. Editions Map — 4 GCC cities */}
+      {/* 2. Editions Map — Timeline pipeline + Asymmetric layout + Reports strip */}
       <OTEditionsMap />
 
       {/* Section Transition - Expand */}
       <SectionTransition variant="expand" color={OT_CRIMSON} />
 
-      {/* 3. Conference Chair Quote */}
+      {/* 3. Conference Chair Quote + Testimonial Shorts */}
       <OTChairQuote />
 
       {/* Section Transition - Pulse */}
@@ -51,64 +52,64 @@ export default function OTSecurityFirstPage() {
       {/* 4. About the Series + 10 Themes */}
       <OTAboutSeries />
 
-      {/* Section Transition - Pulse */}
-      <SectionTransition variant="pulse" color={OT_CRIMSON} />
+      {/* 5. Outcomes Strip — Slim metrics divider */}
+      <OTOutcomesStrip />
 
-      {/* 4. Market Insights — OT threat statistics */}
+      {/* 6. Market Insights — OT threat statistics */}
       <OTMarketInsights />
 
       {/* Section Transition - Sweep */}
       <SectionTransition variant="sweep" color={OT_CRIMSON} />
 
-      {/* 5. Featured Speakers — 8 real speakers */}
+      {/* 7. Featured Speakers — Portrait cards + Attendee logo wall */}
       <OTFeaturedSpeakers />
 
       {/* Section Transition - Expand */}
       <SectionTransition variant="expand" color={OT_CRIMSON} />
 
-      {/* 6. The Experience — The Full Arsenal */}
+      {/* 8. The Experience — The Full Arsenal */}
       <OTExperience />
 
       {/* Section Transition - Pulse */}
       <SectionTransition variant="pulse" color={OT_CRIMSON} />
 
-      {/* 7. Who Should Attend — Self-qualification */}
+      {/* 9. Who Should Attend — Self-qualification */}
       <OTWhoShouldAttend />
 
       {/* Section Transition - Sweep */}
       <SectionTransition variant="sweep" color={OT_CRIMSON} />
 
-      {/* 8. Sponsors + Media Partners */}
+      {/* 10. Sponsors + Media Partners (As Featured In) */}
       <OTSponsors />
 
       {/* Section Transition - Expand */}
       <SectionTransition variant="expand" color={OT_CRIMSON} />
 
-      {/* 9. Photo Gallery — Masonry placeholders */}
+      {/* 11. Gallery + Video Highlights + Agenda */}
       <OTGallery />
 
       {/* Section Transition - Pulse */}
       <SectionTransition variant="pulse" color={OT_CRIMSON} />
 
-      {/* 10. Upcoming Edition CTA */}
-      <OTNextEditionCTA />
+      {/* 12. FAQ — Command Console */}
+      <OTFAQ />
 
       {/* Section Transition - Sweep */}
       <SectionTransition variant="sweep" color={OT_CRIMSON} />
 
-      {/* 11. Registration Form */}
-      <OTRegistrationForm />
+      {/* 13. Upcoming Edition CTA + Registration Form */}
+      <OTUpcomingEditionCTA />
 
       {/* Section Transition - Expand */}
       <SectionTransition variant="expand" color={OT_CRIMSON} />
 
-      {/* 12. Explore Other Series — Cross-sell */}
+      {/* 14. Explore Other Series — Cross-sell */}
       <OTExploreOtherSeries />
 
       {/* Section Transition - Sweep */}
       <SectionTransition variant="sweep" color={OT_CRIMSON} />
 
-      {/* 13. Footer */}
+      {/* 15. Footer */}
       <Footer />
     </div>
   );

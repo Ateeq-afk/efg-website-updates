@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useReveal } from "./useReveal";
 
-type TransitionVariant = "sweep" | "expand" | "pulse";
+type TransitionVariant = "sweep" | "expand" | "pulse" | "dataflow";
 
 interface SectionTransitionProps {
   variant?: TransitionVariant;
@@ -58,6 +58,9 @@ export default function SectionTransition({
       )}
       {variant === "pulse" && (
         <PulseLine isVisible={hasAnimated} color={accentColor} glowColor={glowColor} />
+      )}
+      {variant === "dataflow" && (
+        <DataflowLine isVisible={hasAnimated} color={accentColor} glowColor={glowColor} />
       )}
     </div>
   );
@@ -180,5 +183,60 @@ function PulseLine({
         boxShadow: isVisible ? `0 0 20px ${glowColor}` : "none",
       }}
     />
+  );
+}
+
+/**
+ * Dataflow variant: a bright packet sweeps across a dim baseline —
+ * like data flowing through a wire. Trail lingers at low opacity.
+ */
+function DataflowLine({
+  isVisible,
+  color,
+  glowColor,
+}: {
+  isVisible: boolean;
+  color: string;
+  glowColor: string;
+}) {
+  return (
+    <>
+      {/* Dim baseline that appears first */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={isVisible ? { opacity: 0.12 } : { opacity: 0 }}
+        transition={{ duration: 0.3 }}
+        style={{
+          position: "absolute",
+          left: 0,
+          right: 0,
+          top: 0,
+          height: "1px",
+          background: color,
+        }}
+      />
+      {/* Bright packet that sweeps across */}
+      <motion.div
+        initial={{ left: "-10%", opacity: 0 }}
+        animate={
+          isVisible
+            ? { left: "110%", opacity: [0, 1, 1, 0] }
+            : { left: "-10%", opacity: 0 }
+        }
+        transition={{
+          left: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+          opacity: { duration: 0.8, times: [0, 0.1, 0.7, 1] },
+        }}
+        style={{
+          position: "absolute",
+          top: "-1px",
+          width: "60px",
+          height: "3px",
+          borderRadius: "2px",
+          background: `linear-gradient(90deg, transparent, ${color}, transparent)`,
+          boxShadow: `0 0 16px ${glowColor}, 0 0 4px ${color}`,
+        }}
+      />
+    </>
   );
 }

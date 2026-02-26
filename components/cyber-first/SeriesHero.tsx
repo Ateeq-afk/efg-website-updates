@@ -194,7 +194,7 @@ export default function SeriesHero() {
             style={{ marginTop: 28 }}
           >
             <Link
-              href="/events/cyber-first/kuwait"
+              href="/events/cyber-first/kuwait-april-2026"
               className="inline-flex items-center gap-2 transition-all duration-300"
               style={{
                 padding: "12px 28px",
@@ -265,7 +265,7 @@ export default function SeriesHero() {
         location="Kuwait City, Kuwait"
         targetDate={new Date("2026-04-21T09:00:00")}
         ctaText="Register"
-        ctaHref="/events/cyber-first/kuwait#register"
+        ctaHref="/events/cyber-first/kuwait-april-2026#register"
         angularRadius={false}
       />
 

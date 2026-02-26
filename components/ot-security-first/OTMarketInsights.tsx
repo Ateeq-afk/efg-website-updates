@@ -57,7 +57,7 @@ export default function OTMarketInsights() {
       ref={sectionRef}
       style={{
         background: "#111111",
-        padding: "clamp(80px, 10vw, 130px) 0",
+        padding: "clamp(48px, 6vw, 80px) 0",
       }}
     >
       <div

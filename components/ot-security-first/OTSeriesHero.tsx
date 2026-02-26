@@ -215,7 +215,7 @@ export default function OTSeriesHero() {
           className="flex flex-wrap justify-center gap-3"
           style={{ marginTop: 28 }}
         >
-          <CTAButton primary href="/events/ot-security-first/abu-dhabi-2026">
+          <CTAButton primary href="https://otsecurityfirst.com/" external>
             View Latest Edition →
           </CTAButton>
           <CTAButton href="/sponsors-and-partners">Become a Sponsor →</CTAButton>
@@ -266,38 +266,49 @@ function CTAButton({
   children,
   primary = false,
   href,
+  external = false,
 }: {
   children: React.ReactNode;
   primary?: boolean;
   href: string;
+  external?: boolean;
 }) {
   const [isHovered, setIsHovered] = useState(false);
 
+  const sharedProps = {
+    className: "inline-flex items-center gap-2 transition-all",
+    style: {
+      padding: "12px 24px",
+      borderRadius: 6,
+      background: primary
+        ? isHovered
+          ? OT_FIREBRICK
+          : OT_CRIMSON
+        : isHovered
+          ? `${OT_CRIMSON}14`
+          : "transparent",
+      border: primary ? "none" : `1px solid ${OT_CRIMSON}`,
+      fontFamily: "var(--font-outfit)",
+      fontSize: 14,
+      fontWeight: 500,
+      color: primary ? "var(--white)" : OT_CRIMSON,
+      transitionDuration: "0.4s",
+      transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
+    },
+    onMouseEnter: () => setIsHovered(true),
+    onMouseLeave: () => setIsHovered(false),
+  };
+
+  if (external) {
+    return (
+      <a href={href} target="_blank" rel="noopener noreferrer" {...sharedProps}>
+        {children}
+      </a>
+    );
+  }
+
   return (
-    <Link
-      href={href}
-      className="inline-flex items-center gap-2 transition-all"
-      style={{
-        padding: "12px 24px",
-        borderRadius: 6,
-        background: primary
-          ? isHovered
-            ? OT_FIREBRICK
-            : OT_CRIMSON
-          : isHovered
-            ? `${OT_CRIMSON}14`
-            : "transparent",
-        border: primary ? "none" : `1px solid ${OT_CRIMSON}`,
-        fontFamily: "var(--font-outfit)",
-        fontSize: 14,
-        fontWeight: 500,
-        color: primary ? "var(--white)" : OT_CRIMSON,
-        transitionDuration: "0.4s",
-        transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
-      }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
+    <Link href={href} {...sharedProps}>
       {children}
     </Link>
   );

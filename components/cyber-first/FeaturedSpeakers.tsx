@@ -7,63 +7,63 @@ import Link from "next/link";
 const CYBER_BLUE = "#01BBF5";
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-// Speaker data with portrait images
+// Speaker data matched from Supabase (Cyber First UAE)
 const speakers = [
   {
     id: 1,
     name: "H.E. Dr. Mohamed Al Kuwaiti",
-    title: "Head of Cybersecurity",
+    title: "Head of Cyber Security",
     organization: "UAE Government",
-    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80",
+    image: "https://efg-final.s3.eu-north-1.amazonaws.com/Speakers-photos/OT-Security-First/dr-mohamed-hamad-al-kuwaiti.jpg",
   },
   {
     id: 2,
     name: "Sara Al Hosani",
     title: "Director Cyber Threat Intelligence",
     organization: "Department of Government Enablement",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80",
+    image: "https://efg-final.s3.eu-north-1.amazonaws.com/Speakers-photos/Cyber-First-uae/Sara-Al-Hosani.jpg",
   },
   {
     id: 3,
     name: "Hussain Al Khalsan",
     title: "CISO",
     organization: "Zand Bank",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80",
+    image: "https://efg-final.s3.eu-north-1.amazonaws.com/Speakers-photos/Cyber-First-uae/Hussain-Al-Khalsan.jpg",
   },
   {
     id: 4,
     name: "Bernard Assaf",
     title: "Regional CISO",
     organization: "Airbus",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80",
+    image: "https://efg-final.s3.eu-north-1.amazonaws.com/Speakers-photos/Cyber-First-uae/Bernard-Assaf.png",
   },
   {
     id: 5,
     name: "James Wiles",
     title: "Head of Cyber Security MEA",
     organization: "Cigna Healthcare",
-    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&q=80",
+    image: "https://efg-final.s3.eu-north-1.amazonaws.com/Speakers-photos/Cyber-First-uae/James-Wiles.jpg",
   },
   {
     id: 6,
-    name: "Prof. Khalid Al-Begain",
-    title: "President",
-    organization: "Kuwait College of Science & Technology",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80",
+    name: "Dr. Ebrahim Al Alkeem",
+    title: "National Risk and Policy Director",
+    organization: "Executive Office of AML & CTF, UAE Government",
+    image: "https://efg-final.s3.eu-north-1.amazonaws.com/Speakers-photos/OT-Security-First/Dr-Ebrahim-Al-Alkeem-Al-Zaabi.jpg",
   },
   {
     id: 7,
-    name: "Mohamed Rushdhi",
-    title: "Head of Information Security",
-    organization: "Industrial Bank of Kuwait",
-    image: "https://images.unsplash.com/photo-1556157382-97eda2d62296?w=400&q=80",
+    name: "Toufeeq Ahmed",
+    title: "Group Head Cyber Security",
+    organization: "Gargash Group",
+    image: "https://efg-final.s3.eu-north-1.amazonaws.com/Speakers-photos/Cyber-First-uae/Toufeeq-Ahmed.jpg",
   },
   {
     id: 8,
     name: "Abdulwahab Algamhi",
     title: "Senior Director Information Security",
     organization: "Miral",
-    image: "https://images.unsplash.com/photo-1580518337843-f959e992563b?w=400&q=80",
+    image: "https://efg-final.s3.eu-north-1.amazonaws.com/Speakers-photos/Cyber-First-uae/Abdulwahab-Al-Gamhi.jpg",
   },
 ];
 

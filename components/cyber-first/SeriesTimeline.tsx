@@ -46,12 +46,12 @@ const timeline = [
   },
   {
     id: 5,
-    label: "5th Edition",
+    label: "2nd Edition",
     name: "Cyber First Qatar",
-    date: "2026",
+    date: "Apr 7, 2026",
     city: "Doha",
     venue: null,
-    status: "planned" as const,
+    status: "upcoming" as const,
   },
 ];
 
@@ -231,7 +231,7 @@ function TimelineNode({
         style={{
           padding: "16px 14px",
           background: hovered ? "#141414" : "#111111",
-          border: `1px solid ${
+          border: `1px ${isPlanned ? "dashed" : "solid"} ${
             hovered
               ? "rgba(1, 187, 245, 0.08)"
               : isPlanned
@@ -239,7 +239,6 @@ function TimelineNode({
                 : "rgba(255, 255, 255, 0.05)"
           }`,
           borderRadius: 12,
-          borderStyle: isPlanned ? "dashed" : "solid",
           opacity: isPlanned ? 0.6 : 1,
           transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
         }}

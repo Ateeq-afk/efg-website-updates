@@ -44,7 +44,7 @@ export default function OTWhoShouldAttend() {
       ref={sectionRef}
       style={{
         background: "#0A0A0A",
-        padding: "clamp(80px, 10vw, 130px) 0",
+        padding: "clamp(48px, 6vw, 80px) 0",
       }}
     >
       <div
