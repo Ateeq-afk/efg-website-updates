@@ -31,7 +31,7 @@ export default function ImpactBar() {
       className="relative overflow-hidden"
       style={{
         background: "#0A0A0A",
-        padding: "clamp(48px, 6vw, 80px) 0",
+        padding: "clamp(96px, 8vw, 120px) 0 clamp(48px, 6vw, 80px)",
       }}
     >
       {/* Background image */}

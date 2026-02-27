@@ -233,7 +233,7 @@ export default function AnnualTimeline() {
       className="relative"
       style={{
         background: "var(--black-light)",
-        padding: "clamp(48px, 5vw, 72px) 0 clamp(48px, 5vw, 72px)",
+        padding: "clamp(96px, 8vw, 120px) 0 clamp(48px, 5vw, 72px)",
       }}
     >
       {/* Gradient fade to next section */}
@@ -485,9 +485,9 @@ export default function AnnualTimeline() {
             FILTERED EVENT GRID
             ═══════════════════════════════════════════════════════════════ */}
         <div
-          className="grid gap-4"
+          className="flex flex-wrap gap-4"
           style={{
-            gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+            justifyContent: "center",
           }}
         >
           <AnimatePresence mode="popLayout">
@@ -503,6 +503,7 @@ export default function AnnualTimeline() {
                   ease: [0.16, 1, 0.3, 1],
                 }}
                 layout
+                style={{ flex: "0 1 380px", minWidth: "300px" }}
               >
                 <EventCard event={event} />
               </motion.div>

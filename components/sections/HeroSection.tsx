@@ -4,15 +4,58 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 
-// Hero images from S3 bucket
-const S3_BASE = "https://efg-final.s3.eu-north-1.amazonaws.com/Good";
+const S3 = "https://efg-final.s3.eu-north-1.amazonaws.com";
+const CFK = `${S3}/events/Cyber%20First%20Kuwait%202025/filemail_photos`;
 
-const heroImages = [
-  `${S3_BASE}/4N8A0005.JPG`,
-  `${S3_BASE}/4N8A0133.JPG`,
-  `${S3_BASE}/4N8A0050.JPG`,
-  `${S3_BASE}/4N8A0375.JPG`,
-  `${S3_BASE}/4N8A0035.JPG`,
+interface HeroSlide {
+  image: string;
+  eyebrow: string;
+  title: string[];   // lines of the headline
+  accent: string;    // last word gets the orange shimmer
+  sub: string;
+}
+
+const heroSlides: HeroSlide[] = [
+  {
+    // Grand ballroom panoramic — packed full house, ornate wooden architecture. Scale.
+    image: `${CFK}/cyber21-04-160.jpg`,
+    eyebrow: "Cyber First Kuwait · 21 April 2026 · Kuwait City",
+    title: ["Where the Region's", "Decisions Are"],
+    accent: "Made.",
+    sub: "500+ CISOs, CDOs and Government Officials. One room. One day. Kuwait City.",
+  },
+  {
+    // Wide panel on stage, full audience in dishdashas, branded LED backdrop, scale and authority.
+    image: `${CFK}/cyber21-04-324.jpg`,
+    eyebrow: "200+ Speakers · 12 Cities · 6 Nations",
+    title: ["Conversations That"],
+    accent: "Move Industries.",
+    sub: "Honest dialogue on what comes next — and who needs to be in the room when it arrives.",
+  },
+  {
+    // VIP front row — uniformed Kuwaiti officials, gilded hall, purple lighting. Credibility.
+    image: `${CFK}/cyber21-04-245.jpg`,
+    eyebrow: "Ministerial & Regulatory Participation · GCC",
+    title: ["Government and Industry.", "On The Same"],
+    accent: "Stage.",
+    sub: "The only summit series in the GCC with active ministerial and regulatory voices in every session.",
+  },
+  {
+    // Elevated expo floor — chandeliers, dense crowd, vibrant booths. Energy.
+    image: `${CFK}/cyber21-04-410.jpg`,
+    eyebrow: "5,000+ Delegates · 16 Editions · 99+ Sponsors",
+    title: ["The GCC's Most", "Trusted Technology"],
+    accent: "Summit Series.",
+    sub: "From Kuwait to Abu Dhabi. From the CISO to the Minister. Every edition, every city.",
+  },
+  {
+    // Aerial view of the full expo floor — ornate ballroom, hundreds of attendees. The signature.
+    image: `${CFK}/cyber21-04-500.jpg`,
+    eyebrow: "Cyber First · OT Security · Data & AI · Opex First",
+    title: ["Four Series.", "Twelve Cities."],
+    accent: "One Standard.",
+    sub: "Built for enterprise leaders shaping the region's digital and security future.",
+  },
 ];
 
 // Next event data for the countdown
@@ -23,7 +66,7 @@ const nextEvent = {
 };
 
 // Slideshow timing
-const SLIDE_DURATION = 3500; // 3.5 seconds per image
+const SLIDE_DURATION = 5500; // 5.5 seconds — enough to read the headline
 const CROSSFADE_DURATION = 1.2; // 1.2 second crossfade
 
 export default function HeroSection() {
@@ -31,8 +74,8 @@ export default function HeroSection() {
   const [activeIndex, setActiveIndex] = useState(0);
   const heroRef = useRef<HTMLElement>(null);
 
-  // Hero images from S3
-  const imageSources = heroImages;
+  const imageSources = heroSlides.map((s) => s.image);
+  const activeSlide = heroSlides[activeIndex];
 
   // Parallax scroll tracking
   useEffect(() => {
@@ -165,99 +208,88 @@ export default function HeroSection() {
         }}
       >
         <div style={{ maxWidth: 1320, margin: "0 auto", padding: "0 clamp(20px, 4vw, 60px)", width: "100%" }}>
-          {/* Main Headline — Geometric, Bold, Left-aligned with accent bar */}
-          <div style={{ marginBottom: 24, display: "flex", gap: 20 }}>
-            {/* Orange vertical accent bar */}
+          {/* Dynamic per-slide headline */}
+          <AnimatePresence mode="wait">
             <motion.div
-              initial={{ scaleY: 0, opacity: 0 }}
-              animate={{ scaleY: 1, opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              style={{
-                width: 4,
-                background: "linear-gradient(to bottom, var(--orange), var(--orange-bright))",
-                borderRadius: 2,
-                transformOrigin: "top",
-                flexShrink: 0,
-                alignSelf: "stretch",
-              }}
-            />
-            <h1
-              style={{
-                fontFamily: "var(--font-display), sans-serif",
-                fontWeight: 800,
-                fontStyle: "normal",
-                fontSize: "clamp(46px, 7vw, 88px)",
-                lineHeight: 1.05,
-                letterSpacing: "-2px",
-                color: "var(--white)",
-                textAlign: "left",
-              }}
+              key={activeIndex}
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -16 }}
+              transition={{ duration: 0.55, ease: "easeOut" }}
+              style={{ marginBottom: 40 }}
             >
-              <motion.span
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.5 }}
-                className="block"
-                style={{ fontStyle: "normal" }}
-              >
-                Built for the
-              </motion.span>
-              <motion.span
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.7 }}
-                className="block"
-                style={{ fontStyle: "normal" }}
-              >
-                Leaders
-              </motion.span>
-              <motion.span
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.8 }}
-                className="block"
-                style={{ fontStyle: "normal" }}
-              >
-                Who Build
-              </motion.span>
-              <motion.span
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.9 }}
-                className="block"
+              {/* Eyebrow */}
+              <p
                 style={{
-                  fontStyle: "normal",
-                  background: "linear-gradient(90deg, #FFFFFF 0%, #E8651A 30%, #FF7A2E 60%, #FFFFFF 100%)",
-                  backgroundSize: "300% 100%",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                  animation: "shimmer 5s ease-in-out infinite alternate",
+                  fontFamily: "var(--font-outfit)",
+                  fontSize: "clamp(10px, 0.85vw, 12px)",
+                  fontWeight: 600,
+                  letterSpacing: "0.14em",
+                  textTransform: "uppercase",
+                  color: "var(--orange)",
+                  marginBottom: 20,
                 }}
               >
-                the Region.
-              </motion.span>
-            </h1>
-          </div>
+                {activeSlide.eyebrow}
+              </p>
 
-          {/* Subtext */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 1.1 }}
-            style={{
-              fontFamily: "var(--font-outfit)",
-              fontWeight: 300,
-              fontSize: "clamp(15px, 1.4vw, 18px)",
-              lineHeight: 1.7,
-              color: "#A0A0A0",
-              maxWidth: 560,
-              marginBottom: 48,
-            }}
-          >
-            Curating world-class events that drive industry transformation
-            across cybersecurity, digital, and AI in the GCC.
-          </motion.p>
+              {/* Headline with orange vertical bar */}
+              <div style={{ display: "flex", gap: 20, marginBottom: 24 }}>
+                <div
+                  style={{
+                    width: 4,
+                    background: "linear-gradient(to bottom, var(--orange), var(--orange-bright))",
+                    borderRadius: 2,
+                    flexShrink: 0,
+                    alignSelf: "stretch",
+                  }}
+                />
+                <h1
+                  style={{
+                    fontFamily: "var(--font-display), sans-serif",
+                    fontWeight: 800,
+                    fontSize: "clamp(40px, 6.5vw, 82px)",
+                    lineHeight: 1.05,
+                    letterSpacing: "-2px",
+                    color: "#fff",
+                    margin: 0,
+                  }}
+                >
+                  {activeSlide.title.map((line, i) => (
+                    <span key={i} className="block">{line}</span>
+                  ))}
+                  <span
+                    className="block"
+                    style={{
+                      background: "linear-gradient(90deg, #FFFFFF 0%, #E8651A 30%, #FF7A2E 60%, #FFFFFF 100%)",
+                      backgroundSize: "300% 100%",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                      backgroundClip: "text",
+                      animation: "shimmer 5s ease-in-out infinite alternate",
+                    }}
+                  >
+                    {activeSlide.accent}
+                  </span>
+                </h1>
+              </div>
+
+              {/* Sub */}
+              <p
+                style={{
+                  fontFamily: "var(--font-outfit)",
+                  fontWeight: 300,
+                  fontSize: "clamp(14px, 1.3vw, 17px)",
+                  lineHeight: 1.7,
+                  color: "rgba(255,255,255,0.55)",
+                  maxWidth: 520,
+                  margin: 0,
+                }}
+              >
+                {activeSlide.sub}
+              </p>
+            </motion.div>
+          </AnimatePresence>
 
           {/* CTA Buttons */}
           <motion.div
@@ -570,10 +602,12 @@ function CountdownUnit({ value, label }: { value: number; label: string }) {
       </span>
       <span
         style={{
-          fontSize: 9,
+          fontSize: 11,
           textTransform: "uppercase",
-          color: "var(--white-muted)",
+          color: "rgba(255,255,255,0.7)",
           fontFamily: "var(--font-outfit)",
+          fontWeight: 600,
+          letterSpacing: "0.06em",
         }}
       >
         {label}

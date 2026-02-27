@@ -50,7 +50,7 @@ export default function NetworkFirst() {
       ref={sectionRef}
       style={{
         background: "#08080C",
-        padding: "clamp(48px, 5vw, 72px) 0 clamp(48px, 5vw, 72px)",
+        padding: "clamp(96px, 8vw, 120px) 0 clamp(48px, 5vw, 72px)",
         position: "relative",
         overflow: "hidden",
       }}

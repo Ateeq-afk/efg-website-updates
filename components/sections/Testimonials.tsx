@@ -170,7 +170,7 @@ export default function Testimonials() {
       className="relative overflow-hidden"
       style={{
         background: "var(--black)",
-        padding: "clamp(40px, 5vw, 64px) 0",
+        padding: "clamp(96px, 8vw, 120px) 0 clamp(40px, 5vw, 64px)",
       }}
     >
       {/* Ambient background */}

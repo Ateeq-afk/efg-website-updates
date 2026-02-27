@@ -142,7 +142,7 @@ export default function EventSeriesShowcase() {
       className="relative"
       style={{
         background: "var(--black)",
-        padding: "clamp(56px, 6vw, 80px) 0 clamp(56px, 6vw, 80px)",
+        padding: "clamp(96px, 8vw, 120px) 0 clamp(56px, 6vw, 80px)",
       }}
     >
       {/* Gradient fade to next section */}

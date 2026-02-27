@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -32,6 +33,7 @@ export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isEventsOpen, setIsEventsOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   // Detect scroll position
   useEffect(() => {
@@ -105,6 +107,7 @@ export default function Navigation() {
                   href={link.href}
                   hasDropdown={link.hasDropdown}
                   isDropdownOpen={link.hasDropdown && isEventsOpen}
+                  isActive={link.href === "/" ? pathname === "/" : pathname.startsWith(link.href)}
                 >
                   {link.label}
                 </NavLink>
@@ -317,21 +320,25 @@ function NavLink({
   children,
   hasDropdown,
   isDropdownOpen,
+  isActive,
 }: {
   href: string;
   children: React.ReactNode;
   hasDropdown?: boolean;
   isDropdownOpen?: boolean;
+  isActive?: boolean;
 }) {
   const [isHovered, setIsHovered] = useState(false);
+  const lit = isHovered || isActive;
 
   return (
     <Link
       href={href}
-      className="relative text-[14px] font-normal transition-colors duration-300"
+      className="relative text-[14px] transition-colors duration-300"
       style={{
-        color: isHovered ? "var(--white)" : "var(--white-dim)",
+        color: lit ? "var(--white)" : "var(--white-dim)",
         fontFamily: "var(--font-outfit)",
+        fontWeight: isActive ? 600 : 400,
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -354,12 +361,12 @@ function NavLink({
         )}
       </span>
 
-      {/* Animated underline */}
+      {/* Underline — persistent on active, animated on hover */}
       <motion.span
         className="absolute left-0 bottom-[-4px] h-[1.5px]"
         style={{ background: "var(--orange)" }}
-        initial={{ width: 0 }}
-        animate={{ width: isHovered ? "100%" : 0 }}
+        initial={{ width: isActive ? "100%" : 0 }}
+        animate={{ width: lit ? "100%" : 0 }}
         transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
       />
     </Link>

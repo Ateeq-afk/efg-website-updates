@@ -136,7 +136,7 @@ export default function SponsorsPartners() {
       ref={sectionRef}
       style={{
         background: "var(--black)",
-        padding: "clamp(48px, 5vw, 72px) 0 clamp(40px, 4vw, 60px)",
+        padding: "clamp(96px, 8vw, 120px) 0 clamp(40px, 4vw, 60px)",
         position: "relative",
         overflow: "hidden",
       }}
