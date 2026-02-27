@@ -467,7 +467,7 @@ export default function HeroSection() {
             <CountdownDisplay date={nextEvent.date} />
 
             <Link
-              href="/events/cyber-first/kuwait-april-2026"
+              href="/events/cyber-first/kuwait-april"
               className="transition-colors duration-300 flex items-center gap-1"
               style={{
                 fontSize: 13,

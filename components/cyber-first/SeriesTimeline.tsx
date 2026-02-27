@@ -32,7 +32,7 @@ const timeline = [
     name: "Cyber First Kuwait",
     date: "Apr 21, 2026",
     city: "Kuwait City",
-    venue: "Radisson Blu",
+    venue: "Jumeirah Messilah Beach Hotel",
     status: "upcoming" as const,
   },
   {
