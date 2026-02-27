@@ -7,6 +7,8 @@ import Image from "next/image";
 const S3 = "https://efg-final.s3.eu-north-1.amazonaws.com";
 const CFK = `${S3}/events/Cyber%20First%20Kuwait%202025/filemail_photos`;
 const GOOD = `${S3}/Good`;
+const OT = `${S3}/events/OT%20Security%20First%20UAE%202025/OT%20First%20UAE%20Photos`;
+const HOME = `${S3}/home-event-spec`;
 
 interface GalleryImage {
   src: string;
@@ -62,12 +64,12 @@ const categories: Category[] = [
     id: "expo",
     label: "The Exhibition",
     subtitle: "Global Technology Partners",
-    heroImage: `${CFK}/cyber21-04-410.jpg`,
+    heroImage: `${OT}/4N8A0397.JPG`,
     images: [
-      { src: `${CFK}/cyber21-04-410.jpg`, caption: "Exhibition floor — ThreatLocker & Group-IB" },
-      { src: `${CFK}/cyber21-04-390.jpg`, caption: "Acronis & Bitdefender — active engagement" },
+      { src: `${OT}/4N8A0397.JPG`, caption: "OT Security First UAE — exhibition floor" },
+      { src: `${OT}/4N8A0400.JPG`, caption: "Technology partners — active engagement" },
       { src: `${CFK}/cyber21-04-510.jpg`, caption: "Exhibition hall under grand chandeliers" },
-      { src: `${CFK}/cyber21-04-150.jpg`, caption: "Google Cloud Security — live demos" },
+      { src: `${OT}/4N8A0408.JPG`, caption: "Live product demonstrations" },
     ],
   },
   {

@@ -122,7 +122,7 @@ export default function NetworkFirst() {
           {/* Photo */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={`${S3}/events/Cyber%20First%20Kuwait%202025/filemail_photos/cyber21-04-245.jpg`}
+            src={`${S3}/home-event-spec/Image%2016-02-2026%20at%204.21%E2%80%AFAM.png`}
             alt="NetworkFirst boardroom attendees"
             style={{
               width: "100%",

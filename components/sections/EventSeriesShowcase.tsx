@@ -6,6 +6,8 @@ import Link from "next/link";
 
 const S3 = "https://efg-final.s3.eu-north-1.amazonaws.com";
 const CFK = `${S3}/events/Cyber%20First%20Kuwait%202025/filemail_photos`;
+const HOME = `${S3}/home-event-spec`;
+const OT = `${S3}/events/OT%20Security%20First%20UAE%202025/OT%20First%20UAE%20Photos`;
 
 // Event series data
 const eventSeries = [
@@ -19,7 +21,7 @@ const eventSeries = [
     nations: 4,
     stats: "Kuwait · Qatar · KSA · UAE",
     color: "#01BBF5",
-    image: `${CFK}/cyber21-04-400.jpg`,
+    image: `${HOME}/Image%2016-02-2026%20at%202.46%E2%80%AFAM.png`,
     href: "/events/cyber-first",
   },
   {
@@ -32,7 +34,7 @@ const eventSeries = [
     nations: 2,
     stats: "Saudi Arabia · Oman",
     color: "#D34B9A",
-    image: `${S3}/assets/ot-ceremony.jpg`,
+    image: `${OT}/4N8A0394.JPG`,
     href: "/events/ot-security-first",
   },
   {
@@ -45,7 +47,7 @@ const eventSeries = [
     nations: 3,
     stats: "Dubai · Doha · Riyadh",
     color: "#7C3AED",
-    image: `${S3}/Good/4N8A0090.JPG`,
+    image: `${HOME}/Image%2016-02-2026%20at%202.57%E2%80%AFAM.png`,
     href: "/events/opex-first",
   },
   {
@@ -58,7 +60,7 @@ const eventSeries = [
     nations: 2,
     stats: "Kuwait · Qatar",
     color: "#11A385",
-    image: `${S3}/assets/ai-voxel-teal-strong.jpg`,
+    image: `${HOME}/Image%2016-02-2026%20at%203.45%E2%80%AFAM.png`,
     href: "/events/data-ai-first",
   },
 ];
