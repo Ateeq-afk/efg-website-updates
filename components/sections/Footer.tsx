@@ -20,7 +20,6 @@ const footerLinks = {
   ],
   resources: [
     { label: "Insights & Blog", href: "/insights" },
-    { label: "Media Kit", href: "/media-kit" },
     { label: "Sponsorship Deck", href: "/sponsors-and-partners" },
     { label: "Privacy Policy", href: "/privacy" },
     { label: "Terms of Use", href: "/terms" },

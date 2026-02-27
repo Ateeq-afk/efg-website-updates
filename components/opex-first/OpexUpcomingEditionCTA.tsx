@@ -225,30 +225,6 @@ export default function OpexUpcomingEditionCTA() {
             >
               Sponsor This Edition
             </Link>
-            <Link
-              href="/reports"
-              className="inline-flex items-center gap-2 transition-all duration-300"
-              style={{
-                padding: "12px 24px",
-                borderRadius: 50,
-                border: "1px solid rgba(255, 255, 255, 0.12)",
-                background: "transparent",
-                fontFamily: "var(--font-outfit)",
-                fontSize: 14,
-                fontWeight: 500,
-                color: "#808080",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = "rgba(255, 255, 255, 0.04)";
-                e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.2)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = "transparent";
-                e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.12)";
-              }}
-            >
-              Download Post-Event Report
-            </Link>
           </motion.div>
         </motion.div>
 

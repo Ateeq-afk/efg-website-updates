@@ -25,12 +25,11 @@
   --gray-border: rgba(255, 255, 255, 0.06);       /* Default edge */
   --gray-border-hover: rgba(255, 255, 255, 0.12); /* Edge responding */
 
-  /* Event Series Colors — Characters in a film */
-  --cyber-first: #E8651A;     /* Orange — the protagonist, flagship */
-  --ot-first: #00C9A7;        /* Teal — industrial, precise */
-  --digital-ai: #7B61FF;      /* Purple — visionary, future-facing */
-  --cloud-first: #2E9BFF;     /* Blue — expansive, architectural */
-  --data-first: #FF4D6A;      /* Crimson — sharp, analytical */
+  /* Event Series Colors — matched to each series page */
+  --cyber-first: #01BBF5;     /* Cyan — Cyber First brand */
+  --ot-first: #D34B9A;        /* Pink — OT Security First brand */
+  --digital-ai: #0F735E;      /* Emerald — Data & AI First brand */
+  --cloud-first: #7C3AED;     /* Violet — Opex First brand */
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════

@@ -2,7 +2,6 @@
 
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import Link from "next/link";
 import type { SpeakerWithSeries } from "@/lib/supabase/types";
 
 const VIOLET = "#7C3AED";
@@ -164,27 +163,6 @@ export default function OpexSpeakersGrid({
           ))}
         </div>
 
-        {/* View All link */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.5, delay: 0.8 }}
-          style={{ textAlign: "center", marginTop: 36 }}
-        >
-          <Link
-            href="/events/opex-first/speakers"
-            className="inline-flex items-center gap-2 transition-all duration-300"
-            style={{
-              fontFamily: "var(--font-outfit)",
-              fontSize: 14,
-              fontWeight: 500,
-              color: VIOLET,
-            }}
-          >
-            <span>View All Speakers</span>
-            <span>→</span>
-          </Link>
-        </motion.div>
       </div>
 
       <style jsx global>{`

@@ -2,7 +2,6 @@
 
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import Link from "next/link";
 
 const CYBER_BLUE = "#01BBF5";
 
@@ -162,15 +161,6 @@ export default function CyberFirstGallery() {
         </motion.div>
 
         {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
-          transition={{ duration: 0.6, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="text-center"
-          style={{ marginTop: 28 }}
-        >
-          <GalleryCTA />
-        </motion.div>
       </div>
 
       {/* Grid CSS */}
@@ -290,38 +280,5 @@ function GalleryImage({
         }}
       />
     </motion.div>
-  );
-}
-
-/**
- * GalleryCTA — Link to full gallery
- */
-function GalleryCTA() {
-  const [isHovered, setIsHovered] = useState(false);
-
-  return (
-    <Link
-      href="/events/cyber-first/gallery"
-      className="inline-flex items-center gap-1.5 transition-colors"
-      style={{
-        fontFamily: "var(--font-outfit)",
-        fontSize: 13,
-        fontWeight: 500,
-        color: CYBER_BLUE,
-      }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <span>View full gallery</span>
-      <span
-        className="transition-transform"
-        style={{
-          transform: isHovered ? "translateX(4px)" : "translateX(0)",
-          transitionDuration: "0.3s",
-        }}
-      >
-        →
-      </span>
-    </Link>
   );
 }

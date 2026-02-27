@@ -2,14 +2,11 @@
 
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import Link from "next/link";
-
 // ═══════════════════════════════════════════════════════════════
 // DESIGN CONSTANTS
 // ═══════════════════════════════════════════════════════════════
 
 const AMBER = "#C9935A";
-const AMBER_BRIGHT = "#D4A864";
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 // Feature card data
@@ -207,45 +204,6 @@ export default function NetworkFirst() {
               ))}
             </div>
 
-            {/* CTA */}
-            <div style={{ marginTop: 36 }}>
-              <Link
-                href="/networkfirst"
-                className="inline-flex items-center gap-3 group transition-all"
-                style={{
-                  padding: "14px 36px",
-                  background: `linear-gradient(135deg, ${AMBER} 0%, ${AMBER_BRIGHT} 100%)`,
-                  borderRadius: 50,
-                  fontFamily: "var(--font-outfit)",
-                  fontSize: 13.5,
-                  fontWeight: 600,
-                  color: "#0A0A0A",
-                  letterSpacing: "0.3px",
-                  boxShadow: `0 0 30px rgba(201,147,90,0.15)`,
-                }}
-              >
-                <span>Request Your Invitation</span>
-                <span
-                  className="transition-transform duration-300 group-hover:translate-x-1"
-                  style={{ fontSize: 14 }}
-                >
-                  →
-                </span>
-              </Link>
-
-              <p
-                style={{
-                  fontFamily: "var(--font-outfit)",
-                  fontSize: 11,
-                  fontWeight: 400,
-                  color: "rgba(255,255,255,0.2)",
-                  marginTop: 12,
-                  letterSpacing: "0.3px",
-                }}
-              >
-                Each session is by application only
-              </p>
-            </div>
           </motion.div>
         </div>
 

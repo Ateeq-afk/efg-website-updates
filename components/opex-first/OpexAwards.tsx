@@ -2,7 +2,6 @@
 
 import { useRef, useState, useCallback } from "react";
 import { motion, useInView } from "framer-motion";
-import Link from "next/link";
 
 const VIOLET = "#7C3AED";
 const VIOLET_BRIGHT = "#9F67FF";
@@ -276,14 +275,6 @@ export default function OpexAwards() {
         </motion.div>
 
         {/* ── CTA ── */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-          transition={{ duration: 0.5, delay: 1.0, ease: EASE }}
-          style={{ textAlign: "center", marginTop: 32 }}
-        >
-          <NominateCTA />
-        </motion.div>
       </div>
 
       <style jsx global>{`
@@ -703,53 +694,3 @@ function AwardCard({ award }: { award: (typeof awards)[0] }) {
   );
 }
 
-/* ─── Nominate CTA ────────────────────────────────────────── */
-
-function NominateCTA() {
-  const [isHovered, setIsHovered] = useState(false);
-
-  return (
-    <div style={{ position: "relative", display: "inline-block" }}>
-      {/* Gradient glow behind button */}
-      <div
-        className="absolute inset-0 rounded-full transition-opacity duration-500"
-        style={{
-          background: `linear-gradient(135deg, ${VIOLET}, #c084fc)`,
-          filter: "blur(16px)",
-          opacity: isHovered ? 0.3 : 0,
-        }}
-      />
-      <Link
-        href="/events/opex-first/awards"
-        className="relative inline-flex items-center gap-2 transition-all duration-300"
-        style={{
-          padding: "14px 32px",
-          borderRadius: 50,
-          background: isHovered
-            ? `linear-gradient(135deg, ${VIOLET}, #9333ea)`
-            : "transparent",
-          border: isHovered
-            ? `1px solid ${VIOLET}`
-            : "1px solid rgba(124,58,237,0.3)",
-          fontFamily: "var(--font-outfit)",
-          fontSize: 14,
-          fontWeight: 600,
-          color: isHovered ? "#fff" : VIOLET_BRIGHT,
-          letterSpacing: "0.5px",
-        }}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
-        <span>Nominate Now</span>
-        <span
-          className="transition-transform duration-300"
-          style={{
-            transform: isHovered ? "translateX(4px)" : "translateX(0)",
-          }}
-        >
-          →
-        </span>
-      </Link>
-    </div>
-  );
-}

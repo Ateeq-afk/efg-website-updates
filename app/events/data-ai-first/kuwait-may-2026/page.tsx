@@ -166,43 +166,63 @@ const MARKET_STATS: {
   { value: 50, suffix: "K+", unit: "JOBS", label: "New Tech Jobs by 2030", note: "KD 1B annual revenues projected" },
 ];
 
-const HIGHLIGHTS: { title: string; desc: string; icon: string }[] = [
-  { title: "Insightful Discussions", desc: "Expert-led panels on Kuwait's AI strategy, Vision 2035 alignment, and enterprise transformation.", icon: "M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" },
-  { title: "Real-Time Case Studies", desc: "Live demonstrations of AI deployments with measurable outcomes from Kuwait and GCC enterprises.", icon: "M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" },
-  { title: "100% Big Data & AI Focus", desc: "Every session is purpose-built for data and AI practitioners — no diluted content.", icon: "M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" },
-  { title: "Workshops & Learning", desc: "Interactive deep-dive sessions on critical AI challenges facing Kuwaiti businesses and government.", icon: "M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" },
-  { title: "Networking Opportunities", desc: "Curated connections with 250+ senior leaders — CDOs, CTOs, government officials, and innovators.", icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" },
-  { title: "Award Ceremony", desc: "Celebrating 8 categories of excellence in AI transformation, data innovation, and governance leadership.", icon: "M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" },
-  { title: "Startup Pitch Session", desc: "Showcasing Kuwait's most promising AI and data startups to investors, corporates, and government buyers.", icon: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" },
-  { title: "Investment Opportunities", desc: "Direct access to AI investment pipelines, $9B+ in planned digital sector spending, and partnership frameworks.", icon: "M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" },
-  { title: "Regulatory Sandbox", desc: "Explore AI governance models and regulatory frameworks in a structured environment with policymakers.", icon: "M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" },
-  { title: "Technology Showcase", desc: "Hands-on demonstrations of Edge AI, IoT integration, generative AI platforms, and cloud-native solutions.", icon: "M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" },
+const HIGHLIGHTS = [
+  {
+    title: "Expert-Led Panels & Live Case Studies",
+    desc: "4 high-impact panel discussions on Kuwait's AI strategy, Vision 2035 alignment, and enterprise transformation — plus live demonstrations of AI deployments with measurable outcomes from Kuwait and GCC enterprises.",
+    icon: "M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z",
+    image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&q=80",
+    stat: "4 Panels",
+  },
+  {
+    title: "100% Data & AI — Zero Filler",
+    desc: "Every session is purpose-built for data and AI practitioners. Interactive deep-dive workshops on the critical challenges facing Kuwaiti businesses and government — bring your toughest problems.",
+    icon: "M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4",
+    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&q=80",
+    stat: "100%",
+  },
+  {
+    title: "Curated Executive Networking",
+    desc: "Move beyond generic networking — connect with 250+ handpicked senior leaders, CDOs, CTOs, government strategists, investors, and AI architects across Kuwait and the GCC.",
+    icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z",
+    image: "https://images.unsplash.com/photo-1511578314322-379afb476865?w=1200&q=80",
+    stat: "250+",
+  },
+  {
+    title: "Awards & Startup Pitch Showcase",
+    desc: "Celebrating 8 categories of AI excellence — transformation, innovation, governance, and emerging talent. Plus a live startup pitch session showcasing Kuwait's most promising AI ventures to investors and government buyers.",
+    icon: "M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z",
+    image: "https://images.unsplash.com/photo-1531545514256-b1400bc00f31?w=1200&q=80",
+    stat: "8 Awards",
+  },
+  {
+    title: "Investment & Regulatory Access",
+    desc: "Direct access to $9B+ in planned digital sector investment pipelines, partnership frameworks, and a structured AI governance regulatory sandbox with policymakers. Hands-on demos of Edge AI, IoT, generative AI platforms, and cloud-native solutions.",
+    icon: "M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
+    image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&q=80",
+    stat: "$9B+",
+  },
 ];
 
-const AGENDA: {
-  time: string;
-  title: string;
-  type: "registration" | "ceremony" | "panel" | "keynote" | "presentation" | "break" | "awards";
-  brief?: string;
-}[] = [
-  { time: "8:00 – 9:00", title: "Registration, Networking & Refreshments", type: "registration" },
-  { time: "9:00 – 9:15", title: "Welcome Remarks & Opening Ceremony", type: "ceremony" },
-  { time: "9:15 – 9:30", title: "Kuwait's Transformative Journey & Catalyzing Vision", type: "keynote", brief: "Kuwait's roadmap to becoming a regional AI leader" },
-  { time: "9:30 – 10:15", title: "Shaping Kuwait's AI & Data Ecosystem — Vision 2035 to Execution", type: "panel", brief: "Strategic integration, public-private partnerships, GenAI applications" },
-  { time: "10:15 – 10:30", title: "Enterprise AI Transformation", type: "keynote", brief: "Turning Data & AI into regulated, profitable solutions" },
-  { time: "10:30 – 11:00", title: "VIP Exhibition Tour & Networking Break", type: "break" },
-  { time: "11:00 – 11:40", title: "Building a Robust Data Ecosystem — Privacy & Data Centres", type: "panel", brief: "National data sovereignty, resilient cloud infrastructure" },
-  { time: "11:45 – 12:00", title: "Edge AI & IoT for Real-Time Applications", type: "presentation" },
-  { time: "12:00 – 12:15", title: "AI for Sustainability, Energy & Oil and Gas", type: "presentation" },
-  { time: "12:15 – 13:00", title: "AI-Driven Transformation — Mitigating Threats", type: "panel", brief: "Bias mitigation, ethical compliance, digital trust" },
-  { time: "13:00 – 13:30", title: "Prayer & Networking Break", type: "break" },
-  { time: "13:30 – 13:45", title: "AI for Energy Efficiency & Oil and Gas", type: "presentation" },
-  { time: "13:45 – 14:30", title: "Advancing e-Government & Digital Identity", type: "panel", brief: "Biometrics, citizen services, national security" },
-  { time: "14:30 – 14:45", title: "AI Impact in Organisations", type: "presentation", brief: "Operational risks, decision making, customer service" },
-  { time: "14:45 – 15:00", title: "Awards Ceremony & Close of Conference", type: "awards" },
+const AGENDA = [
+  { time: "08:00 – 09:00", title: "Registration, Networking & Refreshments", type: "break" as const },
+  { time: "09:00 – 09:15", title: "Welcome Remarks & Opening Ceremony", subtitle: "Welcome Address by Events First Group (EFG)", type: "ceremony" as const },
+  { time: "09:15 – 09:30", title: "Opening Keynote", subtitle: "Kuwait's Transformative Journey & Catalyzing Vision — Roadmap to becoming a regional AI leader", type: "keynote" as const },
+  { time: "09:30 – 10:15", title: "Panel Discussion 1 – AI & Data Ecosystem", subtitle: "Shaping Kuwait's AI & Data Ecosystem — Vision 2035 to Execution, Strategic Integration, Public-Private Partnerships & GenAI Applications", type: "panel" as const },
+  { time: "10:15 – 10:30", title: "Sponsor Presentation 1", type: "sponsor" as const },
+  { time: "10:30 – 11:00", title: "VIP Exhibition Tour & Networking Break", type: "break" as const },
+  { time: "11:00 – 11:40", title: "Panel Discussion 2 – Data Infrastructure", subtitle: "Building a Robust Data Ecosystem — National Data Sovereignty, Privacy Frameworks & Resilient Cloud Infrastructure", type: "panel" as const },
+  { time: "11:45 – 12:00", title: "Edge AI & IoT for Real-Time Applications", type: "presentation" as const },
+  { time: "12:00 – 12:15", title: "AI for Sustainability, Energy & Oil and Gas", type: "presentation" as const },
+  { time: "12:15 – 13:00", title: "Panel Discussion 3 – AI Governance & Trust", subtitle: "AI-Driven Transformation — Mitigating Threats, Bias Mitigation, Ethical Compliance & Digital Trust", type: "panel" as const },
+  { time: "13:00 – 13:30", title: "Prayer & Networking Break", type: "break" as const },
+  { time: "13:30 – 13:45", title: "Sponsor Presentation 2", type: "sponsor" as const },
+  { time: "13:45 – 14:30", title: "Panel Discussion 4 – Digital Government", subtitle: "Advancing e-Government & Digital Identity — Biometrics, Citizen Services & National Security", type: "panel" as const },
+  { time: "14:30 – 14:45", title: "AI Impact in Organisations", subtitle: "Operational risks, decision making, customer service", type: "presentation" as const },
+  { time: "14:45 – 15:00", title: "Awards Ceremony & Close of Conference", type: "awards" as const },
 ];
 
-const AWARDS: { title: string; desc: string }[] = [
+const AWARDS = [
   { title: "AI Transformation Leader", desc: "Recognising leaders driving enterprise-wide AI adoption and measurable business outcomes." },
   { title: "Data-Driven Innovation", desc: "Celebrating organisations leveraging data to create breakthrough products and services." },
   { title: "Public Sector AI & Data Impact", desc: "Honouring government entities advancing citizen services through AI and data analytics." },
@@ -213,48 +233,49 @@ const AWARDS: { title: string; desc: string }[] = [
   { title: "AI & Data Educator / Mentor", desc: "Celebrating those advancing AI literacy and mentoring the next generation of talent." },
 ];
 
-const WHY_ATTEND: { title: string; desc: string; icon: string }[] = [
-  { title: "Shape Kuwait's Digital Horizon", desc: "Directly contribute to the national discourse on Data and AI — influencing policy, investment, and strategic direction.", icon: "M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" },
-  { title: "Curated Connections", desc: "Move beyond generic networking — connect with 250+ handpicked senior leaders, CDOs, government strategists, and AI architects.", icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" },
-  { title: "Practical, Localized Strategies", desc: "Laser-focused on actionable strategies for deploying Data and AI solutions specifically within the Kuwaiti context.", icon: "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" },
-  { title: "Deep-Dive Workshops", desc: "Interactive sessions on critical Data and AI challenges facing Kuwaiti businesses and government — bring your toughest problems.", icon: "M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" },
-  { title: "Co-Create Kuwait's AI Roadmap", desc: "A dedicated session to outline Kuwait's National Data & AI roadmap — contribute to strategic priorities and investment areas.", icon: "M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" },
-  { title: "Overcome AI Challenges", desc: "Discuss your challenges with data and AI solution providers, get expert answers, and create strategic alliances.", icon: "M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0z" },
+const AWARDS_ELIGIBILITY = [
+  "Government and public sector organisations",
+  "Enterprises and private sector companies",
+  "Banking and financial institutions",
+  "Data and AI technology providers",
+  "Academic and research institutions",
 ];
 
-const WHO_SHOULD_ATTEND = {
-  roles: [
-    "Government Officials",
-    "Senior Advisors",
-    "CIO",
-    "CTO",
-    "CDO",
-    "Chief AI Officer",
-    "Chief Digital Officer",
-    "Chief Innovation Officer",
-    "Chief Strategy Officer",
-    "Head of Data Science",
-    "Head of ML / AI",
-    "Data Architect",
-    "AI Architect",
-    "Director of Data Engineering",
-    "Head of BI",
-    "Head of Digital Transformation",
-    "Innovation Leads",
-    "Business Unit Leaders",
-    "Academics & Researchers",
-  ],
-  industries: [
-    { name: "Government & Public Sector", pct: 20 },
-    { name: "Technology", pct: 15 },
-    { name: "BFSI", pct: 15 },
-    { name: "Energy", pct: 10 },
-    { name: "Transportation", pct: 10 },
-    { name: "Education", pct: 10 },
-    { name: "Healthcare", pct: 10 },
-    { name: "Manufacturing & Retail", pct: 10 },
-  ],
-};
+const WHY_ATTEND = [
+  { title: "Shape Kuwait's Digital Horizon", desc: "Directly contribute to the national discourse on Data and AI — influencing policy, investment, and strategic direction.", stat: "National Impact", statValue: "1st", icon: "M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" },
+  { title: "Curated Connections", desc: "Move beyond generic networking — connect with 250+ handpicked senior leaders, CDOs, government strategists, and AI architects.", stat: "Senior Leaders", statValue: "250+", icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" },
+  { title: "Practical, Localized Strategies", desc: "Laser-focused on actionable strategies for deploying Data and AI solutions specifically within the Kuwaiti context.", stat: "Kuwait-Focused", statValue: "100%", icon: "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" },
+  { title: "Deep-Dive Workshops", desc: "Interactive sessions on critical Data and AI challenges facing Kuwaiti businesses and government — bring your toughest problems.", stat: "Live Workshops", statValue: "4", icon: "M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" },
+  { title: "Co-Create Kuwait's AI Roadmap", desc: "A dedicated session to outline Kuwait's National Data & AI roadmap — contribute to strategic priorities and investment areas.", stat: "Market Size", statValue: "$9B+", icon: "M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" },
+  { title: "Overcome AI Challenges", desc: "Discuss your challenges with data and AI solution providers, get expert answers, and create strategic alliances.", stat: "Solution Providers", statValue: "30+", icon: "M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0z" },
+];
+
+const ATTEND_ROLES = [
+  { label: "Government Officials & Senior Advisors", icon: "M3 21h18M3 10h18M3 7l9-4 9 4M4 10v11m16-11v11" },
+  { label: "Chief Information Officer (CIO)", icon: "M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" },
+  { label: "Chief Technology Officer (CTO)", icon: "M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" },
+  { label: "Chief Data Officer (CDO)", icon: "M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" },
+  { label: "Chief AI Officer (CAIO)", icon: "M9.663 17h4.674M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" },
+  { label: "Chief Digital Officer", icon: "M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9" },
+  { label: "Head of Data Science", icon: "M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" },
+  { label: "Head of ML / AI", icon: "M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zm0 8a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1v-2zm0 8a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1v-2z" },
+  { label: "Data & AI Architect", icon: "M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" },
+  { label: "Director of Data Engineering", icon: "M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.573-1.066z M15 12a3 3 0 11-6 0 3 3 0 016 0z" },
+  { label: "Head of Digital Transformation", icon: "M13 10V3L4 14h7v7l9-11h-7z" },
+  { label: "Business Unit & Innovation Leads", icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" },
+  { label: "Academics & Researchers", icon: "M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" },
+];
+
+const ATTEND_INDUSTRIES = [
+  { name: "Government & Public Sector" },
+  { name: "Technology" },
+  { name: "Banking & Financial Services" },
+  { name: "Energy" },
+  { name: "Transportation" },
+  { name: "Education" },
+  { name: "Healthcare" },
+  { name: "Manufacturing & Retail" },
+];
 
 // ═══════════════════════════════════════════════════════════════════════════════
 //  PAGE
@@ -303,7 +324,7 @@ function HeroSection() {
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/ai-photo.jpeg"
+          src="/ai-photos.png"
           alt=""
           aria-hidden="true"
           className="daik-hero-img absolute"
@@ -454,7 +475,7 @@ function HeroSection() {
             style={{
               fontFamily: "var(--font-display)",
               fontWeight: 800,
-              fontSize: "clamp(48px, 7vw, 100px)",
+              fontSize: "clamp(44px, 6.5vw, 88px)",
               letterSpacing: "-3px",
               lineHeight: 0.95,
               marginTop: 24,
@@ -464,9 +485,22 @@ function HeroSection() {
               WebkitTextFillColor: "transparent",
             }}
           >
-            Intelligence
+            Data & AI First
             <br />
-            Amplified
+            <span style={{ WebkitTextFillColor: E_BRIGHT }}>Kuwait</span>
+            <span
+              style={{
+                WebkitTextFillColor: "transparent",
+                background: `linear-gradient(90deg, ${E}80, ${E_BRIGHT})`,
+                backgroundSize: "100% 100%",
+                WebkitBackgroundClip: "text",
+                fontSize: "clamp(28px, 4vw, 52px)",
+                letterSpacing: "-1px",
+                marginLeft: 12,
+              }}
+            >
+              2026
+            </span>
           </motion.h1>
 
           {/* Sub-headline */}
@@ -484,8 +518,7 @@ function HeroSection() {
               lineHeight: 1.6,
             }}
           >
-            Kuwait&rsquo;s Journey to an AI-Driven Era — turning data & AI into
-            regulated, profitable, and scalable solutions.
+            Turning Data & AI into regulated, profitable, and scalable solutions.
           </motion.p>
 
           {/* Date + Location */}
@@ -789,7 +822,7 @@ function MarketContext() {
     <section
       ref={ref}
       className="relative overflow-hidden"
-      style={{ background: "#0A0A0A", padding: "clamp(60px, 8vw, 100px) 0" }}
+      style={{ background: "#0A0A0A", padding: "clamp(40px, 5vw, 72px) 0" }}
     >
       <DotMatrixGrid color={E} opacity={0.02} spacing={28} />
 
@@ -807,7 +840,7 @@ function MarketContext() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, ease: EASE }}
-          style={{ textAlign: "center", marginBottom: 48 }}
+          style={{ textAlign: "center", marginBottom: 32 }}
         >
           <div className="flex items-center justify-center gap-3" style={{ marginBottom: 12 }}>
             <span style={{ width: 30, height: 1, background: E }} />
@@ -990,7 +1023,7 @@ function FocusAreas() {
     <section
       ref={ref}
       className="relative overflow-hidden"
-      style={{ background: "#111111", padding: "clamp(60px, 8vw, 100px) 0" }}
+      style={{ background: "#111111", padding: "clamp(40px, 5vw, 72px) 0" }}
     >
       <DotMatrixGrid color={E} opacity={0.015} spacing={24} />
 
@@ -1008,7 +1041,7 @@ function FocusAreas() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, ease: EASE }}
-          style={{ textAlign: "center", marginBottom: 48 }}
+          style={{ textAlign: "center", marginBottom: 32 }}
         >
           <div className="flex items-center justify-center gap-3" style={{ marginBottom: 12 }}>
             <span style={{ width: 30, height: 1, background: E }} />
@@ -1257,124 +1290,277 @@ function HighlightsGrid() {
     <section
       ref={ref}
       className="relative overflow-hidden"
-      style={{ background: "#0A0A0A", padding: "clamp(60px, 8vw, 100px) 0" }}
+      style={{ background: "#080E0C", padding: "clamp(40px, 5vw, 72px) 0" }}
     >
+      {/* Atmospheric radials */}
       <div
+        className="absolute inset-0 pointer-events-none"
         style={{
-          maxWidth: 1100,
+          background: `radial-gradient(ellipse 50% 60% at 25% 40%, ${E}06 0%, transparent 70%)`,
+        }}
+      />
+      <DotMatrixGrid color={E} opacity={0.015} spacing={28} />
+
+      <div
+        className="daik-hl-split"
+        style={{
+          maxWidth: 1200,
           margin: "0 auto",
           padding: "0 clamp(20px, 4vw, 60px)",
           position: "relative",
           zIndex: 1,
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          gap: "clamp(40px, 6vw, 80px)",
+          alignItems: "start",
         }}
       >
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, ease: EASE }}
-          style={{ textAlign: "center", marginBottom: 48 }}
-        >
-          <div className="flex items-center justify-center gap-3" style={{ marginBottom: 12 }}>
-            <span style={{ width: 30, height: 1, background: E }} />
-            <span style={{ fontFamily: "var(--font-outfit)", fontSize: 11, fontWeight: 600, letterSpacing: "2.5px", textTransform: "uppercase", color: E }}>
-              What Makes This Different
-            </span>
-            <span style={{ width: 30, height: 1, background: E }} />
-          </div>
-          <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(30px, 3.5vw, 48px)", letterSpacing: "-1.5px", color: "var(--white)", lineHeight: 1.1, margin: 0 }}>
-            10 Reasons to Be There
-          </h2>
-        </motion.div>
-
-        {/* Grid */}
-        <div
-          className="daik-highlights-grid"
-          style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 14 }}
-        >
-          {HIGHLIGHTS.map((h, i) => (
-            <motion.div
-              key={h.title}
-              initial={{ opacity: 0, y: 15 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.15 + i * 0.05, ease: EASE }}
+        {/* ─── LEFT: Header + summary ─── */}
+        <div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, ease: EASE }}
+          >
+            <div className="flex items-center gap-3" style={{ marginBottom: 16 }}>
+              <span style={{ width: 30, height: 1, background: E }} />
+              <span
+                style={{
+                  fontFamily: "var(--font-outfit)",
+                  fontSize: 11,
+                  fontWeight: 600,
+                  letterSpacing: "2.5px",
+                  textTransform: "uppercase",
+                  color: E,
+                }}
+              >
+                What Makes This Different
+              </span>
+            </div>
+            <h2
+              style={{
+                fontFamily: "var(--font-display)",
+                fontWeight: 800,
+                fontSize: "clamp(30px, 3.5vw, 48px)",
+                letterSpacing: "-1.5px",
+                color: "var(--white)",
+                lineHeight: 1.1,
+                margin: "0 0 20px",
+              }}
             >
-              <HighlightCard item={h} idx={i} />
-            </motion.div>
+              Why You Should
+              <br />
+              Be There
+            </h2>
+            <p
+              style={{
+                fontFamily: "var(--font-outfit)",
+                fontSize: 15,
+                fontWeight: 300,
+                color: "#606060",
+                lineHeight: 1.7,
+                maxWidth: 420,
+                margin: 0,
+              }}
+            >
+              Not another tech conference. A purpose-built summit for the leaders
+              turning Data &amp; AI into Kuwait&rsquo;s competitive advantage.
+            </p>
+          </motion.div>
+
+          {/* Large stat highlight */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.3, ease: EASE }}
+            style={{
+              marginTop: 48,
+              display: "flex",
+              gap: 32,
+            }}
+          >
+            {[
+              { num: 250, suffix: "+", label: "Senior Leaders" },
+              { num: 4, suffix: "", label: "Panel Sessions" },
+              { num: 8, suffix: "", label: "Award Categories" },
+            ].map((s, i) => (
+              <div key={s.label}>
+                <span
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: "clamp(36px, 4vw, 52px)",
+                    fontWeight: 800,
+                    color: E_BRIGHT,
+                    lineHeight: 1,
+                    display: "block",
+                  }}
+                >
+                  <Counter to={s.num} suffix={s.suffix} duration={1400 + i * 200} />
+                </span>
+                <span
+                  style={{
+                    fontFamily: "var(--font-outfit)",
+                    fontSize: 11,
+                    fontWeight: 500,
+                    color: "#505050",
+                    letterSpacing: "1px",
+                    textTransform: "uppercase",
+                    marginTop: 6,
+                    display: "block",
+                  }}
+                >
+                  {s.label}
+                </span>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* ─── RIGHT: Feature items ─── */}
+        <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
+          {HIGHLIGHTS.map((item, i) => (
+            <HighlightRow key={item.title} item={item} idx={i} inView={inView} />
           ))}
         </div>
       </div>
 
       <style jsx global>{`
-        @media (max-width: 768px) { .daik-highlights-grid { grid-template-columns: 1fr !important; } }
+        @media (max-width: 768px) {
+          .daik-hl-split { grid-template-columns: 1fr !important; }
+        }
       `}</style>
     </section>
   );
 }
 
-function HighlightCard({ item, idx }: { item: (typeof HIGHLIGHTS)[0]; idx: number }) {
+function HighlightRow({
+  item,
+  idx,
+  inView,
+}: {
+  item: (typeof HIGHLIGHTS)[0];
+  idx: number;
+  inView: boolean;
+}) {
   const [h, setH] = useState(false);
 
   return (
-    <div
-      className="relative overflow-hidden transition-all"
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.5, delay: 0.15 + idx * 0.08, ease: EASE }}
+      className="relative transition-all"
       style={{
-        borderRadius: 14,
-        padding: "24px 22px",
-        background: h ? `${E}06` : "rgba(255,255,255,0.02)",
-        border: `1px solid ${h ? `${E}25` : "rgba(255,255,255,0.04)"}`,
-        transitionDuration: "0.35s",
+        padding: "24px 0",
+        borderBottom: `1px solid ${h ? `${E}20` : "rgba(255,255,255,0.06)"}`,
+        cursor: "default",
       }}
       onMouseEnter={() => setH(true)}
       onMouseLeave={() => setH(false)}
     >
-      <div className="flex items-start gap-4">
-        {/* Icon */}
-        <div
+      {/* Hover glow background */}
+      <div
+        className="absolute inset-0 pointer-events-none transition-opacity"
+        style={{
+          background: `linear-gradient(90deg, ${E}06 0%, transparent 80%)`,
+          opacity: h ? 1 : 0,
+          transitionDuration: "0.4s",
+        }}
+      />
+
+      <div className="relative flex items-start gap-4">
+        {/* Number index */}
+        <span
           style={{
-            width: 40,
-            height: 40,
-            borderRadius: 10,
-            background: `${E}10`,
-            border: `1px solid ${E}20`,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexShrink: 0,
+            fontFamily: "var(--font-display)",
+            fontSize: 13,
+            fontWeight: 700,
+            color: h ? E_BRIGHT : `${E}50`,
+            minWidth: 24,
+            paddingTop: 2,
+            transition: "color 0.3s",
           }}
         >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={E_BRIGHT} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d={item.icon} />
-          </svg>
+          {(idx + 1).toString().padStart(2, "0")}
+        </span>
+
+        <div style={{ flex: 1 }}>
+          {/* Title + stat row */}
+          <div className="flex items-center justify-between gap-3">
+            <h3
+              style={{
+                fontFamily: "var(--font-display)",
+                fontWeight: 700,
+                fontSize: 17,
+                color: h ? "var(--white)" : "#c0c0c0",
+                letterSpacing: "-0.3px",
+                margin: 0,
+                transition: "color 0.3s",
+              }}
+            >
+              {item.title}
+            </h3>
+            <span
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: 15,
+                fontWeight: 800,
+                color: h ? E_BRIGHT : `${E}40`,
+                whiteSpace: "nowrap",
+                transition: "color 0.3s",
+              }}
+            >
+              {item.stat}
+            </span>
+          </div>
+
+          {/* Description — expands on hover */}
+          <motion.div
+            initial={false}
+            animate={{
+              height: h ? "auto" : 0,
+              opacity: h ? 1 : 0,
+              marginTop: h ? 8 : 0,
+            }}
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            style={{ overflow: "hidden" }}
+          >
+            <p
+              style={{
+                fontFamily: "var(--font-outfit)",
+                fontSize: 13,
+                fontWeight: 300,
+                color: "#707070",
+                lineHeight: 1.65,
+                margin: 0,
+              }}
+            >
+              {item.desc}
+            </p>
+          </motion.div>
         </div>
 
-        <div>
-          <h4
-            style={{
-              fontFamily: "var(--font-display)",
-              fontSize: 16,
-              fontWeight: 700,
-              color: "var(--white)",
-              margin: 0,
-            }}
+        {/* Arrow */}
+        <motion.div
+          animate={{ x: h ? 4 : 0, opacity: h ? 1 : 0.3 }}
+          transition={{ duration: 0.3 }}
+          style={{ paddingTop: 2, flexShrink: 0 }}
+        >
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke={h ? E_BRIGHT : "#404040"}
+            strokeWidth="2"
+            strokeLinecap="round"
+            style={{ transition: "stroke 0.3s" }}
           >
-            {item.title}
-          </h4>
-          <p
-            style={{
-              fontFamily: "var(--font-outfit)",
-              fontSize: 13,
-              fontWeight: 300,
-              color: "#707070",
-              lineHeight: 1.6,
-              margin: "6px 0 0",
-            }}
-          >
-            {item.desc}
-          </p>
-        </div>
+            <path d="M9 18l6-6-6-6" />
+          </svg>
+        </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -1382,165 +1568,339 @@ function HighlightCard({ item, idx }: { item: (typeof HIGHLIGHTS)[0]; idx: numbe
 //  6. AGENDA TIMELINE
 // ═══════════════════════════════════════════════════════════════════════════════
 
+const AGENDA_TYPE_CONFIG: Record<string, { color: string; label: string; tier: "headline" | "standard" | "sponsor" | "break" }> = {
+  panel: { color: E, label: "Panel", tier: "headline" },
+  keynote: { color: "#C4A34A", label: "Keynote", tier: "headline" },
+  ceremony: { color: E_BRIGHT, label: "Opening", tier: "standard" },
+  presentation: { color: "#808080", label: "Presentation", tier: "standard" },
+  sponsor: { color: "#404040", label: "Sponsor", tier: "sponsor" },
+  break: { color: "#333", label: "Break", tier: "break" },
+  awards: { color: "#C4A34A", label: "Awards", tier: "headline" },
+};
+
+const AGENDA_FILTERS = [
+  { key: "all", label: "All" },
+  { key: "panel", label: "Panels" },
+  { key: "keynote", label: "Keynotes" },
+  { key: "presentation", label: "Presentations" },
+  { key: "break", label: "Breaks" },
+] as const;
+
 function AgendaTimeline() {
   const ref = useRef<HTMLElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const [activeFilter, setActiveFilter] = useState<string>("all");
 
-  const typeColor: Record<string, string> = {
-    panel: E_BRIGHT,
-    keynote: "#C4A34A",
-    presentation: "#808080",
-    ceremony: E_BRIGHT,
-    registration: "#505050",
-    break: "#383838",
-    awards: "#C4A34A",
-  };
+  const filtered = activeFilter === "all"
+    ? AGENDA
+    : AGENDA.filter((item) => {
+        if (activeFilter === "keynote") return item.type === "keynote" || item.type === "ceremony";
+        if (activeFilter === "break") return item.type === "break";
+        return item.type === activeFilter;
+      });
 
-  const typeLabel: Record<string, string> = {
-    panel: "Panel Discussion",
-    keynote: "Keynote",
-    presentation: "Presentation",
-    ceremony: "Ceremony",
-    registration: "Registration",
-    break: "Break",
-    awards: "Awards",
-  };
+  // 2-column split for "all", single column for filtered
+  const isTwoCol = activeFilter === "all";
+  const mid = Math.ceil(filtered.length / 2);
+  const colA = isTwoCol ? filtered.slice(0, mid) : filtered;
+  const colB = isTwoCol ? filtered.slice(mid) : [];
 
   return (
     <section
       ref={ref}
-      className="relative overflow-hidden"
-      style={{ background: "#111111", padding: "clamp(60px, 8vw, 100px) 0" }}
+      id="agenda"
+      style={{
+        background: "linear-gradient(180deg, #040E0A 0%, #061410 35%, #050F0C 65%, #040C09 100%)",
+        padding: "clamp(40px,5vw,72px) 0",
+        position: "relative",
+        overflow: "hidden",
+      }}
     >
-      <DotMatrixGrid color={E} opacity={0.015} spacing={26} />
+      {/* Emerald atmosphere */}
+      <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 80% 50% at 50% 0%, ${E}0A, transparent 70%)` }} />
+      <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 50% 60% at 85% 50%, #0a3a2c10, transparent 70%)` }} />
+      <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 40% 40% at 10% 75%, #0a2a1a0A, transparent 60%)` }} />
+      <DotMatrixGrid color={E} opacity={0.02} spacing={26} />
 
-      <div
-        style={{
-          maxWidth: 800,
-          margin: "0 auto",
-          padding: "0 clamp(20px, 4vw, 60px)",
-          position: "relative",
-          zIndex: 1,
-        }}
-      >
+      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 clamp(20px,5vw,80px)", position: "relative", zIndex: 1 }}>
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, ease: EASE }}
-          style={{ textAlign: "center", marginBottom: 48 }}
+          style={{ textAlign: "center", marginBottom: 40 }}
         >
-          <div className="flex items-center justify-center gap-3" style={{ marginBottom: 12 }}>
+          <div className="flex items-center justify-center gap-3" style={{ marginBottom: 16 }}>
             <span style={{ width: 30, height: 1, background: E }} />
             <span style={{ fontFamily: "var(--font-outfit)", fontSize: 11, fontWeight: 600, letterSpacing: "2.5px", textTransform: "uppercase", color: E }}>
-              Full Day Agenda
+              Full Day Programme
             </span>
             <span style={{ width: 30, height: 1, background: E }} />
           </div>
-          <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(30px, 3.5vw, 48px)", letterSpacing: "-1.5px", color: "var(--white)", lineHeight: 1.1, margin: 0 }}>
-            One Day. Every Dimension of AI.
+          <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(28px,3.8vw,48px)", letterSpacing: "-1.5px", color: "white", lineHeight: 1.08, margin: "16px 0 0" }}>
+            Agenda
           </h2>
-          <p style={{ fontFamily: "var(--font-outfit)", fontSize: 12, fontWeight: 400, color: "#505050", marginTop: 12, letterSpacing: "1px" }}>
-            Draft agenda — subject to change
+          <p style={{ fontFamily: "var(--font-outfit)", fontSize: 13, fontStyle: "italic", color: "#404040", marginTop: 14 }}>
+            Draft agenda — subject to change.
           </p>
         </motion.div>
 
-        {/* Timeline */}
-        <div className="relative" style={{ paddingLeft: 40 }}>
-          {/* Vertical line */}
-          <div
-            className="absolute"
-            style={{
-              left: 14,
-              top: 0,
-              bottom: 0,
-              width: 2,
-              background: `linear-gradient(to bottom, ${E}40, ${E}15)`,
-            }}
-          />
-
-          {AGENDA.map((item, i) => {
-            const color = typeColor[item.type] || "#505050";
-            const isHighlight = item.type === "panel" || item.type === "keynote" || item.type === "awards";
-
+        {/* Filter Chips */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.1, ease: EASE }}
+          className="flex flex-wrap justify-center gap-2"
+          style={{ marginBottom: 32 }}
+        >
+          {AGENDA_FILTERS.map((f) => {
+            const isActive = activeFilter === f.key;
             return (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, x: -15 }}
-                animate={inView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.1 + i * 0.04, ease: EASE }}
-                className="relative"
-                style={{ marginBottom: 12 }}
+              <button
+                key={f.key}
+                onClick={() => setActiveFilter(f.key)}
+                style={{
+                  padding: "7px 20px",
+                  borderRadius: 50,
+                  background: isActive ? E : "rgba(255,255,255,0.03)",
+                  border: `1px solid ${isActive ? E : "rgba(255,255,255,0.06)"}`,
+                  fontFamily: "var(--font-outfit)",
+                  fontSize: 12,
+                  fontWeight: isActive ? 600 : 400,
+                  color: isActive ? "white" : "#606060",
+                  cursor: "pointer",
+                  transition: "all 0.3s cubic-bezier(0.16,1,0.3,1)",
+                  letterSpacing: "0.3px",
+                }}
               >
-                {/* Node */}
-                <div
-                  className="absolute"
-                  style={{
-                    left: -33,
-                    top: 18,
-                    width: isHighlight ? 12 : 8,
-                    height: isHighlight ? 12 : 8,
-                    borderRadius: "50%",
-                    background: isHighlight ? color : "transparent",
-                    border: isHighlight ? "none" : `2px solid ${color}50`,
-                    boxShadow: isHighlight ? `0 0 10px ${color}40` : "none",
-                  }}
-                />
-
-                {/* Card */}
-                <div
-                  style={{
-                    padding: isHighlight ? "18px 20px" : "12px 20px",
-                    borderRadius: 12,
-                    background: isHighlight ? `${E}06` : "rgba(255,255,255,0.015)",
-                    border: `1px solid ${isHighlight ? `${E}18` : "rgba(255,255,255,0.04)"}`,
-                  }}
-                >
-                  <div className="flex items-center gap-3" style={{ marginBottom: 4 }}>
-                    <span style={{ fontFamily: "var(--font-display)", fontSize: 13, fontWeight: 700, color }}>
-                      {item.time}
-                    </span>
-                    <span
-                      style={{
-                        fontFamily: "var(--font-outfit)",
-                        fontSize: 9,
-                        fontWeight: 600,
-                        letterSpacing: "1.5px",
-                        textTransform: "uppercase",
-                        color,
-                        opacity: 0.7,
-                        padding: "2px 8px",
-                        borderRadius: 50,
-                        border: `1px solid ${color}30`,
-                      }}
-                    >
-                      {typeLabel[item.type]}
-                    </span>
-                  </div>
-                  <h4
-                    style={{
-                      fontFamily: "var(--font-display)",
-                      fontSize: isHighlight ? 16 : 14,
-                      fontWeight: isHighlight ? 700 : 500,
-                      color: isHighlight ? "var(--white)" : "#c0c0c0",
-                      margin: 0,
-                      lineHeight: 1.3,
-                    }}
-                  >
-                    {item.title}
-                  </h4>
-                  {item.brief && (
-                    <p style={{ fontFamily: "var(--font-outfit)", fontSize: 12, fontWeight: 300, color: "#606060", margin: "6px 0 0", lineHeight: 1.5 }}>
-                      {item.brief}
-                    </p>
-                  )}
-                </div>
-              </motion.div>
+                {f.label}
+              </button>
             );
           })}
-        </div>
+        </motion.div>
+
+        {/* ── Glass Container ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.15, ease: EASE }}
+          style={{
+            borderRadius: 24,
+            background: "linear-gradient(180deg, rgba(8,20,16,0.6) 0%, rgba(4,14,10,0.45) 100%)",
+            backdropFilter: "blur(24px)",
+            WebkitBackdropFilter: "blur(24px)",
+            border: `1px solid rgba(15,115,94,0.08)`,
+            boxShadow: `0 24px 80px rgba(0,6,4,0.5), inset 0 1px 0 rgba(20,168,130,0.04)`,
+            padding: "clamp(24px,3vw,40px)",
+            position: "relative",
+            overflow: "hidden",
+          }}
+        >
+          {/* Top edge glow */}
+          <div className="absolute pointer-events-none" style={{ top: 0, left: "10%", right: "10%", height: 1, background: `linear-gradient(90deg, transparent, ${E}30, transparent)` }} />
+          <div className="absolute pointer-events-none" style={{ top: 0, left: 0, right: 0, height: 100, background: `radial-gradient(ellipse 80% 100% at 50% 0%, ${E}04, transparent)`, borderRadius: "24px 24px 0 0" }} />
+
+          {/* Content: 2-col for "all", single centered col for filtered */}
+          <div
+            className={isTwoCol ? "daik-agenda-cols" : ""}
+            style={{
+              display: "grid",
+              gridTemplateColumns: isTwoCol ? "1fr 1fr" : "1fr",
+              maxWidth: isTwoCol ? "none" : 680,
+              margin: isTwoCol ? 0 : "0 auto",
+              gap: 0,
+              position: "relative",
+              zIndex: 1,
+            }}
+          >
+            {/* Column 1 (or only column when filtered) */}
+            <div style={{
+              paddingRight: isTwoCol ? "clamp(16px,2vw,32px)" : 0,
+              borderRight: isTwoCol ? "1px solid rgba(255,255,255,0.04)" : "none",
+            }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: 3 }}>
+                <AnimatePresence mode="popLayout">
+                  {colA.map((item, i) => {
+                    const cfg = AGENDA_TYPE_CONFIG[item.type] || AGENDA_TYPE_CONFIG.break;
+                    const idx = AGENDA.indexOf(item);
+                    return (
+                      <motion.div
+                        key={`agenda-${idx}`}
+                        layout
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.97 }}
+                        transition={{ duration: 0.3, delay: i * 0.02, ease: EASE }}
+                      >
+                        <AgendaItem item={item} cfg={cfg} />
+                      </motion.div>
+                    );
+                  })}
+                </AnimatePresence>
+              </div>
+            </div>
+
+            {/* Center rail glow (only in 2-col mode) */}
+            {isTwoCol && (
+              <div className="daik-agenda-rail-glow absolute pointer-events-none" style={{ top: 0, bottom: 0, left: "50%", width: 2, transform: "translateX(-50%)", background: `linear-gradient(180deg, transparent, ${E}15, ${E}08, transparent)` }} />
+            )}
+
+            {/* Column 2 (only in 2-col mode) */}
+            {isTwoCol && (
+              <div style={{ paddingLeft: "clamp(16px,2vw,32px)" }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: 3 }}>
+                  <AnimatePresence mode="popLayout">
+                    {colB.map((item, i) => {
+                      const cfg = AGENDA_TYPE_CONFIG[item.type] || AGENDA_TYPE_CONFIG.break;
+                      const idx = AGENDA.indexOf(item);
+                      return (
+                        <motion.div
+                          key={`agenda-${idx}`}
+                          layout
+                          initial={{ opacity: 0, y: 8 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, scale: 0.97 }}
+                          transition={{ duration: 0.3, delay: 0.1 + i * 0.02, ease: EASE }}
+                        >
+                          <AgendaItem item={item} cfg={cfg} />
+                        </motion.div>
+                      );
+                    })}
+                  </AnimatePresence>
+                </div>
+              </div>
+            )}
+          </div>
+        </motion.div>
       </div>
+
+      <style jsx global>{`
+        @media (max-width: 768px) {
+          .daik-agenda-cols { grid-template-columns: 1fr !important; }
+          .daik-agenda-cols > div:first-child { border-right: none !important; padding-right: 0 !important; }
+          .daik-agenda-cols > div:last-child { padding-left: 0 !important; }
+          .daik-agenda-rail-glow { display: none !important; }
+        }
+      `}</style>
     </section>
+  );
+}
+
+function AgendaItem({
+  item,
+  cfg,
+}: {
+  item: (typeof AGENDA)[0];
+  cfg: { color: string; label: string; tier: string };
+}) {
+  const [hovered, setHovered] = useState(false);
+  const isBreak = cfg.tier === "break";
+  const isHeadline = cfg.tier === "headline";
+  const isSponsor = cfg.tier === "sponsor";
+
+  // ── Break: minimal separator ──
+  if (isBreak) {
+    return (
+      <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "14px 0" }}>
+        <div style={{ flex: 1, height: 1, background: "linear-gradient(90deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02))" }} />
+        <span style={{ fontFamily: "var(--font-outfit)", fontSize: 10, fontWeight: 500, color: "#353535", whiteSpace: "nowrap" }}>
+          {item.time}
+        </span>
+        <span style={{ fontFamily: "var(--font-outfit)", fontSize: 11, fontWeight: 500, color: "#404040", whiteSpace: "nowrap" }}>
+          {item.title}
+        </span>
+        <div style={{ flex: 1, height: 1, background: "linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.05))" }} />
+      </div>
+    );
+  }
+
+  // ── Sponsor: compact line ──
+  if (isSponsor) {
+    return (
+      <div
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: 10,
+          padding: "7px 12px",
+          borderRadius: 8,
+          borderLeft: `2px solid ${cfg.color}30`,
+          background: hovered ? "rgba(255,255,255,0.02)" : "transparent",
+          transition: "all 0.25s",
+          cursor: "default",
+        }}
+      >
+        <span style={{ fontFamily: "var(--font-outfit)", fontSize: 10, fontWeight: 500, color: "#303030", whiteSpace: "nowrap", minWidth: 80 }}>
+          {item.time}
+        </span>
+        <span style={{ fontFamily: "var(--font-outfit)", fontSize: 12, fontWeight: 400, color: hovered ? "#555" : "#404040", transition: "color 0.2s" }}>
+          {item.title}
+        </span>
+      </div>
+    );
+  }
+
+  // ── Headline & Standard: clean card ──
+  return (
+    <div
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        borderRadius: isHeadline ? 14 : 10,
+        background: hovered ? `${cfg.color}08` : "rgba(255,255,255,0.008)",
+        borderTop: `1px solid ${hovered ? `${cfg.color}25` : "rgba(255,255,255,0.03)"}`,
+        borderRight: `1px solid ${hovered ? `${cfg.color}25` : "rgba(255,255,255,0.03)"}`,
+        borderBottom: `1px solid ${hovered ? `${cfg.color}25` : "rgba(255,255,255,0.03)"}`,
+        borderLeft: `${isHeadline ? 3 : 2}px solid ${hovered ? cfg.color : `${cfg.color}${isHeadline ? "50" : "25"}`}`,
+        padding: isHeadline ? "16px 18px" : "12px 16px",
+        cursor: "default",
+        transition: "all 0.35s cubic-bezier(0.16,1,0.3,1)",
+        transform: hovered && isHeadline ? "translateY(-1px)" : "translateY(0)",
+        boxShadow: hovered && isHeadline ? `0 8px 24px ${cfg.color}08` : "none",
+      }}
+    >
+      {/* Time + label */}
+      <div className="flex items-center gap-3" style={{ marginBottom: "subtitle" in item && item.subtitle ? 8 : 0 }}>
+        <span style={{
+          fontFamily: "var(--font-outfit)", fontSize: 10, fontWeight: 600,
+          color: hovered ? `${cfg.color}` : isHeadline ? "rgba(255,255,255,0.5)" : "#505050",
+          whiteSpace: "nowrap", transition: "color 0.3s", minWidth: 80,
+        }}>
+          {item.time}
+        </span>
+        <span style={{
+          fontFamily: "var(--font-outfit)", fontSize: 8, fontWeight: 700,
+          letterSpacing: "1px", textTransform: "uppercase",
+          color: cfg.color, opacity: 0.7,
+        }}>
+          {cfg.label}
+        </span>
+      </div>
+
+      {/* Title */}
+      <h4 style={{
+        fontFamily: "var(--font-display)",
+        fontSize: isHeadline ? 15 : 13,
+        fontWeight: isHeadline ? 700 : 600,
+        color: isHeadline ? (hovered ? "white" : "rgba(255,255,255,0.85)") : (hovered ? "#c0c0c0" : "#808080"),
+        lineHeight: 1.35, margin: 0, transition: "color 0.3s",
+      }}>
+        {item.title}
+      </h4>
+
+      {/* Subtitle */}
+      {"subtitle" in item && item.subtitle && (
+        <p style={{
+          fontFamily: "var(--font-outfit)", fontSize: 12, fontWeight: 300,
+          color: "rgba(255,255,255,0.4)", lineHeight: 1.65,
+          margin: "8px 0 0", paddingLeft: 0,
+        }}>
+          {item.subtitle}
+        </p>
+      )}
+    </div>
   );
 }
 
@@ -1602,7 +1962,7 @@ function SpeakersSection() {
     <section
       ref={ref}
       className="relative overflow-hidden"
-      style={{ background: "#0A0A0A", padding: "clamp(60px, 8vw, 100px) 0" }}
+      style={{ background: "#0A0A0A", padding: "clamp(40px, 5vw, 72px) 0" }}
     >
       <div
         style={{
@@ -1775,123 +2135,536 @@ function SpeakerCard({ speaker }: { speaker: (typeof SPEAKERS)[0] }) {
 
 function AwardsSection() {
   const ref = useRef<HTMLElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const nomRef = useRef<HTMLDivElement>(null);
+  const nomInView = useInView(nomRef, { once: true, margin: "-60px" });
+  const GOLD = "#C4A34A";
+  const GOLD_BRIGHT = "#D4B85A";
+
+  const [expandedAward, setExpandedAward] = useState<number | null>(null);
+  const [hoveredElig, setHoveredElig] = useState<number | null>(null);
+  const [formData, setFormData] = useState({
+    orgName: "",
+    contactName: "",
+    email: "",
+    phone: "",
+    category: "",
+    reason: "",
+  });
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [focusedField, setFocusedField] = useState<string | null>(null);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setFormSubmitted(true);
+  };
+
+  const inputStyle = (field: string): React.CSSProperties => ({
+    width: "100%",
+    padding: "14px 18px",
+    borderRadius: 12,
+    backgroundColor: focusedField === field ? "rgba(196,163,74,0.08)" : "rgba(6,14,10,0.5)",
+    border: `1px solid ${focusedField === field ? `${GOLD}40` : `${E}15`}`,
+    boxShadow: focusedField === field ? `0 0 16px ${GOLD}08` : "none",
+    color: "white",
+    fontFamily: "var(--font-outfit)",
+    fontSize: 14,
+    fontWeight: 400,
+    outline: "none",
+    transition: "all 0.3s cubic-bezier(0.16,1,0.3,1)",
+  });
 
   return (
     <section
       ref={ref}
-      className="relative overflow-hidden"
       style={{
-        background: `linear-gradient(180deg, #111111 0%, ${E}06 50%, #0A0A0A 100%)`,
-        padding: "clamp(60px, 8vw, 100px) 0",
+        background: "linear-gradient(180deg, #040E0A 0%, #061410 30%, #071816 50%, #061410 70%, #040E0A 100%)",
+        padding: "clamp(40px,5vw,72px) 0",
+        position: "relative",
+        overflow: "hidden",
       }}
     >
-      <div
-        style={{
-          maxWidth: 1100,
-          margin: "0 auto",
-          padding: "0 clamp(20px, 4vw, 60px)",
-          position: "relative",
-          zIndex: 1,
-        }}
-      >
-        {/* Header */}
+      {/* Emerald atmosphere */}
+      <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 80% 50% at 50% 0%, ${E}0A, transparent 70%)` }} />
+      <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 50% 50% at 15% 70%, #0a2a1a0C, transparent 60%)` }} />
+      <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 100% 30% at 50% 100%, #001a0e 0%, transparent 70%)` }} />
+      {/* Gold accent glows */}
+      <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 35% 30% at 50% 35%, ${GOLD}06, transparent 70%)` }} />
+      <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 25% 25% at 75% 65%, ${GOLD}04, transparent 70%)` }} />
+      <DotMatrixGrid color={E} opacity={0.02} spacing={26} />
+
+      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 clamp(20px,5vw,80px)", position: "relative", zIndex: 1 }}>
+
+        {/* ── Section Header ── */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, ease: EASE }}
-          style={{ textAlign: "center", marginBottom: 48 }}
+          style={{ textAlign: "center", marginBottom: 36 }}
         >
-          <div className="flex items-center justify-center gap-3" style={{ marginBottom: 12 }}>
-            <span style={{ width: 30, height: 1, background: "#C4A34A" }} />
-            <span style={{ fontFamily: "var(--font-outfit)", fontSize: 11, fontWeight: 600, letterSpacing: "2.5px", textTransform: "uppercase", color: "#C4A34A" }}>
+          <div className="flex items-center justify-center gap-3" style={{ marginBottom: 16 }}>
+            <span style={{ width: 30, height: 1, background: GOLD }} />
+            <span style={{ fontFamily: "var(--font-outfit)", fontSize: 11, fontWeight: 600, letterSpacing: "2.5px", textTransform: "uppercase", color: GOLD }}>
               Recognition
             </span>
-            <span style={{ width: 30, height: 1, background: "#C4A34A" }} />
+            <span style={{ width: 30, height: 1, background: GOLD }} />
           </div>
-          <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(30px, 3.5vw, 48px)", letterSpacing: "-1.5px", color: "var(--white)", lineHeight: 1.1, margin: 0 }}>
-            8 Awards. Celebrating Excellence.
+          <h2 style={{
+            fontFamily: "var(--font-display)", fontWeight: 800,
+            fontSize: "clamp(28px,3.8vw,48px)", letterSpacing: "-1.5px",
+            color: "white", lineHeight: 1.08, margin: "16px 0 0",
+          }}>
+            Data &amp; AI First Awards 2026
           </h2>
-          <p style={{ fontFamily: "var(--font-outfit)", fontSize: 15, fontWeight: 300, color: "#606060", maxWidth: 500, margin: "14px auto 0", lineHeight: 1.7 }}>
-            Honouring pioneers and innovators shaping Kuwait&rsquo;s future through
-            Data and Artificial Intelligence.
+        </motion.div>
+
+        {/* ── Glass container wrapping all content ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.08, ease: EASE }}
+          style={{
+            padding: "clamp(28px,3.5vw,48px)",
+            borderRadius: 28,
+            background: "linear-gradient(180deg, rgba(8,20,16,0.6) 0%, rgba(4,14,10,0.45) 100%)",
+            border: `1px solid rgba(15,115,94,0.1)`,
+            backdropFilter: "blur(24px)",
+            WebkitBackdropFilter: "blur(24px)",
+            boxShadow: `0 24px 80px rgba(0,6,4,0.5), inset 0 1px 0 rgba(20,168,130,0.05), 0 0 120px ${E}03`,
+            position: "relative",
+            overflow: "hidden",
+          }}
+        >
+          {/* Top edge glow line */}
+          <div className="absolute pointer-events-none" style={{ top: 0, left: "10%", right: "10%", height: 1, background: `linear-gradient(90deg, transparent, ${GOLD}30, ${E}20, ${GOLD}30, transparent)` }} />
+          {/* Inner emerald ambient glow at top */}
+          <div className="absolute pointer-events-none" style={{ top: 0, left: 0, right: 0, height: 150, background: `radial-gradient(ellipse 80% 100% at 50% 0%, ${E}06, transparent)`, borderRadius: "28px 28px 0 0" }} />
+          {/* Inner gold ambient glow at center */}
+          <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 40% 35% at 50% 50%, ${GOLD}04, transparent 65%)` }} />
+          {/* Bottom edge glow */}
+          <div className="absolute pointer-events-none" style={{ bottom: 0, left: "15%", right: "15%", height: 1, background: `linear-gradient(90deg, transparent, ${E}15, transparent)` }} />
+
+          <div style={{ position: "relative", zIndex: 1 }}>
+
+        {/* ── 1. About Blurb ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.15, ease: EASE }}
+          style={{ marginBottom: 36, maxWidth: 680 }}
+        >
+          <h3 style={{
+            fontFamily: "var(--font-display)", fontWeight: 700,
+            fontSize: "clamp(18px,2.2vw,24px)", letterSpacing: "-0.5px",
+            color: "white", lineHeight: 1.28, margin: "0 0 14px",
+          }}>
+            Honouring Pioneers &amp; Innovators Shaping Kuwait&rsquo;s AI Future
+          </h3>
+          <p style={{
+            fontFamily: "var(--font-outfit)", fontWeight: 350,
+            fontSize: "clamp(13px,1.1vw,15px)", color: "rgba(255,255,255,0.45)",
+            lineHeight: 1.7, margin: 0,
+          }}>
+            The Data &amp; AI First Awards 2026 celebrate outstanding individuals and organisations driving AI transformation, data innovation, and governance leadership across Kuwait&rsquo;s public and private sectors.
           </p>
         </motion.div>
 
-        {/* Grid */}
-        <div
-          className="daik-awards-grid"
-          style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 14 }}
-        >
-          {AWARDS.map((a, i) => (
-            <motion.div
-              key={a.title}
-              initial={{ opacity: 0, y: 15 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.15 + i * 0.06, ease: EASE }}
-            >
-              <AwardCard award={a} idx={i} />
-            </motion.div>
-          ))}
+        {/* ── 2. Award Categories — Expanding Accordion ── */}
+        <div style={{ display: "flex", flexDirection: "column", marginBottom: 20 }}>
+          {AWARDS.map((award, i) => {
+            const isExpanded = expandedAward === i;
+            return (
+              <motion.div
+                key={award.title}
+                initial={{ opacity: 0, y: 12 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.2 + i * 0.04, ease: EASE }}
+                onClick={() => setExpandedAward(isExpanded ? null : i)}
+                style={{
+                  borderBottom: `1px solid ${isExpanded ? `${GOLD}20` : `${E}12`}`,
+                  cursor: "pointer",
+                  background: isExpanded ? `${E}08` : "transparent",
+                  transition: "background 0.4s cubic-bezier(0.16,1,0.3,1), border-color 0.4s",
+                  position: "relative",
+                }}
+                onMouseEnter={(e) => { if (!isExpanded) e.currentTarget.style.background = `${E}04`; }}
+                onMouseLeave={(e) => { if (!isExpanded) e.currentTarget.style.background = "transparent"; }}
+              >
+                {/* Gold left accent bar */}
+                <motion.div
+                  animate={{ scaleY: isExpanded ? 1 : 0, opacity: isExpanded ? 1 : 0 }}
+                  transition={{ duration: 0.35, ease: EASE }}
+                  style={{
+                    position: "absolute", left: 0, top: "15%", bottom: "15%",
+                    width: 2, background: `linear-gradient(180deg, ${GOLD}, ${GOLD_BRIGHT})`,
+                    transformOrigin: "center", borderRadius: 1,
+                  }}
+                />
+
+                {/* Main row */}
+                <div className="flex items-center" style={{ padding: "22px 8px 22px 20px", gap: 20 }}>
+                  {/* Number */}
+                  <span style={{
+                    fontFamily: "var(--font-display)", fontWeight: 200,
+                    fontSize: "clamp(28px,3vw,42px)", letterSpacing: "-2px",
+                    color: isExpanded ? `${GOLD}50` : `${GOLD}18`,
+                    transition: "color 0.4s cubic-bezier(0.16,1,0.3,1)",
+                    minWidth: 52, textAlign: "right", lineHeight: 1,
+                  }}>
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+
+                  {/* Title */}
+                  <span className="daik-award-title" style={{
+                    flex: 1,
+                    fontFamily: "var(--font-display)", fontWeight: 600,
+                    fontSize: "clamp(14px,1.3vw,18px)",
+                    color: isExpanded ? "white" : "rgba(255,255,255,0.55)",
+                    transition: "color 0.4s cubic-bezier(0.16,1,0.3,1)",
+                    letterSpacing: "-0.3px",
+                  }}>
+                    {award.title}
+                  </span>
+
+                  {/* Plus / Cross toggle */}
+                  <motion.svg
+                    animate={{ rotate: isExpanded ? 45 : 0 }}
+                    transition={{ duration: 0.3, ease: EASE }}
+                    width="16" height="16" viewBox="0 0 24 24"
+                    fill="none" stroke={isExpanded ? GOLD : "rgba(255,255,255,0.2)"}
+                    strokeWidth="1.5" strokeLinecap="round"
+                    style={{ flexShrink: 0, marginRight: 4, transition: "stroke 0.35s" }}
+                  >
+                    <path d="M12 5v14M5 12h14" />
+                  </motion.svg>
+                </div>
+
+                {/* Expandable content */}
+                <AnimatePresence>
+                  {isExpanded && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.35, ease: EASE }}
+                      style={{ overflow: "hidden" }}
+                    >
+                      <div style={{ padding: "0 8px 26px 92px" }}>
+                        <p style={{
+                          fontFamily: "var(--font-outfit)", fontWeight: 350,
+                          fontSize: 14, color: "rgba(255,255,255,0.4)",
+                          lineHeight: 1.7, margin: "0 0 16px", maxWidth: 520,
+                        }}>
+                          {award.desc}
+                        </p>
+                        <span
+                          style={{
+                            fontFamily: "var(--font-outfit)", fontSize: 12, fontWeight: 500,
+                            color: GOLD, letterSpacing: "0.5px", textTransform: "uppercase" as const,
+                            borderBottom: `1px solid ${GOLD}35`,
+                            paddingBottom: 2,
+                            transition: "border-color 0.3s",
+                          }}
+                          onMouseEnter={(e) => { e.currentTarget.style.borderColor = GOLD; }}
+                          onMouseLeave={(e) => { e.currentTarget.style.borderColor = `${GOLD}35`; }}
+                        >
+                          Nominate &rarr;
+                        </span>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            );
+          })}
         </div>
+
+        {/* Divider */}
+        <div style={{ height: 1, margin: "28px 0", background: `linear-gradient(90deg, transparent, ${E}15, ${GOLD}20, ${E}15, transparent)` }} />
+
+        {/* ── 3. Nominations & Eligibility (Split Row) — with event photo backdrop ── */}
+        <div style={{ position: "relative", borderRadius: 20, overflow: "hidden" }}>
+          {/* Event photo backdrop */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&q=80"
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+            style={{ filter: "brightness(0.15) saturate(0.6)" }}
+          />
+          <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(180deg, rgba(4,14,10,0.7) 0%, transparent 25%, transparent 75%, rgba(4,14,10,0.7) 100%)" }} />
+          <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 70% 60% at 50% 50%, ${GOLD}08, transparent 70%)` }} />
+
+          <div ref={nomRef} className="daik-awards-nom" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, position: "relative", zIndex: 1, padding: "clamp(24px,3vw,40px)" }}>
+
+          {/* LEFT: Nominations text + Eligibility list */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={nomInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.1, ease: EASE }}
+            style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}
+          >
+            <h3 style={{
+              fontFamily: "var(--font-display)", fontWeight: 800,
+              fontSize: "clamp(24px,3vw,36px)", letterSpacing: "-1px",
+              color: "white", lineHeight: 1.1, margin: "0 0 18px",
+            }}>
+              Award Nominations
+            </h3>
+            <p style={{
+              fontFamily: "var(--font-outfit)", fontWeight: 350,
+              fontSize: "clamp(13px,1.1vw,15px)", color: "rgba(255,255,255,0.5)",
+              lineHeight: 1.7, margin: "0 0 32px",
+            }}>
+              Data &amp; AI First Awards recognise organisations and leaders demonstrating exceptional contributions to Kuwait&rsquo;s data and AI ecosystem.
+            </p>
+
+            <h4 style={{
+              fontFamily: "var(--font-display)", fontWeight: 700,
+              fontSize: 15, color: "white", margin: "0 0 16px",
+            }}>
+              Eligibility
+            </h4>
+
+            <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+              {AWARDS_ELIGIBILITY.map((item, i) => (
+                <motion.div
+                  key={item}
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={nomInView ? { opacity: 1, x: 0 } : {}}
+                  transition={{ duration: 0.35, delay: 0.2 + i * 0.05, ease: EASE }}
+                  onMouseEnter={() => setHoveredElig(i)}
+                  onMouseLeave={() => setHoveredElig(null)}
+                  className="flex items-center gap-3"
+                  style={{
+                    padding: "10px 8px",
+                    borderRadius: 10,
+                    background: hoveredElig === i ? `${GOLD}0A` : "transparent",
+                    transition: "all 0.3s",
+                    cursor: "default",
+                  }}
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={hoveredElig === i ? GOLD : `${GOLD}70`} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, transition: "stroke 0.3s" }}>
+                    <path d="M20 6L9 17l-5-5" />
+                  </svg>
+                  <span style={{
+                    fontFamily: "var(--font-outfit)", fontSize: 14,
+                    fontWeight: 450, color: hoveredElig === i ? "rgba(255,255,255,0.85)" : "rgba(255,255,255,0.5)",
+                    transition: "color 0.3s",
+                  }}>
+                    {item}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* RIGHT: Nomination Form — liquid glass card */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={nomInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.18, ease: EASE }}
+            style={{
+              padding: "clamp(24px,3vw,36px)",
+              borderRadius: 20,
+              background: "linear-gradient(170deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%)",
+              backdropFilter: "blur(32px) saturate(1.4)",
+              WebkitBackdropFilter: "blur(32px) saturate(1.4)",
+              border: `1px solid rgba(255,255,255,0.1)`,
+              boxShadow: `inset 0 1px 0 rgba(255,255,255,0.08), inset 0 -1px 0 rgba(255,255,255,0.02), 0 8px 40px rgba(0,0,0,0.3), 0 0 0 0.5px rgba(255,255,255,0.05)`,
+              position: "relative",
+              overflow: "hidden",
+            }}
+          >
+            {/* Top refraction highlight */}
+            <div className="absolute pointer-events-none" style={{ top: 0, left: 0, right: 0, height: 1, background: `linear-gradient(90deg, transparent 5%, rgba(255,255,255,0.15) 30%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.15) 70%, transparent 95%)` }} />
+            {/* Inner light refraction — warm shift top-right, cool shift bottom-left */}
+            <div className="absolute pointer-events-none" style={{ top: -40, right: -40, width: 200, height: 200, borderRadius: "50%", background: `radial-gradient(circle, ${GOLD}0C, transparent 70%)`, filter: "blur(40px)" }} />
+            <div className="absolute pointer-events-none" style={{ bottom: -40, left: -40, width: 200, height: 200, borderRadius: "50%", background: `radial-gradient(circle, ${E}0C, transparent 70%)`, filter: "blur(40px)" }} />
+            {/* Subtle inner sheen */}
+            <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(135deg, rgba(255,255,255,0.04) 0%, transparent 40%, transparent 60%, rgba(255,255,255,0.02) 100%)", borderRadius: 20 }} />
+
+            <div style={{ position: "relative", zIndex: 1 }}>
+              <div className="flex items-center gap-3" style={{ marginBottom: 10 }}>
+                <span style={{ width: 20, height: 1, background: GOLD }} />
+                <span style={{ fontFamily: "var(--font-outfit)", fontSize: 10, fontWeight: 600, letterSpacing: "2px", textTransform: "uppercase", color: GOLD }}>
+                  Nominate
+                </span>
+              </div>
+              <h4 style={{
+                fontFamily: "var(--font-display)", fontWeight: 700,
+                fontSize: "clamp(18px,2vw,22px)", letterSpacing: "-0.5px",
+                color: "white", lineHeight: 1.15, margin: "0 0 20px",
+              }}>
+                Submit Your Nomination
+              </h4>
+
+              {!formSubmitted ? (
+                <form onSubmit={handleSubmit}>
+                  <div className="daik-awards-form-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 12 }}>
+                    <input
+                      type="text"
+                      placeholder="Organisation Name"
+                      required
+                      value={formData.orgName}
+                      onChange={(e) => setFormData({ ...formData, orgName: e.target.value })}
+                      onFocus={() => setFocusedField("orgName")}
+                      onBlur={() => setFocusedField(null)}
+                      style={inputStyle("orgName")}
+                    />
+                    <input
+                      type="text"
+                      placeholder="Contact Person"
+                      required
+                      value={formData.contactName}
+                      onChange={(e) => setFormData({ ...formData, contactName: e.target.value })}
+                      onFocus={() => setFocusedField("contactName")}
+                      onBlur={() => setFocusedField(null)}
+                      style={inputStyle("contactName")}
+                    />
+                    <input
+                      type="email"
+                      placeholder="Email Address"
+                      required
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      onFocus={() => setFocusedField("email")}
+                      onBlur={() => setFocusedField(null)}
+                      style={inputStyle("email")}
+                    />
+                    <input
+                      type="tel"
+                      placeholder="Phone Number"
+                      value={formData.phone}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      onFocus={() => setFocusedField("phone")}
+                      onBlur={() => setFocusedField(null)}
+                      style={inputStyle("phone")}
+                    />
+                  </div>
+
+                  <select
+                    required
+                    value={formData.category}
+                    onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                    onFocus={() => setFocusedField("category")}
+                    onBlur={() => setFocusedField(null)}
+                    style={{
+                      ...inputStyle("category"),
+                      marginBottom: 12,
+                      appearance: "none",
+                      backgroundImage: `url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23707070' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E")`,
+                      backgroundRepeat: "no-repeat",
+                      backgroundPosition: "right 18px center",
+                      cursor: "pointer",
+                      color: formData.category ? "white" : "rgba(255,255,255,0.35)",
+                    }}
+                  >
+                    <option value="" disabled style={{ color: "#555", background: "#111" }}>Select Award Category</option>
+                    {AWARDS.map((a) => (
+                      <option key={a.title} value={a.title} style={{ color: "white", background: "#111" }}>
+                        {a.title}
+                      </option>
+                    ))}
+                  </select>
+
+                  <textarea
+                    placeholder="Why should this nominee be considered?"
+                    required
+                    rows={3}
+                    value={formData.reason}
+                    onChange={(e) => setFormData({ ...formData, reason: e.target.value })}
+                    onFocus={() => setFocusedField("reason")}
+                    onBlur={() => setFocusedField(null)}
+                    style={{
+                      ...inputStyle("reason"),
+                      marginBottom: 20,
+                      resize: "vertical",
+                      minHeight: 80,
+                    }}
+                  />
+
+                  <button
+                    type="submit"
+                    style={{
+                      padding: "14px 40px",
+                      borderRadius: 12,
+                      background: `linear-gradient(135deg, ${GOLD} 0%, ${GOLD_BRIGHT} 100%)`,
+                      border: "none",
+                      color: "#000",
+                      fontFamily: "var(--font-display)",
+                      fontSize: 14,
+                      fontWeight: 700,
+                      letterSpacing: "-0.2px",
+                      cursor: "pointer",
+                      transition: "all 0.3s cubic-bezier(0.16,1,0.3,1)",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = "translateY(-2px)";
+                      e.currentTarget.style.boxShadow = `0 12px 32px rgba(196,163,74,0.25)`;
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = "translateY(0)";
+                      e.currentTarget.style.boxShadow = "none";
+                    }}
+                  >
+                    Submit Nomination
+                  </button>
+                </form>
+              ) : (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, ease: EASE }}
+                  style={{ textAlign: "center", padding: "32px 16px" }}
+                >
+                  <div style={{
+                    width: 56, height: 56, borderRadius: 16,
+                    background: `${GOLD}15`, border: `1px solid ${GOLD}30`,
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    margin: "0 auto 16px",
+                  }}>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={GOLD} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M20 6L9 17l-5-5" />
+                    </svg>
+                  </div>
+                  <h4 style={{
+                    fontFamily: "var(--font-display)", fontWeight: 700,
+                    fontSize: 18, color: "white", margin: "0 0 8px",
+                  }}>
+                    Nomination Submitted
+                  </h4>
+                  <p style={{
+                    fontFamily: "var(--font-outfit)", fontSize: 13,
+                    color: "rgba(255,255,255,0.45)", lineHeight: 1.6, margin: 0,
+                  }}>
+                    Thank you. Our committee will review your submission and follow up shortly.
+                  </p>
+                </motion.div>
+              )}
+            </div>
+          </motion.div>
+        </div>{/* close daik-awards-nom grid */}
+        </div>{/* close photo backdrop wrapper */}
+
+          </div>{/* close zIndex:1 inner */}
+        </motion.div>{/* close glass container */}
       </div>
 
       <style jsx global>{`
-        @media (max-width: 1024px) { .daik-awards-grid { grid-template-columns: repeat(2, 1fr) !important; } }
-        @media (max-width: 640px) { .daik-awards-grid { grid-template-columns: 1fr !important; } }
+        @media (max-width: 768px) {
+          .daik-awards-nom { grid-template-columns: 1fr !important; }
+          .daik-awards-form-grid { grid-template-columns: 1fr !important; }
+          .daik-award-title { font-size: 14px !important; }
+        }
+        .daik-awards-form-grid input::placeholder,
+        .daik-awards-form-grid + select,
+        .daik-awards-form-grid ~ textarea::placeholder {
+          color: rgba(255,255,255,0.3);
+        }
       `}</style>
     </section>
-  );
-}
-
-function AwardCard({ award, idx }: { award: (typeof AWARDS)[0]; idx: number }) {
-  const [h, setH] = useState(false);
-
-  return (
-    <div
-      className="relative overflow-hidden transition-all"
-      style={{
-        borderRadius: 14,
-        padding: "24px 20px",
-        background: h ? `${E}08` : "rgba(255,255,255,0.02)",
-        border: `1px solid ${h ? `${E}30` : "rgba(255,255,255,0.06)"}`,
-        borderLeft: h ? `3px solid #C4A34A` : "3px solid transparent",
-        transitionDuration: "0.35s",
-      }}
-      onMouseEnter={() => setH(true)}
-      onMouseLeave={() => setH(false)}
-    >
-      {/* Number */}
-      <span style={{ fontFamily: "var(--font-display)", fontSize: 12, fontWeight: 700, color: "#C4A34A", opacity: 0.6 }}>
-        {(idx + 1).toString().padStart(2, "0")}
-      </span>
-
-      {/* Trophy icon */}
-      <div
-        style={{
-          width: 36,
-          height: 36,
-          borderRadius: 10,
-          background: "rgba(196, 163, 74, 0.1)",
-          border: "1px solid rgba(196, 163, 74, 0.2)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          marginTop: 10,
-        }}
-      >
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C4A34A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-        </svg>
-      </div>
-
-      <h4 style={{ fontFamily: "var(--font-display)", fontSize: 15, fontWeight: 700, color: "var(--white)", margin: "14px 0 0", lineHeight: 1.3 }}>
-        {award.title}
-      </h4>
-      <p style={{ fontFamily: "var(--font-outfit)", fontSize: 12, fontWeight: 300, color: "#606060", margin: "6px 0 0", lineHeight: 1.6 }}>
-        {award.desc}
-      </p>
-    </div>
   );
 }
 
@@ -1901,114 +2674,199 @@ function AwardCard({ award, idx }: { award: (typeof AWARDS)[0]; idx: number }) {
 
 function WhoShouldAttend() {
   const ref = useRef<HTMLElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const [hoveredRole, setHoveredRole] = useState<number | null>(null);
+  const [hoveredInd, setHoveredInd] = useState<number | null>(null);
 
   return (
     <section
       ref={ref}
-      className="relative overflow-hidden"
-      style={{ background: "#0A0A0A", padding: "clamp(60px, 8vw, 100px) 0" }}
+      style={{
+        background: "#040E0A",
+        padding: "clamp(40px, 5vw, 72px) 0",
+        position: "relative",
+        overflow: "hidden",
+      }}
     >
-      <div
-        style={{
-          maxWidth: 1100,
-          margin: "0 auto",
-          padding: "0 clamp(20px, 4vw, 60px)",
-          position: "relative",
-          zIndex: 1,
-        }}
-      >
+      {/* Background event photo */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&q=80"
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+        style={{ opacity: 0.07 }}
+      />
+      {/* Dark overlay */}
+      <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(180deg, #040E0A 0%, rgba(4,14,10,0.85) 40%, rgba(4,14,10,0.9) 70%, #040E0A 100%)" }} />
+
+      {/* Atmospheric layers */}
+      <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 50% 50% at 75% 30%, ${E}06, transparent 70%)` }} />
+      <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 40% 40% at 20% 80%, ${E_BRIGHT}03, transparent 70%)` }} />
+      <DotMatrixGrid color={E} opacity={0.015} spacing={30} />
+
+      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 clamp(20px,5vw,80px)", position: "relative", zIndex: 1 }}>
+
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, ease: EASE }}
-          style={{ textAlign: "center", marginBottom: 48 }}
+          style={{ marginBottom: 32 }}
         >
-          <div className="flex items-center justify-center gap-3" style={{ marginBottom: 12 }}>
+          <div className="flex items-center gap-3" style={{ marginBottom: 16 }}>
             <span style={{ width: 30, height: 1, background: E }} />
             <span style={{ fontFamily: "var(--font-outfit)", fontSize: 11, fontWeight: 600, letterSpacing: "2.5px", textTransform: "uppercase", color: E }}>
               Your Peers
             </span>
-            <span style={{ width: 30, height: 1, background: E }} />
           </div>
-          <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(30px, 3.5vw, 48px)", letterSpacing: "-1.5px", color: "var(--white)", lineHeight: 1.1, margin: 0 }}>
+          <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(28px,3.8vw,48px)", letterSpacing: "-1.5px", color: "white", lineHeight: 1.08, margin: 0 }}>
             Who Should Attend
           </h2>
         </motion.div>
 
-        {/* Two columns */}
-        <div
-          className="daik-attend-grid"
-          style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 40, alignItems: "start" }}
-        >
-          {/* Left: Role pills */}
-          <motion.div
-            initial={{ opacity: 0, x: -15 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.2, ease: EASE }}
-          >
-            <h3 style={{ fontFamily: "var(--font-display)", fontSize: 18, fontWeight: 700, color: "var(--white)", marginBottom: 20 }}>
-              Target Roles
-            </h3>
-            <div className="flex flex-wrap gap-2">
-              {WHO_SHOULD_ATTEND.roles.map((role) => (
-                <span
-                  key={role}
-                  style={{
-                    padding: "7px 14px",
-                    borderRadius: 50,
-                    background: "rgba(255,255,255,0.03)",
-                    border: "1px solid rgba(255,255,255,0.06)",
-                    fontFamily: "var(--font-outfit)",
-                    fontSize: 12,
-                    fontWeight: 400,
-                    color: "#909090",
-                  }}
-                >
-                  {role}
-                </span>
-              ))}
-            </div>
-          </motion.div>
+        {/* ── Split Layout: 55/45 ── */}
+        <div className="daik-attend-split" style={{ display: "grid", gridTemplateColumns: "55fr 45fr", gap: "48px 56px", alignItems: "start" }}>
 
-          {/* Right: Industry bars */}
-          <motion.div
-            initial={{ opacity: 0, x: 15 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.3, ease: EASE }}
-          >
-            <h3 style={{ fontFamily: "var(--font-display)", fontSize: 18, fontWeight: 700, color: "var(--white)", marginBottom: 20 }}>
-              Industry Breakdown
-            </h3>
-            <div className="flex flex-col gap-4">
-              {WHO_SHOULD_ATTEND.industries.map((ind, i) => (
-                <div key={ind.name}>
-                  <div className="flex items-center justify-between" style={{ marginBottom: 6 }}>
-                    <span style={{ fontFamily: "var(--font-outfit)", fontSize: 13, fontWeight: 400, color: "#909090" }}>
+          {/* ── LEFT: Roles (2-column grid) ── */}
+          <div className="daik-attend-roles" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4px 32px" }}>
+            {ATTEND_ROLES.map((role, i) => (
+              <motion.div
+                key={role.label}
+                initial={{ opacity: 0, y: 10 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.4, delay: 0.15 + i * 0.035, ease: EASE }}
+                onMouseEnter={() => setHoveredRole(i)}
+                onMouseLeave={() => setHoveredRole(null)}
+                className="flex items-center gap-3"
+                style={{
+                  padding: "12px 8px",
+                  borderRadius: 10,
+                  background: hoveredRole === i ? `${E}06` : "transparent",
+                  transition: "all 0.3s cubic-bezier(0.16,1,0.3,1)",
+                  cursor: "default",
+                }}
+              >
+                <div style={{
+                  width: 32, height: 32, borderRadius: 9,
+                  background: hoveredRole === i ? `${E}15` : `${E}08`,
+                  border: `1px solid ${hoveredRole === i ? `${E}35` : `${E}12`}`,
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  flexShrink: 0, transition: "all 0.3s",
+                }}>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke={hoveredRole === i ? E_BRIGHT : `${E}55`} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ transition: "stroke 0.3s" }}>
+                    <path d={role.icon} />
+                  </svg>
+                </div>
+                <span style={{
+                  fontFamily: "var(--font-outfit)", fontSize: 13.5, fontWeight: 500,
+                  color: hoveredRole === i ? "rgba(255,255,255,0.9)" : "rgba(255,255,255,0.5)",
+                  transition: "all 0.3s", lineHeight: 1.35,
+                }}>
+                  {role.label}
+                </span>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* ── RIGHT: Industries + Stat line ── */}
+          <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+
+            {/* Industries block — liquid glass */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={inView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.25, ease: EASE }}
+              style={{
+                padding: "28px 24px",
+                borderRadius: 20,
+                background: "linear-gradient(170deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%)",
+                backdropFilter: "blur(32px) saturate(1.4)",
+                WebkitBackdropFilter: "blur(32px) saturate(1.4)",
+                border: "1px solid rgba(255,255,255,0.1)",
+                boxShadow: "inset 0 1px 0 rgba(255,255,255,0.08), inset 0 -1px 0 rgba(255,255,255,0.02), 0 8px 40px rgba(0,0,0,0.3), 0 0 0 0.5px rgba(255,255,255,0.05)",
+                position: "relative",
+                overflow: "hidden",
+              }}
+            >
+              {/* Top refraction highlight */}
+              <div className="absolute pointer-events-none" style={{ top: 0, left: 0, right: 0, height: 1, background: "linear-gradient(90deg, transparent 5%, rgba(255,255,255,0.15) 30%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.15) 70%, transparent 95%)" }} />
+              {/* Inner light refraction */}
+              <div className="absolute pointer-events-none" style={{ top: -40, right: -40, width: 200, height: 200, borderRadius: "50%", background: `radial-gradient(circle, ${E_BRIGHT}0C, transparent 70%)`, filter: "blur(40px)" }} />
+              <div className="absolute pointer-events-none" style={{ bottom: -40, left: -40, width: 200, height: 200, borderRadius: "50%", background: `radial-gradient(circle, ${E}0C, transparent 70%)`, filter: "blur(40px)" }} />
+              {/* Diagonal sheen */}
+              <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(135deg, rgba(255,255,255,0.04) 0%, transparent 40%, transparent 60%, rgba(255,255,255,0.02) 100%)", borderRadius: 20 }} />
+
+              <h3 style={{
+                fontFamily: "var(--font-display)", fontSize: 13, fontWeight: 700,
+                color: E_BRIGHT, letterSpacing: "1.5px", textTransform: "uppercase",
+                marginBottom: 16, position: "relative", zIndex: 1,
+              }}>
+                Key Industries
+              </h3>
+
+              <div style={{ display: "flex", flexDirection: "column", gap: 2, position: "relative", zIndex: 1 }}>
+                {ATTEND_INDUSTRIES.map((ind, i) => (
+                  <motion.div
+                    key={ind.name}
+                    initial={{ opacity: 0, x: 10 }}
+                    animate={inView ? { opacity: 1, x: 0 } : {}}
+                    transition={{ duration: 0.35, delay: 0.35 + i * 0.04, ease: EASE }}
+                    onMouseEnter={() => setHoveredInd(i)}
+                    onMouseLeave={() => setHoveredInd(null)}
+                    className="flex items-center gap-3"
+                    style={{
+                      padding: "9px 12px",
+                      borderRadius: 10,
+                      background: hoveredInd === i ? "rgba(255,255,255,0.06)" : "transparent",
+                      transition: "background 0.25s",
+                      cursor: "default",
+                    }}
+                  >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={hoveredInd === i ? E_BRIGHT : `${E}80`} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, transition: "stroke 0.3s" }}>
+                      <path d="M20 6L9 17l-5-5" />
+                    </svg>
+                    <span style={{
+                      fontFamily: "var(--font-outfit)", fontSize: 14,
+                      fontWeight: hoveredInd === i ? 600 : 450,
+                      color: hoveredInd === i ? "white" : "rgba(255,255,255,0.55)",
+                      transition: "all 0.3s",
+                    }}>
                       {ind.name}
                     </span>
-                    <span style={{ fontFamily: "var(--font-display)", fontSize: 14, fontWeight: 700, color: E_BRIGHT }}>
-                      {ind.pct}%
-                    </span>
-                  </div>
-                  <div style={{ height: 6, borderRadius: 3, background: "rgba(255,255,255,0.04)", overflow: "hidden" }}>
-                    <motion.div
-                      initial={{ width: 0 }}
-                      animate={inView ? { width: `${ind.pct}%` } : { width: 0 }}
-                      transition={{ duration: 0.8, delay: 0.4 + i * 0.06, ease: EASE }}
-                      style={{ height: "100%", borderRadius: 3, background: `linear-gradient(90deg, ${E}, ${E_BRIGHT})` }}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </motion.div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Stat line */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.45, ease: EASE }}
+              style={{ padding: "16px 24px" }}
+            >
+              <div style={{ height: 1, background: `${E}18`, marginBottom: 14 }} />
+              <div className="flex items-center gap-4 flex-wrap">
+                {["250+ Senior Leaders", "8 Industries", "1 Transformative Day"].map((stat) => (
+                  <span key={stat} style={{ fontFamily: "var(--font-outfit)", fontSize: 12, fontWeight: 500, color: "rgba(255,255,255,0.35)", whiteSpace: "nowrap" }}>
+                    {stat}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+          </div>
         </div>
       </div>
 
       <style jsx global>{`
-        @media (max-width: 768px) { .daik-attend-grid { grid-template-columns: 1fr !important; } }
+        @media (max-width: 1024px) {
+          .daik-attend-split { grid-template-columns: 1fr !important; }
+          .daik-attend-roles { grid-template-columns: 1fr 1fr !important; }
+        }
+        @media (max-width: 640px) {
+          .daik-attend-roles { grid-template-columns: 1fr !important; }
+        }
       `}</style>
     </section>
   );
@@ -2021,28 +2879,50 @@ function WhoShouldAttend() {
 function WhyAttend() {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
+  const [activeIdx, setActiveIdx] = useState(0);
+  const [userInteracted, setUserInteracted] = useState(false);
+  const activeItem = WHY_ATTEND[activeIdx];
+
+  // Auto-cycle every 4s unless user has hovered
+  useEffect(() => {
+    if (userInteracted || !inView) return;
+    const id = setInterval(() => {
+      setActiveIdx((prev) => (prev + 1) % WHY_ATTEND.length);
+    }, 4000);
+    return () => clearInterval(id);
+  }, [userInteracted, inView]);
+
+  // Resume auto-cycle 8s after last interaction
+  useEffect(() => {
+    if (!userInteracted) return;
+    const id = setTimeout(() => setUserInteracted(false), 8000);
+    return () => clearTimeout(id);
+  }, [userInteracted, activeIdx]);
+
+  const handleHover = (i: number) => {
+    setActiveIdx(i);
+    setUserInteracted(true);
+  };
 
   return (
     <section
       ref={ref}
       className="relative overflow-hidden"
-      style={{ background: "#111111", padding: "clamp(60px, 8vw, 100px) 0" }}
+      style={{ background: "#0A0A0A", padding: "clamp(40px, 5vw, 72px) 0" }}
     >
-      <div
-        style={{
-          maxWidth: 1100,
-          margin: "0 auto",
-          padding: "0 clamp(20px, 4vw, 60px)",
-          position: "relative",
-          zIndex: 1,
-        }}
-      >
+      {/* Atmospheric gradients */}
+      <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 40% 50% at 60% 50%, ${E}06, transparent 70%)` }} />
+      <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 30% 40% at 20% 80%, ${E_BRIGHT}03, transparent 70%)` }} />
+      <DotMatrixGrid color={E} opacity={0.02} spacing={24} />
+
+      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(20px, 4vw, 60px)", position: "relative", zIndex: 1 }}>
+
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, ease: EASE }}
-          style={{ textAlign: "center", marginBottom: 48 }}
+          style={{ textAlign: "center", marginBottom: 32 }}
         >
           <div className="flex items-center justify-center gap-3" style={{ marginBottom: 12 }}>
             <span style={{ width: 30, height: 1, background: E }} />
@@ -2056,73 +2936,152 @@ function WhyAttend() {
           </h2>
         </motion.div>
 
-        {/* Grid */}
-        <div
-          className="daik-why-grid"
-          style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16 }}
+        {/* Console container */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.2, ease: EASE }}
+          className="daik-why-console"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1.4fr",
+            gap: 0,
+            borderRadius: 18,
+            overflow: "hidden",
+            background: `${E}03`,
+            backdropFilter: "blur(20px)",
+            WebkitBackdropFilter: "blur(20px)",
+            border: `1px solid ${E}15`,
+            boxShadow: `0 20px 60px rgba(0,0,0,0.25), 0 0 80px ${E}05`,
+          }}
         >
-          {WHY_ATTEND.map((w, i) => (
-            <motion.div
-              key={w.title}
-              initial={{ opacity: 0, y: 15 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.15 + i * 0.08, ease: EASE }}
-            >
-              <WhyCard item={w} />
-            </motion.div>
-          ))}
-        </div>
+          {/* ── Left: Reason Tabs ── */}
+          <div style={{ borderRight: `1px solid ${E}10`, background: "rgba(10,10,10,0.3)" }}>
+            {/* Console header bar */}
+            <div className="flex items-center gap-2" style={{ padding: "14px 20px", borderBottom: `1px solid ${E}08` }}>
+              <div style={{ width: 7, height: 7, borderRadius: "50%", background: `${E}40` }} />
+              <div style={{ width: 7, height: 7, borderRadius: "50%", background: `${E}25` }} />
+              <div style={{ width: 7, height: 7, borderRadius: "50%", background: `${E}15` }} />
+              <span style={{ fontFamily: "var(--font-outfit)", fontSize: 10, fontWeight: 500, color: "#404040", marginLeft: 8, letterSpacing: "1px" }}>
+                REASONS
+              </span>
+            </div>
+
+            {WHY_ATTEND.map((w, i) => {
+              const isActive = i === activeIdx;
+              return (
+                <button
+                  key={w.title}
+                  onMouseEnter={() => handleHover(i)}
+                  onClick={() => handleHover(i)}
+                  className="w-full text-left transition-all"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 12,
+                    padding: "18px 20px",
+                    background: isActive ? `${E}0A` : "transparent",
+                    border: "none",
+                    borderBottom: `1px solid ${E}08`,
+                    borderLeft: isActive ? `3px solid ${E_BRIGHT}` : "3px solid transparent",
+                    cursor: "pointer",
+                    transitionDuration: "0.25s",
+                    position: "relative",
+                  }}
+                >
+                  {/* Active glow */}
+                  {isActive && (
+                    <div className="absolute pointer-events-none" style={{ width: 100, height: 40, left: 0, top: "50%", transform: "translateY(-50%)", background: `radial-gradient(ellipse at left center, ${E}12, transparent 70%)` }} />
+                  )}
+                  <span style={{
+                    fontFamily: "var(--font-display)", fontSize: 12, fontWeight: 700,
+                    color: isActive ? E_BRIGHT : `${E}40`,
+                    minWidth: 24, position: "relative",
+                  }}>
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span style={{
+                    fontFamily: "var(--font-outfit)", fontSize: 14,
+                    fontWeight: isActive ? 500 : 400,
+                    color: isActive ? "var(--white)" : "#606060",
+                    transition: "color 0.2s",
+                    position: "relative",
+                  }}>
+                    {w.title}
+                  </span>
+                </button>
+              );
+            })}
+
+            {/* Progress bar at bottom */}
+            <div style={{ height: 2, background: `${E}08`, position: "relative", overflow: "hidden" }}>
+              <motion.div
+                key={`progress-${activeIdx}-${userInteracted}`}
+                initial={{ width: "0%" }}
+                animate={{ width: userInteracted ? "0%" : "100%" }}
+                transition={{ duration: userInteracted ? 0 : 4, ease: "linear" }}
+                style={{ height: "100%", background: `linear-gradient(90deg, ${E}, ${E_BRIGHT})`, borderRadius: 1 }}
+              />
+            </div>
+          </div>
+
+          {/* ── Right: Answer Panel ── */}
+          <div style={{ padding: "clamp(28px,3.5vw,44px)", display: "flex", flexDirection: "column", justifyContent: "center", position: "relative", minHeight: 320 }}>
+            {/* Background glow */}
+            <div className="absolute pointer-events-none" style={{ width: 300, height: 300, top: "50%", left: "50%", transform: "translate(-50%, -50%)", background: `radial-gradient(ellipse at center, ${E}08, transparent 70%)`, filter: "blur(40px)" }} />
+
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeIdx}
+                initial={{ opacity: 0, x: 15 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -15 }}
+                transition={{ duration: 0.3, ease: EASE }}
+                style={{ position: "relative" }}
+              >
+                {/* Title */}
+                <h4 style={{
+                  fontFamily: "var(--font-display)", fontSize: "clamp(18px,1.8vw,22px)",
+                  fontWeight: 700, color: "white", margin: "0 0 14px", letterSpacing: "-0.3px",
+                }}>
+                  {activeItem.title}
+                </h4>
+
+                {/* Description */}
+                <p style={{
+                  fontFamily: "var(--font-outfit)", fontSize: 15, fontWeight: 300,
+                  color: "rgba(255,255,255,0.5)", lineHeight: 1.8, margin: "0 0 28px",
+                }}>
+                  {activeItem.desc}
+                </p>
+
+                {/* Stat pill */}
+                <div className="flex items-center gap-4">
+                  <span style={{
+                    fontFamily: "var(--font-display)", fontSize: "clamp(28px,2.5vw,36px)",
+                    fontWeight: 800, color: E_BRIGHT, letterSpacing: "-1px", lineHeight: 1,
+                  }}>
+                    {activeItem.statValue}
+                  </span>
+                  <span style={{
+                    fontFamily: "var(--font-outfit)", fontSize: 12, fontWeight: 500,
+                    color: "rgba(255,255,255,0.3)", letterSpacing: "1px", textTransform: "uppercase",
+                  }}>
+                    {activeItem.stat}
+                  </span>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </motion.div>
       </div>
 
       <style jsx global>{`
-        @media (max-width: 768px) { .daik-why-grid { grid-template-columns: 1fr !important; } }
+        @media (max-width: 768px) {
+          .daik-why-console { grid-template-columns: 1fr !important; }
+        }
       `}</style>
     </section>
-  );
-}
-
-function WhyCard({ item }: { item: (typeof WHY_ATTEND)[0] }) {
-  const [h, setH] = useState(false);
-
-  return (
-    <div
-      className="relative overflow-hidden transition-all"
-      style={{
-        borderRadius: 16,
-        padding: "28px 24px",
-        background: h ? `${E}08` : "rgba(255,255,255,0.02)",
-        border: `1px solid ${h ? `${E}25` : "rgba(255,255,255,0.05)"}`,
-        transitionDuration: "0.4s",
-      }}
-      onMouseEnter={() => setH(true)}
-      onMouseLeave={() => setH(false)}
-    >
-      {/* Icon */}
-      <div
-        style={{
-          width: 44,
-          height: 44,
-          borderRadius: 12,
-          background: `${E}10`,
-          border: `1px solid ${E}20`,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          marginBottom: 16,
-        }}
-      >
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={E_BRIGHT} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d={item.icon} />
-        </svg>
-      </div>
-
-      <h4 style={{ fontFamily: "var(--font-display)", fontSize: 17, fontWeight: 700, color: "var(--white)", margin: 0, lineHeight: 1.3 }}>
-        {item.title}
-      </h4>
-      <p style={{ fontFamily: "var(--font-outfit)", fontSize: 14, fontWeight: 300, color: "#707070", margin: "10px 0 0", lineHeight: 1.7 }}>
-        {item.desc}
-      </p>
-    </div>
   );
 }
 
@@ -2140,7 +3099,7 @@ function SplitCTA() {
       ref={ref}
       id="register"
       className="relative overflow-hidden"
-      style={{ background: "#0A0A0A", padding: "clamp(60px, 8vw, 100px) 0" }}
+      style={{ background: "#0A0A0A", padding: "clamp(40px, 5vw, 72px) 0" }}
     >
       {/* Background */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -2166,7 +3125,7 @@ function SplitCTA() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, ease: EASE }}
-          style={{ textAlign: "center", marginBottom: 48 }}
+          style={{ textAlign: "center", marginBottom: 32 }}
         >
           <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(30px, 3.5vw, 48px)", letterSpacing: "-1.5px", color: "var(--white)", lineHeight: 1.1, margin: 0 }}>
             Be Part of Data & AI First Kuwait
