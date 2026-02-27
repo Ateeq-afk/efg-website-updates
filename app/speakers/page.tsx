@@ -3,8 +3,8 @@
 import { useState, useEffect, useMemo, useRef } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { supabase } from "@/lib/supabase";
-import type { SpeakerWithEvents } from "@/lib/supabase";
+import { supabase } from "@/lib/supabase/client";
+import type { SpeakerWithSeries } from "@/lib/supabase/types";
 import { Footer } from "@/components/sections";
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -15,12 +15,19 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 const MAX_W = 1320;
 const PAD = "0 clamp(20px, 4vw, 60px)";
 
-const EVENT_FILTERS = [
-  "All",
-  "OPEX First UAE",
-  "Cyber First UAE",
-  "OT Security First",
+const SERIES_FILTERS = [
+  { label: "All", slug: "All" },
+  { label: "Cyber First", slug: "cyber-first" },
+  { label: "OT Security First", slug: "ot-security-first" },
+  { label: "Data & AI First", slug: "data-ai-first" },
+  { label: "OPEX First", slug: "opex-first" },
 ] as const;
+
+function seriesSlugToLabel(slug: string): string {
+  const found = SERIES_FILTERS.find((f) => f.slug === slug);
+  if (found) return found.label;
+  return slug.split("-").map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+}
 
 // ─────────────────────────────────────────────────────────────────────────────
 // SECTION LABEL
@@ -123,23 +130,21 @@ function SpeakerCard({
   speaker,
   index,
 }: {
-  speaker: SpeakerWithEvents;
+  speaker: SpeakerWithSeries;
   index: number;
 }) {
   const [hovered, setHovered] = useState(false);
 
-  const initials = speaker.name
-    .split(/[\s-]+/)
+  const fullName = `${speaker.first_name} ${speaker.last_name}`;
+  const initials = [speaker.first_name, speaker.last_name]
     .filter(Boolean)
-    .slice(0, 2)
     .map((w) => w[0])
     .join("")
     .toUpperCase();
 
-  const showBadge =
-    speaker.role_type === "conference-chair" || speaker.role_type === "advisor";
-  const badgeLabel =
-    speaker.role_type === "conference-chair" ? "Conference Chair" : "Advisor";
+  const primaryRole = speaker.speaker_series?.[0]?.role;
+  const showBadge = primaryRole === "chair" || primaryRole === "advisor";
+  const badgeLabel = primaryRole === "chair" ? "Conference Chair" : "Advisor";
 
   return (
     <motion.div
@@ -148,7 +153,7 @@ function SpeakerCard({
       transition={{ duration: 0.5, delay: 0.05 + index * 0.03, ease: EASE }}
     >
       <Link
-        href={`/speakers/${speaker.slug}`}
+        href={`/speakers/${speaker.id}`}
         style={{ textDecoration: "none", display: "block", height: "100%" }}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
@@ -184,11 +189,11 @@ function SpeakerCard({
               flexShrink: 0,
             }}
           >
-            {speaker.image_url ? (
+            {speaker.photo_url ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img
-                src={speaker.image_url}
-                alt={speaker.name}
+                src={speaker.photo_url}
+                alt={fullName}
                 style={{
                   width: "100%",
                   height: "100%",
@@ -278,11 +283,11 @@ function SpeakerCard({
                 lineHeight: 1.3,
               }}
             >
-              {speaker.name}
+              {fullName}
             </h3>
 
             {/* Job title */}
-            {speaker.title && (
+            {speaker.job_title && (
               <p
                 className="speaker-title-clamp"
                 style={{
@@ -294,7 +299,7 @@ function SpeakerCard({
                   margin: "0 0 3px",
                 }}
               >
-                {speaker.title}
+                {speaker.job_title}
               </p>
             )}
 
@@ -315,7 +320,7 @@ function SpeakerCard({
             )}
 
             {/* Event context */}
-            {speaker.speaker_events && speaker.speaker_events.length > 0 && (
+            {speaker.speaker_series && speaker.speaker_series.length > 0 && (
               <div
                 style={{
                   borderTop: "1px solid rgba(255,255,255,0.04)",
@@ -326,7 +331,7 @@ function SpeakerCard({
                   gap: 4,
                 }}
               >
-                {speaker.speaker_events.slice(0, 2).map((ev) => (
+                {speaker.speaker_series.slice(0, 2).map((ev) => (
                   <span
                     key={ev.id}
                     style={{
@@ -340,10 +345,10 @@ function SpeakerCard({
                       whiteSpace: "nowrap",
                     }}
                   >
-                    {ev.event_name} {ev.event_year}
+                    {seriesSlugToLabel(ev.series_slug)} {ev.edition_year ?? ""}
                   </span>
                 ))}
-                {speaker.speaker_events.length > 2 && (
+                {speaker.speaker_series.length > 2 && (
                   <span
                     style={{
                       padding: "3px 8px",
@@ -355,7 +360,7 @@ function SpeakerCard({
                       color: "#E8651A",
                     }}
                   >
-                    +{speaker.speaker_events.length - 2} more
+                    +{speaker.speaker_series.length - 2} more
                   </span>
                 )}
               </div>
@@ -1125,7 +1130,7 @@ export default function SpeakersPage() {
   const heroInView = useInView(heroRef, { once: true, margin: "-60px" });
   const gridInView = useInView(gridRef, { once: true, margin: "-60px" });
 
-  const [speakers, setSpeakers] = useState<SpeakerWithEvents[]>([]);
+  const [speakers, setSpeakers] = useState<SpeakerWithSeries[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [eventFilter, setEventFilter] = useState("All");
@@ -1135,13 +1140,24 @@ export default function SpeakersPage() {
   // Fetch speakers on mount
   useEffect(() => {
     async function fetchSpeakers() {
-      const { data } = await supabase
-        .from("speakers")
-        .select("*, speaker_events(*)")
-        .order("name");
+      try {
+        if (!supabase) return;
+        const { data, error } = await supabase
+          .from("speakers")
+          .select("*, speaker_series(*)")
+          .eq("status", "active")
+          .order("sort_order", { ascending: true });
 
-      if (data) setSpeakers(data as SpeakerWithEvents[]);
-      setLoading(false);
+        if (error) {
+          console.error("Supabase error:", error);
+          return;
+        }
+        if (data) setSpeakers(data as SpeakerWithSeries[]);
+      } catch (err) {
+        console.error("Failed to fetch speakers:", err);
+      } finally {
+        setLoading(false);
+      }
     }
     fetchSpeakers();
   }, []);
@@ -1157,15 +1173,16 @@ export default function SpeakersPage() {
       // Search filter
       if (search) {
         const q = search.toLowerCase();
-        const nameMatch = s.name.toLowerCase().includes(q);
-        const titleMatch = s.title?.toLowerCase().includes(q);
+        const fullName = `${s.first_name} ${s.last_name}`.toLowerCase();
+        const nameMatch = fullName.includes(q);
+        const titleMatch = s.job_title?.toLowerCase().includes(q);
         const orgMatch = s.organization?.toLowerCase().includes(q);
         if (!nameMatch && !titleMatch && !orgMatch) return false;
       }
       // Event filter
       if (eventFilter !== "All") {
-        const hasEvent = s.speaker_events?.some(
-          (e) => e.event_name === eventFilter
+        const hasEvent = s.speaker_series?.some(
+          (e) => e.series_slug === eventFilter
         );
         if (!hasEvent) return false;
       }
@@ -1396,12 +1413,12 @@ export default function SpeakersPage() {
 
           {/* Event filter pills */}
           <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
-            {EVENT_FILTERS.map((ev) => {
-              const isActive = eventFilter === ev;
+            {SERIES_FILTERS.map((f) => {
+              const isActive = eventFilter === f.slug;
               return (
                 <button
-                  key={ev}
-                  onClick={() => setEventFilter(ev)}
+                  key={f.slug}
+                  onClick={() => setEventFilter(f.slug)}
                   style={{
                     padding: "7px 16px",
                     borderRadius: 40,
@@ -1421,7 +1438,7 @@ export default function SpeakersPage() {
                     whiteSpace: "nowrap",
                   }}
                 >
-                  {ev}
+                  {f.label}
                 </button>
               );
             })}

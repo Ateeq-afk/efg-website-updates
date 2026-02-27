@@ -4,8 +4,8 @@ import { useState, useEffect, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { supabase } from "@/lib/supabase";
-import type { SponsorWithEvents } from "@/lib/supabase";
+import { supabase } from "@/lib/supabase/client";
+import type { SponsorWithSeries } from "@/lib/supabase/types";
 import { Footer } from "@/components/sections";
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -265,25 +265,37 @@ export default function SponsorDetailPage() {
   const aboutInView = useInView(aboutRef, { once: true, margin: "-60px" });
   const eventsInView = useInView(eventsRef, { once: true, margin: "-60px" });
 
-  const [sponsor, setSponsor] = useState<SponsorWithEvents | null>(null);
+  const [sponsor, setSponsor] = useState<SponsorWithSeries | null>(null);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
     if (!slug) return;
     async function fetchSponsor() {
-      const { data } = await supabase
-        .from("sponsors")
-        .select("*, sponsor_events(*)")
-        .eq("slug", slug)
-        .single();
+      try {
+        if (!supabase) { setNotFound(true); return; }
+        const { data, error } = await supabase
+          .from("sponsors")
+          .select("*, sponsor_series(*)")
+          .eq("id", slug)
+          .single();
 
-      if (data) {
-        setSponsor(data as SponsorWithEvents);
-      } else {
+        if (error) {
+          console.error("Supabase error:", error);
+          setNotFound(true);
+          return;
+        }
+        if (data) {
+          setSponsor(data as SponsorWithSeries);
+        } else {
+          setNotFound(true);
+        }
+      } catch (err) {
+        console.error("Failed to fetch sponsor:", err);
         setNotFound(true);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     }
     fetchSponsor();
   }, [slug]);
@@ -297,8 +309,7 @@ export default function SponsorDetailPage() {
         .toUpperCase()
     : "";
 
-  const description =
-    sponsor?.full_description || sponsor?.short_description || null;
+  const description = sponsor?.description || null;
 
   // ── NOT FOUND ──
   if (!loading && notFound) {
@@ -740,7 +751,7 @@ export default function SponsorDetailPage() {
               <SectionLabel text="Events Participated" />
             </motion.div>
 
-            {sponsor.sponsor_events && sponsor.sponsor_events.length > 0 ? (
+            {sponsor.sponsor_series && sponsor.sponsor_series.length > 0 ? (
               <div
                 className="sponsor-detail-events-grid"
                 style={{
@@ -749,12 +760,12 @@ export default function SponsorDetailPage() {
                   gap: "clamp(12px, 2vw, 20px)",
                 }}
               >
-                {sponsor.sponsor_events.map((ev, i) => (
+                {sponsor.sponsor_series.map((ev, i) => (
                   <EventCard
                     key={ev.id}
-                    eventName={ev.event_name}
-                    year={ev.event_year}
-                    tier={ev.tier_at_event}
+                    eventName={slugToLabel(ev.series_slug)}
+                    year={ev.edition_year ?? 0}
+                    tier={ev.tier_override || sponsor.tier}
                     index={i}
                   />
                 ))}

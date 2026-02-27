@@ -1013,71 +1013,78 @@ export default function ArticleDetailPage() {
   useEffect(() => {
     if (!slug) return;
     async function fetchPost() {
-      const { data } = await supabase
-        .from("posts")
-        .select("*, authors(*)")
-        .eq("slug", slug)
-        .single();
-
-      if (data) {
-        const postData = data as PostWithAuthor;
-        setPost(postData);
-
-        // Fetch related posts — smarter: try tag overlap first, fall back to category
-        let relatedResults: PostWithAuthor[] = [];
-
-        // First, get more posts from the same category
-        const { data: categoryPosts } = await supabase
+      try {
+        if (!supabase) { setNotFound(true); return; }
+        const { data } = await supabase
           .from("posts")
           .select("*, authors(*)")
-          .eq("category", postData.category)
-          .neq("slug", slug)
-          .order("published_at", { ascending: false })
-          .limit(10);
+          .eq("slug", slug)
+          .single();
 
-        if (categoryPosts && categoryPosts.length > 0) {
-          const candidates = categoryPosts as PostWithAuthor[];
-          // Score by tag overlap
-          if (postData.tags && postData.tags.length > 0) {
-            const scored = candidates.map((c) => {
-              const overlap = c.tags
-                ? c.tags.filter((t) => postData.tags.includes(t)).length
-                : 0;
-              return { post: c, score: overlap };
-            });
-            scored.sort((a, b) => b.score - a.score);
-            relatedResults = scored.slice(0, 3).map((s) => s.post);
-          } else {
-            relatedResults = candidates.slice(0, 3);
-          }
-        }
+        if (data) {
+          const postData = data as PostWithAuthor;
+          setPost(postData);
 
-        // If we still need more, fetch from any category
-        if (relatedResults.length < 3) {
-          const existingIds = relatedResults.map((r) => r.id);
-          const { data: morePosts } = await supabase
+          // Fetch related posts — smarter: try tag overlap first, fall back to category
+          let relatedResults: PostWithAuthor[] = [];
+
+          // First, get more posts from the same category
+          const { data: categoryPosts } = await supabase
             .from("posts")
             .select("*, authors(*)")
+            .eq("category", postData.category)
             .neq("slug", slug)
             .order("published_at", { ascending: false })
             .limit(10);
 
-          if (morePosts) {
-            const extras = (morePosts as PostWithAuthor[]).filter(
-              (p) => !existingIds.includes(p.id)
-            );
-            relatedResults = [
-              ...relatedResults,
-              ...extras.slice(0, 3 - relatedResults.length),
-            ];
+          if (categoryPosts && categoryPosts.length > 0) {
+            const candidates = categoryPosts as PostWithAuthor[];
+            // Score by tag overlap
+            if (postData.tags && postData.tags.length > 0) {
+              const scored = candidates.map((c) => {
+                const overlap = c.tags
+                  ? c.tags.filter((t) => postData.tags.includes(t)).length
+                  : 0;
+                return { post: c, score: overlap };
+              });
+              scored.sort((a, b) => b.score - a.score);
+              relatedResults = scored.slice(0, 3).map((s) => s.post);
+            } else {
+              relatedResults = candidates.slice(0, 3);
+            }
           }
-        }
 
-        setRelated(relatedResults);
-      } else {
+          // If we still need more, fetch from any category
+          if (relatedResults.length < 3) {
+            const existingIds = relatedResults.map((r) => r.id);
+            const { data: morePosts } = await supabase
+              .from("posts")
+              .select("*, authors(*)")
+              .neq("slug", slug)
+              .order("published_at", { ascending: false })
+              .limit(10);
+
+            if (morePosts) {
+              const extras = (morePosts as PostWithAuthor[]).filter(
+                (p) => !existingIds.includes(p.id)
+              );
+              relatedResults = [
+                ...relatedResults,
+                ...extras.slice(0, 3 - relatedResults.length),
+              ];
+            }
+          }
+
+          setRelated(relatedResults);
+        } else {
+          setNotFound(true);
+        }
+      } catch (err) {
+        console.error("Failed to fetch post:", err);
         setNotFound(true);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     }
     fetchPost();
   }, [slug]);

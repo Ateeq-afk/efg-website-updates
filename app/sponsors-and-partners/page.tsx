@@ -3,8 +3,8 @@
 import { useState, useEffect, useMemo, useRef } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { supabase } from "@/lib/supabase";
-import type { SponsorWithEvents } from "@/lib/supabase";
+import { supabase } from "@/lib/supabase/client";
+import type { SponsorWithSeries } from "@/lib/supabase/types";
 import { Footer } from "@/components/sections";
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -27,11 +27,12 @@ function tierToLabel(tier: string): string {
   return `${tier.split("-").map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ")} Sponsor`;
 }
 
-const EVENT_FILTERS = [
-  "All",
-  "OPEX First UAE",
-  "Cyber First UAE",
-  "OT Security First",
+const SERIES_FILTERS = [
+  { label: "All", slug: "All" },
+  { label: "Cyber First", slug: "cyber-first" },
+  { label: "OT Security First", slug: "ot-security-first" },
+  { label: "Data & AI First", slug: "data-ai-first" },
+  { label: "OPEX First", slug: "opex-first" },
 ] as const;
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -124,7 +125,7 @@ function SponsorCard({
   sponsor,
   index,
 }: {
-  sponsor: SponsorWithEvents;
+  sponsor: SponsorWithSeries;
   index: number;
 }) {
   const [hovered, setHovered] = useState(false);
@@ -145,7 +146,7 @@ function SponsorCard({
       transition={{ duration: 0.5, delay: 0.1 + index * 0.04, ease: EASE }}
     >
       <Link
-        href={`/sponsors-and-partners/${sponsor.slug}`}
+        href={`/sponsors-and-partners/${sponsor.id}`}
         style={{ textDecoration: "none", display: "block" }}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
@@ -730,7 +731,7 @@ export default function SponsorsPage() {
   const heroInView = useInView(heroRef, { once: true, margin: "-60px" });
   const gridInView = useInView(gridRef, { once: true, margin: "-60px" });
 
-  const [sponsors, setSponsors] = useState<SponsorWithEvents[]>([]);
+  const [sponsors, setSponsors] = useState<SponsorWithSeries[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [eventFilter, setEventFilter] = useState("All");
@@ -738,13 +739,24 @@ export default function SponsorsPage() {
   // Fetch sponsors on mount
   useEffect(() => {
     async function fetchSponsors() {
-      const { data } = await supabase
-        .from("sponsors")
-        .select("*, sponsor_events(*)")
-        .order("name");
+      try {
+        if (!supabase) return;
+        const { data, error } = await supabase
+          .from("sponsors")
+          .select("*, sponsor_series(*)")
+          .eq("status", "active")
+          .order("sort_order", { ascending: true });
 
-      if (data) setSponsors(data as SponsorWithEvents[]);
-      setLoading(false);
+        if (error) {
+          console.error("Supabase error:", error);
+          return;
+        }
+        if (data) setSponsors(data as SponsorWithSeries[]);
+      } catch (err) {
+        console.error("Failed to fetch sponsors:", err);
+      } finally {
+        setLoading(false);
+      }
     }
     fetchSponsors();
   }, []);
@@ -756,13 +768,13 @@ export default function SponsorsPage() {
       if (search) {
         const q = search.toLowerCase();
         const nameMatch = s.name.toLowerCase().includes(q);
-        const descMatch = s.short_description?.toLowerCase().includes(q);
+        const descMatch = s.description?.toLowerCase().includes(q);
         if (!nameMatch && !descMatch) return false;
       }
       // Event filter
       if (eventFilter !== "All") {
-        const hasEvent = s.sponsor_events?.some(
-          (e) => e.event_name === eventFilter
+        const hasEvent = s.sponsor_series?.some(
+          (e) => e.series_slug === eventFilter
         );
         if (!hasEvent) return false;
       }
@@ -988,12 +1000,12 @@ export default function SponsorsPage() {
 
           {/* Event filter pills */}
           <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
-            {EVENT_FILTERS.map((ev) => {
-              const isActive = eventFilter === ev;
+            {SERIES_FILTERS.map((f) => {
+              const isActive = eventFilter === f.slug;
               return (
                 <button
-                  key={ev}
-                  onClick={() => setEventFilter(ev)}
+                  key={f.slug}
+                  onClick={() => setEventFilter(f.slug)}
                   style={{
                     padding: "7px 16px",
                     borderRadius: 40,
@@ -1013,7 +1025,7 @@ export default function SponsorsPage() {
                     whiteSpace: "nowrap",
                   }}
                 >
-                  {ev}
+                  {f.label}
                 </button>
               );
             })}

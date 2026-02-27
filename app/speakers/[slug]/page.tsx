@@ -4,8 +4,8 @@ import { useState, useEffect, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { supabase } from "@/lib/supabase";
-import type { SpeakerWithEvents } from "@/lib/supabase";
+import { supabase } from "@/lib/supabase/client";
+import type { SpeakerWithSeries } from "@/lib/supabase/types";
 import { Footer } from "@/components/sections";
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -21,9 +21,23 @@ const PAD = "0 clamp(20px, 4vw, 60px)";
 // ─────────────────────────────────────────────────────────────────────────────
 
 function roleLabel(role: string): string {
-  if (role === "conference-chair") return "Conference Chair";
+  if (role === "chair") return "Conference Chair";
   if (role === "advisor") return "Advisor";
+  if (role === "keynote") return "Keynote Speaker";
+  if (role === "moderator") return "Moderator";
+  if (role === "panelist") return "Panelist";
+  if (role === "workshop_lead") return "Workshop Lead";
   return "Speaker";
+}
+
+function seriesSlugToLabel(slug: string): string {
+  const map: Record<string, string> = {
+    "cyber-first": "Cyber First",
+    "ot-security-first": "OT Security First",
+    "data-ai-first": "Data & AI First",
+    "opex-first": "OPEX First",
+  };
+  return map[slug] || slug.split("-").map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
 }
 
 function SectionLabel({ text }: { text: string }) {
@@ -393,44 +407,56 @@ export default function SpeakerDetailPage() {
   const aboutInView = useInView(aboutRef, { once: true, margin: "-60px" });
   const eventsInView = useInView(eventsRef, { once: true, margin: "-60px" });
 
-  const [speaker, setSpeaker] = useState<SpeakerWithEvents | null>(null);
+  const [speaker, setSpeaker] = useState<SpeakerWithSeries | null>(null);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
     if (!slug) return;
     async function fetchSpeaker() {
-      const { data } = await supabase
-        .from("speakers")
-        .select("*, speaker_events(*)")
-        .eq("slug", slug)
-        .single();
+      try {
+        if (!supabase) { setNotFound(true); return; }
+        const { data, error } = await supabase
+          .from("speakers")
+          .select("*, speaker_series(*)")
+          .eq("id", slug)
+          .single();
 
-      if (data) {
-        setSpeaker(data as SpeakerWithEvents);
-      } else {
+        if (error) {
+          console.error("Supabase error:", error);
+          setNotFound(true);
+          return;
+        }
+        if (data) {
+          setSpeaker(data as SpeakerWithSeries);
+        } else {
+          setNotFound(true);
+        }
+      } catch (err) {
+        console.error("Failed to fetch speaker:", err);
         setNotFound(true);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     }
     fetchSpeaker();
   }, [slug]);
 
+  const fullName = speaker
+    ? `${speaker.first_name} ${speaker.last_name}`
+    : "";
+
   const initials = speaker
-    ? speaker.name
-        .split(/[\s-]+/)
+    ? [speaker.first_name, speaker.last_name]
         .filter(Boolean)
-        .slice(0, 2)
         .map((w) => w[0])
         .join("")
         .toUpperCase()
     : "";
 
-  const showBadge =
-    speaker?.role_type === "conference-chair" ||
-    speaker?.role_type === "advisor";
-  const badgeLabel =
-    speaker?.role_type === "conference-chair" ? "Conference Chair" : "Advisor";
+  const primaryRole = speaker?.speaker_series?.[0]?.role;
+  const showBadge = primaryRole === "chair" || primaryRole === "advisor";
+  const badgeLabel = primaryRole === "chair" ? "Conference Chair" : "Advisor";
 
   // ── NOT FOUND ──
   if (!loading && notFound) {
@@ -579,7 +605,7 @@ export default function SpeakerDetailPage() {
               overflow: "hidden",
             }}
           >
-            {speaker.name}
+            {fullName}
           </div>
         )}
 
@@ -642,7 +668,7 @@ export default function SpeakerDetailPage() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.1, ease: EASE }}
                 >
-                  {speaker.image_url ? (
+                  {speaker.photo_url ? (
                     <div
                       style={{
                         width: 180,
@@ -655,8 +681,8 @@ export default function SpeakerDetailPage() {
                     >
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
-                        src={speaker.image_url}
-                        alt={speaker.name}
+                        src={speaker.photo_url}
+                        alt={fullName}
                         style={{
                           width: "100%",
                           height: "100%",
@@ -708,11 +734,11 @@ export default function SpeakerDetailPage() {
                     margin: "0 0 12px",
                   }}
                 >
-                  {speaker.name}
+                  {fullName}
                 </motion.h1>
 
                 {/* Job title */}
-                {speaker.title && (
+                {speaker.job_title && (
                   <motion.p
                     initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -726,7 +752,7 @@ export default function SpeakerDetailPage() {
                       margin: "0 0 6px",
                     }}
                   >
-                    {speaker.title}
+                    {speaker.job_title}
                   </motion.p>
                 )}
 
@@ -876,7 +902,7 @@ export default function SpeakerDetailPage() {
                 )}
 
                 {/* Share buttons */}
-                <ShareButtons name={speaker.name} />
+                <ShareButtons name={fullName} />
               </motion.div>
             </motion.div>
           </div>
@@ -903,7 +929,7 @@ export default function SpeakerDetailPage() {
               <SectionLabel text="Speaking Engagements" />
             </motion.div>
 
-            {speaker.speaker_events && speaker.speaker_events.length > 0 ? (
+            {speaker.speaker_series && speaker.speaker_series.length > 0 ? (
               <div
                 className="speaker-detail-events-grid"
                 style={{
@@ -912,12 +938,12 @@ export default function SpeakerDetailPage() {
                   gap: "clamp(12px, 2vw, 20px)",
                 }}
               >
-                {speaker.speaker_events.map((ev, i) => (
+                {speaker.speaker_series.map((ev, i) => (
                   <EventCard
                     key={ev.id}
-                    eventName={ev.event_name}
-                    year={ev.event_year}
-                    role={ev.role_at_event}
+                    eventName={seriesSlugToLabel(ev.series_slug)}
+                    year={ev.edition_year ?? 0}
+                    role={ev.role}
                     index={i}
                   />
                 ))}
