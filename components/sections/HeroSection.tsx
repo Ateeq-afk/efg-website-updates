@@ -106,7 +106,7 @@ export default function HeroSection() {
   return (
     <section
       ref={heroRef}
-      className="relative w-full overflow-hidden"
+      className="hero-no-pad-override relative w-full overflow-hidden"
       style={{
         height: "100vh",
         background: "transparent",

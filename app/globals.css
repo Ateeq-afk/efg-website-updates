@@ -213,3 +213,15 @@ html.lenis body {
 .events-mobile-slider::-webkit-scrollbar {
   display: none;
 }
+
+/* ── Mobile: reduce excess section vertical padding ── */
+@media (max-width: 640px) {
+  section {
+    padding-top: clamp(48px, 10vw, 72px) !important;
+    padding-bottom: clamp(40px, 8vw, 60px) !important;
+  }
+  /* Hero keeps its own padding (handled inline) */
+  .hero-no-pad-override {
+    padding: 0 !important;
+  }
+}

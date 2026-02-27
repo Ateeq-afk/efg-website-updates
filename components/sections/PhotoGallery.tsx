@@ -250,6 +250,9 @@ export default function PhotoGallery() {
           .gallery-tile-row {
             grid-template-columns: repeat(2, 1fr) !important;
           }
+          .gallery-tile-row > *:nth-child(3) {
+            grid-column: span 2;
+          }
           .gallery-panel {
             grid-template-columns: 1fr !important;
             height: auto !important;
