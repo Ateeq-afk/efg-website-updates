@@ -31,11 +31,11 @@ function normalizeSpeakers(
   if (speakers && speakers.length > 0) {
     return speakers.map((s) => ({
       id: s.id,
-      name: `${s.first_name} ${s.last_name}`,
-      role: s.job_title,
-      org: s.organization,
-      image: s.photo_url,
-      initial: s.first_name.charAt(0),
+      name: s.name,
+      role: s.title ?? "",
+      org: s.organization ?? "",
+      image: s.image_url,
+      initial: s.name.charAt(0),
     }));
   }
   if (fallback && fallback.length > 0) {

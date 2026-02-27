@@ -123,7 +123,7 @@ export function groupSponsorsByTier(
     (acc, sponsor) => {
       // Use tier_override if set, otherwise use default tier
       const effectiveTier =
-        sponsor.sponsor_series?.[0]?.tier_override || sponsor.tier;
+        sponsor.sponsor_events?.[0]?.tier_at_event || sponsor.tier;
       if (!acc[effectiveTier]) {
         acc[effectiveTier] = [];
       }

@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo, useRef } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { supabase } from "@/lib/supabase/client";
-import type { SponsorWithSeries } from "@/lib/supabase/types";
+import type { SponsorWithEvents } from "@/lib/supabase/types";
 import { Footer } from "@/components/sections";
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -27,12 +27,11 @@ function tierToLabel(tier: string): string {
   return `${tier.split("-").map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ")} Sponsor`;
 }
 
-const SERIES_FILTERS = [
-  { label: "All", slug: "All" },
-  { label: "Cyber First", slug: "cyber-first" },
-  { label: "OT Security First", slug: "ot-security-first" },
-  { label: "Data & AI First", slug: "data-ai-first" },
-  { label: "OPEX First", slug: "opex-first" },
+const EVENT_FILTERS = [
+  "All",
+  "Cyber First UAE",
+  "OT Security First",
+  "OPEX First UAE",
 ] as const;
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -125,7 +124,7 @@ function SponsorCard({
   sponsor,
   index,
 }: {
-  sponsor: SponsorWithSeries;
+  sponsor: SponsorWithEvents;
   index: number;
 }) {
   const [hovered, setHovered] = useState(false);
@@ -146,7 +145,7 @@ function SponsorCard({
       transition={{ duration: 0.5, delay: 0.1 + index * 0.04, ease: EASE }}
     >
       <Link
-        href={`/sponsors-and-partners/${sponsor.id}`}
+        href={`/sponsors-and-partners/${sponsor.slug}`}
         style={{ textDecoration: "none", display: "block" }}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
@@ -731,7 +730,7 @@ export default function SponsorsPage() {
   const heroInView = useInView(heroRef, { once: true, margin: "-60px" });
   const gridInView = useInView(gridRef, { once: true, margin: "-60px" });
 
-  const [sponsors, setSponsors] = useState<SponsorWithSeries[]>([]);
+  const [sponsors, setSponsors] = useState<SponsorWithEvents[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [eventFilter, setEventFilter] = useState("All");
@@ -743,15 +742,14 @@ export default function SponsorsPage() {
         if (!supabase) return;
         const { data, error } = await supabase
           .from("sponsors")
-          .select("*, sponsor_series(*)")
-          .eq("status", "active")
-          .order("sort_order", { ascending: true });
+          .select("*, sponsor_events(*)")
+          .order("name", { ascending: true });
 
         if (error) {
           console.error("Supabase error:", error);
           return;
         }
-        if (data) setSponsors(data as SponsorWithSeries[]);
+        if (data) setSponsors(data as SponsorWithEvents[]);
       } catch (err) {
         console.error("Failed to fetch sponsors:", err);
       } finally {
@@ -768,13 +766,13 @@ export default function SponsorsPage() {
       if (search) {
         const q = search.toLowerCase();
         const nameMatch = s.name.toLowerCase().includes(q);
-        const descMatch = s.description?.toLowerCase().includes(q);
+        const descMatch = s.short_description?.toLowerCase().includes(q);
         if (!nameMatch && !descMatch) return false;
       }
       // Event filter
       if (eventFilter !== "All") {
-        const hasEvent = s.sponsor_series?.some(
-          (e) => e.series_slug === eventFilter
+        const hasEvent = s.sponsor_events?.some(
+          (e) => e.event_name === eventFilter
         );
         if (!hasEvent) return false;
       }
@@ -1000,12 +998,12 @@ export default function SponsorsPage() {
 
           {/* Event filter pills */}
           <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
-            {SERIES_FILTERS.map((f) => {
-              const isActive = eventFilter === f.slug;
+            {EVENT_FILTERS.map((ev) => {
+              const isActive = eventFilter === ev;
               return (
                 <button
-                  key={f.slug}
-                  onClick={() => setEventFilter(f.slug)}
+                  key={ev}
+                  onClick={() => setEventFilter(ev)}
                   style={{
                     padding: "7px 16px",
                     borderRadius: 40,
@@ -1025,7 +1023,7 @@ export default function SponsorsPage() {
                     whiteSpace: "nowrap",
                   }}
                 >
-                  {f.label}
+                  {ev}
                 </button>
               );
             })}

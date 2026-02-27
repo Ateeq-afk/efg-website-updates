@@ -5,7 +5,7 @@ import { motion, useInView } from "framer-motion";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { supabase } from "@/lib/supabase/client";
-import type { SpeakerWithSeries } from "@/lib/supabase/types";
+import type { SpeakerWithEvents } from "@/lib/supabase/types";
 import { Footer } from "@/components/sections";
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -21,23 +21,13 @@ const PAD = "0 clamp(20px, 4vw, 60px)";
 // ─────────────────────────────────────────────────────────────────────────────
 
 function roleLabel(role: string): string {
-  if (role === "chair") return "Conference Chair";
+  if (role === "conference-chair") return "Conference Chair";
   if (role === "advisor") return "Advisor";
   if (role === "keynote") return "Keynote Speaker";
   if (role === "moderator") return "Moderator";
   if (role === "panelist") return "Panelist";
   if (role === "workshop_lead") return "Workshop Lead";
   return "Speaker";
-}
-
-function seriesSlugToLabel(slug: string): string {
-  const map: Record<string, string> = {
-    "cyber-first": "Cyber First",
-    "ot-security-first": "OT Security First",
-    "data-ai-first": "Data & AI First",
-    "opex-first": "OPEX First",
-  };
-  return map[slug] || slug.split("-").map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
 }
 
 function SectionLabel({ text }: { text: string }) {
@@ -407,7 +397,7 @@ export default function SpeakerDetailPage() {
   const aboutInView = useInView(aboutRef, { once: true, margin: "-60px" });
   const eventsInView = useInView(eventsRef, { once: true, margin: "-60px" });
 
-  const [speaker, setSpeaker] = useState<SpeakerWithSeries | null>(null);
+  const [speaker, setSpeaker] = useState<SpeakerWithEvents | null>(null);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
 
@@ -418,8 +408,8 @@ export default function SpeakerDetailPage() {
         if (!supabase) { setNotFound(true); return; }
         const { data, error } = await supabase
           .from("speakers")
-          .select("*, speaker_series(*)")
-          .eq("id", slug)
+          .select("*, speaker_events(*)")
+          .eq("slug", slug)
           .single();
 
         if (error) {
@@ -428,7 +418,7 @@ export default function SpeakerDetailPage() {
           return;
         }
         if (data) {
-          setSpeaker(data as SpeakerWithSeries);
+          setSpeaker(data as SpeakerWithEvents);
         } else {
           setNotFound(true);
         }
@@ -442,19 +432,18 @@ export default function SpeakerDetailPage() {
     fetchSpeaker();
   }, [slug]);
 
-  const fullName = speaker
-    ? `${speaker.first_name} ${speaker.last_name}`
-    : "";
+  const fullName = speaker?.name ?? "";
 
   const initials = speaker
-    ? [speaker.first_name, speaker.last_name]
-        .filter(Boolean)
+    ? speaker.name
+        .split(/\s+/)
+        .slice(0, 2)
         .map((w) => w[0])
         .join("")
         .toUpperCase()
     : "";
 
-  const primaryRole = speaker?.speaker_series?.[0]?.role;
+  const primaryRole = speaker?.role_type;
   const showBadge = primaryRole === "chair" || primaryRole === "advisor";
   const badgeLabel = primaryRole === "chair" ? "Conference Chair" : "Advisor";
 
@@ -668,7 +657,7 @@ export default function SpeakerDetailPage() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.1, ease: EASE }}
                 >
-                  {speaker.photo_url ? (
+                  {speaker.image_url ? (
                     <div
                       style={{
                         width: 180,
@@ -681,7 +670,7 @@ export default function SpeakerDetailPage() {
                     >
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
-                        src={speaker.photo_url}
+                        src={speaker.image_url}
                         alt={fullName}
                         style={{
                           width: "100%",
@@ -738,7 +727,7 @@ export default function SpeakerDetailPage() {
                 </motion.h1>
 
                 {/* Job title */}
-                {speaker.job_title && (
+                {speaker.title && (
                   <motion.p
                     initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -752,7 +741,7 @@ export default function SpeakerDetailPage() {
                       margin: "0 0 6px",
                     }}
                   >
-                    {speaker.job_title}
+                    {speaker.title}
                   </motion.p>
                 )}
 
@@ -929,7 +918,7 @@ export default function SpeakerDetailPage() {
               <SectionLabel text="Speaking Engagements" />
             </motion.div>
 
-            {speaker.speaker_series && speaker.speaker_series.length > 0 ? (
+            {speaker.speaker_events && speaker.speaker_events.length > 0 ? (
               <div
                 className="speaker-detail-events-grid"
                 style={{
@@ -938,12 +927,12 @@ export default function SpeakerDetailPage() {
                   gap: "clamp(12px, 2vw, 20px)",
                 }}
               >
-                {speaker.speaker_series.map((ev, i) => (
+                {speaker.speaker_events.map((ev, i) => (
                   <EventCard
                     key={ev.id}
-                    eventName={seriesSlugToLabel(ev.series_slug)}
-                    year={ev.edition_year ?? 0}
-                    role={ev.role}
+                    eventName={ev.event_name}
+                    year={ev.event_year ?? 0}
+                    role={ev.role_at_event}
                     index={i}
                   />
                 ))}
