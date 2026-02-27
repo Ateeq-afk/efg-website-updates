@@ -167,10 +167,10 @@ export default function Testimonials() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden"
+      className="testimonials-section relative overflow-hidden"
       style={{
         background: "var(--black)",
-        padding: "clamp(96px, 8vw, 120px) 0 clamp(40px, 5vw, 64px)",
+        padding: "clamp(60px, 8vw, 120px) 0 clamp(40px, 5vw, 64px)",
       }}
     >
       {/* Ambient background */}
@@ -311,6 +311,10 @@ export default function Testimonials() {
           }
           .testimonials-stat-line {
             white-space: normal !important;
+          }
+          .testimonials-section {
+            padding-top: 60px !important;
+            padding-bottom: 40px !important;
           }
         }
       `}</style>

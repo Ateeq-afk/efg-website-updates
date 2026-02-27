@@ -163,14 +163,17 @@ export default function ImpactBar() {
         @media (max-width: 640px) {
           .impact-grid {
             grid-template-columns: repeat(2, 1fr) !important;
+            gap: 32px 0 !important;
           }
-          .impact-stat:nth-child(4),
+          .impact-stat {
+            border-right: none !important;
+            border-bottom: 1px solid rgba(255,255,255,0.07) !important;
+            padding: 0 0 32px 0 !important;
+          }
           .impact-stat:nth-child(5),
           .impact-stat:nth-child(6) {
             border-bottom: none !important;
-          }
-          .impact-stat:nth-child(5) {
-            border-bottom: none !important;
+            padding-bottom: 0 !important;
           }
         }
       `}</style>

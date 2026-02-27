@@ -111,6 +111,7 @@ export default function NetworkFirst() {
           initial={{ opacity: 0, x: -40 }}
           animate={isInView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.9, ease: EASE }}
+          className="nf-photo"
           style={{
             position: "relative",
             borderRadius: 20,
@@ -342,6 +343,7 @@ export default function NetworkFirst() {
             initial={{ opacity: 0, y: 16 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, ease: EASE, delay: 0.7 }}
+            className="nf-cta-row"
             style={{ display: "flex", alignItems: "center", gap: 20, marginBottom: 48 }}
           >
             <Link
@@ -435,6 +437,18 @@ export default function NetworkFirst() {
         @media (max-width: 768px) {
           .nf-grid {
             grid-template-columns: 1fr !important;
+            gap: 40px !important;
+            padding-top: 60px !important;
+            padding-bottom: 60px !important;
+          }
+          .nf-photo {
+            aspect-ratio: 16 / 9 !important;
+            max-height: 260px !important;
+          }
+          .nf-cta-row {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 10px !important;
           }
         }
       `}</style>

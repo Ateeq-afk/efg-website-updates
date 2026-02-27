@@ -188,7 +188,7 @@ export default function SponsorsPartners() {
         </div>
 
         {/* ── MARQUEE — with edge fades ── */}
-        <div style={{ position: "relative" }}>
+        <div style={{ position: "relative", overflow: "hidden" }}>
           {/* Left fade */}
           <div
             className="absolute left-0 top-0 bottom-0 z-10 pointer-events-none"

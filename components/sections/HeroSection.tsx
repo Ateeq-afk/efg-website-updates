@@ -369,7 +369,7 @@ export default function HeroSection() {
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 2 }}
           className="absolute flex flex-col items-center gap-2 z-10"
-          style={{ bottom: 100, right: 40 }}
+          style={{ bottom: 100, right: 16 }}
         >
           {imageSources.map((_, index) => (
             <div
@@ -400,11 +400,12 @@ export default function HeroSection() {
           backdropFilter: "blur(16px)",
           WebkitBackdropFilter: "blur(16px)",
           borderTop: "1px solid rgba(255, 255, 255, 0.06)",
-          padding: "15px 0",
+          padding: "12px 0",
         }}
       >
+        {/* ── DESKTOP ticker ── */}
         <div
-          className="flex items-center justify-between"
+          className="hidden sm:flex items-center justify-between"
           style={{
             maxWidth: 1320,
             margin: "0 auto",
@@ -413,7 +414,6 @@ export default function HeroSection() {
         >
           {/* Left side: Event info */}
           <div className="flex items-center gap-3">
-            {/* Pulsing dot */}
             <span className="relative flex h-2 w-2">
               <span
                 className="absolute inline-flex h-full w-full rounded-full opacity-75 animate-ping"
@@ -424,65 +424,57 @@ export default function HeroSection() {
                 style={{ background: "var(--orange)" }}
               />
             </span>
-
-            <span
-              style={{
-                fontSize: 10,
-                fontWeight: 600,
-                letterSpacing: "1.5px",
-                textTransform: "uppercase",
-                color: "var(--white-muted)",
-                fontFamily: "var(--font-outfit)",
-              }}
-            >
+            <span style={{ fontSize: 10, fontWeight: 600, letterSpacing: "1.5px", textTransform: "uppercase", color: "var(--white-muted)", fontFamily: "var(--font-outfit)" }}>
               Next Up
             </span>
-
             <span style={{ color: "rgba(255,255,255,0.2)" }}>|</span>
-
-            <span
-              style={{
-                fontSize: 14,
-                fontWeight: 600,
-                color: "var(--white)",
-                fontFamily: "var(--font-display)",
-              }}
-            >
+            <span style={{ fontSize: 14, fontWeight: 600, color: "var(--white)", fontFamily: "var(--font-display)" }}>
               {nextEvent.name}
             </span>
-
-            <span
-              style={{
-                fontSize: 13,
-                color: "var(--white-dim)",
-                fontFamily: "var(--font-outfit)",
-              }}
-            >
+            <span style={{ fontSize: 13, color: "var(--white-dim)", fontFamily: "var(--font-outfit)" }}>
               · {nextEvent.location}
             </span>
           </div>
-
-          {/* Right side: Countdown + Register */}
           <div className="flex items-center gap-6">
             <CountdownDisplay date={nextEvent.date} />
-
             <Link
               href="/events/cyber-first/kuwait-april-2026"
               className="transition-colors duration-300 flex items-center gap-1"
-              style={{
-                fontSize: 13,
-                fontWeight: 600,
-                color: "var(--orange)",
-                fontFamily: "var(--font-outfit)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.color = "var(--orange-bright)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.color = "var(--orange)";
-              }}
+              style={{ fontSize: 13, fontWeight: 600, color: "var(--orange)", fontFamily: "var(--font-outfit)" }}
+              onMouseEnter={(e) => { e.currentTarget.style.color = "var(--orange-bright)"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = "var(--orange)"; }}
             >
               Register <span>→</span>
+            </Link>
+          </div>
+        </div>
+
+        {/* ── MOBILE ticker — compact two-row layout ── */}
+        <div
+          className="flex sm:hidden items-center justify-between"
+          style={{ padding: "0 20px" }}
+        >
+          <div style={{ display: "flex", alignItems: "center", gap: 8, minWidth: 0 }}>
+            <span className="relative flex h-2 w-2" style={{ flexShrink: 0 }}>
+              <span className="absolute inline-flex h-full w-full rounded-full opacity-75 animate-ping" style={{ background: "var(--orange)", animationDuration: "2s" }} />
+              <span className="relative inline-flex rounded-full h-2 w-2" style={{ background: "var(--orange)" }} />
+            </span>
+            <div style={{ minWidth: 0 }}>
+              <p style={{ fontFamily: "var(--font-display)", fontSize: 13, fontWeight: 600, color: "#fff", margin: 0, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                {nextEvent.name}
+              </p>
+              <p style={{ fontFamily: "var(--font-outfit)", fontSize: 10, color: "rgba(255,255,255,0.4)", margin: 0 }}>
+                {nextEvent.location}
+              </p>
+            </div>
+          </div>
+          <div style={{ display: "flex", alignItems: "center", gap: 12, flexShrink: 0 }}>
+            <CountdownDisplay date={nextEvent.date} compact />
+            <Link
+              href="/events/cyber-first/kuwait-april-2026"
+              style={{ fontSize: 12, fontWeight: 600, color: "var(--orange)", fontFamily: "var(--font-outfit)", whiteSpace: "nowrap" }}
+            >
+              Register →
             </Link>
           </div>
         </div>
@@ -494,9 +486,12 @@ export default function HeroSection() {
           0% { background-position: 100% 50%; }
           100% { background-position: 0% 50%; }
         }
-        @media (max-width: 768px) {
+        @media (max-width: 640px) {
           .hero-content-wrapper {
-            padding-bottom: 140px !important;
+            padding-top: 100px !important;
+            padding-bottom: 120px !important;
+            padding-left: 20px !important;
+            padding-right: 20px !important;
           }
         }
       `}</style>
@@ -540,7 +535,7 @@ function HeroImage({
 /**
  * CountdownDisplay — The live countdown numbers
  */
-function CountdownDisplay({ date }: { date: Date }) {
+function CountdownDisplay({ date, compact = false }: { date: Date; compact?: boolean }) {
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -570,13 +565,13 @@ function CountdownDisplay({ date }: { date: Date }) {
 
   return (
     <div className="flex items-center gap-1">
-      <CountdownUnit value={timeLeft.days} label="D" />
-      <span style={{ color: "rgba(232, 101, 26, 0.4)", fontSize: 18 }}>:</span>
-      <CountdownUnit value={timeLeft.hours} label="H" />
-      <span style={{ color: "rgba(232, 101, 26, 0.4)", fontSize: 18 }}>:</span>
-      <CountdownUnit value={timeLeft.minutes} label="M" />
-      <span style={{ color: "rgba(232, 101, 26, 0.4)", fontSize: 18 }}>:</span>
-      <CountdownUnit value={timeLeft.seconds} label="S" />
+      <CountdownUnit value={timeLeft.days} label="D" compact={compact} />
+      <span style={{ color: "rgba(232, 101, 26, 0.4)", fontSize: compact ? 12 : 18 }}>:</span>
+      <CountdownUnit value={timeLeft.hours} label="H" compact={compact} />
+      <span style={{ color: "rgba(232, 101, 26, 0.4)", fontSize: compact ? 12 : 18 }}>:</span>
+      <CountdownUnit value={timeLeft.minutes} label="M" compact={compact} />
+      <span style={{ color: "rgba(232, 101, 26, 0.4)", fontSize: compact ? 12 : 18 }}>:</span>
+      <CountdownUnit value={timeLeft.seconds} label="S" compact={compact} />
     </div>
   );
 }
@@ -584,17 +579,17 @@ function CountdownDisplay({ date }: { date: Date }) {
 /**
  * CountdownUnit — Individual countdown number display
  */
-function CountdownUnit({ value, label }: { value: number; label: string }) {
+function CountdownUnit({ value, label, compact = false }: { value: number; label: string; compact?: boolean }) {
   return (
     <div className="flex items-baseline gap-0.5">
       <span
         className="tabular-nums"
         style={{
-          fontSize: 24,
+          fontSize: compact ? 15 : 24,
           fontWeight: 700,
           color: "var(--white)",
           fontFamily: "var(--font-display)",
-          minWidth: 32,
+          minWidth: compact ? 18 : 32,
           textAlign: "center",
         }}
       >
@@ -602,7 +597,7 @@ function CountdownUnit({ value, label }: { value: number; label: string }) {
       </span>
       <span
         style={{
-          fontSize: 11,
+          fontSize: compact ? 8 : 11,
           textTransform: "uppercase",
           color: "rgba(255,255,255,0.7)",
           fontFamily: "var(--font-outfit)",

@@ -200,6 +200,7 @@ export default function PhotoGallery() {
             <div key={rowIndex}>
               {/* Tiles row */}
               <div
+                className="gallery-tile-row"
                 style={{
                   display: "grid",
                   gridTemplateColumns: "repeat(3, 1fr)",
@@ -243,6 +244,25 @@ export default function PhotoGallery() {
           );
         })}
       </div>
+
+      <style jsx global>{`
+        @media (max-width: 640px) {
+          .gallery-tile-row {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+          .gallery-panel {
+            grid-template-columns: 1fr !important;
+            height: auto !important;
+          }
+          .gallery-panel > div:last-child {
+            display: none !important;
+          }
+          .gallery-panel > div:first-child {
+            height: 280px;
+            position: relative;
+          }
+        }
+      `}</style>
     </section>
   );
 }
@@ -390,6 +410,7 @@ function Panel({
 
   return (
     <div
+      className="gallery-panel"
       style={{
         background: "#0d0d0d",
         display: "grid",
