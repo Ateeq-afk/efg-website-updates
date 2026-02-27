@@ -4,8 +4,8 @@ import { useState, useEffect, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { supabase } from "@/lib/supabase";
-import type { SpeakerWithEvents } from "@/lib/supabase";
+import { supabase } from "@/lib/supabase/client";
+import type { SpeakerWithEvents } from "@/lib/supabase/types";
 import { Footer } from "@/components/sections";
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -23,6 +23,10 @@ const PAD = "0 clamp(20px, 4vw, 60px)";
 function roleLabel(role: string): string {
   if (role === "conference-chair") return "Conference Chair";
   if (role === "advisor") return "Advisor";
+  if (role === "keynote") return "Keynote Speaker";
+  if (role === "moderator") return "Moderator";
+  if (role === "panelist") return "Panelist";
+  if (role === "workshop_lead") return "Workshop Lead";
   return "Speaker";
 }
 
@@ -400,37 +404,48 @@ export default function SpeakerDetailPage() {
   useEffect(() => {
     if (!slug) return;
     async function fetchSpeaker() {
-      const { data } = await supabase
-        .from("speakers")
-        .select("*, speaker_events(*)")
-        .eq("slug", slug)
-        .single();
+      try {
+        if (!supabase) { setNotFound(true); return; }
+        const { data, error } = await supabase
+          .from("speakers")
+          .select("*, speaker_events(*)")
+          .eq("slug", slug)
+          .single();
 
-      if (data) {
-        setSpeaker(data as SpeakerWithEvents);
-      } else {
+        if (error) {
+          console.error("Supabase error:", error);
+          setNotFound(true);
+          return;
+        }
+        if (data) {
+          setSpeaker(data as SpeakerWithEvents);
+        } else {
+          setNotFound(true);
+        }
+      } catch (err) {
+        console.error("Failed to fetch speaker:", err);
         setNotFound(true);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     }
     fetchSpeaker();
   }, [slug]);
 
+  const fullName = speaker?.name ?? "";
+
   const initials = speaker
     ? speaker.name
-        .split(/[\s-]+/)
-        .filter(Boolean)
+        .split(/\s+/)
         .slice(0, 2)
         .map((w) => w[0])
         .join("")
         .toUpperCase()
     : "";
 
-  const showBadge =
-    speaker?.role_type === "conference-chair" ||
-    speaker?.role_type === "advisor";
-  const badgeLabel =
-    speaker?.role_type === "conference-chair" ? "Conference Chair" : "Advisor";
+  const primaryRole = speaker?.role_type;
+  const showBadge = primaryRole === "chair" || primaryRole === "advisor";
+  const badgeLabel = primaryRole === "chair" ? "Conference Chair" : "Advisor";
 
   // ── NOT FOUND ──
   if (!loading && notFound) {
@@ -579,7 +594,7 @@ export default function SpeakerDetailPage() {
               overflow: "hidden",
             }}
           >
-            {speaker.name}
+            {fullName}
           </div>
         )}
 
@@ -656,7 +671,7 @@ export default function SpeakerDetailPage() {
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={speaker.image_url}
-                        alt={speaker.name}
+                        alt={fullName}
                         style={{
                           width: "100%",
                           height: "100%",
@@ -708,7 +723,7 @@ export default function SpeakerDetailPage() {
                     margin: "0 0 12px",
                   }}
                 >
-                  {speaker.name}
+                  {fullName}
                 </motion.h1>
 
                 {/* Job title */}
@@ -876,7 +891,7 @@ export default function SpeakerDetailPage() {
                 )}
 
                 {/* Share buttons */}
-                <ShareButtons name={speaker.name} />
+                <ShareButtons name={fullName} />
               </motion.div>
             </motion.div>
           </div>
@@ -916,7 +931,7 @@ export default function SpeakerDetailPage() {
                   <EventCard
                     key={ev.id}
                     eventName={ev.event_name}
-                    year={ev.event_year}
+                    year={ev.event_year ?? 0}
                     role={ev.role_at_event}
                     index={i}
                   />

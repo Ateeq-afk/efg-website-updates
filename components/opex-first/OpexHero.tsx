@@ -225,7 +225,7 @@ export default function OpexHero() {
         location="St. Regis, Abu Dhabi"
         targetDate={new Date("2026-02-10T09:00:00")}
         ctaText="View Highlights"
-        ctaHref="/events/opex-first/abu-dhabi-2026"
+        ctaHref="/events/opex-first"
         angularRadius={false}
       />
     </section>

@@ -175,11 +175,11 @@ function SpeakerCard({ speaker, accentColor }: SpeakerCardProps) {
           marginBottom: 16,
         }}
       >
-        {speaker.photo_url ? (
+        {speaker.image_url ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
-            src={speaker.photo_url}
-            alt={`${speaker.first_name} ${speaker.last_name}`}
+            src={speaker.image_url}
+            alt={speaker.name}
             style={{
               width: "100%",
               height: "100%",
@@ -200,8 +200,7 @@ function SpeakerCard({ speaker, accentColor }: SpeakerCardProps) {
               color: accentColor,
             }}
           >
-            {speaker.first_name[0]}
-            {speaker.last_name[0]}
+            {speaker.name.split(/\s+/).slice(0, 2).map(w => w[0]).join("")}
           </div>
         )}
       </div>
@@ -216,7 +215,7 @@ function SpeakerCard({ speaker, accentColor }: SpeakerCardProps) {
           margin: 0,
         }}
       >
-        {speaker.first_name} {speaker.last_name}
+        {speaker.name}
       </h3>
 
       {/* Title */}
@@ -230,7 +229,7 @@ function SpeakerCard({ speaker, accentColor }: SpeakerCardProps) {
           lineHeight: 1.4,
         }}
       >
-        {speaker.job_title}
+        {speaker.title}
       </p>
 
       {/* Organization */}

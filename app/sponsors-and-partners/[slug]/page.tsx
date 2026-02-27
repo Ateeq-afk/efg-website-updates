@@ -4,8 +4,8 @@ import { useState, useEffect, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { supabase } from "@/lib/supabase";
-import type { SponsorWithEvents } from "@/lib/supabase";
+import { supabase } from "@/lib/supabase/client";
+import type { SponsorWithEvents } from "@/lib/supabase/types";
 import { Footer } from "@/components/sections";
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -272,18 +272,30 @@ export default function SponsorDetailPage() {
   useEffect(() => {
     if (!slug) return;
     async function fetchSponsor() {
-      const { data } = await supabase
-        .from("sponsors")
-        .select("*, sponsor_events(*)")
-        .eq("slug", slug)
-        .single();
+      try {
+        if (!supabase) { setNotFound(true); return; }
+        const { data, error } = await supabase
+          .from("sponsors")
+          .select("*, sponsor_events(*)")
+          .eq("slug", slug)
+          .single();
 
-      if (data) {
-        setSponsor(data as SponsorWithEvents);
-      } else {
+        if (error) {
+          console.error("Supabase error:", error);
+          setNotFound(true);
+          return;
+        }
+        if (data) {
+          setSponsor(data as SponsorWithEvents);
+        } else {
+          setNotFound(true);
+        }
+      } catch (err) {
+        console.error("Failed to fetch sponsor:", err);
         setNotFound(true);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     }
     fetchSponsor();
   }, [slug]);
@@ -297,8 +309,7 @@ export default function SponsorDetailPage() {
         .toUpperCase()
     : "";
 
-  const description =
-    sponsor?.full_description || sponsor?.short_description || null;
+  const description = sponsor?.full_description || sponsor?.short_description || null;
 
   // ── NOT FOUND ──
   if (!loading && notFound) {
@@ -753,8 +764,8 @@ export default function SponsorDetailPage() {
                   <EventCard
                     key={ev.id}
                     eventName={ev.event_name}
-                    year={ev.event_year}
-                    tier={ev.tier_at_event}
+                    year={ev.event_year ?? 0}
+                    tier={ev.tier_at_event || sponsor.tier}
                     index={i}
                   />
                 ))}

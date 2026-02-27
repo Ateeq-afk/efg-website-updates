@@ -14,7 +14,7 @@ const nextEdition = {
   date: new Date("2026-04-21T09:00:00"),
   dateString: "April 21, 2026",
   city: "Kuwait City",
-  venue: "Radisson Blu",
+  venue: "Jumeirah Messilah Beach Hotel",
 };
 
 // Trust points

@@ -3,8 +3,8 @@
 import { useState, useEffect, useMemo, useRef } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { supabase } from "@/lib/supabase";
-import type { SpeakerWithEvents } from "@/lib/supabase";
+import { supabase } from "@/lib/supabase/client";
+import type { SpeakerWithEvents } from "@/lib/supabase/types";
 import { Footer } from "@/components/sections";
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -17,9 +17,9 @@ const PAD = "0 clamp(20px, 4vw, 60px)";
 
 const EVENT_FILTERS = [
   "All",
-  "OPEX First UAE",
   "Cyber First UAE",
   "OT Security First",
+  "OPEX First UAE",
 ] as const;
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -128,18 +128,17 @@ function SpeakerCard({
 }) {
   const [hovered, setHovered] = useState(false);
 
+  const fullName = speaker.name;
   const initials = speaker.name
-    .split(/[\s-]+/)
-    .filter(Boolean)
+    .split(/\s+/)
     .slice(0, 2)
     .map((w) => w[0])
     .join("")
     .toUpperCase();
 
-  const showBadge =
-    speaker.role_type === "conference-chair" || speaker.role_type === "advisor";
-  const badgeLabel =
-    speaker.role_type === "conference-chair" ? "Conference Chair" : "Advisor";
+  const primaryRole = speaker.role_type;
+  const showBadge = primaryRole === "chair" || primaryRole === "advisor";
+  const badgeLabel = primaryRole === "chair" ? "Conference Chair" : "Advisor";
 
   return (
     <motion.div
@@ -188,7 +187,7 @@ function SpeakerCard({
               // eslint-disable-next-line @next/next/no-img-element
               <img
                 src={speaker.image_url}
-                alt={speaker.name}
+                alt={fullName}
                 style={{
                   width: "100%",
                   height: "100%",
@@ -278,7 +277,7 @@ function SpeakerCard({
                 lineHeight: 1.3,
               }}
             >
-              {speaker.name}
+              {fullName}
             </h3>
 
             {/* Job title */}
@@ -340,7 +339,7 @@ function SpeakerCard({
                       whiteSpace: "nowrap",
                     }}
                   >
-                    {ev.event_name} {ev.event_year}
+                    {ev.event_name} {ev.event_year ?? ""}
                   </span>
                 ))}
                 {speaker.speaker_events.length > 2 && (
@@ -1135,13 +1134,23 @@ export default function SpeakersPage() {
   // Fetch speakers on mount
   useEffect(() => {
     async function fetchSpeakers() {
-      const { data } = await supabase
-        .from("speakers")
-        .select("*, speaker_events(*)")
-        .order("name");
+      try {
+        if (!supabase) return;
+        const { data, error } = await supabase
+          .from("speakers")
+          .select("*, speaker_events(*)")
+          .order("name", { ascending: true });
 
-      if (data) setSpeakers(data as SpeakerWithEvents[]);
-      setLoading(false);
+        if (error) {
+          console.error("Supabase error:", error.message);
+          return;
+        }
+        if (data) setSpeakers(data as SpeakerWithEvents[]);
+      } catch (err) {
+        console.error("Failed to fetch speakers:", err);
+      } finally {
+        setLoading(false);
+      }
     }
     fetchSpeakers();
   }, []);

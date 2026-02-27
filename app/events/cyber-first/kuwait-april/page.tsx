@@ -118,94 +118,10 @@ function Tilt({
 // ─── Data ────────────────────────────────────────────────────────────────────
 const SPEAKERS = [
   {
-    name: "Professor Khalid Al-Begain",
-    title: "President",
-    org: "Kuwait College of Science & Technology",
-    photo: `${WP}/2025/02/Speakers-01.png`,
-  },
-  {
-    name: "Eng. Yousef H. El-Kourdi",
-    title: "Chief Information Technology Director",
+    name: "Yousef El-Kourdi",
+    title: "Group Head of Information Technology",
     org: "City Group Co. KSC",
     photo: `${S3}/yousef-el-kourdi.png`,
-  },
-  {
-    name: "Mohamed Rushdhi",
-    title: "Head of Information Security Unit",
-    org: "Industrial Bank of Kuwait",
-    photo: `${S3}/mohamed-rushdhi.png`,
-  },
-  {
-    name: "Dr. Huda Alrashidi",
-    title: "Professor",
-    org: "Kuwait College of Science & Technology",
-    photo: `${WP}/2025/04/Dr.-Huda-Alrashidi.jpg`,
-  },
-  {
-    name: "Ahmed M. Nahla",
-    title: "Director of Digital Innovation",
-    org: "Kamco Invest",
-    photo: `${S3}/ahmed-nahla.jpg`,
-  },
-  {
-    name: "Dr. Shaheela Banu A. Majeed",
-    title: "Information Security & Compliance Officer",
-    org: "Kuwait Gulf Oil Company (KGOC)",
-    photo: `${S3}/shaheela-majeed.png`,
-  },
-  {
-    name: "Abdulmohsen Alsulaimi",
-    title: "IT Director",
-    org: "Saudi German Hospital (SGH)",
-    photo: null,
-  },
-  {
-    name: "Mohamed El-Demery",
-    title: "Cybersecurity Consultant",
-    org: "Confidential",
-    photo: `${WP}/2025/01/Mohamed-El-Demery.png`,
-  },
-  {
-    name: "Rishabh R. Gaikwad",
-    title: "Head of Information Security & Data Governance",
-    org: "Alghanim Industries",
-    photo: `${S3}/rishabh-gaikwad.png`,
-  },
-  {
-    name: "Faissal Al-Roumi",
-    title: "Executive Manager of Operational Risk",
-    org: "Burgan Bank",
-    photo: `${S3}/faissal-al-roumi.jpg`,
-  },
-  {
-    name: "Dr. Fai Ben Salamah",
-    title: "Cybersecurity Expert",
-    org: "Kuwait Technical College",
-    photo: `${S3}/dr-fai-ben-salamah.png`,
-  },
-  {
-    name: "Kamal Al-Dosouky",
-    title: "Group IT Director",
-    org: "United Real Estate Company",
-    photo: `${S3}/kamal-al-dosouky.jpg`,
-  },
-  {
-    name: "Ali Alqallaf",
-    title: "IT/OT Cybersecurity Operations",
-    org: "KNPC",
-    photo: `${S3}/ali-alqallaf.jpg`,
-  },
-  {
-    name: "Heba AlSawan",
-    title: "Head of IT Operations & Infrastructure",
-    org: "Public Institution for Social Security",
-    photo: `${S3}/heba-alsawan.png`,
-  },
-  {
-    name: "Vinod Easow",
-    title: "Cybersecurity & Data Privacy Leader",
-    org: "IKEA Al-Homaizi Ltd.",
-    photo: `${S3}/vinod-easow.png`,
   },
   {
     name: "Sumit Tekriwal",
@@ -214,16 +130,100 @@ const SPEAKERS = [
     photo: `${S3}/sumit-tekriwal.jpg`,
   },
   {
-    name: "Husain A. ALNakkas",
-    title: "IT Consultant – Cybersecurity",
-    org: "Integrated Computer Solutions",
-    photo: `${S3}/husain-alnakkas.png`,
+    name: "Vinod Easow",
+    title: "Cybersecurity & Data Privacy Leader",
+    org: "IKEA Al-Homaizi Ltd.",
+    photo: `${S3}/vinod-easow.png`,
   },
   {
     name: "Eng. Ahmed Baioumy",
     title: "Digital Transformation Lead",
     org: "New Mowasat Hospital",
     photo: `${S3}/ahmed-baioumy.jpg`,
+  },
+  {
+    name: "Kamal Al-Dosouky",
+    title: "Group Information Technology Director",
+    org: "United Real Estate Company",
+    photo: `${S3}/kamal-al-dosouky.jpg`,
+  },
+  {
+    name: "Heba AlSawan",
+    title: "Head of IT Operations & Infrastructure",
+    org: "Public Institution for Social Security",
+    photo: `${S3}/heba-alsawan.png`,
+  },
+  {
+    name: "Shaheela Banu A. Majeed",
+    title: "Information Security & Compliance Officer & Auditor",
+    org: "Oil & Gas / Confidential",
+    photo: `${S3}/shaheela-majeed.png`,
+  },
+  {
+    name: "Mijo George Chiramal",
+    title: "Manager — IT Operations and Information Security",
+    org: "Al Babtain Group",
+    photo: null,
+  },
+  {
+    name: "Dr. Fai Ben Salamah",
+    title: "Cybersecurity Expert",
+    org: "Kuwait Technical College",
+    photo: `${S3}/dr-fai-ben-salamah.png`,
+  },
+  {
+    name: "Faissal Al-Roumi",
+    title: "Executive Manager of Operational Risk",
+    org: "Burgan Bank",
+    photo: `${S3}/faissal-al-roumi.jpg`,
+  },
+  {
+    name: "Rishabh R. Gaikwad",
+    title: "Head of Information Security, Data Governance",
+    org: "Alghanim Industries",
+    photo: `${S3}/rishabh-gaikwad.png`,
+  },
+  {
+    name: "Hisham Mohamed",
+    title: "Egypt Chief Information Security Officer",
+    org: "Emirates NBD Egypt",
+    photo: null,
+  },
+  {
+    name: "Ahmed Nahla",
+    title: "Director of Digital Innovation",
+    org: "Kamco Invest",
+    photo: `${S3}/ahmed-nahla.jpg`,
+  },
+  {
+    name: "Ali Alqallaf",
+    title: "IT/OT Cybersecurity Operations",
+    org: "KNPC",
+    photo: `${S3}/ali-alqallaf.jpg`,
+  },
+  {
+    name: "Mohamed Rushdhi",
+    title: "Head of Information Security Unit",
+    org: "The Industrial Bank of Kuwait",
+    photo: `${S3}/mohamed-rushdhi.png`,
+  },
+  {
+    name: "Husain A. ALNakkas",
+    title: "IT Consultant — Cybersecurity",
+    org: "Integrated Computer Solutions",
+    photo: `${S3}/husain-alnakkas.png`,
+  },
+  {
+    name: "Abdulmohsen Alsulaimi",
+    title: "Group IT Director",
+    org: "Shuwaikh Gate Holding",
+    photo: null,
+  },
+  {
+    name: "Omer Yildirim",
+    title: "SVP, Chief Technology Officer — Kuwait",
+    org: "Tiqmo",
+    photo: null,
   },
 ];
 
@@ -328,7 +328,7 @@ const GROWTH = [
     speakers: 24,
     sponsors: 22,
     media: 15,
-    extra: "4 Panel Discussions",
+    extra: "4 Panel Discussions · 6 Supporting Partners",
   },
   {
     year: 2025,
@@ -336,7 +336,7 @@ const GROWTH = [
     speakers: 25,
     sponsors: 25,
     media: 17,
-    extra: "Live Hackathon",
+    extra: "6-Hour Live Hackathon · 9 Supporting Partners",
   },
   {
     year: 2026,
@@ -344,7 +344,7 @@ const GROWTH = [
     speakers: 30,
     sponsors: 25,
     media: 25,
-    extra: "Hackathon + Awards",
+    extra: "Live CTF / Hackathon · Awards · 14 Supporting Partners",
     active: true,
   },
 ];
@@ -352,33 +352,36 @@ const GROWTH = [
 const SPONSORS = {
   gold: [
     { name: "Palo Alto Networks", logo: `${WP}/2025/02/paloalto-logo.png` },
-    { name: "Google Cloud", logo: `${WP}/2025/02/google-logo1.png` },
     { name: "SentinelOne", logo: `${WP}/2025/02/snetinel-logo.png` },
+    { name: "Google Cloud", logo: `${WP}/2025/02/google-logo1.png` },
+    { name: "Kaspersky", logo: `${WP}/2025/02/kaspersky-logo.png` },
   ],
   associate: [
-    { name: "Kaspersky", logo: `${WP}/2025/02/kaspersky-logo.png` },
-    { name: "Secureworks", logo: `${WP}/2025/02/secureworks-logo-white.png` },
     { name: "Akamai", logo: `${WP}/2025/02/akamai-logo.png` },
-    { name: "Cyber Shield", logo: `${WP}/2025/02/cyber-shield-logo.png` },
+    { name: "Secureworks", logo: `${WP}/2025/02/secureworks-logo-white.png` },
+    { name: "Hackmanac", logo: null },
+    { name: "ThreatLocker", logo: `${WP}/2025/02/threatlocker-white-logo.png` },
   ],
   strategic: [
-    { name: "ThreatLocker", logo: `${WP}/2025/02/threatlocker-white-logo.png` },
-    { name: "Bitdefender", logo: `${WP}/2025/02/bitdefender-white-logo.png` },
-    { name: "GBM", logo: `${WP}/2025/02/gbm-logo.png` },
-    { name: "Wallix", logo: `${WP}/2025/02/wallix-logo1.png` },
-    { name: "Acronis", logo: `${WP}/2025/02/acronis-white-logo.png` },
-    { name: "DTS Solution", logo: `${WP}/2025/02/dts-solution-logo.png` },
-    { name: "Gorilla Technology", logo: `${WP}/2025/02/gorilla-logo1.png` },
-    { name: "Deepinfo", logo: `${WP}/2025/02/deepinfo-logo.png` },
-    { name: "Sahara Net", logo: `${WP}/2025/02/sahara-net-logo.png` },
-    { name: "GTB Technologies", logo: `${WP}/2025/02/GTB-long-logo-white.png` },
     { name: "Sechard", logo: `${WP}/2025/02/sechard-logo.png` },
+    { name: "Cyber Shield", logo: `${WP}/2025/02/cyber-shield-logo.png` },
+    { name: "Wallix", logo: `${WP}/2025/02/wallix-logo1.png` },
+    { name: "GBM", logo: `${WP}/2025/02/gbm-logo.png` },
+    { name: "Acronis", logo: `${WP}/2025/02/acronis-white-logo.png` },
+    { name: "Bitdefender", logo: `${WP}/2025/02/bitdefender-white-logo.png` },
+    { name: "Sahara Net", logo: `${WP}/2025/02/sahara-net-logo.png` },
+    { name: "Deepinfo", logo: `${WP}/2025/02/deepinfo-logo.png` },
   ],
   specialized: [
-    { name: "Group-IB", logo: null },
-    { name: "Cerebra", logo: null },
-    { name: "ManageEngine", logo: null },
+    { name: "Gorilla Technology", logo: `${WP}/2025/02/gorilla-logo1.png` },
     { name: "Cyber Talents", logo: null },
+    { name: "GTB Technologies", logo: `${WP}/2025/02/GTB-long-logo-white.png` },
+  ],
+  supporting: [
+    { name: "Kuwait College of Science & Technology", logo: null },
+    { name: "Arab Open University", logo: null },
+    { name: "German Business Council Kuwait", logo: null },
+    { name: "ISACA UAE Chapter", logo: null },
   ],
 };
 
@@ -651,7 +654,7 @@ function HeroSection() {
           >
             {[
               { icon: "M8 2v4m8-4v4M3 10h18M5 4h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z", text: "Tuesday, 21 April 2026" },
-              { icon: "M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z", text: "Radisson Blu Hotel, Kuwait City" },
+              { icon: "M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z", text: "Jumeirah Messilah Beach Hotel, Kuwait City" },
             ].map((m) => (
               <div key={m.text} style={{ display: "flex", alignItems: "center", gap: 10 }}>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={C} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.5, flexShrink: 0 }}>
@@ -2314,6 +2317,12 @@ function SponsorsSection() {
         {/* Specialized */}
         <SponsorTier label="Specialized Partners" items={SPONSORS.specialized} size="small" inView={inView} delay={0.65} />
 
+        {/* Divider */}
+        <div style={{ margin: "36px 0", height: 1, background: `linear-gradient(90deg, transparent, ${C}15, transparent)` }} />
+
+        {/* Supporting */}
+        <SponsorTier label="Supporting Partners" items={SPONSORS.supporting} size="small" inView={inView} delay={0.8} />
+
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
@@ -3894,7 +3903,7 @@ function SplitCTA() {
                   maxWidth: 420,
                 }}
               >
-                Join 350+ CISOs, government security leaders, and technology experts. 21 April at the Radisson Blu Hotel Kuwait.
+                Join 350+ CISOs, government security leaders, and technology experts. 21 April at Jumeirah Messilah Beach Hotel, Kuwait.
               </p>
 
               {/* Countdown */}
@@ -4155,7 +4164,7 @@ function Venue() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1920&q=85"
-            alt="Radisson Blu Hotel Kuwait"
+            alt="Jumeirah Messilah Beach Hotel Kuwait"
             className="w-full h-full object-cover"
             style={{
               filter: "brightness(0.55) saturate(1.1)",
@@ -4221,9 +4230,9 @@ function Venue() {
                 margin: 0,
               }}
             >
-              Radisson Blu Hotel
+              Jumeirah Messilah
               <br />
-              <span style={{ color: C }}>Kuwait City</span>
+              <span style={{ color: C }}>Beach Hotel</span>
             </h2>
           </div>
         </div>
@@ -4270,11 +4279,11 @@ function Venue() {
                   maxWidth: 420,
                 }}
               >
-                Kuwait&apos;s premier conference destination — hosting the region&apos;s
+                Kuwait&apos;s premier beachfront conference destination — hosting the region&apos;s
                 leading cybersecurity gathering for the third consecutive year.
               </p>
               <a
-                href="https://maps.google.com/?q=Radisson+Blu+Hotel+Kuwait"
+                href="https://maps.google.com/?q=Jumeirah+Messilah+Beach+Hotel+Kuwait"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="cfk-venue-maps-btn"

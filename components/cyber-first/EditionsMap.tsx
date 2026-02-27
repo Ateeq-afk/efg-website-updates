@@ -17,8 +17,8 @@ const flagship = {
   edition: "3rd Edition",
   date: new Date("2026-04-21T09:00:00"),
   dateString: "April 21, 2026",
-  venue: "Radisson Blu Kuwait",
-  href: "/events/cyber-first/kuwait-april-2026",
+  venue: "Jumeirah Messilah Beach Hotel",
+  href: "/events/cyber-first/kuwait-april",
   external: false,
 };
 

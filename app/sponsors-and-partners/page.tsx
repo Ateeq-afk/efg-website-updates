@@ -3,8 +3,8 @@
 import { useState, useEffect, useMemo, useRef } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { supabase } from "@/lib/supabase";
-import type { SponsorWithEvents } from "@/lib/supabase";
+import { supabase } from "@/lib/supabase/client";
+import type { SponsorWithEvents } from "@/lib/supabase/types";
 import { Footer } from "@/components/sections";
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -29,9 +29,9 @@ function tierToLabel(tier: string): string {
 
 const EVENT_FILTERS = [
   "All",
-  "OPEX First UAE",
   "Cyber First UAE",
   "OT Security First",
+  "OPEX First UAE",
 ] as const;
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -738,13 +738,23 @@ export default function SponsorsPage() {
   // Fetch sponsors on mount
   useEffect(() => {
     async function fetchSponsors() {
-      const { data } = await supabase
-        .from("sponsors")
-        .select("*, sponsor_events(*)")
-        .order("name");
+      try {
+        if (!supabase) return;
+        const { data, error } = await supabase
+          .from("sponsors")
+          .select("*, sponsor_events(*)")
+          .order("name", { ascending: true });
 
-      if (data) setSponsors(data as SponsorWithEvents[]);
-      setLoading(false);
+        if (error) {
+          console.error("Supabase error:", error);
+          return;
+        }
+        if (data) setSponsors(data as SponsorWithEvents[]);
+      } catch (err) {
+        console.error("Failed to fetch sponsors:", err);
+      } finally {
+        setLoading(false);
+      }
     }
     fetchSponsors();
   }, []);

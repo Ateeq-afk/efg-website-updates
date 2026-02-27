@@ -657,13 +657,19 @@ export default function InsightsPage() {
   // Fetch posts on mount
   useEffect(() => {
     async function fetchPosts() {
-      const { data } = await supabase
-        .from("posts")
-        .select("*, authors(*)")
-        .order("published_at", { ascending: false });
+      try {
+        if (!supabase) return;
+        const { data } = await supabase
+          .from("posts")
+          .select("*, authors(*)")
+          .order("published_at", { ascending: false });
 
-      if (data) setPosts(data as PostWithAuthor[]);
-      setLoading(false);
+        if (data) setPosts(data as PostWithAuthor[]);
+      } catch (err) {
+        console.error("Failed to fetch posts:", err);
+      } finally {
+        setLoading(false);
+      }
     }
     fetchPosts();
   }, []);
