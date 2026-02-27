@@ -204,7 +204,6 @@ function FeaturedEventCard({
   const [isHovered, setIsHovered] = useState(false);
   const [daysUntil, setDaysUntil] = useState(0);
 
-  const isLight = event.isLight;
   const accentColor = event.seriesColor;
 
   // Calculate days until event
@@ -332,10 +331,8 @@ function FeaturedEventCard({
           className="inline-flex items-center gap-2 self-start"
           style={{
             marginTop: 14,
-            background: isLight
-              ? "rgba(238, 238, 238, 0.06)"
-              : `${accentColor}14`,
-            border: `1px solid ${isLight ? "rgba(238, 238, 238, 0.1)" : accentColor + "26"}`,
+            background: `${accentColor}14`,
+            border: `1px solid ${accentColor}26`,
             borderRadius: 50,
             padding: "4px 13px",
           }}
@@ -402,14 +399,10 @@ function FeaturedEventCard({
           style={{
             marginTop: 24,
             padding: "13px 32px",
-            background: isHovered
-              ? isLight
-                ? "rgba(238, 238, 238, 0.15)"
-                : accentColor
-              : "transparent",
-            border: `1px solid ${isHovered ? (isLight ? "#EEEEEE" : accentColor) : "rgba(255, 255, 255, 0.12)"}`,
+            background: isHovered ? accentColor : "transparent",
+            border: `1px solid ${isHovered ? accentColor : "rgba(255, 255, 255, 0.12)"}`,
             borderRadius: 50,
-            color: isHovered && !isLight ? "#0A0A0A" : "white",
+            color: isHovered ? "#0A0A0A" : "white",
           }}
         >
           <span

@@ -18,7 +18,7 @@
  */
 
 import { getSpeakersBySeries } from "@/lib/data/speakers";
-import type { SeriesSlug } from "@/lib/supabase";
+import type { SeriesSlug } from "@/lib/supabase/types";
 
 interface SpeakersFromCMSProps {
   seriesSlug: SeriesSlug;
@@ -38,7 +38,7 @@ export async function SpeakersFromCMS({
   showViewAll = true,
 }: SpeakersFromCMSProps) {
   const speakers = await getSpeakersBySeries(seriesSlug, {
-    featuredOnly: true,
+    featured: true,
     limit,
   });
 

@@ -16,7 +16,7 @@
  */
 
 import { getSponsorsBySeries, groupSponsorsByTier, TIER_ORDER } from "@/lib/data/sponsors";
-import type { SeriesSlug, SponsorTier } from "@/lib/supabase";
+import type { SeriesSlug, SponsorTier } from "@/lib/supabase/types";
 
 interface SponsorsFromCMSProps {
   seriesSlug: SeriesSlug;
@@ -25,7 +25,7 @@ interface SponsorsFromCMSProps {
 }
 
 // Display names for tiers
-const TIER_LABELS: Record<SponsorTier, string> = {
+const TIER_LABELS: Partial<Record<SponsorTier, string>> = {
   title: "Title Sponsor",
   platinum: "Platinum Partners",
   gold: "Gold Partners",
@@ -33,6 +33,15 @@ const TIER_LABELS: Record<SponsorTier, string> = {
   bronze: "Bronze Partners",
   partner: "Partners",
   media: "Media Partners",
+  patronage: "Patronage Partners",
+  lead: "Lead Partners",
+  strategic: "Strategic Partners",
+  associate: "Associate Partners",
+  consulting: "Consulting Partners",
+  knowledge: "Knowledge Partners",
+  supporting: "Supporting Partners",
+  community: "Community Partners",
+  networking: "Networking Partners",
 };
 
 export async function SponsorsFromCMS({
