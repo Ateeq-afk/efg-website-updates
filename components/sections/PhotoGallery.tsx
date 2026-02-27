@@ -8,7 +8,7 @@ const S3 = "https://efg-final.s3.eu-north-1.amazonaws.com";
 const CFK = `${S3}/events/Cyber%20First%20Kuwait%202025/filemail_photos`;
 const GOOD = `${S3}/Good`;
 const OT = `${S3}/events/OT%20Security%20First%20UAE%202025/OT%20First%20UAE%20Photos`;
-const HOME = `${S3}/home-event-spec`;
+const OPEX = `${S3}/events/Opex%20First%20UAE`;
 
 interface GalleryImage {
   src: string;
@@ -28,12 +28,12 @@ const categories: Category[] = [
     id: "sessions",
     label: "The Sessions",
     subtitle: "Panels & Keynotes",
-    heroImage: `${CFK}/cyber21-04-230.jpg`,
+    heroImage: `${CFK}/cyber21-04-324.jpg`,
     images: [
-      { src: `${CFK}/cyber21-04-230.jpg`, caption: "Grand ballroom — full summit audience" },
-      { src: `${CFK}/cyber21-04-330.jpg`, caption: "Panel lineup — 7 speakers on stage" },
-      { src: `${GOOD}/4N8A0001.JPG`, caption: "Keynote stage — full LED backdrop" },
-      { src: `${CFK}/cyber21-04-570.jpg`, caption: "Post-session panel — Cyber First Kuwait" },
+      { src: `${CFK}/cyber21-04-324.jpg`, caption: "Panel discussion — LED stage backdrop" },
+      { src: `${CFK}/cyber21-04-330.jpg`, caption: "Speaker lineup — full panel" },
+      { src: `${GOOD}/4N8A0010.JPG`, caption: "Keynote presentation — main stage" },
+      { src: `${OPEX}/4N8A1702.JPG`, caption: "Opex First UAE — executive panel" },
     ],
   },
   {
@@ -42,10 +42,10 @@ const categories: Category[] = [
     subtitle: "Institutional & Official Presence",
     heroImage: `${CFK}/cyber21-04-430.jpg`,
     images: [
-      { src: `${CFK}/cyber21-04-430.jpg`, caption: "Official ribbon-cutting — Kuwaiti police & dignitaries" },
-      { src: `${CFK}/cyber21-04-110.jpg`, caption: "Military officers — venue arrival" },
-      { src: `${CFK}/cyber21-04-250.jpg`, caption: "VIP front row — uniformed officials" },
-      { src: `${CFK}/cyber21-04-210.jpg`, caption: "International delegation — US & Kuwaiti military" },
+      { src: `${CFK}/cyber21-04-430.jpg`, caption: "Official ribbon-cutting ceremony" },
+      { src: `${CFK}/cyber21-04-110.jpg`, caption: "Military & police officials arrival" },
+      { src: `${CFK}/cyber21-04-245.jpg`, caption: "VIP front row — government delegation" },
+      { src: `${CFK}/cyber21-04-210.jpg`, caption: "International dignitaries — bilateral meeting" },
     ],
   },
   {
@@ -54,34 +54,34 @@ const categories: Category[] = [
     subtitle: "C-Suite & CISO Speakers",
     heroImage: `${CFK}/cyber21-04-550.jpg`,
     images: [
-      { src: `${CFK}/cyber21-04-550.jpg`, caption: "Faisal Al Roumi — Burgan Bank" },
-      { src: `${CFK}/cyber21-04-270.jpg`, caption: "Dr. Fatemah Alsewaidi — panel discussion" },
-      { src: `${CFK}/cyber21-04-310.jpg`, caption: "Keynote address from main stage" },
-      { src: `${CFK}/cyber21-04-530.jpg`, caption: "Shaheela B. Abdul Majeed — compliance panel" },
+      { src: `${CFK}/cyber21-04-550.jpg`, caption: "Executive keynote — Burgan Bank" },
+      { src: `${GOOD}/4N8A0122.JPG`, caption: "Industry leader — main stage address" },
+      { src: `${CFK}/cyber21-04-310.jpg`, caption: "CISO presentation — cybersecurity insights" },
+      { src: `${OPEX}/4N8A1666.JPG`, caption: "Operations expert — Opex First speaker" },
     ],
   },
   {
     id: "expo",
     label: "The Exhibition",
     subtitle: "Global Technology Partners",
-    heroImage: `${OT}/4N8A0397.JPG`,
+    heroImage: `${CFK}/cyber21-04-410.jpg`,
     images: [
-      { src: `${OT}/4N8A0397.JPG`, caption: "OT Security First UAE — exhibition floor" },
-      { src: `${OT}/4N8A0400.JPG`, caption: "Technology partners — active engagement" },
-      { src: `${CFK}/cyber21-04-510.jpg`, caption: "Exhibition hall under grand chandeliers" },
-      { src: `${OT}/4N8A0408.JPG`, caption: "Live product demonstrations" },
+      { src: `${CFK}/cyber21-04-410.jpg`, caption: "Exhibition floor — packed venue" },
+      { src: `${OT}/4N8A0397.JPG`, caption: "OT Security — partner booths" },
+      { src: `${CFK}/cyber21-04-390.jpg`, caption: "Technology demos — active engagement" },
+      { src: `${GOOD}/4N8A9900.JPG`, caption: "Networking — sponsor showcase" },
     ],
   },
   {
     id: "audience",
     label: "The Room",
     subtitle: "5,000+ Senior Delegates",
-    heroImage: `${CFK}/cyber21-04-400.jpg`,
+    heroImage: `${CFK}/cyber21-04-160.jpg`,
     images: [
-      { src: `${CFK}/cyber21-04-400.jpg`, caption: "Plenary audience — cinematic lighting" },
+      { src: `${CFK}/cyber21-04-160.jpg`, caption: "Full house — grand ballroom panorama" },
+      { src: `${CFK}/cyber21-04-400.jpg`, caption: "Plenary session — cinematic lighting" },
       { src: `${GOOD}/4N8A0065.JPG`, caption: "Engaged audience — depth of field" },
-      { src: `${CFK}/cyber21-04-50.jpg`, caption: "Registration — red carpet arrival" },
-      { src: `${CFK}/cyber21-04-170.jpg`, caption: "Delegate in attendance — Kuwaiti national" },
+      { src: `${OPEX}/4N8A1848.JPG`, caption: "Opex First — delegate seating" },
     ],
   },
   {
@@ -90,9 +90,9 @@ const categories: Category[] = [
     subtitle: "Honouring Regional Excellence",
     heroImage: `${GOOD}/4N8A0200.JPG`,
     images: [
-      { src: `${GOOD}/4N8A0200.JPG`, caption: "Cybersecurity Leader of the Year — UAE & MENA" },
-      { src: `${GOOD}/4N8A0330.JPG`, caption: "Trophy presentation — award ceremony" },
-      { src: `${CFK}/cyber21-04-350.jpg`, caption: "Cross-sector networking — expo floor" },
+      { src: `${GOOD}/4N8A0200.JPG`, caption: "Cybersecurity Leader of the Year" },
+      { src: `${GOOD}/4N8A0330.JPG`, caption: "Trophy presentation ceremony" },
+      { src: `${CFK}/cyber21-04-350.jpg`, caption: "Award recipient — recognition moment" },
     ],
   },
 ];

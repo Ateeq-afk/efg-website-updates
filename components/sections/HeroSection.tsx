@@ -18,40 +18,40 @@ interface HeroSlide {
 
 const heroSlides: HeroSlide[] = [
   {
-    // Grand ballroom panoramic — packed full house, ornate wooden architecture. Scale.
-    image: `${HOME}/Image%2016-02-2026%20at%203.33%E2%80%AFAM.png`,
+    // Grand ballroom panoramic — packed full house, ornate wooden architecture. SCALE.
+    image: `${CFK}/cyber21-04-160.jpg`,
     eyebrow: "Cyber First Kuwait · 21 April 2026 · Kuwait City",
     title: ["Where the Region's", "Decisions Are"],
     accent: "Made.",
     sub: "500+ CISOs, CDOs and Government Officials. One room. One day. Kuwait City.",
   },
   {
-    // Wide panel on stage, full audience in dishdashas, branded LED backdrop, scale and authority.
-    image: `${HOME}/Image%2016-02-2026%20at%204.18%E2%80%AFAM.png`,
+    // Wide panel on stage with full audience — branded LED backdrop. AUTHORITY.
+    image: `${CFK}/cyber21-04-324.jpg`,
     eyebrow: "200+ Speakers · 12 Cities · 6 Nations",
     title: ["Conversations That"],
     accent: "Move Industries.",
     sub: "Honest dialogue on what comes next — and who needs to be in the room when it arrives.",
   },
   {
-    // VIP front row — uniformed Kuwaiti officials, gilded hall, purple lighting. Credibility.
-    image: `${HOME}/Image%2016-02-2026%20at%204.54%E2%80%AFAM.png`,
+    // VIP front row — uniformed officials, gilded hall. CREDIBILITY.
+    image: `${CFK}/cyber21-04-245.jpg`,
     eyebrow: "Ministerial & Regulatory Participation · GCC",
     title: ["Government and Industry.", "On The Same"],
     accent: "Stage.",
     sub: "The only summit series in the GCC with active ministerial and regulatory voices in every session.",
   },
   {
-    // Elevated expo floor — chandeliers, dense crowd, vibrant booths. Energy.
-    image: `${HOME}/Image%2016-02-2026%20at%205.05%E2%80%AFAM.png`,
+    // Exhibition floor packed — chandeliers, dense crowd, vibrant booths. ENERGY.
+    image: `${CFK}/cyber21-04-410.jpg`,
     eyebrow: "5,000+ Delegates · 16 Editions · 99+ Sponsors",
     title: ["The GCC's Most", "Trusted Technology"],
     accent: "Summit Series.",
     sub: "From Kuwait to Abu Dhabi. From the CISO to the Minister. Every edition, every city.",
   },
   {
-    // Aerial view of the full expo floor — ornate ballroom, hundreds of attendees. The signature.
-    image: `${HOME}/Image%2016-02-2026%20at%203.52%E2%80%AFAM.png`,
+    // Aerial panorama of the full expo floor — signature shot. PRESTIGE.
+    image: `${CFK}/cyber21-04-500.jpg`,
     eyebrow: "Cyber First · OT Security · Data & AI · Opex First",
     title: ["Four Series.", "Twelve Cities."],
     accent: "One Standard.",
