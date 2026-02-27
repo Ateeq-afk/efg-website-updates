@@ -208,3 +208,8 @@ html.lenis body {
 .lenis.lenis-scrolling iframe {
   pointer-events: none;
 }
+
+/* Hide scrollbar on mobile event slider */
+.events-mobile-slider::-webkit-scrollbar {
+  display: none;
+}

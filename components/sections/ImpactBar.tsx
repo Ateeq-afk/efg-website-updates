@@ -1,29 +1,36 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, animate } from "framer-motion";
 
-// S3 bucket for background image
 const S3_BASE = "https://efg-final.s3.eu-north-1.amazonaws.com/Good";
 const BG_IMAGE = `${S3_BASE}/4N8A0133.JPG`;
 
-// Impact metrics data
+const EASE = [0.16, 1, 0.3, 1] as const;
+
 const metrics = [
-  { value: 5000, suffix: "+", label: "SENIOR EXECUTIVES", hasComma: true },
-  { value: 12, suffix: "", label: "CITIES ACROSS THE GCC", hasComma: false },
-  { value: 200, suffix: "+", label: "EXPERT SPEAKERS", hasComma: false },
-  { value: 8, suffix: "", label: "ANNUAL EVENTS", hasComma: false },
-  { value: 50, suffix: "+", label: "STRATEGIC PARTNERS", hasComma: false },
+  { value: 5000, suffix: "+", label: "Senior Delegates", hasComma: true },
+  { value: 16,   suffix: "",  label: "Editions Delivered", hasComma: false },
+  { value: 6,    suffix: "",  label: "Nations", hasComma: false },
+  { value: 12,   suffix: "",  label: "Cities Across GCC", hasComma: false },
+  { value: 200,  suffix: "+", label: "Expert Speakers", hasComma: false },
+  { value: 99,   suffix: "+", label: "Strategic Sponsors", hasComma: false },
 ];
 
-// Easing function: easeOutExpo
-const easeOutExpo = (t: number): number => {
-  return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
-};
+const headlineWords = [
+  { text: "The GCC's", dim: false },
+  { text: "most senior", dim: false },
+  { text: "technology leaders", dim: false },
+  { text: "don't attend", dim: false },
+  { text: "events.", dim: false },
+  { text: "They", dim: true },
+  { text: "build", dim: true },
+  { text: "here.", dim: true },
+];
 
 export default function ImpactBar() {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-50px" });
+  const isInView = useInView(sectionRef, { once: true, margin: "-80px" });
 
   return (
     <section
@@ -31,160 +38,139 @@ export default function ImpactBar() {
       className="relative overflow-hidden"
       style={{
         background: "#0A0A0A",
-        padding: "clamp(96px, 8vw, 120px) 0 clamp(48px, 6vw, 80px)",
+        padding: "clamp(96px, 8vw, 120px) 0 clamp(64px, 6vw, 96px)",
       }}
     >
-      {/* Background image */}
+      {/* Background photo */}
       <div className="absolute inset-0">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={BG_IMAGE}
           alt=""
           className="w-full h-full object-cover"
-          style={{ filter: "brightness(0.2) saturate(0.6)" }}
+          style={{ filter: "brightness(0.18) saturate(0.5)" }}
           loading="lazy"
         />
       </div>
 
-      {/* Left-to-right gradient overlay */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: `
-            linear-gradient(
-              to right,
-              rgba(10, 10, 10, 0.7) 0%,
-              rgba(10, 10, 10, 0.4) 50%,
-              rgba(10, 10, 10, 0.2) 100%
-            )
-          `,
-        }}
-      />
+      {/* Gradient overlays */}
+      <div className="absolute inset-0 pointer-events-none" style={{
+        background: "linear-gradient(to right, rgba(10,10,10,0.75) 0%, rgba(10,10,10,0.35) 60%, rgba(10,10,10,0.15) 100%)",
+      }} />
+      <div className="absolute inset-0 pointer-events-none" style={{
+        background: "linear-gradient(to bottom, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.05) 30%, rgba(10,10,10,0.05) 70%, rgba(10,10,10,0.95) 100%)",
+      }} />
 
-      {/* Top/bottom fade */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: `
-            linear-gradient(
-              to bottom,
-              rgba(10, 10, 10, 0.9) 0%,
-              rgba(10, 10, 10, 0.1) 25%,
-              rgba(10, 10, 10, 0.1) 75%,
-              rgba(10, 10, 10, 0.9) 100%
-            )
-          `,
-        }}
-      />
+      {/* Orange ambient glow — bottom left */}
+      <div className="absolute pointer-events-none" style={{
+        bottom: "-10%", left: "-5%",
+        width: 500, height: 500, borderRadius: "50%",
+        background: "radial-gradient(circle, rgba(232,101,26,0.07) 0%, transparent 70%)",
+        filter: "blur(40px)",
+      }} />
 
-      <div
-        className="relative z-10"
-        style={{
-          maxWidth: 1320,
-          margin: "0 auto",
-          padding: "0 clamp(20px, 4vw, 60px)",
-        }}
-      >
-        {/* Label */}
+      <div className="relative z-10" style={{ maxWidth: 1320, margin: "0 auto", padding: "0 clamp(20px, 4vw, 60px)" }}>
+
+        {/* Eyebrow */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ opacity: 0, y: 16 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, ease: EASE }}
           className="flex items-center gap-3"
-          style={{ marginBottom: 24 }}
+          style={{ marginBottom: 28 }}
         >
-          <span
-            style={{
-              width: 30,
-              height: 1,
-              background: "var(--orange)",
-            }}
-          />
-          <span
-            style={{
-              fontSize: 11,
-              fontWeight: 600,
-              letterSpacing: "2.5px",
-              textTransform: "uppercase",
-              color: "var(--orange)",
-              fontFamily: "var(--font-outfit)",
-            }}
-          >
-            The Region&apos;s Platform
+          <span style={{ width: 30, height: 1, background: "var(--orange)" }} />
+          <span style={{
+            fontSize: 11, fontWeight: 600, letterSpacing: "2.5px",
+            textTransform: "uppercase", color: "var(--orange)",
+            fontFamily: "var(--font-outfit)",
+          }}>
+            By The Numbers
           </span>
         </motion.div>
 
-        {/* Editorial Headline */}
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          style={{
-            fontFamily: "var(--font-display)",
-            fontWeight: 800,
-            fontSize: "clamp(36px, 5.5vw, 72px)",
-            letterSpacing: "-2px",
-            lineHeight: 1.08,
-            maxWidth: 900,
-            margin: "0 0 clamp(32px, 4vw, 48px) 0",
-          }}
-        >
-          <span style={{ color: "var(--white)" }}>
-            The GCC&apos;s most senior technology leaders don&apos;t attend events.
-          </span>
-          <br />
-          <span style={{ color: "rgba(255, 255, 255, 0.25)" }}>
-            They build the future at EFG.
-          </span>
-        </motion.h2>
+        {/* Headline — word by word reveal */}
+        <h2 style={{
+          fontFamily: "var(--font-display)", fontWeight: 800,
+          fontSize: "clamp(32px, 5vw, 68px)", letterSpacing: "-2px",
+          lineHeight: 1.08, maxWidth: 880,
+          margin: "0 0 clamp(48px, 5vw, 72px)",
+          display: "flex", flexWrap: "wrap", gap: "0 0.25em",
+        }}>
+          {headlineWords.map((word, i) => (
+            <motion.span
+              key={i}
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.1 + i * 0.07, ease: EASE }}
+              style={{ color: word.dim ? "rgba(255,255,255,0.2)" : "var(--white)", display: "inline-block" }}
+            >
+              {word.text}
+            </motion.span>
+          ))}
+        </h2>
 
-        {/* Stats Row */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="impact-stats-row flex items-start flex-wrap gap-y-8"
-          style={{ gap: "0 clamp(32px, 4vw, 64px)" }}
-        >
+        {/* Stats grid */}
+        <div className="impact-grid" style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(6, 1fr)",
+          gap: "0",
+        }}>
           {metrics.map((metric, index) => (
-            <div key={metric.label} className="flex items-start">
-              {/* Separator */}
-              {index > 0 && (
-                <div
-                  className="impact-separator hidden md:block"
-                  style={{
-                    width: 1,
-                    height: 48,
-                    background: "rgba(255, 255, 255, 0.08)",
-                    marginRight: "clamp(32px, 4vw, 64px)",
-                    flexShrink: 0,
-                  }}
-                />
-              )}
-
-              <CountingMetric
+            <motion.div
+              key={metric.label}
+              initial={{ opacity: 0, y: 40 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.7, delay: 0.4 + index * 0.1, ease: EASE }}
+              style={{
+                paddingRight: 32,
+                borderRight: index < metrics.length - 1 ? "1px solid rgba(255,255,255,0.07)" : "none",
+                paddingLeft: index > 0 ? 32 : 0,
+              }}
+              className="impact-stat"
+            >
+              <StatNumber
                 value={metric.value}
                 suffix={metric.suffix}
                 label={metric.label}
                 hasComma={metric.hasComma}
-                delay={index * 150}
+                delay={500 + index * 100}
                 isInView={isInView}
               />
-            </div>
+            </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
 
-      {/* Mobile styles */}
       <style jsx global>{`
-        @media (max-width: 768px) {
-          .impact-stats-row {
-            display: grid !important;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 32px !important;
+        @media (max-width: 1024px) {
+          .impact-grid {
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 40px 0 !important;
           }
-          .impact-separator {
-            display: none !important;
+          .impact-stat {
+            border-right: none !important;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+            padding: 0 0 40px 0 !important;
+          }
+          .impact-stat:nth-child(4),
+          .impact-stat:nth-child(5),
+          .impact-stat:nth-child(6) {
+            border-bottom: none !important;
+            padding-bottom: 0 !important;
+          }
+        }
+        @media (max-width: 640px) {
+          .impact-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+          .impact-stat:nth-child(4),
+          .impact-stat:nth-child(5),
+          .impact-stat:nth-child(6) {
+            border-bottom: none !important;
+          }
+          .impact-stat:nth-child(5) {
+            border-bottom: none !important;
           }
         }
       `}</style>
@@ -192,103 +178,77 @@ export default function ImpactBar() {
   );
 }
 
-/**
- * CountingMetric — Animated number counter with easeOutExpo
- */
-function CountingMetric({
-  value,
-  suffix,
-  label,
-  hasComma,
-  delay,
-  isInView,
+function StatNumber({
+  value, suffix, label, hasComma, delay, isInView,
 }: {
-  value: number;
-  suffix: string;
-  label: string;
-  hasComma: boolean;
-  delay: number;
-  isInView: boolean;
+  value: number; suffix: string; label: string;
+  hasComma: boolean; delay: number; isInView: boolean;
 }) {
-  const [displayValue, setDisplayValue] = useState(0);
-  const [showSuffix, setShowSuffix] = useState(false);
+  const [display, setDisplay] = useState(0);
+  const [landed, setLanded] = useState(false);
 
   useEffect(() => {
     if (!isInView) return;
+    const timer = setTimeout(() => {
+      const controls = animate(0, value, {
+        duration: 2,
+        ease: [0.16, 1, 0.3, 1],
+        onUpdate: (v) => setDisplay(Math.floor(v)),
+        onComplete: () => {
+          setDisplay(value);
+          setLanded(true);
+        },
+      });
+      return () => controls.stop();
+    }, delay);
+    return () => clearTimeout(timer);
+  }, [isInView, value, delay]);
 
-    const startTime = Date.now() + delay;
-    const duration = 1800;
-
-    const animate = () => {
-      const now = Date.now();
-      const elapsed = now - startTime;
-
-      if (elapsed < 0) {
-        requestAnimationFrame(animate);
-        return;
-      }
-
-      const progress = Math.min(elapsed / duration, 1);
-      const easedProgress = easeOutExpo(progress);
-      const currentValue = Math.floor(easedProgress * value);
-
-      setDisplayValue(currentValue);
-
-      if (progress < 1) {
-        requestAnimationFrame(animate);
-      } else {
-        setDisplayValue(value);
-        if (suffix) {
-          setTimeout(() => setShowSuffix(true), 50);
-        }
-      }
-    };
-
-    requestAnimationFrame(animate);
-  }, [isInView, value, delay, suffix]);
-
-  const formattedValue = hasComma
-    ? displayValue.toLocaleString()
-    : displayValue.toString();
+  const formatted = hasComma ? display.toLocaleString() : display.toString();
 
   return (
     <div>
-      <div
-        style={{
-          fontFamily: "var(--font-display)",
-          fontWeight: 800,
-          fontSize: "clamp(28px, 3vw, 42px)",
-          letterSpacing: "-1.5px",
-          color: "var(--white)",
-          lineHeight: 1,
-        }}
-      >
-        {formattedValue}
+      {/* Number */}
+      <div style={{ display: "flex", alignItems: "baseline", gap: 2, marginBottom: 12 }}>
+        <span style={{
+          fontFamily: "var(--font-display)", fontWeight: 800,
+          fontSize: "clamp(32px, 3.2vw, 52px)", letterSpacing: "-2px",
+          color: "#fff", lineHeight: 1,
+          transition: landed ? "text-shadow 0.4s ease" : "none",
+          textShadow: landed ? "0 0 40px rgba(232,101,26,0.35)" : "none",
+        }}>
+          {formatted}
+        </span>
         {suffix && (
-          <span
+          <motion.span
+            initial={{ opacity: 0, scale: 1.6 }}
+            animate={landed ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
             style={{
-              color: "#E8651A",
-              display: "inline-block",
-              transform: showSuffix ? "scale(1)" : "scale(1.3)",
-              opacity: showSuffix ? 1 : 0,
-              transition: "transform 0.2s ease-out, opacity 0.2s ease-out",
+              fontFamily: "var(--font-display)", fontWeight: 800,
+              fontSize: "clamp(22px, 2.2vw, 36px)",
+              color: "var(--orange)", lineHeight: 1,
             }}
           >
             {suffix}
-          </span>
+          </motion.span>
         )}
       </div>
-      <p
-        style={{
-          fontFamily: "var(--font-outfit)",
-          fontSize: 11,
-          fontWeight: 500,
-          letterSpacing: "1.5px",
-          textTransform: "uppercase",
-          color: "rgba(255, 255, 255, 0.35)",
-          marginTop: 8,
-        }}
-      >
+
+      {/* Animated underline */}
+      <motion.div
+        initial={{ width: 0 }}
+        animate={landed ? { width: 32 } : {}}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+        style={{ height: 2, background: "var(--orange)", borderRadius: 1, marginBottom: 10 }}
+      />
+
+      {/* Label */}
+      <p style={{
+        fontFamily: "var(--font-outfit)", fontSize: 11, fontWeight: 500,
+        letterSpacing: "1.2px", textTransform: "uppercase",
+        color: "rgba(255,255,255,0.35)", margin: 0,
+      }}>
         {label}
       </p>
     </div>

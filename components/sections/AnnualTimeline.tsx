@@ -484,11 +484,10 @@ export default function AnnualTimeline() {
         {/* ═══════════════════════════════════════════════════════════════
             FILTERED EVENT GRID
             ═══════════════════════════════════════════════════════════════ */}
+        {/* Mobile: horizontal scroll snap | Desktop: flex-wrap grid */}
         <div
-          className="flex flex-wrap gap-4"
-          style={{
-            justifyContent: "center",
-          }}
+          className="hidden sm:flex flex-wrap gap-4"
+          style={{ justifyContent: "center" }}
         >
           <AnimatePresence mode="popLayout">
             {filteredEvents.map((event, index) => (
@@ -509,6 +508,31 @@ export default function AnnualTimeline() {
               </motion.div>
             ))}
           </AnimatePresence>
+        </div>
+
+        {/* Mobile horizontal slider */}
+        <div
+          className="events-mobile-slider flex sm:hidden gap-4 overflow-x-auto pb-4"
+          style={{
+            scrollSnapType: "x mandatory",
+            WebkitOverflowScrolling: "touch",
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+            paddingLeft: "var(--page-x, 20px)",
+            paddingRight: "var(--page-x, 20px)",
+          }}
+        >
+          {filteredEvents.map((event) => (
+            <div
+              key={event.id}
+              style={{
+                flex: "0 0 300px",
+                scrollSnapAlign: "start",
+              }}
+            >
+              <EventCard event={event} />
+            </div>
+          ))}
         </div>
 
         {filteredEvents.length === 0 && (

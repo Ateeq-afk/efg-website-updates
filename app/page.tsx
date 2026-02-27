@@ -25,17 +25,17 @@ export default function Home() {
       {/* The Event Series — Four Worlds */}
       <EventSeriesShowcase />
 
+      {/* NetworkFirst Boardrooms — Most exclusive product, high up */}
+      <NetworkFirst />
+
+      {/* Section Transition - Sweep */}
+      <SectionTransition variant="sweep" />
+
       {/* The Impact Bar — Numbers That Matter (flows from Event Series via gradient) */}
       <ImpactBar />
 
       {/* Annual Timeline — The Year Ahead (flows directly from ImpactBar) */}
       <AnnualTimeline />
-
-      {/* Section Transition - Sweep */}
-      <SectionTransition variant="sweep" />
-
-      {/* NetworkFirst Boardrooms — Independent Brand */}
-      <NetworkFirst />
 
       {/* Section Transition - Expand */}
       <SectionTransition variant="expand" />

@@ -4,6 +4,9 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Link from "next/link";
 
+const S3 = "https://efg-final.s3.eu-north-1.amazonaws.com";
+const CFK = `${S3}/events/Cyber%20First%20Kuwait%202025/filemail_photos`;
+
 // Event series data
 const eventSeries = [
   {
@@ -16,8 +19,7 @@ const eventSeries = [
     nations: 4,
     stats: "Kuwait · Qatar · KSA · UAE",
     color: "#01BBF5",
-    image:
-      "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80",
+    image: `${CFK}/cyber21-04-400.jpg`,
     href: "/events/cyber-first",
   },
   {
@@ -30,8 +32,7 @@ const eventSeries = [
     nations: 2,
     stats: "Saudi Arabia · Oman",
     color: "#D34B9A",
-    image:
-      "https://images.unsplash.com/photo-1513828583688-c52646db42da?w=800&q=80",
+    image: `${S3}/assets/ot-ceremony.jpg`,
     href: "/events/ot-security-first",
   },
   {
@@ -44,8 +45,7 @@ const eventSeries = [
     nations: 3,
     stats: "Dubai · Doha · Riyadh",
     color: "#7C3AED",
-    image:
-      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&q=80",
+    image: `${S3}/Good/4N8A0090.JPG`,
     href: "/events/opex-first",
   },
   {
@@ -57,9 +57,8 @@ const eventSeries = [
     editions: 2,
     nations: 2,
     stats: "Kuwait · Qatar",
-    color: "#0F735E",
-    image:
-      "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80",
+    color: "#11A385",
+    image: `${S3}/assets/ai-voxel-teal-strong.jpg`,
     href: "/events/data-ai-first",
   },
 ];
@@ -320,7 +319,7 @@ function PortalCard({
           alt=""
           className="w-full h-full object-cover transition-all duration-800 group-hover:scale-108"
           style={{
-            filter: "brightness(0.30) saturate(0.8)",
+            filter: "brightness(0.38) saturate(0.9)",
             transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
           }}
         />

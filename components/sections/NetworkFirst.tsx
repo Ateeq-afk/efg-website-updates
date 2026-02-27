@@ -1,396 +1,443 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-// ═══════════════════════════════════════════════════════════════
-// DESIGN CONSTANTS
-// ═══════════════════════════════════════════════════════════════
+import Link from "next/link";
 
 const AMBER = "#C9935A";
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-// Feature card data
+const S3 = "https://efg-final.s3.eu-north-1.amazonaws.com";
+
 const pillars = [
   {
-    number: "01",
-    title: "Curated Roundtables",
-    description:
-      "Hand-selected groups of 15–20 C-suite and VP-level executives, matched by industry vertical, challenge, and seniority. Every seat is earned.",
-  },
-  {
-    number: "02",
-    title: "Off-the-Record Dialogue",
-    description:
-      "Chatham House rules. No recordings, no press. The freedom to speak candidly about real challenges, real failures, and real strategies that work.",
-  },
-  {
-    number: "03",
-    title: "Sponsor Integration",
-    description:
-      "Each NetworkFirst session is hosted by a single strategic partner who shapes the agenda, selects the topic, and builds relationships in the most intimate setting possible.",
-  },
-];
-
-const detailStrip = [
-  { label: "15–20 Executives", icon: "users" },
-  { label: "Chatham House Rule", icon: "shield" },
-  { label: "Sponsor-Hosted", icon: "star" },
-];
-
-// ═══════════════════════════════════════════════════════════════
-// MAIN COMPONENT
-// ═══════════════════════════════════════════════════════════════
-
-export default function NetworkFirst() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
-
-  return (
-    <section
-      ref={sectionRef}
-      style={{
-        background: "#08080C",
-        padding: "clamp(96px, 8vw, 120px) 0 clamp(48px, 5vw, 72px)",
-        position: "relative",
-        overflow: "hidden",
-      }}
-    >
-      {/* ═══════════════════════════════════════════════════════════════
-          ATMOSPHERIC BACKGROUND — warm amber radial gradients
-          ═══════════════════════════════════════════════════════════════ */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: `
-            radial-gradient(ellipse 800px 600px at 15% 30%, rgba(201,147,90,0.06) 0%, transparent 70%),
-            radial-gradient(ellipse 600px 500px at 85% 60%, rgba(201,147,90,0.04) 0%, transparent 70%),
-            radial-gradient(ellipse 400px 300px at 50% 80%, rgba(212,168,100,0.03) 0%, transparent 70%)
-          `,
-        }}
-      />
-
-      {/* NF Monogram watermark */}
-      <div
-        className="absolute pointer-events-none select-none"
-        style={{
-          right: "clamp(-40px, 5vw, 80px)",
-          top: "50%",
-          transform: "translateY(-50%)",
-          fontFamily: "var(--font-display)",
-          fontSize: "clamp(200px, 25vw, 400px)",
-          fontWeight: 900,
-          color: "rgba(201,147,90,0.025)",
-          letterSpacing: "-15px",
-          lineHeight: 0.85,
-          whiteSpace: "nowrap",
-        }}
-      >
-        NF
-      </div>
-
-      <div
-        style={{
-          maxWidth: 1320,
-          margin: "0 auto",
-          padding: "0 clamp(20px, 4vw, 60px)",
-          position: "relative",
-        }}
-      >
-        {/* ═══════════════════════════════════════════════════════════════
-            TOP ZONE — Editorial Hero Content
-            ═══════════════════════════════════════════════════════════════ */}
-        <div
-          className="grid gap-12 lg:gap-16"
-          style={{
-            gridTemplateColumns: "1fr",
-            maxWidth: 680,
-          }}
-        >
-          {/* Format label */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-            transition={{ duration: 0.7, delay: 0.1, ease: EASE }}
-          >
-            <div className="flex items-center gap-3">
-              <span
-                style={{
-                  width: 36,
-                  height: 1,
-                  background: AMBER,
-                }}
-              />
-              <span
-                style={{
-                  fontFamily: "var(--font-outfit)",
-                  fontSize: 11,
-                  fontWeight: 700,
-                  textTransform: "uppercase",
-                  letterSpacing: "3.5px",
-                  color: AMBER,
-                }}
-              >
-                Invitation-Only
-              </span>
-            </div>
-
-            {/* Headline */}
-            <h2
-              style={{
-                fontFamily: "var(--font-display)",
-                fontWeight: 800,
-                fontSize: "clamp(36px, 5vw, 60px)",
-                letterSpacing: "-2.5px",
-                color: "white",
-                lineHeight: 1.05,
-                margin: "22px 0 0",
-              }}
-            >
-              A Different Kind
-              <br />
-              <span style={{ color: AMBER }}>of Room</span>
-            </h2>
-
-            {/* Subhead */}
-            <p
-              style={{
-                fontFamily: "var(--font-outfit)",
-                fontWeight: 300,
-                fontSize: "clamp(15px, 1.4vw, 18px)",
-                color: "rgba(255,255,255,0.5)",
-                lineHeight: 1.7,
-                maxWidth: 520,
-                margin: "20px 0 0",
-              }}
-            >
-              Closed-door sessions for 15–20 hand-selected executives.
-              No keynotes. No slides. No recordings. Just the conversations
-              that move industries — held under Chatham House Rule.
-            </p>
-
-            {/* Details strip */}
-            <div
-              className="flex flex-wrap items-center gap-4 sm:gap-0"
-              style={{ marginTop: 32 }}
-            >
-              {detailStrip.map((item, i) => (
-                <div key={item.label} className="flex items-center">
-                  {i > 0 && (
-                    <div
-                      className="hidden sm:block"
-                      style={{
-                        width: 1,
-                        height: 16,
-                        background: "rgba(201,147,90,0.15)",
-                        margin: "0 20px",
-                      }}
-                    />
-                  )}
-                  <div className="flex items-center gap-2">
-                    <DetailIcon type={item.icon} />
-                    <span
-                      style={{
-                        fontFamily: "var(--font-outfit)",
-                        fontSize: 12,
-                        fontWeight: 500,
-                        color: "rgba(255,255,255,0.4)",
-                        letterSpacing: "0.5px",
-                      }}
-                    >
-                      {item.label}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-          </motion.div>
-        </div>
-
-        {/* ═══════════════════════════════════════════════════════════════
-            BOTTOM ZONE — The Three Pillars
-            ═══════════════════════════════════════════════════════════════ */}
-        <div
-          className="grid grid-cols-1 md:grid-cols-3 gap-5"
-          style={{ marginTop: "clamp(56px, 7vw, 80px)" }}
-        >
-          {pillars.map((pillar, index) => (
-            <motion.div
-              key={pillar.number}
-              initial={{ opacity: 0, y: 25 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 25 }}
-              transition={{
-                duration: 0.6,
-                delay: 0.6 + index * 0.12,
-                ease: EASE,
-              }}
-            >
-              <PillarCard {...pillar} />
-            </motion.div>
-          ))}
-        </div>
-
-        {/* ═══════════════════════════════════════════════════════════════
-            BOTTOM CONTEXT LINE
-            ═══════════════════════════════════════════════════════════════ */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.6, delay: 1.2, ease: EASE }}
-          className="flex items-center justify-center gap-4 mt-10"
-        >
-          <div
-            style={{
-              flex: 1,
-              maxWidth: 100,
-              height: 1,
-              background: `rgba(201,147,90,0.08)`,
-            }}
-          />
-          <p
-            style={{
-              fontFamily: "var(--font-outfit)",
-              fontSize: 12,
-              fontWeight: 400,
-              color: "#3A3A3A",
-              textAlign: "center",
-              margin: 0,
-            }}
-          >
-            Hosted year-round across the GCC by strategic partners
-          </p>
-          <div
-            style={{
-              flex: 1,
-              maxWidth: 100,
-              height: 1,
-              background: `rgba(201,147,90,0.08)`,
-            }}
-          />
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-
-// ═══════════════════════════════════════════════════════════════
-// PILLAR CARD — Left accent bar, no ghost number
-// ═══════════════════════════════════════════════════════════════
-
-function PillarCard({
-  number,
-  title,
-  description,
-}: {
-  number: string;
-  title: string;
-  description: string;
-}) {
-  const [isHovered, setIsHovered] = useState(false);
-
-  return (
-    <div
-      className="relative overflow-hidden transition-all"
-      style={{
-        background: isHovered ? "rgba(201,147,90,0.04)" : "rgba(201,147,90,0.015)",
-        border: `1px solid ${isHovered ? "rgba(201,147,90,0.18)" : "rgba(201,147,90,0.06)"}`,
-        borderRadius: 16,
-        padding: "32px 28px 32px 32px",
-        transform: isHovered ? "translateY(-2px)" : "translateY(0)",
-        transitionDuration: "0.4s",
-        transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
-      }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      {/* Left accent bar */}
-      <div
-        className="absolute left-0 top-0 bottom-0 transition-all duration-500"
-        style={{
-          width: 3,
-          background: AMBER,
-          opacity: isHovered ? 1 : 0.4,
-        }}
-      />
-
-      {/* Number label */}
-      <span
-        className="transition-colors duration-400"
-        style={{
-          fontFamily: "var(--font-outfit)",
-          fontSize: 10,
-          fontWeight: 700,
-          textTransform: "uppercase",
-          letterSpacing: "3px",
-          color: isHovered ? AMBER : "rgba(201,147,90,0.35)",
-          display: "block",
-          marginBottom: 14,
-        }}
-      >
-        {number}
-      </span>
-
-      {/* Title */}
-      <h3
-        style={{
-          fontFamily: "var(--font-display)",
-          fontSize: 18,
-          fontWeight: 700,
-          color: "white",
-          letterSpacing: "-0.3px",
-          marginBottom: 10,
-        }}
-      >
-        {title}
-      </h3>
-
-      {/* Description */}
-      <p
-        style={{
-          fontFamily: "var(--font-outfit)",
-          fontSize: 13.5,
-          fontWeight: 300,
-          color: "#606060",
-          lineHeight: 1.65,
-          margin: 0,
-        }}
-      >
-        {description}
-      </p>
-    </div>
-  );
-}
-
-// ═══════════════════════════════════════════════════════════════
-// DETAIL ICONS — Small inline icons for the details strip
-// ═══════════════════════════════════════════════════════════════
-
-function DetailIcon({ type }: { type: string }) {
-  const style = { color: AMBER, opacity: 0.5 };
-
-  if (type === "users") {
-    return (
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" style={style}>
+    icon: (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
         <circle cx="9" cy="7" r="4" />
         <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
         <path d="M16 3.13a4 4 0 0 1 0 7.75" />
       </svg>
-    );
-  }
-
-  if (type === "shield") {
-    return (
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" style={style}>
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+    ),
+    title: "Curated Attendance",
+    body: "15 to 20 hand-selected executives per session. Every seat is earned — no walk-ins, no exceptions.",
+  },
+  {
+    icon: (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
       </svg>
-    );
-  }
+    ),
+    title: "Chatham House Rule",
+    body: "No recordings. No press. No slides. The freedom to speak about real challenges with the people who actually share them.",
+  },
+  {
+    icon: (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+      </svg>
+    ),
+    title: "Sponsor-Hosted",
+    body: "One strategic partner owns the room. They shape the agenda, select the topic, and build relationships that no exhibition stand can replicate.",
+  },
+];
 
-  // star
+const titles = [
+  "CISO", "CDO", "Chief Digital Officer", "VP Engineering",
+  "Minister of Digital Economy", "Head of Cybersecurity",
+  "Chief Information Officer", "Director of OT Security",
+  "Chief Data Officer", "VP Technology",
+];
+
+
+
+export default function NetworkFirst() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-80px" });
+
   return (
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" style={style}>
-      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-    </svg>
+    <section
+      ref={sectionRef}
+      style={{
+        background: "#07060A",
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
+      {/* Ambient left glow */}
+      <div
+        className="absolute pointer-events-none"
+        style={{
+          top: "10%",
+          left: "-10%",
+          width: 600,
+          height: 600,
+          borderRadius: "50%",
+          background: `radial-gradient(circle, ${AMBER}18 0%, transparent 70%)`,
+          filter: "blur(40px)",
+        }}
+      />
+      {/* Ambient right glow */}
+      <div
+        className="absolute pointer-events-none"
+        style={{
+          bottom: "10%",
+          right: "-5%",
+          width: 400,
+          height: 400,
+          borderRadius: "50%",
+          background: `radial-gradient(circle, ${AMBER}10 0%, transparent 70%)`,
+          filter: "blur(40px)",
+        }}
+      />
+
+      <div
+        style={{
+          maxWidth: 1320,
+          margin: "0 auto",
+          padding: "clamp(80px, 8vw, 120px) clamp(20px, 4vw, 60px)",
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          gap: "clamp(40px, 6vw, 100px)",
+          alignItems: "center",
+        }}
+        className="nf-grid"
+      >
+        {/* ═══════════════════════════════════
+            LEFT — THE PHOTO
+            ═══════════════════════════════════ */}
+        <motion.div
+          initial={{ opacity: 0, x: -40 }}
+          animate={isInView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: 0.9, ease: EASE }}
+          style={{
+            position: "relative",
+            borderRadius: 20,
+            overflow: "hidden",
+            aspectRatio: "4 / 5",
+          }}
+        >
+          {/* Photo */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={`${S3}/events/Cyber%20First%20Kuwait%202025/filemail_photos/cyber21-04-245.jpg`}
+            alt="NetworkFirst boardroom attendees"
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              filter: "brightness(0.55) saturate(0.85)",
+            }}
+          />
+
+          {/* Amber color wash */}
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              background: `linear-gradient(160deg, ${AMBER}28 0%, ${AMBER}08 50%, transparent 100%)`,
+            }}
+          />
+
+          {/* Bottom gradient */}
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              background: "linear-gradient(to top, rgba(7,6,10,0.85) 0%, transparent 50%)",
+            }}
+          />
+
+          {/* Amber border */}
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              borderRadius: 20,
+              border: `1px solid ${AMBER}30`,
+              pointerEvents: "none",
+            }}
+          />
+
+          {/* Bottom label */}
+          <div
+            style={{
+              position: "absolute",
+              bottom: 28,
+              left: 28,
+              right: 28,
+            }}
+          >
+            <p
+              style={{
+                fontFamily: "var(--font-outfit)",
+                fontSize: 11,
+                fontWeight: 600,
+                letterSpacing: "0.15em",
+                textTransform: "uppercase",
+                color: AMBER,
+                margin: "0 0 6px",
+              }}
+            >
+              Invitation Only
+            </p>
+            <p
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(16px, 1.4vw, 20px)",
+                fontWeight: 700,
+                color: "rgba(255,255,255,0.9)",
+                margin: 0,
+                lineHeight: 1.3,
+              }}
+            >
+              Closed-door sessions for the GCC&apos;s most senior technology leaders
+            </p>
+          </div>
+        </motion.div>
+
+        {/* ═══════════════════════════════════
+            RIGHT — THE CONTENT
+            ═══════════════════════════════════ */}
+        <div>
+          {/* Eyebrow */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, ease: EASE, delay: 0.1 }}
+            style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 20 }}
+          >
+            <span style={{ width: 28, height: 1, background: AMBER }} />
+            <span
+              style={{
+                fontFamily: "var(--font-outfit)",
+                fontSize: 11,
+                fontWeight: 600,
+                letterSpacing: "0.16em",
+                textTransform: "uppercase",
+                color: AMBER,
+              }}
+            >
+              NetworkFirst Boardrooms
+            </span>
+          </motion.div>
+
+          {/* Headline */}
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, ease: EASE, delay: 0.2 }}
+            style={{
+              fontFamily: "var(--font-display)",
+              fontWeight: 800,
+              fontSize: "clamp(36px, 4vw, 58px)",
+              lineHeight: 1.05,
+              letterSpacing: "-1.5px",
+              color: "#fff",
+              margin: "0 0 8px",
+            }}
+          >
+            A Different
+          </motion.h2>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, ease: EASE, delay: 0.28 }}
+            style={{
+              fontFamily: "var(--font-display)",
+              fontWeight: 800,
+              fontSize: "clamp(36px, 4vw, 58px)",
+              lineHeight: 1.05,
+              letterSpacing: "-1.5px",
+              color: AMBER,
+              margin: "0 0 28px",
+            }}
+          >
+            Kind of Room.
+          </motion.h2>
+
+          {/* Scarcity line */}
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, ease: EASE, delay: 0.35 }}
+            style={{
+              fontFamily: "var(--font-outfit)",
+              fontSize: "clamp(14px, 1.2vw, 16px)",
+              fontWeight: 400,
+              color: "rgba(255,255,255,0.55)",
+              lineHeight: 1.7,
+              maxWidth: 460,
+              margin: "0 0 36px",
+            }}
+          >
+            15 seats. Hand-selected executives. No keynotes, no slides, no recordings.
+            Just the conversations that actually move industries — held under Chatham House Rule.
+          </motion.p>
+
+          {/* Pillars */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, ease: EASE, delay: 0.42 }}
+            style={{ display: "flex", flexDirection: "column", gap: 20, marginBottom: 40 }}
+          >
+            {pillars.map((p, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: 20 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.5, ease: EASE, delay: 0.45 + i * 0.08 }}
+                style={{ display: "flex", gap: 14, alignItems: "flex-start" }}
+              >
+                <div
+                  style={{
+                    width: 32,
+                    height: 32,
+                    borderRadius: 8,
+                    background: `${AMBER}15`,
+                    border: `1px solid ${AMBER}30`,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flexShrink: 0,
+                    color: AMBER,
+                    marginTop: 2,
+                  }}
+                >
+                  {p.icon}
+                </div>
+                <div>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      fontSize: 14,
+                      fontWeight: 700,
+                      color: "#fff",
+                      margin: "0 0 3px",
+                    }}
+                  >
+                    {p.title}
+                  </p>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-outfit)",
+                      fontSize: 13,
+                      fontWeight: 300,
+                      color: "rgba(255,255,255,0.45)",
+                      lineHeight: 1.6,
+                      margin: 0,
+                    }}
+                  >
+                    {p.body}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, ease: EASE, delay: 0.7 }}
+            style={{ display: "flex", alignItems: "center", gap: 20, marginBottom: 48 }}
+          >
+            <Link
+              href="/contact"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                padding: "14px 32px",
+                borderRadius: 60,
+                background: AMBER,
+                color: "#07060A",
+                fontFamily: "var(--font-outfit)",
+                fontSize: 14,
+                fontWeight: 700,
+                textDecoration: "none",
+                transition: "all 0.3s ease",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "#DBA96A";
+                e.currentTarget.style.transform = "translateY(-2px)";
+                e.currentTarget.style.boxShadow = `0 12px 40px ${AMBER}40`;
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = AMBER;
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.boxShadow = "none";
+              }}
+            >
+              Request an Invitation
+              <span style={{ fontSize: 16 }}>→</span>
+            </Link>
+            <span
+              style={{
+                fontFamily: "var(--font-outfit)",
+                fontSize: 12,
+                color: "rgba(255,255,255,0.3)",
+              }}
+            >
+              Limited seats per session
+            </span>
+          </motion.div>
+
+          {/* Participant titles marquee strip */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.8, ease: EASE, delay: 0.85 }}
+          >
+            <p
+              style={{
+                fontFamily: "var(--font-outfit)",
+                fontSize: 10,
+                fontWeight: 600,
+                letterSpacing: "0.14em",
+                textTransform: "uppercase",
+                color: "rgba(255,255,255,0.2)",
+                margin: "0 0 10px",
+              }}
+            >
+              Past participants include
+            </p>
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: "8px 16px",
+              }}
+            >
+              {titles.map((title, i) => (
+                <span
+                  key={i}
+                  style={{
+                    fontFamily: "var(--font-outfit)",
+                    fontSize: 11,
+                    fontWeight: 500,
+                    color: `${AMBER}70`,
+                    letterSpacing: "0.04em",
+                  }}
+                >
+                  {title}{i < titles.length - 1 && <span style={{ color: "rgba(255,255,255,0.1)", marginLeft: 16 }}>·</span>}
+                </span>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Mobile responsive */}
+      <style jsx global>{`
+        @media (max-width: 768px) {
+          .nf-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
+    </section>
   );
 }
