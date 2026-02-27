@@ -242,13 +242,13 @@ export default function EventSeriesShowcase() {
         </div>
 
         {/* ═══════════════════════════════════════════════════════════════
-            THE FOUR PORTAL CARDS
+            THE FOUR PORTAL CARDS — Desktop grid
             ═══════════════════════════════════════════════════════════════ */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid gap-6"
+          className="series-grid hidden sm:grid gap-6"
           style={{
             gridTemplateColumns: "repeat(4, 1fr)",
           }}
@@ -259,26 +259,52 @@ export default function EventSeriesShowcase() {
               variants={cardVariants[index]}
               custom={index}
               style={{
-                marginTop: index % 2 === 1 ? 40 : 0, // Stagger effect: Push down odd items
+                marginTop: index % 2 === 1 ? 40 : 0,
               }}
             >
               <PortalCard series={series} />
             </motion.div>
           ))}
         </motion.div>
+
+        {/* Mobile horizontal scroll snap */}
+        <div
+          className="series-mobile-slider flex sm:hidden gap-4 overflow-x-auto pb-4"
+          style={{
+            scrollSnapType: "x mandatory",
+            WebkitOverflowScrolling: "touch",
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+            marginLeft: "-20px",
+            marginRight: "-20px",
+            paddingLeft: "20px",
+            paddingRight: "20px",
+          }}
+        >
+          {eventSeries.map((series) => (
+            <div
+              key={series.id}
+              style={{
+                flex: "0 0 72vw",
+                maxWidth: 280,
+                scrollSnapAlign: "start",
+              }}
+            >
+              <PortalCard series={series} />
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Responsive grid styles */}
       <style jsx global>{`
         @media (max-width: 1024px) {
-          .grid {
+          .series-grid {
             grid-template-columns: repeat(2, 1fr) !important;
           }
         }
-        @media (max-width: 640px) {
-          .grid {
-            grid-template-columns: 1fr !important;
-          }
+        .series-mobile-slider::-webkit-scrollbar {
+          display: none;
         }
       `}</style>
     </section>
@@ -584,8 +610,8 @@ function PortalCard({
         }
         @media (max-width: 640px) {
           .portal-card {
-            aspect-ratio: auto !important;
-            min-height: 400px;
+            aspect-ratio: 3 / 4.2 !important;
+            min-height: unset;
           }
           .portal-card:hover {
             transform: translateY(-4px) scale(1.01);
