@@ -39,7 +39,7 @@ const allEvents: EventItem[] = [
     location: "Kuwait City, Kuwait",
     venue: "Jumeirah Messilah Beach Hotel",
     attendees: "350+ Delegates",
-    href: "/events/cyber-first/kuwait-april",
+    href: "/events/cyber-first/kuwait-2026",
     status: "open",
   },
   {

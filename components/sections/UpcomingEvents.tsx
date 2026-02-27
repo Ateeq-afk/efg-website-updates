@@ -17,7 +17,7 @@ const upcomingEvents = [
     location: "Kuwait City, Kuwait",
     venue: "Venue TBA",
     image: "https://images.unsplash.com/photo-1622547748225-3fc4abd2cca0?w=900&q=80",
-    href: "/events/cyber-first/kuwait-april",
+    href: "/events/cyber-first/kuwait-2026",
   },
   {
     id: "data-ai-kuwait",

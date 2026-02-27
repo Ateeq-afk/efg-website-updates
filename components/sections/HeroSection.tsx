@@ -438,7 +438,7 @@ export default function HeroSection() {
           <div className="flex items-center gap-6">
             <CountdownDisplay date={nextEvent.date} />
             <Link
-              href="/events/cyber-first/kuwait-april"
+              href="/events/cyber-first/kuwait-2026"
               className="transition-colors duration-300 flex items-center gap-1"
               style={{ fontSize: 13, fontWeight: 600, color: "var(--orange)", fontFamily: "var(--font-outfit)" }}
               onMouseEnter={(e) => { e.currentTarget.style.color = "var(--orange-bright)"; }}
@@ -471,7 +471,7 @@ export default function HeroSection() {
           <div style={{ display: "flex", alignItems: "center", gap: 12, flexShrink: 0 }}>
             <CountdownDisplay date={nextEvent.date} compact />
             <Link
-              href="/events/cyber-first/kuwait-april-2026"
+              href="/events/cyber-first/kuwait-2026-2026"
               style={{ fontSize: 12, fontWeight: 600, color: "var(--orange)", fontFamily: "var(--font-outfit)", whiteSpace: "nowrap" }}
             >
               Register →

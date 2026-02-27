@@ -256,7 +256,7 @@ function RegisterButton() {
 
   return (
     <Link
-      href="/events/cyber-first/kuwait-april#register"
+      href="/events/cyber-first/kuwait-2026#register"
       className="inline-flex items-center gap-2 transition-all duration-300"
       style={{
         padding: "14px 32px",
