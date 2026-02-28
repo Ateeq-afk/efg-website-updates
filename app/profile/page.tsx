@@ -4,26 +4,65 @@ import { useState, useEffect } from "react"
 import { createClient } from "@/lib/supabase"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
-import {
-  INDUSTRIES,
-  ROLE_TYPES,
-  COMPANY_SIZES,
-  INTERESTS,
-  LOOKING_FOR,
-  type Profile,
-} from "@/lib/supabase"
+
+type Industry = { id: string; name: string }
+type Interest = { id: string; name: string }
+
+const COMPANY_SIZES = [
+  { value: "1-10", label: "1-10 employees" },
+  { value: "11-50", label: "11-50 employees" },
+  { value: "51-200", label: "51-200 employees" },
+  { value: "201-500", label: "201-500 employees" },
+  { value: "501-1000", label: "501-1000 employees" },
+  { value: "1000+", label: "1000+ employees" },
+]
+
+const ROLE_TYPES = [
+  { value: "attendee", label: "Attendee / Professional" },
+  { value: "sponsor_rep", label: "Sponsor Representative" },
+  { value: "speaker", label: "Speaker" },
+]
+
+const LOOKING_FOR_OPTIONS = [
+  "Technology Partners",
+  "Solution Vendors",
+  "Investment Opportunities",
+  "Talent / Hiring",
+  "Clients / Sales",
+  "Knowledge Sharing",
+  "Government Connections",
+]
+
+type Profile = {
+  id: string
+  email: string
+  full_name: string
+  title: string | null
+  company: string | null
+  industry_id: string | null
+  company_size: string | null
+  role_type: string
+  phone: string | null
+  linkedin_url: string | null
+  bio: string | null
+  interests: string[]
+  looking_for: string[]
+  open_to_sponsors: boolean
+  profile_completed: boolean
+}
 
 export default function ProfilePage() {
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [user, setUser] = useState<any>(null)
   const [profile, setProfile] = useState<Partial<Profile>>({})
+  const [industries, setIndustries] = useState<Industry[]>([])
+  const [interests, setInterests] = useState<Interest[]>([])
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState(false)
   const router = useRouter()
   const supabase = createClient()
 
-  // Load user and profile
   useEffect(() => {
     const loadProfile = async () => {
       const { data: { user } } = await supabase.auth.getUser()
@@ -35,21 +74,22 @@ export default function ProfilePage() {
       
       setUser(user)
       
-      const { data: profileData } = await supabase
-        .from("profiles")
-        .select("*")
-        .eq("user_id", user.id)
-        .single()
-      
-      if (profileData) {
-        setProfile(profileData)
-      }
+      // Load industries and interests
+      const [industriesRes, interestsRes, profileRes] = await Promise.all([
+        supabase.from("industries").select("*").order("name"),
+        supabase.from("interests").select("*").order("name"),
+        supabase.from("profiles").select("*").eq("user_id", user.id).single(),
+      ])
+
+      if (industriesRes.data) setIndustries(industriesRes.data)
+      if (interestsRes.data) setInterests(interestsRes.data)
+      if (profileRes.data) setProfile(profileRes.data)
       
       setLoading(false)
     }
     
     loadProfile()
-  }, [])
+  }, [supabase, router])
 
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -63,17 +103,16 @@ export default function ProfilePage() {
         full_name: profile.full_name,
         title: profile.title,
         company: profile.company,
-        industry: profile.industry,
-        role_type: profile.role_type,
-        company_size: profile.company_size,
-        phone: profile.phone,
-        linkedin_url: profile.linkedin_url,
-        bio: profile.bio,
+        industry_id: profile.industry_id || null,
+        company_size: profile.company_size || null,
+        role_type: profile.role_type || "attendee",
+        phone: profile.phone || null,
+        linkedin_url: profile.linkedin_url || null,
+        bio: profile.bio || null,
         interests: profile.interests || [],
         looking_for: profile.looking_for || [],
         open_to_sponsors: profile.open_to_sponsors ?? true,
         profile_completed: true,
-        updated_at: new Date().toISOString(),
       })
       .eq("user_id", user.id)
 
@@ -93,12 +132,20 @@ export default function ProfilePage() {
     router.refresh()
   }
 
-  const toggleArrayItem = (field: 'interests' | 'looking_for', item: string) => {
-    const current = profile[field] || []
+  const toggleInterest = (interestId: string) => {
+    const current = profile.interests || []
+    const updated = current.includes(interestId)
+      ? current.filter(i => i !== interestId)
+      : [...current, interestId]
+    setProfile({ ...profile, interests: updated })
+  }
+
+  const toggleLookingFor = (item: string) => {
+    const current = profile.looking_for || []
     const updated = current.includes(item)
-      ? current.filter((i: string) => i !== item)
+      ? current.filter(i => i !== item)
       : [...current, item]
-    setProfile({ ...profile, [field]: updated })
+    setProfile({ ...profile, looking_for: updated })
   }
 
   if (loading) {
@@ -199,27 +246,26 @@ export default function ProfilePage() {
               <div className="form-group">
                 <label>Industry *</label>
                 <select
-                  value={profile.industry || ""}
-                  onChange={(e) => setProfile({ ...profile, industry: e.target.value })}
+                  value={profile.industry_id || ""}
+                  onChange={(e) => setProfile({ ...profile, industry_id: e.target.value })}
                   required
                 >
                   <option value="">Select industry...</option>
-                  {INDUSTRIES.map((ind) => (
-                    <option key={ind} value={ind}>{ind}</option>
+                  {industries.map((ind) => (
+                    <option key={ind.id} value={ind.id}>{ind.name}</option>
                   ))}
                 </select>
               </div>
               
               <div className="form-group">
-                <label>Role Type *</label>
+                <label>I am joining as *</label>
                 <select
-                  value={profile.role_type || ""}
+                  value={profile.role_type || "attendee"}
                   onChange={(e) => setProfile({ ...profile, role_type: e.target.value })}
                   required
                 >
-                  <option value="">Select role type...</option>
                   {ROLE_TYPES.map((role) => (
-                    <option key={role} value={role}>{role}</option>
+                    <option key={role.value} value={role.value}>{role.label}</option>
                   ))}
                 </select>
               </div>
@@ -232,7 +278,7 @@ export default function ProfilePage() {
                 >
                   <option value="">Select company size...</option>
                   {COMPANY_SIZES.map((size) => (
-                    <option key={size} value={size}>{size}</option>
+                    <option key={size.value} value={size.value}>{size.label}</option>
                   ))}
                 </select>
               </div>
@@ -299,14 +345,14 @@ export default function ProfilePage() {
             <p className="section-subtitle">Select topics you want to discuss at events</p>
             
             <div className="chips-grid">
-              {INTERESTS.map((interest) => (
+              {interests.map((interest) => (
                 <button
-                  key={interest}
+                  key={interest.id}
                   type="button"
-                  className={`chip ${(profile.interests || []).includes(interest) ? 'active' : ''}`}
-                  onClick={() => toggleArrayItem('interests', interest)}
+                  className={`chip ${(profile.interests || []).includes(interest.id) ? 'active' : ''}`}
+                  onClick={() => toggleInterest(interest.id)}
                 >
-                  {interest}
+                  {interest.name}
                 </button>
               ))}
             </div>
@@ -318,12 +364,12 @@ export default function ProfilePage() {
             <p className="section-subtitle">Help us match you with the right people</p>
             
             <div className="chips-grid">
-              {LOOKING_FOR.map((item) => (
+              {LOOKING_FOR_OPTIONS.map((item) => (
                 <button
                   key={item}
                   type="button"
                   className={`chip ${(profile.looking_for || []).includes(item) ? 'active' : ''}`}
-                  onClick={() => toggleArrayItem('looking_for', item)}
+                  onClick={() => toggleLookingFor(item)}
                 >
                   {item}
                 </button>
