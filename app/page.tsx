@@ -1,6 +1,5 @@
 import {
   HeroSection,
-  InstitutionalBacking,
   EventSeriesShowcase,
   ImpactBar,
   AnnualTimeline,
@@ -19,12 +18,6 @@ export default function Home() {
     <div>
       {/* The Hero — The Promise */}
       <HeroSection />
-
-      {/* Institutional Backing — Trust Signals */}
-      <InstitutionalBacking />
-
-      {/* Section Transition - Sweep */}
-      <SectionTransition variant="sweep" />
 
       {/* The Event Series — Four Worlds */}
       <EventSeriesShowcase />

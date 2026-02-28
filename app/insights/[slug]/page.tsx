@@ -1043,7 +1043,7 @@ export default function ArticleDetailPage() {
             if (postData.tags && postData.tags.length > 0) {
               const scored = candidates.map((c) => {
                 const overlap = c.tags
-                  ? c.tags.filter((t) => postData.tags.includes(t)).length
+                  ? c.tags.filter((t) => postData.tags!.includes(t)).length
                   : 0;
                 return { post: c, score: overlap };
               });
