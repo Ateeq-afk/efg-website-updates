@@ -2,400 +2,279 @@
 
 import { useState, useEffect } from "react"
 import { createClient } from "@/lib/supabase"
-import { useRouter } from "next/navigation"
 import Link from "next/link"
 
-type Event = {
-  id: string
-  name: string
-  slug: string
-  date: string
+type Stats = {
+  totalUsers: number
+  totalEvents: number
+  pendingRegistrations: number
+  approvedRegistrations: number
+  confirmedRegistrations: number
+  totalSponsors: number
 }
 
-type Registration = {
+type RecentRegistration = {
   id: string
-  event_id: string
-  profile_id: string
   status: string
   registered_at: string
-  admin_notes: string | null
-  events: Event
-  profiles: {
-    id: string
-    full_name: string
-    email: string
-    title: string | null
-    company: string | null
-    role_type: string
-    linkedin_url: string | null
-    bio: string | null
-  }
+  profiles: { full_name: string; email: string }
+  events: { name: string }
 }
 
-export default function AdminPage() {
+export default function AdminDashboard() {
+  const [stats, setStats] = useState<Stats>({
+    totalUsers: 0,
+    totalEvents: 0,
+    pendingRegistrations: 0,
+    approvedRegistrations: 0,
+    confirmedRegistrations: 0,
+    totalSponsors: 0,
+  })
+  const [recentRegs, setRecentRegs] = useState<RecentRegistration[]>([])
   const [loading, setLoading] = useState(true)
-  const [isAdmin, setIsAdmin] = useState(false)
-  const [registrations, setRegistrations] = useState<Registration[]>([])
-  const [events, setEvents] = useState<Event[]>([])
-  const [selectedEvent, setSelectedEvent] = useState<string>("all")
-  const [selectedStatus, setSelectedStatus] = useState<string>("interested")
-  const [processing, setProcessing] = useState<string | null>(null)
   
-  const router = useRouter()
   const supabase = createClient()
 
   useEffect(() => {
-    const init = async () => {
-      const { data: { user } } = await supabase.auth.getUser()
-      if (!user) {
-        router.push("/login")
-        return
-      }
+    const loadDashboard = async () => {
+      // Get counts
+      const [usersRes, eventsRes, regsRes, sponsorsRes] = await Promise.all([
+        supabase.from("profiles").select("id", { count: "exact", head: true }),
+        supabase.from("events").select("id", { count: "exact", head: true }).eq("is_active", true),
+        supabase.from("event_registrations").select("status"),
+        supabase.from("sponsors").select("id", { count: "exact", head: true }).eq("is_active", true),
+      ])
 
-      // Check if admin
-      const { data: profile } = await supabase
-        .from("profiles")
-        .select("is_admin")
-        .eq("user_id", user.id)
-        .single()
+      const registrations = regsRes.data || []
+      
+      setStats({
+        totalUsers: usersRes.count || 0,
+        totalEvents: eventsRes.count || 0,
+        pendingRegistrations: registrations.filter(r => r.status === "interested").length,
+        approvedRegistrations: registrations.filter(r => r.status === "approved").length,
+        confirmedRegistrations: registrations.filter(r => r.status === "confirmed").length,
+        totalSponsors: sponsorsRes.count || 0,
+      })
 
-      if (!profile?.is_admin) {
-        router.push("/portal")
-        return
-      }
+      // Get recent registrations
+      const { data: recent } = await supabase
+        .from("event_registrations")
+        .select("id, status, registered_at, profiles(full_name, email), events(name)")
+        .order("registered_at", { ascending: false })
+        .limit(5)
 
-      setIsAdmin(true)
-
-      // Load events
-      const { data: eventsData } = await supabase
-        .from("events")
-        .select("id, name, slug, date")
-        .eq("is_active", true)
-        .order("date", { ascending: true })
-
-      if (eventsData) setEvents(eventsData)
+      if (recent) setRecentRegs(recent as RecentRegistration[])
 
       setLoading(false)
     }
-    init()
-  }, [supabase, router])
-
-  useEffect(() => {
-    if (!isAdmin) return
-    loadRegistrations()
-  }, [isAdmin, selectedEvent, selectedStatus])
-
-  const loadRegistrations = async () => {
-    let query = supabase
-      .from("event_registrations")
-      .select(`
-        *,
-        events (id, name, slug, date),
-        profiles (id, full_name, email, title, company, role_type, linkedin_url, bio)
-      `)
-      .order("registered_at", { ascending: false })
-
-    if (selectedEvent !== "all") {
-      query = query.eq("event_id", selectedEvent)
-    }
-
-    if (selectedStatus !== "all") {
-      query = query.eq("status", selectedStatus)
-    }
-
-    const { data } = await query
-
-    if (data) setRegistrations(data as Registration[])
-  }
-
-  const handleAction = async (regId: string, action: "approved" | "rejected") => {
-    setProcessing(regId)
-
-    const { error } = await supabase
-      .from("event_registrations")
-      .update({
-        status: action,
-        reviewed_at: new Date().toISOString(),
-      })
-      .eq("id", regId)
-
-    if (!error) {
-      setRegistrations(prev => 
-        prev.map(r => r.id === regId ? { ...r, status: action } : r)
-      )
-    }
-
-    setProcessing(null)
-  }
+    loadDashboard()
+  }, [supabase])
 
   const formatDate = (dateStr: string) => {
     return new Date(dateStr).toLocaleDateString("en-US", {
       month: "short",
       day: "numeric",
-      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
     })
   }
 
-  const getStatusBadge = (status: string) => {
-    const styles: Record<string, { bg: string; color: string }> = {
-      interested: { bg: "rgba(251, 191, 36, 0.15)", color: "#fbbf24" },
-      approved: { bg: "rgba(34, 197, 94, 0.15)", color: "#22c55e" },
-      rejected: { bg: "rgba(239, 68, 68, 0.15)", color: "#ef4444" },
-      confirmed: { bg: "rgba(59, 130, 246, 0.15)", color: "#3b82f6" },
-      attended: { bg: "rgba(139, 92, 246, 0.15)", color: "#8b5cf6" },
+  const getStatusColor = (status: string) => {
+    const colors: Record<string, string> = {
+      interested: "#fbbf24",
+      approved: "#22c55e",
+      confirmed: "#3b82f6",
+      rejected: "#ef4444",
     }
-    return styles[status] || styles.interested
+    return colors[status] || "#888"
   }
 
   if (loading) {
-    return (
-      <div className="admin-loading">
-        <div className="spinner" />
-        <style jsx>{`
-          .admin-loading {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #0a0a0a;
-          }
-          .spinner {
-            width: 40px;
-            height: 40px;
-            border: 3px solid rgba(255,255,255,0.1);
-            border-top-color: var(--orange);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-          }
-          @keyframes spin { to { transform: rotate(360deg); } }
-        `}</style>
-      </div>
-    )
+    return <div className="loading">Loading dashboard...</div>
   }
 
   return (
-    <div className="admin">
-      <header className="admin-header">
-        <div className="header-content">
-          <div className="header-left">
-            <Link href="/portal" className="back">← Portal</Link>
-            <h1>Admin Panel</h1>
-          </div>
-          <div className="filters">
-            <select 
-              value={selectedEvent} 
-              onChange={(e) => setSelectedEvent(e.target.value)}
-            >
-              <option value="all">All Events</option>
-              {events.map(e => (
-                <option key={e.id} value={e.id}>{e.name}</option>
-              ))}
-            </select>
-            <select 
-              value={selectedStatus} 
-              onChange={(e) => setSelectedStatus(e.target.value)}
-            >
-              <option value="all">All Status</option>
-              <option value="interested">Pending</option>
-              <option value="approved">Approved</option>
-              <option value="rejected">Rejected</option>
-              <option value="confirmed">Confirmed</option>
-            </select>
-          </div>
-        </div>
+    <div className="dashboard">
+      <header className="page-header">
+        <h1>Dashboard</h1>
+        <p>Overview of your EFG Networking platform</p>
       </header>
 
-      <main className="admin-main">
-        <div className="stats">
-          <div className="stat">
-            <span className="stat-value">{registrations.filter(r => r.status === "interested").length}</span>
-            <span className="stat-label">Pending</span>
+      <div className="stats-grid">
+        <div className="stat-card">
+          <div className="stat-icon">👥</div>
+          <div className="stat-info">
+            <span className="stat-value">{stats.totalUsers}</span>
+            <span className="stat-label">Total Users</span>
           </div>
-          <div className="stat">
-            <span className="stat-value">{registrations.filter(r => r.status === "approved").length}</span>
+        </div>
+
+        <div className="stat-card">
+          <div className="stat-icon">📅</div>
+          <div className="stat-info">
+            <span className="stat-value">{stats.totalEvents}</span>
+            <span className="stat-label">Active Events</span>
+          </div>
+        </div>
+
+        <div className="stat-card highlight pending">
+          <div className="stat-icon">⏳</div>
+          <div className="stat-info">
+            <span className="stat-value">{stats.pendingRegistrations}</span>
+            <span className="stat-label">Pending Approval</span>
+          </div>
+          <Link href="/admin/registrations" className="stat-action">Review →</Link>
+        </div>
+
+        <div className="stat-card">
+          <div className="stat-icon">✓</div>
+          <div className="stat-info">
+            <span className="stat-value">{stats.approvedRegistrations}</span>
             <span className="stat-label">Approved</span>
           </div>
-          <div className="stat">
-            <span className="stat-value">{registrations.filter(r => r.status === "confirmed").length}</span>
+        </div>
+
+        <div className="stat-card">
+          <div className="stat-icon">🎫</div>
+          <div className="stat-info">
+            <span className="stat-value">{stats.confirmedRegistrations}</span>
             <span className="stat-label">Confirmed</span>
           </div>
         </div>
 
-        <div className="registrations">
-          {registrations.length === 0 ? (
-            <div className="empty">No registrations found</div>
-          ) : (
-            registrations.map(reg => (
-              <div key={reg.id} className="reg-card">
-                <div className="reg-header">
-                  <div className="applicant">
-                    <div className="avatar">
-                      {reg.profiles.full_name?.charAt(0) || "?"}
-                    </div>
-                    <div className="info">
-                      <h3>{reg.profiles.full_name}</h3>
-                      <p>{reg.profiles.title} {reg.profiles.company ? `at ${reg.profiles.company}` : ""}</p>
-                    </div>
-                  </div>
-                  <div 
-                    className="status-badge"
-                    style={{ 
-                      background: getStatusBadge(reg.status).bg,
-                      color: getStatusBadge(reg.status).color 
-                    }}
-                  >
-                    {reg.status}
-                  </div>
-                </div>
-
-                <div className="reg-details">
-                  <div className="detail">
-                    <span className="label">Event</span>
-                    <span className="value">{reg.events.name}</span>
-                  </div>
-                  <div className="detail">
-                    <span className="label">Email</span>
-                    <span className="value">{reg.profiles.email}</span>
-                  </div>
-                  <div className="detail">
-                    <span className="label">Role</span>
-                    <span className="value">{reg.profiles.role_type}</span>
-                  </div>
-                  <div className="detail">
-                    <span className="label">Applied</span>
-                    <span className="value">{formatDate(reg.registered_at)}</span>
-                  </div>
-                  {reg.profiles.linkedin_url && (
-                    <div className="detail">
-                      <span className="label">LinkedIn</span>
-                      <a href={reg.profiles.linkedin_url} target="_blank" rel="noopener" className="link">
-                        View Profile →
-                      </a>
-                    </div>
-                  )}
-                </div>
-
-                {reg.profiles.bio && (
-                  <div className="bio">
-                    <span className="label">Bio</span>
-                    <p>{reg.profiles.bio}</p>
-                  </div>
-                )}
-
-                {reg.status === "interested" && (
-                  <div className="actions">
-                    <button
-                      className="btn approve"
-                      onClick={() => handleAction(reg.id, "approved")}
-                      disabled={processing === reg.id}
-                    >
-                      {processing === reg.id ? "..." : "Approve"}
-                    </button>
-                    <button
-                      className="btn reject"
-                      onClick={() => handleAction(reg.id, "rejected")}
-                      disabled={processing === reg.id}
-                    >
-                      Reject
-                    </button>
-                  </div>
-                )}
-              </div>
-            ))
-          )}
+        <div className="stat-card">
+          <div className="stat-icon">🏢</div>
+          <div className="stat-info">
+            <span className="stat-value">{stats.totalSponsors}</span>
+            <span className="stat-label">Sponsors</span>
+          </div>
         </div>
-      </main>
+      </div>
+
+      <div className="dashboard-grid">
+        <section className="recent-section">
+          <div className="section-header">
+            <h2>Recent Registrations</h2>
+            <Link href="/admin/registrations" className="view-all">View All →</Link>
+          </div>
+
+          <div className="recent-list">
+            {recentRegs.length === 0 ? (
+              <p className="empty">No registrations yet</p>
+            ) : (
+              recentRegs.map(reg => (
+                <div key={reg.id} className="recent-item">
+                  <div className="recent-user">
+                    <div className="avatar">{reg.profiles.full_name?.charAt(0) || "?"}</div>
+                    <div className="info">
+                      <span className="name">{reg.profiles.full_name}</span>
+                      <span className="event">{reg.events.name}</span>
+                    </div>
+                  </div>
+                  <div className="recent-meta">
+                    <span 
+                      className="status"
+                      style={{ color: getStatusColor(reg.status) }}
+                    >
+                      {reg.status}
+                    </span>
+                    <span className="time">{formatDate(reg.registered_at)}</span>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+        </section>
+
+        <section className="quick-actions">
+          <h2>Quick Actions</h2>
+          <div className="actions-grid">
+            <Link href="/admin/registrations?status=interested" className="action-card">
+              <span className="action-icon">📋</span>
+              <span className="action-label">Review Pending</span>
+            </Link>
+            <Link href="/admin/events" className="action-card">
+              <span className="action-icon">➕</span>
+              <span className="action-label">Create Event</span>
+            </Link>
+            <Link href="/admin/users" className="action-card">
+              <span className="action-icon">🔍</span>
+              <span className="action-label">Find User</span>
+            </Link>
+            <Link href="/admin/sponsors" className="action-card">
+              <span className="action-icon">🏢</span>
+              <span className="action-label">Add Sponsor</span>
+            </Link>
+          </div>
+        </section>
+      </div>
 
       <style jsx>{`
-        .admin {
-          min-height: 100vh;
-          background: #0a0a0a;
+        .dashboard {
+          padding: 32px;
         }
 
-        .admin-header {
-          background: rgba(0,0,0,0.8);
-          border-bottom: 1px solid rgba(255,255,255,0.05);
-          padding: 20px 24px;
-          position: sticky;
-          top: 0;
-          z-index: 100;
-          backdrop-filter: blur(20px);
-        }
-
-        .header-content {
-          max-width: 1200px;
-          margin: 0 auto;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          flex-wrap: wrap;
-          gap: 16px;
-        }
-
-        .back {
-          font-family: var(--font-outfit);
-          font-size: 13px;
+        .loading {
+          padding: 48px;
+          text-align: center;
           color: rgba(255,255,255,0.5);
-          text-decoration: none;
-          display: block;
-          margin-bottom: 4px;
+          font-family: var(--font-outfit);
         }
 
-        .back:hover { color: var(--orange); }
+        .page-header {
+          margin-bottom: 32px;
+        }
 
-        h1 {
+        .page-header h1 {
           font-family: var(--font-display);
-          font-size: 24px;
+          font-size: 32px;
           font-weight: 700;
           color: white;
+          margin: 0 0 8px;
+        }
+
+        .page-header p {
+          font-family: var(--font-outfit);
+          font-size: 14px;
+          color: rgba(255,255,255,0.5);
           margin: 0;
         }
 
-        .filters {
-          display: flex;
-          gap: 12px;
-        }
-
-        .filters select {
-          padding: 10px 16px;
-          background: rgba(255,255,255,0.05);
-          border: 1px solid rgba(255,255,255,0.1);
-          border-radius: 8px;
-          font-family: var(--font-outfit);
-          font-size: 13px;
-          color: white;
-          cursor: pointer;
-        }
-
-        .filters select option {
-          background: #1a1a1a;
-        }
-
-        .admin-main {
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 32px 24px;
-        }
-
-        .stats {
-          display: flex;
+        .stats-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
           gap: 16px;
           margin-bottom: 32px;
         }
 
-        .stat {
+        .stat-card {
           background: rgba(255,255,255,0.03);
           border: 1px solid rgba(255,255,255,0.06);
-          border-radius: 12px;
-          padding: 20px 24px;
-          text-align: center;
-          flex: 1;
+          border-radius: 16px;
+          padding: 20px;
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          position: relative;
+        }
+
+        .stat-card.highlight.pending {
+          border-color: rgba(251, 191, 36, 0.3);
+          background: rgba(251, 191, 36, 0.05);
+        }
+
+        .stat-icon {
+          font-size: 24px;
+        }
+
+        .stat-info {
+          display: flex;
+          flex-direction: column;
         }
 
         .stat-value {
-          display: block;
           font-family: var(--font-display);
-          font-size: 32px;
+          font-size: 28px;
           font-weight: 700;
           color: white;
         }
@@ -406,173 +285,188 @@ export default function AdminPage() {
           color: rgba(255,255,255,0.5);
         }
 
-        .registrations {
-          display: flex;
-          flex-direction: column;
-          gap: 16px;
-        }
-
-        .empty {
-          text-align: center;
-          padding: 48px;
-          color: rgba(255,255,255,0.4);
+        .stat-action {
+          position: absolute;
+          top: 12px;
+          right: 16px;
           font-family: var(--font-outfit);
-        }
-
-        .reg-card {
-          background: rgba(255,255,255,0.02);
-          border: 1px solid rgba(255,255,255,0.06);
-          border-radius: 16px;
-          padding: 24px;
-        }
-
-        .reg-header {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          margin-bottom: 20px;
-        }
-
-        .applicant {
-          display: flex;
-          align-items: center;
-          gap: 16px;
-        }
-
-        .avatar {
-          width: 48px;
-          height: 48px;
-          border-radius: 50%;
-          background: rgba(232, 101, 26, 0.2);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-family: var(--font-display);
-          font-size: 18px;
-          font-weight: 600;
+          font-size: 12px;
           color: var(--orange);
+          text-decoration: none;
         }
 
-        .info h3 {
+        .dashboard-grid {
+          display: grid;
+          grid-template-columns: 2fr 1fr;
+          gap: 24px;
+        }
+
+        .section-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 16px;
+        }
+
+        .section-header h2,
+        .quick-actions h2 {
           font-family: var(--font-display);
           font-size: 18px;
           font-weight: 600;
           color: white;
-          margin: 0 0 4px;
-        }
-
-        .info p {
-          font-family: var(--font-outfit);
-          font-size: 13px;
-          color: rgba(255,255,255,0.5);
           margin: 0;
         }
 
-        .status-badge {
-          padding: 6px 12px;
-          border-radius: 20px;
-          font-family: var(--font-outfit);
-          font-size: 12px;
-          font-weight: 600;
-          text-transform: capitalize;
-        }
-
-        .reg-details {
-          display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-          gap: 16px;
-          margin-bottom: 16px;
-        }
-
-        .detail {
-          display: flex;
-          flex-direction: column;
-          gap: 4px;
-        }
-
-        .label {
-          font-family: var(--font-outfit);
-          font-size: 11px;
-          font-weight: 500;
-          color: rgba(255,255,255,0.4);
-          text-transform: uppercase;
-          letter-spacing: 0.5px;
-        }
-
-        .value {
-          font-family: var(--font-outfit);
-          font-size: 14px;
-          color: rgba(255,255,255,0.8);
-        }
-
-        .link {
+        .view-all {
           font-family: var(--font-outfit);
           font-size: 13px;
           color: var(--orange);
           text-decoration: none;
         }
 
-        .link:hover { text-decoration: underline; }
-
-        .bio {
+        .recent-section {
           background: rgba(255,255,255,0.02);
-          border-radius: 8px;
-          padding: 12px 16px;
+          border: 1px solid rgba(255,255,255,0.06);
+          border-radius: 16px;
+          padding: 20px;
+        }
+
+        .recent-list {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+        }
+
+        .empty {
+          color: rgba(255,255,255,0.4);
+          font-family: var(--font-outfit);
+          font-size: 14px;
+          padding: 24px;
+          text-align: center;
+        }
+
+        .recent-item {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 12px;
+          background: rgba(255,255,255,0.02);
+          border-radius: 10px;
+        }
+
+        .recent-user {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+        }
+
+        .avatar {
+          width: 36px;
+          height: 36px;
+          border-radius: 50%;
+          background: rgba(232, 101, 26, 0.2);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-family: var(--font-display);
+          font-size: 14px;
+          font-weight: 600;
+          color: var(--orange);
+        }
+
+        .info {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .name {
+          font-family: var(--font-outfit);
+          font-size: 14px;
+          font-weight: 500;
+          color: white;
+        }
+
+        .event {
+          font-family: var(--font-outfit);
+          font-size: 12px;
+          color: rgba(255,255,255,0.5);
+        }
+
+        .recent-meta {
+          text-align: right;
+        }
+
+        .status {
+          display: block;
+          font-family: var(--font-outfit);
+          font-size: 12px;
+          font-weight: 600;
+          text-transform: capitalize;
+        }
+
+        .time {
+          font-family: var(--font-outfit);
+          font-size: 11px;
+          color: rgba(255,255,255,0.4);
+        }
+
+        .quick-actions {
+          background: rgba(255,255,255,0.02);
+          border: 1px solid rgba(255,255,255,0.06);
+          border-radius: 16px;
+          padding: 20px;
+        }
+
+        .quick-actions h2 {
           margin-bottom: 16px;
         }
 
-        .bio p {
-          font-family: var(--font-outfit);
-          font-size: 13px;
-          color: rgba(255,255,255,0.7);
-          line-height: 1.6;
-          margin: 4px 0 0;
-        }
-
-        .actions {
-          display: flex;
+        .actions-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
           gap: 12px;
-          padding-top: 16px;
-          border-top: 1px solid rgba(255,255,255,0.06);
         }
 
-        .btn {
-          padding: 12px 24px;
-          border-radius: 10px;
-          font-family: var(--font-outfit);
-          font-size: 14px;
-          font-weight: 600;
-          cursor: pointer;
+        .action-card {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 8px;
+          padding: 20px 16px;
+          background: rgba(255,255,255,0.03);
+          border: 1px solid rgba(255,255,255,0.06);
+          border-radius: 12px;
+          text-decoration: none;
           transition: all 0.2s ease;
-          border: none;
         }
 
-        .btn:disabled {
-          opacity: 0.5;
-          cursor: not-allowed;
+        .action-card:hover {
+          background: rgba(255,255,255,0.06);
+          border-color: rgba(255,255,255,0.1);
         }
 
-        .btn.approve {
-          background: rgba(34, 197, 94, 0.15);
-          color: #22c55e;
+        .action-icon {
+          font-size: 24px;
         }
 
-        .btn.approve:hover:not(:disabled) {
-          background: rgba(34, 197, 94, 0.25);
+        .action-label {
+          font-family: var(--font-outfit);
+          font-size: 12px;
+          font-weight: 500;
+          color: rgba(255,255,255,0.7);
+          text-align: center;
         }
 
-        .btn.reject {
-          background: rgba(239, 68, 68, 0.1);
-          color: #ef4444;
+        @media (max-width: 900px) {
+          .dashboard-grid {
+            grid-template-columns: 1fr;
+          }
         }
 
-        .btn.reject:hover:not(:disabled) {
-          background: rgba(239, 68, 68, 0.2);
-        }
-
-        @media (max-width: 640px) {
-          .stats { flex-direction: column; }
-          .reg-details { grid-template-columns: 1fr 1fr; }
+        @media (max-width: 600px) {
+          .stats-grid {
+            grid-template-columns: 1fr 1fr;
+          }
         }
       `}</style>
     </div>
