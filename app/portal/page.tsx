@@ -12,6 +12,7 @@ type Profile = {
   company: string
   photo_url: string | null
   profile_completed: boolean
+  is_admin: boolean
 }
 
 type Event = {
@@ -119,6 +120,25 @@ export default function PortalPage() {
     setSubmitting(null)
   }
 
+  const handleConfirm = async (eventId: string) => {
+    if (!profile) return
+    setSubmitting(eventId)
+
+    const { error } = await supabase
+      .from("event_registrations")
+      .update({ status: "confirmed" })
+      .eq("event_id", eventId)
+      .eq("profile_id", profile.id)
+
+    if (!error) {
+      setRegistrations(prev => 
+        prev.map(r => r.event_id === eventId ? { ...r, status: "confirmed" } : r)
+      )
+    }
+
+    setSubmitting(null)
+  }
+
   const formatDate = (dateStr: string) => {
     const date = new Date(dateStr)
     return date.toLocaleDateString("en-US", {
@@ -179,6 +199,9 @@ export default function PortalPage() {
           </Link>
           
           <div className="user-menu">
+            {profile?.is_admin && (
+              <Link href="/admin" className="admin-link">Admin</Link>
+            )}
             <span className="user-name">{profile?.full_name}</span>
             <Link href="/profile" className="avatar">
               {profile?.photo_url ? (
@@ -228,7 +251,15 @@ export default function PortalPage() {
                         <p className="event-description">{event.description}</p>
                       )}
 
-                      {status ? (
+                      {status === "approved" ? (
+                        <button
+                          className="confirm-button"
+                          onClick={() => handleConfirm(event.id)}
+                          disabled={submitting === event.id}
+                        >
+                          {submitting === event.id ? "Confirming..." : "✓ Confirm Attendance"}
+                        </button>
+                      ) : status ? (
                         <div 
                           className="status-badge"
                           style={{ background: badge?.bg, color: badge?.color }}
@@ -312,6 +343,22 @@ export default function PortalPage() {
           display: flex;
           align-items: center;
           gap: 12px;
+        }
+        
+        .admin-link {
+          padding: 8px 16px;
+          background: rgba(139, 92, 246, 0.15);
+          border-radius: 8px;
+          font-family: var(--font-outfit);
+          font-size: 13px;
+          font-weight: 600;
+          color: #8b5cf6;
+          text-decoration: none;
+          transition: all 0.2s ease;
+        }
+        
+        .admin-link:hover {
+          background: rgba(139, 92, 246, 0.25);
         }
         
         .user-name {
@@ -479,6 +526,29 @@ export default function PortalPage() {
         
         .interest-button:hover:not(:disabled) {
           background: #ff7a2e;
+        }
+        
+        .confirm-button {
+          width: 100%;
+          padding: 14px;
+          background: rgba(34, 197, 94, 0.15);
+          border: 2px solid #22c55e;
+          border-radius: 12px;
+          font-family: var(--font-outfit);
+          font-size: 14px;
+          font-weight: 600;
+          color: #22c55e;
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+        
+        .confirm-button:hover:not(:disabled) {
+          background: rgba(34, 197, 94, 0.25);
+        }
+        
+        .confirm-button:disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
         }
         
         .interest-button:disabled {
