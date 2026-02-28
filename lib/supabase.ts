@@ -26,7 +26,7 @@ export type Profile = {
   full_name: string
   title: string
   company: string
-  industry: string
+  industry_id: string | null
   role_type: string
   company_size: string
   phone?: string
@@ -36,7 +36,10 @@ export type Profile = {
   interests: string[]
   looking_for: string[]
   open_to_sponsors: boolean
-  is_sponsor: boolean
+  is_verified: boolean
+  is_admin: boolean
+  profile_completed: boolean
+  visibility: string
   created_at: string
   updated_at: string
 }
