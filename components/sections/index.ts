@@ -1,4 +1,5 @@
 export { default as HeroSection } from "./HeroSection";
+export { default as InstitutionalBacking } from "./InstitutionalBacking";
 export { default as EventSeriesShowcase } from "./EventSeriesShowcase";
 export { default as ImpactBar } from "./ImpactBar";
 export { default as AnnualTimeline } from "./AnnualTimeline";
