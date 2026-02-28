@@ -118,12 +118,11 @@ export default function ProfilePage() {
 
     if (error) {
       setError(error.message)
+      setSaving(false)
     } else {
-      setSuccess(true)
-      setTimeout(() => setSuccess(false), 3000)
+      // Redirect to portal after saving
+      router.push("/portal")
     }
-    
-    setSaving(false)
   }
 
   const handleSignOut = async () => {
