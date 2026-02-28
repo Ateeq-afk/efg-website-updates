@@ -26,11 +26,9 @@ type Registration = {
     email: string
     title: string | null
     company: string | null
-    industry_id: string | null
     role_type: string
     linkedin_url: string | null
     bio: string | null
-    industries?: { name: string } | null
   }
 }
 
@@ -93,10 +91,7 @@ export default function AdminPage() {
       .select(`
         *,
         events (id, name, slug, date),
-        profiles (
-          id, full_name, email, title, company, industry_id, role_type, linkedin_url, bio,
-          industries:industry_id (name)
-        )
+        profiles (id, full_name, email, title, company, role_type, linkedin_url, bio)
       `)
       .order("registered_at", { ascending: false })
 
@@ -265,10 +260,6 @@ export default function AdminPage() {
                   <div className="detail">
                     <span className="label">Role</span>
                     <span className="value">{reg.profiles.role_type}</span>
-                  </div>
-                  <div className="detail">
-                    <span className="label">Industry</span>
-                    <span className="value">{reg.profiles.industries?.name || "—"}</span>
                   </div>
                   <div className="detail">
                     <span className="label">Applied</span>
