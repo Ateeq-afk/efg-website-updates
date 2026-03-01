@@ -39,7 +39,7 @@ const EVENT_CONFIGS: Record<string, {
     colorBright: "#4DD4FF",
     date: "21 April 2026",
     location: "Kuwait City",
-    logo: "https://efg-final.s3.eu-north-1.amazonaws.com/logos/cyber-first-kuwait-icon.png",
+    logo: "https://efg-final.s3.eu-north-1.amazonaws.com/logos/cyber-first-kuwait-white.svg",
     navLinks: [
       { href: "#overview", label: "Overview" },
       { href: "#speakers", label: "Speakers" },
@@ -107,7 +107,7 @@ export default function EventNavigation() {
                 style={{ 
                   height: 80, 
                   width: "auto",
-                  filter: "invert(1) brightness(1.1)", // Convert black logo to white for dark bg
+                  // No filter - logos should be provided in correct colors for dark bg
                 }} 
               />
             ) : (
