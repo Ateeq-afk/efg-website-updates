@@ -14,6 +14,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Footer } from "@/components/sections";
 import { NeuralConstellation, DotMatrixGrid } from "@/components/effects";
+import EventNavigation from "@/components/ui/EventNavigation";
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 const C = "#01BBF5";
@@ -455,7 +456,8 @@ const WHO_ATTEND_INDUSTRIES = [
 // ─── PAGE ─────────────────────────────────────────────────────────────────────
 export default function CyberFirstKuwait2026() {
   return (
-    <div>
+    <div style={{ background: "#050810" }}>
+      <EventNavigation />
       <HeroSection />
       <StatsBar />
       <Gallery />
