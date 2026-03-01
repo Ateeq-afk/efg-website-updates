@@ -1196,10 +1196,10 @@ function MarketContext() {
           }}
         >
           {[
-            { value: 43, suffix: "B", prefix: "$", label: "ICT Market 2030", highlight: true },
-            { value: 9, suffix: "B", prefix: "$", label: "AI Investment" },
-            { value: 800, suffix: "M", prefix: "$", label: "KOC Digital" },
-            { value: 50, suffix: "K+", prefix: "", label: "New Tech Jobs" },
+            { value: 43, suffix: "B", prefix: "$", label: "ICT Market 2030", highlight: true, icon: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" },
+            { value: 9, suffix: "B", prefix: "$", label: "AI Investment", icon: "M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" },
+            { value: 800, suffix: "M", prefix: "$", label: "KOC Digital", icon: "M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" },
+            { value: 50, suffix: "K+", prefix: "", label: "New Tech Jobs", icon: "M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" },
           ].map((stat, i) => (
             <motion.div
               key={stat.label}
@@ -1229,6 +1229,18 @@ function MarketContext() {
                 overflow: "hidden",
               }}
             >
+              {/* Corner icon decoration */}
+              <div className="absolute pointer-events-none" style={{ top: 12, right: 12, opacity: stat.highlight ? 0.4 : 0.15 }}>
+                <svg width={stat.highlight ? 28 : 22} height={stat.highlight ? 28 : 22} viewBox="0 0 24 24" fill="none" stroke={stat.highlight ? E_BRIGHT : "white"} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d={stat.icon} />
+                </svg>
+              </div>
+              {/* Subtle grid pattern */}
+              <div className="absolute inset-0 pointer-events-none" style={{ 
+                backgroundImage: `radial-gradient(${stat.highlight ? E : "white"}10 1px, transparent 1px)`,
+                backgroundSize: "16px 16px",
+                opacity: 0.3,
+              }} />
               {/* Highlight glow effect for main stat */}
               {stat.highlight && (
                 <div
