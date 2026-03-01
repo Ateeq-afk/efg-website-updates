@@ -483,8 +483,51 @@ function HeroSection() {
               lineHeight: 1.7,
             }}
           >
-            Turning Data & AI into regulated, profitable, and scalable solutions.
+            Kuwait&apos;s most exclusive gathering of Data & AI decision-makers. By invitation only.
           </motion.p>
+
+          {/* Exclusivity Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.7, ease: EASE }}
+            className="flex items-center gap-3 flex-wrap"
+            style={{ marginTop: 20 }}
+          >
+            <span
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 6,
+                padding: "6px 14px",
+                borderRadius: 50,
+                background: "rgba(196,163,74,0.12)",
+                border: "1px solid rgba(196,163,74,0.25)",
+              }}
+            >
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="#C4A34A" stroke="none">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+              </svg>
+              <span style={{ fontFamily: "var(--font-outfit)", fontSize: 10, fontWeight: 700, letterSpacing: "1px", textTransform: "uppercase", color: "#C4A34A" }}>
+                By Invitation Only
+              </span>
+            </span>
+            <span
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 6,
+                padding: "6px 14px",
+                borderRadius: 50,
+                background: `${E}10`,
+                border: `1px solid ${E}25`,
+              }}
+            >
+              <span style={{ fontFamily: "var(--font-outfit)", fontSize: 10, fontWeight: 600, color: E_BRIGHT }}>
+                Limited to 250 Senior Leaders
+              </span>
+            </span>
+          </motion.div>
 
           {/* CTAs */}
           <motion.div
@@ -492,10 +535,10 @@ function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.8, ease: EASE }}
             className="daik-hero-ctas flex flex-wrap gap-4"
-            style={{ marginTop: 32 }}
+            style={{ marginTop: 24 }}
           >
-            <HeroCTA primary href="#register">Reserve Your Seat</HeroCTA>
-            <HeroCTA href="#sponsors">Become a Sponsor</HeroCTA>
+            <HeroCTA primary href="#register">Request Invitation</HeroCTA>
+            <HeroCTA href="#sponsors">Sponsor Enquiry</HeroCTA>
           </motion.div>
         </div>
       </div>
@@ -515,31 +558,35 @@ function HeroSection() {
           gap: 24,
         }}
       >
-        {/* Left: Inaugural badge */}
+        {/* Left: Exclusivity badge */}
         <div className="daik-bar-badge flex items-center gap-3">
           <span className="relative flex h-3 w-3">
             <span
               className="absolute inline-flex h-full w-full rounded-full opacity-75 animate-ping"
-              style={{ background: E_BRIGHT, animationDuration: "2s" }}
+              style={{ background: "#C4A34A", animationDuration: "1.5s" }}
             />
-            <span className="relative inline-flex rounded-full h-3 w-3" style={{ background: E_BRIGHT }} />
+            <span className="relative inline-flex rounded-full h-3 w-3" style={{ background: "#C4A34A" }} />
           </span>
           <span
             style={{
               fontFamily: "var(--font-outfit)",
-              fontSize: 13,
-              fontWeight: 600,
-              letterSpacing: "2px",
+              fontSize: 12,
+              fontWeight: 700,
+              letterSpacing: "1.5px",
               textTransform: "uppercase",
-              color: E_BRIGHT,
+              color: "#C4A34A",
             }}
           >
-            Inaugural Edition
+            Applications Closing Soon
           </span>
         </div>
 
-        {/* Center: Countdown */}
-        <div className="daik-bar-countdown flex items-center gap-4">
+        {/* Center: Countdown with urgency label */}
+        <div className="daik-bar-countdown flex flex-col items-center gap-2">
+          <span style={{ fontFamily: "var(--font-outfit)", fontSize: 9, fontWeight: 600, letterSpacing: "1.5px", textTransform: "uppercase", color: "rgba(255,255,255,0.4)" }}>
+            Application Window Closes In
+          </span>
+          <div className="flex items-center gap-4">
           {[
             { v: cd.d, l: "Days" },
             { v: cd.h, l: "Hrs" },
@@ -593,6 +640,7 @@ function HeroSection() {
               )}
             </div>
           ))}
+          </div>
         </div>
 
         {/* Right: CTA */}
@@ -602,25 +650,21 @@ function HeroSection() {
           style={{
             padding: "14px 32px",
             borderRadius: 50,
-            background: `linear-gradient(135deg, ${E} 0%, ${E_BRIGHT} 100%)`,
+            background: `linear-gradient(135deg, #C4A34A 0%, #D4B85A 100%)`,
             fontFamily: "var(--font-outfit)",
             fontSize: 15,
             fontWeight: 600,
-            color: "white",
-            boxShadow: `0 4px 24px ${E}50`,
+            color: "#000",
+            boxShadow: `0 4px 24px rgba(196,163,74,0.4)`,
             display: "flex",
             alignItems: "center",
             gap: 8,
           }}
         >
-          <span className="relative flex h-2 w-2">
-            <span
-              className="absolute inline-flex h-full w-full rounded-full opacity-75 animate-ping"
-              style={{ background: "white", animationDuration: "1.5s" }}
-            />
-            <span className="relative inline-flex rounded-full h-2 w-2" style={{ background: "white" }} />
-          </span>
-          Register Now
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+            <path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4M10 17l5-5-5-5M13.8 12H3" />
+          </svg>
+          Apply Now
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" className="transition-transform group-hover:translate-x-1">
             <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
@@ -816,6 +860,27 @@ function StatsBar() {
           transition={{ duration: 0.6, ease: EASE }}
           style={{ textAlign: "center", marginBottom: "clamp(32px, 4vw, 48px)" }}
         >
+          {/* Exclusivity badge */}
+          <div className="flex items-center justify-center gap-2" style={{ marginBottom: 14 }}>
+            <span
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 6,
+                padding: "5px 12px",
+                borderRadius: 50,
+                background: "rgba(196,163,74,0.1)",
+                border: "1px solid rgba(196,163,74,0.2)",
+              }}
+            >
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="#C4A34A" stroke="none">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+              </svg>
+              <span style={{ fontFamily: "var(--font-outfit)", fontSize: 9, fontWeight: 700, letterSpacing: "1.5px", textTransform: "uppercase", color: "#C4A34A" }}>
+                Exclusive · Curated · Invite-Only
+              </span>
+            </span>
+          </div>
           <span
             style={{
               fontFamily: "var(--font-outfit)",
@@ -838,7 +903,7 @@ function StatsBar() {
               letterSpacing: "-0.5px",
             }}
           >
-            One Day. One Room. All of Kuwait&apos;s Data & AI Leadership.
+            One Day. One Room. Kuwait&apos;s Elite Data & AI Leaders.
           </h2>
         </motion.div>
 
@@ -904,7 +969,7 @@ function StatsBar() {
                 margin: 0,
               }}
             >
-              Decision Makers
+              Vetted Decision Makers
             </p>
             <p
               style={{
@@ -916,7 +981,7 @@ function StatsBar() {
                 lineHeight: 1.5,
               }}
             >
-              Kuwait&apos;s senior data & AI leadership — CDOs, CTOs, CIOs — together in one room.
+              Hand-selected CDOs, CTOs, CIOs & government strategists. Every attendee personally vetted.
             </p>
           </motion.div>
 
@@ -1335,6 +1400,9 @@ function FocusAreas() {
           >
             12 Strategic Focus Areas
           </h2>
+          <p style={{ fontFamily: "var(--font-outfit)", fontSize: 14, fontWeight: 400, color: "rgba(255,255,255,0.4)", marginTop: 10 }}>
+            Curated agenda topics shaped by Kuwait&apos;s top CDOs and CTOs
+          </p>
         </motion.div>
 
         {/* Console layout */}
@@ -1648,9 +1716,9 @@ function HighlightsGrid() {
                 margin: "0 0 20px",
               }}
             >
-              Why You Should
+              Why Leaders Are
               <br />
-              Be There
+              <span style={{ color: "#C4A34A" }}>Fighting</span> to Get In
             </h2>
             <p
               style={{
@@ -1663,8 +1731,8 @@ function HighlightsGrid() {
                 margin: 0,
               }}
             >
-              Not another tech conference. A purpose-built summit for the leaders
-              turning Data &amp; AI into Kuwait&rsquo;s competitive advantage.
+              This isn&apos;t a conference. It&apos;s Kuwait&apos;s most exclusive gathering of Data &amp; AI 
+              decision-makers — where deals close and strategies align.
             </p>
           </motion.div>
 
@@ -1983,8 +2051,28 @@ function AgendaTimeline() {
           <p style={{ fontFamily: "var(--font-outfit)", fontSize: 14, fontWeight: 400, color: "rgba(255,255,255,0.4)", marginTop: 12 }}>
             4 panels · 2 keynotes · 8 presentations · 1 awards ceremony
           </p>
-          <p style={{ fontFamily: "var(--font-outfit)", fontSize: 12, fontStyle: "italic", color: "#353535", marginTop: 8 }}>
-            Draft agenda — subject to refinement
+          <div className="flex items-center justify-center gap-2" style={{ marginTop: 12 }}>
+            <span
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 6,
+                padding: "5px 12px",
+                borderRadius: 50,
+                background: "rgba(196,163,74,0.08)",
+                border: "1px solid rgba(196,163,74,0.15)",
+              }}
+            >
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#C4A34A" strokeWidth="2" strokeLinecap="round">
+                <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              </svg>
+              <span style={{ fontFamily: "var(--font-outfit)", fontSize: 9, fontWeight: 600, letterSpacing: "1px", textTransform: "uppercase", color: "#C4A34A" }}>
+                Closed-Door Sessions · Chatham House Rules
+              </span>
+            </span>
+          </div>
+          <p style={{ fontFamily: "var(--font-outfit)", fontSize: 11, fontStyle: "italic", color: "#303030", marginTop: 10 }}>
+            Full agenda shared with approved applicants only
           </p>
         </motion.div>
 
@@ -2341,8 +2429,26 @@ function AtmosphereDivider() {
             lineHeight: 1.25,
           }}
         >
-          Where Kuwait&rsquo;s data and AI leaders shape the future of <span style={{ color: E_BRIGHT }}>intelligent governance.</span>
+          The room where Kuwait&rsquo;s most <span style={{ color: "#C4A34A" }}>powerful decisions</span> in Data & AI get made.
         </motion.h2>
+        
+        {/* Exclusivity tagline */}
+        <motion.p
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+          style={{
+            fontFamily: "var(--font-outfit)",
+            fontSize: 14,
+            fontWeight: 500,
+            color: "rgba(255,255,255,0.4)",
+            marginTop: 16,
+            fontStyle: "italic",
+          }}
+        >
+          &ldquo;If you&apos;re not in the room, you&apos;re not in the conversation.&rdquo;
+        </motion.p>
         
         {/* Stats row */}
         <motion.div
@@ -2351,15 +2457,15 @@ function AtmosphereDivider() {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
           className="flex items-center gap-8"
-          style={{ marginTop: 32 }}
+          style={{ marginTop: 28 }}
         >
           {[
-            { value: "250+", label: "Leaders" },
-            { value: "1", label: "Day" },
-            { value: "∞", label: "Impact" },
+            { value: "250", label: "Vetted Leaders" },
+            { value: "68", label: "Spots Left" },
+            { value: "1", label: "Exclusive Day" },
           ].map((s, i) => (
-            <div key={s.label} className="text-center" style={{ opacity: i === 2 ? 0.7 : 1 }}>
-              <span style={{ fontFamily: "var(--font-display)", fontSize: 28, fontWeight: 800, color: E_BRIGHT }}>
+            <div key={s.label} className="text-center" style={{ opacity: i === 1 ? 1 : 0.8 }}>
+              <span style={{ fontFamily: "var(--font-display)", fontSize: 28, fontWeight: 800, color: i === 1 ? "#C4A34A" : E_BRIGHT }}>
                 {s.value}
               </span>
               <span style={{ fontFamily: "var(--font-outfit)", fontSize: 10, fontWeight: 500, color: "rgba(255,255,255,0.4)", display: "block", marginTop: 4, letterSpacing: "1px", textTransform: "uppercase" }}>
@@ -2416,7 +2522,7 @@ function SpeakersSection() {
               Who&rsquo;s Speaking
             </h2>
             <p style={{ fontFamily: "var(--font-outfit)", fontSize: 14, fontWeight: 400, color: "rgba(255,255,255,0.45)", marginTop: 10, maxWidth: 400 }}>
-              Industry leaders shaping Kuwait&apos;s data and AI landscape
+              The calibre of voices you&apos;ll hear — and network with — nowhere else
             </p>
           </div>
           <motion.span 
@@ -3297,15 +3403,37 @@ function WhoShouldAttend() {
           transition={{ duration: 0.7, ease: EASE }}
           style={{ marginBottom: 32 }}
         >
-          <div className="flex items-center gap-3" style={{ marginBottom: 16 }}>
+          <div className="flex items-center gap-3 flex-wrap" style={{ marginBottom: 16 }}>
             <span style={{ width: 30, height: 1, background: E }} />
             <span style={{ fontFamily: "var(--font-outfit)", fontSize: 11, fontWeight: 600, letterSpacing: "2.5px", textTransform: "uppercase", color: E }}>
-              Your Peers
+              The Guest List
+            </span>
+            <span
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 5,
+                padding: "4px 10px",
+                borderRadius: 50,
+                background: "rgba(196,163,74,0.1)",
+                border: "1px solid rgba(196,163,74,0.2)",
+                marginLeft: 8,
+              }}
+            >
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="#C4A34A" stroke="none">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+              </svg>
+              <span style={{ fontFamily: "var(--font-outfit)", fontSize: 9, fontWeight: 700, letterSpacing: "1px", textTransform: "uppercase", color: "#C4A34A" }}>
+                C-Level Only
+              </span>
             </span>
           </div>
           <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(28px,3.8vw,48px)", letterSpacing: "-1.5px", color: "white", lineHeight: 1.08, margin: 0 }}>
-            Who Should Attend
+            Who We&apos;re Looking For
           </h2>
+          <p style={{ fontFamily: "var(--font-outfit)", fontSize: 14, fontWeight: 400, color: "rgba(255,255,255,0.45)", marginTop: 10 }}>
+            Applications accepted from senior decision-makers only
+          </p>
         </motion.div>
 
         {/* ── Split Layout: 55/45 ── */}
@@ -3526,15 +3654,18 @@ function WhyAttend() {
           style={{ textAlign: "center", marginBottom: 32 }}
         >
           <div className="flex items-center justify-center gap-3" style={{ marginBottom: 12 }}>
-            <span style={{ width: 30, height: 1, background: E }} />
+            <span style={{ width: 30, height: 1, background: `linear-gradient(90deg, transparent, ${E})` }} />
             <span style={{ fontFamily: "var(--font-outfit)", fontSize: 11, fontWeight: 600, letterSpacing: "2.5px", textTransform: "uppercase", color: E }}>
-              Why Attend
+              Why Leaders Apply
             </span>
-            <span style={{ width: 30, height: 1, background: E }} />
+            <span style={{ width: 30, height: 1, background: `linear-gradient(90deg, ${E}, transparent)` }} />
           </div>
           <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(30px, 3.5vw, 48px)", letterSpacing: "-1.5px", color: "var(--white)", lineHeight: 1.1, margin: 0 }}>
-            6 Reasons to Join Us
+            6 Reasons to <span style={{ color: "#C4A34A" }}>Fight</span> for a Seat
           </h2>
+          <p style={{ fontFamily: "var(--font-outfit)", fontSize: 14, fontWeight: 400, color: "rgba(255,255,255,0.4)", marginTop: 10 }}>
+            What makes this gathering worth the application process
+          </p>
         </motion.div>
 
         {/* Console container */}
@@ -3754,9 +3885,33 @@ function SplitCTA() {
           transition={{ duration: 0.7, ease: EASE }}
           style={{ textAlign: "center", marginBottom: 32 }}
         >
+          {/* Exclusivity badge */}
+          <div className="flex items-center justify-center gap-2" style={{ marginBottom: 16 }}>
+            <span
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                padding: "8px 18px",
+                borderRadius: 50,
+                background: "rgba(196,163,74,0.12)",
+                border: "1px solid rgba(196,163,74,0.25)",
+              }}
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C4A34A" strokeWidth="2" strokeLinecap="round">
+                <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              </svg>
+              <span style={{ fontFamily: "var(--font-outfit)", fontSize: 11, fontWeight: 700, letterSpacing: "1px", textTransform: "uppercase", color: "#C4A34A" }}>
+                Approval Required · Limited Seats
+              </span>
+            </span>
+          </div>
           <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(30px, 3.5vw, 48px)", letterSpacing: "-1.5px", color: "var(--white)", lineHeight: 1.1, margin: 0 }}>
-            Be Part of Data & AI First Kuwait
+            Request Your Invitation
           </h2>
+          <p style={{ fontFamily: "var(--font-outfit)", fontSize: 15, fontWeight: 400, color: "rgba(255,255,255,0.5)", marginTop: 12, maxWidth: 500, margin: "12px auto 0" }}>
+            All applications are reviewed by our committee. Senior leaders only.
+          </p>
         </motion.div>
 
         {/* Two cards */}
@@ -3784,8 +3939,8 @@ function SplitCTA() {
             {/* Top glow accent */}
             <div className="absolute top-0 left-1/4 right-1/4 h-px pointer-events-none" style={{ background: `linear-gradient(90deg, transparent, ${EFG_ORANGE}50, transparent)` }} />
             
-            {/* Early Bird badge */}
-            <div className="flex items-center gap-2" style={{ marginBottom: 16 }}>
+            {/* Applications Closing badge */}
+            <div className="flex items-center gap-2 flex-wrap" style={{ marginBottom: 16 }}>
               <span
                 style={{
                   display: "inline-flex",
@@ -3793,38 +3948,48 @@ function SplitCTA() {
                   gap: 6,
                   padding: "5px 14px",
                   borderRadius: 50,
-                  background: `linear-gradient(135deg, ${EFG_ORANGE}20 0%, ${EFG_ORANGE}10 100%)`,
-                  border: `1px solid ${EFG_ORANGE}30`,
+                  background: "linear-gradient(135deg, rgba(196,163,74,0.15) 0%, rgba(196,163,74,0.08) 100%)",
+                  border: "1px solid rgba(196,163,74,0.3)",
                 }}
               >
                 <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full rounded-full opacity-75 animate-ping" style={{ background: EFG_ORANGE, animationDuration: "2s" }} />
-                  <span className="relative inline-flex rounded-full h-2 w-2" style={{ background: EFG_ORANGE }} />
+                  <span className="absolute inline-flex h-full w-full rounded-full opacity-75 animate-ping" style={{ background: "#C4A34A", animationDuration: "1.5s" }} />
+                  <span className="relative inline-flex rounded-full h-2 w-2" style={{ background: "#C4A34A" }} />
                 </span>
-                <span style={{ fontFamily: "var(--font-outfit)", fontSize: 10, fontWeight: 700, letterSpacing: "1.5px", textTransform: "uppercase", color: EFG_ORANGE }}>
-                  Early Bird Open
+                <span style={{ fontFamily: "var(--font-outfit)", fontSize: 10, fontWeight: 700, letterSpacing: "1.5px", textTransform: "uppercase", color: "#C4A34A" }}>
+                  Applications Closing Soon
                 </span>
               </span>
             </div>
 
             <span style={{ fontFamily: "var(--font-outfit)", fontSize: 10, fontWeight: 600, letterSpacing: "2.5px", textTransform: "uppercase", color: `${EFG_ORANGE}90` }}>
-              For Delegates
+              For Senior Leaders
             </span>
             <h3 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(24px, 2.8vw, 32px)", fontWeight: 800, color: "var(--white)", margin: "10px 0 0", letterSpacing: "-0.5px" }}>
-              Reserve Your Seat
+              Request Your Invitation
             </h3>
             <p style={{ fontFamily: "var(--font-outfit)", fontSize: 14, fontWeight: 400, color: "#808080", margin: "12px 0 0", lineHeight: 1.7, maxWidth: 380 }}>
-              Join 250+ senior leaders for a full-day summit on May 18, 2026 in Kuwait City.
+              Submit your application to join Kuwait&apos;s most exclusive Data & AI gathering.
             </p>
 
-            {/* Limited seats badge */}
-            <div className="flex items-center gap-2" style={{ marginTop: 16 }}>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={EFG_ORANGE} strokeWidth="2" strokeLinecap="round">
-                <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <span style={{ fontFamily: "var(--font-outfit)", fontSize: 12, fontWeight: 500, color: `${EFG_ORANGE}90` }}>
-                Limited to 250 seats — 73% sold
-              </span>
+            {/* Vetting process badge */}
+            <div className="flex flex-col gap-2" style={{ marginTop: 16 }}>
+              <div className="flex items-center gap-2">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C4A34A" strokeWidth="2" strokeLinecap="round">
+                  <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+                <span style={{ fontFamily: "var(--font-outfit)", fontSize: 12, fontWeight: 500, color: "#C4A34A" }}>
+                  Vetting process: 48-hour approval
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={EFG_ORANGE} strokeWidth="2" strokeLinecap="round">
+                  <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <span style={{ fontFamily: "var(--font-outfit)", fontSize: 12, fontWeight: 500, color: `${EFG_ORANGE}90` }}>
+                  Only 68 spots remaining of 250
+                </span>
+              </div>
             </div>
 
             {/* Countdown */}
@@ -3876,15 +4041,18 @@ function SplitCTA() {
                 marginTop: 28,
                 padding: "16px 36px",
                 borderRadius: 50,
-                background: `linear-gradient(135deg, ${EFG_ORANGE} 0%, ${EFG_ORANGE_BRIGHT} 100%)`,
+                background: `linear-gradient(135deg, #C4A34A 0%, #D4B85A 100%)`,
                 fontFamily: "var(--font-outfit)",
                 fontSize: 15,
-                fontWeight: 600,
-                color: "white",
-                boxShadow: `0 6px 28px ${EFG_ORANGE}40`,
+                fontWeight: 700,
+                color: "#000",
+                boxShadow: `0 6px 28px rgba(196,163,74,0.35)`,
               }}
             >
-              <span>Register Now</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4M10 17l5-5-5-5M13.8 12H3" />
+              </svg>
+              <span>Submit Application</span>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" className="transition-transform group-hover:translate-x-1">
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
