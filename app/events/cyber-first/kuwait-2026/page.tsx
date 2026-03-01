@@ -467,6 +467,7 @@ export default function CyberFirstKuwait2026() {
       <WhoShouldAttend />
       <AwardsSection />
       <SplitCTA />
+      <ContactSection />
       <Venue />
       <Footer />
     </div>
@@ -4122,6 +4123,186 @@ function SplitCTA() {
           .cfk-split-cta {
             grid-template-columns: 1fr !important;
           }
+        }
+      `}</style>
+    </section>
+  );
+}
+
+// ─── Contact Section ──────────────────────────────────────────────────────────
+const S3_TEAM = "https://efg-final.s3.eu-north-1.amazonaws.com/about-us-photos";
+
+const CFK_CONTACTS = {
+  speaking: {
+    name: "Harini Sudhakar",
+    role: "Producer",
+    phone: "+971 50 500 3341",
+    email: "harini@eventsfirstgroup.com",
+    photo: `${S3_TEAM}/Harini.jpg`,
+  },
+  sponsorship: [
+    {
+      name: "Mohammed Hassan",
+      role: "Partnership Manager",
+      phone: "+971 56 398 6565",
+      email: "hassan@eventsfirstgroup.com",
+      photo: null,
+    },
+    {
+      name: "Danish",
+      role: "Partnership Manager",
+      phone: "+971 50 987 6543",
+      email: "danish@eventsfirstgroup.com",
+      photo: `${S3_TEAM}/Danish.jpg`,
+    },
+  ],
+};
+
+function ContactSection() {
+  const ref = useRef<HTMLElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+
+  return (
+    <section
+      ref={ref}
+      style={{
+        background: "linear-gradient(180deg, #020810 0%, #051220 100%)",
+        padding: "clamp(48px, 6vw, 80px) 0",
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
+      <div style={{ maxWidth: 1000, margin: "0 auto", padding: "0 clamp(20px, 4vw, 60px)" }}>
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, ease: EASE }}
+          style={{ textAlign: "center", marginBottom: 48 }}
+        >
+          <div className="flex items-center justify-center gap-3">
+            <span style={{ width: 30, height: 1, background: C }} />
+            <span style={{ fontFamily: "var(--font-outfit)", fontSize: 11, fontWeight: 600, letterSpacing: "2.5px", textTransform: "uppercase", color: C_BRIGHT }}>
+              Get in Touch
+            </span>
+            <span style={{ width: 30, height: 1, background: C }} />
+          </div>
+          <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(28px, 3.5vw, 44px)", letterSpacing: "-1.5px", color: "white", lineHeight: 1.1, margin: "16px 0 0" }}>
+            Contact Us
+          </h2>
+        </motion.div>
+
+        {/* Contact Grid */}
+        <div
+          className="cfk-contact-grid"
+          style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}
+        >
+          {/* Speaking Enquiries */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.1, ease: EASE }}
+            style={{
+              padding: "32px",
+              borderRadius: 20,
+              background: `linear-gradient(145deg, ${C}08, rgba(255,255,255,0.02))`,
+              border: `1px solid ${C}20`,
+            }}
+          >
+            <p style={{ fontFamily: "var(--font-outfit)", fontSize: 10, fontWeight: 600, letterSpacing: "2px", textTransform: "uppercase", color: C_BRIGHT, marginBottom: 20 }}>
+              For Speaking Enquiries
+            </p>
+            <div className="flex items-center gap-4">
+              <div
+                style={{
+                  width: 72,
+                  height: 72,
+                  borderRadius: "50%",
+                  background: `linear-gradient(135deg, ${C}30, ${C}10)`,
+                  border: `2px solid ${C}40`,
+                  overflow: "hidden",
+                  flexShrink: 0,
+                }}
+              >
+                {CFK_CONTACTS.speaking.photo && (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={CFK_CONTACTS.speaking.photo} alt={CFK_CONTACTS.speaking.name} className="w-full h-full object-cover" />
+                )}
+              </div>
+              <div>
+                <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: 18, color: "white", margin: "0 0 2px" }}>
+                  {CFK_CONTACTS.speaking.name}
+                </h3>
+                <p style={{ fontFamily: "var(--font-outfit)", fontSize: 12, color: "rgba(255,255,255,0.5)", margin: "0 0 8px" }}>
+                  {CFK_CONTACTS.speaking.role}
+                </p>
+                <a href={`mailto:${CFK_CONTACTS.speaking.email}`} style={{ fontFamily: "var(--font-outfit)", fontSize: 13, color: C_BRIGHT, textDecoration: "none" }}>
+                  {CFK_CONTACTS.speaking.email}
+                </a>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Sponsorship Enquiries */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.2, ease: EASE }}
+            style={{
+              padding: "32px",
+              borderRadius: 20,
+              background: `linear-gradient(145deg, ${C}08, rgba(255,255,255,0.02))`,
+              border: `1px solid ${C}20`,
+            }}
+          >
+            <p style={{ fontFamily: "var(--font-outfit)", fontSize: 10, fontWeight: 600, letterSpacing: "2px", textTransform: "uppercase", color: C_BRIGHT, marginBottom: 20 }}>
+              For Sponsorship Enquiries
+            </p>
+            <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+              {CFK_CONTACTS.sponsorship.map((person) => (
+                <div key={person.name} className="flex items-center gap-3">
+                  <div
+                    style={{
+                      width: 48,
+                      height: 48,
+                      borderRadius: "50%",
+                      background: `linear-gradient(135deg, ${C}30, ${C}10)`,
+                      border: `1px solid ${C}30`,
+                      overflow: "hidden",
+                      flexShrink: 0,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    {person.photo ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img src={person.photo} alt={person.name} className="w-full h-full object-cover" />
+                    ) : (
+                      <span style={{ fontFamily: "var(--font-outfit)", fontSize: 16, fontWeight: 600, color: C_BRIGHT }}>
+                        {person.name.charAt(0)}
+                      </span>
+                    )}
+                  </div>
+                  <div>
+                    <h4 style={{ fontFamily: "var(--font-outfit)", fontWeight: 600, fontSize: 14, color: "white", margin: 0 }}>
+                      {person.name}
+                    </h4>
+                    <a href={`mailto:${person.email}`} style={{ fontFamily: "var(--font-outfit)", fontSize: 12, color: "rgba(255,255,255,0.5)", textDecoration: "none" }}>
+                      {person.email}
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Mobile responsive */}
+      <style jsx global>{`
+        @media (max-width: 768px) {
+          .cfk-contact-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
     </section>
