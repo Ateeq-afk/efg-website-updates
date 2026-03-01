@@ -14,6 +14,7 @@ const EVENT_CONFIGS: Record<string, {
   date: string;
   location: string;
   logo?: string;
+  logoFilter?: string;
   navLinks: { href: string; label: string }[];
 }> = {
   "/events/data-ai-first/kuwait-2026": {
@@ -24,6 +25,7 @@ const EVENT_CONFIGS: Record<string, {
     date: "18 May 2026",
     location: "Kuwait City",
     logo: "/logos/data-ai-first-kuwait-logo.png",
+    logoFilter: "brightness(0) invert(1)", // Make logo white
     navLinks: [
       { href: "#overview", label: "Overview" },
       { href: "#speakers", label: "Speakers" },
@@ -77,7 +79,7 @@ export default function EventNavigation() {
 
   if (!config) return null;
 
-  const { name, shortName, color, colorBright, date, location, logo, navLinks } = config;
+  const { name, shortName, color, colorBright, date, location, logo, logoFilter, navLinks } = config;
 
   return (
     <>
@@ -107,7 +109,7 @@ export default function EventNavigation() {
                 style={{ 
                   height: 80, 
                   width: "auto",
-                  // No filter - logos should be provided in correct colors for dark bg
+                  filter: logoFilter || "none",
                 }} 
               />
             ) : (
