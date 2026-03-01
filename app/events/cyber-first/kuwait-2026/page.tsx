@@ -1224,10 +1224,10 @@ function MarketContext() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const stats = [
-    { value: 1, suffix: "B+", unit: "USD", label: "Kuwait cyber market projected by 2030", note: "Exceeding USD 1 billion" },
-    { value: 11, suffix: "%", unit: "CAGR", label: "Market growth rate fueled by Vision 2035", note: "Strong double-digit expansion" },
-    { value: 25, suffix: "%", unit: "YoY", label: "Annual cyber workforce demand growth", note: "Through 2030" },
-    { value: 5, suffix: "M+", unit: "USD", label: "Potential breach cost per incident", note: "Critical sectors by 2030" },
+    { value: 1, suffix: "B+", unit: "USD", label: "Kuwait Cyber Market by 2030", note: "Exceeding USD 1 billion", icon: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6", badge: "Vision 2035" },
+    { value: 11, suffix: "%", unit: "CAGR", label: "Market Growth Rate", note: "Strong double-digit expansion", icon: "M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z", badge: "By 2030" },
+    { value: 25, suffix: "%", unit: "YoY", label: "Cyber Workforce Demand", note: "Annual growth through 2030", icon: "M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75", badge: "+25%" },
+    { value: 5, suffix: "M+", unit: "USD", label: "Average Breach Cost", note: "Critical sectors by 2030", icon: "M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z", badge: "Risk" },
   ];
   return (
     <section
@@ -1319,7 +1319,7 @@ function MarketCard({
   delay,
   inView,
 }: {
-  stat: { value: number; suffix: string; unit: string; label: string; note: string };
+  stat: { value: number; suffix: string; unit: string; label: string; note: string; icon?: string; badge?: string };
   delay: number;
   inView: boolean;
 }) {
@@ -1344,10 +1344,10 @@ function MarketCard({
         onMouseLeave={() => setHovered(false)}
         onMouseMove={handleMouseMove}
         style={{
-          padding: "36px 30px",
+          padding: "28px 24px 24px",
           borderRadius: 20,
-          background: hovered ? `${C}08` : "rgba(255,255,255,0.025)",
-          border: `1px solid ${hovered ? `${C}30` : `${C}18`}`,
+          background: hovered ? `${C}08` : `linear-gradient(145deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01))`,
+          border: `1px solid ${hovered ? `${C}30` : `${C}15`}`,
           position: "relative",
           overflow: "hidden",
           height: "100%",
@@ -1367,6 +1367,7 @@ function MarketCard({
             opacity: hovered ? 1 : 0,
           }}
         />
+        {/* Top accent line */}
         <div
           style={{
             position: "absolute",
@@ -1377,6 +1378,43 @@ function MarketCard({
             background: `linear-gradient(90deg, ${C} 0%, ${C}50 70%, transparent 100%)`,
           }}
         />
+        
+        {/* Top row: Icon + Badge */}
+        <div className="flex items-center justify-between" style={{ marginBottom: 16, position: "relative", zIndex: 1 }}>
+          {stat.icon && (
+            <div style={{
+              width: 40,
+              height: 40,
+              borderRadius: 12,
+              background: `${C}15`,
+              border: `1px solid ${C}30`,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={C_BRIGHT} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d={stat.icon} />
+              </svg>
+            </div>
+          )}
+          {stat.badge && (
+            <span style={{
+              padding: "4px 10px",
+              borderRadius: 20,
+              background: `${C}20`,
+              border: `1px solid ${C}30`,
+              fontFamily: "var(--font-outfit)",
+              fontSize: 9,
+              fontWeight: 600,
+              color: C_BRIGHT,
+              letterSpacing: "0.5px",
+            }}>
+              {stat.badge}
+            </span>
+          )}
+        </div>
+
+        {/* Unit badge */}
         <div
           style={{
             position: "absolute",
@@ -1386,20 +1424,23 @@ function MarketCard({
             fontSize: 9,
             fontWeight: 700,
             letterSpacing: "1.5px",
-            color: `${C}80`,
+            color: `${C}60`,
+            display: stat.badge ? "none" : "block",
           }}
         >
           {stat.unit}
         </div>
+
+        {/* Number */}
         <div
           style={{
             fontFamily: "var(--font-display)",
-            fontSize: "clamp(38px,4.5vw,56px)",
+            fontSize: "clamp(36px,4vw,48px)",
             fontWeight: 900,
-            color: C,
+            color: C_BRIGHT,
             letterSpacing: "-2px",
             lineHeight: 1,
-            marginBottom: 14,
+            marginBottom: 10,
             position: "relative",
           }}
         >
@@ -1418,9 +1459,19 @@ function MarketCard({
         >
           {stat.label}
         </div>
-        <div style={{ fontFamily: "var(--font-outfit)", fontSize: 11, color: "rgba(255,255,255,0.22)", position: "relative" }}>
+        <div style={{ fontFamily: "var(--font-outfit)", fontSize: 11, color: "rgba(255,255,255,0.35)", position: "relative" }}>
           {stat.note}
         </div>
+        {/* Bottom accent line */}
+        <div style={{
+          position: "absolute",
+          bottom: 0,
+          left: 24,
+          right: 24,
+          height: 2,
+          background: `linear-gradient(90deg, transparent, ${C}40, transparent)`,
+          borderRadius: 1,
+        }} />
       </motion.div>
     </Tilt>
   );
@@ -2509,25 +2560,25 @@ function WhatToExpect() {
       icon: "M12 3a9 9 0 110 18 9 9 0 010-18zm0 5a4 4 0 100 8 4 4 0 000-8zm0-3v2m0 14v2",
       title: "4 High-Impact Panel Discussions",
       desc: "National Cyber Resilience, AI-Driven Defense, OT/ICS Protection, and Data Privacy Governance.",
-      image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80",
+      image: `${WP}/2024/12/Cyber-First-Series-Pictures-and-Sponsors-28.jpg`,
     },
     {
       icon: "M2 3h20v14H2V3zm6 18h8m-8-4h8",
       title: "Live CTF / Hackathon",
       desc: "Teams compete in real-time capture-the-flag scenarios — tested against simulated threat environments.",
-      image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&q=80",
+      image: `${WP}/2024/12/Cyber-First-Series-Pictures-and-Sponsors-29.jpg`,
     },
     {
       icon: "M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z",
       title: "Cyber Excellence Awards",
-      desc: "Recognising outstanding contributions to Kuwait\u2019s cybersecurity ecosystem across government and enterprise.",
-      image: "https://images.unsplash.com/photo-1531545514256-b1400bc00f31?w=600&q=80",
+      desc: "Recognising outstanding contributions to Kuwait's cybersecurity ecosystem across government and enterprise.",
+      image: `${WP}/2024/12/Cyber-First-Series-Pictures-and-Sponsors-30.jpg`,
     },
     {
       icon: "M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 7a4 4 0 100 8 4 4 0 000-8zm14 14v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75",
       title: "Executive Networking",
       desc: "Curated roundtables connecting CISOs and decision-makers across banking, oil & gas, government, and telecom.",
-      image: "https://images.unsplash.com/photo-1511578314322-379afb476865?w=600&q=80",
+      image: `${WP}/2024/12/Cyber-First-Series-Pictures-and-Sponsors-28.jpg`,
     },
   ];
   return (
