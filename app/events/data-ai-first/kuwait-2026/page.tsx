@@ -4015,9 +4015,10 @@ function PastEventsGallery() {
 // ═══════════════════════════════════════════════════════════════════════════════
 
 const SPONSOR_TIERS = [
-  { tier: "Patronage Partner", slots: 1, color: GOLD },
-  { tier: "Knowledge Partners", slots: 2, color: E_BRIGHT },
-  { tier: "Supporting Partners", slots: 4, color: "#808080" },
+  { tier: "Gold Partner", slots: 1, color: GOLD },
+  { tier: "Associate Partners", slots: 2, color: E_BRIGHT },
+  { tier: "Panel Partners", slots: 3, color: "#A78BFA" },
+  { tier: "Strategic Partners", slots: 4, color: "#808080" },
 ];
 
 function SponsorsSection() {
