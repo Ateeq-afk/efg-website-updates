@@ -273,52 +273,47 @@ const GALLERY: {
 
 const FOCUS_AREAS = [
   {
-    title: "National Cyber Resilience & Digital Sovereignty",
-    desc: "Building sovereign cyber capabilities and national frameworks to protect critical digital infrastructure.",
+    title: "Cyber Leadership & Governance",
+    desc: "Elevating cybersecurity as a strategic business and national governance priority, strengthening regulatory alignment, executive accountability, and enterprise cyber risk frameworks.",
     icon: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z",
     wide: true,
   },
   {
-    title: "AI-Driven Threat Detection & Response",
-    desc: "Leveraging machine learning and generative AI to identify, predict, and neutralize threats in real time.",
+    title: "AI & Emerging Threat Landscape",
+    desc: "Addressing how artificial intelligence is reshaping cyber threats and defence strategies while enabling secure adoption of AI-driven technologies across enterprise and government ecosystems.",
     icon: "M12 2a4 4 0 014 4v1a2 2 0 012 2v1a2 2 0 01-2 2H8a2 2 0 01-2-2V9a2 2 0 012-2V6a4 4 0 014-4zM9 18h6M10 22h4",
   },
   {
     title: "OT & Critical Infrastructure Security",
-    desc: "Securing industrial control systems, SCADA networks, and energy grids against nation-state threats.",
+    desc: "Strengthening protection of industrial control systems, utilities, energy infrastructure, and smart city platforms against targeted cyber attacks and operational disruptions.",
     icon: "M2 20h20M4 20V10l8-6 8 6v10M9 20v-4a3 3 0 016 0v4",
   },
   {
-    title: "Regulatory Compliance & Risk Oversight",
-    desc: "Navigating Kuwait's evolving regulatory landscape, GCC compliance mandates, and global standards.",
-    icon: "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2M9 14l2 2 4-4",
+    title: "Banking & Financial Cyber Resilience",
+    desc: "Enhancing resilience across digital banking, fintech innovation, fraud prevention, identity security, and regulatory compliance under evolving financial sector frameworks.",
+    icon: "M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z",
     wide: true,
   },
   {
-    title: "Cyber Workforce Development",
-    desc: "Closing the skills gap through training, certification programs, and next-gen talent pipelines.",
-    icon: "M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75",
-  },
-  {
-    title: "Zero Trust & Cloud Security",
-    desc: "Implementing identity-centric architectures and securing multi-cloud environments at scale.",
-    icon: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10zM12 8v4M12 16h.01",
-  },
-  {
-    title: "Incident Response & Business Continuity",
-    desc: "Preparing organizations with playbooks, tabletop exercises, and rapid recovery strategies.",
-    icon: "M13 2L3 14h9l-1 8 10-12h-9l1-8z",
-    wide: true,
-  },
-  {
-    title: "Supply Chain Risk Management",
-    desc: "Addressing third-party vulnerabilities and building resilient digital supply chain ecosystems.",
-    icon: "M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71",
-  },
-  {
-    title: "Data Protection & Privacy Governance",
-    desc: "Implementing robust data governance frameworks aligned with regional and international privacy standards.",
+    title: "Data Protection, Privacy & Digital Trust",
+    desc: "Advancing data sovereignty, regulatory compliance, privacy governance, and secure cross-border data management to build trusted digital ecosystems.",
     icon: "M12 1a3 3 0 00-3 3v4a3 3 0 006 0V4a3 3 0 00-3-3zM19 10v2a7 7 0 01-14 0v-2M5 21h14M8 21v-4M16 21v-4",
+  },
+  {
+    title: "Threat Intelligence & Incident Response",
+    desc: "Advancing proactive threat detection, intelligence sharing, and rapid incident response capabilities to minimize breach impact and accelerate recovery.",
+    icon: "M13 2L3 14h9l-1 8 10-12h-9l1-8z",
+  },
+  {
+    title: "Securing Digital Transformation",
+    desc: "Ensuring cybersecurity resilience across smart infrastructure, cloud transformation, and emerging digital technologies aligned with Kuwait Vision 2035.",
+    icon: "M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z",
+    wide: true,
+  },
+  {
+    title: "Regulatory Compliance & Risk Frameworks",
+    desc: "Navigating Kuwait's evolving regulatory landscape including CBK's Cyber & Operational Resilience Framework (CORF), GCC mandates, and global standards.",
+    icon: "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2M9 14l2 2 4-4",
   },
 ];
 
@@ -1466,7 +1461,7 @@ function FocusAreas() {
               margin: "16px 0 0",
             }}
           >
-            9 Focus Areas. One Mission.
+            8 Strategic Focus Areas
           </h2>
           <p
             style={{
