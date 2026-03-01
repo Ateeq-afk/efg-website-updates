@@ -488,7 +488,7 @@ function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.8, ease: EASE }}
-            className="flex flex-wrap gap-4"
+            className="daik-hero-ctas flex flex-wrap gap-4"
             style={{ marginTop: 32 }}
           >
             <HeroCTA primary href="#register">Reserve Your Seat</HeroCTA>
@@ -616,16 +616,62 @@ function HeroSection() {
           .daik-bottom-bar {
             flex-direction: column !important;
             gap: 16px !important;
-            padding: 20px 24px !important;
+            padding: 16px 20px !important;
             text-align: center;
           }
           .daik-bar-badge { justify-content: center; }
-          .daik-bar-countdown { justify-content: center; }
-          .daik-bar-cta { width: 100%; text-align: center; padding: 16px 32px !important; }
+          .daik-bar-countdown { 
+            justify-content: center;
+            gap: 12px !important;
+          }
+          .daik-bar-countdown > div > div > span:first-child {
+            font-size: 24px !important;
+          }
+          .daik-bar-cta { 
+            width: 100%; 
+            text-align: center; 
+            padding: 14px 28px !important;
+            font-size: 14px !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .daik-bottom-bar {
+            padding: 14px 16px !important;
+          }
+          .daik-bar-countdown {
+            gap: 8px !important;
+          }
+          .daik-bar-countdown > div > div > span:first-child {
+            font-size: 20px !important;
+          }
+          .daik-bar-countdown > div > div > span:last-child {
+            font-size: 8px !important;
+          }
+          .daik-bar-badge span:last-child {
+            font-size: 11px !important;
+            letter-spacing: 1.5px !important;
+          }
         }
         @media (max-width: 600px) {
           .daik-hero-image-wrap {
             height: 40vh !important;
+          }
+          .daik-hero-ctas {
+            flex-direction: column !important;
+            width: 100%;
+            gap: 12px !important;
+          }
+          .daik-hero-ctas > a {
+            width: 100%;
+            justify-content: center;
+            padding: 14px 24px !important;
+            font-size: 14px !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .daik-hero-ctas > a {
+            padding: 12px 20px !important;
+            font-size: 13px !important;
           }
         }
       `}</style>
@@ -885,12 +931,33 @@ function StatsBar() {
           .daik-stats-layout {
             grid-template-columns: 1fr !important;
             text-align: center;
+            gap: 24px !important;
           }
           .daik-stats-layout > div:first-child {
             border-right: none !important;
             border-bottom: 1px solid rgba(15,115,94,0.2);
             padding-right: 0 !important;
-            padding-bottom: 32px;
+            padding-bottom: 24px;
+          }
+          .daik-stats-layout > div:first-child span {
+            font-size: 72px !important;
+          }
+          .daik-stats-grid-new {
+            grid-template-columns: repeat(3, 1fr) !important;
+          }
+          .daik-stats-grid-new > div span:first-of-type {
+            font-size: 32px !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .daik-stats-layout > div:first-child span {
+            font-size: 56px !important;
+          }
+          .daik-stats-grid-new > div {
+            padding: 12px 8px !important;
+          }
+          .daik-stats-grid-new > div span:first-of-type {
+            font-size: 28px !important;
           }
         }
       `}</style>
@@ -1053,11 +1120,33 @@ function MarketContext() {
         @media (max-width: 900px) {
           .daik-glass-stats {
             grid-template-columns: repeat(2, 1fr) !important;
+            gap: 12px !important;
           }
         }
         @media (max-width: 500px) {
           .daik-glass-stats {
-            grid-template-columns: 1fr !important;
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 10px !important;
+          }
+          .daik-glass-stats > div {
+            padding: 16px 12px !important;
+            border-radius: 14px !important;
+          }
+          .daik-glass-stats > div p:first-child {
+            font-size: 28px !important;
+          }
+          .daik-glass-stats > div p:last-child {
+            font-size: 9px !important;
+            margin-top: 6px !important;
+          }
+        }
+        @media (max-width: 380px) {
+          .daik-glass-stats {
+            grid-template-columns: 1fr 1fr !important;
+            gap: 8px !important;
+          }
+          .daik-glass-stats > div p:first-child {
+            font-size: 24px !important;
           }
         }
       `}</style>
@@ -1301,7 +1390,15 @@ function FocusAreas() {
           .daik-focus-cards { grid-template-columns: repeat(4, 1fr) !important; }
         }
         @media (max-width: 640px) {
-          .daik-focus-cards { grid-template-columns: repeat(3, 1fr) !important; }
+          .daik-focus-cards { grid-template-columns: repeat(3, 1fr) !important; gap: 6px !important; }
+          .daik-focus-cards button { padding: 10px 8px !important; }
+          .daik-focus-cards button span:first-child { font-size: 10px !important; }
+          .daik-focus-cards button span:last-child { font-size: 10px !important; }
+        }
+        @media (max-width: 480px) {
+          .daik-focus-cards { grid-template-columns: repeat(3, 1fr) !important; gap: 4px !important; }
+          .daik-focus-cards button { padding: 8px 6px !important; border-radius: 8px !important; }
+          .daik-focus-detail { padding: 20px !important; min-height: 280px !important; }
         }
       `}</style>
     </section>
@@ -1515,7 +1612,23 @@ function HighlightsGrid() {
 
       <style jsx global>{`
         @media (max-width: 768px) {
-          .daik-hl-split { grid-template-columns: 1fr !important; }
+          .daik-hl-split { 
+            grid-template-columns: 1fr !important;
+            gap: 32px !important;
+          }
+          .daik-hl-split > div:first-child > div:last-child {
+            gap: 20px !important;
+            flex-wrap: wrap !important;
+            justify-content: center !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .daik-hl-split > div:first-child > div:last-child {
+            gap: 16px !important;
+          }
+          .daik-hl-split > div:first-child > div:last-child > div span:first-child {
+            font-size: 32px !important;
+          }
         }
       `}</style>
     </section>
@@ -1867,8 +1980,19 @@ function AgendaTimeline() {
         @media (max-width: 768px) {
           .daik-agenda-cols { grid-template-columns: 1fr !important; }
           .daik-agenda-cols > div:first-child { border-right: none !important; padding-right: 0 !important; }
-          .daik-agenda-cols > div:last-child { padding-left: 0 !important; }
+          .daik-agenda-cols > div:last-child { padding-left: 0 !important; margin-top: 8px; }
           .daik-agenda-rail-glow { display: none !important; }
+        }
+        @media (max-width: 480px) {
+          .daik-agenda-cols > div > div > div > div {
+            padding: 14px 12px !important;
+          }
+          .daik-agenda-cols > div > div > div > div h4 {
+            font-size: 13px !important;
+          }
+          .daik-agenda-cols > div > div > div > div p {
+            font-size: 11px !important;
+          }
         }
       `}</style>
     </section>
@@ -2087,7 +2211,7 @@ function SpeakersSection() {
         </motion.div>
 
         {/* Grid */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: 16 }}>
+        <div className="daik-speakers-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: 16 }}>
           {SPEAKERS.map((s, i) => (
             <motion.div
               key={s.name}
@@ -2100,6 +2224,42 @@ function SpeakersSection() {
           ))}
         </div>
       </div>
+      <style jsx global>{`
+        @media (max-width: 900px) {
+          .daik-speakers-grid {
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 14px !important;
+          }
+        }
+        @media (max-width: 640px) {
+          .daik-speakers-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 12px !important;
+          }
+        }
+        @media (max-width: 400px) {
+          .daik-speakers-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 10px !important;
+          }
+          .daik-speakers-grid > div > div > div {
+            border-radius: 12px !important;
+          }
+          .daik-speakers-grid > div > div > div > div:last-child {
+            padding: 0 12px 14px !important;
+          }
+          .daik-speakers-grid > div > div > div > div:last-child h4 {
+            font-size: 14px !important;
+          }
+          .daik-speakers-grid > div > div > div > div:last-child p {
+            font-size: 11px !important;
+          }
+          .daik-speakers-grid > div > div > div > div:last-child span {
+            font-size: 9px !important;
+            padding: 2px 8px !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }
@@ -2743,9 +2903,19 @@ function AwardsSection() {
 
       <style jsx global>{`
         @media (max-width: 768px) {
-          .daik-awards-nom { grid-template-columns: 1fr !important; }
+          .daik-awards-nom { 
+            grid-template-columns: 1fr !important;
+            padding: 20px !important;
+            gap: 24px !important;
+          }
           .daik-awards-form-grid { grid-template-columns: 1fr !important; }
           .daik-award-title { font-size: 14px !important; }
+        }
+        @media (max-width: 480px) {
+          .daik-awards-nom { 
+            padding: 16px !important;
+          }
+          .daik-award-title { font-size: 13px !important; }
         }
         .daik-awards-form-grid input::placeholder,
         .daik-awards-form-grid + select,
@@ -2950,11 +3120,29 @@ function WhoShouldAttend() {
 
       <style jsx global>{`
         @media (max-width: 1024px) {
-          .daik-attend-split { grid-template-columns: 1fr !important; }
+          .daik-attend-split { 
+            grid-template-columns: 1fr !important;
+            gap: 32px !important;
+          }
           .daik-attend-roles { grid-template-columns: 1fr 1fr !important; }
         }
         @media (max-width: 640px) {
-          .daik-attend-roles { grid-template-columns: 1fr !important; }
+          .daik-attend-roles { grid-template-columns: 1fr !important; gap: 2px !important; }
+          .daik-attend-roles > div {
+            padding: 10px 8px !important;
+          }
+          .daik-attend-roles > div > div {
+            width: 28px !important;
+            height: 28px !important;
+          }
+          .daik-attend-roles > div > span {
+            font-size: 13px !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .daik-attend-split {
+            gap: 24px !important;
+          }
         }
       `}</style>
     </section>
@@ -3167,7 +3355,33 @@ function WhyAttend() {
 
       <style jsx global>{`
         @media (max-width: 768px) {
-          .daik-why-console { grid-template-columns: 1fr !important; }
+          .daik-why-console { 
+            grid-template-columns: 1fr !important;
+            border-radius: 14px !important;
+          }
+          .daik-why-console > div:first-child {
+            border-right: none !important;
+            border-bottom: 1px solid rgba(15,115,94,0.1);
+          }
+          .daik-why-console > div:first-child > button {
+            padding: 14px 16px !important;
+          }
+          .daik-why-console > div:last-child {
+            min-height: 260px !important;
+            padding: 24px 20px !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .daik-why-console > div:first-child > button {
+            padding: 12px 14px !important;
+          }
+          .daik-why-console > div:first-child > button span:last-child {
+            font-size: 13px !important;
+          }
+          .daik-why-console > div:last-child {
+            min-height: 240px !important;
+            padding: 20px 16px !important;
+          }
         }
       `}</style>
     </section>
@@ -3359,7 +3573,36 @@ function SplitCTA() {
       </div>
 
       <style jsx global>{`
-        @media (max-width: 768px) { .daik-cta-grid { grid-template-columns: 1fr !important; } }
+        @media (max-width: 768px) { 
+          .daik-cta-grid { 
+            grid-template-columns: 1fr !important;
+            gap: 16px !important;
+          }
+          .daik-cta-grid > div {
+            padding: 28px 24px !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .daik-cta-grid > div {
+            padding: 24px 20px !important;
+            border-radius: 14px !important;
+          }
+          .daik-cta-grid > div > .flex {
+            gap: 8px !important;
+          }
+          .daik-cta-grid > div > .flex > div {
+            padding: 8px 10px !important;
+            min-width: 48px !important;
+          }
+          .daik-cta-grid > div > .flex > div span:first-child {
+            font-size: 18px !important;
+          }
+          .daik-cta-grid > div > a {
+            width: 100%;
+            justify-content: center;
+            padding: 12px 24px !important;
+          }
+        }
       `}</style>
     </section>
   );
@@ -3482,6 +3725,23 @@ function Venue() {
           .daik-venue-inner {
             grid-template-columns: 1fr !important;
             padding: 28px 24px !important;
+            gap: 24px !important;
+          }
+          .daik-venue-inner > div:last-child {
+            grid-template-columns: 1fr 1fr !important;
+            gap: 10px !important;
+          }
+        }
+        @media (max-width: 400px) {
+          .daik-venue-inner {
+            padding: 24px 20px !important;
+            margin-top: -60px !important;
+          }
+          .daik-venue-inner > div:last-child > div {
+            padding: 12px !important;
+          }
+          .daik-venue-inner > div:last-child > div p:last-child {
+            font-size: 13px !important;
           }
         }
       `}</style>
