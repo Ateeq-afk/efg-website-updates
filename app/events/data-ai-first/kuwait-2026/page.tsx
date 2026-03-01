@@ -130,7 +130,7 @@ const SPEAKERS: {
   photo: string | null;
 }[] = [
   { name: "Dr Khalid Al Begain", title: "President", org: "KCST", photo: "https://efg-final.s3.eu-north-1.amazonaws.com/speakers/kuwait-2026/khalid-al-begain.png" },
-  { name: "Mai AlOwaish", title: "CEO", org: "CINET", photo: null },
+  { name: "Mai AlOwaish", title: "CEO", org: "CINET", photo: "https://efg-final.s3.eu-north-1.amazonaws.com/speakers/kuwait-2026/mai-alowaish.jpg" },
   { name: "Sudhakar Nibhanupudi", title: "Group Chief Data Officer", org: "National Bank of Kuwait", photo: null },
   { name: "Iyad Atieh", title: "CISO", org: "Alghanim Industries", photo: null },
   { name: "Abdullah AlNusef", title: "Chief Data Officer", org: "Bank Boubyan", photo: null },
