@@ -875,102 +875,163 @@ function StatsBar() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true });
   const items = [
-    { n: 350, suffix: "+", label: "Delegates", icon: "M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" },
-    { n: 4, suffix: "+", label: "Speakers", icon: "M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" },
-    { n: 25, suffix: "", label: "Sponsors", icon: "M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" },
-    { n: 25, suffix: "", label: "Media Partners", icon: "M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" },
-    { n: 14, suffix: "", label: "Supporting Partners", icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" },
+    { n: 350, suffix: "+", label: "Delegates", desc: "C-Suite & Directors", icon: "M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75", highlight: true },
+    { n: 30, suffix: "+", label: "Speakers", desc: "Industry Leaders", icon: "M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" },
+    { n: 25, suffix: "", label: "Sponsors", desc: "Technology Partners", icon: "M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" },
+    { n: 1, suffix: "", label: "Day", desc: "Full Summit", icon: "M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" },
   ];
   return (
     <section
       ref={ref}
       style={{
-        background: "#020508",
-        borderTop: `1px solid ${C}15`,
-        borderBottom: `1px solid ${C}15`,
-        padding: "clamp(32px, 4vw, 48px) 0",
+        background: "linear-gradient(180deg, #020508 0%, #051015 100%)",
+        padding: "clamp(48px, 6vw, 72px) 0",
+        position: "relative",
+        overflow: "hidden",
       }}
     >
+      {/* Atmospheric glow */}
+      <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 60% 50% at 50% 50%, ${C}06, transparent 70%)` }} />
+      
       <div
         className="cfk-stats-grid"
         style={{
-          maxWidth: 1280,
+          maxWidth: 1100,
           margin: "0 auto",
-          padding: "0 clamp(20px,5vw,80px)",
+          padding: "0 clamp(20px,5vw,60px)",
           display: "grid",
-          gridTemplateColumns: `repeat(${items.length}, 1fr)`,
+          gridTemplateColumns: "repeat(4, 1fr)",
           gap: 16,
         }}
       >
         {items.map((s, i) => (
           <motion.div
             key={s.label}
-            initial={{ opacity: 0, y: 16 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.55, delay: i * 0.08, ease: EASE }}
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+            transition={{ duration: 0.5, delay: i * 0.1, ease: EASE }}
+            whileHover={{ scale: 1.02, y: -4 }}
             style={{
-              textAlign: "center",
-              padding: "16px 12px",
-              borderRadius: 14,
-              background: `linear-gradient(145deg, ${C}08, rgba(255,255,255,0.02))`,
-              border: `1px solid ${C}12`,
+              padding: s.highlight ? "28px 20px 24px" : "24px 16px 20px",
+              borderRadius: 20,
+              background: s.highlight 
+                ? `linear-gradient(145deg, ${C}20 0%, ${C}08 100%)`
+                : `linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02))`,
+              border: `1px solid ${s.highlight ? `${C}40` : "rgba(255,255,255,0.08)"}`,
               position: "relative",
+              overflow: "hidden",
+              boxShadow: s.highlight ? `0 8px 32px ${C}20, inset 0 1px 0 ${C}30` : "0 4px 20px rgba(0,0,0,0.2)",
             }}
           >
-            {/* Icon */}
-            <div
-              style={{
-                width: 36,
-                height: 36,
-                borderRadius: 10,
-                background: `${C}15`,
-                border: `1px solid ${C}25`,
+            {/* Top glow for highlight */}
+            {s.highlight && (
+              <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 80% 50% at 50% 0%, ${C}15, transparent 60%)` }} />
+            )}
+            
+            {/* Top row: Icon + Badge */}
+            <div className="flex items-center justify-between" style={{ marginBottom: 14, position: "relative" }}>
+              <div style={{
+                width: s.highlight ? 44 : 36,
+                height: s.highlight ? 44 : 36,
+                borderRadius: 12,
+                background: s.highlight ? `${C}25` : "rgba(255,255,255,0.06)",
+                border: `1px solid ${s.highlight ? `${C}50` : "rgba(255,255,255,0.1)"}`,
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                margin: "0 auto 12px",
-              }}
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={C_BRIGHT} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d={s.icon} />
-              </svg>
+              }}>
+                <svg width={s.highlight ? 22 : 18} height={s.highlight ? 22 : 18} viewBox="0 0 24 24" fill="none" stroke={s.highlight ? C_BRIGHT : "rgba(255,255,255,0.5)"} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d={s.icon} />
+                </svg>
+              </div>
+              <span style={{
+                padding: "4px 10px",
+                borderRadius: 20,
+                background: s.highlight ? `${C}20` : "rgba(255,255,255,0.05)",
+                border: `1px solid ${s.highlight ? `${C}30` : "rgba(255,255,255,0.08)"}`,
+                fontFamily: "var(--font-outfit)",
+                fontSize: 9,
+                fontWeight: 600,
+                color: s.highlight ? C_BRIGHT : "rgba(255,255,255,0.4)",
+                letterSpacing: "0.5px",
+              }}>
+                2026
+              </span>
             </div>
+            
             {/* Number */}
             <div
               style={{
                 fontFamily: "var(--font-display)",
-                fontSize: "clamp(28px,3.5vw,40px)",
+                fontSize: s.highlight ? "clamp(40px,5vw,52px)" : "clamp(32px,4vw,40px)",
                 fontWeight: 900,
-                color: C_BRIGHT,
-                letterSpacing: "-1.5px",
+                background: s.highlight 
+                  ? `linear-gradient(135deg, ${C_BRIGHT} 0%, white 100%)`
+                  : "white",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+                letterSpacing: "-2px",
                 lineHeight: 1,
+                filter: s.highlight ? `drop-shadow(0 0 20px ${C}40)` : "none",
+                position: "relative",
               }}
             >
               {inView ? <Counter to={s.n} suffix={s.suffix} /> : "0"}
             </div>
+            
             {/* Label */}
             <div
               style={{
                 fontFamily: "var(--font-outfit)",
-                fontSize: 10,
-                fontWeight: 600,
-                color: "rgba(255,255,255,0.4)",
+                fontSize: s.highlight ? 12 : 10,
+                fontWeight: 700,
+                color: s.highlight ? "rgba(255,255,255,0.9)" : "rgba(255,255,255,0.6)",
                 letterSpacing: "1.5px",
                 textTransform: "uppercase",
                 marginTop: 8,
+                position: "relative",
               }}
             >
               {s.label}
             </div>
+            
+            {/* Description */}
+            <div
+              style={{
+                fontFamily: "var(--font-outfit)",
+                fontSize: 11,
+                fontWeight: 400,
+                color: s.highlight ? "rgba(255,255,255,0.5)" : "rgba(255,255,255,0.3)",
+                marginTop: 4,
+                position: "relative",
+              }}
+            >
+              {s.desc}
+            </div>
+            
+            {/* Bottom accent */}
+            <div style={{
+              position: "absolute",
+              bottom: 0,
+              left: s.highlight ? 20 : 16,
+              right: s.highlight ? 20 : 16,
+              height: 2,
+              background: s.highlight 
+                ? `linear-gradient(90deg, transparent, ${C}60, transparent)`
+                : `linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent)`,
+              borderRadius: 1,
+            }} />
           </motion.div>
         ))}
       </div>
       <style jsx global>{`
         @media (max-width: 900px) {
-          .cfk-stats-grid { grid-template-columns: repeat(3, 1fr) !important; }
+          .cfk-stats-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
         }
-        @media (max-width: 600px) {
-          .cfk-stats-grid { grid-template-columns: repeat(2, 1fr) !important; }
+        @media (max-width: 480px) {
+          .cfk-stats-grid { gap: 10px !important; }
+          .cfk-stats-grid > div { padding: 20px 14px 16px !important; }
         }
       `}</style>
     </section>
