@@ -4014,11 +4014,18 @@ function PastEventsGallery() {
 //  13. SPONSORS SECTION
 // ═══════════════════════════════════════════════════════════════════════════════
 
-const SPONSOR_TIERS = [
-  { tier: "Gold Partner", slots: 1, color: GOLD },
-  { tier: "Associate Partners", slots: 2, color: E_BRIGHT },
-  { tier: "Panel Partners", slots: 3, color: "#A78BFA" },
-  { tier: "Strategic Partners", slots: 4, color: "#808080" },
+const SPONSOR_TIERS: {
+  tier: string;
+  slots: number;
+  color: string;
+  sponsors?: { name: string; logo: string }[];
+}[] = [
+  { tier: "Gold Partner", slots: 1, color: GOLD, sponsors: [] },
+  { tier: "Associate Partners", slots: 2, color: E_BRIGHT, sponsors: [] },
+  { tier: "Panel Partners", slots: 3, color: "#A78BFA", sponsors: [] },
+  { tier: "Strategic Partners", slots: 4, color: "#808080", sponsors: [
+    { name: "ManageEngine", logo: "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo/ManageEngine.png" },
+  ]},
 ];
 
 function SponsorsSection() {
@@ -4079,9 +4086,30 @@ function SponsorsSection() {
                 gap: 12,
               }}
             >
-              {Array.from({ length: tierData.slots }).map((_, i) => (
+              {/* Actual sponsors */}
+              {tierData.sponsors?.map((sponsor, i) => (
                 <div
-                  key={i}
+                  key={sponsor.name}
+                  className="flex items-center justify-center transition-all"
+                  style={{
+                    padding: tierIndex === 0 ? "32px" : "24px",
+                    borderRadius: 14,
+                    background: `linear-gradient(145deg, ${tierData.color}12, ${tierData.color}06)`,
+                    border: `1px solid ${tierData.color}30`,
+                  }}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={sponsor.logo}
+                    alt={sponsor.name}
+                    style={{ maxHeight: tierIndex === 0 ? 60 : 40, maxWidth: "100%", objectFit: "contain", filter: "brightness(0) invert(1)", opacity: 0.9 }}
+                  />
+                </div>
+              ))}
+              {/* Placeholder slots */}
+              {Array.from({ length: tierData.slots - (tierData.sponsors?.length || 0) }).map((_, i) => (
+                <div
+                  key={`placeholder-${i}`}
                   className="flex items-center justify-center transition-all"
                   style={{
                     padding: tierIndex === 0 ? "48px 32px" : "32px 24px",
