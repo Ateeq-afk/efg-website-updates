@@ -884,26 +884,57 @@ function StatsBar() {
     <section
       ref={ref}
       style={{
-        background: "linear-gradient(180deg, #020508 0%, #051015 100%)",
-        padding: "clamp(48px, 6vw, 72px) 0",
         position: "relative",
+        padding: "clamp(64px, 8vw, 100px) 0",
         overflow: "hidden",
+        minHeight: "clamp(400px, 50vh, 550px)",
       }}
     >
-      {/* Atmospheric glow */}
-      <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 60% 50% at 50% 50%, ${C}06, transparent 70%)` }} />
+      {/* Background Image */}
+      <div className="absolute inset-0">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="https://cyberfirstseries.com/wp-content/uploads/2024/12/Cyber-First-Series-Pictures-and-Sponsors-29.jpg"
+          alt=""
+          className="w-full h-full object-cover"
+          style={{ filter: "brightness(0.25) saturate(0.7)" }}
+        />
+      </div>
       
-      <div
-        className="cfk-stats-grid"
-        style={{
-          maxWidth: 1100,
-          margin: "0 auto",
-          padding: "0 clamp(20px,5vw,60px)",
-          display: "grid",
-          gridTemplateColumns: "repeat(4, 1fr)",
-          gap: 16,
-        }}
-      >
+      {/* Gradient overlays */}
+      <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(180deg, rgba(2,5,8,0.8) 0%, rgba(2,5,8,0.4) 50%, rgba(2,5,8,0.85) 100%)" }} />
+      <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 60% 50% at 50% 50%, ${C}10, transparent 70%)` }} />
+      
+      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(20px,5vw,60px)", position: "relative", zIndex: 1 }}>
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, ease: EASE }}
+          style={{ marginBottom: 40 }}
+        >
+          <span style={{ fontFamily: "var(--font-outfit)", fontSize: 11, fontWeight: 600, letterSpacing: "3px", textTransform: "uppercase", color: C_BRIGHT }}>
+            Summit Overview
+          </span>
+          <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(32px, 4.5vw, 48px)", letterSpacing: "-2px", color: "white", lineHeight: 1.1, margin: "14px 0 0", maxWidth: 550 }}>
+            Securing Kuwait&apos;s
+            <br />
+            <span style={{ color: C_BRIGHT }}>Digital Future.</span>
+          </h2>
+        </motion.div>
+
+        {/* Stats Grid */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.3, ease: EASE }}
+          className="cfk-stats-grid"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(4, 1fr)",
+            gap: 16,
+          }}
+        >
         {items.map((s, i) => (
           <motion.div
             key={s.label}
@@ -1024,6 +1055,7 @@ function StatsBar() {
             }} />
           </motion.div>
         ))}
+        </motion.div>
       </div>
       <style jsx global>{`
         @media (max-width: 900px) {
