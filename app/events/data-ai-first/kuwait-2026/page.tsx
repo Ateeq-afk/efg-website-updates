@@ -129,7 +129,7 @@ const SPEAKERS: {
   org: string;
   photo: string | null;
 }[] = [
-  { name: "Dr Khalid Al Begain", title: "President", org: "KCST", photo: null },
+  { name: "Dr Khalid Al Begain", title: "President", org: "KCST", photo: "https://efg-final.s3.eu-north-1.amazonaws.com/speakers/kuwait-2026/khalid-al-begain.png" },
   { name: "Mai AlOwaish", title: "CEO", org: "CINET", photo: null },
   { name: "Sudhakar Nibhanupudi", title: "Group Chief Data Officer", org: "National Bank of Kuwait", photo: null },
   { name: "Iyad Atieh", title: "CISO", org: "Alghanim Industries", photo: null },
