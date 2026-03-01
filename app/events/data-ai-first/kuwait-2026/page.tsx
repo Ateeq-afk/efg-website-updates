@@ -2981,9 +2981,9 @@ function AwardsSection() {
                 />
 
                 {/* Main row */}
-                <div className="flex items-center" style={{ padding: "22px 8px 22px 20px", gap: 20 }}>
+                <div className="daik-award-row flex items-center" style={{ padding: "22px 8px 22px 20px", gap: 20 }}>
                   {/* Number */}
-                  <span style={{
+                  <span className="daik-award-number" style={{
                     fontFamily: "var(--font-display)", fontWeight: 200,
                     fontSize: "clamp(28px,3vw,42px)", letterSpacing: "-2px",
                     color: isExpanded ? `${GOLD}50` : `${GOLD}18`,
@@ -3028,7 +3028,7 @@ function AwardsSection() {
                       transition={{ duration: 0.35, ease: EASE }}
                       style={{ overflow: "hidden" }}
                     >
-                      <div style={{ padding: "0 8px 26px 92px" }}>
+                      <div className="daik-award-expand-content" style={{ padding: "0 8px 26px 92px" }}>
                         <p style={{
                           fontFamily: "var(--font-outfit)", fontWeight: 350,
                           fontSize: 14, color: "rgba(255,255,255,0.4)",
@@ -3336,16 +3336,41 @@ function AwardsSection() {
           .daik-awards-nom { 
             grid-template-columns: 1fr !important;
             padding: 20px !important;
-            gap: 24px !important;
+            gap: 28px !important;
           }
           .daik-awards-form-grid { grid-template-columns: 1fr !important; }
           .daik-award-title { font-size: 14px !important; }
+          .daik-award-expand-content {
+            padding-left: 20px !important;
+            padding-right: 16px !important;
+          }
+          .daik-award-number {
+            min-width: 36px !important;
+            font-size: 24px !important;
+          }
+          .daik-award-row {
+            padding: 16px 8px 16px 12px !important;
+            gap: 12px !important;
+          }
         }
         @media (max-width: 480px) {
           .daik-awards-nom { 
             padding: 16px !important;
+            gap: 24px !important;
           }
           .daik-award-title { font-size: 13px !important; }
+          .daik-award-expand-content {
+            padding-left: 12px !important;
+            padding-right: 12px !important;
+          }
+          .daik-award-number {
+            min-width: 28px !important;
+            font-size: 20px !important;
+          }
+          .daik-award-row {
+            padding: 14px 6px 14px 8px !important;
+            gap: 10px !important;
+          }
         }
         .daik-awards-form-grid input::placeholder,
         .daik-awards-form-grid + select,
