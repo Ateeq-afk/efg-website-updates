@@ -610,7 +610,7 @@ function HeroSection() {
               Cyber Resilience
             </span>
             <br />
-            for Kuwait
+            for a Digitally Sovereign Kuwait
           </motion.h1>
 
           {/* Separator */}
@@ -642,9 +642,7 @@ function HeroSection() {
               marginBottom: 24,
             }}
           >
-            Powered by AI, Secured by Intelligence — convening regulators,
-            government authorities, and industry leaders to advance
-            Kuwait&apos;s cyber governance maturity under Vision 2035.
+            Kuwait&apos;s Premier Cybersecurity &amp; Operational Resilience Conference — convening government authorities, regulators, critical infrastructure leaders, CISOs, and global cybersecurity experts. Exclusive for C-Suite &amp; Director-Level Leaders.
           </motion.p>
 
           {/* Date & Location */}
