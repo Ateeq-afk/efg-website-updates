@@ -1061,9 +1061,48 @@ function StatsBar() {
         @media (max-width: 900px) {
           .cfk-stats-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
         }
-        @media (max-width: 480px) {
+        @media (max-width: 600px) {
           .cfk-stats-grid { gap: 10px !important; }
-          .cfk-stats-grid > div { padding: 20px 14px 16px !important; }
+          .cfk-stats-grid > div { 
+            padding: 16px 14px 14px !important; 
+            border-radius: 16px !important;
+          }
+          /* Smaller icons on mobile */
+          .cfk-stats-grid > div > div:first-child > div:first-child {
+            width: 32px !important;
+            height: 32px !important;
+            border-radius: 8px !important;
+          }
+          .cfk-stats-grid > div > div:first-child > div:first-child svg {
+            width: 16px !important;
+            height: 16px !important;
+          }
+          /* Badge smaller */
+          .cfk-stats-grid > div > div:first-child > span {
+            padding: 3px 8px !important;
+            font-size: 8px !important;
+          }
+          /* Numbers smaller with less spacing */
+          .cfk-stats-grid > div > div:nth-child(2) {
+            font-size: 32px !important;
+            margin-top: 8px !important;
+          }
+          /* Labels */
+          .cfk-stats-grid > div > div:nth-child(3) {
+            font-size: 9px !important;
+            margin-top: 4px !important;
+          }
+          /* Description */
+          .cfk-stats-grid > div > div:nth-child(4) {
+            font-size: 10px !important;
+            margin-top: 2px !important;
+          }
+        }
+        @media (max-width: 380px) {
+          .cfk-stats-grid > div { padding: 14px 12px 12px !important; }
+          .cfk-stats-grid > div > div:nth-child(2) {
+            font-size: 28px !important;
+          }
         }
       `}</style>
     </section>
