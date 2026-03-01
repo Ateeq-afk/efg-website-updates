@@ -3880,12 +3880,12 @@ function WhyAttend() {
 // ═══════════════════════════════════════════════════════════════════════════════
 
 const PAST_EVENT_PHOTOS = [
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/Good/4N8A0290.JPG", caption: "OT Security First Abu Dhabi 2026" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/Good/4N8A0001.JPG", caption: "Keynote Session" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/Good/4N8A0012.JPG", caption: "Panel Discussion" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/Good/4N8A0025.JPG", caption: "Networking" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/Good/4N8A0028.JPG", caption: "Exhibition" },
-  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/Good/4N8A0006.JPG", caption: "Awards Ceremony" },
+  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/events/Cyber+First+Kuwait+2025/Kuwait+Photos/Kuwait+Photos/4X9A1744.jpg", caption: "Cyber First Kuwait 2025" },
+  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/Good/4N8A0001.JPG", caption: "OT Security First Abu Dhabi" },
+  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/events/OT+Security+First+UAE+2025/OT+First+UAE+Photos/4N8A0398.JPG", caption: "OT Security First UAE 2025" },
+  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/events/Cyber+First+Kuwait+2025/Kuwait+Photos/Kuwait+Photos/4X9A1576.jpg", caption: "Cyber First Kuwait" },
+  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/Good/4N8A0028.JPG", caption: "Exhibition & Networking" },
+  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/events/OT+Security+First+UAE+2025/OT+First+UAE+Photos/4N8A0412.JPG", caption: "Panel Discussion" },
 ];
 
 function PastEventsGallery() {
