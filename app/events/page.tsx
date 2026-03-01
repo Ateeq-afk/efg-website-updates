@@ -65,7 +65,7 @@ const allEvents = [
     color: "#0F735E",
     image:
       "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80",
-    href: "/events/data-ai-first/kuwait-may-2026",
+    href: "/events/data-ai-first/kuwait-2026",
     date: "2026-05-18",
     nextDate: "18 May 2026",
     nextCity: "Kuwait City",

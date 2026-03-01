@@ -35,7 +35,7 @@ const upcomingEvents: UpcomingEvent[] = [
     title: "Data & AI First Kuwait",
     date: new Date("2026-05-18T09:00:00"),
     location: "Kuwait City, Kuwait",
-    href: "/events/data-ai-first/kuwait-may-2026",
+    href: "/events/data-ai-first/kuwait-2026",
   },
   {
     id: "ot-security-jubail",

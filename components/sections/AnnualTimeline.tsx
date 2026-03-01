@@ -49,7 +49,7 @@ const allEvents: EventItem[] = [
     location: "Kuwait City, Kuwait",
     venue: "Venue TBA",
     attendees: "500+",
-    href: "/events/data-ai-first/kuwait-may-2026",
+    href: "/events/data-ai-first/kuwait-2026",
     status: "soon",
   },
   {

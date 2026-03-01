@@ -3192,7 +3192,7 @@ function SplitCTA() {
 
             {/* CTA */}
             <Link
-              href="/events/data-ai-first/kuwait-may-2026#register"
+              href="/events/data-ai-first/kuwait-2026#register"
               className="inline-flex items-center gap-2 transition-all"
               style={{
                 marginTop: 28,

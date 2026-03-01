@@ -161,7 +161,7 @@ export default function DAHero() {
           style={{ marginTop: 40 }}
         >
           <HeroButton href="#content">Explore the Series</HeroButton>
-          <HeroButton primary href="/events/data-ai-first/kuwait-may-2026#register">
+          <HeroButton primary href="/events/data-ai-first/kuwait-2026#register">
             Register for Kuwait
           </HeroButton>
         </motion.div>
@@ -174,7 +174,7 @@ export default function DAHero() {
         location="Kuwait City, Kuwait"
         targetDate={new Date("2026-05-18T09:00:00")}
         ctaText="Register"
-        ctaHref="/events/data-ai-first/kuwait-may-2026#register"
+        ctaHref="/events/data-ai-first/kuwait-2026#register"
         angularRadius={false}
       />
     </section>
