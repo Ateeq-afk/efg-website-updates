@@ -3960,6 +3960,8 @@ function PastEventsGallery() {
                 onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.05)"; }}
                 onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; }}
               />
+              {/* Subtle emerald theme overlay */}
+              <div className="absolute inset-0 pointer-events-none" style={{ background: `linear-gradient(135deg, ${E}15 0%, transparent 50%, ${E}10 100%)`, mixBlendMode: "overlay" }} />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
                 <span style={{ fontFamily: "var(--font-outfit)", fontSize: 13, fontWeight: 500, color: "white" }}>
@@ -5186,7 +5188,7 @@ const CONTACTS = {
     role: "Producer",
     phone: "+971 50 500 3341",
     email: "sanjana@eventsfirstgroup.com",
-    photo: `${S3_TEAM}/Sanjana-Venugopal.jpg`,
+    photo: `${S3_TEAM}/Sanjana-Venugopal-new.jpg`,
   },
   sponsorship: [
     {

@@ -83,7 +83,7 @@ const teamMembers: Member[] = [
   // Operations
   { name: "Mini", role: "Operations", initials: "M", photo: `${S3}/Mini.jpg` },
   // Producer
-  { name: "Sanjana Venugopal", role: "Producer", initials: "SV", photo: `${S3}/Sanjana-Venugopal.jpg` },
+  { name: "Sanjana Venugopal", role: "Producer", initials: "SV", photo: `${S3}/Sanjana-Venugopal-new.jpg` },
   { name: "Harini", role: "Producer", initials: "H", photo: `${S3}/Harini.jpg` },
   // Marketing & Tech
   { name: "Syed Asad", role: "Marketing & Tech", initials: "SA", photo: `${S3}/Syed-Asad.jpg` },
