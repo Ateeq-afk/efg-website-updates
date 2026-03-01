@@ -4933,7 +4933,7 @@ function Venue() {
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1920&q=85"
+            src="https://efg-final.s3.eu-north-1.amazonaws.com/venues/jumeirah-messilah-kuwait.jpg"
             alt="Jumeirah Messilah Beach Hotel Kuwait"
             className="w-full h-full object-cover"
             style={{
