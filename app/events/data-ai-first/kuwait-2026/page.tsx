@@ -414,151 +414,82 @@ function HeroSection() {
           maxWidth: 1320,
           margin: "0 auto",
           padding: "0 clamp(24px, 4vw, 60px)",
-          paddingBottom: 60,
+          paddingTop: 140,
+          paddingBottom: 100,
         }}
       >
         <div style={{ maxWidth: 560 }}>
-          {/* Eyebrow */}
+          {/* Badge — Date & Edition */}
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.2 }}
-            className="flex items-center gap-3"
-          >
-            <span style={{ width: 32, height: 2, background: E }} />
-            <span
-              style={{
-                fontFamily: "var(--font-outfit)",
-                fontSize: 10,
-                fontWeight: 600,
-                letterSpacing: "4px",
-                textTransform: "uppercase",
-                color: E_BRIGHT,
-              }}
-            >
-              Data & AI First Series &middot; Kuwait
-            </span>
-          </motion.div>
-
-          {/* Badge */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.3, ease: EASE }}
-            style={{ marginTop: 20, display: "inline-block" }}
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: EASE }}
           >
             <span
               style={{
                 display: "inline-block",
-                padding: "6px 18px",
+                padding: "8px 20px",
                 borderRadius: 50,
-                background: `${E}15`,
-                border: `1px solid ${E}30`,
+                background: `${E}18`,
+                border: `1px solid ${E}35`,
                 fontFamily: "var(--font-outfit)",
-                fontSize: 11,
+                fontSize: 12,
                 fontWeight: 600,
                 letterSpacing: "2px",
                 textTransform: "uppercase",
                 color: E_BRIGHT,
               }}
             >
-              Inaugural Edition &middot; 18 May 2026
+              18 May 2026 &middot; Kuwait City
             </span>
           </motion.div>
 
           {/* Headline */}
           <motion.h1
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5, ease: EASE }}
-            className="daik-shimmer"
+            transition={{ duration: 0.8, delay: 0.4, ease: EASE }}
             style={{
               fontFamily: "var(--font-display)",
               fontWeight: 800,
-              fontSize: "clamp(44px, 6.5vw, 88px)",
-              letterSpacing: "-3px",
-              lineHeight: 0.95,
-              marginTop: 24,
-              background: `linear-gradient(90deg, #ffffff 0%, ${E_BRIGHT} 50%, #ffffff 100%)`,
-              backgroundSize: "200% 100%",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
+              fontSize: "clamp(42px, 5.5vw, 72px)",
+              letterSpacing: "-2px",
+              lineHeight: 1.0,
+              marginTop: 28,
+              color: "white",
             }}
           >
             Data & AI First
             <br />
-            <span style={{ WebkitTextFillColor: E_BRIGHT }}>Kuwait</span>
-            <span
-              style={{
-                WebkitTextFillColor: "transparent",
-                background: `linear-gradient(90deg, ${E}80, ${E_BRIGHT})`,
-                backgroundSize: "100% 100%",
-                WebkitBackgroundClip: "text",
-                fontSize: "clamp(28px, 4vw, 52px)",
-                letterSpacing: "-1px",
-                marginLeft: 12,
-              }}
-            >
-              2026
-            </span>
+            <span style={{ color: E_BRIGHT }}>Kuwait</span>
+            <span style={{ color: E, marginLeft: 12, fontSize: "0.6em" }}>2026</span>
           </motion.h1>
 
           {/* Sub-headline */}
           <motion.p
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.7, ease: EASE }}
+            transition={{ duration: 0.7, delay: 0.6, ease: EASE }}
             style={{
               fontFamily: "var(--font-outfit)",
-              fontSize: "clamp(16px, 1.8vw, 19px)",
-              fontWeight: 300,
-              color: "#909090",
-              maxWidth: 460,
-              marginTop: 28,
-              lineHeight: 1.6,
+              fontSize: "clamp(16px, 1.6vw, 18px)",
+              fontWeight: 400,
+              color: "rgba(255,255,255,0.6)",
+              maxWidth: 440,
+              marginTop: 24,
+              lineHeight: 1.7,
             }}
           >
             Turning Data & AI into regulated, profitable, and scalable solutions.
           </motion.p>
 
-          {/* Date + Location */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.9 }}
-            className="flex items-center gap-5"
-            style={{ marginTop: 28 }}
-          >
-            <span className="flex items-center gap-2">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={E_BRIGHT} strokeWidth="2" strokeLinecap="round">
-                <rect x="3" y="4" width="18" height="18" rx="2" />
-                <line x1="16" y1="2" x2="16" y2="6" />
-                <line x1="8" y1="2" x2="8" y2="6" />
-                <line x1="3" y1="10" x2="21" y2="10" />
-              </svg>
-              <span style={{ fontFamily: "var(--font-outfit)", fontSize: 14, fontWeight: 400, color: "#909090" }}>
-                May 18, 2026
-              </span>
-            </span>
-            <span style={{ width: 1, height: 14, background: "rgba(255,255,255,0.1)" }} />
-            <span className="flex items-center gap-2">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={E_BRIGHT} strokeWidth="2" strokeLinecap="round">
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
-                <circle cx="12" cy="10" r="3" />
-              </svg>
-              <span style={{ fontFamily: "var(--font-outfit)", fontSize: 14, fontWeight: 400, color: "#909090" }}>
-                Kuwait City, Kuwait
-              </span>
-            </span>
-          </motion.div>
-
           {/* CTAs */}
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 1.1, ease: EASE }}
+            transition={{ duration: 0.7, delay: 0.8, ease: EASE }}
             className="flex flex-wrap gap-4"
-            style={{ marginTop: 36 }}
+            style={{ marginTop: 32 }}
           >
             <HeroCTA primary href="#register">Reserve Your Seat</HeroCTA>
             <HeroCTA href="#sponsors">Become a Sponsor</HeroCTA>
@@ -570,30 +501,30 @@ function HeroSection() {
       <div
         className="daik-bottom-bar absolute bottom-0 left-0 right-0 z-20"
         style={{
-          padding: "14px clamp(20px, 4vw, 60px)",
-          background: "rgba(6,13,11,0.85)",
-          backdropFilter: "blur(12px)",
-          WebkitBackdropFilter: "blur(12px)",
-          borderTop: `1px solid ${E}15`,
+          padding: "20px clamp(24px, 4vw, 60px)",
+          background: "rgba(6,13,11,0.90)",
+          backdropFilter: "blur(16px)",
+          WebkitBackdropFilter: "blur(16px)",
+          borderTop: `1px solid ${E}25`,
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          gap: 16,
+          gap: 24,
         }}
       >
         {/* Left: Inaugural badge */}
-        <div className="flex items-center gap-3">
-          <span className="relative flex h-2 w-2">
+        <div className="daik-bar-badge flex items-center gap-3">
+          <span className="relative flex h-3 w-3">
             <span
               className="absolute inline-flex h-full w-full rounded-full opacity-75 animate-ping"
               style={{ background: E_BRIGHT, animationDuration: "2s" }}
             />
-            <span className="relative inline-flex rounded-full h-2 w-2" style={{ background: E_BRIGHT }} />
+            <span className="relative inline-flex rounded-full h-3 w-3" style={{ background: E_BRIGHT }} />
           </span>
           <span
             style={{
               fontFamily: "var(--font-outfit)",
-              fontSize: 11,
+              fontSize: 13,
               fontWeight: 600,
               letterSpacing: "2px",
               textTransform: "uppercase",
@@ -605,38 +536,44 @@ function HeroSection() {
         </div>
 
         {/* Center: Countdown */}
-        <div className="daik-bar-countdown flex items-center gap-3">
+        <div className="daik-bar-countdown flex items-center gap-5">
           {[
             { v: cd.d, l: "Days" },
             { v: cd.h, l: "Hrs" },
             { v: cd.m, l: "Min" },
             { v: cd.s, l: "Sec" },
-          ].map((u) => (
-            <div key={u.l} className="text-center">
-              <span
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontSize: 18,
-                  fontWeight: 800,
-                  color: E_BRIGHT,
-                }}
-              >
-                {u.v.toString().padStart(2, "0")}
-              </span>
-              <span
-                style={{
-                  fontFamily: "var(--font-outfit)",
-                  fontSize: 8,
-                  fontWeight: 500,
-                  color: "#505050",
-                  letterSpacing: "1px",
-                  textTransform: "uppercase",
-                  display: "block",
-                  marginTop: 2,
-                }}
-              >
-                {u.l}
-              </span>
+          ].map((u, i) => (
+            <div key={u.l} className="text-center flex items-center gap-5">
+              <div>
+                <span
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: 32,
+                    fontWeight: 800,
+                    color: E_BRIGHT,
+                    lineHeight: 1,
+                  }}
+                >
+                  {u.v.toString().padStart(2, "0")}
+                </span>
+                <span
+                  style={{
+                    fontFamily: "var(--font-outfit)",
+                    fontSize: 10,
+                    fontWeight: 500,
+                    color: "#606060",
+                    letterSpacing: "1.5px",
+                    textTransform: "uppercase",
+                    display: "block",
+                    marginTop: 4,
+                  }}
+                >
+                  {u.l}
+                </span>
+              </div>
+              {i < 3 && (
+                <span style={{ color: `${E}40`, fontSize: 24, fontWeight: 300 }}>:</span>
+              )}
             </div>
           ))}
         </div>
@@ -644,18 +581,19 @@ function HeroSection() {
         {/* Right: CTA */}
         <Link
           href="#register"
-          className="daik-bar-cta transition-all"
+          className="daik-bar-cta transition-all hover:scale-105"
           style={{
-            padding: "8px 22px",
+            padding: "14px 32px",
             borderRadius: 50,
             background: E,
             fontFamily: "var(--font-outfit)",
-            fontSize: 12,
+            fontSize: 15,
             fontWeight: 600,
             color: "white",
+            boxShadow: `0 4px 20px ${E}40`,
           }}
         >
-          Register →
+          Register Now →
         </Link>
       </div>
 
@@ -677,11 +615,13 @@ function HeroSection() {
         @media (max-width: 768px) {
           .daik-bottom-bar {
             flex-direction: column !important;
-            gap: 12px !important;
-            padding: 16px 20px !important;
+            gap: 16px !important;
+            padding: 20px 24px !important;
             text-align: center;
           }
-          .daik-bar-cta { width: 100%; text-align: center; }
+          .daik-bar-badge { justify-content: center; }
+          .daik-bar-countdown { justify-content: center; }
+          .daik-bar-cta { width: 100%; text-align: center; padding: 16px 32px !important; }
         }
         @media (max-width: 600px) {
           .daik-hero-image-wrap {
@@ -727,83 +667,198 @@ function HeroCTA({
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
-//  2. STATS BAR
+//  2. STATS BAR — Impactful, visual-rich
 // ═══════════════════════════════════════════════════════════════════════════════
 
 function StatsBar() {
   const ref = useRef<HTMLElement>(null);
-  const inView = useInView(ref, { once: true });
+  const inView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
     <section
       ref={ref}
+      className="relative overflow-hidden"
       style={{
-        background: "#080808",
+        background: "#060606",
         borderTop: `1px solid ${E}15`,
         borderBottom: `1px solid ${E}15`,
-        padding: "40px 0",
+        padding: "clamp(48px, 6vw, 72px) 0",
       }}
     >
+      {/* Background glow */}
       <div
-        className="daik-stats-grid"
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: `radial-gradient(ellipse 60% 50% at 50% 30%, ${E}12 0%, transparent 70%)`,
+        }}
+      />
+      
+      {/* Subtle grid pattern */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: `linear-gradient(${E}06 1px, transparent 1px), linear-gradient(90deg, ${E}06 1px, transparent 1px)`,
+          backgroundSize: "40px 40px",
+          opacity: 0.5,
+        }}
+      />
+
+      <div
         style={{
           maxWidth: 1100,
           margin: "0 auto",
-          padding: "0 clamp(20px, 4vw, 60px)",
-          display: "grid",
-          gridTemplateColumns: `repeat(${EVENT_STATS.length}, 1fr)`,
-          gap: 24,
+          padding: "0 clamp(24px, 5vw, 60px)",
+          position: "relative",
+          zIndex: 1,
         }}
       >
-        {EVENT_STATS.map((s, i) => (
+        {/* Two-column layout: Hero stat left, supporting stats right */}
+        <div
+          className="daik-stats-layout"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1.2fr",
+            gap: "clamp(32px, 5vw, 64px)",
+            alignItems: "center",
+          }}
+        >
+          {/* Left: Hero Stat */}
           <motion.div
-            key={s.label}
-            initial={{ opacity: 0, y: 15 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: i * 0.08, ease: EASE }}
-            className="text-center"
+            initial={{ opacity: 0, x: -30 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8, ease: EASE }}
             style={{
-              borderRight: i < EVENT_STATS.length - 1 ? "1px solid rgba(255,255,255,0.06)" : "none",
-              paddingRight: 16,
+              borderRight: `1px solid ${E}20`,
+              paddingRight: "clamp(24px, 4vw, 48px)",
             }}
           >
-            <span
+            <div style={{ marginBottom: 8 }}>
+              <span
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: "clamp(80px, 14vw, 120px)",
+                  fontWeight: 800,
+                  color: E_BRIGHT,
+                  letterSpacing: "-4px",
+                  lineHeight: 0.9,
+                  textShadow: `0 0 80px ${E}50`,
+                }}
+              >
+                <Counter to={250} suffix="+" duration={2000} />
+              </span>
+            </div>
+            <p
               style={{
                 fontFamily: "var(--font-display)",
-                fontSize: "clamp(28px, 3.5vw, 42px)",
-                fontWeight: 800,
-                color: E_BRIGHT,
+                fontSize: "clamp(18px, 2vw, 24px)",
+                fontWeight: 700,
+                color: "white",
+                letterSpacing: "-0.5px",
+                margin: 0,
               }}
             >
-              <Counter to={s.n} suffix={s.suffix} />
-            </span>
+              Decision Makers
+            </p>
             <p
               style={{
                 fontFamily: "var(--font-outfit)",
-                fontSize: 11,
-                fontWeight: 500,
-                color: "#505050",
-                letterSpacing: "1.5px",
-                textTransform: "uppercase",
-                marginTop: 6,
+                fontSize: 14,
+                fontWeight: 400,
+                color: "rgba(255,255,255,0.5)",
+                marginTop: 8,
+                lineHeight: 1.5,
               }}
             >
-              {s.label}
+              Kuwait&apos;s senior data & AI leadership — CDOs, CTOs, CIOs — together in one room.
             </p>
           </motion.div>
-        ))}
+
+          {/* Right: Supporting Stats Grid */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.2, ease: EASE }}
+            className="daik-stats-grid-new"
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(3, 1fr)",
+              gap: 0,
+            }}
+          >
+            {[
+              { n: 25, suffix: "+", label: "Speakers", icon: "M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" },
+              { n: 4, suffix: "", label: "Panels", icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" },
+              { n: 8, suffix: "", label: "Awards", icon: "M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" },
+            ].map((stat, i) => (
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, y: 20 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.3 + i * 0.1, ease: EASE }}
+                style={{
+                  textAlign: "center",
+                  padding: "clamp(16px, 2vw, 24px)",
+                  borderLeft: i > 0 ? `1px solid ${E}15` : "none",
+                  background: i === 1 ? `${E}08` : "transparent",
+                }}
+              >
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke={E_BRIGHT}
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  style={{ margin: "0 auto 12px", opacity: 0.7 }}
+                >
+                  <path d={stat.icon} />
+                </svg>
+                <span
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: "clamp(36px, 5vw, 48px)",
+                    fontWeight: 800,
+                    color: "white",
+                    letterSpacing: "-2px",
+                    display: "block",
+                  }}
+                >
+                  <Counter to={stat.n} suffix={stat.suffix} />
+                </span>
+                <p
+                  style={{
+                    fontFamily: "var(--font-outfit)",
+                    fontSize: 12,
+                    fontWeight: 600,
+                    color: E_BRIGHT,
+                    letterSpacing: "1px",
+                    textTransform: "uppercase",
+                    marginTop: 8,
+                    margin: 0,
+                  }}
+                >
+                  {stat.label}
+                </p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
       </div>
 
       <style jsx global>{`
         @media (max-width: 768px) {
-          .daik-stats-grid {
-            grid-template-columns: repeat(3, 1fr) !important;
-            gap: 20px 16px !important;
+          .daik-stats-layout {
+            grid-template-columns: 1fr !important;
+            text-align: center;
           }
-          .daik-stats-grid > div { border-right: none !important; padding-right: 0 !important; }
-        }
-        @media (max-width: 480px) {
-          .daik-stats-grid { grid-template-columns: repeat(2, 1fr) !important; }
+          .daik-stats-layout > div:first-child {
+            border-right: none !important;
+            border-bottom: 1px solid rgba(15,115,94,0.2);
+            padding-right: 0 !important;
+            padding-bottom: 32px;
+          }
         }
       `}</style>
     </section>
@@ -811,201 +866,203 @@ function StatsBar() {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
-//  3. MARKET CONTEXT
+//  3. MARKET CONTEXT — Full-width image with floating glass stats
 // ═══════════════════════════════════════════════════════════════════════════════
 
 function MarketContext() {
   const ref = useRef<HTMLElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
     <section
       ref={ref}
       className="relative overflow-hidden"
-      style={{ background: "#0A0A0A", padding: "clamp(40px, 5vw, 72px) 0" }}
+      style={{ 
+        minHeight: "clamp(500px, 70vh, 700px)",
+        background: "#050505",
+      }}
     >
-      <DotMatrixGrid color={E} opacity={0.02} spacing={28} />
-
+      {/* Background Image */}
       <div
+        className="absolute inset-0"
         style={{
-          maxWidth: 1100,
+          backgroundImage: `url('/market-context-bg.jpg')`,
+          backgroundSize: "cover",
+          backgroundPosition: "center 30%",
+        }}
+      />
+      
+      {/* Gradient overlay for text readability - lighter to show image */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.6) 100%)`,
+        }}
+      />
+
+      {/* Content */}
+      <div
+        className="relative z-10 flex flex-col justify-center"
+        style={{
+          minHeight: "clamp(500px, 70vh, 700px)",
+          maxWidth: 1200,
           margin: "0 auto",
-          padding: "0 clamp(20px, 4vw, 60px)",
-          position: "relative",
-          zIndex: 1,
+          padding: "clamp(48px, 6vw, 80px) clamp(24px, 5vw, 60px)",
         }}
       >
-        {/* Header */}
+        {/* Headline */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, ease: EASE }}
-          style={{ textAlign: "center", marginBottom: 32 }}
+          transition={{ duration: 0.8, ease: EASE }}
+          style={{ marginBottom: 48 }}
         >
-          <div className="flex items-center justify-center gap-3" style={{ marginBottom: 12 }}>
-            <span style={{ width: 30, height: 1, background: E }} />
-            <span style={{ fontFamily: "var(--font-outfit)", fontSize: 11, fontWeight: 600, letterSpacing: "2.5px", textTransform: "uppercase", color: E }}>
-              The Opportunity
-            </span>
-            <span style={{ width: 30, height: 1, background: E }} />
-          </div>
+          <span
+            style={{
+              fontFamily: "var(--font-outfit)",
+              fontSize: 11,
+              fontWeight: 600,
+              letterSpacing: "3px",
+              textTransform: "uppercase",
+              color: E_BRIGHT,
+            }}
+          >
+            The Opportunity
+          </span>
           <h2
             style={{
               fontFamily: "var(--font-display)",
               fontWeight: 800,
-              fontSize: "clamp(30px, 3.5vw, 48px)",
-              letterSpacing: "-1.5px",
-              color: "var(--white)",
+              fontSize: "clamp(36px, 5vw, 56px)",
+              letterSpacing: "-2px",
+              color: "white",
               lineHeight: 1.1,
               margin: "16px 0 0",
+              maxWidth: 600,
             }}
           >
-            Kuwait&rsquo;s AI & Data Market
+            Kuwait Vision 2035 is
             <br />
-            Is <span style={{ color: E_BRIGHT }}>Accelerating</span>
+            <span style={{ color: E_BRIGHT }}>reshaping the future.</span>
           </h2>
-          <p
-            style={{
-              fontFamily: "var(--font-outfit)",
-              fontSize: 16,
-              fontWeight: 300,
-              color: "#606060",
-              maxWidth: 560,
-              margin: "16px auto 0",
-              lineHeight: 1.7,
-            }}
-          >
-            Aligned with Kuwait Vision 2035, the nation is building a knowledge-based
-            economy powered by AI, big data, and digital infrastructure.
-          </p>
         </motion.div>
 
-        {/* Cards */}
-        <div
-          className="daik-market-grid"
+        {/* Floating Glass Stats */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.3, ease: EASE }}
+          className="daik-glass-stats"
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(4, 1fr)",
             gap: 16,
           }}
         >
-          {MARKET_STATS.map((s, i) => (
+          {[
+            { value: 43, suffix: "B", prefix: "$", label: "ICT Market 2030", highlight: true },
+            { value: 9, suffix: "B", prefix: "$", label: "AI Investment" },
+            { value: 800, suffix: "M", prefix: "$", label: "KOC Digital" },
+            { value: 50, suffix: "K+", prefix: "", label: "New Tech Jobs" },
+          ].map((stat, i) => (
             <motion.div
-              key={s.label}
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 + i * 0.1, ease: EASE }}
+              key={stat.label}
+              initial={{ opacity: 0, y: 20, scale: 0.95 }}
+              animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+              transition={{ duration: 0.5, delay: 0.4 + i * 0.1, ease: EASE }}
+              style={{
+                padding: stat.highlight ? "32px 24px" : "24px 20px",
+                background: stat.highlight 
+                  ? `linear-gradient(135deg, ${E}25 0%, ${E}10 100%)`
+                  : "rgba(255,255,255,0.05)",
+                backdropFilter: "blur(20px)",
+                WebkitBackdropFilter: "blur(20px)",
+                borderRadius: 20,
+                border: `1px solid ${stat.highlight ? `${E}40` : "rgba(255,255,255,0.1)"}`,
+                textAlign: "center",
+                boxShadow: stat.highlight ? `0 8px 32px ${E}20` : "none",
+              }}
             >
-              <MarketCard stat={s} />
+              <p
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: stat.highlight ? "clamp(40px, 6vw, 56px)" : "clamp(28px, 4vw, 36px)",
+                  fontWeight: 800,
+                  color: stat.highlight ? E_BRIGHT : "white",
+                  margin: 0,
+                  lineHeight: 1,
+                  letterSpacing: "-2px",
+                  textShadow: stat.highlight ? `0 0 40px ${E}60` : "none",
+                }}
+              >
+                {stat.prefix}<Counter to={stat.value} suffix={stat.suffix} duration={stat.highlight ? 2000 : 1500} />
+              </p>
+              <p
+                style={{
+                  fontFamily: "var(--font-outfit)",
+                  fontSize: stat.highlight ? 13 : 11,
+                  fontWeight: 600,
+                  color: stat.highlight ? "white" : "rgba(255,255,255,0.6)",
+                  letterSpacing: "1px",
+                  textTransform: "uppercase",
+                  marginTop: stat.highlight ? 12 : 8,
+                  margin: 0,
+                  marginTop: 12,
+                }}
+              >
+                {stat.label}
+              </p>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
 
       <style jsx global>{`
-        @media (max-width: 1024px) { .daik-market-grid { grid-template-columns: repeat(2, 1fr) !important; } }
-        @media (max-width: 640px) { .daik-market-grid { grid-template-columns: 1fr !important; } }
+        @media (max-width: 900px) {
+          .daik-glass-stats {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+        }
+        @media (max-width: 500px) {
+          .daik-glass-stats {
+            grid-template-columns: 1fr !important;
+          }
+        }
       `}</style>
     </section>
   );
 }
 
+/* MarketCard - kept for reference but not used in new design */
 function MarketCard({ stat }: { stat: (typeof MARKET_STATS)[0] }) {
   const [h, setH] = useState(false);
-  const [mouse, setMouse] = useState({ x: 0, y: 0 });
 
   return (
-    <Tilt max={6}>
-      <div
-        className="relative overflow-hidden transition-all"
-        style={{
-          borderRadius: 16,
-          padding: "28px 24px",
-          background: h ? `${E}08` : "rgba(255,255,255,0.02)",
-          border: `1px solid ${h ? `${E}30` : "rgba(255,255,255,0.06)"}`,
-          transitionDuration: "0.4s",
-        }}
-        onMouseEnter={() => setH(true)}
-        onMouseLeave={() => setH(false)}
-        onMouseMove={(ev) => {
-          const r = ev.currentTarget.getBoundingClientRect();
-          setMouse({ x: ev.clientX - r.left, y: ev.clientY - r.top });
-        }}
-      >
-        {/* Spotlight */}
-        <div
-          className="absolute pointer-events-none transition-opacity"
-          style={{
-            width: 200,
-            height: 200,
-            left: mouse.x - 100,
-            top: mouse.y - 100,
-            background: `radial-gradient(circle, ${E}15 0%, transparent 70%)`,
-            opacity: h ? 1 : 0,
-            transitionDuration: "0.3s",
-          }}
-        />
-
-        {/* Unit label */}
-        <span
-          style={{
-            fontFamily: "var(--font-outfit)",
-            fontSize: 9,
-            fontWeight: 600,
-            letterSpacing: "2px",
-            textTransform: "uppercase",
-            color: "#404040",
-            position: "relative",
-          }}
-        >
-          {stat.unit}
-        </span>
-
-        {/* Value */}
-        <p
-          style={{
-            fontFamily: "var(--font-display)",
-            fontSize: "clamp(36px, 4vw, 48px)",
-            fontWeight: 800,
-            color: E_BRIGHT,
-            margin: "8px 0 0",
-            lineHeight: 1,
-            position: "relative",
-          }}
-        >
-          <Counter to={stat.value} suffix={stat.suffix} />
-        </p>
-
-        {/* Label */}
-        <p
-          style={{
-            fontFamily: "var(--font-outfit)",
-            fontSize: 14,
-            fontWeight: 500,
-            color: "var(--white)",
-            margin: "10px 0 0",
-            position: "relative",
-          }}
-        >
-          {stat.label}
-        </p>
-
-        {/* Note */}
-        <p
-          style={{
-            fontFamily: "var(--font-outfit)",
-            fontSize: 12,
-            fontWeight: 300,
-            color: "#505050",
-            margin: "6px 0 0",
-            lineHeight: 1.5,
-            position: "relative",
-          }}
-        >
-          {stat.note}
-        </p>
-      </div>
-    </Tilt>
+    <div
+      className="relative overflow-hidden transition-all"
+      style={{
+        borderRadius: 16,
+        padding: "28px 24px",
+        background: h ? `${E}08` : "rgba(255,255,255,0.02)",
+        border: `1px solid ${h ? `${E}30` : "rgba(255,255,255,0.06)"}`,
+        transitionDuration: "0.4s",
+      }}
+      onMouseEnter={() => setH(true)}
+      onMouseLeave={() => setH(false)}
+    >
+      <span style={{ fontFamily: "var(--font-outfit)", fontSize: 9, fontWeight: 600, letterSpacing: "2px", textTransform: "uppercase", color: "#404040" }}>
+        {stat.unit}
+      </span>
+      <p style={{ fontFamily: "var(--font-display)", fontSize: "clamp(36px, 4vw, 48px)", fontWeight: 800, color: E_BRIGHT, margin: "8px 0 0", lineHeight: 1 }}>
+        <Counter to={stat.value} suffix={stat.suffix} />
+      </p>
+      <p style={{ fontFamily: "var(--font-outfit)", fontSize: 14, fontWeight: 500, color: "var(--white)", margin: "10px 0 0" }}>
+        {stat.label}
+      </p>
+      <p style={{ fontFamily: "var(--font-outfit)", fontSize: 12, fontWeight: 300, color: "#505050", margin: "6px 0 0", lineHeight: 1.5 }}>
+        {stat.note}
+      </p>
+    </div>
   );
 }
 

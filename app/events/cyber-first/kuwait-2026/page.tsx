@@ -688,11 +688,11 @@ function HeroSection() {
         className="absolute bottom-0 left-0 right-0"
         style={{
           zIndex: 20,
-          background: "rgba(5,8,16,0.7)",
+          background: "rgba(5,8,16,0.90)",
           backdropFilter: "blur(16px)",
           WebkitBackdropFilter: "blur(16px)",
-          borderTop: `1px solid rgba(255,255,255,0.06)`,
-          padding: "14px 0",
+          borderTop: `1px solid ${C}25`,
+          padding: "20px 0",
         }}
       >
         <div
@@ -704,18 +704,18 @@ function HeroSection() {
           }}
         >
           {/* Left: 3rd Annual badge */}
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <span className="relative flex h-2 w-2" style={{ flexShrink: 0 }}>
+          <div className="cfk-bar-badge" style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            <span className="relative flex h-3 w-3" style={{ flexShrink: 0 }}>
               <span
                 className="absolute inline-flex h-full w-full rounded-full animate-ping"
                 style={{ background: C, opacity: 0.75 }}
               />
-              <span className="relative inline-flex rounded-full h-2 w-2" style={{ background: C }} />
+              <span className="relative inline-flex rounded-full h-3 w-3" style={{ background: C }} />
             </span>
             <span
               style={{
                 fontFamily: "var(--font-outfit)",
-                fontSize: 11,
+                fontSize: 13,
                 fontWeight: 700,
                 letterSpacing: "2.5px",
                 textTransform: "uppercase",
@@ -724,42 +724,38 @@ function HeroSection() {
             >
               3rd Annual
             </span>
-            <span style={{ color: "rgba(255,255,255,0.15)", margin: "0 4px" }}>|</span>
+            <span style={{ color: "rgba(255,255,255,0.15)", margin: "0 6px" }}>|</span>
             <span
               style={{
                 fontFamily: "var(--font-outfit)",
-                fontSize: 12,
+                fontSize: 13,
                 fontWeight: 500,
-                color: "rgba(255,255,255,0.4)",
+                color: "rgba(255,255,255,0.5)",
               }}
             >
               Cyber First Series
             </span>
           </div>
 
-          {/* Right: Countdown + CTA */}
-          <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 0 }}>
-              {[
-                { v: cd.d, l: "D" },
-                { v: cd.h, l: "H" },
-                { v: cd.m, l: "M" },
-                { v: cd.s, l: "S" },
-              ].map((u, i) => (
-                <div key={u.l} style={{ display: "flex", alignItems: "baseline" }}>
-                  {i > 0 && (
-                    <span style={{ color: `${C}30`, fontSize: 16, fontWeight: 200, margin: "0 4px" }}>:</span>
-                  )}
+          {/* Center: Countdown */}
+          <div className="cfk-bar-countdown" style={{ display: "flex", alignItems: "center", gap: 6 }}>
+            {[
+              { v: cd.d, l: "Days" },
+              { v: cd.h, l: "Hrs" },
+              { v: cd.m, l: "Min" },
+              { v: cd.s, l: "Sec" },
+            ].map((u, i) => (
+              <div key={u.l} style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                <div className="text-center">
                   <span
                     className="tabular-nums"
                     style={{
                       fontFamily: "var(--font-display)",
-                      fontSize: 20,
+                      fontSize: 32,
                       fontWeight: 800,
-                      color: "white",
+                      color: C_BRIGHT,
                       letterSpacing: "-1px",
-                      minWidth: 28,
-                      textAlign: "center",
+                      lineHeight: 1,
                     }}
                   >
                     {String(u.v).padStart(2, "0")}
@@ -767,35 +763,43 @@ function HeroSection() {
                   <span
                     style={{
                       fontFamily: "var(--font-outfit)",
-                      fontSize: 8,
-                      fontWeight: 600,
-                      letterSpacing: "1px",
-                      color: "rgba(255,255,255,0.25)",
-                      marginLeft: 1,
+                      fontSize: 10,
+                      fontWeight: 500,
+                      letterSpacing: "1.5px",
+                      textTransform: "uppercase",
+                      color: "#606060",
+                      display: "block",
+                      marginTop: 4,
                     }}
                   >
                     {u.l}
                   </span>
                 </div>
-              ))}
-            </div>
-            <Link
-              href="/contact"
-              className="cfk-bar-cta"
-              style={{
-                fontFamily: "var(--font-outfit)",
-                fontSize: 12,
-                fontWeight: 600,
-                color: C,
-                textDecoration: "none",
-                display: "flex",
-                alignItems: "center",
-                gap: 4,
-              }}
-            >
-              Register <span>→</span>
-            </Link>
+                {i < 3 && (
+                  <span style={{ color: `${C}40`, fontSize: 24, fontWeight: 300, marginLeft: 6 }}>:</span>
+                )}
+              </div>
+            ))}
           </div>
+
+          {/* Right: CTA */}
+          <Link
+            href="#register"
+            className="cfk-bar-cta transition-all hover:scale-105"
+            style={{
+              padding: "14px 32px",
+              borderRadius: 50,
+              background: C,
+              fontFamily: "var(--font-outfit)",
+              fontSize: 15,
+              fontWeight: 600,
+              color: "white",
+              textDecoration: "none",
+              boxShadow: `0 4px 20px ${C}40`,
+            }}
+          >
+            Register Now →
+          </Link>
         </div>
       </motion.div>
 
@@ -809,7 +813,7 @@ function HeroSection() {
           animation: cfkShimmer 6s ease-in-out infinite;
         }
         .cfk-bar-cta:hover {
-          color: ${C_BRIGHT} !important;
+          background: ${C_BRIGHT} !important;
         }
         @media (max-width: 768px) {
           .cfk-hero-content > div {
@@ -818,9 +822,12 @@ function HeroSection() {
           }
           .cfk-bottom-bar {
             flex-direction: column !important;
-            gap: 12px !important;
+            gap: 16px !important;
             text-align: center;
           }
+          .cfk-bar-badge { justify-content: center; }
+          .cfk-bar-countdown { justify-content: center; }
+          .cfk-bar-cta { width: 100%; text-align: center; padding: 16px 32px !important; justify-content: center; }
         }
       `}</style>
     </section>
