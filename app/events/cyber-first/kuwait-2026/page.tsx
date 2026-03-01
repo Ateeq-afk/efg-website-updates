@@ -1324,97 +1324,280 @@ function Gallery() {
   );
 }
 
-// ─── Market Context ──────────────────────────────────────────────────────────
+// ─── Market Context (Premium Uplift) ─────────────────────────────────────────
 function MarketContext() {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const inView = useInView(ref, { once: true, margin: "-100px" });
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  
   const stats = [
-    { value: 1, suffix: "B+", unit: "USD", label: "Kuwait Cyber Market by 2030", note: "Exceeding USD 1 billion", icon: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6", badge: "Vision 2035" },
-    { value: 11, suffix: "%", unit: "CAGR", label: "Market Growth Rate", note: "Strong double-digit expansion", icon: "M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z", badge: "By 2030" },
-    { value: 25, suffix: "%", unit: "YoY", label: "Cyber Workforce Demand", note: "Annual growth through 2030", icon: "M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75", badge: "+25%" },
-    { value: 5, suffix: "M+", unit: "USD", label: "Average Breach Cost", note: "Critical sectors by 2030", icon: "M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z", badge: "Risk" },
+    { value: 1, suffix: "B+", label: "Kuwait Cyber Market by 2030", note: "Exceeding USD 1 billion", icon: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6", badge: "Vision 2035", highlight: true },
+    { value: 11, suffix: "%", label: "Market Growth Rate", note: "Strong double-digit expansion", icon: "M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z", badge: "By 2030" },
+    { value: 25, suffix: "%", label: "Cyber Workforce Demand", note: "Annual growth through 2030", icon: "M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75", badge: "+25%" },
+    { value: 5, suffix: "M+", label: "Average Breach Cost", note: "Critical sectors by 2030", icon: "M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z", badge: "Risk" },
   ];
+
   return (
     <section
       ref={ref}
+      className="cfk-market-section"
       style={{
-        background: "#020508",
-        padding: "clamp(56px,7vw,100px) 0",
         position: "relative",
+        padding: "clamp(100px,12vw,160px) 0",
         overflow: "hidden",
+        background: "#020508",
       }}
     >
-      <div
+      {/* ═══ BACKGROUND LAYERS ═══ */}
+      {/* Parallax cyber grid background */}
+      <motion.div
         className="absolute inset-0 pointer-events-none"
-        style={{ background: `radial-gradient(ellipse 70% 60% at 50% 100%, ${C}06, transparent 70%)` }}
-      />
+        style={{ y: bgY }}
+      >
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `
+              linear-gradient(${C}08 1px, transparent 1px),
+              linear-gradient(90deg, ${C}08 1px, transparent 1px)
+            `,
+            backgroundSize: "80px 80px",
+            opacity: 0.4,
+          }}
+        />
+      </motion.div>
+
+      {/* Central glow orb */}
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="absolute pointer-events-none cfk-market-orb"
         style={{
-          backgroundImage: `radial-gradient(circle, ${C}04 1px, transparent 1px)`,
-          backgroundSize: "32px 32px",
+          width: "120%",
+          height: "100%",
+          left: "-10%",
+          top: 0,
+          background: `radial-gradient(ellipse 50% 70% at 50% 30%, ${C}15, transparent 70%)`,
         }}
       />
-      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 clamp(20px,5vw,80px)", position: "relative" }}>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, ease: EASE }}
-          style={{ marginBottom: 56 }}
-        >
-          <span
+
+      {/* Animated scan line */}
+      <div
+        className="absolute inset-0 pointer-events-none overflow-hidden"
+        style={{ opacity: 0.15 }}
+      >
+        <div
+          className="cfk-scanline"
+          style={{
+            position: "absolute",
+            left: 0,
+            right: 0,
+            height: 2,
+            background: `linear-gradient(90deg, transparent, ${C}, transparent)`,
+          }}
+        />
+      </div>
+
+      {/* Floating particles */}
+      <div className="absolute inset-0 pointer-events-none">
+        {[...Array(20)].map((_, i) => (
+          <div
+            key={i}
+            className="cfk-particle"
             style={{
-              display: "inline-block",
-              padding: "6px 16px",
+              position: "absolute",
+              width: Math.random() * 4 + 2,
+              height: Math.random() * 4 + 2,
+              borderRadius: "50%",
+              background: C,
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              opacity: Math.random() * 0.5 + 0.1,
+              animationDelay: `${Math.random() * 5}s`,
+              animationDuration: `${Math.random() * 10 + 10}s`,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* ═══ CONTENT ═══ */}
+      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 clamp(20px,5vw,80px)", position: "relative", zIndex: 1 }}>
+        {/* Section Header - Centered & Dramatic */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.9, ease: EASE }}
+          style={{ textAlign: "center", marginBottom: 80 }}
+        >
+          {/* Badge */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={inView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.6, delay: 0.1, ease: EASE }}
+            className="cfk-market-badge"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 10,
+              padding: "10px 24px",
               borderRadius: 50,
-              background: `${C}12`,
-              border: `1px solid ${C}25`,
-              fontFamily: "var(--font-outfit)",
-              fontSize: 11,
-              fontWeight: 600,
-              letterSpacing: "2.5px",
-              textTransform: "uppercase",
-              color: C_BRIGHT,
-              marginBottom: 20,
+              background: `linear-gradient(135deg, ${C}20 0%, ${C}08 100%)`,
+              border: `1px solid ${C}40`,
+              marginBottom: 28,
+              boxShadow: `0 0 40px ${C}15, inset 0 1px 0 ${C}30`,
             }}
           >
-            The Opportunity
-          </span>
-          <h2
+            <span
+              className="cfk-pulse-dot"
+              style={{
+                width: 8,
+                height: 8,
+                borderRadius: "50%",
+                background: C_BRIGHT,
+                boxShadow: `0 0 12px ${C}`,
+              }}
+            />
+            <span
+              style={{
+                fontFamily: "var(--font-outfit)",
+                fontSize: 12,
+                fontWeight: 700,
+                letterSpacing: "3px",
+                textTransform: "uppercase",
+                color: C_BRIGHT,
+              }}
+            >
+              The Opportunity
+            </span>
+          </motion.div>
+
+          {/* Title with gradient */}
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.2, ease: EASE }}
             style={{
               fontFamily: "var(--font-display)",
-              fontWeight: 800,
-              fontSize: "clamp(28px,3.8vw,52px)",
+              fontWeight: 900,
+              fontSize: "clamp(32px, 5vw, 64px)",
               letterSpacing: "-2px",
-              color: "white",
-              lineHeight: 1.08,
-              margin: "0 0 14px",
+              lineHeight: 1.1,
+              margin: "0 0 20px",
+              maxWidth: 900,
+              marginLeft: "auto",
+              marginRight: "auto",
             }}
           >
-            Kuwait&apos;s Cybersecurity Market Is Accelerating
-          </h2>
-          <p
+            <span style={{ color: "white" }}>Kuwait&apos;s Cybersecurity Market</span>
+            <br />
+            <span
+              className="cfk-title-glow"
+              style={{
+                background: `linear-gradient(135deg, ${C_BRIGHT} 0%, ${C} 50%, #fff 100%)`,
+                backgroundSize: "200% 200%",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                filter: `drop-shadow(0 0 30px ${C}50)`,
+              }}
+            >
+              Is Accelerating
+            </span>
+          </motion.h2>
+
+          {/* Subtitle */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.3, ease: EASE }}
             style={{
               fontFamily: "var(--font-outfit)",
-              fontWeight: 300,
-              fontSize: 15,
-              color: "#484848",
-              lineHeight: 1.65,
-              maxWidth: 520,
-              margin: 0,
+              fontWeight: 400,
+              fontSize: "clamp(16px, 1.5vw, 20px)",
+              color: "rgba(255,255,255,0.5)",
+              lineHeight: 1.7,
+              maxWidth: 650,
+              margin: "0 auto",
             }}
           >
             Vision 2035 is driving an unprecedented wave of digital transformation — and
             with it, the imperative to secure every layer of the nation&apos;s critical infrastructure.
-          </p>
+          </motion.p>
         </motion.div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 16 }}>
+        {/* Stats Grid - Premium Cards */}
+        <div
+          className="cfk-market-grid"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(4, 1fr)",
+            gap: 20,
+          }}
+        >
           {stats.map((s, i) => (
-            <MarketCard key={s.label} stat={s} delay={0.1 + i * 0.1} inView={inView} />
+            <MarketCard key={s.label} stat={s} delay={0.2 + i * 0.12} inView={inView} index={i} />
           ))}
         </div>
+
+        {/* Bottom accent line */}
+        <motion.div
+          initial={{ scaleX: 0 }}
+          animate={inView ? { scaleX: 1 } : {}}
+          transition={{ duration: 1.2, delay: 0.8, ease: EASE }}
+          style={{
+            height: 1,
+            background: `linear-gradient(90deg, transparent, ${C}40, ${C}, ${C}40, transparent)`,
+            marginTop: 80,
+            transformOrigin: "center",
+          }}
+        />
       </div>
+
+      {/* ═══ CSS ═══ */}
+      <style jsx global>{`
+        @keyframes cfkScanline {
+          0% { top: -2px; opacity: 0; }
+          10% { opacity: 1; }
+          90% { opacity: 1; }
+          100% { top: 100%; opacity: 0; }
+        }
+        .cfk-scanline {
+          animation: cfkScanline 4s ease-in-out infinite;
+        }
+        @keyframes cfkParticle {
+          0%, 100% { transform: translateY(0) translateX(0); opacity: 0.2; }
+          50% { transform: translateY(-30px) translateX(10px); opacity: 0.6; }
+        }
+        .cfk-particle {
+          animation: cfkParticle 15s ease-in-out infinite;
+        }
+        @keyframes cfkPulse {
+          0%, 100% { transform: scale(1); opacity: 1; }
+          50% { transform: scale(1.3); opacity: 0.6; }
+        }
+        .cfk-pulse-dot {
+          animation: cfkPulse 2s ease-in-out infinite;
+        }
+        @keyframes cfkTitleGlow {
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+        }
+        .cfk-title-glow {
+          animation: cfkTitleGlow 4s ease-in-out infinite;
+        }
+        @media (max-width: 1024px) {
+          .cfk-market-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+        }
+        @media (max-width: 600px) {
+          .cfk-market-grid {
+            grid-template-columns: 1fr !important;
+            gap: 16px !important;
+          }
+          .cfk-market-section {
+            padding: 80px 0 !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }
@@ -1423,10 +1606,12 @@ function MarketCard({
   stat,
   delay,
   inView,
+  index,
 }: {
-  stat: { value: number; suffix: string; unit: string; label: string; note: string; icon?: string; badge?: string };
+  stat: { value: number; suffix: string; label: string; note: string; icon?: string; badge?: string; highlight?: boolean };
   delay: number;
   inView: boolean;
+  index: number;
 }) {
   const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
   const [hovered, setHovered] = useState(false);
@@ -1438,145 +1623,207 @@ function MarketCard({
     setMousePos({ x: (e.clientX - r.left) / r.width, y: (e.clientY - r.top) / r.height });
   }, []);
 
+  const isHighlight = stat.highlight || index === 0;
+
   return (
-    <Tilt max={7}>
+    <Tilt max={8}>
       <motion.div
         ref={cardRef}
-        initial={{ opacity: 0, y: 28 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.65, delay, ease: EASE }}
+        initial={{ opacity: 0, y: 40, scale: 0.95 }}
+        animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+        transition={{ duration: 0.7, delay, ease: EASE }}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         onMouseMove={handleMouseMove}
+        whileHover={{ y: -8 }}
+        className="cfk-market-card"
         style={{
-          padding: "28px 24px 24px",
-          borderRadius: 20,
-          background: hovered ? `${C}08` : `linear-gradient(145deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01))`,
-          border: `1px solid ${hovered ? `${C}30` : `${C}15`}`,
+          padding: isHighlight ? "36px 28px 32px" : "32px 24px 28px",
+          borderRadius: 24,
+          background: isHighlight
+            ? `linear-gradient(145deg, ${C}15 0%, ${C}05 100%)`
+            : `linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02))`,
+          border: `1px solid ${isHighlight ? `${C}50` : `${C}20`}`,
           position: "relative",
           overflow: "hidden",
           height: "100%",
-          transition: "all 0.4s cubic-bezier(0.16,1,0.3,1)",
+          transition: "all 0.5s cubic-bezier(0.16,1,0.3,1)",
+          boxShadow: isHighlight
+            ? `0 20px 60px ${C}15, 0 0 0 1px ${C}20 inset`
+            : `0 10px 40px rgba(0,0,0,0.3)`,
         }}
       >
-        {/* Spotlight */}
+        {/* Animated spotlight */}
         <div
-          className="absolute pointer-events-none transition-opacity duration-500"
+          className="absolute pointer-events-none transition-opacity duration-700"
           style={{
-            width: 200,
-            height: 200,
+            width: 300,
+            height: 300,
             borderRadius: "50%",
-            background: `radial-gradient(circle, ${C}12 0%, transparent 70%)`,
-            left: `calc(${mousePos.x * 100}% - 100px)`,
-            top: `calc(${mousePos.y * 100}% - 100px)`,
+            background: `radial-gradient(circle, ${C}20 0%, transparent 70%)`,
+            left: `calc(${mousePos.x * 100}% - 150px)`,
+            top: `calc(${mousePos.y * 100}% - 150px)`,
             opacity: hovered ? 1 : 0,
+            filter: "blur(20px)",
           }}
         />
-        {/* Top accent line */}
+
+        {/* Top glow line */}
         <div
           style={{
             position: "absolute",
             top: 0,
             left: 0,
             right: 0,
-            height: 2,
-            background: `linear-gradient(90deg, ${C} 0%, ${C}50 70%, transparent 100%)`,
+            height: isHighlight ? 3 : 2,
+            background: isHighlight
+              ? `linear-gradient(90deg, transparent, ${C_BRIGHT}, ${C}, transparent)`
+              : `linear-gradient(90deg, transparent 10%, ${C}60 50%, transparent 90%)`,
+            boxShadow: isHighlight ? `0 0 20px ${C}80` : "none",
           }}
         />
-        
+
+        {/* Corner accent */}
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            right: 0,
+            width: 60,
+            height: 60,
+            background: `linear-gradient(135deg, ${C}10 0%, transparent 70%)`,
+            borderBottomLeftRadius: 40,
+          }}
+        />
+
         {/* Top row: Icon + Badge */}
-        <div className="flex items-center justify-between" style={{ marginBottom: 16, position: "relative", zIndex: 1 }}>
+        <div className="flex items-center justify-between" style={{ marginBottom: 20, position: "relative", zIndex: 1 }}>
           {stat.icon && (
-            <div style={{
-              width: 40,
-              height: 40,
-              borderRadius: 12,
-              background: `${C}15`,
-              border: `1px solid ${C}30`,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={C_BRIGHT} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <div
+              style={{
+                width: isHighlight ? 52 : 44,
+                height: isHighlight ? 52 : 44,
+                borderRadius: 16,
+                background: `linear-gradient(135deg, ${C}25 0%, ${C}10 100%)`,
+                border: `1px solid ${C}40`,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                boxShadow: isHighlight ? `0 8px 24px ${C}20` : "none",
+              }}
+            >
+              <svg
+                width={isHighlight ? 26 : 22}
+                height={isHighlight ? 26 : 22}
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke={C_BRIGHT}
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <path d={stat.icon} />
               </svg>
             </div>
           )}
           {stat.badge && (
-            <span style={{
-              padding: "4px 10px",
-              borderRadius: 20,
-              background: `${C}20`,
-              border: `1px solid ${C}30`,
-              fontFamily: "var(--font-outfit)",
-              fontSize: 9,
-              fontWeight: 600,
-              color: C_BRIGHT,
-              letterSpacing: "0.5px",
-            }}>
+            <span
+              style={{
+                padding: "6px 14px",
+                borderRadius: 20,
+                background: `linear-gradient(135deg, ${C}30 0%, ${C}15 100%)`,
+                border: `1px solid ${C}40`,
+                fontFamily: "var(--font-outfit)",
+                fontSize: 10,
+                fontWeight: 700,
+                color: C_BRIGHT,
+                letterSpacing: "1px",
+                textTransform: "uppercase",
+                boxShadow: `0 4px 12px ${C}15`,
+              }}
+            >
               {stat.badge}
             </span>
           )}
         </div>
 
-        {/* Unit badge */}
+        {/* Number with glow */}
         <div
-          style={{
-            position: "absolute",
-            top: 16,
-            right: 16,
-            fontFamily: "var(--font-outfit)",
-            fontSize: 9,
-            fontWeight: 700,
-            letterSpacing: "1.5px",
-            color: `${C}60`,
-            display: stat.badge ? "none" : "block",
-          }}
-        >
-          {stat.unit}
-        </div>
-
-        {/* Number */}
-        <div
+          className={isHighlight ? "cfk-number-glow" : ""}
           style={{
             fontFamily: "var(--font-display)",
-            fontSize: "clamp(36px,4vw,48px)",
+            fontSize: isHighlight ? "clamp(52px,5.5vw,72px)" : "clamp(44px,4.5vw,56px)",
             fontWeight: 900,
-            color: C_BRIGHT,
-            letterSpacing: "-2px",
+            background: isHighlight
+              ? `linear-gradient(135deg, ${C_BRIGHT} 0%, white 50%, ${C_BRIGHT} 100%)`
+              : C_BRIGHT,
+            backgroundSize: "200% 200%",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            letterSpacing: "-3px",
             lineHeight: 1,
-            marginBottom: 10,
+            marginBottom: 14,
             position: "relative",
+            filter: isHighlight ? `drop-shadow(0 0 30px ${C}60)` : `drop-shadow(0 0 15px ${C}40)`,
           }}
         >
-          {inView ? <Counter to={stat.value} suffix={stat.suffix} duration={1600} /> : `0${stat.suffix}`}
+          {inView ? <Counter to={stat.value} suffix={stat.suffix} duration={1800} /> : `0${stat.suffix}`}
         </div>
+
+        {/* Label */}
         <div
           style={{
             fontFamily: "var(--font-outfit)",
-            fontSize: 13,
+            fontSize: isHighlight ? 15 : 14,
             fontWeight: 600,
-            color: "rgba(255,255,255,0.65)",
-            lineHeight: 1.45,
-            marginBottom: 6,
+            color: "rgba(255,255,255,0.85)",
+            lineHeight: 1.5,
+            marginBottom: 8,
             position: "relative",
           }}
         >
           {stat.label}
         </div>
-        <div style={{ fontFamily: "var(--font-outfit)", fontSize: 11, color: "rgba(255,255,255,0.35)", position: "relative" }}>
+
+        {/* Note */}
+        <div
+          style={{
+            fontFamily: "var(--font-outfit)",
+            fontSize: 12,
+            fontWeight: 400,
+            color: "rgba(255,255,255,0.4)",
+            lineHeight: 1.5,
+            position: "relative",
+          }}
+        >
           {stat.note}
         </div>
-        {/* Bottom accent line */}
-        <div style={{
-          position: "absolute",
-          bottom: 0,
-          left: 24,
-          right: 24,
-          height: 2,
-          background: `linear-gradient(90deg, transparent, ${C}40, transparent)`,
-          borderRadius: 1,
-        }} />
+
+        {/* Bottom accent */}
+        <div
+          style={{
+            position: "absolute",
+            bottom: 0,
+            left: isHighlight ? 28 : 24,
+            right: isHighlight ? 28 : 24,
+            height: 2,
+            background: `linear-gradient(90deg, transparent, ${C}50, transparent)`,
+            borderRadius: 1,
+            opacity: hovered ? 1 : 0.5,
+            transition: "opacity 0.3s",
+          }}
+        />
+
+        {/* Hover border glow */}
+        {hovered && (
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              borderRadius: 24,
+              boxShadow: `inset 0 0 0 1px ${C}50, 0 0 40px ${C}20`,
+            }}
+          />
+        )}
       </motion.div>
     </Tilt>
   );
