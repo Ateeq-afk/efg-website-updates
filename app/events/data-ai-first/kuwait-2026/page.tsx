@@ -302,6 +302,7 @@ export default function DataAIFirstKuwait2026() {
       <FAQSection />
       <SplitCTA />
       <Venue />
+      <ContactSection />
       <Footer />
     </div>
   );
@@ -5166,6 +5167,204 @@ function Venue() {
           }
           .daik-venue-title {
             font-size: 20px !important;
+          }
+        }
+      `}</style>
+    </section>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+//  CONTACT SECTION
+// ═══════════════════════════════════════════════════════════════════════════════
+
+const S3_TEAM = "https://efg-final.s3.eu-north-1.amazonaws.com/about-us-photos";
+
+const CONTACTS = {
+  speaking: {
+    name: "Sanjana Venugopal",
+    role: "Producer",
+    phone: "+971 50 500 3341",
+    email: "sanjana@eventsfirstgroup.com",
+    photo: `${S3_TEAM}/Sanjana-Venugopal.jpg`,
+  },
+  sponsorship: [
+    {
+      name: "Mohammed Sahil",
+      role: "Partnership Manager",
+      phone: "+971 50 123 4567",
+      email: "sahil@eventsfirstgroup.com",
+      photo: `${S3_TEAM}/sahil.jpeg`,
+    },
+    {
+      name: "Mayur Methi",
+      role: "Partnership Manager",
+      phone: "+971 50 987 6543",
+      email: "mayur@eventsfirstgroup.com",
+      photo: `${S3_TEAM}/Mayur-Methi.png`,
+    },
+  ],
+};
+
+function ContactSection() {
+  const ref = useRef<HTMLElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+
+  return (
+    <section
+      ref={ref}
+      style={{
+        background: "linear-gradient(180deg, #0A0A0A 0%, #0F1614 100%)",
+        padding: "clamp(48px, 6vw, 80px) 0",
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
+      <div style={{ maxWidth: 1000, margin: "0 auto", padding: "0 clamp(20px, 4vw, 60px)" }}>
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, ease: EASE }}
+          style={{ textAlign: "center", marginBottom: 48 }}
+        >
+          <div className="flex items-center justify-center gap-3">
+            <span style={{ width: 30, height: 1, background: E }} />
+            <span style={{ fontFamily: "var(--font-outfit)", fontSize: 11, fontWeight: 600, letterSpacing: "2.5px", textTransform: "uppercase", color: E_BRIGHT }}>
+              Get in Touch
+            </span>
+            <span style={{ width: 30, height: 1, background: E }} />
+          </div>
+          <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(28px, 3.5vw, 44px)", letterSpacing: "-1.5px", color: "var(--white)", lineHeight: 1.1, margin: "16px 0 0" }}>
+            Contact Us
+          </h2>
+        </motion.div>
+
+        {/* Contact Grid */}
+        <div
+          className="daik-contact-grid"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: 24,
+          }}
+        >
+          {/* Speaking Enquiries */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.1, ease: EASE }}
+            style={{
+              padding: "32px",
+              borderRadius: 20,
+              background: `linear-gradient(145deg, ${E}08, rgba(255,255,255,0.02))`,
+              border: `1px solid ${E}20`,
+            }}
+          >
+            <p style={{ fontFamily: "var(--font-outfit)", fontSize: 10, fontWeight: 600, letterSpacing: "2px", textTransform: "uppercase", color: E_BRIGHT, marginBottom: 20 }}>
+              For Speaking Enquiries
+            </p>
+            <div className="flex items-center gap-4">
+              <div
+                style={{
+                  width: 72,
+                  height: 72,
+                  borderRadius: "50%",
+                  overflow: "hidden",
+                  border: `2px solid ${E}30`,
+                  flexShrink: 0,
+                }}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={CONTACTS.speaking.photo}
+                  alt={CONTACTS.speaking.name}
+                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                />
+              </div>
+              <div>
+                <p style={{ fontFamily: "var(--font-display)", fontSize: 18, fontWeight: 700, color: "white", margin: "0 0 2px" }}>
+                  {CONTACTS.speaking.name}
+                </p>
+                <p style={{ fontFamily: "var(--font-outfit)", fontSize: 12, fontWeight: 500, color: "#606060", margin: 0 }}>
+                  {CONTACTS.speaking.role}
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-col gap-3" style={{ marginTop: 20 }}>
+              <a href={`tel:${CONTACTS.speaking.phone.replace(/\s/g, "")}`} className="flex items-center gap-3 transition-colors hover:opacity-80">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={E_BRIGHT} strokeWidth="2" strokeLinecap="round">
+                  <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
+                </svg>
+                <span style={{ fontFamily: "var(--font-outfit)", fontSize: 14, color: "#909090" }}>{CONTACTS.speaking.phone}</span>
+              </a>
+              <a href={`mailto:${CONTACTS.speaking.email}`} className="flex items-center gap-3 transition-colors hover:opacity-80">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={E_BRIGHT} strokeWidth="2" strokeLinecap="round">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                  <path d="M22 6l-10 7L2 6" />
+                </svg>
+                <span style={{ fontFamily: "var(--font-outfit)", fontSize: 14, color: "#909090" }}>{CONTACTS.speaking.email}</span>
+              </a>
+            </div>
+          </motion.div>
+
+          {/* Sponsorship Enquiries */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.2, ease: EASE }}
+            style={{
+              padding: "32px",
+              borderRadius: 20,
+              background: `linear-gradient(145deg, ${GOLD}08, rgba(255,255,255,0.02))`,
+              border: `1px solid ${GOLD}20`,
+            }}
+          >
+            <p style={{ fontFamily: "var(--font-outfit)", fontSize: 10, fontWeight: 600, letterSpacing: "2px", textTransform: "uppercase", color: GOLD, marginBottom: 20 }}>
+              For Sponsorship Enquiries
+            </p>
+            {CONTACTS.sponsorship.map((contact, i) => (
+              <div key={contact.name} style={{ marginBottom: i < CONTACTS.sponsorship.length - 1 ? 24 : 0 }}>
+                <div className="flex items-center gap-4">
+                  <div
+                    style={{
+                      width: 56,
+                      height: 56,
+                      borderRadius: "50%",
+                      overflow: "hidden",
+                      border: `2px solid ${GOLD}30`,
+                      flexShrink: 0,
+                    }}
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={contact.photo}
+                      alt={contact.name}
+                      style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                    />
+                  </div>
+                  <div>
+                    <p style={{ fontFamily: "var(--font-display)", fontSize: 16, fontWeight: 700, color: "white", margin: "0 0 2px" }}>
+                      {contact.name}
+                    </p>
+                    <p style={{ fontFamily: "var(--font-outfit)", fontSize: 11, fontWeight: 500, color: "#606060", margin: "0 0 6px" }}>
+                      {contact.role}
+                    </p>
+                    <a href={`mailto:${contact.email}`} style={{ fontFamily: "var(--font-outfit)", fontSize: 12, color: GOLD, textDecoration: "none" }}>
+                      {contact.email}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+      </div>
+
+      <style jsx global>{`
+        @media (max-width: 768px) {
+          .daik-contact-grid {
+            grid-template-columns: 1fr !important;
           }
         }
       `}</style>
