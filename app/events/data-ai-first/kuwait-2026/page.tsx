@@ -17,7 +17,10 @@ import { NeuralConstellation, DotMatrixGrid } from "@/components/effects";
 // ─── Constants ───────────────────────────────────────────────────────────────
 const E = "#0F735E";
 const E_BRIGHT = "#14A882";
+const E_GLOW = "#10B981";
 const EFG_ORANGE = "#E8651A";
+const EFG_ORANGE_BRIGHT = "#F97316";
+const GOLD = "#C4A34A";
 const EASE = [0.16, 1, 0.3, 1] as const;
 const EVENT_DATE = new Date("2026-05-18T08:00:00+03:00");
 
@@ -536,32 +539,46 @@ function HeroSection() {
         </div>
 
         {/* Center: Countdown */}
-        <div className="daik-bar-countdown flex items-center gap-5">
+        <div className="daik-bar-countdown flex items-center gap-4">
           {[
             { v: cd.d, l: "Days" },
             { v: cd.h, l: "Hrs" },
             { v: cd.m, l: "Min" },
             { v: cd.s, l: "Sec" },
           ].map((u, i) => (
-            <div key={u.l} className="text-center flex items-center gap-5">
-              <div>
-                <span
+            <div key={u.l} className="text-center flex items-center gap-4">
+              <div
+                style={{
+                  padding: "8px 12px",
+                  borderRadius: 10,
+                  background: `${E}0A`,
+                  border: `1px solid ${E}20`,
+                  minWidth: 56,
+                }}
+              >
+                <motion.span
+                  key={u.v}
+                  initial={{ opacity: 0.5, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.3 }}
                   style={{
                     fontFamily: "var(--font-display)",
-                    fontSize: 32,
+                    fontSize: 28,
                     fontWeight: 800,
                     color: E_BRIGHT,
                     lineHeight: 1,
+                    display: "block",
+                    textShadow: `0 0 20px ${E}60`,
                   }}
                 >
                   {u.v.toString().padStart(2, "0")}
-                </span>
+                </motion.span>
                 <span
                   style={{
                     fontFamily: "var(--font-outfit)",
-                    fontSize: 10,
-                    fontWeight: 500,
-                    color: "#606060",
+                    fontSize: 9,
+                    fontWeight: 600,
+                    color: `${E}80`,
                     letterSpacing: "1.5px",
                     textTransform: "uppercase",
                     display: "block",
@@ -572,7 +589,7 @@ function HeroSection() {
                 </span>
               </div>
               {i < 3 && (
-                <span style={{ color: `${E}40`, fontSize: 24, fontWeight: 300 }}>:</span>
+                <span style={{ color: `${E}50`, fontSize: 20, fontWeight: 300, opacity: 0.5 }}>:</span>
               )}
             </div>
           ))}
@@ -581,19 +598,32 @@ function HeroSection() {
         {/* Right: CTA */}
         <Link
           href="#register"
-          className="daik-bar-cta transition-all hover:scale-105"
+          className="daik-bar-cta transition-all group"
           style={{
             padding: "14px 32px",
             borderRadius: 50,
-            background: E,
+            background: `linear-gradient(135deg, ${E} 0%, ${E_BRIGHT} 100%)`,
             fontFamily: "var(--font-outfit)",
             fontSize: 15,
             fontWeight: 600,
             color: "white",
-            boxShadow: `0 4px 20px ${E}40`,
+            boxShadow: `0 4px 24px ${E}50`,
+            display: "flex",
+            alignItems: "center",
+            gap: 8,
           }}
         >
-          Register Now →
+          <span className="relative flex h-2 w-2">
+            <span
+              className="absolute inline-flex h-full w-full rounded-full opacity-75 animate-ping"
+              style={{ background: "white", animationDuration: "1.5s" }}
+            />
+            <span className="relative inline-flex rounded-full h-2 w-2" style={{ background: "white" }} />
+          </span>
+          Register Now
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" className="transition-transform group-hover:translate-x-1">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
         </Link>
       </div>
 
@@ -692,22 +722,43 @@ function HeroCTA({
   return (
     <Link
       href={href}
-      className="inline-flex items-center transition-all"
+      className="inline-flex items-center transition-all group"
       style={{
-        padding: "14px 32px",
+        padding: primary ? "16px 36px" : "14px 32px",
         borderRadius: 50,
-        background: primary ? (h ? E_BRIGHT : E) : h ? `${E}15` : "transparent",
-        border: primary ? "none" : `1px solid ${E}50`,
+        background: primary 
+          ? `linear-gradient(135deg, ${E} 0%, ${E_BRIGHT} 100%)`
+          : h ? `${E}18` : "rgba(255,255,255,0.03)",
+        border: primary ? "none" : `1px solid ${h ? `${E}60` : `${E}40`}`,
         fontFamily: "var(--font-outfit)",
-        fontSize: 15,
-        fontWeight: 500,
-        color: primary ? "white" : E_BRIGHT,
-        transitionDuration: "0.3s",
+        fontSize: primary ? 16 : 15,
+        fontWeight: primary ? 600 : 500,
+        color: primary ? "white" : h ? "white" : E_BRIGHT,
+        transitionDuration: "0.4s",
+        transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
+        boxShadow: primary 
+          ? h ? `0 8px 32px ${E}50, 0 0 60px ${E}30` : `0 4px 20px ${E}35`
+          : h ? `0 4px 16px ${E}20` : "none",
+        transform: h ? "translateY(-2px)" : "translateY(0)",
+        letterSpacing: primary ? "0.3px" : "0",
       }}
       onMouseEnter={() => setH(true)}
       onMouseLeave={() => setH(false)}
     >
       {children}
+      {primary && (
+        <svg 
+          width="16" height="16" viewBox="0 0 24 24" fill="none" 
+          stroke="currentColor" strokeWidth="2" strokeLinecap="round"
+          style={{ 
+            marginLeft: 8, 
+            transition: "transform 0.3s",
+            transform: h ? "translateX(4px)" : "translateX(0)" 
+          }}
+        >
+          <path d="M5 12h14M12 5l7 7-7 7" />
+        </svg>
+      )}
     </Link>
   );
 }
@@ -809,18 +860,35 @@ function StatsBar() {
             style={{
               borderRight: `1px solid ${E}20`,
               paddingRight: "clamp(24px, 4vw, 48px)",
+              position: "relative",
             }}
           >
-            <div style={{ marginBottom: 8 }}>
+            {/* Glow background for the number */}
+            <div
+              className="absolute pointer-events-none"
+              style={{
+                top: 0,
+                left: "50%",
+                transform: "translateX(-50%)",
+                width: 200,
+                height: 150,
+                background: `radial-gradient(ellipse at center, ${E}25 0%, transparent 70%)`,
+                filter: "blur(40px)",
+              }}
+            />
+            <div style={{ marginBottom: 8, position: "relative" }}>
               <span
                 style={{
                   fontFamily: "var(--font-display)",
                   fontSize: "clamp(80px, 14vw, 120px)",
                   fontWeight: 800,
-                  color: E_BRIGHT,
+                  background: `linear-gradient(135deg, ${E_BRIGHT} 0%, ${E_GLOW} 50%, ${E_BRIGHT} 100%)`,
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
                   letterSpacing: "-4px",
                   lineHeight: 0.9,
-                  textShadow: `0 0 80px ${E}50`,
+                  filter: `drop-shadow(0 0 60px ${E}60)`,
                 }}
               >
                 <Counter to={250} suffix="+" duration={2000} />
@@ -1070,29 +1138,54 @@ function MarketContext() {
               initial={{ opacity: 0, y: 20, scale: 0.95 }}
               animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
               transition={{ duration: 0.5, delay: 0.4 + i * 0.1, ease: EASE }}
+              whileHover={{ 
+                scale: stat.highlight ? 1.03 : 1.02, 
+                y: -4,
+                transition: { duration: 0.3 }
+              }}
               style={{
                 padding: stat.highlight ? "32px 24px" : "24px 20px",
                 background: stat.highlight 
-                  ? `linear-gradient(135deg, ${E}25 0%, ${E}10 100%)`
+                  ? `linear-gradient(145deg, ${E}30 0%, ${E}15 50%, ${E}08 100%)`
                   : "rgba(255,255,255,0.05)",
-                backdropFilter: "blur(20px)",
-                WebkitBackdropFilter: "blur(20px)",
+                backdropFilter: "blur(24px)",
+                WebkitBackdropFilter: "blur(24px)",
                 borderRadius: 20,
-                border: `1px solid ${stat.highlight ? `${E}40` : "rgba(255,255,255,0.1)"}`,
+                border: `1px solid ${stat.highlight ? `${E}50` : "rgba(255,255,255,0.1)"}`,
                 textAlign: "center",
-                boxShadow: stat.highlight ? `0 8px 32px ${E}20` : "none",
+                boxShadow: stat.highlight 
+                  ? `0 12px 40px ${E}30, inset 0 1px 0 ${E}40, 0 0 80px ${E}15` 
+                  : "0 4px 20px rgba(0,0,0,0.2)",
+                cursor: "default",
+                position: "relative",
+                overflow: "hidden",
               }}
             >
+              {/* Highlight glow effect for main stat */}
+              {stat.highlight && (
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background: `radial-gradient(ellipse at 50% 30%, ${E}20 0%, transparent 60%)`,
+                  }}
+                />
+              )}
               <p
                 style={{
                   fontFamily: "var(--font-display)",
-                  fontSize: stat.highlight ? "clamp(40px, 6vw, 56px)" : "clamp(28px, 4vw, 36px)",
+                  fontSize: stat.highlight ? "clamp(44px, 6vw, 60px)" : "clamp(28px, 4vw, 36px)",
                   fontWeight: 800,
-                  color: stat.highlight ? E_BRIGHT : "white",
+                  background: stat.highlight 
+                    ? `linear-gradient(135deg, ${E_BRIGHT} 0%, ${E_GLOW} 50%, white 100%)`
+                    : "white",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
                   margin: 0,
                   lineHeight: 1,
                   letterSpacing: "-2px",
-                  textShadow: stat.highlight ? `0 0 40px ${E}60` : "none",
+                  filter: stat.highlight ? `drop-shadow(0 0 30px ${E}50)` : "none",
+                  position: "relative",
                 }}
               >
                 {stat.prefix}<Counter to={stat.value} suffix={stat.suffix} duration={stat.highlight ? 2000 : 1500} />
@@ -1102,11 +1195,12 @@ function MarketContext() {
                   fontFamily: "var(--font-outfit)",
                   fontSize: stat.highlight ? 13 : 11,
                   fontWeight: 600,
-                  color: stat.highlight ? "white" : "rgba(255,255,255,0.6)",
+                  color: stat.highlight ? "rgba(255,255,255,0.9)" : "rgba(255,255,255,0.6)",
                   letterSpacing: "1px",
                   textTransform: "uppercase",
                   margin: 0,
                   marginTop: stat.highlight ? 12 : 8,
+                  position: "relative",
                 }}
               >
                 {stat.label}
@@ -1280,23 +1374,30 @@ function FocusAreas() {
           <div
             className="daik-focus-detail relative overflow-hidden"
             style={{
-              borderRadius: 16,
-              background: `${E}06`,
-              border: `1px solid ${E}15`,
-              padding: "clamp(24px, 3vw, 40px)",
-              minHeight: 340,
+              borderRadius: 20,
+              background: `linear-gradient(145deg, ${E}0A 0%, ${E}04 100%)`,
+              border: `1px solid ${E}20`,
+              padding: "clamp(28px, 3vw, 44px)",
+              minHeight: 360,
+              boxShadow: `0 8px 40px ${E}08, inset 0 1px 0 ${E}15`,
             }}
           >
-            {/* Watermark number */}
+            {/* Top edge glow */}
+            <div className="absolute top-0 left-1/4 right-1/4 h-px pointer-events-none" style={{ background: `linear-gradient(90deg, transparent, ${E}30, transparent)` }} />
+            
+            {/* Watermark number with gradient */}
             <span
               style={{
                 position: "absolute",
-                top: -10,
+                top: -15,
                 right: 10,
                 fontFamily: "var(--font-display)",
                 fontSize: "clamp(100px, 12vw, 160px)",
                 fontWeight: 900,
-                color: `${E}08`,
+                background: `linear-gradient(180deg, ${E}12 0%, ${E}04 100%)`,
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
                 lineHeight: 1,
                 pointerEvents: "none",
               }}
@@ -1307,30 +1408,34 @@ function FocusAreas() {
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeIdx}
-                initial={{ opacity: 0, x: 15 }}
+                initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -15 }}
-                transition={{ duration: 0.3, ease: EASE }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.35, ease: EASE }}
                 style={{ position: "relative" }}
               >
-                {/* Icon */}
-                <div
+                {/* Icon with glow */}
+                <motion.div
+                  initial={{ scale: 0.9, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 0.3, delay: 0.1 }}
                   style={{
-                    width: 44,
-                    height: 44,
-                    borderRadius: 12,
-                    background: `${E}12`,
-                    border: `1px solid ${E}25`,
+                    width: 52,
+                    height: 52,
+                    borderRadius: 14,
+                    background: `linear-gradient(145deg, ${E}18 0%, ${E}08 100%)`,
+                    border: `1px solid ${E}30`,
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    marginBottom: 20,
+                    marginBottom: 24,
+                    boxShadow: `0 4px 20px ${E}15`,
                   }}
                 >
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={E_BRIGHT} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={E_BRIGHT} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d={active.icon} />
                   </svg>
-                </div>
+                </motion.div>
 
                 {/* Label */}
                 <span
@@ -1340,7 +1445,7 @@ function FocusAreas() {
                     fontWeight: 600,
                     letterSpacing: "2px",
                     textTransform: "uppercase",
-                    color: E,
+                    color: E_BRIGHT,
                   }}
                 >
                   Focus Area {(activeIdx + 1).toString().padStart(2, "0")}
@@ -1350,7 +1455,7 @@ function FocusAreas() {
                 <h3
                   style={{
                     fontFamily: "var(--font-display)",
-                    fontSize: "clamp(22px, 2.5vw, 30px)",
+                    fontSize: "clamp(24px, 2.5vw, 32px)",
                     fontWeight: 800,
                     color: "var(--white)",
                     letterSpacing: "-0.5px",
@@ -1366,18 +1471,27 @@ function FocusAreas() {
                   style={{
                     fontFamily: "var(--font-outfit)",
                     fontSize: 15,
-                    fontWeight: 300,
-                    color: "#808080",
-                    lineHeight: 1.8,
-                    margin: "14px 0 0",
-                    maxWidth: 420,
+                    fontWeight: 400,
+                    color: "rgba(255,255,255,0.55)",
+                    lineHeight: 1.85,
+                    margin: "16px 0 0",
+                    maxWidth: 440,
                   }}
                 >
                   {active.desc}
                 </p>
 
-                {/* Accent bar */}
-                <div style={{ width: 40, height: 3, background: E_BRIGHT, borderRadius: 2, marginTop: 24 }} />
+                {/* Accent bar with gradient */}
+                <div 
+                  style={{ 
+                    width: 50, 
+                    height: 3, 
+                    background: `linear-gradient(90deg, ${E_BRIGHT}, ${E})`, 
+                    borderRadius: 2, 
+                    marginTop: 28,
+                    boxShadow: `0 0 12px ${E}40`,
+                  }} 
+                />
               </motion.div>
             </AnimatePresence>
           </div>
@@ -1832,18 +1946,45 @@ function AgendaTimeline() {
           transition={{ duration: 0.7, ease: EASE }}
           style={{ textAlign: "center", marginBottom: 40 }}
         >
-          <div className="flex items-center justify-center gap-3" style={{ marginBottom: 16 }}>
-            <span style={{ width: 30, height: 1, background: E }} />
+          {/* Time badge */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={inView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.5, delay: 0.1, ease: EASE }}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 10,
+              padding: "10px 20px",
+              borderRadius: 50,
+              background: `${E}10`,
+              border: `1px solid ${E}20`,
+              marginBottom: 20,
+            }}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={E_BRIGHT} strokeWidth="1.5" strokeLinecap="round">
+              <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span style={{ fontFamily: "var(--font-outfit)", fontSize: 12, fontWeight: 600, color: E_BRIGHT }}>
+              8:00 AM – 3:00 PM · Full Day
+            </span>
+          </motion.div>
+          
+          <div className="flex items-center justify-center gap-3" style={{ marginBottom: 14 }}>
+            <span style={{ width: 30, height: 1, background: `linear-gradient(90deg, transparent, ${E})` }} />
             <span style={{ fontFamily: "var(--font-outfit)", fontSize: 11, fontWeight: 600, letterSpacing: "2.5px", textTransform: "uppercase", color: E }}>
               Full Day Programme
             </span>
-            <span style={{ width: 30, height: 1, background: E }} />
+            <span style={{ width: 30, height: 1, background: `linear-gradient(90deg, ${E}, transparent)` }} />
           </div>
-          <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(28px,3.8vw,48px)", letterSpacing: "-1.5px", color: "white", lineHeight: 1.08, margin: "16px 0 0" }}>
+          <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(28px,3.8vw,48px)", letterSpacing: "-1.5px", color: "white", lineHeight: 1.08, margin: "12px 0 0" }}>
             Agenda
           </h2>
-          <p style={{ fontFamily: "var(--font-outfit)", fontSize: 13, fontStyle: "italic", color: "#404040", marginTop: 14 }}>
-            Draft agenda — subject to change.
+          <p style={{ fontFamily: "var(--font-outfit)", fontSize: 14, fontWeight: 400, color: "rgba(255,255,255,0.4)", marginTop: 12 }}>
+            4 panels · 2 keynotes · 8 presentations · 1 awards ceremony
+          </p>
+          <p style={{ fontFamily: "var(--font-outfit)", fontSize: 12, fontStyle: "italic", color: "#353535", marginTop: 8 }}>
+            Draft agenda — subject to refinement
           </p>
         </motion.div>
 
@@ -2125,40 +2266,109 @@ function AtmosphereDivider() {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   const y = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.3, 1, 1, 0.3]);
 
   return (
-    <section ref={ref} className="relative overflow-hidden" style={{ height: "55vh", minHeight: 350 }}>
+    <section ref={ref} className="relative overflow-hidden" style={{ height: "60vh", minHeight: 400 }}>
       <motion.div className="absolute inset-0" style={{ y }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="https://images.unsplash.com/photo-1573164713988-8665fc963095?w=1920&q=80"
           alt=""
           className="w-full h-full object-cover"
-          style={{ filter: "brightness(0.2) saturate(0.6)", transform: "scale(1.2)" }}
+          style={{ filter: "brightness(0.25) saturate(0.5)", transform: "scale(1.2)" }}
         />
       </motion.div>
-      <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, #0A0A0A 0%, transparent 30%, transparent 70%, #111111 100%)" }} />
-      <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse at center, ${E}08 0%, transparent 60%)` }} />
+      <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, #0A0A0A 0%, transparent 25%, transparent 75%, #111111 100%)" }} />
+      <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse at center, ${E}10 0%, transparent 55%)` }} />
+      
+      {/* Animated glow pulse */}
+      <motion.div
+        className="absolute inset-0 pointer-events-none"
+        animate={{
+          background: [
+            `radial-gradient(ellipse 60% 50% at 50% 50%, ${E}08 0%, transparent 70%)`,
+            `radial-gradient(ellipse 70% 60% at 50% 50%, ${E}12 0%, transparent 70%)`,
+            `radial-gradient(ellipse 60% 50% at 50% 50%, ${E}08 0%, transparent 70%)`,
+          ],
+        }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+      />
 
-      <div className="relative z-10 flex flex-col items-center justify-center text-center h-full" style={{ padding: "0 24px" }}>
-        <span style={{ fontFamily: "var(--font-outfit)", fontSize: 11, fontWeight: 600, letterSpacing: "4px", textTransform: "uppercase", color: E_BRIGHT }}>
-          Kuwait &middot; May 2026
-        </span>
-        <h2
+      <motion.div 
+        className="relative z-10 flex flex-col items-center justify-center text-center h-full" 
+        style={{ padding: "0 24px", opacity }}
+      >
+        {/* Location badge */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: 10,
+            padding: "10px 20px",
+            borderRadius: 50,
+            background: "rgba(255,255,255,0.05)",
+            border: `1px solid ${E}30`,
+            backdropFilter: "blur(12px)",
+            marginBottom: 20,
+          }}
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={E_BRIGHT} strokeWidth="2" strokeLinecap="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+            <circle cx="12" cy="10" r="3" />
+          </svg>
+          <span style={{ fontFamily: "var(--font-outfit)", fontSize: 12, fontWeight: 600, letterSpacing: "2px", textTransform: "uppercase", color: E_BRIGHT }}>
+            Kuwait &middot; May 2026
+          </span>
+        </motion.div>
+        
+        <motion.h2
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.1 }}
           style={{
             fontFamily: "var(--font-display)",
             fontWeight: 800,
-            fontSize: "clamp(24px, 3vw, 40px)",
+            fontSize: "clamp(26px, 3.5vw, 44px)",
             letterSpacing: "-1px",
-            color: "rgba(255,255,255,0.85)",
-            maxWidth: 600,
-            lineHeight: 1.2,
-            marginTop: 16,
+            color: "rgba(255,255,255,0.9)",
+            maxWidth: 650,
+            lineHeight: 1.25,
           }}
         >
-          Where Kuwait&rsquo;s data and AI leaders shape the future of intelligent governance.
-        </h2>
-      </div>
+          Where Kuwait&rsquo;s data and AI leaders shape the future of <span style={{ color: E_BRIGHT }}>intelligent governance.</span>
+        </motion.h2>
+        
+        {/* Stats row */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="flex items-center gap-8"
+          style={{ marginTop: 32 }}
+        >
+          {[
+            { value: "250+", label: "Leaders" },
+            { value: "1", label: "Day" },
+            { value: "∞", label: "Impact" },
+          ].map((s, i) => (
+            <div key={s.label} className="text-center" style={{ opacity: i === 2 ? 0.7 : 1 }}>
+              <span style={{ fontFamily: "var(--font-display)", fontSize: 28, fontWeight: 800, color: E_BRIGHT }}>
+                {s.value}
+              </span>
+              <span style={{ fontFamily: "var(--font-outfit)", fontSize: 10, fontWeight: 500, color: "rgba(255,255,255,0.4)", display: "block", marginTop: 4, letterSpacing: "1px", textTransform: "uppercase" }}>
+                {s.label}
+              </span>
+            </div>
+          ))}
+        </motion.div>
+      </motion.div>
     </section>
   );
 }
@@ -2192,22 +2402,45 @@ function SpeakersSection() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, ease: EASE }}
           className="flex flex-wrap items-end justify-between gap-4"
-          style={{ marginBottom: 40 }}
+          style={{ marginBottom: 44 }}
         >
           <div>
-            <div className="flex items-center gap-3" style={{ marginBottom: 12 }}>
-              <span style={{ width: 30, height: 1, background: E }} />
+            <div className="flex items-center gap-3" style={{ marginBottom: 14 }}>
+              <span style={{ width: 30, height: 1, background: `linear-gradient(90deg, transparent, ${E})` }} />
               <span style={{ fontFamily: "var(--font-outfit)", fontSize: 11, fontWeight: 600, letterSpacing: "2.5px", textTransform: "uppercase", color: E }}>
                 The Faculty
               </span>
+              <span style={{ width: 30, height: 1, background: `linear-gradient(90deg, ${E}, transparent)` }} />
             </div>
             <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(30px, 3.5vw, 48px)", letterSpacing: "-1.5px", color: "var(--white)", lineHeight: 1.1, margin: 0 }}>
               Who&rsquo;s Speaking
             </h2>
+            <p style={{ fontFamily: "var(--font-outfit)", fontSize: 14, fontWeight: 400, color: "rgba(255,255,255,0.45)", marginTop: 10, maxWidth: 400 }}>
+              Industry leaders shaping Kuwait&apos;s data and AI landscape
+            </p>
           </div>
-          <span style={{ fontFamily: "var(--font-outfit)", fontSize: 12, fontWeight: 500, color: "#505050", padding: "6px 14px", borderRadius: 50, border: "1px solid rgba(255,255,255,0.06)" }}>
+          <motion.span 
+            whileHover={{ scale: 1.05 }}
+            style={{ 
+              fontFamily: "var(--font-outfit)", 
+              fontSize: 12, 
+              fontWeight: 600, 
+              color: E_BRIGHT, 
+              padding: "8px 18px", 
+              borderRadius: 50, 
+              background: `${E}12`,
+              border: `1px solid ${E}25`,
+              display: "flex",
+              alignItems: "center",
+              gap: 8,
+            }}
+          >
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full rounded-full opacity-75 animate-ping" style={{ background: E_BRIGHT, animationDuration: "2s" }} />
+              <span className="relative inline-flex rounded-full h-2 w-2" style={{ background: E_BRIGHT }} />
+            </span>
             {SPEAKERS.length}+ Confirmed
-          </span>
+          </motion.span>
         </motion.div>
 
         {/* Grid */}
@@ -2275,71 +2508,124 @@ function SpeakerCard({ speaker }: { speaker: (typeof SPEAKERS)[0] }) {
   return (
     <Tilt max={6}>
       <div
-        className="relative overflow-hidden transition-all"
+        className="relative overflow-hidden transition-all group"
         style={{
-          borderRadius: 16,
+          borderRadius: 18,
           aspectRatio: "3 / 4",
           background: "#141414",
-          border: `1px solid ${h ? `${E}30` : "rgba(255,255,255,0.06)"}`,
-          transform: h ? "translateY(-4px)" : "translateY(0)",
-          boxShadow: h ? `0 16px 40px rgba(0,0,0,0.3), 0 0 30px ${E}10` : "none",
+          border: `1px solid ${h ? `${E}40` : "rgba(255,255,255,0.06)"}`,
+          transform: h ? "translateY(-6px)" : "translateY(0)",
+          boxShadow: h ? `0 20px 50px rgba(0,0,0,0.4), 0 0 40px ${E}15` : `0 4px 16px rgba(0,0,0,0.2)`,
           transitionDuration: "0.5s",
           transitionTimingFunction: "cubic-bezier(0.16,1,0.3,1)",
         }}
         onMouseEnter={() => setH(true)}
         onMouseLeave={() => setH(false)}
       >
-        {/* Photo or initials fallback */}
+        {/* Photo or premium initials fallback */}
         {speaker.photo ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={speaker.photo}
-            alt={speaker.name}
-            className="w-full h-full object-cover transition-all"
-            style={{
-              filter: h ? "brightness(0.9) saturate(1)" : "brightness(0.7) saturate(0)",
-              transitionDuration: "0.6s",
-            }}
-          />
+          <>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={speaker.photo}
+              alt={speaker.name}
+              className="w-full h-full object-cover transition-all"
+              style={{
+                filter: h ? "brightness(0.95) saturate(1.1)" : "brightness(0.75) saturate(0.3)",
+                transitionDuration: "0.6s",
+                transform: h ? "scale(1.02)" : "scale(1)",
+              }}
+            />
+            {/* Emerald tint overlay on hover */}
+            <div
+              className="absolute inset-0 pointer-events-none transition-opacity"
+              style={{
+                background: `linear-gradient(135deg, ${E}15 0%, transparent 50%)`,
+                opacity: h ? 1 : 0,
+                transitionDuration: "0.5s",
+              }}
+            />
+          </>
         ) : (
           <div
-            className="w-full h-full flex items-center justify-center"
+            className="daik-speaker-placeholder w-full h-full flex flex-col items-center justify-center relative"
             style={{
-              background: `linear-gradient(135deg, ${E}20 0%, ${E}08 100%)`,
+              background: `linear-gradient(145deg, ${E}18 0%, ${E}08 50%, #141414 100%)`,
             }}
           >
+            {/* Animated shimmer effect */}
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background: `linear-gradient(110deg, transparent 30%, ${E}10 45%, ${E}20 50%, ${E}10 55%, transparent 70%)`,
+                backgroundSize: "200% 100%",
+                animation: "shimmer 3s ease-in-out infinite",
+              }}
+            />
+            {/* Grid pattern */}
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                backgroundImage: `linear-gradient(${E}08 1px, transparent 1px), linear-gradient(90deg, ${E}08 1px, transparent 1px)`,
+                backgroundSize: "24px 24px",
+                opacity: 0.5,
+              }}
+            />
+            {/* Initials with gradient */}
             <span
               style={{
                 fontFamily: "var(--font-display)",
-                fontSize: 48,
+                fontSize: 56,
                 fontWeight: 800,
-                color: `${E}40`,
+                background: `linear-gradient(135deg, ${E}60 0%, ${E_BRIGHT}80 100%)`,
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+                position: "relative",
+                zIndex: 1,
               }}
             >
               {initials}
             </span>
+            {/* "Photo Coming" label */}
+            <span
+              style={{
+                fontFamily: "var(--font-outfit)",
+                fontSize: 9,
+                fontWeight: 600,
+                letterSpacing: "1.5px",
+                textTransform: "uppercase",
+                color: `${E}60`,
+                marginTop: 8,
+                position: "relative",
+                zIndex: 1,
+              }}
+            >
+              Photo Coming
+            </span>
           </div>
         )}
 
-        {/* Bottom gradient */}
+        {/* Bottom gradient - enhanced */}
         <div
           className="absolute inset-x-0 bottom-0 pointer-events-none"
           style={{
-            height: "60%",
-            background: "linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.6) 40%, transparent 100%)",
+            height: "65%",
+            background: "linear-gradient(to top, rgba(10,10,10,0.98) 0%, rgba(10,10,10,0.8) 35%, transparent 100%)",
           }}
         />
 
-        {/* Info */}
-        <div className="absolute bottom-0 left-0 right-0" style={{ padding: "0 16px 18px" }}>
+        {/* Info - enhanced styling */}
+        <div className="absolute bottom-0 left-0 right-0" style={{ padding: "0 16px 20px" }}>
           <h4
             style={{
               fontFamily: "var(--font-display)",
-              fontSize: 16,
+              fontSize: 17,
               fontWeight: 700,
               color: "var(--white)",
               margin: 0,
               lineHeight: 1.2,
+              transition: "color 0.3s",
             }}
           >
             {speaker.name}
@@ -2349,9 +2635,10 @@ function SpeakerCard({ speaker }: { speaker: (typeof SPEAKERS)[0] }) {
               fontFamily: "var(--font-outfit)",
               fontSize: 12,
               fontWeight: 400,
-              color: "#808080",
-              margin: "4px 0 0",
-              lineHeight: 1.3,
+              color: h ? "#a0a0a0" : "#707070",
+              margin: "5px 0 0",
+              lineHeight: 1.35,
+              transition: "color 0.3s",
             }}
           >
             {speaker.title}
@@ -2359,21 +2646,29 @@ function SpeakerCard({ speaker }: { speaker: (typeof SPEAKERS)[0] }) {
           <span
             style={{
               display: "inline-block",
-              marginTop: 6,
-              padding: "3px 10px",
+              marginTop: 8,
+              padding: "4px 12px",
               borderRadius: 50,
-              background: `${E}15`,
-              border: `1px solid ${E}25`,
+              background: h ? `${E}20` : `${E}12`,
+              border: `1px solid ${h ? `${E}40` : `${E}20`}`,
               fontFamily: "var(--font-outfit)",
               fontSize: 10,
               fontWeight: 500,
-              color: E_BRIGHT,
+              color: h ? E_BRIGHT : `${E}90`,
+              transition: "all 0.3s",
             }}
           >
             {speaker.org}
           </span>
         </div>
       </div>
+      
+      <style jsx global>{`
+        @keyframes shimmer {
+          0% { background-position: 200% 0; }
+          100% { background-position: -200% 0; }
+        }
+      `}</style>
     </Tilt>
   );
 }
@@ -2451,20 +2746,49 @@ function AwardsSection() {
           transition={{ duration: 0.7, ease: EASE }}
           style={{ textAlign: "center", marginBottom: 36 }}
         >
+          {/* Trophy icon */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={inView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.5, delay: 0.1, ease: EASE }}
+            style={{
+              width: 64,
+              height: 64,
+              margin: "0 auto 20px",
+              borderRadius: 16,
+              background: `linear-gradient(145deg, ${GOLD}20 0%, ${GOLD}08 100%)`,
+              border: `1px solid ${GOLD}30`,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              boxShadow: `0 8px 32px ${GOLD}15`,
+            }}
+          >
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke={GOLD} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M6 9H4.5a2.5 2.5 0 010-5H6M18 9h1.5a2.5 2.5 0 000-5H18M4 22h16M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22M18 2H6v7a6 6 0 1012 0V2z" />
+            </svg>
+          </motion.div>
+          
           <div className="flex items-center justify-center gap-3" style={{ marginBottom: 16 }}>
-            <span style={{ width: 30, height: 1, background: GOLD }} />
+            <span style={{ width: 30, height: 1, background: `linear-gradient(90deg, transparent, ${GOLD})` }} />
             <span style={{ fontFamily: "var(--font-outfit)", fontSize: 11, fontWeight: 600, letterSpacing: "2.5px", textTransform: "uppercase", color: GOLD }}>
-              Recognition
+              Recognition Excellence
             </span>
-            <span style={{ width: 30, height: 1, background: GOLD }} />
+            <span style={{ width: 30, height: 1, background: `linear-gradient(90deg, ${GOLD}, transparent)` }} />
           </div>
           <h2 style={{
             fontFamily: "var(--font-display)", fontWeight: 800,
             fontSize: "clamp(28px,3.8vw,48px)", letterSpacing: "-1.5px",
-            color: "white", lineHeight: 1.08, margin: "16px 0 0",
+            color: "white", lineHeight: 1.08, margin: "12px 0 0",
           }}>
             Data &amp; AI First Awards 2026
           </h2>
+          <p style={{
+            fontFamily: "var(--font-outfit)", fontSize: 14, fontWeight: 400,
+            color: "rgba(255,255,255,0.45)", marginTop: 12, maxWidth: 500, margin: "12px auto 0",
+          }}>
+            Celebrating the pioneers shaping Kuwait&apos;s digital future
+          </p>
         </motion.div>
 
         {/* ── Glass container wrapping all content ── */}
@@ -3446,26 +3770,65 @@ function SplitCTA() {
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.15, ease: EASE }}
             style={{
-              borderRadius: 18,
-              padding: "36px 32px",
-              background: "rgba(10,10,10,0.7)",
-              backdropFilter: "blur(20px)",
-              WebkitBackdropFilter: "blur(20px)",
-              border: `1px solid ${EFG_ORANGE}30`,
+              borderRadius: 22,
+              padding: "40px 36px",
+              background: "linear-gradient(145deg, rgba(232,101,26,0.08) 0%, rgba(10,10,10,0.8) 100%)",
+              backdropFilter: "blur(24px)",
+              WebkitBackdropFilter: "blur(24px)",
+              border: `1px solid ${EFG_ORANGE}35`,
+              boxShadow: `0 8px 40px rgba(232,101,26,0.1), inset 0 1px 0 rgba(232,101,26,0.15)`,
+              position: "relative",
+              overflow: "hidden",
             }}
           >
-            <span style={{ fontFamily: "var(--font-outfit)", fontSize: 10, fontWeight: 600, letterSpacing: "2.5px", textTransform: "uppercase", color: EFG_ORANGE }}>
+            {/* Top glow accent */}
+            <div className="absolute top-0 left-1/4 right-1/4 h-px pointer-events-none" style={{ background: `linear-gradient(90deg, transparent, ${EFG_ORANGE}50, transparent)` }} />
+            
+            {/* Early Bird badge */}
+            <div className="flex items-center gap-2" style={{ marginBottom: 16 }}>
+              <span
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 6,
+                  padding: "5px 14px",
+                  borderRadius: 50,
+                  background: `linear-gradient(135deg, ${EFG_ORANGE}20 0%, ${EFG_ORANGE}10 100%)`,
+                  border: `1px solid ${EFG_ORANGE}30`,
+                }}
+              >
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full rounded-full opacity-75 animate-ping" style={{ background: EFG_ORANGE, animationDuration: "2s" }} />
+                  <span className="relative inline-flex rounded-full h-2 w-2" style={{ background: EFG_ORANGE }} />
+                </span>
+                <span style={{ fontFamily: "var(--font-outfit)", fontSize: 10, fontWeight: 700, letterSpacing: "1.5px", textTransform: "uppercase", color: EFG_ORANGE }}>
+                  Early Bird Open
+                </span>
+              </span>
+            </div>
+
+            <span style={{ fontFamily: "var(--font-outfit)", fontSize: 10, fontWeight: 600, letterSpacing: "2.5px", textTransform: "uppercase", color: `${EFG_ORANGE}90` }}>
               For Delegates
             </span>
-            <h3 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(22px, 2.5vw, 30px)", fontWeight: 800, color: "var(--white)", margin: "12px 0 0", letterSpacing: "-0.5px" }}>
+            <h3 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(24px, 2.8vw, 32px)", fontWeight: 800, color: "var(--white)", margin: "10px 0 0", letterSpacing: "-0.5px" }}>
               Reserve Your Seat
             </h3>
-            <p style={{ fontFamily: "var(--font-outfit)", fontSize: 14, fontWeight: 300, color: "#707070", margin: "10px 0 0", lineHeight: 1.7, maxWidth: 380 }}>
+            <p style={{ fontFamily: "var(--font-outfit)", fontSize: 14, fontWeight: 400, color: "#808080", margin: "12px 0 0", lineHeight: 1.7, maxWidth: 380 }}>
               Join 250+ senior leaders for a full-day summit on May 18, 2026 in Kuwait City.
             </p>
 
+            {/* Limited seats badge */}
+            <div className="flex items-center gap-2" style={{ marginTop: 16 }}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={EFG_ORANGE} strokeWidth="2" strokeLinecap="round">
+                <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span style={{ fontFamily: "var(--font-outfit)", fontSize: 12, fontWeight: 500, color: `${EFG_ORANGE}90` }}>
+                Limited to 250 seats — 73% sold
+              </span>
+            </div>
+
             {/* Countdown */}
-            <div className="flex gap-3" style={{ marginTop: 24 }}>
+            <div className="flex gap-3" style={{ marginTop: 20 }}>
               {[
                 { v: cd.d, l: "Days" },
                 { v: cd.h, l: "Hrs" },
@@ -3476,39 +3839,55 @@ function SplitCTA() {
                   key={u.l}
                   className="text-center"
                   style={{
-                    padding: "10px 14px",
-                    borderRadius: 10,
-                    background: "rgba(232, 101, 26, 0.08)",
-                    border: "1px solid rgba(232, 101, 26, 0.15)",
-                    minWidth: 56,
+                    padding: "12px 16px",
+                    borderRadius: 12,
+                    background: `linear-gradient(145deg, ${EFG_ORANGE}12 0%, ${EFG_ORANGE}06 100%)`,
+                    border: `1px solid ${EFG_ORANGE}20`,
+                    minWidth: 60,
                   }}
                 >
-                  <span style={{ fontFamily: "var(--font-display)", fontSize: 22, fontWeight: 800, color: EFG_ORANGE, display: "block" }}>
+                  <motion.span 
+                    key={u.v}
+                    initial={{ opacity: 0.5 }}
+                    animate={{ opacity: 1 }}
+                    style={{ 
+                      fontFamily: "var(--font-display)", 
+                      fontSize: 24, 
+                      fontWeight: 800, 
+                      color: EFG_ORANGE, 
+                      display: "block",
+                      textShadow: `0 0 20px ${EFG_ORANGE}40`,
+                    }}
+                  >
                     {u.v.toString().padStart(2, "0")}
-                  </span>
-                  <span style={{ fontFamily: "var(--font-outfit)", fontSize: 8, fontWeight: 500, color: "#505050", letterSpacing: "1px", textTransform: "uppercase" }}>
+                  </motion.span>
+                  <span style={{ fontFamily: "var(--font-outfit)", fontSize: 8, fontWeight: 600, color: `${EFG_ORANGE}70`, letterSpacing: "1.5px", textTransform: "uppercase" }}>
                     {u.l}
                   </span>
                 </div>
               ))}
             </div>
 
-            {/* CTA */}
+            {/* CTA - Enhanced */}
             <Link
               href="/events/data-ai-first/kuwait-2026#register"
-              className="inline-flex items-center gap-2 transition-all"
+              className="inline-flex items-center gap-3 transition-all group"
               style={{
                 marginTop: 28,
-                padding: "14px 32px",
+                padding: "16px 36px",
                 borderRadius: 50,
-                background: EFG_ORANGE,
+                background: `linear-gradient(135deg, ${EFG_ORANGE} 0%, ${EFG_ORANGE_BRIGHT} 100%)`,
                 fontFamily: "var(--font-outfit)",
-                fontSize: 14,
+                fontSize: 15,
                 fontWeight: 600,
                 color: "white",
+                boxShadow: `0 6px 28px ${EFG_ORANGE}40`,
               }}
             >
-              Register Now <span>→</span>
+              <span>Register Now</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" className="transition-transform group-hover:translate-x-1">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
             </Link>
           </motion.div>
 
@@ -3519,15 +3898,43 @@ function SplitCTA() {
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.25, ease: EASE }}
             style={{
-              borderRadius: 18,
-              padding: "36px 28px",
-              background: "rgba(10,10,10,0.7)",
-              backdropFilter: "blur(20px)",
-              WebkitBackdropFilter: "blur(20px)",
-              border: `1px solid ${E}25`,
+              borderRadius: 22,
+              padding: "40px 32px",
+              background: "linear-gradient(145deg, rgba(15,115,94,0.06) 0%, rgba(10,10,10,0.8) 100%)",
+              backdropFilter: "blur(24px)",
+              WebkitBackdropFilter: "blur(24px)",
+              border: `1px solid ${E}30`,
+              boxShadow: `0 8px 40px ${E}08, inset 0 1px 0 ${E}15`,
+              position: "relative",
+              overflow: "hidden",
             }}
           >
-            <span style={{ fontFamily: "var(--font-outfit)", fontSize: 10, fontWeight: 600, letterSpacing: "2.5px", textTransform: "uppercase", color: E_BRIGHT }}>
+            {/* Top glow accent */}
+            <div className="absolute top-0 left-1/4 right-1/4 h-px pointer-events-none" style={{ background: `linear-gradient(90deg, transparent, ${E}40, transparent)` }} />
+            
+            {/* Partnership tiers badge */}
+            <div className="flex items-center gap-2" style={{ marginBottom: 16 }}>
+              <span
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 6,
+                  padding: "5px 14px",
+                  borderRadius: 50,
+                  background: `linear-gradient(135deg, ${E}15 0%, ${E}08 100%)`,
+                  border: `1px solid ${E}25`,
+                }}
+              >
+                <svg width="12" height="12" viewBox="0 0 24 24" fill={E_BRIGHT} stroke="none">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                </svg>
+                <span style={{ fontFamily: "var(--font-outfit)", fontSize: 10, fontWeight: 700, letterSpacing: "1.5px", textTransform: "uppercase", color: E_BRIGHT }}>
+                  Premium Partnerships
+                </span>
+              </span>
+            </div>
+
+            <span style={{ fontFamily: "var(--font-outfit)", fontSize: 10, fontWeight: 600, letterSpacing: "2.5px", textTransform: "uppercase", color: `${E_BRIGHT}90` }}>
               For Brands & Vendors
             </span>
             <h3 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(20px, 2vw, 26px)", fontWeight: 800, color: "var(--white)", margin: "12px 0 0", letterSpacing: "-0.5px" }}>
@@ -3554,19 +3961,24 @@ function SplitCTA() {
             {/* CTA */}
             <Link
               href="mailto:shyam@eventsfirstgroup.com"
-              className="inline-flex items-center gap-2 transition-all"
+              className="inline-flex items-center gap-3 transition-all group"
               style={{
-                marginTop: 24,
-                padding: "12px 28px",
+                marginTop: 28,
+                padding: "14px 32px",
                 borderRadius: 50,
+                background: `linear-gradient(135deg, ${E}15 0%, ${E}08 100%)`,
                 border: `1px solid ${E}40`,
                 fontFamily: "var(--font-outfit)",
-                fontSize: 13,
-                fontWeight: 500,
+                fontSize: 14,
+                fontWeight: 600,
                 color: E_BRIGHT,
+                boxShadow: `0 4px 20px ${E}15`,
               }}
             >
-              Get Partnership Deck <span>→</span>
+              <span>Get Partnership Deck</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="transition-transform group-hover:translate-x-1">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
             </Link>
           </motion.div>
         </div>
@@ -3662,59 +4074,118 @@ function Venue() {
           zIndex: 10,
         }}
       >
-        <div
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease: EASE }}
           className="daik-venue-inner"
           style={{
-            borderRadius: 20,
-            background: "rgba(20, 20, 20, 0.85)",
-            backdropFilter: "blur(24px)",
-            WebkitBackdropFilter: "blur(24px)",
-            border: `1px solid ${E}20`,
-            padding: "40px",
+            borderRadius: 24,
+            background: "linear-gradient(145deg, rgba(15,115,94,0.08) 0%, rgba(20, 20, 20, 0.9) 100%)",
+            backdropFilter: "blur(32px)",
+            WebkitBackdropFilter: "blur(32px)",
+            border: `1px solid ${E}25`,
+            padding: "44px",
             display: "grid",
             gridTemplateColumns: "1.2fr 1fr",
-            gap: 40,
+            gap: 48,
             alignItems: "start",
+            boxShadow: `0 24px 60px rgba(0,0,0,0.4), inset 0 1px 0 ${E}15`,
+            position: "relative",
+            overflow: "hidden",
           }}
         >
+          {/* Top glow accent */}
+          <div className="absolute top-0 left-1/4 right-1/4 h-px pointer-events-none" style={{ background: `linear-gradient(90deg, transparent, ${E}40, transparent)` }} />
+          
           {/* Left */}
           <div>
-            <h3 style={{ fontFamily: "var(--font-display)", fontSize: 22, fontWeight: 700, color: "var(--white)", margin: "0 0 12px" }}>
-              Venue Details
-            </h3>
-            <p style={{ fontFamily: "var(--font-outfit)", fontSize: 14, fontWeight: 300, color: "#707070", lineHeight: 1.7, margin: 0 }}>
+            <div className="flex items-center gap-3" style={{ marginBottom: 16 }}>
+              <div
+                style={{
+                  width: 40,
+                  height: 40,
+                  borderRadius: 10,
+                  background: `${E}15`,
+                  border: `1px solid ${E}25`,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={E_BRIGHT} strokeWidth="1.5" strokeLinecap="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+              </div>
+              <h3 style={{ fontFamily: "var(--font-display)", fontSize: 24, fontWeight: 700, color: "var(--white)", margin: 0 }}>
+                Venue Details
+              </h3>
+            </div>
+            <p style={{ fontFamily: "var(--font-outfit)", fontSize: 15, fontWeight: 400, color: "rgba(255,255,255,0.55)", lineHeight: 1.75, margin: 0 }}>
               Data & AI First Kuwait 2026 will be hosted at a premier venue in Kuwait City.
               Final venue details will be announced shortly.
             </p>
+            
+            {/* Coming soon badge */}
+            <div className="flex items-center gap-2" style={{ marginTop: 20 }}>
+              <span
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 6,
+                  padding: "6px 14px",
+                  borderRadius: 50,
+                  background: `${E}10`,
+                  border: `1px solid ${E}20`,
+                }}
+              >
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={E_BRIGHT} strokeWidth="2" strokeLinecap="round">
+                  <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span style={{ fontFamily: "var(--font-outfit)", fontSize: 11, fontWeight: 600, color: E_BRIGHT }}>
+                  Venue reveal coming soon
+                </span>
+              </span>
+            </div>
           </div>
 
           {/* Right: Detail grid */}
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
             {[
-              { label: "Location", value: "Kuwait City" },
-              { label: "Date", value: "May 18, 2026" },
-              { label: "Time", value: "8:00 AM – 3:00 PM" },
-              { label: "Format", value: "Full-Day Summit" },
-            ].map((d) => (
-              <div
+              { label: "Location", value: "Kuwait City", icon: "M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" },
+              { label: "Date", value: "May 18, 2026", icon: "M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" },
+              { label: "Time", value: "8:00 AM – 3:00 PM", icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" },
+              { label: "Format", value: "Full-Day Summit", icon: "M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" },
+            ].map((d, i) => (
+              <motion.div
                 key={d.label}
+                whileHover={{ scale: 1.02, y: -2 }}
+                transition={{ duration: 0.2 }}
                 style={{
-                  padding: "14px 16px",
-                  borderRadius: 12,
-                  background: "rgba(255,255,255,0.03)",
-                  border: "1px solid rgba(255,255,255,0.06)",
+                  padding: "16px 18px",
+                  borderRadius: 14,
+                  background: i === 1 ? `${E}10` : "rgba(255,255,255,0.03)",
+                  border: `1px solid ${i === 1 ? `${E}25` : "rgba(255,255,255,0.06)"}`,
+                  cursor: "default",
                 }}
               >
-                <p style={{ fontFamily: "var(--font-outfit)", fontSize: 9, fontWeight: 600, letterSpacing: "2px", textTransform: "uppercase", color: "#404040", margin: 0 }}>
-                  {d.label}
-                </p>
-                <p style={{ fontFamily: "var(--font-display)", fontSize: 14, fontWeight: 700, color: "var(--white)", margin: "6px 0 0" }}>
+                <div className="flex items-center gap-2" style={{ marginBottom: 8 }}>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={i === 1 ? E_BRIGHT : "#505050"} strokeWidth="1.5" strokeLinecap="round">
+                    <path d={d.icon} />
+                  </svg>
+                  <p style={{ fontFamily: "var(--font-outfit)", fontSize: 9, fontWeight: 600, letterSpacing: "2px", textTransform: "uppercase", color: i === 1 ? E_BRIGHT : "#505050", margin: 0 }}>
+                    {d.label}
+                  </p>
+                </div>
+                <p style={{ fontFamily: "var(--font-display)", fontSize: 15, fontWeight: 700, color: "var(--white)", margin: 0 }}>
                   {d.value}
                 </p>
-              </div>
+              </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
       </div>
 
       {/* Bottom padding */}
