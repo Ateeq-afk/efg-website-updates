@@ -297,6 +297,9 @@ export default function DataAIFirstKuwait2026() {
       <AwardsSection />
       <WhoShouldAttend />
       <WhyAttend />
+      <PastEventsGallery />
+      <SponsorsSection />
+      <FAQSection />
       <SplitCTA />
       <Venue />
       <Footer />
@@ -3868,7 +3871,422 @@ function WhyAttend() {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
-//  12. APPLICATION FORM + SPLIT CTA
+//  12. PAST EVENTS GALLERY
+// ═══════════════════════════════════════════════════════════════════════════════
+
+const PAST_EVENT_PHOTOS = [
+  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/Good/4N8A0290.JPG", caption: "OT Security First Abu Dhabi 2026" },
+  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/Good/4N8A0001.JPG", caption: "Keynote Session" },
+  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/Good/4N8A0012.JPG", caption: "Panel Discussion" },
+  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/Good/4N8A0025.JPG", caption: "Networking" },
+  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/Good/4N8A0028.JPG", caption: "Exhibition" },
+  { src: "https://efg-final.s3.eu-north-1.amazonaws.com/Good/4N8A0006.JPG", caption: "Awards Ceremony" },
+];
+
+function PastEventsGallery() {
+  const ref = useRef<HTMLElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+
+  return (
+    <section
+      ref={ref}
+      style={{
+        background: "#0A0A0A",
+        padding: "clamp(48px, 6vw, 80px) 0",
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
+      {/* Subtle gradient */}
+      <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 60% 40% at 50% 100%, ${E}08, transparent)` }} />
+
+      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(20px, 4vw, 60px)", position: "relative", zIndex: 1 }}>
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, ease: EASE }}
+          style={{ textAlign: "center", marginBottom: 40 }}
+        >
+          <div className="flex items-center justify-center gap-3">
+            <span style={{ width: 30, height: 1, background: E }} />
+            <span style={{ fontFamily: "var(--font-outfit)", fontSize: 11, fontWeight: 600, letterSpacing: "2.5px", textTransform: "uppercase", color: E_BRIGHT }}>
+              Events First Group
+            </span>
+            <span style={{ width: 30, height: 1, background: E }} />
+          </div>
+          <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(28px, 3.5vw, 44px)", letterSpacing: "-1.5px", color: "var(--white)", lineHeight: 1.1, margin: "16px 0 0" }}>
+            From Our Recent Events
+          </h2>
+          <p style={{ fontFamily: "var(--font-outfit)", fontSize: 15, fontWeight: 400, color: "rgba(255,255,255,0.5)", marginTop: 12, maxWidth: 500, margin: "12px auto 0" }}>
+            A glimpse of what to expect at Data & AI First Kuwait
+          </p>
+        </motion.div>
+
+        {/* Photo Grid */}
+        <div
+          className="daik-gallery-grid"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(3, 1fr)",
+            gap: 12,
+          }}
+        >
+          {PAST_EVENT_PHOTOS.map((photo, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.1 + i * 0.08, ease: EASE }}
+              className="relative overflow-hidden group"
+              style={{
+                borderRadius: 14,
+                aspectRatio: i === 0 ? "16/10" : "4/3",
+                gridColumn: i === 0 ? "span 2" : "span 1",
+                gridRow: i === 0 ? "span 2" : "span 1",
+              }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={photo.src}
+                alt={photo.caption}
+                className="w-full h-full object-cover transition-transform duration-700"
+                style={{ transform: "scale(1)" }}
+                onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.05)"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                <span style={{ fontFamily: "var(--font-outfit)", fontSize: 13, fontWeight: 500, color: "white" }}>
+                  {photo.caption}
+                </span>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Stats row */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.5, ease: EASE }}
+          className="flex flex-wrap justify-center gap-8"
+          style={{ marginTop: 32 }}
+        >
+          {[
+            { value: "15+", label: "Events Delivered" },
+            { value: "5,000+", label: "Attendees" },
+            { value: "6", label: "GCC Countries" },
+          ].map((stat) => (
+            <div key={stat.label} className="text-center">
+              <span style={{ fontFamily: "var(--font-display)", fontSize: 28, fontWeight: 800, color: E_BRIGHT }}>{stat.value}</span>
+              <span style={{ fontFamily: "var(--font-outfit)", fontSize: 12, fontWeight: 500, color: "#606060", display: "block", marginTop: 4 }}>{stat.label}</span>
+            </div>
+          ))}
+        </motion.div>
+      </div>
+
+      <style jsx global>{`
+        @media (max-width: 768px) {
+          .daik-gallery-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+          .daik-gallery-grid > div:first-child {
+            grid-column: span 2 !important;
+            grid-row: span 1 !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .daik-gallery-grid {
+            grid-template-columns: 1fr !important;
+            gap: 10px !important;
+          }
+          .daik-gallery-grid > div:first-child {
+            grid-column: span 1 !important;
+          }
+        }
+      `}</style>
+    </section>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+//  13. SPONSORS SECTION
+// ═══════════════════════════════════════════════════════════════════════════════
+
+const SPONSOR_TIERS = [
+  { tier: "Patronage Partner", slots: 1, color: GOLD },
+  { tier: "Knowledge Partners", slots: 2, color: E_BRIGHT },
+  { tier: "Supporting Partners", slots: 4, color: "#808080" },
+];
+
+function SponsorsSection() {
+  const ref = useRef<HTMLElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+
+  return (
+    <section
+      ref={ref}
+      id="partners"
+      style={{
+        background: "#080808",
+        padding: "clamp(48px, 6vw, 80px) 0",
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
+      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(20px, 4vw, 60px)", position: "relative", zIndex: 1 }}>
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, ease: EASE }}
+          style={{ textAlign: "center", marginBottom: 40 }}
+        >
+          <div className="flex items-center justify-center gap-3">
+            <span style={{ width: 30, height: 1, background: E }} />
+            <span style={{ fontFamily: "var(--font-outfit)", fontSize: 11, fontWeight: 600, letterSpacing: "2.5px", textTransform: "uppercase", color: E_BRIGHT }}>
+              Partners
+            </span>
+            <span style={{ width: 30, height: 1, background: E }} />
+          </div>
+          <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(28px, 3.5vw, 44px)", letterSpacing: "-1.5px", color: "var(--white)", lineHeight: 1.1, margin: "16px 0 0" }}>
+            Founding Partners
+          </h2>
+          <p style={{ fontFamily: "var(--font-outfit)", fontSize: 15, fontWeight: 400, color: "rgba(255,255,255,0.5)", marginTop: 12, maxWidth: 500, margin: "12px auto 0" }}>
+            Join Kuwait&apos;s leading AI summit as a founding partner
+          </p>
+        </motion.div>
+
+        {/* Sponsor Tiers */}
+        {SPONSOR_TIERS.map((tierData, tierIndex) => (
+          <motion.div
+            key={tierData.tier}
+            initial={{ opacity: 0, y: 15 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.2 + tierIndex * 0.1, ease: EASE }}
+            style={{ marginBottom: tierIndex < SPONSOR_TIERS.length - 1 ? 28 : 0 }}
+          >
+            <p style={{ fontFamily: "var(--font-outfit)", fontSize: 10, fontWeight: 600, letterSpacing: "2.5px", textTransform: "uppercase", color: tierData.color, marginBottom: 12 }}>
+              {tierData.tier}
+            </p>
+            <div
+              className="daik-sponsor-grid"
+              style={{
+                display: "grid",
+                gridTemplateColumns: `repeat(${Math.min(tierData.slots, 4)}, 1fr)`,
+                gap: 12,
+              }}
+            >
+              {Array.from({ length: tierData.slots }).map((_, i) => (
+                <div
+                  key={i}
+                  className="flex items-center justify-center transition-all"
+                  style={{
+                    padding: tierIndex === 0 ? "48px 32px" : "32px 24px",
+                    borderRadius: 14,
+                    background: `linear-gradient(145deg, ${tierData.color}08, ${tierData.color}03)`,
+                    border: `1px dashed ${tierData.color}25`,
+                    cursor: "default",
+                  }}
+                >
+                  <span style={{ fontFamily: "var(--font-outfit)", fontSize: 13, fontWeight: 400, color: `${tierData.color}50` }}>
+                    Your brand here
+                  </span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        ))}
+
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.6, ease: EASE }}
+          style={{ textAlign: "center", marginTop: 36 }}
+        >
+          <Link
+            href="#register"
+            className="inline-flex items-center gap-2 transition-all group"
+            style={{
+              padding: "14px 32px",
+              borderRadius: 50,
+              background: `linear-gradient(135deg, ${E}15 0%, ${E}08 100%)`,
+              border: `1px solid ${E}40`,
+              fontFamily: "var(--font-outfit)",
+              fontSize: 14,
+              fontWeight: 600,
+              color: E_BRIGHT,
+            }}
+          >
+            <span>Become a Founding Partner</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="transition-transform group-hover:translate-x-1">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </Link>
+        </motion.div>
+      </div>
+
+      <style jsx global>{`
+        @media (max-width: 768px) {
+          .daik-sponsor-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .daik-sponsor-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
+    </section>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+//  14. FAQ SECTION
+// ═══════════════════════════════════════════════════════════════════════════════
+
+const FAQS = [
+  {
+    q: "What is Data & AI First?",
+    a: "Data & AI First is a premier summit series by Events First Group designed for enterprise leaders driving AI transformation across the GCC. It brings together Chief Data Officers, AI architects, government strategists, and solution providers for a full day of practitioner-led sessions, workshops, and curated meetings.",
+  },
+  {
+    q: "Who should attend?",
+    a: "The summit is built for C-suite and senior leaders in data, AI, digital transformation, and technology. Think CDOs, CAIOs, CTOs, Heads of Data Science, Directors of Digital Transformation, and Government Technology Leaders.",
+  },
+  {
+    q: "Is there a registration fee?",
+    a: "Attendance is by invitation only. Submit your application and our committee will review within 48 hours. Approved delegates receive complimentary access including all sessions, networking lunch, and materials.",
+  },
+  {
+    q: "What's included in my attendance?",
+    a: "Full-day access to all keynotes, panels, and workshops. Networking lunch and refreshments. Event materials and delegate pack. Certificate of attendance. Access to the exhibition floor and sponsor showcases.",
+  },
+  {
+    q: "What is the dress code?",
+    a: "Business formal. The summit brings together senior executives and government officials, so professional attire is expected.",
+  },
+  {
+    q: "How can my company sponsor or partner?",
+    a: "We offer Patronage, Knowledge Partner, and Supporting Partner tiers. Founding partners receive priority positioning across all future editions. Request the partnership deck through our form above.",
+  },
+];
+
+function FAQSection() {
+  const ref = useRef<HTMLElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+
+  return (
+    <section
+      ref={ref}
+      style={{
+        background: "#0A0A0A",
+        padding: "clamp(48px, 6vw, 80px) 0",
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
+      <div style={{ maxWidth: 800, margin: "0 auto", padding: "0 clamp(20px, 4vw, 60px)", position: "relative", zIndex: 1 }}>
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, ease: EASE }}
+          style={{ textAlign: "center", marginBottom: 40 }}
+        >
+          <div className="flex items-center justify-center gap-3">
+            <span style={{ width: 30, height: 1, background: E }} />
+            <span style={{ fontFamily: "var(--font-outfit)", fontSize: 11, fontWeight: 600, letterSpacing: "2.5px", textTransform: "uppercase", color: E_BRIGHT }}>
+              FAQ
+            </span>
+            <span style={{ width: 30, height: 1, background: E }} />
+          </div>
+          <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(28px, 3.5vw, 44px)", letterSpacing: "-1.5px", color: "var(--white)", lineHeight: 1.1, margin: "16px 0 0" }}>
+            Common Questions
+          </h2>
+        </motion.div>
+
+        {/* FAQ Accordion */}
+        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+          {FAQS.map((faq, i) => {
+            const isOpen = openIndex === i;
+            return (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 15 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.4, delay: 0.1 + i * 0.05, ease: EASE }}
+                style={{
+                  borderRadius: 12,
+                  background: isOpen ? `${E}0A` : "rgba(255,255,255,0.02)",
+                  border: `1px solid ${isOpen ? `${E}25` : "rgba(255,255,255,0.05)"}`,
+                  overflow: "hidden",
+                  transition: "all 0.3s",
+                }}
+              >
+                <button
+                  onClick={() => setOpenIndex(isOpen ? null : i)}
+                  className="w-full flex items-center justify-between text-left"
+                  style={{ padding: "18px 20px", background: "none", border: "none", cursor: "pointer" }}
+                >
+                  <span style={{ fontFamily: "var(--font-outfit)", fontSize: 15, fontWeight: 500, color: isOpen ? "white" : "rgba(255,255,255,0.7)" }}>
+                    {faq.q}
+                  </span>
+                  <motion.svg
+                    animate={{ rotate: isOpen ? 45 : 0 }}
+                    transition={{ duration: 0.2 }}
+                    width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke={isOpen ? E_BRIGHT : "rgba(255,255,255,0.3)"}
+                    strokeWidth="2" strokeLinecap="round"
+                    style={{ flexShrink: 0, marginLeft: 16 }}
+                  >
+                    <path d="M12 5v14M5 12h14" />
+                  </motion.svg>
+                </button>
+                <AnimatePresence>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.25, ease: EASE }}
+                    >
+                      <p style={{ fontFamily: "var(--font-outfit)", fontSize: 14, fontWeight: 400, color: "rgba(255,255,255,0.5)", lineHeight: 1.7, padding: "0 20px 18px", margin: 0 }}>
+                        {faq.a}
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* Contact CTA */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.5, delay: 0.6 }}
+          style={{ textAlign: "center", marginTop: 32 }}
+        >
+          <p style={{ fontFamily: "var(--font-outfit)", fontSize: 14, color: "#606060" }}>
+            Still have questions?{" "}
+            <a href="mailto:info@eventsfirstgroup.com" style={{ color: E_BRIGHT, textDecoration: "none" }}>
+              Contact us
+            </a>
+          </p>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+//  15. APPLICATION FORM + SPLIT CTA
 // ═══════════════════════════════════════════════════════════════════════════════
 
 function ApplicationForm() {
