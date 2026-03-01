@@ -135,7 +135,7 @@ const SPEAKERS: {
   { name: "Iyad Atieh", title: "CISO", org: "Alghanim Industries", photo: "https://efg-final.s3.eu-north-1.amazonaws.com/speakers/kuwait-2026/iyad-atieh.jpg" },
   { name: "Abdullah AlNusef", title: "Chief Data Officer", org: "Bank Boubyan", photo: "https://efg-final.s3.eu-north-1.amazonaws.com/speakers/kuwait-2026/abdullah-alnusef.jpg" },
   { name: "Abdulmohsen Alsulaimi", title: "Group CTO", org: "Towell International Holding", photo: "https://efg-final.s3.eu-north-1.amazonaws.com/speakers/kuwait-2026/abdulmohsen-alsulaimi.jpg" },
-  { name: "Amr Wageeh", title: "General Counsel & FDI Policy Advisor", org: "KDIPA", photo: null },
+  { name: "Amr Wageeh", title: "General Counsel & FDI Policy Advisor", org: "KDIPA", photo: "https://efg-final.s3.eu-north-1.amazonaws.com/speakers/kuwait-2026/amr-wageeh.jpg" },
 ];
 
 const FOCUS_AREAS: { title: string; desc: string; icon: string }[] = [
