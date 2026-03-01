@@ -1801,17 +1801,21 @@ function HighlightsGrid() {
             gap: 32px !important;
           }
           .daik-hl-split > div:first-child > div:last-child {
-            gap: 20px !important;
-            flex-wrap: wrap !important;
-            justify-content: center !important;
+            display: grid !important;
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 16px !important;
+            text-align: center !important;
           }
         }
         @media (max-width: 480px) {
           .daik-hl-split > div:first-child > div:last-child {
-            gap: 16px !important;
+            gap: 12px !important;
           }
           .daik-hl-split > div:first-child > div:last-child > div span:first-child {
-            font-size: 32px !important;
+            font-size: 28px !important;
+          }
+          .daik-hl-split > div:first-child > div:last-child > div span:last-child {
+            font-size: 9px !important;
           }
         }
       `}</style>
