@@ -447,13 +447,13 @@ export default function CyberFirstKuwait2026() {
       <EventNavigation />
       <HeroSection />
       <StatsBar />
-      <Gallery />
       <MarketContext />
       <FocusAreas />
       <AgendaTimeline />
       <GrowthStory />
       <AtmosphereDivider />
       <Speakers />
+      <Gallery />
       <SponsorsSection />
       <WhatToExpect />
       <WhoShouldAttend />
