@@ -4,7 +4,7 @@ import { useRef, useState, useEffect } from "react";
 import { motion, useInView, animate } from "framer-motion";
 
 const S3_BASE = "https://efg-final.s3.eu-north-1.amazonaws.com/Good";
-const BG_IMAGE = `${S3_BASE}/4N8A0133.JPG`;
+const BG_IMAGE = `${S3_BASE}/4N8A0290.JPG`;
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
