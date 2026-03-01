@@ -133,7 +133,7 @@ const SPEAKERS: {
   { name: "Mai AlOwaish", title: "CEO", org: "CINET", photo: "https://efg-final.s3.eu-north-1.amazonaws.com/speakers/kuwait-2026/mai-alowaish.jpg" },
   { name: "Sudhakar Nibhanupudi", title: "Group Chief Data Officer", org: "National Bank of Kuwait", photo: null },
   { name: "Iyad Atieh", title: "CISO", org: "Alghanim Industries", photo: "https://efg-final.s3.eu-north-1.amazonaws.com/speakers/kuwait-2026/iyad-atieh.jpg" },
-  { name: "Abdullah AlNusef", title: "Chief Data Officer", org: "Bank Boubyan", photo: null },
+  { name: "Abdullah AlNusef", title: "Chief Data Officer", org: "Bank Boubyan", photo: "https://efg-final.s3.eu-north-1.amazonaws.com/speakers/kuwait-2026/abdullah-alnusef.jpg" },
   { name: "Abdulmohsen Alsulaimi", title: "Group CTO", org: "Towell International Holding", photo: null },
   { name: "Amr Wageeh", title: "General Counsel & FDI Policy Advisor", org: "KDIPA", photo: null },
 ];
