@@ -73,7 +73,7 @@ const teamMembers: Member[] = [
   { name: "Kausar Noor", role: "Partnership Manager", initials: "KN", photo: "/team/noor-kauser.jpg" },
   // Delegate Acquisition
   { name: "Mary", role: "Delegate Acquisition", initials: "M", photo: `${S3}/Mary.jpg` },
-  { name: "Rajan", role: "Delegate Acquisition", initials: "R", photo: `${S3}/Rajan.jpg` },
+  { name: "Rajan", role: "Delegate Acquisition", initials: "R", photo: "/team/rajan.jpg" },
   { name: "Afra Sait", role: "Delegate Acquisition", initials: "AS", photo: `${S3}/Afra-Sait.jpeg` },
   { name: "Mriggashi Mohini", role: "Delegate Acquisition", initials: "MM", photo: `${S3}/Mriggashi-Mohini.jpeg` },
   { name: "Stephen D'Souza", role: "Delegate Acquisition", initials: "SD" },
