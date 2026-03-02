@@ -273,7 +273,7 @@ export default function NetworkFirst() {
               margin: "0 0 36px",
             }}
           >
-            15 seats. Hand-selected executives. No keynotes, no slides, no recordings.
+            15-seat executive roundtables. Hand-selected leaders. No keynotes, no slides, no recordings.
             Just the conversations that actually move industries — held under Chatham House Rule.
           </motion.p>
 
