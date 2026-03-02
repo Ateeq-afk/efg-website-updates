@@ -10,7 +10,6 @@ const navLinks = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/events", label: "Events", hasDropdown: true },
-  { href: "/sponsors-and-partners", label: "Sponsors & Partners" },
   { href: "/speakers", label: "Speakers" },
   { href: "/insights", label: "Insights" },
   { href: "/contact", label: "Contact" },
