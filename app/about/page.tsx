@@ -87,7 +87,7 @@ const teamMembers: Member[] = [
   { name: "Harini", role: "Producer", initials: "H", photo: `${S3}/Harini.jpg` },
   // Marketing & Tech
   { name: "Syed Asad", role: "Marketing & Tech", initials: "SA", photo: `${S3}/Syed-Asad.jpg` },
-  { name: "Mannan Akhtar", role: "Marketing & Tech", initials: "MA", photo: "/team/mannaan.PNG" },
+  { name: "Mannan Akhtar", role: "Marketing & Tech", initials: "MA", photo: `${S3}/Mannan-Akhtar.jpg` },
 ];
 
 // Fun team photos (candid shots)
