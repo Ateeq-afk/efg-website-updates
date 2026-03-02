@@ -472,7 +472,7 @@ export default function HeroSection() {
           <div style={{ display: "flex", alignItems: "center", gap: 12, flexShrink: 0 }}>
             <CountdownDisplay date={nextEvent.date} compact />
             <Link
-              href="/events/cyber-first/kuwait-2026-2026"
+              href="/events/cyber-first/kuwait-2026"
               style={{ fontSize: 12, fontWeight: 600, color: "var(--orange)", fontFamily: "var(--font-outfit)", whiteSpace: "nowrap" }}
             >
               Register →
