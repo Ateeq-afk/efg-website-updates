@@ -2738,24 +2738,40 @@ function SponsorsSection() {
           </p>
         </motion.div>
 
-        {/* Gold */}
-        <SponsorTier label="Gold Sponsors" items={SPONSORS.gold} size="lead" inView={inView} delay={0.2} />
-        {/* Associate */}
-        <SponsorTier label="Associate Sponsors" items={SPONSORS.associate} size="normal" inView={inView} delay={0.35} />
-        {/* Strategic */}
-        <SponsorTier label="Strategic Partners" items={SPONSORS.strategic} size="small" inView={inView} delay={0.5} />
-
-        {/* Divider */}
-        <div style={{ margin: "36px 0", height: 1, background: `linear-gradient(90deg, transparent, ${C}15, transparent)` }} />
-
-        {/* Specialized */}
-        <SponsorTier label="Specialized Partners" items={SPONSORS.specialized} size="small" inView={inView} delay={0.65} />
-
-        {/* Divider */}
-        <div style={{ margin: "36px 0", height: 1, background: `linear-gradient(90deg, transparent, ${C}15, transparent)` }} />
-
-        {/* Supporting */}
-        <SponsorTier label="Supporting Partners" items={SPONSORS.supporting} size="small" inView={inView} delay={0.8} />
+        {/* All Previous Sponsors - One Block */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          <p
+            style={{
+              fontFamily: "var(--font-outfit)",
+              fontSize: 10,
+              fontWeight: 600,
+              letterSpacing: "2.5px",
+              textTransform: "uppercase",
+              color: C,
+              marginBottom: 16,
+              opacity: 0.7,
+              textAlign: "center",
+            }}
+          >
+            Previous Sponsors & Partners
+          </p>
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "center",
+              gap: 10,
+            }}
+          >
+            {[...SPONSORS.gold, ...SPONSORS.associate, ...SPONSORS.strategic, ...SPONSORS.specialized, ...SPONSORS.supporting].map((s) => (
+              <SponsorLogo key={s.name} sponsor={s} height={68} logoH={32} />
+            ))}
+          </div>
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 10 }}
