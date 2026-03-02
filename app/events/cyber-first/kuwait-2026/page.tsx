@@ -449,12 +449,12 @@ export default function CyberFirstKuwait2026() {
       <StatsBar />
       <MarketContext />
       <FocusAreas />
+      <Speakers />
       <AgendaTimeline />
+      <SponsorsSection />
       <GrowthStory />
       <AtmosphereDivider />
-      <Speakers />
       <Gallery />
-      <SponsorsSection />
       <WhatToExpect />
       <WhoShouldAttend />
       <AdvisoryBoard />
