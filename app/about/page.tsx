@@ -68,7 +68,7 @@ const teamMembers: Member[] = [
   // Partnership
   { name: "Mohammed Hassan", role: "Partnership Manager", initials: "MH" },
   { name: "Mohammed Sahil", role: "Partnership Manager", initials: "MS", photo: `${S3}/sahil.jpeg` },
-  { name: "Mohammed Danish", role: "Partnership Manager", initials: "MD", photo: `${S3}/Danish.jpg` },
+  { name: "Mohammed Danish", role: "Partnership Manager", initials: "MD", photo: "/team/danish.jpg" },
   { name: "Mayur Methi", role: "Partnership Manager", initials: "MM", photo: `${S3}/Mayur-Methi.png` },
   { name: "Kausar Noor", role: "Partnership Manager", initials: "KN", photo: `${S3}/Kausar-Noor.jpg` },
   // Delegate Acquisition

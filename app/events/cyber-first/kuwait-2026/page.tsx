@@ -4740,7 +4740,7 @@ const CFK_CONTACTS = {
       role: "Partnership Manager",
       phone: "+971 50 987 6543",
       email: "danish@eventsfirstgroup.com",
-      photo: `${S3_TEAM}/Danish.jpg`,
+      photo: "/team/danish.jpg",
     },
   ],
 };
