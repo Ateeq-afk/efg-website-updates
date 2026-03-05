@@ -772,7 +772,7 @@ function HeroSection() {
               boxShadow: `0 4px 20px ${C}40`,
             }}
           >
-            Register Now →
+            Register Now &rarr;
           </Link>
         </div>
       </motion.div>
@@ -849,7 +849,7 @@ function HeroCTA({
     >
       <span>{children}</span>
       {primary && (
-        <span style={{ transition: "transform 0.3s", transform: hovered ? "translateX(3px)" : "translateX(0)" }}>→</span>
+        <span style={{ transition: "transform 0.3s", transform: hovered ? "translateX(3px)" : "translateX(0)" }}>&rarr;</span>
       )}
     </Link>
   );
@@ -2933,86 +2933,6 @@ function SponsorTier({
   );
 }
 
-function _unusedLegacyCTA() {
-  return (
-    <Link
-      href="/contact"
-      style={{
-        display: "inline-flex",
-              alignItems: "center",
-              gap: 8,
-              padding: "12px 28px",
-              borderRadius: 50,
-              border: `1px solid ${C}30`,
-              background: "transparent",
-              fontFamily: "var(--font-outfit)",
-              fontSize: 14,
-              fontWeight: 500,
-              color: C,
-              textDecoration: "none",
-            }}
-          >
-            Become a Sponsor →
-          </Link>
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-
-function SponsorTier({
-  label,
-  items,
-  size,
-  inView,
-  delay,
-}: {
-  label: string;
-  items: { name: string; logo: string | null }[];
-  size: "lead" | "normal" | "small";
-  inView: boolean;
-  delay: number;
-}) {
-  const heights = { lead: 90, normal: 68, small: 52 };
-  const logoH = { lead: 44, normal: 32, small: 24 };
-
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={inView ? { opacity: 1 } : { opacity: 0 }}
-      transition={{ duration: 0.5, delay }}
-      style={{ marginTop: 28 }}
-    >
-      <p
-        style={{
-          fontFamily: "var(--font-outfit)",
-          fontSize: 10,
-          fontWeight: 600,
-          letterSpacing: "2.5px",
-          textTransform: "uppercase",
-          color: C,
-          marginBottom: 12,
-          opacity: 0.7,
-        }}
-      >
-        {label}
-      </p>
-      <div
-        className={`cfk-sponsor-${size}`}
-        style={{
-          display: "grid",
-          gridTemplateColumns: `repeat(${Math.min(items.length, size === "lead" ? 3 : size === "normal" ? 4 : 6)}, 1fr)`,
-          gap: 10,
-        }}
-      >
-        {items.map((s) => (
-          <SponsorLogo key={s.name} sponsor={s} height={heights[size]} logoH={logoH[size]} />
-        ))}
-      </div>
-    </motion.div>
-  );
-}
-
 function SponsorLogo({
   sponsor,
   height,
@@ -3331,7 +3251,7 @@ function AgendaTimeline() {
   const filtered = activeFilter === "all"
     ? AGENDA
     : AGENDA.filter((item) => {
-        if (activeFilter === "keynote") return item.type === "keynote" || item.type === "fireside" || item.type === "ceremony";
+        if (activeFilter === "keynote") return item.type === "keynote" || item.type === "fireside";
         if (activeFilter === "break") return item.type === "break" || item.type === "closing";
         return item.type === activeFilter;
       });
@@ -4736,7 +4656,7 @@ function SplitCTA() {
                 transition: "all 0.3s ease",
               }}
             >
-              Register Now →
+              Register Now &rarr;
             </Link>
           </div>
 
@@ -4862,7 +4782,7 @@ function SplitCTA() {
                 transition: "all 0.3s ease",
               }}
             >
-              Explore Partnerships →
+              Explore Partnerships &rarr;
             </Link>
           </div>
         </motion.div>
@@ -5249,7 +5169,7 @@ function Venue() {
                   <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
                   <circle cx="12" cy="10" r="3" />
                 </svg>
-                Open in Google Maps →
+                Open in Google Maps &rarr;
               </a>
             </div>
 
