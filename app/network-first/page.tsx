@@ -164,19 +164,89 @@ const formats = [
   },
 ];
 
-const pastBoardrooms = [
-  { sponsor: "Confluent | AWS", venue: "Ritz Carlton DIFC", date: "25 Nov", city: "Dubai" },
-  { sponsor: "Strategy", venue: "Crowne Plaza", date: "19 Nov", city: "Riyadh" },
-  { sponsor: "OutSystems", venue: "Dana Rayhaan by Rotana", date: "18 Nov", city: "Dammam" },
-  { sponsor: "Commvault | GBM", venue: "Ritz Carlton DIFC", date: "18 Nov", city: "Dubai" },
-  { sponsor: "Finastra", venue: "Voco Riyadh", date: "29 Oct", city: "Saudi Arabia" },
-  { sponsor: "CleverTap", venue: "Jumeirah Messilah Beach", date: "29 Oct", city: "Kuwait" },
-  { sponsor: "SecurityScorecard", venue: "Grand Hyatt", date: "29 Oct", city: "Abu Dhabi" },
-  { sponsor: "GBM | Cisco", venue: "St. Regis Downtown", date: "23 Oct", city: "Dubai" },
-  { sponsor: "GBM | Fortinet", venue: "One&Only One Za'abeel", date: "09 Oct", city: "Dubai" },
-  { sponsor: "Freshworks", venue: "Ritz-Carlton", date: "Dec", city: "Abu Dhabi" },
-  { sponsor: "Celonis", venue: "Executive Boardroom", date: "Oct", city: "Riyadh" },
-  { sponsor: "Kissflow", venue: "Executive Boardroom", date: "Jul", city: "Dubai" },
+// Comprehensive past boardrooms from NetworkFirst portfolio
+const pastBoardrooms2025 = [
+  { sponsor: "ONE Executive Day UAE", venue: "Dubai", date: "10 Dec 2025" },
+  { sponsor: "Confluent | AWS", venue: "Ritz Carlton DIFC, Dubai", date: "25 Nov 2025" },
+  { sponsor: "Strategy", venue: "Crowne Plaza, Riyadh", date: "19 Nov 2025" },
+  { sponsor: "OutSystems", venue: "Dana Rayhaan by Rotana, Dammam", date: "18 Nov 2025" },
+  { sponsor: "Commvault | GBM", venue: "Ritz Carlton DIFC, Dubai", date: "18 Nov 2025" },
+  { sponsor: "Finastra", venue: "Voco Riyadh, Saudi Arabia", date: "29 Oct 2025" },
+  { sponsor: "CleverTap", venue: "Jumeirah Messilah Beach, Kuwait", date: "29 Oct 2025" },
+  { sponsor: "Crayon Event", venue: "Crowne Plaza Riyadh", date: "29 Oct 2025" },
+  { sponsor: "SecurityScorecard", venue: "Grand Hyatt, Abu Dhabi", date: "29 Oct 2025" },
+  { sponsor: "Akamai | Cyberia", venue: "Riyadh", date: "29 Oct 2025" },
+  { sponsor: "Jedox Elevate Roadshow", venue: "Ritz Carlton JBR, Dubai", date: "29 Oct 2025" },
+  { sponsor: "Confluent", venue: "Voco Hotel, Riyadh", date: "28 Oct 2025" },
+  { sponsor: "SplashBI", venue: "Hilton Riyadh Olaya", date: "28 Oct 2025" },
+  { sponsor: "GBM | Cisco", venue: "St. Regis Downtown, Dubai", date: "23 Oct 2025" },
+  { sponsor: "Boomi", venue: "Executive Roundtable", date: "22 Oct 2025" },
+  { sponsor: "GBM | Fortinet", venue: "One&Only One Za'abeel, Dubai", date: "09 Oct 2025" },
+  { sponsor: "Airtable", venue: "Virtual", date: "01 Oct 2025" },
+  { sponsor: "Akamai", venue: "TODA Dubai", date: "01 Oct 2025" },
+  { sponsor: "SplashBI", venue: "Ritz Carlton JBR, Dubai", date: "25 Sep 2025" },
+  { sponsor: "Freshworks", venue: "Ritz Carlton JBR, Dubai", date: "18 Sep 2025" },
+  { sponsor: "GreytHR", venue: "Virtual Boardroom", date: "18 Sep 2025" },
+  { sponsor: "Strategy World Dubai", venue: "Delano Bluewaters", date: "17 Sep 2025" },
+  { sponsor: "Confluent", venue: "Crowne Plaza Riyadh", date: "16 Sep 2025" },
+  { sponsor: "GBM", venue: "JW Marriott Marquis, Dubai", date: "16 Sep 2025" },
+  { sponsor: "Freshworks", venue: "Voco Hotel, Riyadh", date: "16 Sep 2025" },
+  { sponsor: "Summerge", venue: "Ritz Carlton DIFC, Dubai", date: "10 Sep 2025" },
+  { sponsor: "CleverTap", venue: "Ritz-Carlton Jeddah", date: "09 Sep 2025" },
+  { sponsor: "Celonis", venue: "Hilton Riyadh", date: "07 Jul 2025" },
+  { sponsor: "Freshworks", venue: "Voco Hotel, Riyadh", date: "02 Jul 2025" },
+  { sponsor: "OutSystems", venue: "Hilton Riyadh", date: "25 Jun 2025" },
+  { sponsor: "Celonis", venue: "Riyadh", date: "23 Jun 2025" },
+  { sponsor: "Jedox", venue: "Ritz Carlton JBR, Dubai", date: "17 Jun 2025" },
+  { sponsor: "OutSystems", venue: "Ritz Carlton Grand Canal, Abu Dhabi", date: "29 May 2025" },
+  { sponsor: "Intertec", venue: "Address Sky View, Dubai", date: "20 May 2025" },
+  { sponsor: "Confluent", venue: "Ritz Carlton DIFC, Dubai", date: "14 May 2025" },
+  { sponsor: "Jedox", venue: "Taj Hotel, Business Bay, Dubai", date: "07 May 2025" },
+  { sponsor: "Confluent", venue: "Riyadh", date: "30 Apr 2025" },
+  { sponsor: "Celonis", venue: "Abu Dhabi", date: "29 Apr 2025" },
+  { sponsor: "iSolution", venue: "Pullman Hotel West Bay, Doha", date: "28 Apr 2025" },
+  { sponsor: "Akamai", venue: "Vida Dubai Mall", date: "09 Apr 2025" },
+  { sponsor: "Freshworks Iftar", venue: "St. Regis, Dubai", date: "18 Mar 2025" },
+  { sponsor: "Freshworks", venue: "Dubai", date: "12 Mar 2025" },
+  { sponsor: "FutureBridge", venue: "Dubai", date: "25 Feb 2025" },
+  { sponsor: "Confluent", venue: "Riyadh", date: "20 Feb 2025" },
+  { sponsor: "Whatfix", venue: "St. Regis Downtown, Dubai", date: "18 Feb 2025" },
+  { sponsor: "Appknox", venue: "Ritz Carlton DIFC, Dubai", date: "05 Feb 2025" },
+];
+
+const pastBoardrooms2024 = [
+  { sponsor: "Freshworks", venue: "Ritz-Carlton, Abu Dhabi", date: "Dec 2024" },
+  { sponsor: "Trimble", venue: "Ritz Carlton DIFC, Dubai", date: "26 Nov 2024" },
+  { sponsor: "Confluent", venue: "Hilton Riyadh", date: "20 Nov 2024" },
+  { sponsor: "Celonis", venue: "Dubai", date: "14 Nov 2024" },
+  { sponsor: "Connect MEA", venue: "Atlantis, The Palm, Dubai", date: "13 Nov 2024" },
+  { sponsor: "Coursera Finance Leaders", venue: "VOCO Hotel, Riyadh", date: "22 Oct 2024" },
+  { sponsor: "Coursera Government Leaders", venue: "VOCO Hotel, Riyadh", date: "21 Oct 2024" },
+  { sponsor: "Orbit", venue: "Ritz Carlton JBR, Dubai", date: "10 Oct 2024" },
+  { sponsor: "CIONET", venue: "Sushi Samba, St. Regis, Dubai", date: "25 Sep 2024" },
+  { sponsor: "Keka", venue: "Ritz Carlton DIFC, Dubai", date: "26 Sep 2024" },
+  { sponsor: "Kissflow", venue: "JW Marriott Marina, Dubai", date: "24 Sep 2024" },
+  { sponsor: "Appknox", venue: "Conrad Etihad Towers, Abu Dhabi", date: "19 Sep 2024" },
+  { sponsor: "Uniphore", venue: "Dubai", date: "18 Sep 2024" },
+  { sponsor: "Freshworks", venue: "Conrad Etihad Towers, Abu Dhabi", date: "17 Sep 2024" },
+  { sponsor: "Freshworks", venue: "Ritz Carlton DIFC, Dubai", date: "12 Sep 2024" },
+  { sponsor: "Orbit", venue: "Dubai", date: "03 Jul 2024" },
+  { sponsor: "Freshservice", venue: "Palazzo Versace, Dubai", date: "30 May 2024" },
+  { sponsor: "Oracle ERP Finance Forum", venue: "Voco, Riyadh", date: "03 Jun 2024" },
+  { sponsor: "Oracle ERP Finance Forum", venue: "Ritz Carlton DIFC, Dubai", date: "05 Jun 2024" },
+  { sponsor: "JAGGAER", venue: "Rosewood Abu Dhabi", date: "05 Jun 2024" },
+  { sponsor: "Huco Roadshow", venue: "Westin Dubai Mina Seyahi", date: "22 May 2024" },
+  { sponsor: "Coursera Women Leadership", venue: "Ritz Carlton Jeddah", date: "30 Apr 2024" },
+];
+
+const pastBoardrooms2023 = [
+  { sponsor: "Appknox", venue: "Sheraton Grand, Dubai", date: "22 Aug 2023" },
+  { sponsor: "Zero Trust Roundtable", venue: "GITEX, Dubai", date: "17 Oct 2023" },
+  { sponsor: "Ransomware Recovery", venue: "GITEX, Dubai", date: "18 Oct 2023" },
+  { sponsor: "Atlassian Cloud", venue: "Grand Movenpick, Dubai", date: "21 Sep 2023" },
+  { sponsor: "Tap1ce NFC Solutions", venue: "Radisson Blu, Dubai", date: "06 Jun 2023" },
+  { sponsor: "Digital Marketing Excellence", venue: "Grand Hyatt, Abu Dhabi", date: "01 Jun 2023" },
+  { sponsor: "Adtech Media Gaming", venue: "Address Marina, Dubai", date: "18 May 2023" },
 ];
 
 const upcomingBoardrooms = [
@@ -1159,7 +1229,7 @@ export default function NetworkFirstPage() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════
-          TRACK RECORD - PAST BOARDROOMS
+          TRACK RECORD - PAST BOARDROOMS (Organized by Year)
           ═══════════════════════════════════════════════════════════════ */}
       <section
         ref={trackRef}
@@ -1173,7 +1243,7 @@ export default function NetworkFirstPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={trackInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, ease: EASE }}
-            style={{ textAlign: "center", marginBottom: 60 }}
+            style={{ textAlign: "center", marginBottom: 70 }}
           >
             <span
               style={{
@@ -1196,7 +1266,7 @@ export default function NetworkFirstPage() {
                 margin: "16px 0 0",
               }}
             >
-              Brands That Trusted Us
+              100+ Boardrooms Delivered
             </h2>
             <p
               style={{
@@ -1206,76 +1276,319 @@ export default function NetworkFirstPage() {
                 marginTop: 12,
               }}
             >
-              100+ executive roundtables delivered across the GCC since 2023
+              Executive roundtables across UAE, Saudi Arabia, Kuwait, Qatar & beyond
             </p>
           </motion.div>
 
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(4, 1fr)",
-              gap: 16,
-            }}
-            className="track-grid"
+          {/* 2025 Boardrooms */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={trackInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, ease: EASE, delay: 0.1 }}
+            style={{ marginBottom: 50 }}
           >
-            {pastBoardrooms.map((boardroom, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                animate={trackInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, ease: EASE, delay: i * 0.04 }}
+            <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 24 }}>
+              <span
                 style={{
-                  background: "rgba(255,255,255,0.02)",
-                  border: "1px solid rgba(255,255,255,0.06)",
-                  borderRadius: 12,
-                  padding: 20,
-                  transition: "all 0.3s ease",
+                  fontFamily: "var(--font-display)",
+                  fontSize: 28,
+                  fontWeight: 800,
+                  color: AMBER,
                 }}
               >
-                <p
+                2025
+              </span>
+              <span
+                style={{
+                  fontFamily: "var(--font-outfit)",
+                  fontSize: 13,
+                  fontWeight: 500,
+                  color: "rgba(255,255,255,0.4)",
+                  background: "rgba(255,255,255,0.05)",
+                  padding: "4px 12px",
+                  borderRadius: 20,
+                }}
+              >
+                {pastBoardrooms2025.length} Boardrooms
+              </span>
+              <div style={{ flex: 1, height: 1, background: "rgba(255,255,255,0.08)" }} />
+            </div>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(4, 1fr)",
+                gap: 12,
+              }}
+              className="track-grid"
+            >
+              {pastBoardrooms2025.slice(0, 16).map((boardroom, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={trackInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.4, ease: EASE, delay: 0.15 + i * 0.02 }}
                   style={{
-                    fontFamily: "var(--font-display)",
-                    fontSize: 14,
-                    fontWeight: 700,
-                    color: "#fff",
-                    margin: "0 0 6px",
+                    background: "linear-gradient(135deg, rgba(201,147,90,0.06) 0%, rgba(201,147,90,0.01) 100%)",
+                    border: `1px solid ${AMBER}15`,
+                    borderRadius: 12,
+                    padding: 18,
+                    transition: "all 0.3s ease",
                   }}
                 >
-                  {boardroom.sponsor}
-                </p>
-                <p
-                  style={{
-                    fontFamily: "var(--font-outfit)",
-                    fontSize: 12,
-                    color: "rgba(255,255,255,0.45)",
-                    margin: "0 0 10px",
-                  }}
-                >
-                  {boardroom.venue}
-                </p>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      fontSize: 14,
+                      fontWeight: 700,
+                      color: "#fff",
+                      margin: "0 0 6px",
+                      lineHeight: 1.3,
+                    }}
+                  >
+                    {boardroom.sponsor}
+                  </p>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-outfit)",
+                      fontSize: 12,
+                      color: "rgba(255,255,255,0.45)",
+                      margin: "0 0 8px",
+                      lineHeight: 1.4,
+                    }}
+                  >
+                    {boardroom.venue}
+                  </p>
                   <span
                     style={{
                       fontFamily: "var(--font-outfit)",
                       fontSize: 11,
+                      fontWeight: 600,
                       color: AMBER,
                     }}
                   >
                     {boardroom.date}
                   </span>
+                </motion.div>
+              ))}
+            </div>
+            {pastBoardrooms2025.length > 16 && (
+              <p style={{
+                fontFamily: "var(--font-outfit)",
+                fontSize: 13,
+                color: "rgba(255,255,255,0.4)",
+                textAlign: "center",
+                marginTop: 16,
+              }}>
+                + {pastBoardrooms2025.length - 16} more boardrooms in 2025
+              </p>
+            )}
+          </motion.div>
+
+          {/* 2024 Boardrooms */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={trackInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, ease: EASE, delay: 0.3 }}
+            style={{ marginBottom: 50 }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 24 }}>
+              <span
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: 28,
+                  fontWeight: 800,
+                  color: AMBER,
+                }}
+              >
+                2024
+              </span>
+              <span
+                style={{
+                  fontFamily: "var(--font-outfit)",
+                  fontSize: 13,
+                  fontWeight: 500,
+                  color: "rgba(255,255,255,0.4)",
+                  background: "rgba(255,255,255,0.05)",
+                  padding: "4px 12px",
+                  borderRadius: 20,
+                }}
+              >
+                {pastBoardrooms2024.length} Boardrooms
+              </span>
+              <div style={{ flex: 1, height: 1, background: "rgba(255,255,255,0.08)" }} />
+            </div>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(4, 1fr)",
+                gap: 12,
+              }}
+              className="track-grid"
+            >
+              {pastBoardrooms2024.slice(0, 12).map((boardroom, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={trackInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.4, ease: EASE, delay: 0.35 + i * 0.02 }}
+                  style={{
+                    background: "rgba(255,255,255,0.02)",
+                    border: "1px solid rgba(255,255,255,0.06)",
+                    borderRadius: 12,
+                    padding: 18,
+                    transition: "all 0.3s ease",
+                  }}
+                >
+                  <p
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      fontSize: 14,
+                      fontWeight: 700,
+                      color: "#fff",
+                      margin: "0 0 6px",
+                      lineHeight: 1.3,
+                    }}
+                  >
+                    {boardroom.sponsor}
+                  </p>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-outfit)",
+                      fontSize: 12,
+                      color: "rgba(255,255,255,0.45)",
+                      margin: "0 0 8px",
+                      lineHeight: 1.4,
+                    }}
+                  >
+                    {boardroom.venue}
+                  </p>
                   <span
                     style={{
                       fontFamily: "var(--font-outfit)",
                       fontSize: 11,
-                      color: "rgba(255,255,255,0.35)",
+                      fontWeight: 600,
+                      color: `${AMBER}90`,
                     }}
                   >
-                    {boardroom.city}
+                    {boardroom.date}
                   </span>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+                </motion.div>
+              ))}
+            </div>
+            {pastBoardrooms2024.length > 12 && (
+              <p style={{
+                fontFamily: "var(--font-outfit)",
+                fontSize: 13,
+                color: "rgba(255,255,255,0.4)",
+                textAlign: "center",
+                marginTop: 16,
+              }}>
+                + {pastBoardrooms2024.length - 12} more boardrooms in 2024
+              </p>
+            )}
+          </motion.div>
+
+          {/* 2023 Boardrooms */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={trackInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, ease: EASE, delay: 0.5 }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 24 }}>
+              <span
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: 28,
+                  fontWeight: 800,
+                  color: AMBER,
+                }}
+              >
+                2023
+              </span>
+              <span
+                style={{
+                  fontFamily: "var(--font-outfit)",
+                  fontSize: 13,
+                  fontWeight: 500,
+                  color: "rgba(255,255,255,0.4)",
+                  background: "rgba(255,255,255,0.05)",
+                  padding: "4px 12px",
+                  borderRadius: 20,
+                }}
+              >
+                {pastBoardrooms2023.length} Boardrooms
+              </span>
+              <span
+                style={{
+                  fontFamily: "var(--font-outfit)",
+                  fontSize: 12,
+                  color: "rgba(255,255,255,0.3)",
+                  fontStyle: "italic",
+                }}
+              >
+                Where it all began
+              </span>
+              <div style={{ flex: 1, height: 1, background: "rgba(255,255,255,0.08)" }} />
+            </div>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(4, 1fr)",
+                gap: 12,
+              }}
+              className="track-grid"
+            >
+              {pastBoardrooms2023.map((boardroom, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={trackInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.4, ease: EASE, delay: 0.55 + i * 0.02 }}
+                  style={{
+                    background: "rgba(255,255,255,0.02)",
+                    border: "1px solid rgba(255,255,255,0.06)",
+                    borderRadius: 12,
+                    padding: 18,
+                    transition: "all 0.3s ease",
+                  }}
+                >
+                  <p
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      fontSize: 14,
+                      fontWeight: 700,
+                      color: "#fff",
+                      margin: "0 0 6px",
+                      lineHeight: 1.3,
+                    }}
+                  >
+                    {boardroom.sponsor}
+                  </p>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-outfit)",
+                      fontSize: 12,
+                      color: "rgba(255,255,255,0.45)",
+                      margin: "0 0 8px",
+                      lineHeight: 1.4,
+                    }}
+                  >
+                    {boardroom.venue}
+                  </p>
+                  <span
+                    style={{
+                      fontFamily: "var(--font-outfit)",
+                      fontSize: 11,
+                      fontWeight: 600,
+                      color: `${AMBER}70`,
+                    }}
+                  >
+                    {boardroom.date}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </section>
 
