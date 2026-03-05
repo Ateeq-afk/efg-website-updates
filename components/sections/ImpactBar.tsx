@@ -48,25 +48,32 @@ export default function ImpactBar() {
           src={BG_IMAGE}
           alt=""
           className="w-full h-full object-cover"
-          style={{ filter: "brightness(0.18) saturate(0.5)" }}
+          style={{ filter: "brightness(0.32) saturate(0.7)" }}
           loading="lazy"
         />
       </div>
 
       {/* Gradient overlays */}
       <div className="absolute inset-0 pointer-events-none" style={{
-        background: "linear-gradient(to right, rgba(10,10,10,0.75) 0%, rgba(10,10,10,0.35) 60%, rgba(10,10,10,0.15) 100%)",
+        background: "linear-gradient(to right, rgba(10,10,10,0.88) 0%, rgba(10,10,10,0.55) 60%, rgba(10,10,10,0.3) 100%)",
       }} />
       <div className="absolute inset-0 pointer-events-none" style={{
-        background: "linear-gradient(to bottom, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.05) 30%, rgba(10,10,10,0.05) 70%, rgba(10,10,10,0.95) 100%)",
+        background: "linear-gradient(to bottom, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.1) 25%, rgba(10,10,10,0.1) 75%, rgba(10,10,10,0.92) 100%)",
       }} />
 
       {/* Orange ambient glow — bottom left */}
       <div className="absolute pointer-events-none" style={{
         bottom: "-10%", left: "-5%",
+        width: 700, height: 700, borderRadius: "50%",
+        background: "radial-gradient(circle, rgba(232,101,26,0.12) 0%, transparent 70%)",
+        filter: "blur(60px)",
+      }} />
+      {/* Orange ambient glow — top right */}
+      <div className="absolute pointer-events-none" style={{
+        top: "-10%", right: "-5%",
         width: 500, height: 500, borderRadius: "50%",
         background: "radial-gradient(circle, rgba(232,101,26,0.07) 0%, transparent 70%)",
-        filter: "blur(40px)",
+        filter: "blur(50px)",
       }} />
 
       <div className="relative z-10" style={{ maxWidth: 1320, margin: "0 auto", padding: "0 clamp(20px, 4vw, 60px)" }}>
@@ -100,10 +107,10 @@ export default function ImpactBar() {
           {headlineWords.map((word, i) => (
             <motion.span
               key={i}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.1 + i * 0.07, ease: EASE }}
-              style={{ color: word.dim ? "rgba(255,255,255,0.2)" : "var(--white)", display: "inline-block" }}
+              transition={{ duration: 0.5, delay: 0.05 + i * 0.05, ease: EASE }}
+              style={{ color: word.dim ? "rgba(255,255,255,0.25)" : "var(--white)", display: "inline-block" }}
             >
               {word.text}
             </motion.span>
