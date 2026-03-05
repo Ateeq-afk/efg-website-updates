@@ -33,6 +33,91 @@ const stats = [
   { value: "5", label: "GCC Markets" },
 ];
 
+// How We Deliver - The Process
+const processSteps = [
+  {
+    number: "01",
+    title: "We Curate",
+    description: "Hand-select 15-20 decision-makers who match your ideal customer profile. No fillers, no juniors — only the executives who sign the checks.",
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+      </svg>
+    ),
+  },
+  {
+    number: "02",
+    title: "We Execute",
+    description: "Five-star venues, premium catering, seamless production. You show up with your talking points — we handle everything else.",
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <polygon points="12 2 2 7 12 12 22 7 12 2" />
+        <polyline points="2 17 12 22 22 17" />
+        <polyline points="2 12 12 17 22 12" />
+      </svg>
+    ),
+  },
+  {
+    number: "03",
+    title: "You Connect",
+    description: "Focus on what matters — building relationships, sharing expertise, closing deals. Walk out with warm leads and real partnerships.",
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+      </svg>
+    ),
+  },
+];
+
+// What Sponsors Get
+const sponsorBenefits = [
+  {
+    title: "Turnkey Execution",
+    description: "From venue sourcing to attendee management — we run the entire operation so you can focus on your message.",
+    icon: "🎯",
+  },
+  {
+    title: "Guaranteed Audience",
+    description: "Every seat filled with qualified decision-makers. We verify titles, confirm attendance, and deliver the room you paid for.",
+    icon: "✓",
+  },
+  {
+    title: "Your Brand, Center Stage",
+    description: "You own the room. Shape the agenda, lead the discussion, position your solution — without competing voices.",
+    icon: "🏆",
+  },
+  {
+    title: "Post-Event Intelligence",
+    description: "Full attendee list with contact details, engagement notes, and follow-up recommendations delivered within 48 hours.",
+    icon: "📊",
+  },
+];
+
+// Sponsor Testimonials
+const testimonials = [
+  {
+    quote: "The executive boardroom was transformative for us — our brand got exposure with exactly the right connections. These weren't just leads, they were relationships.",
+    author: "Srikanth Rayaprolu",
+    title: "CEO & Co-Founder",
+    company: "Ad Scholars",
+  },
+  {
+    quote: "Unforgettable experience with tangible results. Everything was professionally managed — we just showed up and connected with decision-makers.",
+    author: "Deep Vyas",
+    title: "Partner",
+    company: "Worker Ants Media",
+  },
+  {
+    quote: "Our event with NetworkFirst exceeded expectations in every way. The caliber of attendees and the seamless execution made it our highest-ROI marketing investment.",
+    author: "Sheryan Gandhi",
+    title: "Chief Operating Officer",
+    company: "Tap1ce",
+  },
+];
+
 const formats = [
   {
     title: "Physical Boardrooms",
@@ -90,17 +175,23 @@ const titles = [
 
 export default function NetworkFirstPage() {
   const heroRef = useRef<HTMLElement>(null);
+  const processRef = useRef<HTMLElement>(null);
+  const benefitsRef = useRef<HTMLElement>(null);
   const statsRef = useRef<HTMLElement>(null);
   const formatRef = useRef<HTMLElement>(null);
   const galleryRef = useRef<HTMLElement>(null);
+  const testimonialsRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLElement>(null);
   const upcomingRef = useRef<HTMLElement>(null);
   const ctaRef = useRef<HTMLElement>(null);
 
   const heroInView = useInView(heroRef, { once: true, margin: "-50px" });
+  const processInView = useInView(processRef, { once: true, margin: "-50px" });
+  const benefitsInView = useInView(benefitsRef, { once: true, margin: "-50px" });
   const statsInView = useInView(statsRef, { once: true, margin: "-50px" });
   const formatInView = useInView(formatRef, { once: true, margin: "-50px" });
   const galleryInView = useInView(galleryRef, { once: true, margin: "-50px" });
+  const testimonialsInView = useInView(testimonialsRef, { once: true, margin: "-50px" });
   const trackInView = useInView(trackRef, { once: true, margin: "-50px" });
   const upcomingInView = useInView(upcomingRef, { once: true, margin: "-50px" });
   const ctaInView = useInView(ctaRef, { once: true, margin: "-50px" });
@@ -110,7 +201,7 @@ export default function NetworkFirstPage() {
       <Navigation />
 
       {/* ═══════════════════════════════════════════════════════════════
-          HERO SECTION
+          HERO SECTION - Your Event. Our Expertise.
           ═══════════════════════════════════════════════════════════════ */}
       <section
         ref={heroRef}
@@ -122,7 +213,7 @@ export default function NetworkFirstPage() {
           overflow: "hidden",
         }}
       >
-        {/* Background Image */}
+        {/* Animated Background */}
         <div
           style={{
             position: "absolute",
@@ -130,7 +221,7 @@ export default function NetworkFirstPage() {
             backgroundImage: `url(${S3}/networkfirst-boardrooms/6cbebbd9-21cd-44ad-9bd6-4897f37beec1.jpg)`,
             backgroundSize: "cover",
             backgroundPosition: "center",
-            filter: "brightness(0.3) saturate(0.8)",
+            filter: "brightness(0.25) saturate(0.9)",
           }}
         />
         
@@ -139,7 +230,26 @@ export default function NetworkFirstPage() {
           style={{
             position: "absolute",
             inset: 0,
-            background: `linear-gradient(135deg, rgba(7,6,10,0.95) 0%, rgba(7,6,10,0.7) 50%, rgba(201,147,90,0.15) 100%)`,
+            background: `linear-gradient(135deg, rgba(7,6,10,0.97) 0%, rgba(7,6,10,0.8) 40%, rgba(201,147,90,0.2) 100%)`,
+          }}
+        />
+
+        {/* Floating Accent */}
+        <motion.div
+          animate={{ 
+            y: [0, -20, 0],
+            opacity: [0.3, 0.5, 0.3]
+          }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          style={{
+            position: "absolute",
+            top: "20%",
+            right: "10%",
+            width: 400,
+            height: 400,
+            borderRadius: "50%",
+            background: `radial-gradient(circle, ${AMBER}20 0%, transparent 70%)`,
+            filter: "blur(60px)",
           }}
         />
 
@@ -180,16 +290,16 @@ export default function NetworkFirstPage() {
             transition={{ duration: 0.8, ease: EASE, delay: 0.1 }}
             style={{
               fontFamily: "var(--font-display)",
-              fontSize: "clamp(42px, 6vw, 80px)",
+              fontSize: "clamp(44px, 6vw, 82px)",
               fontWeight: 800,
-              lineHeight: 1.05,
-              letterSpacing: "-2px",
+              lineHeight: 1.02,
+              letterSpacing: "-2.5px",
               color: "#fff",
-              margin: "0 0 12px",
+              margin: "0 0 8px",
               maxWidth: 900,
             }}
           >
-            Where the GCC&apos;s
+            Your Event.
           </motion.h1>
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
@@ -197,16 +307,16 @@ export default function NetworkFirstPage() {
             transition={{ duration: 0.8, ease: EASE, delay: 0.15 }}
             style={{
               fontFamily: "var(--font-display)",
-              fontSize: "clamp(42px, 6vw, 80px)",
+              fontSize: "clamp(44px, 6vw, 82px)",
               fontWeight: 800,
-              lineHeight: 1.05,
-              letterSpacing: "-2px",
+              lineHeight: 1.02,
+              letterSpacing: "-2.5px",
               color: AMBER,
               margin: "0 0 32px",
               maxWidth: 900,
             }}
           >
-            Most Senior Leaders Meet Behind Closed Doors
+            Our Expertise.
           </motion.h1>
 
           <motion.p
@@ -215,16 +325,32 @@ export default function NetworkFirstPage() {
             transition={{ duration: 0.7, ease: EASE, delay: 0.25 }}
             style={{
               fontFamily: "var(--font-outfit)",
-              fontSize: "clamp(16px, 1.4vw, 20px)",
+              fontSize: "clamp(17px, 1.5vw, 21px)",
               fontWeight: 400,
-              color: "rgba(255,255,255,0.65)",
+              color: "rgba(255,255,255,0.7)",
               lineHeight: 1.7,
-              maxWidth: 600,
-              margin: "0 0 48px",
+              maxWidth: 620,
+              margin: "0 0 20px",
             }}
           >
-            Exclusive executive roundtables for CISOs, CDOs, CTOs, and government strategists. 
-            Invitation only. Since 2023.
+            We build the room. We fill the seats. We run the show.
+            <br />
+            <strong style={{ color: "#fff" }}>You focus on what you do best — connecting with decision-makers.</strong>
+          </motion.p>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={heroInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, ease: EASE, delay: 0.3 }}
+            style={{
+              fontFamily: "var(--font-outfit)",
+              fontSize: 14,
+              fontWeight: 500,
+              color: "rgba(255,255,255,0.45)",
+              margin: "0 0 40px",
+            }}
+          >
+            100+ boardrooms delivered across 5 GCC markets since 2023
           </motion.p>
 
           <motion.div
@@ -234,46 +360,326 @@ export default function NetworkFirstPage() {
             style={{ display: "flex", flexWrap: "wrap", gap: 16 }}
           >
             <Link
-              href="#request"
+              href="#build"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
                 gap: 10,
-                padding: "16px 36px",
+                padding: "18px 40px",
                 borderRadius: 60,
                 background: AMBER,
                 color: "#07060A",
                 fontFamily: "var(--font-outfit)",
-                fontSize: 15,
+                fontSize: 16,
                 fontWeight: 700,
                 textDecoration: "none",
                 transition: "all 0.3s ease",
               }}
             >
-              Request an Invitation
+              Let&apos;s Build Your Boardroom
               <span>→</span>
             </Link>
             <Link
-              href="#host"
+              href="#how"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
                 gap: 10,
-                padding: "16px 36px",
+                padding: "18px 40px",
                 borderRadius: 60,
                 background: "transparent",
                 border: `1px solid ${AMBER}50`,
                 color: "#fff",
                 fontFamily: "var(--font-outfit)",
-                fontSize: 15,
+                fontSize: 16,
                 fontWeight: 600,
                 textDecoration: "none",
                 transition: "all 0.3s ease",
               }}
             >
-              Host a Boardroom
+              See How It Works
             </Link>
           </motion.div>
+
+          {/* Trust Badges */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={heroInView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.8, ease: EASE, delay: 0.5 }}
+            style={{
+              marginTop: 60,
+              paddingTop: 40,
+              borderTop: "1px solid rgba(255,255,255,0.08)",
+              display: "flex",
+              flexWrap: "wrap",
+              gap: 40,
+            }}
+          >
+            {[
+              { label: "Fully Managed", sublabel: "End-to-end execution" },
+              { label: "Guaranteed Attendance", sublabel: "Verified executives only" },
+              { label: "Premium Venues", sublabel: "5-star hotels across GCC" },
+            ].map((badge, i) => (
+              <div key={i} style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                <div
+                  style={{
+                    width: 10,
+                    height: 10,
+                    borderRadius: "50%",
+                    background: AMBER,
+                  }}
+                />
+                <div>
+                  <p style={{ fontFamily: "var(--font-outfit)", fontSize: 14, fontWeight: 600, color: "#fff", margin: 0 }}>
+                    {badge.label}
+                  </p>
+                  <p style={{ fontFamily: "var(--font-outfit)", fontSize: 12, color: "rgba(255,255,255,0.4)", margin: 0 }}>
+                    {badge.sublabel}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════════════
+          HOW WE DELIVER - The Process
+          ═══════════════════════════════════════════════════════════════ */}
+      <section
+        ref={processRef}
+        id="how"
+        style={{
+          background: "linear-gradient(180deg, #0A0A0A 0%, #07060A 100%)",
+          padding: "clamp(80px, 10vw, 140px) clamp(20px, 4vw, 60px)",
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        {/* Decorative Line */}
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: 1,
+            height: 80,
+            background: `linear-gradient(to bottom, transparent, ${AMBER}50)`,
+          }}
+        />
+
+        <div style={{ maxWidth: 1320, margin: "0 auto" }}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={processInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, ease: EASE }}
+            style={{ textAlign: "center", marginBottom: 70 }}
+          >
+            <span
+              style={{
+                fontFamily: "var(--font-outfit)",
+                fontSize: 11,
+                fontWeight: 600,
+                letterSpacing: "0.2em",
+                textTransform: "uppercase",
+                color: AMBER,
+              }}
+            >
+              How We Deliver
+            </span>
+            <h2
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(32px, 4vw, 50px)",
+                fontWeight: 800,
+                color: "#fff",
+                margin: "16px 0 0",
+              }}
+            >
+              We Handle Everything.
+              <br />
+              <span style={{ color: AMBER }}>You Show Up and Shine.</span>
+            </h2>
+          </motion.div>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(3, 1fr)",
+              gap: 32,
+            }}
+            className="process-grid"
+          >
+            {processSteps.map((step, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 40 }}
+                animate={processInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, ease: EASE, delay: i * 0.15 }}
+                style={{
+                  background: "rgba(255,255,255,0.02)",
+                  border: `1px solid ${AMBER}15`,
+                  borderRadius: 24,
+                  padding: 40,
+                  position: "relative",
+                  overflow: "hidden",
+                }}
+              >
+                {/* Step Number */}
+                <span
+                  style={{
+                    position: "absolute",
+                    top: 24,
+                    right: 28,
+                    fontFamily: "var(--font-display)",
+                    fontSize: 64,
+                    fontWeight: 800,
+                    color: `${AMBER}10`,
+                    lineHeight: 1,
+                  }}
+                >
+                  {step.number}
+                </span>
+
+                <div
+                  style={{
+                    width: 64,
+                    height: 64,
+                    borderRadius: 16,
+                    background: `${AMBER}15`,
+                    border: `1px solid ${AMBER}30`,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    color: AMBER,
+                    marginBottom: 28,
+                  }}
+                >
+                  {step.icon}
+                </div>
+
+                <h3
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: 26,
+                    fontWeight: 700,
+                    color: "#fff",
+                    margin: "0 0 14px",
+                  }}
+                >
+                  {step.title}
+                </h3>
+                <p
+                  style={{
+                    fontFamily: "var(--font-outfit)",
+                    fontSize: 15,
+                    fontWeight: 400,
+                    color: "rgba(255,255,255,0.55)",
+                    lineHeight: 1.75,
+                    margin: 0,
+                  }}
+                >
+                  {step.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════════════
+          WHAT SPONSORS GET
+          ═══════════════════════════════════════════════════════════════ */}
+      <section
+        ref={benefitsRef}
+        style={{
+          background: "#07060A",
+          padding: "clamp(80px, 10vw, 140px) clamp(20px, 4vw, 60px)",
+        }}
+      >
+        <div style={{ maxWidth: 1320, margin: "0 auto" }}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={benefitsInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, ease: EASE }}
+            style={{ textAlign: "center", marginBottom: 60 }}
+          >
+            <span
+              style={{
+                fontFamily: "var(--font-outfit)",
+                fontSize: 11,
+                fontWeight: 600,
+                letterSpacing: "0.2em",
+                textTransform: "uppercase",
+                color: AMBER,
+              }}
+            >
+              What You Get
+            </span>
+            <h2
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(32px, 4vw, 48px)",
+                fontWeight: 800,
+                color: "#fff",
+                margin: "16px 0 0",
+              }}
+            >
+              Not Just an Event — <span style={{ color: AMBER }}>A Growth Engine</span>
+            </h2>
+          </motion.div>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(4, 1fr)",
+              gap: 24,
+            }}
+            className="benefits-grid"
+          >
+            {sponsorBenefits.map((benefit, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                animate={benefitsInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, ease: EASE, delay: i * 0.1 }}
+                style={{
+                  background: "linear-gradient(135deg, rgba(201,147,90,0.08) 0%, rgba(201,147,90,0.02) 100%)",
+                  border: `1px solid ${AMBER}20`,
+                  borderRadius: 20,
+                  padding: 32,
+                  textAlign: "center",
+                }}
+              >
+                <span style={{ fontSize: 40, display: "block", marginBottom: 20 }}>
+                  {benefit.icon}
+                </span>
+                <h3
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: 18,
+                    fontWeight: 700,
+                    color: "#fff",
+                    margin: "0 0 10px",
+                  }}
+                >
+                  {benefit.title}
+                </h3>
+                <p
+                  style={{
+                    fontFamily: "var(--font-outfit)",
+                    fontSize: 14,
+                    color: "rgba(255,255,255,0.5)",
+                    lineHeight: 1.65,
+                    margin: 0,
+                  }}
+                >
+                  {benefit.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -337,6 +743,237 @@ export default function NetworkFirstPage() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════
+          PHOTO GALLERY - INSIDE THE ROOM
+          ═══════════════════════════════════════════════════════════════ */}
+      <section
+        ref={galleryRef}
+        style={{
+          background: "#07060A",
+          padding: "clamp(80px, 10vw, 140px) 0",
+          overflow: "hidden",
+        }}
+      >
+        <div style={{ maxWidth: 1320, margin: "0 auto", padding: "0 clamp(20px, 4vw, 60px)" }}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={galleryInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, ease: EASE }}
+            style={{ textAlign: "center", marginBottom: 60 }}
+          >
+            <span
+              style={{
+                fontFamily: "var(--font-outfit)",
+                fontSize: 11,
+                fontWeight: 600,
+                letterSpacing: "0.2em",
+                textTransform: "uppercase",
+                color: AMBER,
+              }}
+            >
+              Proof, Not Promises
+            </span>
+            <h2
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(32px, 4vw, 48px)",
+                fontWeight: 800,
+                color: "#fff",
+                margin: "16px 0 0",
+              }}
+            >
+              Inside the Room
+            </h2>
+          </motion.div>
+        </div>
+
+        {/* Gallery Grid */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(4, 1fr)",
+            gap: 4,
+          }}
+          className="gallery-grid"
+        >
+          {BOARDROOM_IMAGES.map((img, i) => (
+            <motion.div
+              key={img.id}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={galleryInView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ duration: 0.5, ease: EASE, delay: i * 0.05 }}
+              style={{
+                position: "relative",
+                aspectRatio: "4 / 3",
+                overflow: "hidden",
+              }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`${S3}/networkfirst-boardrooms/${img.id}.jpg`}
+                alt={img.caption}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  transition: "transform 0.5s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "scale(1.05)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "scale(1)";
+                }}
+              />
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  background: "linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%)",
+                  opacity: 0,
+                  transition: "opacity 0.3s ease",
+                  display: "flex",
+                  alignItems: "flex-end",
+                  padding: 16,
+                }}
+                className="gallery-overlay"
+              >
+                <span
+                  style={{
+                    fontFamily: "var(--font-outfit)",
+                    fontSize: 13,
+                    color: "#fff",
+                  }}
+                >
+                  {img.caption}
+                </span>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════════════
+          TESTIMONIALS FROM SPONSORS
+          ═══════════════════════════════════════════════════════════════ */}
+      <section
+        ref={testimonialsRef}
+        style={{
+          background: "#0A0A0A",
+          padding: "clamp(80px, 10vw, 140px) clamp(20px, 4vw, 60px)",
+        }}
+      >
+        <div style={{ maxWidth: 1320, margin: "0 auto" }}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={testimonialsInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, ease: EASE }}
+            style={{ textAlign: "center", marginBottom: 60 }}
+          >
+            <span
+              style={{
+                fontFamily: "var(--font-outfit)",
+                fontSize: 11,
+                fontWeight: 600,
+                letterSpacing: "0.2em",
+                textTransform: "uppercase",
+                color: AMBER,
+              }}
+            >
+              In Their Words
+            </span>
+            <h2
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(32px, 4vw, 48px)",
+                fontWeight: 800,
+                color: "#fff",
+                margin: "16px 0 0",
+              }}
+            >
+              What Our Sponsors Say
+            </h2>
+          </motion.div>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(3, 1fr)",
+              gap: 28,
+            }}
+            className="testimonials-grid"
+          >
+            {testimonials.map((t, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                animate={testimonialsInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, ease: EASE, delay: i * 0.12 }}
+                style={{
+                  background: "rgba(255,255,255,0.02)",
+                  border: "1px solid rgba(255,255,255,0.06)",
+                  borderRadius: 20,
+                  padding: 36,
+                  position: "relative",
+                }}
+              >
+                <span
+                  style={{
+                    position: "absolute",
+                    top: 24,
+                    left: 32,
+                    fontFamily: "var(--font-display)",
+                    fontSize: 80,
+                    fontWeight: 800,
+                    color: `${AMBER}15`,
+                    lineHeight: 1,
+                  }}
+                >
+                  &ldquo;
+                </span>
+                <p
+                  style={{
+                    fontFamily: "var(--font-outfit)",
+                    fontSize: 15,
+                    fontWeight: 400,
+                    color: "rgba(255,255,255,0.7)",
+                    lineHeight: 1.75,
+                    margin: "0 0 28px",
+                    position: "relative",
+                    zIndex: 1,
+                  }}
+                >
+                  {t.quote}
+                </p>
+                <div>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      fontSize: 15,
+                      fontWeight: 700,
+                      color: "#fff",
+                      margin: "0 0 2px",
+                    }}
+                  >
+                    {t.author}
+                  </p>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-outfit)",
+                      fontSize: 13,
+                      color: "rgba(255,255,255,0.4)",
+                      margin: 0,
+                    }}
+                  >
+                    {t.title}, {t.company}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════════════
           THE FORMAT - HOW WE CONVENE
           ═══════════════════════════════════════════════════════════════ */}
       <section
@@ -363,7 +1000,7 @@ export default function NetworkFirstPage() {
                 color: AMBER,
               }}
             >
-              How We Convene
+              Flexible Formats
             </span>
             <h2
               style={{
@@ -374,7 +1011,7 @@ export default function NetworkFirstPage() {
                 margin: "16px 0 0",
               }}
             >
-              Two Formats. One Standard.
+              In-Person or Virtual. Same Standard.
             </h2>
           </motion.div>
 
@@ -489,122 +1126,12 @@ export default function NetworkFirstPage() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════
-          PHOTO GALLERY - INSIDE THE ROOM
-          ═══════════════════════════════════════════════════════════════ */}
-      <section
-        ref={galleryRef}
-        style={{
-          background: "#0A0A0A",
-          padding: "clamp(80px, 10vw, 140px) 0",
-          overflow: "hidden",
-        }}
-      >
-        <div style={{ maxWidth: 1320, margin: "0 auto", padding: "0 clamp(20px, 4vw, 60px)" }}>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={galleryInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, ease: EASE }}
-            style={{ textAlign: "center", marginBottom: 60 }}
-          >
-            <span
-              style={{
-                fontFamily: "var(--font-outfit)",
-                fontSize: 11,
-                fontWeight: 600,
-                letterSpacing: "0.2em",
-                textTransform: "uppercase",
-                color: AMBER,
-              }}
-            >
-              Proof, Not Promises
-            </span>
-            <h2
-              style={{
-                fontFamily: "var(--font-display)",
-                fontSize: "clamp(32px, 4vw, 48px)",
-                fontWeight: 800,
-                color: "#fff",
-                margin: "16px 0 0",
-              }}
-            >
-              Inside the Room
-            </h2>
-          </motion.div>
-        </div>
-
-        {/* Gallery Grid */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(4, 1fr)",
-            gap: 4,
-          }}
-          className="gallery-grid"
-        >
-          {BOARDROOM_IMAGES.map((img, i) => (
-            <motion.div
-              key={img.id}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={galleryInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.5, ease: EASE, delay: i * 0.05 }}
-              style={{
-                position: "relative",
-                aspectRatio: "4 / 3",
-                overflow: "hidden",
-              }}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={`${S3}/networkfirst-boardrooms/${img.id}.jpg`}
-                alt={img.caption}
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  transition: "transform 0.5s ease",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = "scale(1.05)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = "scale(1)";
-                }}
-              />
-              <div
-                style={{
-                  position: "absolute",
-                  inset: 0,
-                  background: "linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%)",
-                  opacity: 0,
-                  transition: "opacity 0.3s ease",
-                  display: "flex",
-                  alignItems: "flex-end",
-                  padding: 16,
-                }}
-                className="gallery-overlay"
-              >
-                <span
-                  style={{
-                    fontFamily: "var(--font-outfit)",
-                    fontSize: 13,
-                    color: "#fff",
-                  }}
-                >
-                  {img.caption}
-                </span>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════════════
           TRACK RECORD - PAST BOARDROOMS
           ═══════════════════════════════════════════════════════════════ */}
       <section
         ref={trackRef}
         style={{
-          background: "#07060A",
+          background: "#0A0A0A",
           padding: "clamp(80px, 10vw, 140px) clamp(20px, 4vw, 60px)",
         }}
       >
@@ -636,7 +1163,7 @@ export default function NetworkFirstPage() {
                 margin: "16px 0 0",
               }}
             >
-              Past Boardrooms
+              Brands That Trusted Us
             </h2>
             <p
               style={{
@@ -653,7 +1180,7 @@ export default function NetworkFirstPage() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(3, 1fr)",
+              gridTemplateColumns: "repeat(4, 1fr)",
               gap: 16,
             }}
             className="track-grid"
@@ -663,7 +1190,7 @@ export default function NetworkFirstPage() {
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
                 animate={trackInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, ease: EASE, delay: i * 0.05 }}
+                transition={{ duration: 0.5, ease: EASE, delay: i * 0.04 }}
                 style={{
                   background: "rgba(255,255,255,0.02)",
                   border: "1px solid rgba(255,255,255,0.06)",
@@ -675,10 +1202,10 @@ export default function NetworkFirstPage() {
                 <p
                   style={{
                     fontFamily: "var(--font-display)",
-                    fontSize: 15,
+                    fontSize: 14,
                     fontWeight: 700,
                     color: "#fff",
-                    margin: "0 0 8px",
+                    margin: "0 0 6px",
                   }}
                 >
                   {boardroom.sponsor}
@@ -686,9 +1213,9 @@ export default function NetworkFirstPage() {
                 <p
                   style={{
                     fontFamily: "var(--font-outfit)",
-                    fontSize: 13,
-                    color: "rgba(255,255,255,0.5)",
-                    margin: "0 0 12px",
+                    fontSize: 12,
+                    color: "rgba(255,255,255,0.45)",
+                    margin: "0 0 10px",
                   }}
                 >
                   {boardroom.venue}
@@ -697,7 +1224,7 @@ export default function NetworkFirstPage() {
                   <span
                     style={{
                       fontFamily: "var(--font-outfit)",
-                      fontSize: 12,
+                      fontSize: 11,
                       color: AMBER,
                     }}
                   >
@@ -706,8 +1233,8 @@ export default function NetworkFirstPage() {
                   <span
                     style={{
                       fontFamily: "var(--font-outfit)",
-                      fontSize: 12,
-                      color: "rgba(255,255,255,0.4)",
+                      fontSize: 11,
+                      color: "rgba(255,255,255,0.35)",
                     }}
                   >
                     {boardroom.city}
@@ -725,7 +1252,7 @@ export default function NetworkFirstPage() {
       <section
         ref={upcomingRef}
         style={{
-          background: "#0A0A0A",
+          background: "#07060A",
           padding: "clamp(80px, 10vw, 140px) clamp(20px, 4vw, 60px)",
         }}
       >
@@ -746,7 +1273,7 @@ export default function NetworkFirstPage() {
                 color: AMBER,
               }}
             >
-              What&apos;s Next
+              Coming Up
             </span>
             <h2
               style={{
@@ -868,7 +1395,7 @@ export default function NetworkFirstPage() {
           ═══════════════════════════════════════════════════════════════ */}
       <section
         style={{
-          background: "#07060A",
+          background: "#0A0A0A",
           padding: "60px clamp(20px, 4vw, 60px)",
           borderTop: "1px solid rgba(255,255,255,0.05)",
         }}
@@ -885,7 +1412,7 @@ export default function NetworkFirstPage() {
               margin: "0 0 20px",
             }}
           >
-            Past Participants Include
+            Who Attends Our Boardrooms
           </p>
           <div
             style={{
@@ -913,44 +1440,81 @@ export default function NetworkFirstPage() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════
-          FINAL CTA
+          FINAL CTA - Let's Build Your Boardroom
           ═══════════════════════════════════════════════════════════════ */}
       <section
         ref={ctaRef}
-        id="request"
+        id="build"
         style={{
-          background: `linear-gradient(135deg, ${AMBER}15 0%, #07060A 50%)`,
-          padding: "clamp(80px, 10vw, 120px) clamp(20px, 4vw, 60px)",
+          background: `linear-gradient(135deg, ${AMBER}20 0%, #07060A 40%)`,
+          padding: "clamp(100px, 12vw, 160px) clamp(20px, 4vw, 60px)",
+          position: "relative",
+          overflow: "hidden",
         }}
       >
-        <div style={{ maxWidth: 800, margin: "0 auto", textAlign: "center" }}>
+        {/* Background Accent */}
+        <div
+          style={{
+            position: "absolute",
+            top: "50%",
+            right: "-10%",
+            width: 500,
+            height: 500,
+            borderRadius: "50%",
+            background: `radial-gradient(circle, ${AMBER}15 0%, transparent 70%)`,
+            filter: "blur(80px)",
+            transform: "translateY(-50%)",
+          }}
+        />
+
+        <div style={{ maxWidth: 900, margin: "0 auto", textAlign: "center", position: "relative" }}>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={ctaInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, ease: EASE }}
           >
+            <span
+              style={{
+                fontFamily: "var(--font-outfit)",
+                fontSize: 12,
+                fontWeight: 600,
+                letterSpacing: "0.2em",
+                textTransform: "uppercase",
+                color: AMBER,
+                display: "block",
+                marginBottom: 20,
+              }}
+            >
+              Ready to Start?
+            </span>
             <h2
               style={{
                 fontFamily: "var(--font-display)",
-                fontSize: "clamp(32px, 4vw, 48px)",
+                fontSize: "clamp(36px, 5vw, 56px)",
                 fontWeight: 800,
                 color: "#fff",
-                margin: "0 0 16px",
+                margin: "0 0 20px",
+                lineHeight: 1.1,
               }}
             >
-              Ready to Join the Room?
+              Let&apos;s Build Your Next
+              <br />
+              <span style={{ color: AMBER }}>High-Impact Boardroom</span>
             </h2>
             <p
               style={{
                 fontFamily: "var(--font-outfit)",
-                fontSize: 17,
+                fontSize: 18,
                 color: "rgba(255,255,255,0.6)",
                 lineHeight: 1.7,
-                margin: "0 0 40px",
+                margin: "0 0 44px",
+                maxWidth: 650,
+                marginLeft: "auto",
+                marginRight: "auto",
               }}
             >
-              Whether you&apos;re a senior executive seeking an invitation to our closed-door sessions, 
-              or a brand looking to host a boardroom — we&apos;d like to hear from you.
+              Tell us about your goals. We&apos;ll design a boardroom experience that puts your brand 
+              in front of the right decision-makers, in the right room, with the right outcomes.
             </p>
             <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: 16 }}>
               <Link
@@ -958,43 +1522,32 @@ export default function NetworkFirstPage() {
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
-                  gap: 10,
-                  padding: "18px 40px",
+                  gap: 12,
+                  padding: "20px 48px",
                   borderRadius: 60,
                   background: AMBER,
                   color: "#07060A",
                   fontFamily: "var(--font-outfit)",
-                  fontSize: 16,
+                  fontSize: 17,
                   fontWeight: 700,
                   textDecoration: "none",
                   transition: "all 0.3s ease",
                 }}
               >
-                Request an Invitation
-                <span>→</span>
-              </Link>
-              <Link
-                href="/contact"
-                id="host"
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 10,
-                  padding: "18px 40px",
-                  borderRadius: 60,
-                  background: "transparent",
-                  border: `1px solid ${AMBER}50`,
-                  color: "#fff",
-                  fontFamily: "var(--font-outfit)",
-                  fontSize: 16,
-                  fontWeight: 600,
-                  textDecoration: "none",
-                  transition: "all 0.3s ease",
-                }}
-              >
-                Become a Sponsor
+                Start the Conversation
+                <span style={{ fontSize: 20 }}>→</span>
               </Link>
             </div>
+            <p
+              style={{
+                fontFamily: "var(--font-outfit)",
+                fontSize: 13,
+                color: "rgba(255,255,255,0.35)",
+                marginTop: 24,
+              }}
+            >
+              Typical response time: under 24 hours
+            </p>
           </motion.div>
         </div>
       </section>
@@ -1007,7 +1560,7 @@ export default function NetworkFirstPage() {
           .stats-grid {
             grid-template-columns: repeat(2, 1fr) !important;
           }
-          .format-grid {
+          .format-grid, .upcoming-grid, .testimonials-grid {
             grid-template-columns: 1fr !important;
           }
           .gallery-grid {
@@ -1016,8 +1569,11 @@ export default function NetworkFirstPage() {
           .track-grid {
             grid-template-columns: repeat(2, 1fr) !important;
           }
-          .upcoming-grid {
+          .process-grid {
             grid-template-columns: 1fr !important;
+          }
+          .benefits-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
           }
         }
         @media (max-width: 640px) {
@@ -1029,6 +1585,9 @@ export default function NetworkFirstPage() {
             grid-template-columns: repeat(2, 1fr) !important;
           }
           .track-grid {
+            grid-template-columns: 1fr !important;
+          }
+          .benefits-grid {
             grid-template-columns: 1fr !important;
           }
         }
