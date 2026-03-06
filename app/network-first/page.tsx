@@ -407,7 +407,7 @@ function WhyBoardroomsWork() {
     {
       versus: "Webinars",
       problem: "Lead lists, not relationships. Attendees multitask through your content.",
-      solution: "Face-to-face conversations that build real trust and pipeline.",
+      solution: "Face-to-face conversations that build real trust and lasting connections.",
     },
     {
       versus: "Cold Outreach",
