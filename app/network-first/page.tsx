@@ -418,7 +418,7 @@ function WhyBoardroomsWork() {
 
   const advantages = [
     { num: "01", title: "Boardrooms Built for Leaders", desc: "Carefully designed environments where decisions are made and networks are strengthened." },
-    { num: "02", title: "C-Level Decision-Makers", desc: "We know the right audience is the key to success. Every seat earned by senior executives." },
+    { num: "02", title: "The Right Audience", desc: "We curate C-level executives and technical leaders. Every seat earned by decision-makers who matter." },
     { num: "03", title: "Productive Exchange", desc: "Unlock the power of productive exchange with tailored agendas that drive value." },
   ];
 
