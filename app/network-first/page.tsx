@@ -302,7 +302,7 @@ function Hero() {
   return (
     <section ref={ref} style={{ position: "relative", height: "100vh", minHeight: 700, overflow: "hidden" }}>
       <motion.div style={{ position: "absolute", inset: 0, y, scale }}>
-        <img src={`${BOARDROOM}/outsystems-one/4N8A7045.JPG`} alt="" style={{ width: "100%", height: "120%", objectFit: "cover", filter: "brightness(0.4)" }} />
+        <img src={`${S3}/network-first/gallery-03.jpg`} alt="" style={{ width: "100%", height: "120%", objectFit: "cover", filter: "brightness(0.4)" }} />
       </motion.div>
       <div style={{ position: "absolute", inset: 0, background: `linear-gradient(to bottom, ${BG} 0%, transparent 20%, transparent 70%, ${BG} 100%)` }} />
 
