@@ -161,6 +161,49 @@ export default function CyberFirstGallery() {
         </motion.div>
 
         {/* CTA */}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 12,
+            marginTop: 32,
+          }}
+        >
+          <span
+            style={{
+              fontFamily: "var(--font-outfit)",
+              fontSize: 14,
+              color: "#707070",
+              fontWeight: 400,
+            }}
+          >
+            Experience it yourself
+          </span>
+          <a
+            href="#register"
+            style={{
+              padding: "12px 28px",
+              borderRadius: 50,
+              background: "transparent",
+              border: "1px solid rgba(1, 187, 245, 0.25)",
+              color: "#01BBF5",
+              fontFamily: "var(--font-outfit)",
+              fontSize: 14,
+              fontWeight: 600,
+              textDecoration: "none",
+              transition: "background 0.3s",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "rgba(1, 187, 245, 0.08)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "transparent";
+            }}
+          >
+            Register for the Next Edition →
+          </a>
+        </div>
       </div>
 
       {/* Grid CSS */}

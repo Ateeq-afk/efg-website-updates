@@ -106,7 +106,7 @@ export default function ConferenceElements() {
               margin: "16px 0 0",
             }}
           >
-            More Than a Conference
+            Six Formats. One Outcome: You Leave Sharper.
           </h2>
 
           <p
@@ -120,8 +120,8 @@ export default function ConferenceElements() {
               lineHeight: 1.7,
             }}
           >
-            Every element is designed for one outcome — that the right people
-            leave with the right connections, insights, and momentum.
+            Keynotes for strategy. Roundtables for honesty. 1-on-1s for deals.
+            Every format exists because it earns its place.
           </p>
         </motion.div>
 
@@ -205,8 +205,8 @@ function ElementCard({
           className="w-full h-full object-cover"
           style={{
             filter: isHovered
-              ? "brightness(0.25) saturate(0.6)"
-              : "brightness(0.15) saturate(0.4)",
+              ? "brightness(0.35) saturate(0.6)"
+              : "brightness(0.2) saturate(0.4)",
             transform: isHovered ? "scale(1.06)" : "scale(1)",
             transition: "all 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
           }}

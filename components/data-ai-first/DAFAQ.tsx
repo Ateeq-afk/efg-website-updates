@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
-import { DotMatrixGrid, ScanLines } from "@/components/effects";
+import { ScanLines } from "@/components/effects";
 import { EMERALD, EMERALD_BRIGHT, EASE } from "./constants";
 
 const faqs = [
@@ -60,23 +60,17 @@ export default function DAFAQ() {
         padding: "clamp(36px, 5vw, 56px) 0",
       }}
     >
-      {/* Multi-layer atmospheric gradients */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: `radial-gradient(ellipse 40% 50% at 60% 50%, rgba(15,115,94,0.04) 0%, transparent 70%)`,
-        }}
-      />
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: `radial-gradient(ellipse 30% 40% at 20% 80%, rgba(20,168,130,0.02) 0%, transparent 70%)`,
-        }}
-      />
+      {/* Scan-line texture */}
+      <ScanLines opacity={0.02} lineHeight={3} />
 
-      {/* Texture */}
-      <DotMatrixGrid color={EMERALD} opacity={0.02} spacing={24} />
-      <ScanLines opacity={0.01} lineHeight={5} />
+      {/* Emerald glow — bottom-left */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: `radial-gradient(ellipse 40% 50% at 15% 80%, ${EMERALD}0A 0%, transparent 70%)`,
+          zIndex: 1,
+        }}
+      />
 
       <div
         style={{
@@ -167,7 +161,7 @@ export default function DAFAQ() {
                   fontFamily: "var(--font-outfit)",
                   fontSize: 10,
                   fontWeight: 500,
-                  color: "#404040",
+                  color: "#555555",
                   marginLeft: 8,
                   letterSpacing: "1px",
                 }}
@@ -244,6 +238,28 @@ export default function DAFAQ() {
               </motion.div>
             </AnimatePresence>
           </div>
+        </motion.div>
+
+        {/* Still have questions? */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+          transition={{ duration: 0.5, delay: 0.5, ease: EASE }}
+          style={{ textAlign: "center", marginTop: 32 }}
+        >
+          <a
+            href="#register"
+            style={{
+              fontFamily: "var(--font-outfit)",
+              fontSize: 13,
+              fontWeight: 500,
+              color: EMERALD,
+              textDecoration: "none",
+              letterSpacing: "0.5px",
+            }}
+          >
+            Still have questions? Get in Touch →
+          </a>
         </motion.div>
       </div>
 

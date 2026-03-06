@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
+import { submitForm } from "@/lib/form-helpers";
 
 const CYBER_BLUE = "#01BBF5";
 
@@ -32,10 +33,22 @@ export default function RegistrationForm() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Registration submitted:", formData);
-    setIsSubmitted(true);
+    setIsLoading(true);
+    const result = await submitForm({
+      type: "attend",
+      full_name: `${formData.firstName} ${formData.lastName}`.trim(),
+      email: formData.email,
+      company: formData.organization,
+      job_title: formData.jobTitle,
+      phone: formData.phone,
+      event_name: "Cyber First Kuwait 2026",
+    });
+    setIsLoading(false);
+    if (result.success) setIsSubmitted(true);
   };
 
   return (
@@ -202,7 +215,7 @@ export default function RegistrationForm() {
                 </div>
 
                 {/* Submit Button */}
-                <SubmitButton />
+                <SubmitButton loading={isLoading} />
 
                 {/* Privacy Note */}
                 <p
@@ -357,28 +370,30 @@ function FormInput({
 /**
  * SubmitButton — Form submit button
  */
-function SubmitButton() {
+function SubmitButton({ loading = false }: { loading?: boolean }) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
     <button
       type="submit"
+      disabled={loading}
       className="w-full transition-all duration-300"
       style={{
         padding: 16,
-        background: isHovered ? "#33CCFF" : CYBER_BLUE,
+        background: loading ? `${CYBER_BLUE}80` : isHovered ? "#33CCFF" : CYBER_BLUE,
         border: "none",
         borderRadius: 12,
         fontFamily: "var(--font-outfit)",
         fontSize: 15,
         fontWeight: 600,
         color: "#0A0A0A",
-        cursor: "pointer",
+        cursor: loading ? "wait" : "pointer",
+        opacity: loading ? 0.7 : 1,
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      Register Interest →
+      {loading ? "Submitting..." : "Register Interest →"}
     </button>
   );
 }

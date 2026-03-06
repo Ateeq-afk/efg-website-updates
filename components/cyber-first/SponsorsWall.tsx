@@ -382,7 +382,7 @@ function SponsorCard({
             fontSize: size === "normal" ? 13 : 11,
             fontWeight: 700,
             letterSpacing: "1.5px",
-            color: isHovered ? "#0A0A0A" : "rgba(255, 255, 255, 0.18)",
+            color: isHovered ? "#0A0A0A" : "rgba(255, 255, 255, 0.5)",
             textTransform: "uppercase",
             textAlign: "center",
             transition: "color 0.4s",

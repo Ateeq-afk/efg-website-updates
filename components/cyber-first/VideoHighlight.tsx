@@ -68,7 +68,7 @@ export default function VideoHighlight() {
               margin: "16px 0 0",
             }}
           >
-            See It in Action
+            60 Seconds Inside Cyber First
           </h2>
         </motion.div>
 

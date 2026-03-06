@@ -2,6 +2,8 @@
 
 import { useRef, useState } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
+import { submitForm } from "@/lib/form-helpers";
+import type { FormType } from "@/lib/form-helpers";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // CONSTANTS
@@ -31,9 +33,11 @@ const INQUIRY_TABS = [
     fields: [
       { name: "name", label: "Full Name", type: "text", placeholder: "Your full name" },
       { name: "email", label: "Work Email", type: "email", placeholder: "you@company.com" },
+      { name: "phone", label: "Phone Number", type: "tel", placeholder: "+971 xxxx xxxx" },
       { name: "company", label: "Company", type: "text", placeholder: "Company name" },
       { name: "title", label: "Job Title", type: "text", placeholder: "Your role" },
       { name: "interest", label: "Event Interest", type: "select", placeholder: "Select an event series", options: ["Cyber First", "OT Security First", "Data & AI First", "Opex First", "Multiple Events"] },
+      { name: "city", label: "Preferred City", type: "select", placeholder: "Select a city", options: ["Kuwait City", "Riyadh", "Doha", "Muscat", "Jubail"] },
       { name: "message", label: "Message (Optional)", type: "textarea", placeholder: "Tell us about your sponsorship goals..." },
     ],
     cta: "Request Sponsorship Info",
@@ -53,10 +57,12 @@ const INQUIRY_TABS = [
     fields: [
       { name: "name", label: "Full Name", type: "text", placeholder: "Your full name" },
       { name: "email", label: "Work Email", type: "email", placeholder: "you@company.com" },
+      { name: "phone", label: "Phone Number", type: "tel", placeholder: "+971 xxxx xxxx" },
       { name: "company", label: "Company", type: "text", placeholder: "Company name" },
       { name: "title", label: "Job Title", type: "text", placeholder: "Your role" },
-      { name: "event", label: "Preferred Event", type: "select", placeholder: "Select an event", options: ["Cyber First", "OT Security First", "Data & AI First", "Opex First"] },
+      { name: "interest", label: "Event Interest", type: "select", placeholder: "Select an event series", options: ["Cyber First", "OT Security First", "Data & AI First", "Opex First", "Multiple Events"] },
       { name: "city", label: "Preferred City", type: "select", placeholder: "Select a city", options: ["Kuwait City", "Riyadh", "Doha", "Muscat", "Jubail"] },
+      { name: "message", label: "Message (Optional)", type: "textarea", placeholder: "Tell us about your interests..." },
     ],
     cta: "Request Pass",
   },
@@ -75,10 +81,13 @@ const INQUIRY_TABS = [
     fields: [
       { name: "name", label: "Full Name", type: "text", placeholder: "Your full name" },
       { name: "email", label: "Work Email", type: "email", placeholder: "you@company.com" },
-      { name: "company", label: "Company / Organization", type: "text", placeholder: "Company name" },
+      { name: "phone", label: "Phone Number", type: "tel", placeholder: "+971 xxxx xxxx" },
+      { name: "company", label: "Company", type: "text", placeholder: "Company name" },
       { name: "title", label: "Job Title", type: "text", placeholder: "Your role" },
+      { name: "interest", label: "Event Interest", type: "select", placeholder: "Select an event series", options: ["Cyber First", "OT Security First", "Data & AI First", "Opex First", "Multiple Events"] },
+      { name: "city", label: "Preferred City", type: "select", placeholder: "Select a city", options: ["Kuwait City", "Riyadh", "Doha", "Muscat", "Jubail"] },
       { name: "topic", label: "Proposed Topic", type: "text", placeholder: "Brief topic or area of expertise" },
-      { name: "bio", label: "Short Bio", type: "textarea", placeholder: "2\u20133 sentences about your background and expertise..." },
+      { name: "message", label: "Message (Optional)", type: "textarea", placeholder: "Tell us about your background..." },
     ],
     cta: "Submit Speaker Proposal",
   },
@@ -142,13 +151,50 @@ export default function InquiryForm() {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
   const [activeTab, setActiveTab] = useState<string>("sponsor");
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
   const [formData, setFormData] = useState<Record<string, string>>({});
 
   const tab = INQUIRY_TABS.find((t) => t.key === activeTab)!;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setSubmitting(true);
+    setFormError(null);
+
+    const typeMap: Record<string, FormType> = { sponsor: "sponsor", pass: "attend", speaker: "speak" };
+    const type = typeMap[activeTab] || "attend";
+
+    const sharedMeta = {
+      event_interest: formData.interest || "",
+      preferred_city: formData.city || "",
+      message: formData.message || "",
+    };
+
+    const metadataMap: Record<string, () => Record<string, string>> = {
+      sponsor: () => ({ ...sharedMeta }),
+      pass: () => ({ ...sharedMeta }),
+      speaker: () => ({ ...sharedMeta, proposed_topic: formData.topic || "" }),
+    };
+
+    const meta = metadataMap[activeTab]?.() || {};
+    const result = await submitForm({
+      type,
+      full_name: formData.name || "",
+      email: formData.email || "",
+      company: formData.company || "",
+      job_title: formData.title || "",
+      phone: formData.phone || "",
+      event_name: meta.event_interest || undefined,
+      metadata: meta,
+    });
+
+    setSubmitting(false);
+    if (result.success) {
+      setSubmitted(true);
+    } else {
+      setFormError(result.error || "Something went wrong.");
+    }
   };
 
   const handleChange = (name: string, value: string) => {
@@ -157,6 +203,7 @@ export default function InquiryForm() {
 
   const resetForm = () => {
     setSubmitted(false);
+    setFormError(null);
     setFormData({});
   };
 
@@ -522,7 +569,7 @@ export default function InquiryForm() {
                                 value={formData[field.name] || ""}
                                 onChange={(e) => handleChange(field.name, e.target.value)}
                                 placeholder={field.placeholder}
-                                required
+                                required={field.type !== "tel"}
                                 style={inputStyle}
                                 onFocus={(e) => { e.currentTarget.style.borderColor = "rgba(232,101,26,0.3)"; }}
                                 onBlur={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"; }}
@@ -533,39 +580,53 @@ export default function InquiryForm() {
                       })}
                     </div>
 
+                    {/* Honeypot — hidden from real users */}
+                    <input type="text" name="website" style={{ display: "none" }} tabIndex={-1} autoComplete="off" />
+
+                    {/* Error message */}
+                    {formError && (
+                      <p style={{ color: "#ef4444", fontFamily: "var(--font-outfit)", fontSize: 13, margin: "8px 0 0" }}>
+                        {formError}
+                      </p>
+                    )}
+
                     {/* Submit */}
                     <button
                       type="submit"
+                      disabled={submitting}
                       style={{
                         width: "100%",
                         marginTop: 20,
                         padding: "13px 28px",
                         borderRadius: 10,
-                        background: "var(--orange)",
+                        background: submitting ? "rgba(232,101,26,0.6)" : "var(--orange)",
                         color: "white",
                         fontFamily: "var(--font-outfit)",
                         fontSize: 14,
                         fontWeight: 600,
                         border: "none",
-                        cursor: "pointer",
+                        cursor: submitting ? "not-allowed" : "pointer",
                         transition: "all 0.3s ease",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
                         gap: 8,
+                        opacity: submitting ? 0.7 : 1,
                       }}
                       onMouseEnter={(e) => {
-                        e.currentTarget.style.background = "var(--orange-bright)";
-                        e.currentTarget.style.transform = "translateY(-2px)";
-                        e.currentTarget.style.boxShadow = "0 12px 40px var(--orange-glow)";
+                        if (!submitting) {
+                          e.currentTarget.style.background = "var(--orange-bright)";
+                          e.currentTarget.style.transform = "translateY(-2px)";
+                          e.currentTarget.style.boxShadow = "0 12px 40px var(--orange-glow)";
+                        }
                       }}
                       onMouseLeave={(e) => {
-                        e.currentTarget.style.background = "var(--orange)";
+                        e.currentTarget.style.background = submitting ? "rgba(232,101,26,0.6)" : "var(--orange)";
                         e.currentTarget.style.transform = "translateY(0)";
                         e.currentTarget.style.boxShadow = "none";
                       }}
                     >
-                      {tab.cta} <span>&rarr;</span>
+                      {submitting ? "Submitting..." : tab.cta} {!submitting && <span>&rarr;</span>}
                     </button>
                   </form>
 

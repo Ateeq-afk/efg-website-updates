@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
-import { DotMatrixGrid, ScanLines } from "@/components/effects";
+import { DotMatrixGrid } from "@/components/effects";
 import { EMERALD, EMERALD_BRIGHT, EASE, WIDE } from "./constants";
 
 const topics = [
@@ -84,23 +84,25 @@ export default function DATopics() {
         padding: "clamp(36px, 5vw, 56px) 0",
       }}
     >
-      {/* Multi-layer atmospheric gradients */}
+      {/* Vertical line pattern */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: `radial-gradient(ellipse 50% 50% at 30% 40%, rgba(15,115,94,0.04) 0%, transparent 70%)`,
-        }}
-      />
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: `radial-gradient(ellipse 40% 40% at 80% 60%, rgba(20,168,130,0.025) 0%, transparent 70%)`,
+          backgroundImage: `repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(15,115,94,0.035) 59px, rgba(15,115,94,0.035) 60px)`,
+          zIndex: 1,
         }}
       />
 
-      {/* Textures */}
-      <DotMatrixGrid color={EMERALD} opacity={0.02} spacing={28} />
-      <ScanLines opacity={0.01} lineHeight={5} />
+      {/* Emerald glow — left */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: `radial-gradient(ellipse 40% 50% at 10% 50%, ${EMERALD}0A 0%, transparent 70%)`,
+          zIndex: 1,
+        }}
+      />
+
+      <DotMatrixGrid color={EMERALD} opacity={0.015} spacing={32} />
 
       <div
         style={{
@@ -346,6 +348,28 @@ export default function DATopics() {
               </motion.div>
             </AnimatePresence>
           </div>
+        </motion.div>
+
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+          transition={{ duration: 0.5, delay: 0.6, ease: EASE }}
+          style={{ textAlign: "center", marginTop: 36 }}
+        >
+          <a
+            href="#register"
+            style={{
+              fontFamily: "var(--font-outfit)",
+              fontSize: 14,
+              fontWeight: 500,
+              color: EMERALD,
+              textDecoration: "none",
+              letterSpacing: "0.3px",
+            }}
+          >
+            Choose Your Track →
+          </a>
         </motion.div>
       </div>
 

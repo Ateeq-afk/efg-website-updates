@@ -146,8 +146,8 @@ export default function PastEditionsTimeline() {
           style={{
             fontFamily: "var(--font-outfit)",
             fontWeight: 400,
-            fontSize: 14,
-            color: "#505050",
+            fontSize: 15,
+            color: "#707070",
             textAlign: "center",
             marginTop: 40,
             letterSpacing: "0.3px",

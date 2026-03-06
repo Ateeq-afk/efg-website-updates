@@ -114,7 +114,7 @@ export default function MarketInsights() {
               margin: "16px 0 0",
             }}
           >
-            This Is the Landscape. We Built the Room.
+            The Threat Is Accelerating. Your Peers Are Already Here.
           </h2>
 
           {/* Paragraph */}
@@ -132,7 +132,7 @@ export default function MarketInsights() {
             adversaries know it. The attack surface is expanding faster than
             most organisations can defend. These aren&rsquo;t statistics to
             worry about in isolation. They&rsquo;re the reason 1,500+
-            security leaders gather at Cyber First every year.
+            security leaders refuse to miss Cyber First.
           </p>
         </motion.div>
 

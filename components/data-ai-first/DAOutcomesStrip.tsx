@@ -65,7 +65,7 @@ export default function DAOutcomesStrip() {
                 fontFamily: "var(--font-outfit)",
                 fontSize: 11,
                 fontWeight: 400,
-                color: "#505050",
+                color: "#686868",
                 marginTop: 6,
                 letterSpacing: "0.5px",
               }}
