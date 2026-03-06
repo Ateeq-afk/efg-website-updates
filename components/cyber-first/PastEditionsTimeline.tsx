@@ -16,7 +16,7 @@ const roles = [
 // Big proof numbers
 const proofStats = [
   { value: 1500, suffix: "+", label: "Senior Security Leaders" },
-  { value: 4, suffix: "", label: "GCC Nations" },
+  { value: 5, suffix: "+", label: "Nations" },
   { value: 120, suffix: "+", label: "Organisations Represented" },
   { value: 92, suffix: "%", label: "Director-Level & Above" },
 ];
@@ -89,7 +89,7 @@ export default function PastEditionsTimeline() {
             }}
           >
             Cyber First doesn&rsquo;t fill seats — it curates a room. Every
-            attendee is a decision-maker shaping cybersecurity across the GCC.
+            attendee is a decision-maker shaping enterprise cybersecurity.
           </p>
         </motion.div>
 

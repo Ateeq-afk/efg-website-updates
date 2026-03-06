@@ -59,11 +59,11 @@ const TABS = [
     label: "Sponsor",
     heading: "Partner with\nCyber First",
     description:
-      "Put your brand in the room with the GCC\u2019s top CISOs and security decision-makers. Sponsorship packages are designed for maximum visibility and qualified lead generation.",
+      "Put your brand in the room with top CISOs and security decision-makers. Sponsorship packages are designed for maximum visibility and qualified lead generation.",
     perks: [
       { icon: "layers", text: "Boardroom hosting & keynote slots" },
       { icon: "target", text: "Qualified lead generation" },
-      { icon: "eye", text: "Premium brand visibility across GCC" },
+      { icon: "eye", text: "Premium brand visibility worldwide" },
     ],
     trust: "50+ technology leaders have partnered with Cyber First",
     fields: [
