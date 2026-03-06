@@ -19,7 +19,7 @@ const TEXT = "#F5F5F7";
 const TEXT_DIM = "#A1A1A6";
 const TEXT_MUTED = "#6E6E73";
 const BORDER = "rgba(255,255,255,0.08)";
-const EASE_OUT = [0.22, 1, 0.36, 1];
+const EASE_OUT: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 // NetworkFirst WordPress uploads base
 const NF = "https://networkfirstme.com/wp-content/uploads";
