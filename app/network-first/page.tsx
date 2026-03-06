@@ -307,9 +307,9 @@ function Hero() {
       <motion.div style={{ position: "relative", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", textAlign: "center", padding: "0 24px", opacity }}>
         <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.3, ease: EASE_OUT }} style={{ fontSize: 13, fontWeight: 500, letterSpacing: "0.25em", textTransform: "uppercase", color: GOLD, marginBottom: 24 }}>NetworkFirst Boardrooms</motion.p>
         
-        <motion.h1 initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.4, ease: EASE_OUT }} style={{ fontFamily: "var(--font-display)", fontSize: "clamp(56px, 14vw, 160px)", fontWeight: 600, lineHeight: 0.9, letterSpacing: "-0.04em", margin: 0, color: TEXT }}>The Room.</motion.h1>
+        <motion.h1 initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.4, ease: EASE_OUT }} style={{ fontFamily: "var(--font-display)", fontSize: "clamp(40px, 10vw, 100px)", fontWeight: 600, lineHeight: 1.0, letterSpacing: "-0.03em", margin: 0, color: TEXT, maxWidth: 900 }}>Executive Roundtables<br />Designed to Elevate.</motion.h1>
         
-        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 0.8 }} style={{ fontSize: "clamp(17px, 2.2vw, 21px)", fontWeight: 400, color: TEXT_50, maxWidth: 500, marginTop: 24, lineHeight: 1.6 }}>Host your boardroom. Curate your guests.<br />Shape the conversation that matters.</motion.p>
+        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 0.8 }} style={{ fontSize: "clamp(17px, 2.2vw, 21px)", fontWeight: 400, color: TEXT_50, maxWidth: 600, marginTop: 24, lineHeight: 1.6 }}>Join an exclusive event experience tailored for leaders seeking to expand their network, foster peer connections, and engage in in-depth discussions.</motion.p>
 
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 1.1 }} className="hero-cta-row" style={{ display: "flex", gap: 16, marginTop: 40, flexWrap: "wrap", justifyContent: "center" }}>
           <Link href="/contact" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8, padding: "16px 32px", background: GOLD, color: BG, borderRadius: 980, fontSize: 15, fontWeight: 500, textDecoration: "none", minWidth: 180 }}>
@@ -380,9 +380,9 @@ function IntroStatement() {
   return (
     <section ref={ref} style={{ padding: "clamp(120px, 18vw, 200px) 24px", maxWidth: 900, margin: "0 auto", textAlign: "center" }}>
       <motion.p initial={{ opacity: 0, y: 40 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: EASE_OUT }} style={{ fontFamily: "var(--font-display)", fontSize: "clamp(28px, 5vw, 48px)", fontWeight: 500, lineHeight: 1.3, letterSpacing: "-0.02em", color: TEXT }}>
-        Your brand. Your agenda.<br />
-        <span style={{ color: TEXT_50 }}>The region&apos;s most senior executives</span>{" "}
-        <span style={{ color: GOLD }}>in one room.</span>
+        We design and manage exclusive executive networking roundtables{" "}
+        <span style={{ color: TEXT_50 }}>that bring together C-level decision-makers</span>{" "}
+        <span style={{ color: GOLD }}>for meaningful engagement.</span>
       </motion.p>
     </section>
   );
@@ -415,9 +415,9 @@ function WhyBoardroomsWork() {
   ];
 
   const advantages = [
-    { icon: "🏛", title: "Chatham House Rule", desc: "No recordings, no press. Candor that doesn't happen in public forums." },
-    { icon: "👔", title: "Decision-Makers Only", desc: "CISOs, CTOs, C-level executives. No delegates. Every seat earned." },
-    { icon: "🎯", title: "Your Brand, Front & Center", desc: "You set the agenda. You lead the conversation. You own the narrative." },
+    { icon: "🏛", title: "Boardrooms Built for Leaders", desc: "Carefully designed environments where decisions are made and networks are strengthened." },
+    { icon: "👔", title: "C-Level Decision-Makers", desc: "We know the right audience is the key to success. Every seat earned by senior executives." },
+    { icon: "🎯", title: "Productive Exchange", desc: "Unlock the power of productive exchange with tailored agendas that drive value." },
   ];
 
   return (
@@ -475,9 +475,9 @@ function TheFormat() {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const pillars = [
-    { num: "01", title: "You Host", desc: "Your brand owns the room. Set the agenda, choose the topic, lead the conversation that positions you as a thought leader." },
-    { num: "02", title: "We Curate", desc: "15–20 hand-selected CISOs, CTOs, and C-level executives. Every seat earned. No walk-ins, no filler." },
-    { num: "03", title: "They Connect", desc: "Chatham House Rule. No recordings, no press. Real conversations that build real relationships." },
+    { num: "01", title: "Event Planning & Content", desc: "We work with you to design a tailored agenda that aligns with your goals, ensuring every conversation drives value." },
+    { num: "02", title: "Delegate Acquisition", desc: "We identify your ideal prospects, deploy multi-channel outreach, and manage registration & attendee coordination end-to-end." },
+    { num: "03", title: "Flawless Execution", desc: "5-star hotel venues with curated menus, premium branding, and on-site execution so you can focus on your business objectives." },
   ];
 
   return (
@@ -530,10 +530,10 @@ function WhyHost() {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const benefits = [
-    { title: "Direct Access", desc: "Meet decision-makers face-to-face. No gatekeepers." },
-    { title: "Thought Leadership", desc: "Position your brand at the center of industry conversations." },
-    { title: "Quality Content", desc: "Professional photography and video. Your brand documented." },
-    { title: "Real Relationships", desc: "Connections that convert to pipeline and partnerships." },
+    { title: "Private & Intimate Setting", desc: "Our managed roundtables provide a private and intimate setting to connect with C-level executives and business leaders." },
+    { title: "Tailored Agenda", desc: "We work with you to design a tailored agenda that aligns with your goals, ensuring every conversation drives value." },
+    { title: "End-to-End Management", desc: "From planning to flawless on-site execution, we handle everything so you can focus on achieving your business objectives." },
+    { title: "Post-Event ROI", desc: "We provide a comprehensive attendee database – insights, contacts, and follow-up opportunities – to nurture relationships long after the event." },
   ];
 
   return (
@@ -582,10 +582,10 @@ function TheExperience() {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const features = [
-    { title: "Five-Star Venues", desc: "Ritz Carlton, Four Seasons, St. Regis — venues that match the caliber of your guests." },
-    { title: "Curated Guest List", desc: "We select participants by title, organization, and relevance to your agenda." },
-    { title: "Full Production", desc: "Photography, videography, and post-event content. Your brand documented." },
-    { title: "Private Dining", desc: "The conversation continues over lunch. Relationships that outlast the session." },
+    { title: "5-Star Hotel Venues", desc: "World-class venues with curated menus that match the caliber of your guests." },
+    { title: "Captivating Collateral", desc: "Landing pages and brochures designed to attract and engage your target audience." },
+    { title: "Premium Branding", desc: "On-site execution with premium branding that positions your company front and center." },
+    { title: "Strategic Acquisition", desc: "Multi-channel outreach including calls, email, LinkedIn campaigns to fill your room with decision-makers." },
   ];
 
   return (
