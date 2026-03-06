@@ -91,14 +91,14 @@ const PAST_EVENTS_2024 = [
 ];
 
 const CANDID_MOMENTS = [
-  `${BOARDROOM}/outsystems-hero.jpg`,
-  `${BOARDROOM}/outsystems-03.jpg`,
-  `${BOARDROOM}/outsystems-04.jpg`,
-  `${BOARDROOM}/outsystems-05.jpg`,
-  `${BOARDROOM}/outsystems-06.jpg`,
-  `${BOARDROOM}/outsystems-07.jpg`,
-  `${BOARDROOM}/boardroom-15.jpg`,
-  `${BOARDROOM}/boardroom-18.jpg`,
+  `${BOARDROOM}/outsystems-one/4N8A7045.JPG`,
+  `${BOARDROOM}/outsystems-one/4N8A7067.JPG`,
+  `${BOARDROOM}/outsystems-one/4N8A7080.JPG`,
+  `${BOARDROOM}/outsystems-one/4N8A7096.JPG`,
+  `${BOARDROOM}/outsystems-one/4N8A7110.JPG`,
+  `${BOARDROOM}/outsystems-one/4N8A7125.JPG`,
+  `${BOARDROOM}/outsystems-one/4N8A7150.JPG`,
+  `${BOARDROOM}/outsystems-one/4N8A7185.JPG`,
 ];
 
 const STATS = [
@@ -116,9 +116,9 @@ const TESTIMONIALS = [
 
 const TRUST_LOGOS = [
   "Google-Cloud-Security.png", "paloalto.png", "fortinet.png", "Akamai.png",
-  "EY.png", "Celonis.png", "Claroty.png", "GBM.png", "Confluent.png",
+  "EY.png", "Celonis.png", "Claroty.png", "GBM.png", 
   "OutSystems.png", "Freshworks.png", "CleverTap.png", "Tenable-logo.png",
-  "sentinelone.png", "ManageEngine.png", "Dragos.png",
+  "sentinelone.png", "kaspersky.png", "Dragos.png", "Group-IB.png",
 ];
 
 const TITLES = [
@@ -154,13 +154,13 @@ export default function NetworkFirstPage() {
       <TheFormat />
       <CandidMoments />
       <WhyHost />
-      <EditorialBreak src={`${BOARDROOM}/boardroom-26.jpg`} />
+      <EditorialBreak src={`${BOARDROOM}/outsystems-one/4N8A7058.JPG`} />
       <TheExperience />
       <TheFullPackage />
       <TheJourney />
       <UpcomingSection />
       <UrgencyBanner />
-      <EditorialBreak src={`${BOARDROOM}/boardroom-31.jpg`} />
+      <EditorialBreak src={`${BOARDROOM}/outsystems-one/4N8A7103.JPG`} />
       <PastBoardroomsShowcase />
       <ResultsThatMatter />
       <ByTheNumbers />
@@ -362,7 +362,7 @@ function TrustStrip() {
       <p style={{ fontSize: 11, color: GOLD, letterSpacing: "0.2em", textTransform: "uppercase", textAlign: "center", marginBottom: 24 }}>Trusted By</p>
       <motion.div animate={{ x: ["0%", "-50%"] }} transition={{ duration: 30, repeat: Infinity, ease: "linear" }} style={{ display: "flex", gap: 64, alignItems: "center" }}>
         {[...TRUST_LOGOS, ...TRUST_LOGOS].map((logo, i) => (
-          <img key={i} src={`${S3_LOGOS}/${logo}`} alt="" style={{ height: 32, width: "auto", filter: "brightness(0) invert(1)", opacity: 0.7, flexShrink: 0 }} />
+          <img key={i} src={`${S3_LOGOS}/${logo}`} alt="" style={{ height: 48, width: "auto", filter: "brightness(0) invert(1)", opacity: 0.85, flexShrink: 0 }} />
         ))}
       </motion.div>
     </section>
@@ -594,7 +594,7 @@ function TheExperience() {
         <div className="exp-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(48px, 8vw, 80px)", alignItems: "center" }}>
           <motion.div initial={{ opacity: 0, x: -40 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.8, ease: EASE_OUT }} className="exp-images">
             <div style={{ borderRadius: 16, overflow: "hidden", aspectRatio: "4/5", border: `1px solid ${BORDER}` }}>
-              <img src={`${BOARDROOM}/boardroom-30.jpg`} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+              <img src={`${BOARDROOM}/outsystems-one/4N8A7072.JPG`} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
             </div>
           </motion.div>
           <motion.div initial={{ opacity: 0, x: 40 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.8, delay: 0.2, ease: EASE_OUT }}>
