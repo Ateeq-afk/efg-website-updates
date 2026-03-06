@@ -2191,3 +2191,502 @@ function AwardsSection() {
             {AWARDS_ELIGIBILITY.map((item) => (
               <div key={item} className="flex items-center gap-3">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={KENYA_GOLD} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M20 6L9 17l-5-5" />
+                </svg>
+                <span style={{ fontFamily: "var(--font-outfit)", fontSize: 13, fontWeight: 500, color: "rgba(255,255,255,0.6)" }}>{item}</span>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+// ─── SPLIT CTA ───────────────────────────────────────────────────────────────
+function SplitCTA() {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const cd = useCountdown(EVENT_DATE);
+
+  const EFG_ORANGE = "#E8651A";
+
+  const inputStyle = (accent: string): React.CSSProperties => ({
+    width: "100%",
+    padding: "12px 16px",
+    borderRadius: 12,
+    border: `1px solid ${accent}20`,
+    background: `${accent}06`,
+    color: "white",
+    fontFamily: "var(--font-outfit)",
+    fontSize: 13,
+    fontWeight: 400,
+    outline: "none",
+    transition: "border-color 0.3s, background 0.3s",
+  });
+
+  return (
+    <section
+      ref={ref}
+      style={{
+        position: "relative",
+        overflow: "hidden",
+        padding: "clamp(40px,5vw,72px) 0",
+      }}
+    >
+      <div className="absolute inset-0">
+        <img
+          src="https://cyberfirstseries.com/wp-content/uploads/2024/12/Cyber-First-Series-Pictures-and-Sponsors-28.jpg"
+          alt=""
+          className="w-full h-full object-cover"
+          style={{ filter: "brightness(0.15) saturate(0.6)" }}
+        />
+      </div>
+      <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(to bottom, #030810 0%, transparent 20%, transparent 80%, #030810 100%)" }} />
+      <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 60% 50% at 50% 50%, ${KENYA_ACCENT}06, transparent 70%)` }} />
+
+      <div style={{ maxWidth: 1320, margin: "0 auto", padding: "0 clamp(20px,4vw,60px)", position: "relative", zIndex: 1 }}>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, ease: EASE }}
+          style={{ textAlign: "center", marginBottom: 48 }}
+        >
+          <div className="flex items-center justify-center gap-3" style={{ marginBottom: 16 }}>
+            <span style={{ width: 30, height: 1, background: KENYA_ACCENT }} />
+            <span style={{ fontFamily: "var(--font-outfit)", fontSize: 11, fontWeight: 600, letterSpacing: "2.5px", textTransform: "uppercase", color: KENYA_ACCENT }}>
+              Join Us
+            </span>
+            <span style={{ width: 30, height: 1, background: KENYA_ACCENT }} />
+          </div>
+          <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(28px,4vw,52px)", letterSpacing: "-1.5px", color: "white", lineHeight: 1.08, margin: "12px 0 0" }}>
+            Be Part of Cyber First Kenya
+          </h2>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.2, ease: EASE }}
+          className="cfk-split-cta"
+          style={{ display: "grid", gridTemplateColumns: "3fr 2fr", gap: 16, alignItems: "stretch" }}
+        >
+          {/* Register card */}
+          <div
+            style={{
+              padding: "clamp(28px,3.5vw,48px)",
+              borderRadius: 22,
+              background: `linear-gradient(135deg, ${EFG_ORANGE}12, ${EFG_ORANGE}03)`,
+              border: `1px solid ${EFG_ORANGE}20`,
+              position: "relative",
+              overflow: "hidden",
+            }}
+          >
+            <div className="absolute top-0 left-0 right-0" style={{ height: 2, background: `linear-gradient(90deg, ${EFG_ORANGE}, ${EFG_ORANGE}60, transparent)` }} />
+            <div className="absolute pointer-events-none" style={{ width: 300, height: 300, bottom: -80, right: -60, background: `radial-gradient(ellipse at center, ${EFG_ORANGE}08, transparent 70%)`, filter: "blur(40px)" }} />
+
+            <span style={{ fontFamily: "var(--font-outfit)", fontSize: 10, fontWeight: 700, letterSpacing: "2.5px", textTransform: "uppercase", color: EFG_ORANGE }}>
+              For Delegates
+            </span>
+            <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(22px,2.8vw,36px)", letterSpacing: "-1.5px", color: "white", lineHeight: 1.1, margin: "14px 0 12px" }}>
+              Register for Cyber First<br />Kenya 2026
+            </h3>
+            <p style={{ fontFamily: "var(--font-outfit)", fontSize: 14, color: "rgba(255,255,255,0.45)", lineHeight: 1.65, margin: "0 0 24px", maxWidth: 420 }}>
+              Join 300+ CISOs, government security leaders, and technology experts. June 2026 at Radisson Blu Hotel, Nairobi.
+            </p>
+
+            <div style={{ display: "flex", gap: 12, marginBottom: 28 }}>
+              {[{ val: cd.d, label: "Days" }, { val: cd.h, label: "Hrs" }, { val: cd.m, label: "Min" }, { val: cd.s, label: "Sec" }].map((u) => (
+                <div key={u.label} style={{ textAlign: "center", background: `${EFG_ORANGE}08`, border: `1px solid ${EFG_ORANGE}15`, borderRadius: 12, padding: "10px 14px", minWidth: 56 }}>
+                  <div style={{ fontFamily: "var(--font-display)", fontSize: 22, fontWeight: 800, color: "white", lineHeight: 1 }}>{String(u.val).padStart(2, "0")}</div>
+                  <div style={{ fontFamily: "var(--font-outfit)", fontSize: 9, fontWeight: 600, color: `${EFG_ORANGE}70`, textTransform: "uppercase", letterSpacing: "1px", marginTop: 4 }}>{u.label}</div>
+                </div>
+              ))}
+            </div>
+
+            <Link
+              href="/contact"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                padding: "14px 32px",
+                borderRadius: 50,
+                background: EFG_ORANGE,
+                color: "white",
+                fontFamily: "var(--font-outfit)",
+                fontSize: 14,
+                fontWeight: 600,
+                textDecoration: "none",
+                boxShadow: `0 4px 28px ${EFG_ORANGE}35`,
+              }}
+            >
+              Register Now →
+            </Link>
+          </div>
+
+          {/* Sponsor card */}
+          <div
+            style={{
+              padding: "clamp(28px,3.5vw,48px)",
+              borderRadius: 22,
+              background: `linear-gradient(135deg, ${C}0A, ${C}03)`,
+              border: `1px solid ${C}20`,
+              position: "relative",
+              overflow: "hidden",
+            }}
+          >
+            <div className="absolute top-0 left-0 right-0" style={{ height: 2, background: `linear-gradient(90deg, ${C}, ${C}60, transparent)` }} />
+            <div className="absolute pointer-events-none" style={{ width: 250, height: 250, bottom: -60, right: -40, background: `radial-gradient(ellipse at center, ${C}08, transparent 70%)`, filter: "blur(40px)" }} />
+
+            <span style={{ fontFamily: "var(--font-outfit)", fontSize: 10, fontWeight: 700, letterSpacing: "2.5px", textTransform: "uppercase", color: C }}>
+              For Brands & Vendors
+            </span>
+            <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(20px,2.2vw,30px)", letterSpacing: "-1px", color: "white", lineHeight: 1.15, margin: "14px 0 12px" }}>
+              Sponsor or Partner This Edition
+            </h3>
+
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 20 }}>
+              {[{ num: "300+", label: "Delegates" }, { num: "25+", label: "Speakers" }, { num: "20+", label: "Partners" }].map((s) => (
+                <div key={s.label} style={{ display: "flex", alignItems: "center", gap: 6, padding: "6px 12px", borderRadius: 20, background: `${C}08`, border: `1px solid ${C}15` }}>
+                  <span style={{ fontFamily: "var(--font-display)", fontSize: 13, fontWeight: 800, color: C_BRIGHT }}>{s.num}</span>
+                  <span style={{ fontFamily: "var(--font-outfit)", fontSize: 11, fontWeight: 400, color: "rgba(255,255,255,0.4)" }}>{s.label}</span>
+                </div>
+              ))}
+            </div>
+
+            <Link
+              href="/contact"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                padding: "13px 28px",
+                borderRadius: 50,
+                background: "transparent",
+                color: C,
+                fontFamily: "var(--font-outfit)",
+                fontSize: 13,
+                fontWeight: 600,
+                textDecoration: "none",
+                border: `1px solid ${C}50`,
+              }}
+            >
+              Explore Partnerships →
+            </Link>
+          </div>
+        </motion.div>
+      </div>
+
+      <style jsx global>{`
+        @media (max-width: 900px) {
+          .cfk-split-cta { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
+    </section>
+  );
+}
+
+// ─── CONTACT SECTION ─────────────────────────────────────────────────────────
+function ContactSection() {
+  const ref = useRef<HTMLElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+
+  return (
+    <section
+      ref={ref}
+      style={{
+        background: "linear-gradient(180deg, #020810 0%, #051220 100%)",
+        padding: "clamp(48px, 6vw, 80px) 0",
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
+      <div style={{ maxWidth: 1000, margin: "0 auto", padding: "0 clamp(20px, 4vw, 60px)" }}>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, ease: EASE }}
+          style={{ textAlign: "center", marginBottom: 48 }}
+        >
+          <div className="flex items-center justify-center gap-3">
+            <span style={{ width: 30, height: 1, background: KENYA_ACCENT }} />
+            <span style={{ fontFamily: "var(--font-outfit)", fontSize: 11, fontWeight: 600, letterSpacing: "2.5px", textTransform: "uppercase", color: KENYA_ACCENT }}>
+              Get in Touch
+            </span>
+            <span style={{ width: 30, height: 1, background: KENYA_ACCENT }} />
+          </div>
+          <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(28px, 3.5vw, 44px)", letterSpacing: "-1.5px", color: "white", lineHeight: 1.1, margin: "16px 0 0" }}>
+            Contact Us
+          </h2>
+        </motion.div>
+
+        <div className="cfk-contact-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.1, ease: EASE }}
+            style={{
+              padding: "32px",
+              borderRadius: 20,
+              background: `linear-gradient(145deg, ${KENYA_ACCENT}08, rgba(255,255,255,0.02))`,
+              border: `1px solid ${KENYA_ACCENT}20`,
+            }}
+          >
+            <p style={{ fontFamily: "var(--font-outfit)", fontSize: 10, fontWeight: 600, letterSpacing: "2px", textTransform: "uppercase", color: KENYA_ACCENT, marginBottom: 20 }}>
+              For Speaking Enquiries
+            </p>
+            <div className="flex items-center gap-4">
+              <div
+                style={{
+                  width: 72,
+                  height: 72,
+                  borderRadius: "50%",
+                  background: `linear-gradient(135deg, ${KENYA_ACCENT}30, ${KENYA_ACCENT}10)`,
+                  border: `2px solid ${KENYA_ACCENT}40`,
+                  overflow: "hidden",
+                  flexShrink: 0,
+                }}
+              >
+                {CFK_CONTACTS.speaking.photo && (
+                  <img src={CFK_CONTACTS.speaking.photo} alt={CFK_CONTACTS.speaking.name} className="w-full h-full object-cover" />
+                )}
+              </div>
+              <div>
+                <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: 18, color: "white", margin: "0 0 2px" }}>
+                  {CFK_CONTACTS.speaking.name}
+                </h3>
+                <p style={{ fontFamily: "var(--font-outfit)", fontSize: 12, color: "rgba(255,255,255,0.5)", margin: "0 0 8px" }}>
+                  {CFK_CONTACTS.speaking.role}
+                </p>
+                <a href={`mailto:${CFK_CONTACTS.speaking.email}`} style={{ fontFamily: "var(--font-outfit)", fontSize: 13, color: KENYA_ACCENT, textDecoration: "none" }}>
+                  {CFK_CONTACTS.speaking.email}
+                </a>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.2, ease: EASE }}
+            style={{
+              padding: "32px",
+              borderRadius: 20,
+              background: `linear-gradient(145deg, ${KENYA_ACCENT}08, rgba(255,255,255,0.02))`,
+              border: `1px solid ${KENYA_ACCENT}20`,
+            }}
+          >
+            <p style={{ fontFamily: "var(--font-outfit)", fontSize: 10, fontWeight: 600, letterSpacing: "2px", textTransform: "uppercase", color: KENYA_ACCENT, marginBottom: 20 }}>
+              For Sponsorship Enquiries
+            </p>
+            <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+              {CFK_CONTACTS.sponsorship.map((person) => (
+                <div key={person.name} className="flex items-center gap-3">
+                  <div
+                    style={{
+                      width: 48,
+                      height: 48,
+                      borderRadius: "50%",
+                      background: `linear-gradient(135deg, ${KENYA_ACCENT}30, ${KENYA_ACCENT}10)`,
+                      border: `1px solid ${KENYA_ACCENT}30`,
+                      overflow: "hidden",
+                      flexShrink: 0,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <span style={{ fontFamily: "var(--font-outfit)", fontSize: 16, fontWeight: 600, color: KENYA_ACCENT }}>
+                      {person.name.charAt(0)}
+                    </span>
+                  </div>
+                  <div>
+                    <h4 style={{ fontFamily: "var(--font-outfit)", fontWeight: 600, fontSize: 14, color: "white", margin: 0 }}>
+                      {person.name}
+                    </h4>
+                    <a href={`mailto:${person.email}`} style={{ fontFamily: "var(--font-outfit)", fontSize: 12, color: "rgba(255,255,255,0.5)", textDecoration: "none" }}>
+                      {person.email}
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </div>
+
+      <style jsx global>{`
+        @media (max-width: 768px) {
+          .cfk-contact-grid { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
+    </section>
+  );
+}
+
+// ─── VENUE ───────────────────────────────────────────────────────────────────
+function Venue() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const cardRef = useRef(null);
+  const inView = useInView(cardRef, { once: true, margin: "-60px" });
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  const imgY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
+
+  const venueDetails = [
+    { icon: "M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0zM12 13a3 3 0 100-6 3 3 0 000 6z", label: "Location", value: "Nairobi, Kenya" },
+    { icon: "M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z", label: "Date", value: "Thursday, 18 June 2026" },
+    { icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z", label: "Time", value: "8:00 AM — 5:00 PM (EAT)" },
+    { icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z", label: "Format", value: "Full-day conference + networking" },
+  ];
+
+  return (
+    <section ref={sectionRef} style={{ background: "#030810" }}>
+      <div style={{ position: "relative", height: "65vh", minHeight: 500, overflow: "hidden" }}>
+        <motion.div className="absolute inset-0" style={{ y: imgY }}>
+          <img
+            src="https://images.unsplash.com/photo-1540541338287-41700207dee6?w=1600&q=80"
+            alt="Radisson Blu Hotel Nairobi"
+            className="w-full h-full object-cover"
+            style={{ filter: "brightness(0.55) saturate(1.1)", minHeight: "120%" }}
+          />
+        </motion.div>
+
+        <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(to top, #030810 0%, rgba(3,8,16,0.5) 35%, rgba(3,8,16,0.05) 65%, rgba(3,8,16,0.3) 100%)" }} />
+        <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 80% 40% at 50% 100%, ${KENYA_ACCENT}06, transparent 60%)` }} />
+
+        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "0 clamp(20px,4vw,60px) 120px", zIndex: 2 }}>
+          <div style={{ maxWidth: 1320, margin: "0 auto" }}>
+            <div className="flex items-center gap-3" style={{ marginBottom: 12 }}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={KENYA_ACCENT} strokeWidth="1.5" strokeLinecap="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+              <span style={{ fontFamily: "var(--font-outfit)", fontSize: 11, fontWeight: 600, letterSpacing: "2.5px", textTransform: "uppercase", color: KENYA_ACCENT }}>
+                The Venue
+              </span>
+            </div>
+            <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(32px,4.5vw,56px)", letterSpacing: "-2px", color: "white", lineHeight: 1.05, margin: 0 }}>
+              Radisson Blu Hotel
+              <br />
+              <span style={{ color: KENYA_ACCENT }}>Nairobi</span>
+            </h2>
+          </div>
+        </div>
+      </div>
+
+      <div ref={cardRef} style={{ maxWidth: 1320, margin: "0 auto", padding: "0 clamp(20px,4vw,60px)", position: "relative", zIndex: 3, marginTop: -80 }}>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, ease: EASE }}
+          style={{
+            background: "rgba(3,8,16,0.55)",
+            backdropFilter: "blur(24px)",
+            WebkitBackdropFilter: "blur(24px)",
+            border: `1px solid ${KENYA_ACCENT}15`,
+            borderRadius: 22,
+            padding: "clamp(28px,3.5vw,44px) clamp(24px,3vw,44px)",
+            boxShadow: `0 0 80px ${KENYA_ACCENT}04, 0 25px 60px rgba(0,0,0,0.4)`,
+          }}
+        >
+          <div className="cfk-venue-inner" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(24px,3vw,40px)", alignItems: "center" }}>
+            <div>
+              <p style={{ fontFamily: "var(--font-outfit)", fontWeight: 300, fontSize: 15, color: "rgba(255,255,255,0.5)", lineHeight: 1.7, margin: "0 0 24px", maxWidth: 420 }}>
+                Kenya&apos;s premier conference destination — hosting East Africa&apos;s leading cybersecurity gathering for its inaugural edition in the heart of Nairobi.
+              </p>
+              <a
+                href="https://maps.google.com/?q=Radisson+Blu+Hotel+Nairobi"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 8,
+                  padding: "12px 26px",
+                  borderRadius: 50,
+                  background: `${KENYA_ACCENT}10`,
+                  color: KENYA_ACCENT,
+                  fontFamily: "var(--font-outfit)",
+                  fontSize: 13,
+                  fontWeight: 600,
+                  textDecoration: "none",
+                  border: `1px solid ${KENYA_ACCENT}30`,
+                  transition: "all 0.3s ease",
+                }}
+              >
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke={KENYA_ACCENT} strokeWidth="1.5" strokeLinecap="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+                Open in Google Maps →
+              </a>
+            </div>
+
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+              {venueDetails.map((item) => (
+                <div key={item.label} style={{ padding: "18px 16px", background: `${KENYA_ACCENT}05`, border: `1px solid ${KENYA_ACCENT}0A`, borderRadius: 14 }}>
+                  <div className="flex items-center gap-2" style={{ marginBottom: 8 }}>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={KENYA_ACCENT} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.7, flexShrink: 0 }}>
+                      <path d={item.icon} />
+                    </svg>
+                    <span style={{ fontFamily: "var(--font-outfit)", fontSize: 10, fontWeight: 600, color: KENYA_ACCENT, textTransform: "uppercase", letterSpacing: "1.5px" }}>
+                      {item.label}
+                    </span>
+                  </div>
+                  <span style={{ fontFamily: "var(--font-outfit)", fontSize: 13, fontWeight: 500, color: "rgba(255,255,255,0.7)", lineHeight: 1.4 }}>
+                    {item.value}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+      </div>
+
+      <div style={{ height: "clamp(48px,6vw,80px)" }} />
+
+      <style jsx global>{`
+        @media (max-width: 768px) {
+          .cfk-venue-inner { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
+    </section>
+  );
+}
+
+// ─── REGISTRATION SECTION ────────────────────────────────────────────────────
+function RegistrationSection() {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+
+  return (
+    <section id="register" ref={ref} style={{ background: "#080A0F", padding: "clamp(100px, 12vw, 140px) 0", position: "relative" }}>
+      <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 60% 50% at 50% 100%, ${KENYA_ACCENT}12, transparent 70%)` }} />
+      <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 40% 40% at 30% 80%, ${C}08, transparent 60%)` }} />
+
+      <div style={{ maxWidth: 700, margin: "0 auto", padding: "0 clamp(20px, 4vw, 60px)", textAlign: "center", position: "relative" }}>
+        <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, ease: EASE }}>
+          <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(36px, 5vw, 56px)", letterSpacing: "-2px", color: "white", lineHeight: 1.1, margin: "0 0 16px" }}>
+            Join Us in<br /><span style={{ color: KENYA_ACCENT }}>Nairobi</span>
+          </h2>
+          <p style={{ fontFamily: "var(--font-outfit)", fontSize: 17, color: "rgba(255,255,255,0.55)", lineHeight: 1.7, marginBottom: 40, maxWidth: 500, margin: "0 auto 40px" }}>
+            Be part of the Cyber First Movement and lead the charge toward a strategic, resilient, and innovative digital economy in the Silicon Savannah.
+          </p>
+          <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
+            <Link href="/contact" style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "18px 40px", borderRadius: 50, background: `linear-gradient(135deg, ${C}, ${C_DIM})`, color: "white", fontFamily: "var(--font-outfit)", fontSize: 16, fontWeight: 700, textDecoration: "none", boxShadow: `0 8px 32px ${C}35` }}>
+              Register Now <span>→</span>
+            </Link>
+            <Link href="/contact" style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "18px 40px", borderRadius: 50, background: "transparent", color: "white", fontFamily: "var(--font-outfit)", fontSize: 16, fontWeight: 500, textDecoration: "none", border: "1px solid rgba(255,255,255,0.2)" }}>
+              Contact Us
+            </Link>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
