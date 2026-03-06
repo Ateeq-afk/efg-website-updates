@@ -6,28 +6,26 @@ import Link from "next/link";
 import { Footer } from "@/components/sections";
 
 // ─────────────────────────────────────────────────────────────────────────────
-// DESIGN SYSTEM — Apple Premium
+// DESIGN SYSTEM — White + Gold Only
 // ─────────────────────────────────────────────────────────────────────────────
 
 const GOLD = "#C9935A";
-const GOLD_LIGHT = "#DBA96A";
-const GOLD_DIM = "rgba(201, 147, 90, 0.4)";
+const GOLD_50 = "rgba(201, 147, 90, 0.5)";
+const GOLD_30 = "rgba(201, 147, 90, 0.3)";
+const GOLD_15 = "rgba(201, 147, 90, 0.15)";
 const BG = "#000000";
-const BG_ALT = "#0a0a0a";
-const BG_CARD = "#111111";
-const TEXT = "#f5f5f7";
-const TEXT_DIM = "#86868b";
-const TEXT_MUTED = "#6e6e73";
-const BORDER = "rgba(255,255,255,0.06)";
+const BG_ALT = "#050505";
+const TEXT = "#ffffff";
+const TEXT_50 = "rgba(255, 255, 255, 0.5)";
+const TEXT_30 = "rgba(255, 255, 255, 0.3)";
+const BORDER = "rgba(201, 147, 90, 0.2)";
 const EASE_OUT: [number, number, number, number] = [0.22, 1, 0.36, 1];
-
-// NetworkFirst WordPress uploads base
-const NF = "https://networkfirstme.com/wp-content/uploads";
 
 // S3 for boardroom photos & sponsor logos
 const S3 = "https://efg-final.s3.eu-north-1.amazonaws.com";
 const BOARDROOM = `${S3}/networkfirst/boardrooms`;
 const S3_LOGOS = `${S3}/sponsors-logo`;
+const NF = "https://networkfirstme.com/wp-content/uploads";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // DATA
@@ -42,7 +40,6 @@ const UPCOMING_EVENTS = [
     sponsor: "CleverTap",
     location: "JW Marriott, Riyadh",
     link: "https://clevertap.networkfirstme.com/",
-    color: "#FF6B35",
     image: `${NF}/2026/02/Suhoor-photo1.jpg`,
   },
   {
@@ -53,7 +50,6 @@ const UPCOMING_EVENTS = [
     sponsor: "CleverTap",
     location: "Madinat Jumeirah, Dubai",
     link: "https://clevertapdxb.networkfirstme.com/",
-    color: "#FF6B35",
     image: `${NF}/2026/02/iftar-photo1.jpg`,
   },
   {
@@ -64,7 +60,6 @@ const UPCOMING_EVENTS = [
     sponsor: "OutSystems",
     location: "JW Marriott Hotel Riyadh",
     link: "https://events.outsystems.com/",
-    color: "#E31937",
     image: `${NF}/2026/02/outsystems-one.jpg`,
   },
 ];
@@ -82,10 +77,6 @@ const PAST_EVENTS_2025 = [
   { sponsor: "Akamai | Cyberia", date: "29 Oct", venue: "Riyadh", image: `${NF}/2025/10/cyberia.jpeg` },
   { sponsor: "Jedox Elevate", date: "29 Oct", venue: "Ritz Carlton JBR", image: `${NF}/2025/09/jedox-roadshow1.jpg` },
   { sponsor: "Confluent", date: "28 Oct", venue: "Voco Hotel, Riyadh", image: `${NF}/2025/10/Confluent-28-oct-01.jpg` },
-  { sponsor: "SplashBI", date: "28 Oct", venue: "Hilton Riyadh", image: `${NF}/2025/10/splashbi-photos.jpg` },
-  { sponsor: "GBM | Cisco", date: "23 Oct", venue: "St. Regis Downtown Dubai", image: `${NF}/2025/10/GBM-Cisco-1024x662.jpeg` },
-  { sponsor: "Boomi", date: "22 Oct", venue: "Riyadh", image: `${NF}/2025/09/events-aa-01-1-1-1024x662.jpg` },
-  { sponsor: "GBM | Fortinet", date: "09 Oct", venue: "One&Only One Za'abeel", image: `${NF}/2025/09/GBM-Fortinet-01-1024x662.jpg` },
 ];
 
 const PAST_EVENTS_2024 = [
@@ -100,21 +91,21 @@ const PAST_EVENTS_2024 = [
 ];
 
 const CANDID_MOMENTS = [
-  { src: `${BOARDROOM}/boardroom-01.jpg`, caption: "Executive networking" },
-  { src: `${BOARDROOM}/boardroom-05.jpg`, caption: "Panel discussion" },
-  { src: `${BOARDROOM}/boardroom-09.jpg`, caption: "Private dialogue" },
-  { src: `${BOARDROOM}/boardroom-12.jpg`, caption: "Roundtable session" },
-  { src: `${BOARDROOM}/boardroom-15.jpg`, caption: "C-Suite gathering" },
-  { src: `${BOARDROOM}/boardroom-18.jpg`, caption: "Strategic conversations" },
-  { src: `${BOARDROOM}/boardroom-21.jpg`, caption: "Leadership exchange" },
-  { src: `${BOARDROOM}/boardroom-24.jpg`, caption: "Private dining" },
+  `${BOARDROOM}/boardroom-01.jpg`,
+  `${BOARDROOM}/boardroom-05.jpg`,
+  `${BOARDROOM}/boardroom-09.jpg`,
+  `${BOARDROOM}/boardroom-12.jpg`,
+  `${BOARDROOM}/boardroom-15.jpg`,
+  `${BOARDROOM}/boardroom-18.jpg`,
+  `${BOARDROOM}/boardroom-21.jpg`,
+  `${BOARDROOM}/boardroom-24.jpg`,
 ];
 
 const STATS = [
-  { value: "100+", label: "Boardrooms", sub: "Delivered since 2023" },
-  { value: "1,500+", label: "Executives", sub: "C-Level hosted" },
-  { value: "80+", label: "Sponsors", sub: "Trusted partners" },
-  { value: "5", label: "GCC Markets", sub: "UAE · KSA · Kuwait · Qatar · Bahrain" },
+  { value: "100+", label: "Boardrooms" },
+  { value: "1,500+", label: "Executives" },
+  { value: "80+", label: "Sponsors" },
+  { value: "5", label: "GCC Markets" },
 ];
 
 const TESTIMONIALS = [
@@ -123,21 +114,20 @@ const TESTIMONIALS = [
   { quote: "An invaluable experience that exceeded our expectations in every way.", name: "Sheryan Gandhi", title: "COO", company: "Tap1ce" },
 ];
 
-const SPONSOR_LOGOS = [
+const TRUST_LOGOS = [
   "Google-Cloud-Security.png", "paloalto.png", "fortinet.png", "Akamai.png",
   "EY.png", "Celonis.png", "Claroty.png", "GBM.png", "Confluent.png",
   "OutSystems.png", "Freshworks.png", "CleverTap.png", "Tenable-logo.png",
-  "sentinelone.png", "ManageEngine.png", "Dragos.png", "nozomi-networks.png",
-  "kaspersky.png", "Group-IB.png", "CPX.png",
+  "sentinelone.png", "ManageEngine.png", "Dragos.png",
 ];
 
 const TITLES = [
   "CISO", "CDO", "CTO", "COO", "CIO", "VP Engineering", "Head of Cybersecurity",
-  "Director of IT", "Chief Data Officer", "Group CIO", "Digital Transformation Lead",
+  "Director of IT", "Chief Data Officer", "Group CIO",
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
-// MOTION VARIANTS
+// MOTION
 // ─────────────────────────────────────────────────────────────────────────────
 
 const fadeUp = {
@@ -148,11 +138,6 @@ const fadeUp = {
 const staggerContainer = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
-};
-
-const scaleIn = {
-  hidden: { opacity: 0, scale: 0.95 },
-  visible: (i = 0) => ({ opacity: 1, scale: 1, transition: { duration: 0.5, delay: i * 0.05, ease: EASE_OUT } }),
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -168,16 +153,15 @@ export default function NetworkFirstPage() {
       <TheFormat />
       <CandidMoments />
       <WhyHost />
-      <EditorialBreak src={`${BOARDROOM}/boardroom-26.jpg`} caption="Executive roundtable · Ritz Carlton DIFC" />
+      <EditorialBreak src={`${BOARDROOM}/boardroom-26.jpg`} />
       <TheExperience />
       <UpcomingSection />
       <UrgencyBanner />
-      <EditorialBreak src={`${BOARDROOM}/boardroom-31.jpg`} caption="C-Level dialogue · St. Regis Dubai" />
+      <EditorialBreak src={`${BOARDROOM}/boardroom-31.jpg`} />
       <PastBoardroomsShowcase />
       <ByTheNumbers />
       <VideoTestimonials />
       <TestimonialCarousel />
-      <SponsorLogos />
       <TitlesMarquee />
       <FinalCTA />
       <Footer />
@@ -186,7 +170,7 @@ export default function NetworkFirstPage() {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// HERO — Apple Premium
+// HERO
 // ═══════════════════════════════════════════════════════════════════════════════
 
 function Hero() {
@@ -204,17 +188,17 @@ function Hero() {
       <div style={{ position: "absolute", inset: 0, background: `linear-gradient(to bottom, ${BG} 0%, transparent 20%, transparent 70%, ${BG} 100%)` }} />
 
       <motion.div style={{ position: "relative", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", textAlign: "center", padding: "0 24px", opacity }}>
-        <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.3, ease: EASE_OUT }} style={{ fontSize: 13, fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: GOLD, marginBottom: 24 }}>NetworkFirst Boardrooms</motion.p>
+        <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.3, ease: EASE_OUT }} style={{ fontSize: 13, fontWeight: 500, letterSpacing: "0.25em", textTransform: "uppercase", color: GOLD, marginBottom: 24 }}>NetworkFirst Boardrooms</motion.p>
         
-        <motion.h1 initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.4, ease: EASE_OUT }} style={{ fontFamily: "var(--font-display)", fontSize: "clamp(56px, 14vw, 160px)", fontWeight: 600, lineHeight: 0.9, letterSpacing: "-0.04em", margin: 0 }}>The Room.</motion.h1>
+        <motion.h1 initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.4, ease: EASE_OUT }} style={{ fontFamily: "var(--font-display)", fontSize: "clamp(56px, 14vw, 160px)", fontWeight: 600, lineHeight: 0.9, letterSpacing: "-0.04em", margin: 0, color: TEXT }}>The Room.</motion.h1>
         
-        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 0.8 }} style={{ fontSize: "clamp(17px, 2.2vw, 21px)", fontWeight: 400, color: TEXT_DIM, maxWidth: 500, marginTop: 24, lineHeight: 1.6 }}>Host your boardroom. Curate your guests.<br />Shape the conversation that matters.</motion.p>
+        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 0.8 }} style={{ fontSize: "clamp(17px, 2.2vw, 21px)", fontWeight: 400, color: TEXT_50, maxWidth: 500, marginTop: 24, lineHeight: 1.6 }}>Host your boardroom. Curate your guests.<br />Shape the conversation that matters.</motion.p>
 
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 1.1 }} style={{ display: "flex", gap: 16, marginTop: 40 }}>
-          <Link href="/contact" style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "16px 32px", background: TEXT, color: BG, borderRadius: 980, fontSize: 15, fontWeight: 500, textDecoration: "none", transition: "all 0.3s" }}>
+          <Link href="/contact" style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "16px 32px", background: GOLD, color: BG, borderRadius: 980, fontSize: 15, fontWeight: 500, textDecoration: "none" }}>
             Host a Boardroom
           </Link>
-          <Link href="/contact" style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "16px 32px", background: "rgba(255,255,255,0.1)", color: TEXT, borderRadius: 980, fontSize: 15, fontWeight: 500, textDecoration: "none", backdropFilter: "blur(10px)", transition: "all 0.3s" }}>
+          <Link href="/contact" style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "16px 32px", background: "transparent", color: TEXT, border: `1px solid ${TEXT_30}`, borderRadius: 980, fontSize: 15, fontWeight: 500, textDecoration: "none" }}>
             Learn More
           </Link>
         </motion.div>
@@ -222,14 +206,14 @@ function Hero() {
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 1.4 }} style={{ display: "flex", gap: 56, marginTop: 64 }} className="hero-stats">
           {[{ v: "100+", l: "Boardrooms" }, { v: "1,500+", l: "Executives" }, { v: "80+", l: "Sponsors" }].map((s) => (
             <div key={s.l} style={{ textAlign: "center" }}>
-              <p style={{ fontFamily: "var(--font-display)", fontSize: 28, fontWeight: 600, color: TEXT, margin: 0, letterSpacing: "-0.02em" }}>{s.v}</p>
-              <p style={{ fontSize: 11, color: TEXT_MUTED, letterSpacing: "0.1em", textTransform: "uppercase", marginTop: 4 }}>{s.l}</p>
+              <p style={{ fontFamily: "var(--font-display)", fontSize: 28, fontWeight: 600, color: GOLD, margin: 0, letterSpacing: "-0.02em" }}>{s.v}</p>
+              <p style={{ fontSize: 11, color: TEXT_50, letterSpacing: "0.1em", textTransform: "uppercase", marginTop: 4 }}>{s.l}</p>
             </div>
           ))}
         </motion.div>
 
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 0.3 }} transition={{ duration: 1, delay: 1.8 }} style={{ position: "absolute", bottom: 40 }}>
-          <motion.div animate={{ y: [0, 6, 0] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }} style={{ width: 1, height: 40, background: `linear-gradient(to bottom, ${TEXT_DIM}, transparent)` }} />
+          <motion.div animate={{ y: [0, 6, 0] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }} style={{ width: 1, height: 40, background: `linear-gradient(to bottom, ${GOLD}, transparent)` }} />
         </motion.div>
       </motion.div>
       <style jsx global>{`@media (max-width: 640px) { .hero-stats { flex-direction: column !important; gap: 24px !important; } }`}</style>
@@ -238,20 +222,18 @@ function Hero() {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// TRUST STRIP
+// TRUST STRIP — Animated Marquee with Larger Logos
 // ═══════════════════════════════════════════════════════════════════════════════
 
 function TrustStrip() {
   return (
-    <section style={{ padding: "28px 24px", background: BG_ALT, borderBottom: `1px solid ${BORDER}` }}>
-      <div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "center", gap: 48, flexWrap: "wrap" }}>
-        <p style={{ fontSize: 11, color: TEXT_MUTED, letterSpacing: "0.15em", textTransform: "uppercase" }}>Trusted by</p>
-        <div style={{ display: "flex", gap: 36, alignItems: "center", flexWrap: "wrap", justifyContent: "center" }}>
-          {["Google-Cloud-Security.png", "paloalto.png", "OutSystems.png", "Confluent.png", "Freshworks.png"].map((logo) => (
-            <img key={logo} src={`${S3_LOGOS}/${logo}`} alt="" style={{ height: 18, width: "auto", filter: "brightness(0) invert(1)", opacity: 0.4 }} />
-          ))}
-        </div>
-      </div>
+    <section style={{ padding: "40px 0", background: BG_ALT, borderTop: `1px solid ${BORDER}`, borderBottom: `1px solid ${BORDER}`, overflow: "hidden" }}>
+      <p style={{ fontSize: 11, color: GOLD, letterSpacing: "0.2em", textTransform: "uppercase", textAlign: "center", marginBottom: 24 }}>Trusted By</p>
+      <motion.div animate={{ x: ["0%", "-50%"] }} transition={{ duration: 30, repeat: Infinity, ease: "linear" }} style={{ display: "flex", gap: 64, alignItems: "center" }}>
+        {[...TRUST_LOGOS, ...TRUST_LOGOS].map((logo, i) => (
+          <img key={i} src={`${S3_LOGOS}/${logo}`} alt="" style={{ height: 32, width: "auto", filter: "brightness(0) invert(1)", opacity: 0.7, flexShrink: 0 }} />
+        ))}
+      </motion.div>
     </section>
   );
 }
@@ -268,7 +250,7 @@ function IntroStatement() {
     <section ref={ref} style={{ padding: "clamp(120px, 18vw, 200px) 24px", maxWidth: 900, margin: "0 auto", textAlign: "center" }}>
       <motion.p initial={{ opacity: 0, y: 40 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: EASE_OUT }} style={{ fontFamily: "var(--font-display)", fontSize: "clamp(28px, 5vw, 48px)", fontWeight: 500, lineHeight: 1.3, letterSpacing: "-0.02em", color: TEXT }}>
         Your brand. Your agenda.<br />
-        <span style={{ color: TEXT_DIM }}>The region&apos;s most senior executives</span>{" "}
+        <span style={{ color: TEXT_50 }}>The region&apos;s most senior executives</span>{" "}
         <span style={{ color: GOLD }}>in one room.</span>
       </motion.p>
     </section>
@@ -276,7 +258,7 @@ function IntroStatement() {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// THE FORMAT — Clean, no emoji
+// THE FORMAT
 // ═══════════════════════════════════════════════════════════════════════════════
 
 function TheFormat() {
@@ -291,14 +273,14 @@ function TheFormat() {
   return (
     <section ref={ref} style={{ padding: "clamp(80px, 10vw, 120px) 24px", maxWidth: 1200, margin: "0 auto" }}>
       <motion.div variants={fadeUp} initial="hidden" animate={inView ? "visible" : "hidden"} style={{ textAlign: "center", marginBottom: 64 }}>
-        <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(36px, 6vw, 52px)", fontWeight: 600, lineHeight: 1.1, letterSpacing: "-0.03em", margin: 0 }}>How it works.</h2>
+        <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(36px, 6vw, 52px)", fontWeight: 600, lineHeight: 1.1, letterSpacing: "-0.03em", margin: 0, color: TEXT }}>How it works.</h2>
       </motion.div>
       <motion.div variants={staggerContainer} initial="hidden" animate={inView ? "visible" : "hidden"} style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 2 }} className="format-grid">
         {pillars.map((p, i) => (
-          <motion.div key={p.num} variants={fadeUp} custom={i} style={{ padding: "48px 40px", background: BG_CARD, position: "relative" }} className="format-card">
-            <span style={{ fontFamily: "var(--font-display)", fontSize: 64, fontWeight: 600, color: GOLD_DIM, position: "absolute", top: 32, right: 40, lineHeight: 1 }}>{p.num}</span>
+          <motion.div key={p.num} variants={fadeUp} custom={i} style={{ padding: "48px 40px", background: BG_ALT, border: `1px solid ${BORDER}`, position: "relative" }} className="format-card">
+            <span style={{ fontFamily: "var(--font-display)", fontSize: 64, fontWeight: 600, color: GOLD_15, position: "absolute", top: 24, right: 32, lineHeight: 1 }}>{p.num}</span>
             <h3 style={{ fontFamily: "var(--font-display)", fontSize: 24, fontWeight: 600, color: TEXT, margin: "0 0 16px", position: "relative" }}>{p.title}</h3>
-            <p style={{ fontSize: 15, fontWeight: 400, color: TEXT_DIM, lineHeight: 1.7, margin: 0, position: "relative" }}>{p.desc}</p>
+            <p style={{ fontSize: 15, fontWeight: 400, color: TEXT_50, lineHeight: 1.7, margin: 0, position: "relative" }}>{p.desc}</p>
           </motion.div>
         ))}
       </motion.div>
@@ -319,9 +301,9 @@ function CandidMoments() {
     <section ref={ref} style={{ padding: "clamp(40px, 6vw, 60px) 0", overflow: "hidden" }}>
       <motion.div initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 1.2 }}>
         <motion.div animate={{ x: ["0%", "-50%"] }} transition={{ duration: 45, repeat: Infinity, ease: "linear" }} style={{ display: "flex", gap: 12 }}>
-          {[...CANDID_MOMENTS, ...CANDID_MOMENTS].map((img, i) => (
+          {[...CANDID_MOMENTS, ...CANDID_MOMENTS].map((src, i) => (
             <div key={i} style={{ flex: "0 0 320px", aspectRatio: "3/2", borderRadius: 12, overflow: "hidden" }}>
-              <img src={img.src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", filter: "brightness(0.85)" }} />
+              <img src={src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", filter: "brightness(0.85)" }} />
             </div>
           ))}
         </motion.div>
@@ -331,7 +313,7 @@ function CandidMoments() {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// WHY HOST — Value proposition (no emoji)
+// WHY HOST
 // ═══════════════════════════════════════════════════════════════════════════════
 
 function WhyHost() {
@@ -348,13 +330,13 @@ function WhyHost() {
     <section ref={ref} style={{ padding: "clamp(100px, 12vw, 140px) 24px", background: BG_ALT }}>
       <div style={{ maxWidth: 1000, margin: "0 auto" }}>
         <motion.div variants={fadeUp} initial="hidden" animate={inView ? "visible" : "hidden"} style={{ textAlign: "center", marginBottom: 64 }}>
-          <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(32px, 5vw, 44px)", fontWeight: 600, margin: 0, letterSpacing: "-0.02em" }}>Why host with us.</h2>
+          <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(32px, 5vw, 44px)", fontWeight: 600, margin: 0, letterSpacing: "-0.02em", color: TEXT }}>Why host with us.</h2>
         </motion.div>
         <motion.div variants={staggerContainer} initial="hidden" animate={inView ? "visible" : "hidden"} style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "48px 64px" }} className="benefits-grid">
           {benefits.map((b, i) => (
             <motion.div key={b.title} variants={fadeUp} custom={i} style={{ borderLeft: `2px solid ${GOLD}`, paddingLeft: 24 }}>
               <h3 style={{ fontSize: 20, fontWeight: 600, color: TEXT, marginBottom: 8 }}>{b.title}</h3>
-              <p style={{ fontSize: 15, color: TEXT_DIM, lineHeight: 1.6, margin: 0 }}>{b.desc}</p>
+              <p style={{ fontSize: 15, color: TEXT_50, lineHeight: 1.6, margin: 0 }}>{b.desc}</p>
             </motion.div>
           ))}
         </motion.div>
@@ -368,7 +350,7 @@ function WhyHost() {
 // EDITORIAL BREAK
 // ═══════════════════════════════════════════════════════════════════════════════
 
-function EditorialBreak({ src, caption }: { src: string; caption: string }) {
+function EditorialBreak({ src }: { src: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
@@ -376,15 +358,14 @@ function EditorialBreak({ src, caption }: { src: string; caption: string }) {
 
   return (
     <motion.div ref={ref} initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 1.2 }} style={{ position: "relative", width: "100%", height: "60vh", minHeight: 360, maxHeight: 600, overflow: "hidden" }}>
-      <motion.img src={src} alt="" style={{ width: "100%", height: "130%", objectFit: "cover", filter: "brightness(0.55)", y }} />
+      <motion.img src={src} alt="" style={{ width: "100%", height: "130%", objectFit: "cover", filter: "brightness(0.5)", y }} />
       <div style={{ position: "absolute", inset: 0, background: `linear-gradient(to bottom, ${BG} 0%, transparent 15%, transparent 80%, ${BG} 100%)` }} />
-      <motion.p initial={{ opacity: 0 }} animate={inView ? { opacity: 0.5 } : {}} transition={{ duration: 0.8, delay: 0.4 }} style={{ position: "absolute", bottom: 28, left: 28, fontSize: 12, color: TEXT, letterSpacing: "0.05em" }}>{caption}</motion.p>
     </motion.div>
   );
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// THE EXPERIENCE — No emoji
+// THE EXPERIENCE
 // ═══════════════════════════════════════════════════════════════════════════════
 
 function TheExperience() {
@@ -402,17 +383,17 @@ function TheExperience() {
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         <div className="exp-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(48px, 8vw, 80px)", alignItems: "center" }}>
           <motion.div initial={{ opacity: 0, x: -40 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.8, ease: EASE_OUT }} className="exp-images">
-            <div style={{ borderRadius: 16, overflow: "hidden", aspectRatio: "4/5" }}>
+            <div style={{ borderRadius: 16, overflow: "hidden", aspectRatio: "4/5", border: `1px solid ${BORDER}` }}>
               <img src={`${BOARDROOM}/boardroom-30.jpg`} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
             </div>
           </motion.div>
           <motion.div initial={{ opacity: 0, x: 40 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.8, delay: 0.2, ease: EASE_OUT }}>
-            <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(32px, 5vw, 44px)", fontWeight: 600, lineHeight: 1.15, margin: "0 0 48px", letterSpacing: "-0.02em" }}>What you get.</h2>
+            <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(32px, 5vw, 44px)", fontWeight: 600, lineHeight: 1.15, margin: "0 0 48px", letterSpacing: "-0.02em", color: TEXT }}>What you get.</h2>
             <div style={{ display: "grid", gap: 32 }}>
               {features.map((f, i) => (
                 <motion.div key={f.title} initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: 0.3 + i * 0.1 }}>
-                  <h4 style={{ fontSize: 17, fontWeight: 600, color: TEXT, margin: "0 0 6px" }}>{f.title}</h4>
-                  <p style={{ fontSize: 15, fontWeight: 400, color: TEXT_DIM, lineHeight: 1.6, margin: 0 }}>{f.desc}</p>
+                  <h4 style={{ fontSize: 17, fontWeight: 600, color: GOLD, margin: "0 0 6px" }}>{f.title}</h4>
+                  <p style={{ fontSize: 15, fontWeight: 400, color: TEXT_50, lineHeight: 1.6, margin: 0 }}>{f.desc}</p>
                 </motion.div>
               ))}
             </div>
@@ -448,12 +429,12 @@ function UpcomingSection() {
     <section ref={ref} style={{ padding: "clamp(100px, 12vw, 140px) 0", background: BG_ALT }}>
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
         <motion.div variants={fadeUp} initial="hidden" animate={inView ? "visible" : "hidden"} style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 48, flexWrap: "wrap", gap: 24 }}>
-          <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(32px, 5vw, 44px)", fontWeight: 600, margin: 0, letterSpacing: "-0.02em" }}>Upcoming sessions.</h2>
+          <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(32px, 5vw, 44px)", fontWeight: 600, margin: 0, letterSpacing: "-0.02em", color: TEXT }}>Upcoming sessions.</h2>
           <div style={{ display: "flex", gap: 8 }}>
-            <button onClick={() => scroll("left")} disabled={activeIndex === 0} style={{ width: 44, height: 44, borderRadius: "50%", border: `1px solid ${activeIndex === 0 ? BORDER : TEXT_DIM}`, background: "transparent", color: activeIndex === 0 ? TEXT_MUTED : TEXT, cursor: activeIndex === 0 ? "not-allowed" : "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <button onClick={() => scroll("left")} disabled={activeIndex === 0} style={{ width: 44, height: 44, borderRadius: "50%", border: `1px solid ${activeIndex === 0 ? TEXT_30 : GOLD}`, background: "transparent", color: activeIndex === 0 ? TEXT_30 : GOLD, cursor: activeIndex === 0 ? "not-allowed" : "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M19 12H5M12 19l-7-7 7-7" /></svg>
             </button>
-            <button onClick={() => scroll("right")} disabled={activeIndex === UPCOMING_EVENTS.length - 1} style={{ width: 44, height: 44, borderRadius: "50%", border: `1px solid ${activeIndex === UPCOMING_EVENTS.length - 1 ? BORDER : TEXT_DIM}`, background: "transparent", color: activeIndex === UPCOMING_EVENTS.length - 1 ? TEXT_MUTED : TEXT, cursor: activeIndex === UPCOMING_EVENTS.length - 1 ? "not-allowed" : "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <button onClick={() => scroll("right")} disabled={activeIndex === UPCOMING_EVENTS.length - 1} style={{ width: 44, height: 44, borderRadius: "50%", border: `1px solid ${activeIndex === UPCOMING_EVENTS.length - 1 ? TEXT_30 : GOLD}`, background: "transparent", color: activeIndex === UPCOMING_EVENTS.length - 1 ? TEXT_30 : GOLD, cursor: activeIndex === UPCOMING_EVENTS.length - 1 ? "not-allowed" : "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
             </button>
           </div>
@@ -462,16 +443,16 @@ function UpcomingSection() {
 
       <div ref={sliderRef} className="upcoming-slider" style={{ display: "flex", gap: 16, overflowX: "auto", scrollSnapType: "x mandatory", scrollbarWidth: "none", paddingLeft: "max(24px, calc((100vw - 1152px) / 2))", paddingRight: 24 }}>
         {UPCOMING_EVENTS.map((e, i) => (
-          <motion.a key={e.title} href={e.link} target="_blank" rel="noopener noreferrer" initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: i * 0.1 }} className="upcoming-card" style={{ flex: "0 0 min(380px, 85vw)", scrollSnapAlign: "start", display: "block", borderRadius: 16, overflow: "hidden", background: BG_CARD, textDecoration: "none" }}>
+          <motion.a key={e.title} href={e.link} target="_blank" rel="noopener noreferrer" initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: i * 0.1 }} className="upcoming-card" style={{ flex: "0 0 min(380px, 85vw)", scrollSnapAlign: "start", display: "block", borderRadius: 16, overflow: "hidden", background: BG, border: `1px solid ${BORDER}`, textDecoration: "none" }}>
             <div style={{ position: "relative", aspectRatio: "16/10", overflow: "hidden" }}>
               <img src={e.image} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-              <div style={{ position: "absolute", top: 12, left: 12, padding: "6px 12px", borderRadius: 6, background: e.color, fontSize: 11, fontWeight: 600, color: "#fff" }}>{e.sponsor}</div>
+              <div style={{ position: "absolute", top: 12, left: 12, padding: "6px 12px", borderRadius: 6, background: GOLD, fontSize: 11, fontWeight: 600, color: BG }}>{e.sponsor}</div>
             </div>
             <div style={{ padding: 24 }}>
-              <p style={{ fontSize: 12, fontWeight: 500, color: e.color, marginBottom: 8 }}>{e.date}</p>
+              <p style={{ fontSize: 12, fontWeight: 500, color: GOLD, marginBottom: 8 }}>{e.date}</p>
               <h3 style={{ fontSize: 20, fontWeight: 600, color: TEXT, margin: "0 0 4px", lineHeight: 1.2 }}>{e.title}</h3>
-              <p style={{ fontSize: 13, color: TEXT_DIM, margin: "0 0 12px" }}>{e.subtitle}</p>
-              <p style={{ fontSize: 12, color: TEXT_MUTED, margin: 0 }}>{e.location}</p>
+              <p style={{ fontSize: 13, color: TEXT_50, margin: "0 0 12px" }}>{e.subtitle}</p>
+              <p style={{ fontSize: 12, color: TEXT_30, margin: 0 }}>{e.location}</p>
             </div>
           </motion.a>
         ))}
@@ -487,10 +468,10 @@ function UpcomingSection() {
 
 function UrgencyBanner() {
   return (
-    <section style={{ padding: "48px 24px", background: BG_CARD }}>
+    <section style={{ padding: "56px 24px", background: BG, borderTop: `1px solid ${BORDER}`, borderBottom: `1px solid ${BORDER}` }}>
       <div style={{ maxWidth: 700, margin: "0 auto", textAlign: "center" }}>
-        <p style={{ fontSize: "clamp(18px, 3vw, 22px)", color: TEXT, fontWeight: 500, margin: "0 0 20px", lineHeight: 1.4 }}>Limited sponsorship slots available for Q2 2026.</p>
-        <Link href="/contact" style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "14px 28px", background: TEXT, color: BG, borderRadius: 980, fontSize: 14, fontWeight: 500, textDecoration: "none" }}>
+        <p style={{ fontSize: "clamp(18px, 3vw, 22px)", color: TEXT, fontWeight: 500, margin: "0 0 24px", lineHeight: 1.4 }}>Limited sponsorship slots available for Q2 2026.</p>
+        <Link href="/contact" style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "16px 32px", background: GOLD, color: BG, borderRadius: 980, fontSize: 15, fontWeight: 500, textDecoration: "none" }}>
           Reserve Your Session
         </Link>
       </div>
@@ -512,10 +493,10 @@ function PastBoardroomsShowcase() {
     <section ref={ref} style={{ padding: "clamp(100px, 12vw, 140px) 24px" }}>
       <div style={{ maxWidth: 1400, margin: "0 auto" }}>
         <motion.div variants={fadeUp} initial="hidden" animate={inView ? "visible" : "hidden"} style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: 24, marginBottom: 48 }}>
-          <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(32px, 5vw, 44px)", fontWeight: 600, margin: 0, letterSpacing: "-0.02em" }}>100+ sessions delivered.</h2>
+          <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(32px, 5vw, 44px)", fontWeight: 600, margin: 0, letterSpacing: "-0.02em", color: TEXT }}>100+ sessions delivered.</h2>
           <div style={{ display: "flex", gap: 4 }}>
             {(["2025", "2024"] as const).map((year) => (
-              <button key={year} onClick={() => setActiveYear(year)} style={{ padding: "10px 20px", borderRadius: 980, border: "none", background: activeYear === year ? TEXT : "transparent", color: activeYear === year ? BG : TEXT_DIM, fontSize: 14, fontWeight: 500, cursor: "pointer", transition: "all 0.3s" }}>{year}</button>
+              <button key={year} onClick={() => setActiveYear(year)} style={{ padding: "10px 20px", borderRadius: 980, border: "none", background: activeYear === year ? GOLD : "transparent", color: activeYear === year ? BG : TEXT_50, fontSize: 14, fontWeight: 500, cursor: "pointer" }}>{year}</button>
             ))}
           </div>
         </motion.div>
@@ -523,11 +504,11 @@ function PastBoardroomsShowcase() {
         <AnimatePresence mode="wait">
           <motion.div key={activeYear} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} transition={{ duration: 0.3 }} className="past-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 12 }}>
             {events.slice(0, 12).map((e, i) => (
-              <motion.div key={e.sponsor + i} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3, delay: i * 0.02 }} className="past-card" style={{ position: "relative", aspectRatio: "4/3", borderRadius: 12, overflow: "hidden", background: BG_CARD }}>
+              <motion.div key={e.sponsor + i} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3, delay: i * 0.02 }} className="past-card" style={{ position: "relative", aspectRatio: "4/3", borderRadius: 12, overflow: "hidden", border: `1px solid ${BORDER}` }}>
                 <img src={e.image} alt={e.sponsor} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                 <div style={{ position: "absolute", inset: 0, background: `linear-gradient(to top, ${BG}ee 0%, ${BG}60 30%, transparent 50%)` }} />
                 <div style={{ position: "absolute", bottom: 14, left: 14, right: 14 }}>
-                  <p style={{ fontSize: 10, color: TEXT_MUTED, marginBottom: 2 }}>{e.date} {activeYear}</p>
+                  <p style={{ fontSize: 10, color: GOLD, marginBottom: 2 }}>{e.date} {activeYear}</p>
                   <p style={{ fontSize: 13, fontWeight: 600, color: TEXT, margin: 0, lineHeight: 1.2 }}>{e.sponsor}</p>
                 </div>
               </motion.div>
@@ -554,8 +535,8 @@ function ByTheNumbers() {
         <motion.div variants={staggerContainer} initial="hidden" animate={inView ? "visible" : "hidden"} className="stats-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 24, textAlign: "center" }}>
           {STATS.map((s, i) => (
             <motion.div key={s.label} variants={fadeUp} custom={i}>
-              <p style={{ fontFamily: "var(--font-display)", fontSize: "clamp(40px, 8vw, 56px)", fontWeight: 600, color: TEXT, margin: 0, letterSpacing: "-0.03em" }}>{s.value}</p>
-              <p style={{ fontSize: 13, fontWeight: 500, color: TEXT_DIM, marginTop: 4 }}>{s.label}</p>
+              <p style={{ fontFamily: "var(--font-display)", fontSize: "clamp(40px, 8vw, 56px)", fontWeight: 600, color: GOLD, margin: 0, letterSpacing: "-0.03em" }}>{s.value}</p>
+              <p style={{ fontSize: 13, fontWeight: 500, color: TEXT_50, marginTop: 4 }}>{s.label}</p>
             </motion.div>
           ))}
         </motion.div>
@@ -577,13 +558,13 @@ function VideoTestimonials() {
   return (
     <section ref={ref} style={{ padding: "clamp(80px, 10vw, 120px) 24px" }}>
       <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-        <motion.h2 variants={fadeUp} initial="hidden" animate={inView ? "visible" : "hidden"} style={{ fontFamily: "var(--font-display)", fontSize: "clamp(28px, 4vw, 36px)", fontWeight: 600, margin: "0 0 48px", textAlign: "center", letterSpacing: "-0.02em" }}>Hear from our sponsors.</motion.h2>
+        <motion.h2 variants={fadeUp} initial="hidden" animate={inView ? "visible" : "hidden"} style={{ fontFamily: "var(--font-display)", fontSize: "clamp(28px, 4vw, 36px)", fontWeight: 600, margin: "0 0 48px", textAlign: "center", letterSpacing: "-0.02em", color: TEXT }}>Hear from our sponsors.</motion.h2>
         <motion.div variants={staggerContainer} initial="hidden" animate={inView ? "visible" : "hidden"} style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 12 }} className="videos-grid">
           {videos.map((v, i) => (
-            <motion.a key={v.id} href={`https://youtube.com/shorts/${v.id}`} target="_blank" rel="noopener noreferrer" variants={scaleIn} custom={i} style={{ position: "relative", aspectRatio: "9/16", borderRadius: 12, overflow: "hidden", background: BG_CARD }}>
+            <motion.a key={v.id} href={`https://youtube.com/shorts/${v.id}`} target="_blank" rel="noopener noreferrer" variants={fadeUp} custom={i} style={{ position: "relative", aspectRatio: "9/16", borderRadius: 12, overflow: "hidden", border: `1px solid ${BORDER}` }}>
               <img src={`https://img.youtube.com/vi/${v.id}/maxresdefault.jpg`} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", filter: "brightness(0.7)" }} />
               <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <div style={{ width: 48, height: 48, borderRadius: "50%", background: "rgba(255,255,255,0.95)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <div style={{ width: 48, height: 48, borderRadius: "50%", background: GOLD, display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <svg width="18" height="18" viewBox="0 0 24 24" fill={BG}><polygon points="6 3 20 12 6 21" /></svg>
                 </div>
               </div>
@@ -618,38 +599,16 @@ function TestimonialCarousel() {
             <AnimatePresence mode="wait">
               <motion.div key={active} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} transition={{ duration: 0.4 }}>
                 <p style={{ fontFamily: "var(--font-display)", fontSize: "clamp(22px, 3.5vw, 28px)", fontWeight: 400, lineHeight: 1.4, color: TEXT, margin: "0 0 32px" }}>&ldquo;{TESTIMONIALS[active].quote}&rdquo;</p>
-                <p style={{ fontSize: 15, fontWeight: 600, color: TEXT }}>{TESTIMONIALS[active].name}</p>
-                <p style={{ fontSize: 13, color: TEXT_DIM }}>{TESTIMONIALS[active].title}, {TESTIMONIALS[active].company}</p>
+                <p style={{ fontSize: 15, fontWeight: 600, color: GOLD }}>{TESTIMONIALS[active].name}</p>
+                <p style={{ fontSize: 13, color: TEXT_50 }}>{TESTIMONIALS[active].title}, {TESTIMONIALS[active].company}</p>
               </motion.div>
             </AnimatePresence>
           </div>
           <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 32 }}>
             {TESTIMONIALS.map((_, i) => (
-              <button key={i} onClick={() => setActive(i)} style={{ width: active === i ? 24 : 8, height: 8, borderRadius: 4, border: "none", background: active === i ? TEXT : TEXT_MUTED, cursor: "pointer", transition: "all 0.3s" }} />
+              <button key={i} onClick={() => setActive(i)} style={{ width: active === i ? 24 : 8, height: 8, borderRadius: 4, border: "none", background: active === i ? GOLD : TEXT_30, cursor: "pointer", transition: "all 0.3s" }} />
             ))}
           </div>
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-
-// ═══════════════════════════════════════════════════════════════════════════════
-// SPONSOR LOGOS
-// ═══════════════════════════════════════════════════════════════════════════════
-
-function SponsorLogos() {
-  const ref = useRef<HTMLElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-50px" });
-
-  return (
-    <section ref={ref} style={{ padding: "clamp(80px, 10vw, 100px) 24px" }}>
-      <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-        <motion.p initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} style={{ fontSize: 12, color: TEXT_MUTED, textAlign: "center", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 32 }}>Sponsors who&apos;ve hosted with us</motion.p>
-        <motion.div initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 1, delay: 0.2 }} style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", alignItems: "center", gap: "20px 36px" }}>
-          {SPONSOR_LOGOS.map((logo) => (
-            <img key={logo} src={`${S3_LOGOS}/${logo}`} alt="" style={{ height: 22, width: "auto", filter: "brightness(0) invert(1)", opacity: 0.35 }} />
-          ))}
         </motion.div>
       </div>
     </section>
@@ -665,12 +624,12 @@ function TitlesMarquee() {
   const inView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <section ref={ref} style={{ padding: "clamp(60px, 8vw, 80px) 0", background: BG_ALT, overflow: "hidden" }}>
+    <section ref={ref} style={{ padding: "clamp(60px, 8vw, 80px) 0", overflow: "hidden" }}>
       <motion.div initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}>
-        <p style={{ fontSize: 11, color: TEXT_MUTED, letterSpacing: "0.15em", textTransform: "uppercase", textAlign: "center", marginBottom: 24 }}>Who attends</p>
+        <p style={{ fontSize: 11, color: GOLD, letterSpacing: "0.2em", textTransform: "uppercase", textAlign: "center", marginBottom: 24 }}>Who attends</p>
         <motion.div animate={{ x: ["0%", "-50%"] }} transition={{ duration: 35, repeat: Infinity, ease: "linear" }} style={{ display: "flex", gap: 48 }}>
           {[...TITLES, ...TITLES, ...TITLES, ...TITLES].map((t, i) => (
-            <span key={i} style={{ fontFamily: "var(--font-display)", fontSize: "clamp(24px, 4vw, 36px)", fontWeight: 500, color: TEXT_MUTED, whiteSpace: "nowrap" }}>{t}</span>
+            <span key={i} style={{ fontFamily: "var(--font-display)", fontSize: "clamp(24px, 4vw, 36px)", fontWeight: 500, color: TEXT_30, whiteSpace: "nowrap" }}>{t}</span>
           ))}
         </motion.div>
       </motion.div>
@@ -689,12 +648,12 @@ function FinalCTA() {
   return (
     <section ref={ref} style={{ padding: "clamp(140px, 18vw, 220px) 24px", position: "relative" }}>
       <motion.div initial={{ opacity: 0, y: 40 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, ease: EASE_OUT }} style={{ textAlign: "center", maxWidth: 600, margin: "0 auto" }}>
-        <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(40px, 8vw, 64px)", fontWeight: 600, lineHeight: 1.05, letterSpacing: "-0.03em", margin: "0 0 20px" }}>Ready to host<br />your boardroom?</h2>
-        <p style={{ fontSize: 17, fontWeight: 400, color: TEXT_DIM, lineHeight: 1.6, margin: "0 0 36px" }}>Limited sessions available per quarter.<br />Let&apos;s discuss your objectives.</p>
-        <Link href="/contact" style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "18px 40px", background: TEXT, color: BG, borderRadius: 980, fontSize: 16, fontWeight: 500, textDecoration: "none" }}>
+        <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(40px, 8vw, 64px)", fontWeight: 600, lineHeight: 1.05, letterSpacing: "-0.03em", margin: "0 0 20px", color: TEXT }}>Ready to host<br /><span style={{ color: GOLD }}>your boardroom?</span></h2>
+        <p style={{ fontSize: 17, fontWeight: 400, color: TEXT_50, lineHeight: 1.6, margin: "0 0 36px" }}>Limited sessions available per quarter.<br />Let&apos;s discuss your objectives.</p>
+        <Link href="/contact" style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "18px 40px", background: GOLD, color: BG, borderRadius: 980, fontSize: 16, fontWeight: 500, textDecoration: "none" }}>
           Get Started
         </Link>
-        <p style={{ fontSize: 13, color: TEXT_MUTED, marginTop: 24 }}>Or email <a href="mailto:hello@networkfirstme.com" style={{ color: TEXT_DIM, textDecoration: "underline" }}>hello@networkfirstme.com</a></p>
+        <p style={{ fontSize: 13, color: TEXT_30, marginTop: 24 }}>Or email <a href="mailto:hello@networkfirstme.com" style={{ color: GOLD, textDecoration: "none" }}>hello@networkfirstme.com</a></p>
       </motion.div>
     </section>
   );
