@@ -3,8 +3,8 @@
 import { useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import { COLORS, TYPOGRAPHY, ANIMATION, RADIUS, SHADOWS } from "@/lib/cyber-design-tokens";
 
-const CYBER_BLUE = "#01BBF5";
 const EVENT_DATE = new Date("2026-04-21T09:00:00");
 
 export default function MidPageCTA() {
@@ -23,11 +23,11 @@ export default function MidPageCTA() {
       ref={ref}
       initial={{ opacity: 0 }}
       animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.6, ease: ANIMATION.ease }}
       style={{
-        background: `rgba(1, 187, 245, 0.03)`,
-        borderTop: `1px solid rgba(1, 187, 245, 0.08)`,
-        borderBottom: `1px solid rgba(1, 187, 245, 0.08)`,
+        background: COLORS.cyanSubtle,
+        borderTop: `1px solid ${COLORS.borderAccent}`,
+        borderBottom: `1px solid ${COLORS.borderAccent}`,
         padding: "20px 0",
       }}
     >
@@ -50,32 +50,32 @@ export default function MidPageCTA() {
               width: 8,
               height: 8,
               borderRadius: "50%",
-              background: CYBER_BLUE,
+              background: COLORS.cyan,
               display: "inline-block",
               animation: "pulse 2s ease-in-out infinite",
             }}
           />
           <span
             style={{
-              fontFamily: "var(--font-outfit)",
+              fontFamily: TYPOGRAPHY.fontBody,
               fontSize: 14,
               fontWeight: 500,
-              color: "var(--white)",
+              color: COLORS.textPrimary,
             }}
           >
             Cyber First Kuwait
-            <span style={{ color: "#505050", margin: "0 8px" }}>|</span>
-            <span style={{ color: "#707070" }}>April 21, 2026</span>
+            <span style={{ color: COLORS.textMuted, margin: "0 8px" }}>|</span>
+            <span style={{ color: COLORS.textTertiary }}>April 21, 2026</span>
           </span>
         </div>
 
         {/* Center — Countdown */}
         <span
           style={{
-            fontFamily: "var(--font-display)",
+            fontFamily: TYPOGRAPHY.fontDisplay,
             fontSize: 14,
             fontWeight: 700,
-            color: CYBER_BLUE,
+            color: COLORS.cyan,
             letterSpacing: "1px",
           }}
         >
@@ -87,20 +87,23 @@ export default function MidPageCTA() {
           href="#register"
           style={{
             padding: "10px 24px",
-            borderRadius: 50,
-            background: CYBER_BLUE,
-            color: "#0A0A0A",
-            fontFamily: "var(--font-outfit)",
+            borderRadius: RADIUS.round,
+            background: COLORS.cyan,
+            color: COLORS.bgDeep,
+            fontFamily: TYPOGRAPHY.fontBody,
             fontSize: 13,
             fontWeight: 600,
             textDecoration: "none",
-            transition: "background 0.3s",
+            transition: "all 0.3s",
+            boxShadow: SHADOWS.cyanGlow,
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.background = "#33CCFF";
+            e.currentTarget.style.background = COLORS.cyanBright;
+            e.currentTarget.style.transform = "translateY(-1px)";
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.background = CYBER_BLUE;
+            e.currentTarget.style.background = COLORS.cyan;
+            e.currentTarget.style.transform = "translateY(0)";
           }}
         >
           Register Now

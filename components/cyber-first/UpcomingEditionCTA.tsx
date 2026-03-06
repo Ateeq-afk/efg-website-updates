@@ -5,9 +5,10 @@ import { motion, useInView, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { submitForm } from "@/lib/form-helpers";
 import type { FormType } from "@/lib/form-helpers";
+import { COLORS, TYPOGRAPHY, ANIMATION, RADIUS, SHADOWS, SPACING } from "@/lib/cyber-design-tokens";
 
-const CYBER_BLUE = "#01BBF5";
-const EASE = [0.16, 1, 0.3, 1] as const;
+const CYBER_BLUE = COLORS.cyan;
+const EASE = ANIMATION.ease;
 
 // Next edition data
 const nextEdition = {
