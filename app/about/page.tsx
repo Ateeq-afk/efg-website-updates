@@ -66,7 +66,7 @@ const teamMembers: Member[] = [
   { name: "Yasir", role: "Chief Growth Officer", initials: "Y", photo: `${S3}/yasir.jpeg?v=2` },
   { name: "Shyam", role: "Chief Growth Officer", initials: "S", photo: `${S3}/shyam.jpg?v=2` },
   // Partnership
-  { name: "Mohammed Hassan", role: "Partnership Manager", initials: "MH" },
+  { name: "Mohammed Hassan", role: "Partnership Manager", initials: "MH", photo: `${S3}/hassan.jpg` },
   { name: "Mohammed Sahil", role: "Partnership Manager", initials: "MS", photo: `${S3}/sahil.jpeg` },
   { name: "Mohammed Danish", role: "Partnership Manager", initials: "MD", photo: "/team/danish.jpg" },
   { name: "Mayur Methi", role: "Partnership Manager", initials: "MM", photo: `${S3}/Mayur-Methi.png` },
