@@ -489,7 +489,7 @@ function HeroSection() {
       <div className="absolute inset-0">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="https://cyberfirstseries.com/wp-content/uploads/2024/12/Cyber-First-Series-Pictures-and-Sponsors-30.jpg"
+          src="https://efg-final.s3.eu-north-1.amazonaws.com/cyber-first-kenya/hero-keynote.jpg"
           alt=""
           className="w-full h-full object-cover"
           style={{ filter: "brightness(0.55) saturate(0.85)" }}
