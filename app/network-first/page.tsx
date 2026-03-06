@@ -91,14 +91,14 @@ const PAST_EVENTS_2024 = [
 ];
 
 const CANDID_MOMENTS = [
-  `${BOARDROOM}/boardroom-01.jpg`,
-  `${BOARDROOM}/boardroom-05.jpg`,
-  `${BOARDROOM}/boardroom-09.jpg`,
-  `${BOARDROOM}/boardroom-12.jpg`,
+  `${BOARDROOM}/outsystems-hero.jpg`,
+  `${BOARDROOM}/outsystems-03.jpg`,
+  `${BOARDROOM}/outsystems-04.jpg`,
+  `${BOARDROOM}/outsystems-05.jpg`,
+  `${BOARDROOM}/outsystems-06.jpg`,
+  `${BOARDROOM}/outsystems-07.jpg`,
   `${BOARDROOM}/boardroom-15.jpg`,
   `${BOARDROOM}/boardroom-18.jpg`,
-  `${BOARDROOM}/boardroom-21.jpg`,
-  `${BOARDROOM}/boardroom-24.jpg`,
 ];
 
 const STATS = [
