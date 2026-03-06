@@ -467,10 +467,10 @@ function HeroSection() {
       {/* Nairobi Skyline Background */}
       <div className="absolute inset-0">
         <img
-          src="https://images.unsplash.com/photo-1611348524140-53c9a25263d6?w=1600&q=80"
-          alt="Nairobi Skyline"
+          src="https://efg-final.s3.eu-north-1.amazonaws.com/cyber-first-kenya/hero-keynote.jpg"
+          alt="Africa Cybersecurity Forum Keynote"
           className="w-full h-full object-cover"
-          style={{ filter: "brightness(0.35) saturate(0.9)" }}
+          style={{ filter: "brightness(0.5) saturate(0.95)" }}
         />
       </div>
 
