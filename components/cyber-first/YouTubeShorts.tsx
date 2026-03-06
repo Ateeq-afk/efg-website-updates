@@ -72,7 +72,7 @@ export default function YouTubeShorts() {
                 fontFamily: "var(--font-outfit)",
               }}
             >
-              Quick Clips
+              From the Room
             </span>
             <span style={{ width: 30, height: 1, background: CYBER_BLUE }} />
           </div>
@@ -88,7 +88,7 @@ export default function YouTubeShorts() {
               margin: "16px 0 0",
             }}
           >
-            Shorts &amp; Reels
+            Hear It From the Room
           </h2>
         </motion.div>
 

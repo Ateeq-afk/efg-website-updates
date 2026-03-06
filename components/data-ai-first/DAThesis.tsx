@@ -2,7 +2,6 @@
 
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import { DotMatrixGrid } from "@/components/effects";
 import { EMERALD, EMERALD_BRIGHT, EASE, WIDE } from "./constants";
 
 export default function DAThesis() {
@@ -19,21 +18,26 @@ export default function DAThesis() {
         padding: "clamp(36px, 5vw, 56px) 24px",
       }}
     >
-      {/* Multi-layer atmospheric gradients */}
+      {/* Diagonal grid texture */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: `radial-gradient(ellipse 50% 60% at 30% 40%, rgba(15,115,94,0.04) 0%, transparent 70%)`,
+          backgroundImage: `
+            linear-gradient(45deg, rgba(15,115,94,0.04) 1px, transparent 1px),
+            linear-gradient(-45deg, rgba(15,115,94,0.04) 1px, transparent 1px)
+          `,
+          backgroundSize: "50px 50px",
+          zIndex: 1,
         }}
       />
+      {/* Emerald glow — left center */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: `radial-gradient(ellipse 40% 50% at 80% 60%, rgba(20,168,130,0.025) 0%, transparent 70%)`,
+          background: `radial-gradient(ellipse 50% 60% at 15% 40%, ${EMERALD}0C 0%, transparent 70%)`,
+          zIndex: 1,
         }}
       />
-
-      <DotMatrixGrid color={EMERALD} opacity={0.015} spacing={32} />
 
       <div
         className="da-thesis-grid"
@@ -194,7 +198,7 @@ export default function DAThesis() {
                   fontFamily: "var(--font-outfit)",
                   fontSize: 11,
                   fontWeight: 500,
-                  color: "#505050",
+                  color: "#686868",
                   padding: "6px 14px",
                   borderRadius: 50,
                   border: "1px solid rgba(255,255,255,0.06)",
@@ -204,6 +208,28 @@ export default function DAThesis() {
                 {tag}
               </span>
             ))}
+          </motion.div>
+
+          {/* CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            style={{ marginTop: 28 }}
+          >
+            <a
+              href="#register"
+              style={{
+                fontFamily: "var(--font-outfit)",
+                fontSize: 14,
+                fontWeight: 500,
+                color: EMERALD,
+                textDecoration: "none",
+                letterSpacing: "0.3px",
+              }}
+            >
+              Be Part of the First Edition →
+            </a>
           </motion.div>
         </motion.div>
 

@@ -123,7 +123,7 @@ export default function FeaturedSpeakers() {
               margin: "16px 0 0",
             }}
           >
-            The Leaders Setting the Agenda
+            Past Speakers. Future Peers.
           </h2>
 
           {/* Description */}
@@ -322,7 +322,7 @@ function ViewAllLink() {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <span>View All Speakers</span>
+      <span>See the Full Kuwait 2026 Lineup</span>
       <span
         className="transition-transform duration-300"
         style={{

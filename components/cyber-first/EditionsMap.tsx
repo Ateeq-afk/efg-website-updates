@@ -49,8 +49,8 @@ const supporting = [
     dateString: "Apr 7, 2026",
     venue: null,
     stat: null,
-    href: "https://qatar.cyberfirstseries.com/",
-    external: true,
+    href: "#register",
+    external: false,
   },
   {
     id: "ksa",
@@ -122,7 +122,7 @@ export default function EditionsMap() {
               margin: "16px 0 0",
             }}
           >
-            Four Nations. Total Coverage.
+            Choose Your City. Join the Same Room.
           </h2>
         </motion.div>
 
@@ -142,7 +142,7 @@ export default function EditionsMap() {
             display: "grid",
             gridTemplateColumns: "repeat(3, 1fr)",
             gap: 14,
-            marginTop: 14,
+            marginTop: 24,
           }}
         >
           {supporting.map((edition, index) => (
@@ -163,15 +163,7 @@ export default function EditionsMap() {
           ))}
         </div>
 
-        {/* Post-Event Reports Strip */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
-          transition={{ duration: 0.5, delay: 0.7, ease: EASE }}
-          style={{ marginTop: 14 }}
-        >
-          <ReportsStrip />
-        </motion.div>
+        {/* Post-Event Reports Strip — hidden until real PDFs are available */}
       </div>
 
       <style jsx global>{`
@@ -388,7 +380,7 @@ function FlagshipCard() {
               transitionDuration: "0.4s",
             }}
           >
-            Visit Event Site
+            Explore Kuwait 2026
             <span
               className="transition-transform"
               style={{
@@ -396,7 +388,7 @@ function FlagshipCard() {
                 transitionDuration: "0.3s",
               }}
             >
-              ↗
+              →
             </span>
           </span>
         </div>
@@ -665,7 +657,7 @@ function SupportingCard({
         boxShadow: isHovered ? "0 12px 40px rgba(0, 0, 0, 0.3)" : "none",
         transitionDuration: "0.5s",
         transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
-        opacity: isPlanned && !isUpcoming ? 0.7 : 1,
+        opacity: isPlanned && !isUpcoming ? 0.85 : 1,
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -714,7 +706,7 @@ function SupportingCard({
               height="12"
               viewBox="0 0 16 16"
               fill="none"
-              style={{ opacity: 0.7 }}
+              style={{ opacity: 1 }}
             >
               <circle cx="8" cy="8" r="7" stroke={CYBER_BLUE} strokeWidth="1.5" />
               <path
@@ -769,7 +761,7 @@ function SupportingCard({
             style={{
               fontWeight: 400,
               fontSize: "0.6em",
-              color: "#606060",
+              color: "#808080",
               marginLeft: 8,
             }}
           >

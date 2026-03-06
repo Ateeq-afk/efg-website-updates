@@ -149,7 +149,7 @@ export default function WhoShouldAttend() {
                 fontWeight: 600,
                 letterSpacing: "2px",
                 textTransform: "uppercase",
-                color: "#505050",
+                color: "#707070",
                 marginBottom: 16,
               }}
             >
@@ -171,7 +171,7 @@ export default function WhoShouldAttend() {
                 fontWeight: 600,
                 letterSpacing: "2px",
                 textTransform: "uppercase",
-                color: "#505050",
+                color: "#707070",
                 marginBottom: 16,
               }}
             >
@@ -256,7 +256,7 @@ function RegisterButton() {
 
   return (
     <Link
-      href="/events/cyber-first/kuwait-2026#register"
+      href="#register"
       className="inline-flex items-center gap-2 transition-all duration-300"
       style={{
         padding: "14px 32px",
@@ -270,7 +270,7 @@ function RegisterButton() {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <span>Register for Next Edition</span>
+      <span>Check If You Qualify</span>
       <span
         className="transition-transform"
         style={{

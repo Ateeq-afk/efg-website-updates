@@ -13,6 +13,7 @@ import {
 import Link from "next/link";
 import { Footer } from "@/components/sections";
 import { NeuralConstellation, DotMatrixGrid } from "@/components/effects";
+import { submitForm } from "@/lib/form-helpers";
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 const E = "#0F735E";
@@ -4675,13 +4676,22 @@ function ApplicationForm() {
   const [loading, setLoading] = useState(false);
   const [focusedField, setFocusedField] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setSubmitted(true);
-    }, 1500);
+    const fd = new FormData(e.currentTarget);
+    const result = await submitForm({
+      type: "attend",
+      full_name: String(fd.get("name") || ""),
+      email: String(fd.get("email") || ""),
+      company: String(fd.get("company") || ""),
+      job_title: String(fd.get("title") || ""),
+      phone: String(fd.get("phone") || ""),
+      metadata: { message: String(fd.get("message") || "") },
+      event_name: "Data & AI First Kuwait 2026",
+    });
+    setLoading(false);
+    if (result.success) setSubmitted(true);
   };
 
   const inputStyle = (field: string): React.CSSProperties => ({
@@ -4741,6 +4751,7 @@ function ApplicationForm() {
     <form onSubmit={handleSubmit} style={{ marginTop: 24 }}>
       <div className="daik-app-form-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 12 }}>
         <input
+          name="name"
           type="text"
           placeholder="Full Name"
           required
@@ -4749,6 +4760,7 @@ function ApplicationForm() {
           style={inputStyle("name")}
         />
         <input
+          name="email"
           type="email"
           placeholder="Work Email"
           required
@@ -4756,45 +4768,41 @@ function ApplicationForm() {
           onBlur={() => setFocusedField(null)}
           style={inputStyle("email")}
         />
-        <input
-          type="text"
-          placeholder="Job Title"
-          required
-          onFocus={() => setFocusedField("title")}
-          onBlur={() => setFocusedField(null)}
-          style={inputStyle("title")}
-        />
-        <input
-          type="text"
-          placeholder="Company"
-          required
-          onFocus={() => setFocusedField("company")}
-          onBlur={() => setFocusedField(null)}
-          style={inputStyle("company")}
-        />
       </div>
-      <select
-        required
-        onFocus={() => setFocusedField("industry")}
+      <input
+        name="phone"
+        type="tel"
+        placeholder="Phone Number"
+        onFocus={() => setFocusedField("phone")}
         onBlur={() => setFocusedField(null)}
-        style={{
-          ...inputStyle("industry"),
-          marginBottom: 12,
-          cursor: "pointer",
-          appearance: "none",
-          color: "#808080",
-        }}
-      >
-        <option value="">Select Industry</option>
-        <option>Government</option>
-        <option>Finance & Banking</option>
-        <option>Technology</option>
-        <option>Oil & Gas</option>
-        <option>Healthcare</option>
-        <option>Telecommunications</option>
-        <option>Education</option>
-        <option>Other</option>
-      </select>
+        style={{ ...inputStyle("phone"), marginBottom: 12 }}
+      />
+      <input
+        name="company"
+        type="text"
+        placeholder="Company"
+        required
+        onFocus={() => setFocusedField("company")}
+        onBlur={() => setFocusedField(null)}
+        style={{ ...inputStyle("company"), marginBottom: 12 }}
+      />
+      <input
+        name="title"
+        type="text"
+        placeholder="Job Title"
+        required
+        onFocus={() => setFocusedField("title")}
+        onBlur={() => setFocusedField(null)}
+        style={{ ...inputStyle("title"), marginBottom: 12 }}
+      />
+      <textarea
+        name="message"
+        placeholder="Message (Optional)"
+        rows={3}
+        onFocus={() => setFocusedField("message")}
+        onBlur={() => setFocusedField(null)}
+        style={{ ...inputStyle("message"), marginBottom: 12, resize: "vertical" }}
+      />
       <button
         type="submit"
         disabled={loading}
@@ -4844,13 +4852,22 @@ function PartnershipForm() {
   const [loading, setLoading] = useState(false);
   const [focusedField, setFocusedField] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setSubmitted(true);
-    }, 1500);
+    const fd = new FormData(e.currentTarget);
+    const result = await submitForm({
+      type: "sponsor",
+      full_name: String(fd.get("name") || ""),
+      email: String(fd.get("email") || ""),
+      company: String(fd.get("company") || ""),
+      job_title: String(fd.get("title") || ""),
+      phone: String(fd.get("phone") || ""),
+      metadata: { message: String(fd.get("message") || "") },
+      event_name: "Data & AI First Kuwait 2026",
+    });
+    setLoading(false);
+    if (result.success) setSubmitted(true);
   };
 
   const inputStyle = (field: string): React.CSSProperties => ({
@@ -4908,24 +4925,18 @@ function PartnershipForm() {
 
   return (
     <form onSubmit={handleSubmit} style={{ marginTop: 20 }}>
-      <div className="daik-partner-form-grid" style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+      <div className="daik-app-form-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 10 }}>
         <input
+          name="name"
           type="text"
-          placeholder="Company Name"
+          placeholder="Full Name"
           required
-          onFocus={() => setFocusedField("company")}
+          onFocus={() => setFocusedField("name")}
           onBlur={() => setFocusedField(null)}
-          style={inputStyle("company")}
+          style={inputStyle("name")}
         />
         <input
-          type="text"
-          placeholder="Contact Person"
-          required
-          onFocus={() => setFocusedField("contact")}
-          onBlur={() => setFocusedField(null)}
-          style={inputStyle("contact")}
-        />
-        <input
+          name="email"
           type="email"
           placeholder="Work Email"
           required
@@ -4933,24 +4944,41 @@ function PartnershipForm() {
           onBlur={() => setFocusedField(null)}
           style={inputStyle("email")}
         />
-        <select
-          required
-          onFocus={() => setFocusedField("tier")}
-          onBlur={() => setFocusedField(null)}
-          style={{
-            ...inputStyle("tier"),
-            cursor: "pointer",
-            appearance: "none",
-            color: "#808080",
-          }}
-        >
-          <option value="">Partnership Interest</option>
-          <option>Patronage Partner</option>
-          <option>Knowledge Partner</option>
-          <option>Supporting Partner</option>
-          <option>Exhibition Only</option>
-        </select>
       </div>
+      <input
+        name="phone"
+        type="tel"
+        placeholder="Phone Number"
+        onFocus={() => setFocusedField("phone")}
+        onBlur={() => setFocusedField(null)}
+        style={{ ...inputStyle("phone"), marginBottom: 10 }}
+      />
+      <input
+        name="company"
+        type="text"
+        placeholder="Company"
+        required
+        onFocus={() => setFocusedField("company")}
+        onBlur={() => setFocusedField(null)}
+        style={{ ...inputStyle("company"), marginBottom: 10 }}
+      />
+      <input
+        name="title"
+        type="text"
+        placeholder="Job Title"
+        required
+        onFocus={() => setFocusedField("title")}
+        onBlur={() => setFocusedField(null)}
+        style={{ ...inputStyle("title"), marginBottom: 10 }}
+      />
+      <textarea
+        name="message"
+        placeholder="Tell us about your sponsorship goals..."
+        rows={3}
+        onFocus={() => setFocusedField("message")}
+        onBlur={() => setFocusedField(null)}
+        style={{ ...inputStyle("message"), marginBottom: 10, resize: "vertical" }}
+      />
       <button
         type="submit"
         disabled={loading}

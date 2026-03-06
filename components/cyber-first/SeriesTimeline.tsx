@@ -39,9 +39,9 @@ const timeline = [
     id: 4,
     label: "4th Edition",
     name: "Cyber First KSA",
-    date: "2026",
+    date: "H2 2026",
     city: "Riyadh",
-    venue: null,
+    venue: "Venue TBA",
     status: "planned" as const,
   },
   {
@@ -50,7 +50,7 @@ const timeline = [
     name: "Cyber First Qatar",
     date: "Apr 7, 2026",
     city: "Doha",
-    venue: null,
+    venue: "Venue TBA",
     status: "upcoming" as const,
   },
 ];

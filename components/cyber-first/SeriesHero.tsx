@@ -19,7 +19,7 @@ const editions = [
 // Stats data
 const stats = [
   { value: 1500, suffix: "+", label: "SECURITY LEADERS" },
-  { value: 4, suffix: "", label: "NATIONS" },
+  { value: 92, suffix: "%", label: "DIRECTOR-LEVEL & ABOVE" },
   { value: 80, suffix: "+", label: "SPEAKERS" },
   { value: 50, suffix: "+", label: "SPONSORS" },
 ];
@@ -142,14 +142,14 @@ export default function SeriesHero() {
             transition={{ duration: 0.7, delay: 0.5 }}
             style={{
               fontFamily: "var(--font-outfit)",
-              fontWeight: 300,
+              fontWeight: 400,
               fontSize: "clamp(16px, 2vw, 22px)",
-              color: `rgba(1, 187, 245, 0.7)`,
+              color: `rgba(1, 187, 245, 1)`,
               letterSpacing: "1px",
               marginTop: 6,
             }}
           >
-            The GCC&rsquo;s Definitive Cybersecurity Summit
+            Where the GCC&rsquo;s Top CISOs Convene
           </motion.p>
 
           {/* Description */}
@@ -161,15 +161,15 @@ export default function SeriesHero() {
               fontFamily: "var(--font-outfit)",
               fontWeight: 300,
               fontSize: 15,
-              color: "#909090",
+              color: "#A0A0A0",
               lineHeight: 1.7,
               maxWidth: 560,
               margin: "20px auto 0",
             }}
           >
-            Where the region&rsquo;s CISOs, government cyber leaders, and security
-            architects convene. Four nations. One platform. The conversations
-            that define GCC cybersecurity happen here.
+            1,500+ security leaders across Abu Dhabi, Kuwait, Riyadh, and Doha.
+            92% director-level and above. The room where GCC cybersecurity
+            strategy is shaped.
           </motion.p>
 
           {/* Edition Badges */}
@@ -194,7 +194,7 @@ export default function SeriesHero() {
             style={{ marginTop: 28 }}
           >
             <Link
-              href="/events/cyber-first/kuwait-2026"
+              href="#register"
               className="inline-flex items-center gap-2 transition-all duration-300"
               style={{
                 padding: "12px 28px",
@@ -212,7 +212,7 @@ export default function SeriesHero() {
                 e.currentTarget.style.background = CYBER_BLUE;
               }}
             >
-              <span>Next Edition — Kuwait</span>
+              <span>Register for Kuwait 2026</span>
               <span>→</span>
             </Link>
             <Link
@@ -265,7 +265,7 @@ export default function SeriesHero() {
         location="Kuwait City, Kuwait"
         targetDate={new Date("2026-04-21T09:00:00")}
         ctaText="Register"
-        ctaHref="/events/cyber-first/kuwait-2026#register"
+        ctaHref="#register"
         angularRadius={false}
       />
 
