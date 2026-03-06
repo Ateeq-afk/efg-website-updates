@@ -91,14 +91,16 @@ const PAST_EVENTS_2024 = [
 ];
 
 const CANDID_MOMENTS = [
-  `${BOARDROOM}/outsystems-one/4N8A7045.JPG`,
-  `${BOARDROOM}/outsystems-one/4N8A7067.JPG`,
-  `${BOARDROOM}/outsystems-one/4N8A7080.JPG`,
-  `${BOARDROOM}/outsystems-one/4N8A7096.JPG`,
-  `${BOARDROOM}/outsystems-one/4N8A7110.JPG`,
-  `${BOARDROOM}/outsystems-one/4N8A7125.JPG`,
-  `${BOARDROOM}/outsystems-one/4N8A7150.JPG`,
-  `${BOARDROOM}/outsystems-one/4N8A7185.JPG`,
+  `${BOARDROOM}/outsystems-one/4N8A7047.JPG`,
+  `${BOARDROOM}/outsystems-one/4N8A7060.JPG`,
+  `${BOARDROOM}/outsystems-one/4N8A7070.JPG`,
+  `${BOARDROOM}/outsystems-one/4N8A7077.JPG`,
+  `${BOARDROOM}/outsystems-one/4N8A7086.JPG`,
+  `${BOARDROOM}/outsystems-one/4N8A7097.JPG`,
+  `${BOARDROOM}/outsystems-one/4N8A7107.JPG`,
+  `${BOARDROOM}/outsystems-one/4N8A7116.JPG`,
+  `${BOARDROOM}/outsystems-one/4N8A7121.JPG`,
+  `${BOARDROOM}/outsystems-one/4N8A7129.JPG`,
 ];
 
 const STATS = [
@@ -154,13 +156,13 @@ export default function NetworkFirstPage() {
       <TheFormat />
       <CandidMoments />
       <WhyHost />
-      <EditorialBreak src={`${BOARDROOM}/outsystems-one/4N8A7058.JPG`} />
+      <EditorialBreak src={`${BOARDROOM}/outsystems-one/4N8A7073.JPG`} />
       <TheExperience />
       <TheFullPackage />
       <TheJourney />
       <UpcomingSection />
       <UrgencyBanner />
-      <EditorialBreak src={`${BOARDROOM}/outsystems-one/4N8A7103.JPG`} />
+      <EditorialBreak src={`${BOARDROOM}/outsystems-one/4N8A7114.JPG`} />
       <PastBoardroomsShowcase />
       <ResultsThatMatter />
       <ByTheNumbers />
@@ -300,7 +302,7 @@ function Hero() {
   return (
     <section ref={ref} style={{ position: "relative", height: "100vh", minHeight: 700, overflow: "hidden" }}>
       <motion.div style={{ position: "absolute", inset: 0, y, scale }}>
-        <img src={`${BOARDROOM}/outsystems-hero.jpg`} alt="" style={{ width: "100%", height: "120%", objectFit: "cover", filter: "brightness(0.4)" }} />
+        <img src={`${BOARDROOM}/outsystems-one/4N8A7045.JPG`} alt="" style={{ width: "100%", height: "120%", objectFit: "cover", filter: "brightness(0.4)" }} />
       </motion.div>
       <div style={{ position: "absolute", inset: 0, background: `linear-gradient(to bottom, ${BG} 0%, transparent 20%, transparent 70%, ${BG} 100%)` }} />
 
@@ -594,7 +596,7 @@ function TheExperience() {
         <div className="exp-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(48px, 8vw, 80px)", alignItems: "center" }}>
           <motion.div initial={{ opacity: 0, x: -40 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.8, ease: EASE_OUT }} className="exp-images">
             <div style={{ borderRadius: 16, overflow: "hidden", aspectRatio: "4/5", border: `1px solid ${BORDER}` }}>
-              <img src={`${BOARDROOM}/outsystems-one/4N8A7072.JPG`} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+              <img src={`${BOARDROOM}/outsystems-one/4N8A7083.JPG`} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
             </div>
           </motion.div>
           <motion.div initial={{ opacity: 0, x: 40 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.8, delay: 0.2, ease: EASE_OUT }}>
