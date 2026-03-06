@@ -22,8 +22,9 @@ const eventSeries = [
     label: "Cyber First", 
     color: "#01BBF5",
     editions: [
-      { href: "/events/cyber-first/kuwait-2026", label: "Kuwait 2026" },
-      { href: "/events/cyber-first/kenya-2026", label: "Kenya 2026" },
+      { href: "/events/cyber-first/kuwait-2026", label: "Kuwait" },
+      { href: "/events/cyber-first/kenya-2026", label: "Nairobi" },
+      { href: "/events/cyber-first/india-2026", label: "New Delhi" },
     ]
   },
   { 
