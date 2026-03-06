@@ -415,9 +415,9 @@ function WhyBoardroomsWork() {
   ];
 
   const advantages = [
-    { icon: "🏛", title: "Boardrooms Built for Leaders", desc: "Carefully designed environments where decisions are made and networks are strengthened." },
-    { icon: "👔", title: "C-Level Decision-Makers", desc: "We know the right audience is the key to success. Every seat earned by senior executives." },
-    { icon: "🎯", title: "Productive Exchange", desc: "Unlock the power of productive exchange with tailored agendas that drive value." },
+    { num: "01", title: "Boardrooms Built for Leaders", desc: "Carefully designed environments where decisions are made and networks are strengthened." },
+    { num: "02", title: "C-Level Decision-Makers", desc: "We know the right audience is the key to success. Every seat earned by senior executives." },
+    { num: "03", title: "Productive Exchange", desc: "Unlock the power of productive exchange with tailored agendas that drive value." },
   ];
 
   return (
@@ -450,7 +450,7 @@ function WhyBoardroomsWork() {
         <motion.div variants={staggerContainer} initial="hidden" animate={inView ? "visible" : "hidden"} style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 48 }} className="advantages-grid">
           {advantages.map((a, i) => (
             <motion.div key={a.title} variants={fadeUp} custom={i} style={{ textAlign: "center" }}>
-              <span style={{ fontSize: 40, display: "block", marginBottom: 16 }}>{a.icon}</span>
+              <span style={{ fontFamily: "var(--font-display)", fontSize: 24, fontWeight: 600, color: GOLD_30, display: "block", marginBottom: 16 }}>{a.num}</span>
               <h4 style={{ fontSize: 18, fontWeight: 600, color: TEXT, margin: "0 0 8px" }}>{a.title}</h4>
               <p style={{ fontSize: 14, color: TEXT_50, lineHeight: 1.6, margin: 0 }}>{a.desc}</p>
             </motion.div>
@@ -625,22 +625,22 @@ function TheFullPackage() {
 
   const packages = [
     {
-      icon: "🌐",
+      num: "01",
       title: "Custom Landing Pages",
       desc: "Branded registration pages for your event. Your logo, your messaging, your call-to-action. Full analytics on registrations and engagement.",
     },
     {
-      icon: "📣",
+      num: "02",
       title: "Marketing Content",
       desc: "Pre-event promotion materials, social media assets, email templates, and LinkedIn carousel graphics. Everything you need to amplify reach.",
     },
     {
-      icon: "🎬",
+      num: "03",
       title: "Post-Event Deliverables",
       desc: "Complete attendee list with verified contact details. Professional photography, video highlights, and recap content for your channels.",
     },
     {
-      icon: "🤝",
+      num: "04",
       title: "Lead Nurturing Support",
       desc: "Follow-up email templates, introduction facilitation to key attendees, and recommended next steps for converting conversations to pipeline.",
     },
@@ -660,7 +660,7 @@ function TheFullPackage() {
         <motion.div variants={staggerContainer} initial="hidden" animate={inView ? "visible" : "hidden"} style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 24 }} className="package-grid">
           {packages.map((p, i) => (
             <motion.div key={p.title} variants={fadeUp} custom={i} style={{ background: BG, border: `1px solid ${BORDER}`, borderRadius: 16, padding: "32px 28px", display: "flex", gap: 20, alignItems: "flex-start" }}>
-              <span style={{ fontSize: 32, flexShrink: 0, lineHeight: 1 }}>{p.icon}</span>
+              <span style={{ fontFamily: "var(--font-display)", fontSize: 20, fontWeight: 600, color: GOLD_30, flexShrink: 0, lineHeight: 1 }}>{p.num}</span>
               <div>
                 <h4 style={{ fontSize: 18, fontWeight: 600, color: TEXT, margin: "0 0 8px" }}>{p.title}</h4>
                 <p style={{ fontSize: 14, color: TEXT_50, lineHeight: 1.7, margin: 0 }}>{p.desc}</p>
