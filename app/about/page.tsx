@@ -481,7 +481,7 @@ function AboutStory() {
               </p>
               <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "clamp(14px, 1.3vw, 16px)", fontWeight: 300, lineHeight: 1.8, color: "var(--white-muted)" }}>
                 We built EFG from the ground up — from relationships forged in boardrooms
-                across Dubai, Riyadh, Kuwait City, and Nairobi, to the agenda-curation philosophy
+                across Dubai, Riyadh, Kuwait City, and Riyadh, to the agenda-curation philosophy
                 that puts practitioner insight above promotional noise.
               </p>
               <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "clamp(14px, 1.3vw, 16px)", fontWeight: 300, lineHeight: 1.8, color: "var(--white-muted)" }}>

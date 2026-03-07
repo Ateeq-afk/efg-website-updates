@@ -38,7 +38,7 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: "Events First Group | Premium Technology Conferences Worldwide",
   description:
-    "EFG runs premium technology conferences across Dubai, Riyadh, Abu Dhabi, Doha, Nairobi, and beyond — cybersecurity, OT security, digital transformation, and AI events for enterprise technology leaders.",
+    "EFG runs premium technology conferences across Dubai, Riyadh, Abu Dhabi, Doha, Riyadh, and beyond — cybersecurity, OT security, digital transformation, and AI events for enterprise technology leaders.",
   keywords: [
     "technology conferences",
     "cybersecurity events",
