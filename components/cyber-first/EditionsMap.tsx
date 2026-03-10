@@ -54,7 +54,7 @@ const supporting = [
     image: "https://images.unsplash.com/photo-1611348524140-53c9a25263d6?w=600&q=80",
     status: "upcoming" as const,
     edition: "1st Edition",
-    dateString: "Jun 2026",
+    dateString: "Jul 2026",
     venue: "Nairobi",
     stat: null,
     href: "/events/cyber-first/kenya-2026",

@@ -32,8 +32,8 @@ const S3 = "https://efg-final.s3.eu-north-1.amazonaws.com";
 const S3_LOGOS = `${S3}/sponsors-logo`;
 const WP = "https://cyberfirstseries.com/wp-content/uploads";
 
-// Event date - June 2026
-const EVENT_DATE = new Date("2026-06-18T08:00:00+03:00");
+// Event date - July 2026
+const EVENT_DATE = new Date("2026-07-08T08:00:00+03:00");
 
 // ─── Countdown Hook ──────────────────────────────────────────────────────────
 function useCountdown(target: Date) {
@@ -506,7 +506,7 @@ function HeroSection() {
         <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, delay: 0.2, ease: EASE }} style={{ display: "inline-flex", alignItems: "center", alignSelf: "flex-start", gap: 10, padding: "8px 16px", borderRadius: 30, background: `linear-gradient(135deg, ${C}15, ${KENYA_ACCENT}10)`, border: `1px solid ${C}30`, marginBottom: 24 }}>
           <span style={{ width: 6, height: 6, borderRadius: "50%", background: C_BRIGHT }} />
           <span style={{ fontFamily: "var(--font-outfit)", fontSize: 11, fontWeight: 600, letterSpacing: "2px", textTransform: "uppercase", color: C_BRIGHT }}>
-            1st Edition · June 2026 · The Silicon Savannah
+            1st Edition · July 2026 · The Silicon Savannah
           </span>
         </motion.div>
 
@@ -2292,7 +2292,7 @@ function SplitCTA() {
               Register for Cyber First<br />Kenya 2026
             </h3>
             <p style={{ fontFamily: "var(--font-outfit)", fontSize: 14, color: "rgba(255,255,255,0.45)", lineHeight: 1.65, margin: "0 0 24px", maxWidth: 420 }}>
-              Join 300+ CISOs, government security leaders, and technology experts. June 2026 at Radisson Blu Hotel, Nairobi.
+              Join 300+ CISOs, government security leaders, and technology experts. July 2026 at Radisson Blu Hotel, Nairobi.
             </p>
 
             <div style={{ display: "flex", gap: 12, marginBottom: 28 }}>
@@ -2539,7 +2539,7 @@ function Venue() {
 
   const venueDetails = [
     { icon: "M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0zM12 13a3 3 0 100-6 3 3 0 000 6z", label: "Location", value: "Nairobi, Kenya" },
-    { icon: "M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z", label: "Date", value: "Thursday, 18 June 2026" },
+    { icon: "M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z", label: "Date", value: "Wednesday, 8 July 2026" },
     { icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z", label: "Time", value: "8:00 AM — 5:00 PM (EAT)" },
     { icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z", label: "Format", value: "Full-day conference + networking" },
   ];
