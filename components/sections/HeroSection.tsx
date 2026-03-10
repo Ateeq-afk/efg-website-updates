@@ -6,6 +6,7 @@ import Link from "next/link";
 
 const S3 = "https://efg-final.s3.eu-north-1.amazonaws.com";
 const CFK = `${S3}/events/Cyber%20First%20Kuwait%202025/filemail_photos`;
+const OPEX = `${S3}/events/Opex%20First%20UAE`;
 
 interface HeroSlide {
   image: string;
@@ -23,6 +24,14 @@ const heroSlides: HeroSlide[] = [
     title: ["Where the Region's", "Decisions Are"],
     accent: "Made.",
     sub: "500+ CISOs, CDOs and Government Officials. One room. One day. Kuwait City.",
+  },
+  {
+    // VIP audience — UAE officials, military, packed crowd.
+    image: `${OPEX}/4N8A1688.JPG`,
+    eyebrow: "200+ Speakers · 12 Cities · 6 Nations",
+    title: ["Conversations That"],
+    accent: "Move Industries.",
+    sub: "Honest dialogue on what comes next — and who needs to be in the room when it arrives.",
   },
 ];
 
