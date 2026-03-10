@@ -6,8 +6,6 @@ import Link from "next/link";
 
 const S3 = "https://efg-final.s3.eu-north-1.amazonaws.com";
 const CFK = `${S3}/events/Cyber%20First%20Kuwait%202025/filemail_photos`;
-const OPEX = `${S3}/events/Opex%20First%20UAE`;
-const HOME = `${S3}/home-event-spec`;
 
 interface HeroSlide {
   image: string;
@@ -19,36 +17,36 @@ interface HeroSlide {
 
 const heroSlides: HeroSlide[] = [
   {
-    // Ribbon cutting ceremony — SHYAM'S PICK for main slide
-    image: `${OPEX}/4N8A1688.JPG`,
+    // Grand ballroom with chandeliers — VIPs + packed house. PRESTIGE.
+    image: `${CFK}/cyber21-04-178.jpg`,
     eyebrow: "Cyber First Kuwait · 21 April 2026 · Kuwait City",
     title: ["Where the Region's", "Decisions Are"],
     accent: "Made.",
     sub: "500+ CISOs, CDOs and Government Officials. One room. One day. Kuwait City.",
   },
   {
-    // Ribbon cutting — official ceremony moment
-    image: `${OPEX}/4N8A1698.JPG`,
+    // Exhibition floor aerial — colorful booths, busy networking. ENERGY.
+    image: `${CFK}/cyber21-04-377.jpg`,
     eyebrow: "200+ Speakers · 12 Cities · 6 Nations",
     title: ["Conversations That"],
     accent: "Move Industries.",
     sub: "Honest dialogue on what comes next — and who needs to be in the room when it arrives.",
   },
   {
-    // Executive panel — authoritative
-    image: `${OPEX}/4N8A1736.JPG`,
+    // Wide audience with VIP front row — full room scale. SCALE.
+    image: `${CFK}/cyber21-04-254.jpg`,
     eyebrow: "Ministerial & Regulatory Participation · Global",
     title: ["Government and Industry.", "On The Same"],
     accent: "Stage.",
     sub: "The only summit series with active ministerial and regulatory voices in every session.",
   },
   {
-    // Grand ceremony — scale and prestige
-    image: `${OPEX}/4N8A1751.JPG`,
+    // Audience from stage perspective — VIP front row visible. AUTHORITY.
+    image: `${CFK}/cyber21-04-412.jpg`,
     eyebrow: "5,000+ Delegates · 16 Editions · 99+ Sponsors",
     title: ["The World's Most", "Trusted Technology"],
     accent: "Summit Series.",
-    sub: "From Kuwait to Riyadh. From the CISO to the Minister. Every edition, every city.",
+    sub: "From Kuwait to Nairobi. From the CISO to the Minister. Every edition, every city.",
   },
   {
     // Aerial panorama of the full expo floor — signature shot. PRESTIGE.
