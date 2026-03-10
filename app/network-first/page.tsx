@@ -650,7 +650,7 @@ function TheFormat() {
         className="absolute inset-0 pointer-events-none"
       >
         <img
-          src="/networkfirst/boardroom-15.jpg"
+          src="/networkfirst/boardroom-executives.jpg"
           alt=""
           style={{ position: "absolute", top: 0, left: 0, width: "55%", height: "100%", objectFit: "cover", filter: "brightness(0.4) saturate(0.7)" }}
           className="format-bg-img"
