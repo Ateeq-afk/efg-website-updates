@@ -17,44 +17,12 @@ interface HeroSlide {
 
 const heroSlides: HeroSlide[] = [
   {
-    // Empty venue architecture — stunning chandeliers, grand scale. VENUE.
-    image: `${CFK}/cyber21-04-4.jpg`,
+    // Exhibition networking — packed floor, sponsor booths, energy.
+    image: `${CFK}/exhibition-networking.jpg`,
     eyebrow: "Cyber First Kuwait · 21 April 2026 · Kuwait City",
     title: ["Where the Region's", "Decisions Are"],
     accent: "Made.",
     sub: "500+ CISOs, CDOs and Government Officials. One room. One day. Kuwait City.",
-  },
-  {
-    // Packed ballroom with audience — shows the crowd. SCALE.
-    image: `${CFK}/cyber21-04-178.jpg`,
-    eyebrow: "200+ Speakers · 12 Cities · 6 Nations",
-    title: ["Conversations That"],
-    accent: "Move Industries.",
-    sub: "Honest dialogue on what comes next — and who needs to be in the room when it arrives.",
-  },
-  {
-    // Exhibition floor aerial — colorful booths, networking. ENERGY.
-    image: `${CFK}/cyber21-04-377.jpg`,
-    eyebrow: "Ministerial & Regulatory Participation · Global",
-    title: ["Government and Industry.", "On The Same"],
-    accent: "Stage.",
-    sub: "The only summit series with active ministerial and regulatory voices in every session.",
-  },
-  {
-    // MOU signing — AOU & GBM partnership. PARTNERSHIPS.
-    image: `${CFK}/mou-signing-aou-gbm.jpg`,
-    eyebrow: "5,000+ Delegates · 16 Editions · 99+ Sponsors",
-    title: ["The World's Most", "Trusted Technology"],
-    accent: "Summit Series.",
-    sub: "From Kuwait to Nairobi. From the CISO to the Minister. Every edition, every city.",
-  },
-  {
-    // Aerial panorama of the full expo floor — signature shot. PRESTIGE.
-    image: `${CFK}/cyber21-04-500.jpg`,
-    eyebrow: "Cyber First · OT Security · Data & AI · Opex First",
-    title: ["Four Series.", "Multiple Cities."],
-    accent: "One Standard.",
-    sub: "Built for enterprise leaders shaping the digital and security future.",
   },
 ];
 
