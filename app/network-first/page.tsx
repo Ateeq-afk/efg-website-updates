@@ -42,7 +42,7 @@ const UPCOMING_EVENTS = [
     subtitle: "Explore the Power of Agentic Enterprise and Low-Code",
     sponsor: "OutSystems",
     location: "JW Marriott Hotel Riyadh",
-    link: "https://events.outsystems.com/",
+    link: "https://events.outsystems.com/event/17e2fb07-2b9a-46e2-9acf-44590276e2d8/homepage?RefId=oed-ksa&utm_source=efg&utm_medium=referral&utm_campaign=emea-mea-re-2026-04-29-outsystems-one-executive-day-ksa&utm_term=none&utm_content=none&utm_campaignteam=camp-emea&utm_partner=none",
     image: `${NF}/2026/02/outsystems-one.jpg`,
   },
 ];
