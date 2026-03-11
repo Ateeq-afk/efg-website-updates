@@ -14,8 +14,8 @@ const EASE = ANIMATION.ease;
 const nextEdition = {
   name: "Cyber First Kuwait",
   edition: "3rd Edition",
-  date: new Date("2026-04-21T09:00:00"),
-  dateString: "April 21, 2026",
+  date: new Date("2026-06-09T09:00:00"),
+  dateString: "June 9, 2026",
   city: "Kuwait City",
   venue: "Jumeirah Messilah Beach Hotel",
 };

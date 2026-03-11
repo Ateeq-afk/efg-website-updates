@@ -24,7 +24,7 @@ const EFG_ORANGE = "#E8651A";
 const EFG_ORANGE_BRIGHT = "#F97316";
 const GOLD = "#C4A34A";
 const EASE = [0.16, 1, 0.3, 1] as const;
-const EVENT_DATE = new Date("2026-05-18T08:00:00+03:00");
+const EVENT_DATE = new Date("2026-06-10T08:00:00+03:00");
 
 // ─── Countdown Hook ─────────────────────────────────────────────────────────
 function useCountdown(target: Date) {
@@ -449,7 +449,7 @@ function HeroSection() {
                 color: E_BRIGHT,
               }}
             >
-              18 May 2026 &middot; Kuwait City
+              10 June 2026 &middot; Kuwait City
             </span>
           </motion.div>
 
@@ -2454,7 +2454,7 @@ function AtmosphereDivider() {
             <circle cx="12" cy="10" r="3" />
           </svg>
           <span style={{ fontFamily: "var(--font-outfit)", fontSize: 12, fontWeight: 600, letterSpacing: "2px", textTransform: "uppercase", color: E_BRIGHT }}>
-            Kuwait &middot; May 2026
+            Kuwait &middot; June 2026
           </span>
         </motion.div>
         
@@ -5514,7 +5514,7 @@ function Venue() {
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
             {[
               { label: "Location", value: "Messilah, Kuwait", icon: "M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" },
-              { label: "Date", value: "May 18, 2026", icon: "M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" },
+              { label: "Date", value: "June 10, 2026", icon: "M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" },
               { label: "Time", value: "8:00 AM – 3:00 PM", icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" },
               { label: "Format", value: "Full-Day Summit", icon: "M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" },
             ].map((d, i) => (

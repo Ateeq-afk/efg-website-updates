@@ -47,8 +47,8 @@ const allEvents = [
     image:
       "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80",
     href: "/events/cyber-first",
-    date: "2026-04-21",
-    nextDate: "21 Apr 2026",
+    date: "2026-06-09",
+    nextDate: "9 Jun 2026",
     nextCity: "Kuwait City",
     editions: "3rd Edition",
     regions: "Kuwait",
@@ -66,8 +66,8 @@ const allEvents = [
     image:
       "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80",
     href: "/events/data-ai-first/kuwait-2026",
-    date: "2026-05-18",
-    nextDate: "18 May 2026",
+    date: "2026-06-10",
+    nextDate: "10 June 2026",
     nextCity: "Kuwait City",
     editions: "1st Edition",
     regions: "Kuwait",
@@ -217,7 +217,7 @@ const NEXT_EVENT = {
   seriesColor: "#01BBF5",
   edition: "3RD EDITION",
   title: "Cyber First Kuwait",
-  date: new Date("2026-04-21"),
+  date: new Date("2026-06-09"),
   location: "Kuwait City, Kuwait",
   venue: "Venue TBA",
   attendees: "500+ Attendees",
@@ -665,7 +665,7 @@ function EventsHero() {
               {"  "}·{"  "}
               {NEXT_EVENT.title}
               {"  "}·{"  "}
-              21 Apr 2026
+              9 Jun 2026
             </span>
 
             <span
@@ -1887,7 +1887,7 @@ function EventsUpNext() {
                 <line x1="8" y1="2" x2="8" y2="6" />
                 <line x1="3" y1="10" x2="21" y2="10" />
               </svg>
-              21 April 2026
+              9 June 2026
             </span>
             <span
               style={{

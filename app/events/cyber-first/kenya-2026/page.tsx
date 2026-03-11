@@ -347,26 +347,36 @@ const GROWTH = [
 ];
 
 // Sponsor tiers for Kenya
-const SPONSOR_TIERS: {
-  tier: string;
-  slots: number;
-  color: string;
-  sponsors?: { name: string; logo: string | null }[];
-}[] = [
-  { tier: "Gold Partner", slots: 1, color: KENYA_GOLD, sponsors: [] },
-  { tier: "Associate Partners", slots: 2, color: C_BRIGHT, sponsors: [] },
-  { tier: "Panel Partners", slots: 3, color: "#9D4EDD", sponsors: [] },
-  { tier: "Strategic Partners", slots: 4, color: "#808080", sponsors: [] },
-];
-
-// Past sponsors for credibility
-const PAST_SPONSORS = [
+// Marquee Row 1 — past / credibility logos
+const MARQUEE_ROW_1 = [
   { name: "Palo Alto Networks", logo: `${S3_LOGOS}/paloalto.png` },
   { name: "SentinelOne", logo: `${S3_LOGOS}/sentinelone.png` },
   { name: "Google Cloud", logo: `${S3_LOGOS}/Google-Cloud-Security.png` },
   { name: "Kaspersky", logo: `${S3_LOGOS}/kaspersky.png` },
   { name: "Akamai", logo: `${S3_LOGOS}/Akamai.png` },
   { name: "Secureworks", logo: `${S3_LOGOS}/secureworks.png` },
+];
+
+// Marquee Row 2 — series-wide sponsors
+const MARQUEE_ROW_2 = [
+  { name: "Google Cloud Security", logo: `${S3_LOGOS}/Google-Cloud-Security.png` },
+  { name: "Anomali", logo: `${S3_LOGOS}/Anomali.png` },
+  { name: "OPSWAT", logo: `${S3_LOGOS}/OPSWAT-logo.png` },
+  { name: "Pentera", logo: `${S3_LOGOS}/PENTERA.png` },
+  { name: "HWG", logo: `${S3_LOGOS}/hwg-here-we-go.png` },
+  { name: "AmiViz", logo: `${S3_LOGOS}/AmiViz.png` },
+  { name: "Securonix", logo: `${S3_LOGOS}/Securonix-logo.png` },
+  { name: "Paramount", logo: `${S3_LOGOS}/Paramount.png` },
+  { name: "Kron Technologies", logo: `${S3_LOGOS}/kron-technologies.png` },
+  { name: "Appknox", logo: `${S3_LOGOS}/appknox.png` },
+  { name: "Filigran", logo: `${S3_LOGOS}/filigran.png` },
+  { name: "Corelight", logo: `${S3_LOGOS}/corelight.png` },
+  { name: "ManageEngine", logo: `${S3_LOGOS}/ManageEngine.png` },
+  { name: "Fortinet", logo: `${S3_LOGOS}/fortinet.png` },
+  { name: "Gen-X Systems", logo: `${S3_LOGOS}/Gen-x-systems.png` },
+  { name: "SecureB4", logo: `${S3_LOGOS}/secureb4.png` },
+  { name: "Bureau Veritas", logo: `${S3_LOGOS}/bureau-veritas.png` },
+  { name: "DREAM", logo: `${S3_LOGOS}/DREAM.png` },
 ];
 
 // Who Should Attend roles
@@ -1116,7 +1126,7 @@ function AgendaTimeline() {
   );
 }
 
-// ─── SPONSORS SECTION ────────────────────────────────────────────────────────
+// ─── SPONSORS MARQUEE ────────────────────────────────────────────────────────
 function SponsorsSection() {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
@@ -1127,150 +1137,229 @@ function SponsorsSection() {
       id="partners"
       style={{
         background: "#020508",
-        padding: "clamp(40px,5vw,72px) 0",
+        padding: "clamp(48px, 6vw, 80px) 0",
         position: "relative",
         overflow: "hidden",
       }}
     >
+      {/* Subtle radial glow */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          backgroundImage: `radial-gradient(circle, ${KENYA_ACCENT}03 1px, transparent 1px)`,
-          backgroundSize: "32px 32px",
+          background: `radial-gradient(ellipse 60% 40% at 50% 40%, ${KENYA_ACCENT}06 0%, transparent 70%)`,
         }}
       />
-      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(20px, 4vw, 60px)", position: "relative" }}>
+
+      <DotMatrixGrid color={KENYA_ACCENT} opacity={0.012} spacing={30} />
+
+      <div
+        style={{
+          maxWidth: 1520,
+          margin: "0 auto",
+          position: "relative",
+          zIndex: 1,
+        }}
+      >
+        {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 25 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, ease: EASE }}
+          transition={{ duration: 0.7, ease: EASE }}
           style={{ textAlign: "center", marginBottom: 40 }}
         >
           <div className="flex items-center justify-center gap-3">
             <span style={{ width: 30, height: 1, background: KENYA_ACCENT }} />
-            <span style={{ fontFamily: "var(--font-outfit)", fontSize: 11, fontWeight: 600, letterSpacing: "2.5px", textTransform: "uppercase", color: KENYA_ACCENT }}>
-              Partners
+            <span
+              style={{
+                fontFamily: "var(--font-outfit)",
+                fontSize: 11,
+                fontWeight: 600,
+                letterSpacing: "2.5px",
+                textTransform: "uppercase",
+                color: KENYA_ACCENT,
+              }}
+            >
+              Trusted By Industry Leaders
             </span>
             <span style={{ width: 30, height: 1, background: KENYA_ACCENT }} />
           </div>
-          <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(28px, 3.5vw, 44px)", letterSpacing: "-1.5px", color: "var(--white)", lineHeight: 1.1, margin: "16px 0 0" }}>
-            Founding Partners
+
+          <h2
+            style={{
+              fontFamily: "var(--font-display)",
+              fontWeight: 800,
+              fontSize: "clamp(28px, 3.5vw, 44px)",
+              letterSpacing: "-1.5px",
+              color: "var(--white)",
+              lineHeight: 1.1,
+              margin: "20px 0 0",
+            }}
+          >
+            Our Partners & Sponsors
           </h2>
-          <p style={{ fontFamily: "var(--font-outfit)", fontSize: 15, fontWeight: 400, color: "rgba(255,255,255,0.5)", marginTop: 12, maxWidth: 500, margin: "12px auto 0" }}>
-            Join East Africa&apos;s premier cybersecurity summit as a founding partner
+
+          <p
+            style={{
+              fontFamily: "var(--font-outfit)",
+              fontWeight: 300,
+              fontSize: 16,
+              color: "#707070",
+              lineHeight: 1.6,
+              maxWidth: 480,
+              margin: "14px auto 0",
+            }}
+          >
+            Backed by global technology leaders and security vendors worldwide.
           </p>
         </motion.div>
 
-        {SPONSOR_TIERS.map((tierData, tierIndex) => (
-          <motion.div
-            key={tierData.tier}
-            initial={{ opacity: 0, y: 15 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.2 + tierIndex * 0.1, ease: EASE }}
-            style={{ marginBottom: tierIndex < SPONSOR_TIERS.length - 1 ? 28 : 0 }}
-          >
-            <p style={{ fontFamily: "var(--font-outfit)", fontSize: 10, fontWeight: 600, letterSpacing: "2.5px", textTransform: "uppercase", color: tierData.color, marginBottom: 12 }}>
-              {tierData.tier}
-            </p>
+        {/* Marquee Container */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          style={{ position: "relative" }}
+        >
+          {/* Left edge fade */}
+          <div
+            className="absolute left-0 top-0 bottom-0 z-10 pointer-events-none"
+            style={{
+              width: "clamp(60px, 10vw, 120px)",
+              background: "linear-gradient(to right, #020508 0%, transparent 100%)",
+            }}
+          />
+          {/* Right edge fade */}
+          <div
+            className="absolute right-0 top-0 bottom-0 z-10 pointer-events-none"
+            style={{
+              width: "clamp(60px, 10vw, 120px)",
+              background: "linear-gradient(to left, #020508 0%, transparent 100%)",
+            }}
+          />
+
+          {/* Row 1 — scrolls left */}
+          <div className="cfkn-marquee-track" style={{ marginBottom: 20 }}>
             <div
-              className="cfk-sponsor-grid"
-              style={{
-                display: "grid",
-                gridTemplateColumns: `repeat(${Math.min(tierData.slots, 4)}, 1fr)`,
-                gap: 12,
-              }}
+              className="cfkn-marquee-inner cfkn-scroll-left"
+              style={{ animationDuration: "70s" }}
             >
-              {Array.from({ length: tierData.slots }).map((_, i) => (
+              {[...MARQUEE_ROW_1, ...MARQUEE_ROW_1].map((logo, i) => (
                 <div
-                  key={`placeholder-${i}`}
-                  className="flex items-center justify-center transition-all"
+                  key={`r1-${i}`}
                   style={{
-                    padding: tierIndex === 0 ? "48px 32px" : "32px 24px",
-                    borderRadius: 14,
-                    background: `linear-gradient(145deg, ${tierData.color}08, ${tierData.color}03)`,
-                    border: `1px dashed ${tierData.color}25`,
-                    cursor: "default",
+                    width: 140,
+                    height: 44,
+                    margin: "0 clamp(14px, 2vw, 28px)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    opacity: 0.45,
+                    flexShrink: 0,
+                    borderRadius: 8,
                   }}
                 >
-                  <span style={{ fontFamily: "var(--font-outfit)", fontSize: 13, fontWeight: 400, color: `${tierData.color}50` }}>
-                    Your brand here
-                  </span>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={logo.logo}
+                    alt={logo.name}
+                    loading="lazy"
+                    style={{
+                      maxHeight: "100%",
+                      maxWidth: "100%",
+                      objectFit: "contain",
+                      filter: "brightness(0) invert(1)",
+                    }}
+                  />
                 </div>
               ))}
             </div>
-          </motion.div>
-        ))}
+          </div>
 
-        {/* Past Partners */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.5, ease: EASE }}
-          style={{ marginTop: 48, paddingTop: 40, borderTop: "1px solid rgba(255,255,255,0.06)" }}
-        >
-          <p style={{ fontFamily: "var(--font-outfit)", fontSize: 11, fontWeight: 600, letterSpacing: "2.5px", textTransform: "uppercase", color: "#606060", textAlign: "center", marginBottom: 24 }}>
-            Trusted by Leading Organizations
-          </p>
-          <div
-            className="cfk-past-sponsors"
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              justifyContent: "center",
-              alignItems: "center",
-              gap: 32,
-              opacity: 0.6,
-            }}
-          >
-            {PAST_SPONSORS.map((s) => (
-              <div key={s.name} style={{ height: 40 }}>
-                <img
-                  src={s.logo}
-                  alt={s.name}
-                  style={{ height: "100%", width: "auto", objectFit: "contain", filter: "brightness(0) invert(1)", opacity: 0.7 }}
-                />
-              </div>
-            ))}
+          {/* Row 2 — scrolls right */}
+          <div className="cfkn-marquee-track">
+            <div
+              className="cfkn-marquee-inner cfkn-scroll-right"
+              style={{ animationDuration: "80s" }}
+            >
+              {[...MARQUEE_ROW_2, ...MARQUEE_ROW_2].map((logo, i) => (
+                <div
+                  key={`r2-${i}`}
+                  style={{
+                    width: 140,
+                    height: 44,
+                    margin: "0 clamp(14px, 2vw, 28px)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    opacity: 0.45,
+                    flexShrink: 0,
+                    borderRadius: 8,
+                  }}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={logo.logo}
+                    alt={logo.name}
+                    loading="lazy"
+                    style={{
+                      maxHeight: "100%",
+                      maxWidth: "100%",
+                      objectFit: "contain",
+                      filter: "brightness(0) invert(1)",
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </motion.div>
 
+        {/* CTA */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.6, ease: EASE }}
-          style={{ textAlign: "center", marginTop: 40 }}
+          style={{ textAlign: "center", marginTop: 36 }}
         >
           <Link
             href="#partnership"
-            className="inline-flex items-center gap-2 transition-all group"
             style={{
-              padding: "14px 32px",
-              borderRadius: 50,
-              background: `linear-gradient(135deg, ${KENYA_ACCENT}15 0%, ${KENYA_ACCENT}08 100%)`,
-              border: `1px solid ${KENYA_ACCENT}40`,
               fontFamily: "var(--font-outfit)",
               fontSize: 14,
-              fontWeight: 600,
+              fontWeight: 500,
               color: KENYA_ACCENT,
               textDecoration: "none",
+              letterSpacing: "0.3px",
             }}
           >
-            <span>Become a Founding Partner</span>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="transition-transform group-hover:translate-x-1">
-              <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
+            Become a Partner →
           </Link>
         </motion.div>
       </div>
 
       <style jsx global>{`
-        @media (max-width: 768px) {
-          .cfk-sponsor-grid { grid-template-columns: repeat(2, 1fr) !important; }
-          .cfk-past-sponsors { gap: 24px !important; }
-          .cfk-past-sponsors > div { height: 22px !important; }
+        .cfkn-marquee-track {
+          overflow: hidden;
+          width: 100%;
         }
-        @media (max-width: 480px) {
-          .cfk-sponsor-grid { grid-template-columns: 1fr !important; }
+        .cfkn-marquee-inner {
+          display: flex;
+          width: max-content;
+          will-change: transform;
+        }
+        .cfkn-scroll-left {
+          animation: cfknScrollLeft linear infinite;
+        }
+        .cfkn-scroll-right {
+          animation: cfknScrollRight linear infinite;
+        }
+        @keyframes cfknScrollLeft {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        @keyframes cfknScrollRight {
+          0% { transform: translateX(-50%); }
+          100% { transform: translateX(0); }
         }
       `}</style>
     </section>

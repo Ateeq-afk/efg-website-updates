@@ -217,7 +217,7 @@ VALUES (
   'Cyber First Kuwait 2026',
   'cyber-first-kuwait-2026',
   'Cyber First',
-  '2026-04-21',
+  '2026-06-09',
   'Kuwait City, Kuwait',
   'Jumeirah Messilah Beach Hotel',
   'The premier cybersecurity summit for Kuwait''s technology leaders.',

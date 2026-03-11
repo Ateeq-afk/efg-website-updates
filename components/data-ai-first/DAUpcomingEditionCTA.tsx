@@ -120,7 +120,7 @@ export default function DAUpcomingEditionCTA() {
   const tab = TABS.find((t) => t.key === activeTab)!;
 
   useEffect(() => {
-    const target = new Date("2026-05-18T09:00:00");
+    const target = new Date("2026-06-10T09:00:00");
     const calc = () => {
       const diff = target.getTime() - Date.now();
       if (diff > 0) {
@@ -352,7 +352,7 @@ export default function DAUpcomingEditionCTA() {
               {/* Info Cards (attend tab) */}
               {activeTab === "attend" && (
                 <div className="flex flex-wrap gap-3" style={{ marginTop: 32 }}>
-                  <InfoCard label="Date" value="May 18, 2026" />
+                  <InfoCard label="Date" value="June 10, 2026" />
                   <InfoCard label="Location" value="Kuwait City" />
                   <InfoCard label="Format" value="Full-Day Summit" />
                 </div>

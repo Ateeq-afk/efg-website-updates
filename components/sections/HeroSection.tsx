@@ -20,7 +20,7 @@ const heroSlides: HeroSlide[] = [
   {
     // Exhibition networking — packed floor, sponsor booths, energy.
     image: `${CFK}/exhibition-networking.jpg`,
-    eyebrow: "Cyber First Kuwait · 21 April 2026 · Kuwait City",
+    eyebrow: "Cyber First Kuwait · 9 June 2026 · Kuwait City",
     title: ["Where the Region's", "Decisions Are"],
     accent: "Made.",
     sub: "500+ CISOs, CDOs and Government Officials. One room. One day. Kuwait City.",
@@ -71,7 +71,7 @@ const heroSlides: HeroSlide[] = [
 const nextEvent = {
   name: "Cyber First Kuwait",
   location: "Kuwait City, Kuwait",
-  date: new Date("2026-04-21T09:00:00"),
+  date: new Date("2026-06-09T09:00:00"),
 };
 
 // Slideshow timing
