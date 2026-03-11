@@ -1,0 +1,16 @@
+# robots.txt for Events First Group
+# https://eventsfirstgroup.com
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://eventsfirstgroup.com/sitemap.xml
+
+# Disallow admin/internal paths
+Disallow: /api/
+Disallow: /login
+Disallow: /signup
+Disallow: /portal
+Disallow: /profile
+Disallow: /_next/
