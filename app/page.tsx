@@ -7,6 +7,7 @@ import {
   PhotoGallery,
   WhyEFG,
   Testimonials,
+  EventHighlights,
   SponsorsPartners,
   InquiryForm,
   Footer,
@@ -51,6 +52,12 @@ export default function Home() {
 
       {/* Testimonials — The Human Voice */}
       <Testimonials />
+
+      {/* Section Transition - Expand */}
+      <SectionTransition variant="expand" />
+
+      {/* Event Highlights — From the Stage */}
+      <EventHighlights />
 
       {/* Sponsors & Partners — The Credibility */}
       <SponsorsPartners />

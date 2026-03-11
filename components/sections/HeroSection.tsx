@@ -41,6 +41,30 @@ const heroSlides: HeroSlide[] = [
     accent: "Stage.",
     sub: "The only summit series with active ministerial and regulatory voices in every session.",
   },
+  {
+    // OPEX First KSA — leadership panel on stage. LEADERSHIP.
+    image: `${S3}/opex1.jpg`,
+    eyebrow: "Opex First KSA · Leadership Panel · Riyadh",
+    title: ["Excellence Isn't a", "Department. It's a"],
+    accent: "Culture.",
+    sub: "Senior leaders from Roads General Authority, Red Sea Global, and the Ministry of HR — one stage, one mission.",
+  },
+  {
+    // Audience from stage perspective — VIP front row visible. AUTHORITY.
+    image: `${CFK}/cyber21-04-412.jpg`,
+    eyebrow: "5,000+ Delegates · 16 Editions · 99+ Sponsors",
+    title: ["The World's Most", "Trusted Technology"],
+    accent: "Summit Series.",
+    sub: "From Kuwait to Nairobi. From the CISO to the Minister. Every edition, every city.",
+  },
+  {
+    // Cyber First Kuwait — MOU signing between GBM & AOU. PARTNERSHIPS.
+    image: `${S3}/cyber1.jpg`,
+    eyebrow: "Cyber First Kuwait · Strategic Partnerships",
+    title: ["Where Partnerships"],
+    accent: "Begin.",
+    sub: "Real outcomes, signed on stage. GBM and Arab Open University formalised a cybersecurity MOU at Cyber First Kuwait.",
+  },
 ];
 
 // Next event data for the countdown

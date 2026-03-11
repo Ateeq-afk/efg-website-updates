@@ -8,6 +8,7 @@ export { default as NetworkFirst } from "./NetworkFirst";
 export { default as PhotoGallery } from "./PhotoGallery";
 export { default as WhyEFG } from "./WhyEFG";
 export { default as Testimonials } from "./Testimonials";
+export { default as EventHighlights } from "./EventHighlights";
 export { default as SponsorsPartners } from "./SponsorsPartners";
 export { default as InquiryForm } from "./InquiryForm";
 export { default as Footer } from "./Footer";
