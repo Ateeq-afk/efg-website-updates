@@ -91,8 +91,8 @@ const PAST_EVENTS_2023 = [
 ];
 
 const PAST_EVENTS_2026: { sponsor: string; date: string; venue: string; image: string }[] = [
-  { sponsor: "CleverTap Iftar", date: "5 Mar", venue: "Madinat Jumeirah, Dubai", image: `${NF}/2025/10/clevertap-1024x662.jpeg` },
-  { sponsor: "CleverTap Majlis Al-Suhoor", date: "3 Mar", venue: "JW Marriott, Riyadh", image: `${NF}/2025/10/clevertap-1024x662.jpeg` },
+  { sponsor: "CleverTap Iftar", date: "5 Mar", venue: "Madinat Jumeirah, Dubai", image: `${NF}/2026/02/iftar-photo1.jpg` },
+  { sponsor: "CleverTap Majlis Al-Suhoor", date: "3 Mar", venue: "JW Marriott, Riyadh", image: `${NF}/2026/02/Suhoor-photo1.jpg` },
 ];
 
 const CANDID_MOMENTS = [
