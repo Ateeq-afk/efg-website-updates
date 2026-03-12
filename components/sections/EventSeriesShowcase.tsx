@@ -50,8 +50,7 @@ const eventSeries = [
     nations: 3,
     stats: "Dubai · Doha · Riyadh",
     color: "#7C3AED",
-    image: `${GOOD}/opex-ksa-minister.jpg`,
-    objectPosition: "left center",
+    image: `${GOOD}/opex-ksa-speaker.jpg`,
     href: "/events/opex-first",
   },
   {
@@ -386,14 +385,13 @@ function PortalCard({
         }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img loading="lazy"
+        <img
           src={series.image}
-          alt={`${series.title} event series - ${series.tagline}`}
+          alt=""
           className="w-full h-full object-cover transition-all duration-800 group-hover:scale-108"
           style={{
             filter: "brightness(0.38) saturate(0.9)",
             transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
-            objectPosition: (series as { objectPosition?: string }).objectPosition || "center",
           }}
         />
       </div>
