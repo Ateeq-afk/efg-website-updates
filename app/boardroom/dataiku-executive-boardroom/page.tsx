@@ -31,7 +31,7 @@ const S3 = "https://efg-final.s3.eu-north-1.amazonaws.com";
 const EVENT = {
   sponsor: {
     name: "Dataiku",
-    logo: "https://www.dataiku.com/wp-content/uploads/2021/01/dataiku-logo-color.svg",
+    logo: "https://images.ctfassets.net/5nvgvgqbpp73/6f63ePFTcBtQIWJiVIbKVV/708831f68f139c954afadead4486d894/White_Dataiku_Lockup_Logo.svg",
     tagline: "Platform for AI Success",
   },
   title: "Executive AI Boardroom",
