@@ -239,7 +239,7 @@ const FOCUS_AREAS: { title: string; desc: string; bg: string; wide?: boolean }[]
   {
     title: "Cloud & Digital Transformation",
     desc: "Securing cloud adoption and hybrid infrastructure across government and enterprise India as organisations accelerate digital-first strategies.",
-    bg: `${S3}/delhi2-bg.png`,
+    bg: `${S3}/events/Cyber%20First%20Kuwait%202025/filemail_photos/cyber21-04-160.jpg`,
     wide: true,
   },
   {
@@ -759,7 +759,7 @@ function StatsBar() {
       {/* Background — real EFG event photo */}
       <div className="absolute inset-0">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={`${S3}/events/Cyber%20First%20Kuwait%202025/filemail_photos/cyber21-04-324.jpg`} alt="Cyber First India 2026 cybersecurity summit Delhi" className="w-full h-full object-cover" style={{ filter: "brightness(0.1) saturate(0.4)" }} />
+        <img src={`${S3}/events/Cyber%20First%20Kuwait%202025/filemail_photos/cyber21-04-324.jpg`} alt="" className="w-full h-full object-cover" style={{ filter: "brightness(0.1) saturate(0.4)" }} />
       </div>
 
       {/* Gradient overlays */}
@@ -1107,7 +1107,7 @@ function FocusAreas() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={area.bg}
-                alt="Cyber First India 2026 cybersecurity summit Delhi"
+                alt=""
                 aria-hidden="true"
                 className="cfi-focus-bg"
                 style={{
@@ -1489,7 +1489,7 @@ function SpeakersSection() {
                 <img
                   src={speaker.photo}
                   alt={speaker.name}
-                  style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center", filter: "grayscale(1)", transition: "transform 0.5s ease, filter 0.5s ease" }}
+                  style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center", filter: "grayscale(0.2)", transition: "transform 0.5s ease, filter 0.5s ease" }}
                 />
                 {/* Bottom gradient overlay */}
                 <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "50%", background: "linear-gradient(to top, #080A0F, transparent)", pointerEvents: "none" }} />
@@ -1654,8 +1654,8 @@ function SponsorsSection() {
                 <div
                   key={`r1-${i}`}
                   style={{
-                    width: 200,
-                    height: 64,
+                    width: 140,
+                    height: 44,
                     margin: "0 clamp(14px, 2vw, 28px)",
                     display: "flex",
                     alignItems: "center",
@@ -1692,8 +1692,8 @@ function SponsorsSection() {
                 <div
                   key={`r2-${i}`}
                   style={{
-                    width: 200,
-                    height: 64,
+                    width: 140,
+                    height: 44,
                     margin: "0 clamp(14px, 2vw, 28px)",
                     display: "flex",
                     alignItems: "center",
@@ -1834,7 +1834,7 @@ function AwardsSection() {
   const [formData, setFormData] = useState({ orgName: "", contactName: "", email: "", phone: "", category: "", reason: "" });
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [focusedField, setFocusedField] = useState<string | null>(null);
-  const [awardsSelectedCountry, setAwardsSelectedCountry] = useState<CountryCode>(COUNTRY_CODES.find(c => c.country === "IN") || COUNTRY_CODES[0]);
+  const [awardsSelectedCountry, setAwardsSelectedCountry] = useState<CountryCode>(COUNTRY_CODES[2]);
   const [awardsPhoneError, setAwardsPhoneError] = useState<string | null>(null);
   const [awardsEmailError, setAwardsEmailError] = useState<string | null>(null);
 
@@ -2070,7 +2070,7 @@ function Venue() {
       <div style={{ maxWidth: 1320, margin: "0 auto", padding: "0 clamp(20px, 4vw, 60px)" }}>
         <div className="cfi-venue-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "center" }}>
           <motion.div initial={{ opacity: 0, x: -30 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.8, ease: EASE }} style={{ borderRadius: 20, overflow: "hidden", aspectRatio: "16/10" }}>
-            <img src="/Hotel_delhi.png" alt="The Leela Palace New Delhi" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&q=80" alt="The Leela Palace New Delhi" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
           </motion.div>
           <motion.div initial={{ opacity: 0, x: 30 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.8, delay: 0.2, ease: EASE }}>
             <div className="flex items-center gap-3" style={{ marginBottom: 16 }}>
