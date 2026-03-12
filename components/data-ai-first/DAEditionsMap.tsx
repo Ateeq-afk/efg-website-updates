@@ -10,7 +10,7 @@ const cities = [
   {
     name: "Kuwait City",
     country: "Kuwait",
-    date: "May 18, 2026",
+    date: "June 10, 2026",
     status: "LAUNCHING",
     active: true,
     href: "/events/data-ai-first/kuwait-2026",

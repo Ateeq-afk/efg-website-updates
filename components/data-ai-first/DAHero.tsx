@@ -172,7 +172,7 @@ export default function DAHero() {
         accentColor={EMERALD}
         eventName="Data & AI First Kuwait"
         location="Kuwait City, Kuwait"
-        targetDate={new Date("2026-05-18T09:00:00")}
+        targetDate={new Date("2026-06-10T09:00:00")}
         ctaText="Register"
         ctaHref="/events/data-ai-first/kuwait-2026#register"
         angularRadius={false}

@@ -375,7 +375,7 @@ export default function NetworkFirst() {
           {/* CTA */}
           <div className="nf-cta-wrap" style={{ flexShrink: 0, display: "flex", alignItems: "center", gap: 14 }}>
             <Link
-              href="#get-started"
+              href="/network-first#get-started"
               style={{
                 display: "inline-flex",
                 alignItems: "center",

@@ -24,7 +24,7 @@ const C_BRIGHT = "#4DD4FF";
 const EASE = [0.16, 1, 0.3, 1] as const;
 const WP = "https://cyberfirstseries.com/wp-content/uploads";
 const S3 = "https://efg-final.s3.eu-north-1.amazonaws.com";
-const EVENT_DATE = new Date("2026-06-11T08:30:00+05:30");
+const EVENT_DATE = new Date("2026-06-16T08:30:00+05:30");
 
 // ─── Countdown ───────────────────────────────────────────────────────────────
 function useCountdown(target: Date) {
@@ -197,22 +197,37 @@ const FOCUS_AREAS = [
 ];
 
 const S3_LOGOS = "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo";
-const SPONSORS = {
-  gold: [
-    { name: "Palo Alto Networks", logo: `${S3_LOGOS}/paloalto.png` },
-    { name: "Google Cloud", logo: `${S3_LOGOS}/Google-Cloud-Security.png` },
-    { name: "Microsoft", logo: null },
-    { name: "Tata Communications", logo: null },
-  ],
-  strategic: [
-    { name: "Kaspersky", logo: `${S3_LOGOS}/kaspersky.png` },
-    { name: "Fortinet", logo: `${S3_LOGOS}/fortinet.png` },
-    { name: "CrowdStrike", logo: null },
-    { name: "Tenable", logo: `${S3_LOGOS}/Tenable-logo.png` },
-    { name: "SentinelOne", logo: `${S3_LOGOS}/sentinelone.png` },
-    { name: "Securonix", logo: `${S3_LOGOS}/Securonix-logo.png` },
-  ],
-};
+
+const MARQUEE_ROW_1 = [
+  { name: "Palo Alto Networks", logo: `${S3_LOGOS}/paloalto.png` },
+  { name: "Google Cloud", logo: `${S3_LOGOS}/Google-Cloud-Security.png` },
+  { name: "Kaspersky", logo: `${S3_LOGOS}/kaspersky.png` },
+  { name: "Fortinet", logo: `${S3_LOGOS}/fortinet.png` },
+  { name: "Tenable", logo: `${S3_LOGOS}/Tenable-logo.png` },
+  { name: "SentinelOne", logo: `${S3_LOGOS}/sentinelone.png` },
+  { name: "Securonix", logo: `${S3_LOGOS}/Securonix-logo.png` },
+];
+
+const MARQUEE_ROW_2 = [
+  { name: "Google Cloud Security", logo: `${S3_LOGOS}/Google-Cloud-Security.png` },
+  { name: "Anomali", logo: `${S3_LOGOS}/Anomali.png` },
+  { name: "OPSWAT", logo: `${S3_LOGOS}/OPSWAT-logo.png` },
+  { name: "Pentera", logo: `${S3_LOGOS}/PENTERA.png` },
+  { name: "HWG", logo: `${S3_LOGOS}/hwg-here-we-go.png` },
+  { name: "AmiViz", logo: `${S3_LOGOS}/AmiViz.png` },
+  { name: "Securonix", logo: `${S3_LOGOS}/Securonix-logo.png` },
+  { name: "Paramount", logo: `${S3_LOGOS}/Paramount.png` },
+  { name: "Kron Technologies", logo: `${S3_LOGOS}/kron-technologies.png` },
+  { name: "Appknox", logo: `${S3_LOGOS}/appknox.png` },
+  { name: "Filigran", logo: `${S3_LOGOS}/filigran.png` },
+  { name: "Corelight", logo: `${S3_LOGOS}/corelight.png` },
+  { name: "ManageEngine", logo: `${S3_LOGOS}/ManageEngine.png` },
+  { name: "Fortinet", logo: `${S3_LOGOS}/fortinet.png` },
+  { name: "Gen-X Systems", logo: `${S3_LOGOS}/Gen-x-systems.png` },
+  { name: "SecureB4", logo: `${S3_LOGOS}/secureb4.png` },
+  { name: "Bureau Veritas", logo: `${S3_LOGOS}/bureau-veritas.png` },
+  { name: "DREAM", logo: `${S3_LOGOS}/DREAM.png` },
+];
 
 const AGENDA = [
   { time: "08:30 – 09:30", title: "Registration & Networking Breakfast", type: "break" as const },
@@ -404,7 +419,7 @@ function HeroSection() {
           >
             <span style={{ width: 6, height: 6, borderRadius: "50%", background: C_BRIGHT }} />
             <span style={{ fontFamily: "var(--font-outfit)", fontSize: 11, fontWeight: 600, letterSpacing: "2px", textTransform: "uppercase", color: C_BRIGHT }}>
-              1st Edition · 11 June 2026
+              1st Edition · 16 June 2026
             </span>
           </motion.div>
 
@@ -854,46 +869,240 @@ function AgendaTimeline() {
 
 // ─── Sponsors Section ────────────────────────────────────────────────────────
 function SponsorsSection() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const ref = useRef<HTMLElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section ref={ref} style={{ background: "#080A0F", padding: "clamp(80px, 10vw, 120px) 0" }}>
-      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(20px, 4vw, 60px)" }}>
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, ease: EASE }} style={{ textAlign: "center", marginBottom: 56 }}>
-          <div className="flex items-center justify-center gap-3" style={{ marginBottom: 12 }}>
+    <section
+      ref={ref}
+      id="partners"
+      style={{
+        background: "#020508",
+        padding: "clamp(48px, 6vw, 80px) 0",
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
+      {/* Subtle radial glow */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: `radial-gradient(ellipse 60% 40% at 50% 40%, ${C}06 0%, transparent 70%)`,
+        }}
+      />
+
+      <DotMatrixGrid color={C} opacity={0.012} spacing={30} />
+
+      <div
+        style={{
+          maxWidth: 1520,
+          margin: "0 auto",
+          position: "relative",
+          zIndex: 1,
+        }}
+      >
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, ease: EASE }}
+          style={{ textAlign: "center", marginBottom: 40 }}
+        >
+          <div className="flex items-center justify-center gap-3">
             <span style={{ width: 30, height: 1, background: C }} />
-            <span style={{ fontFamily: "var(--font-outfit)", fontSize: 11, fontWeight: 600, letterSpacing: "2.5px", textTransform: "uppercase", color: C }}>Partners</span>
+            <span
+              style={{
+                fontFamily: "var(--font-outfit)",
+                fontSize: 11,
+                fontWeight: 600,
+                letterSpacing: "2.5px",
+                textTransform: "uppercase",
+                color: C_BRIGHT,
+              }}
+            >
+              Trusted By Industry Leaders
+            </span>
             <span style={{ width: 30, height: 1, background: C }} />
           </div>
-          <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(32px, 4vw, 48px)", letterSpacing: "-1.5px", color: "white", lineHeight: 1.1, margin: "0 0 12px" }}>
-            Sponsorship Opportunities
+
+          <h2
+            style={{
+              fontFamily: "var(--font-display)",
+              fontWeight: 800,
+              fontSize: "clamp(28px, 3.5vw, 44px)",
+              letterSpacing: "-1.5px",
+              color: "white",
+              lineHeight: 1.1,
+              margin: "20px 0 0",
+            }}
+          >
+            Our Partners & Sponsors
           </h2>
-          <p style={{ fontFamily: "var(--font-outfit)", fontSize: 16, color: "rgba(255,255,255,0.5)", maxWidth: 500, margin: "0 auto" }}>
-            Position your brand in front of India's top cybersecurity decision-makers.
+
+          <p
+            style={{
+              fontFamily: "var(--font-outfit)",
+              fontWeight: 300,
+              fontSize: 16,
+              color: "#707070",
+              lineHeight: 1.6,
+              maxWidth: 480,
+              margin: "14px auto 0",
+            }}
+          >
+            Backed by global technology leaders and security vendors worldwide.
           </p>
         </motion.div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16, marginBottom: 40 }} className="cfi-sponsor-grid">
-          {SPONSORS.gold.map((sponsor) => (
-            <div key={sponsor.name} style={{ padding: 24, borderRadius: 16, background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: "center", minHeight: 80 }}>
-              {sponsor.logo ? (
-                <img src={sponsor.logo} alt={sponsor.name} style={{ maxHeight: 32, maxWidth: "80%", filter: "brightness(0) invert(1)", opacity: 0.7 }} />
-              ) : (
-                <span style={{ fontFamily: "var(--font-outfit)", fontSize: 14, fontWeight: 600, color: "rgba(255,255,255,0.5)" }}>{sponsor.name}</span>
-              )}
-            </div>
-          ))}
-        </div>
+        {/* Marquee Container */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          style={{ position: "relative" }}
+        >
+          {/* Left edge fade */}
+          <div
+            className="absolute left-0 top-0 bottom-0 z-10 pointer-events-none"
+            style={{
+              width: "clamp(60px, 10vw, 120px)",
+              background: "linear-gradient(to right, #020508 0%, transparent 100%)",
+            }}
+          />
+          {/* Right edge fade */}
+          <div
+            className="absolute right-0 top-0 bottom-0 z-10 pointer-events-none"
+            style={{
+              width: "clamp(60px, 10vw, 120px)",
+              background: "linear-gradient(to left, #020508 0%, transparent 100%)",
+            }}
+          />
 
-        <motion.div initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.4, ease: EASE }} style={{ textAlign: "center" }}>
-          <Link href="/contact" style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "14px 32px", borderRadius: 50, border: `1px solid ${C}40`, background: "transparent", fontFamily: "var(--font-outfit)", fontSize: 14, fontWeight: 500, color: C, textDecoration: "none" }}>
-            Become a Sponsor <span>→</span>
+          {/* Row 1 — scrolls left */}
+          <div className="cfi-marquee-track" style={{ marginBottom: 20 }}>
+            <div
+              className="cfi-marquee-inner cfi-scroll-left"
+              style={{ animationDuration: "70s" }}
+            >
+              {[...MARQUEE_ROW_1, ...MARQUEE_ROW_1].map((logo, i) => (
+                <div
+                  key={`r1-${i}`}
+                  style={{
+                    width: 140,
+                    height: 44,
+                    margin: "0 clamp(14px, 2vw, 28px)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    opacity: 0.45,
+                    flexShrink: 0,
+                    borderRadius: 8,
+                  }}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={logo.logo}
+                    alt={logo.name}
+                    loading="lazy"
+                    style={{
+                      maxHeight: "100%",
+                      maxWidth: "100%",
+                      objectFit: "contain",
+                      filter: "brightness(0) invert(1)",
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Row 2 — scrolls right */}
+          <div className="cfi-marquee-track">
+            <div
+              className="cfi-marquee-inner cfi-scroll-right"
+              style={{ animationDuration: "80s" }}
+            >
+              {[...MARQUEE_ROW_2, ...MARQUEE_ROW_2].map((logo, i) => (
+                <div
+                  key={`r2-${i}`}
+                  style={{
+                    width: 140,
+                    height: 44,
+                    margin: "0 clamp(14px, 2vw, 28px)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    opacity: 0.45,
+                    flexShrink: 0,
+                    borderRadius: 8,
+                  }}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={logo.logo}
+                    alt={logo.name}
+                    loading="lazy"
+                    style={{
+                      maxHeight: "100%",
+                      maxWidth: "100%",
+                      objectFit: "contain",
+                      filter: "brightness(0) invert(1)",
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.6, ease: EASE }}
+          style={{ textAlign: "center", marginTop: 36 }}
+        >
+          <Link
+            href="/sponsors-and-partners"
+            style={{
+              fontFamily: "var(--font-outfit)",
+              fontSize: 14,
+              fontWeight: 500,
+              color: C_BRIGHT,
+              textDecoration: "none",
+              letterSpacing: "0.3px",
+            }}
+          >
+            Become a Partner →
           </Link>
         </motion.div>
       </div>
 
-      <style jsx global>{`@media (max-width: 768px) { .cfi-sponsor-grid { grid-template-columns: repeat(2, 1fr) !important; } }`}</style>
+      <style jsx global>{`
+        .cfi-marquee-track {
+          overflow: hidden;
+          width: 100%;
+        }
+        .cfi-marquee-inner {
+          display: flex;
+          width: max-content;
+          will-change: transform;
+        }
+        .cfi-scroll-left {
+          animation: cfiScrollLeft linear infinite;
+        }
+        .cfi-scroll-right {
+          animation: cfiScrollRight linear infinite;
+        }
+        @keyframes cfiScrollLeft {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        @keyframes cfiScrollRight {
+          0% { transform: translateX(-50%); }
+          100% { transform: translateX(0); }
+        }
+      `}</style>
     </section>
   );
 }
@@ -993,7 +1202,7 @@ function Venue() {
               India's premier cybersecurity summit bringing together the nation's top CISOs, government leaders, and enterprise security executives in the capital city. A world-class venue for world-class conversations.
             </p>
             <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-              {[{ icon: "M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z", text: "New Delhi, India" }, { icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z", text: "11 June 2026 · 8:30 AM – 4:00 PM" }].map((item) => (
+              {[{ icon: "M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z", text: "New Delhi, India" }, { icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z", text: "16 June 2026 · 8:30 AM – 4:00 PM" }].map((item) => (
                 <div key={item.text} style={{ display: "flex", alignItems: "center", gap: 12 }}>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={C} strokeWidth="1.5"><path d={item.icon} /></svg>
                   <span style={{ fontFamily: "var(--font-outfit)", fontSize: 14, color: "rgba(255,255,255,0.7)" }}>{item.text}</span>

@@ -30,8 +30,8 @@ const allEvents: EventItem[] = [
     seriesColor: "#01BBF5",
     edition: "3RD EDITION",
     title: "Cyber First Kuwait",
-    date: new Date("2026-04-21"),
-    dateDisplay: "April 21, 2026",
+    date: new Date("2026-06-09"),
+    dateDisplay: "June 9, 2026",
     location: "Kuwait City, Kuwait",
     venue: "Jumeirah Messilah Beach Hotel",
     attendees: "350+",
@@ -44,12 +44,40 @@ const allEvents: EventItem[] = [
     seriesColor: "#0F735E",
     edition: "1ST EDITION",
     title: "Data & AI First Kuwait",
-    date: new Date("2026-05-18"),
-    dateDisplay: "May 18, 2026",
+    date: new Date("2026-06-10"),
+    dateDisplay: "June 10, 2026",
     location: "Kuwait City, Kuwait",
     venue: "Venue TBA",
     attendees: "500+",
     href: "/events/data-ai-first/kuwait-2026",
+    status: "soon",
+  },
+  {
+    id: "networkfirst-outsystems-ksa",
+    series: "NetworkFirst",
+    seriesColor: "#C9935A",
+    edition: "",
+    title: "ONE Executive Day KSA",
+    date: new Date("2026-04-29"),
+    dateDisplay: "April 29, 2026",
+    location: "Riyadh, Saudi Arabia",
+    venue: "JW Marriott Hotel Riyadh",
+    attendees: "15-20",
+    href: "/network-first",
+    status: "open",
+  },
+  {
+    id: "cyber-first-new-delhi",
+    series: "Cyber First",
+    seriesColor: "#01BBF5",
+    edition: "1ST EDITION",
+    title: "Cyber First New Delhi",
+    date: new Date("2026-06-16"),
+    dateDisplay: "June 16, 2026",
+    location: "New Delhi, India",
+    venue: "Venue TBA",
+    attendees: "400+",
+    href: "/events/cyber-first",
     status: "soon",
   },
   {
@@ -64,6 +92,20 @@ const allEvents: EventItem[] = [
     venue: "Venue TBA",
     attendees: "300+",
     href: "/events/ot-security-first",
+    status: "soon",
+  },
+  {
+    id: "cyber-first-nairobi",
+    series: "Cyber First",
+    seriesColor: "#01BBF5",
+    edition: "1ST EDITION",
+    title: "Cyber First Nairobi",
+    date: new Date("2026-07-08"),
+    dateDisplay: "July 8, 2026",
+    location: "Nairobi, Kenya",
+    venue: "Venue TBA",
+    attendees: "400+",
+    href: "/events/cyber-first",
     status: "soon",
   },
   {
@@ -157,6 +199,7 @@ const MONTHS = [
   { abbr: "APR", full: "April", index: 3 },
   { abbr: "MAY", full: "May", index: 4 },
   { abbr: "JUN", full: "June", index: 5 },
+  { abbr: "JUL", full: "July", index: 6 },
   { abbr: "SEP", full: "September", index: 8 },
   { abbr: "OCT", full: "October", index: 9 },
 ];
@@ -168,6 +211,7 @@ const SERIES_FILTERS = [
   { label: "Data & AI First", value: "Data & AI First", color: "#0F735E" },
   { label: "OT Security First", value: "OT Security First", color: "#D34B9A" },
   { label: "Opex First", value: "Opex First", color: "#7C3AED" },
+  { label: "NetworkFirst", value: "NetworkFirst", color: "#C9935A" },
 ];
 
 // Group events by month
@@ -221,6 +265,11 @@ export default function AnnualTimeline() {
   const [isDragging, setIsDragging] = useState(false);
   const [activeMonth, setActiveMonth] = useState<number | null>(null);
   const [activeSeries, setActiveSeries] = useState<string>("all");
+
+  // Drag-to-scroll refs
+  const dragStartX = useRef(0);
+  const dragScrollLeft = useRef(0);
+  const dragDistance = useRef(0);
   
   const nextEvent = useMemo(() => getNextEvent(), []);
   
@@ -287,6 +336,27 @@ export default function AnnualTimeline() {
         behavior: "smooth",
       });
     }
+  }, []);
+
+  // Drag-to-scroll handlers
+  const handleDragStart = useCallback((e: React.MouseEvent) => {
+    if (isTouch || !scrollRef.current) return;
+    setIsDragging(true);
+    dragStartX.current = e.pageX;
+    dragScrollLeft.current = scrollRef.current.scrollLeft;
+    dragDistance.current = 0;
+  }, [isTouch]);
+
+  const handleDragMove = useCallback((e: React.MouseEvent) => {
+    if (!isDragging || !scrollRef.current) return;
+    e.preventDefault();
+    const dx = e.pageX - dragStartX.current;
+    dragDistance.current = Math.abs(dx);
+    scrollRef.current.scrollLeft = dragScrollLeft.current - dx;
+  }, [isDragging]);
+
+  const handleDragEnd = useCallback(() => {
+    setIsDragging(false);
   }, []);
 
   return (
@@ -413,10 +483,18 @@ export default function AnnualTimeline() {
               className="timeline-scroll"
               style={{
                 cursor: isTouch ? "default" : (isDragging ? "grabbing" : "grab"),
+                userSelect: isDragging ? "none" : "auto",
               }}
-              onMouseDown={() => !isTouch && setIsDragging(true)}
-              onMouseUp={() => setIsDragging(false)}
-              onMouseLeave={() => setIsDragging(false)}
+              onMouseDown={handleDragStart}
+              onMouseMove={handleDragMove}
+              onMouseUp={handleDragEnd}
+              onMouseLeave={handleDragEnd}
+              onClickCapture={(e) => {
+                if (dragDistance.current > 5) {
+                  e.preventDefault();
+                  e.stopPropagation();
+                }
+              }}
             >
               {/* Left Spacer */}
               <div className="timeline-spacer" />
@@ -467,6 +545,37 @@ export default function AnnualTimeline() {
 
         {/* Scroll fade hints */}
         <div className="timeline-fade-right" />
+
+        {/* Bottom CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          style={{ textAlign: "center", marginTop: "clamp(32px, 4vw, 48px)", maxWidth: 1320, margin: "clamp(32px, 4vw, 48px) auto 0", padding: "0 clamp(16px, 4vw, 60px)" }}
+        >
+          <Link
+            href="/events"
+            className="timeline-bottom-cta"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 8,
+              padding: "14px 36px",
+              borderRadius: 60,
+              border: "1px solid rgba(255,255,255,0.12)",
+              background: "rgba(255,255,255,0.03)",
+              color: "rgba(255,255,255,0.75)",
+              fontFamily: "var(--font-outfit)",
+              fontSize: 14,
+              fontWeight: 600,
+              textDecoration: "none",
+              transition: "all 0.3s ease",
+              backdropFilter: "blur(8px)",
+            }}
+          >
+            View All Events →
+          </Link>
+        </motion.div>
       </div>
 
       <style jsx global>{`
@@ -984,6 +1093,12 @@ export default function AnnualTimeline() {
             display: none;
           }
         }
+
+        .timeline-bottom-cta:hover {
+          border-color: var(--orange) !important;
+          color: var(--orange) !important;
+          background: rgba(232,101,26,0.06) !important;
+        }
       `}</style>
     </section>
   );
@@ -1073,19 +1188,36 @@ function TimelineCard({
 
           {/* Top Row: Date + Badge */}
           <div className="flex items-start justify-between" style={{ marginBottom: "clamp(14px, 2vw, 20px)" }}>
-            <span
-              className="timeline-card-date"
-              style={{
-                fontFamily: "var(--font-display)",
-                fontSize: isNext ? 48 : 40,
-                fontWeight: 800,
-                letterSpacing: "-2px",
-                color: "white",
-                lineHeight: 1,
-              }}
-            >
-              {dayNum}
-            </span>
+            <div>
+              <span
+                className="timeline-card-date"
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: isNext ? 48 : 40,
+                  fontWeight: 800,
+                  letterSpacing: "-2px",
+                  color: "white",
+                  lineHeight: 1,
+                  display: "block",
+                }}
+              >
+                {dayNum}
+              </span>
+              <span
+                style={{
+                  fontFamily: "var(--font-outfit)",
+                  fontSize: 9,
+                  fontWeight: 500,
+                  letterSpacing: "0.8px",
+                  textTransform: "uppercase",
+                  color: "rgba(255,255,255,0.3)",
+                  marginTop: 6,
+                  display: "block",
+                }}
+              >
+                {event.dateDisplay}
+              </span>
+            </div>
             
             <div className="flex flex-col items-end gap-2">
               {isNext && (
@@ -1095,18 +1227,18 @@ function TimelineCard({
                     alignItems: "center",
                     gap: 5,
                     padding: "4px 10px",
-                    background: "rgba(232, 101, 26, 0.15)",
-                    border: "1px solid rgba(232, 101, 26, 0.3)",
+                    background: `${accentColor}25`,
+                    border: `1px solid ${accentColor}4D`,
                     borderRadius: 50,
                     fontFamily: "var(--font-outfit)",
                     fontSize: 8,
                     fontWeight: 700,
                     letterSpacing: "1.5px",
                     textTransform: "uppercase",
-                    color: "#E8651A",
+                    color: accentColor,
                   }}
                 >
-                  <PulsingDot color="#E8651A" />
+                  <PulsingDot color={accentColor} />
                   Next
                 </span>
               )}
@@ -1196,16 +1328,33 @@ function TimelineCard({
           <div className="flex flex-col gap-1.5" style={{ marginBottom: "clamp(14px, 2vw, 20px)" }}>
             <div className="flex items-center gap-2">
               <MapPinIcon />
-              <span
-                style={{
-                  fontFamily: "var(--font-outfit)",
-                  fontSize: 11,
-                  fontWeight: 400,
-                  color: "rgba(255,255,255,0.5)",
-                }}
-              >
-                {event.location}
-              </span>
+              <div>
+                <span
+                  style={{
+                    fontFamily: "var(--font-outfit)",
+                    fontSize: 11,
+                    fontWeight: 400,
+                    color: "rgba(255,255,255,0.5)",
+                    display: "block",
+                  }}
+                >
+                  {event.location}
+                </span>
+                {event.venue && event.venue !== "Venue TBA" && (
+                  <span
+                    style={{
+                      fontFamily: "var(--font-outfit)",
+                      fontSize: 10,
+                      fontWeight: 400,
+                      color: "rgba(255,255,255,0.3)",
+                      display: "block",
+                      marginTop: 2,
+                    }}
+                  >
+                    {event.venue}
+                  </span>
+                )}
+              </div>
             </div>
             <div className="flex items-center gap-2">
               <UsersIcon />
@@ -1217,7 +1366,7 @@ function TimelineCard({
                   color: "rgba(255,255,255,0.5)",
                 }}
               >
-                {event.attendees} Delegates
+                {event.attendees} {event.series === "NetworkFirst" ? "Executives" : "Delegates"}
               </span>
             </div>
           </div>

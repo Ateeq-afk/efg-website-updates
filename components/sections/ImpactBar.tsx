@@ -9,12 +9,12 @@ const BG_IMAGE = `${S3_BASE}/4N8A0290.JPG`;
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 const metrics = [
-  { value: 5000, suffix: "+", label: "Senior Delegates", hasComma: true },
+  { value: 25000, suffix: "+", label: "Senior Delegates", hasComma: true },
   { value: 16,   suffix: "",  label: "Editions Delivered", hasComma: false },
   { value: 6,    suffix: "",  label: "Nations", hasComma: false },
   { value: 12,   suffix: "+",  label: "Cities Worldwide", hasComma: false },
-  { value: 200,  suffix: "+", label: "Expert Speakers", hasComma: false },
-  { value: 99,   suffix: "+", label: "Strategic Sponsors", hasComma: false },
+  { value: 500,  suffix: "+", label: "Expert Speakers", hasComma: false },
+  { value: 200,  suffix: "+", label: "Strategic Sponsors", hasComma: false },
 ];
 
 const headlineWords = [

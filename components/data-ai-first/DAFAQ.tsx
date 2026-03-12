@@ -22,7 +22,7 @@ const faqs = [
     id: 3,
     question: "When and where is the first edition?",
     answer:
-      "Data & AI First launches May 18, 2026 in Kuwait City, Kuwait — with Abu Dhabi, Riyadh, and Doha editions scheduled for 2027.",
+      "Data & AI First launches June 10, 2026 in Kuwait City, Kuwait — with Abu Dhabi, Riyadh, and Doha editions scheduled for 2027.",
   },
   {
     id: 4,

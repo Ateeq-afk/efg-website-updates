@@ -28,7 +28,7 @@ const timeline = [
     id: 3,
     label: "3rd Edition",
     name: "Cyber First Kuwait",
-    date: "Apr 21, 2026",
+    date: "Jun 9, 2026",
     city: "Kuwait City",
     venue: "Jumeirah Messilah Beach Hotel",
     status: "upcoming" as const,

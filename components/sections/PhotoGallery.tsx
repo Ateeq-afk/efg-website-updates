@@ -33,7 +33,7 @@ const categories: Category[] = [
     images: [
       { src: `${OPEX}/4N8A1702.JPG`, caption: "Opex First UAE — executive panel" },
       { src: `${CFK}/cyber21-04-324.jpg`, caption: "Cyber First Kuwait — LED stage" },
-      { src: `${OT}/4N8A0320.JPG`, caption: "OT Security First — panel discussion" },
+      { src: `${OT}/4N8A0420.JPG`, caption: "OT Security First — panel discussion" },
       { src: `${GOOD}/4N8A0010.JPG`, caption: "Keynote presentation — main stage" },
     ],
   },
@@ -53,9 +53,9 @@ const categories: Category[] = [
     id: "speakers",
     label: "The Voices",
     subtitle: "C-Suite & CISO Speakers",
-    heroImage: `${OT}/4N8A0250.JPG`,
+    heroImage: `${OT}/4N8A0394.JPG`,
     images: [
-      { src: `${OT}/4N8A0250.JPG`, caption: "OT Security First — keynote address" },
+      { src: `${OT}/4N8A0394.JPG`, caption: "OT Security First — keynote address" },
       { src: `${OPEX}/4N8A1666.JPG`, caption: "Opex First UAE — operations expert" },
       { src: `${CFK}/cyber21-04-550.jpg`, caption: "Cyber First — executive keynote" },
       { src: `${GOOD}/4N8A0122.JPG`, caption: "Industry leader — main stage address" },
@@ -81,7 +81,7 @@ const categories: Category[] = [
     images: [
       { src: `${OPEX}/4N8A1848.JPG`, caption: "Opex First — delegate seating" },
       { src: `${CFK}/cyber21-04-160.jpg`, caption: "Full house — grand ballroom panorama" },
-      { src: `${OT}/4N8A0180.JPG`, caption: "OT Security — engaged audience" },
+      { src: `${GOOD}/4N8A0160.JPG`, caption: "OT Security — engaged audience" },
       { src: `${GOOD}/4N8A0065.JPG`, caption: "Focus — depth of field" },
     ],
   },

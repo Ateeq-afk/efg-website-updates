@@ -276,7 +276,7 @@ export default function SeriesHero() {
         accentColor={COLORS.cyan}
         eventName="Cyber First Kuwait"
         location="Kuwait City, Kuwait"
-        targetDate={new Date("2026-04-21T09:00:00")}
+        targetDate={new Date("2026-06-09T09:00:00")}
         ctaText="Register"
         ctaHref="#register"
         angularRadius={false}

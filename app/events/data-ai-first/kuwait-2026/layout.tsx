@@ -5,9 +5,9 @@ const PAGE_URL = `${BASE_URL}/events/data-ai-first/kuwait-2026`;
 const OG_IMAGE = "https://efg-final.s3.eu-north-1.amazonaws.com/Good/4N8A0290.JPG";
 
 export const metadata: Metadata = {
-  title: "Data & AI First Kuwait 2026 | Data & AI Summit — 18 May, Jumeirah Messilah Beach",
+  title: "Data & AI First Kuwait 2026 | Data & AI Summit — 10 June, Jumeirah Messilah Beach",
   description:
-    "Kuwait's premier Data & AI leadership summit. 250+ CDOs, AI architects, and enterprise leaders. 18 May 2026 at Jumeirah Messilah Beach Hotel, Kuwait City. Turning Data & AI into Regulated, Profitable, and Scalable Solutions.",
+    "Kuwait's premier Data & AI leadership summit. 250+ CDOs, AI architects, and enterprise leaders. 10 June 2026 at Jumeirah Messilah Beach Hotel, Kuwait City. Turning Data & AI into Regulated, Profitable, and Scalable Solutions.",
   keywords: [
     "data AI conference Kuwait 2026",
     "artificial intelligence summit Kuwait",
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     "data analytics conference",
     "CDO summit Kuwait",
     "Data AI First Kuwait",
-    "AI event May 2026",
+    "AI event June 2026",
     "machine learning conference Kuwait",
     "enterprise AI summit",
     "Kuwait Vision 2035 AI",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Data & AI First Kuwait 2026 — Data & AI Summit",
     description:
-      "250+ CDOs, AI architects, and enterprise leaders. 18 May 2026. Jumeirah Messilah Beach Hotel, Kuwait City. Turning Data & AI into Regulated, Profitable, and Scalable Solutions.",
+      "250+ CDOs, AI architects, and enterprise leaders. 10 June 2026. Jumeirah Messilah Beach Hotel, Kuwait City. Turning Data & AI into Regulated, Profitable, and Scalable Solutions.",
     url: PAGE_URL,
     siteName: "Events First Group",
     images: [
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Data & AI First Kuwait 2026 — Data & AI Summit",
     description:
-      "250+ CDOs and AI leaders. 18 May 2026. Jumeirah Messilah Beach Hotel, Kuwait City.",
+      "250+ CDOs and AI leaders. 10 June 2026. Jumeirah Messilah Beach Hotel, Kuwait City.",
     images: [OG_IMAGE],
   },
 };
@@ -66,8 +66,8 @@ export default function DataAIKuwaitLayout({
             name: "Data & AI First Kuwait 2026 — Data & AI Summit",
             description:
               "Kuwait's premier Data & AI leadership summit bringing together CDOs, AI architects, data scientists, and enterprise leaders to shape Kuwait's AI-driven future aligned with Vision 2035.",
-            startDate: "2026-05-18T08:00:00+03:00",
-            endDate: "2026-05-18T18:00:00+03:00",
+            startDate: "2026-06-10T08:00:00+03:00",
+            endDate: "2026-06-10T18:00:00+03:00",
             eventStatus: "https://schema.org/EventScheduled",
             eventAttendanceMode:
               "https://schema.org/OfflineEventAttendanceMode",

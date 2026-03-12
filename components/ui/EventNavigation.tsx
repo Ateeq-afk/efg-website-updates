@@ -22,7 +22,7 @@ const EVENT_CONFIGS: Record<string, {
     shortName: "Data & AI First",
     color: "#0F735E",
     colorBright: "#14A882",
-    date: "18 May 2026",
+    date: "10 June 2026",
     location: "Kuwait City",
     logo: "/logos/data-ai-first-kuwait-logo.png",
     logoFilter: "invert(1) brightness(1)",
@@ -39,7 +39,7 @@ const EVENT_CONFIGS: Record<string, {
     shortName: "Cyber First",
     color: "#01BBF5",
     colorBright: "#4DD4FF",
-    date: "21 April 2026",
+    date: "9 June 2026",
     location: "Kuwait City",
     logo: "https://efg-final.s3.eu-north-1.amazonaws.com/logos/cyber-first-kuwait-white.svg",
     navLinks: [

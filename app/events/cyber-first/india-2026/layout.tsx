@@ -5,9 +5,9 @@ const PAGE_URL = `${BASE_URL}/events/cyber-first/india-2026`;
 const OG_IMAGE = "https://efg-final.s3.eu-north-1.amazonaws.com/Good/4N8A0030.JPG";
 
 export const metadata: Metadata = {
-  title: "Cyber First India 2026 | Delhi | Cybersecurity Summit — 11 June",
+  title: "Cyber First India 2026 | Delhi | Cybersecurity Summit — 16 June",
   description:
-    "Cyber Resilience for India's Digital Future. India's premier cybersecurity summit bringing together 350+ CISOs, government cyber leaders, and enterprise security executives. 11 June 2026, Delhi.",
+    "Cyber Resilience for India's Digital Future. India's premier cybersecurity summit bringing together 350+ CISOs, government cyber leaders, and enterprise security executives. 16 June 2026, Delhi.",
   keywords: [
     "cybersecurity conference India 2026",
     "CISO summit India",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Cyber First India 2026 — Delhi Edition",
     description:
-      "350+ CISOs and security leaders. 11 June 2026, Delhi. Cyber Resilience for India's Digital Future.",
+      "350+ CISOs and security leaders. 16 June 2026, Delhi. Cyber Resilience for India's Digital Future.",
     url: PAGE_URL,
     siteName: "Events First Group",
     images: [
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Cyber First India 2026 — Delhi Edition",
     description:
-      "350+ CISOs and security leaders. 11 June 2026, Delhi.",
+      "350+ CISOs and security leaders. 16 June 2026, Delhi.",
     images: [OG_IMAGE],
   },
 };
@@ -66,8 +66,8 @@ export default function CyberFirstIndiaLayout({
             name: "Cyber First India 2026 — Delhi Edition",
             description:
               "India's premier cybersecurity leadership summit bringing together CISOs, government cyber leaders, and enterprise security executives. Cyber Resilience for India's Digital Future.",
-            startDate: "2026-06-11T08:30:00+05:30",
-            endDate: "2026-06-11T18:00:00+05:30",
+            startDate: "2026-06-16T08:30:00+05:30",
+            endDate: "2026-06-16T18:00:00+05:30",
             eventStatus: "https://schema.org/EventScheduled",
             eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
             location: {

@@ -5,7 +5,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { COLORS, TYPOGRAPHY, ANIMATION, RADIUS, SHADOWS } from "@/lib/cyber-design-tokens";
 
-const EVENT_DATE = new Date("2026-04-21T09:00:00");
+const EVENT_DATE = new Date("2026-06-09T09:00:00");
 
 export default function MidPageCTA() {
   const ref = useRef<HTMLDivElement>(null);
@@ -65,7 +65,7 @@ export default function MidPageCTA() {
           >
             Cyber First Kuwait
             <span style={{ color: COLORS.textMuted, margin: "0 8px" }}>|</span>
-            <span style={{ color: COLORS.textTertiary }}>April 21, 2026</span>
+            <span style={{ color: COLORS.textTertiary }}>June 9, 2026</span>
           </span>
         </div>
 
