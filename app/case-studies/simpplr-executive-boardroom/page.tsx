@@ -25,7 +25,7 @@ export default function SimpplrCaseStudy() {
             />
             <div className="w-px h-8 bg-gray-200" />
             <Image 
-              src="/events-first-group_logo_alt.svg" 
+              src="/events-first-group_logo_dark.svg" 
               alt="Events First Group" 
               width={100}
               height={25}
@@ -61,58 +61,46 @@ export default function SimpplrCaseStudy() {
 
       {/* Slide 2: The Challenge */}
       <section className="min-h-screen bg-gray-50 flex items-center px-16 py-20">
-        <div className="max-w-7xl mx-auto grid grid-cols-2 gap-20 items-center">
-          <div>
-            <p className="text-[#FF6B4A] text-xs tracking-[2px] uppercase mb-4 font-semibold">01 / The Challenge</p>
-            <h2 className="text-5xl font-bold tracking-tight mb-8 leading-tight">
-              Reaching Decision-Makers Who Matter
-            </h2>
-            <p className="text-xl text-gray-600 leading-relaxed mb-6">
-              Simpplr, the AI-powered employee experience platform, sought to establish thought leadership among enterprise decision-makers in the MENA region.
-            </p>
-            <p className="text-xl text-gray-600 leading-relaxed">
-              Traditional webinars weren&apos;t delivering the intimate, high-value conversations needed to influence C-suite buyers.
-            </p>
-          </div>
-          <div className="relative h-[500px] rounded-2xl overflow-hidden shadow-2xl">
-            <Image 
-              src="https://images.unsplash.com/photo-1517502884422-41eaead166d4?w=800&h=1000&fit=crop&q=80"
-              alt="Executive boardroom"
-              fill
-              className="object-cover"
-            />
-          </div>
+        <div className="max-w-4xl mx-auto text-center">
+          <p className="text-[#FF6B4A] text-xs tracking-[2px] uppercase mb-4 font-semibold">01 / The Challenge</p>
+          <h2 className="text-5xl font-bold tracking-tight mb-8 leading-tight">
+            Reaching Decision-Makers Who Matter
+          </h2>
+          <p className="text-xl text-gray-600 leading-relaxed mb-6">
+            Simpplr, the AI-powered employee experience platform, sought to establish thought leadership among enterprise decision-makers in the MENA region.
+          </p>
+          <p className="text-xl text-gray-600 leading-relaxed">
+            Traditional webinars weren&apos;t delivering the intimate, high-value conversations needed to influence C-suite buyers.
+          </p>
         </div>
       </section>
 
       {/* Slide 3: The Solution */}
       <section className="min-h-screen flex items-center px-16 py-20">
-        <div className="max-w-7xl mx-auto grid grid-cols-2 gap-20 items-center">
-          <div className="relative h-[500px] rounded-2xl overflow-hidden shadow-2xl">
-            <Image 
-              src="https://images.unsplash.com/photo-1560439514-4e9645039924?w=800&h=1000&fit=crop&q=80"
-              alt="Executive networking"
-              fill
-              className="object-cover"
-            />
-          </div>
-          <div>
-            <p className="text-[#FF6B4A] text-xs tracking-[2px] uppercase mb-4 font-semibold">02 / The Solution</p>
-            <h2 className="text-5xl font-bold tracking-tight mb-8 leading-tight">
-              An Exclusive Executive Boardroom
-            </h2>
-            <p className="text-xl text-gray-600 leading-relaxed mb-8">
-              Events First Group designed a curated, invitation-only roundtable at Rosewood Abu Dhabi—bringing together senior technology and HR leaders for candid discussions.
-            </p>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="bg-gray-50 rounded-xl p-6">
-                <div className="text-3xl font-bold text-[#FF6B4A] mb-1">20</div>
-                <div className="text-sm text-gray-500">Target Executives</div>
-              </div>
-              <div className="bg-gray-50 rounded-xl p-6">
-                <div className="text-3xl font-bold text-[#FF6B4A] mb-1">5hr</div>
-                <div className="text-sm text-gray-500">Premium Experience</div>
-              </div>
+        <div className="max-w-4xl mx-auto text-center">
+          <p className="text-[#FF6B4A] text-xs tracking-[2px] uppercase mb-4 font-semibold">02 / The Solution</p>
+          <h2 className="text-5xl font-bold tracking-tight mb-8 leading-tight">
+            An Exclusive Executive Boardroom
+          </h2>
+          <p className="text-xl text-gray-600 leading-relaxed mb-12">
+            Events First Group designed a curated, invitation-only roundtable at Rosewood Abu Dhabi—bringing together senior technology and HR leaders for candid discussions.
+          </p>
+          <div className="grid grid-cols-4 gap-6">
+            <div className="bg-gray-50 rounded-xl p-8">
+              <div className="text-4xl font-bold text-[#FF6B4A] mb-2">20</div>
+              <div className="text-sm text-gray-500">Target Executives</div>
+            </div>
+            <div className="bg-gray-50 rounded-xl p-8">
+              <div className="text-4xl font-bold text-[#FF6B4A] mb-2">5hr</div>
+              <div className="text-sm text-gray-500">Premium Experience</div>
+            </div>
+            <div className="bg-gray-50 rounded-xl p-8">
+              <div className="text-4xl font-bold text-[#FF6B4A] mb-2">1</div>
+              <div className="text-sm text-gray-500">Exclusive Venue</div>
+            </div>
+            <div className="bg-gray-50 rounded-xl p-8">
+              <div className="text-4xl font-bold text-[#FF6B4A] mb-2">C-Suite</div>
+              <div className="text-sm text-gray-500">Only</div>
             </div>
           </div>
         </div>
@@ -176,7 +164,7 @@ export default function SimpplrCaseStudy() {
 
       {/* Slide 5: Audience */}
       <section className="min-h-screen flex items-center px-16 py-20">
-        <div className="max-w-6xl mx-auto w-full">
+        <div className="max-w-5xl mx-auto w-full">
           <div className="text-center mb-16">
             <p className="text-[#FF6B4A] text-xs tracking-[2px] uppercase mb-4 font-semibold">04 / The Audience</p>
             <h2 className="text-5xl font-bold tracking-tight mb-6">Who Attended</h2>
@@ -185,7 +173,7 @@ export default function SimpplrCaseStudy() {
             </p>
           </div>
           
-          <div className="grid grid-cols-4 gap-8">
+          <div className="grid grid-cols-4 gap-6">
             <AudienceCard percent="31%" title="CHROs" subtitle="Chief HR Officers" />
             <AudienceCard percent="27%" title="VP HR" subtitle="VP People & Culture" />
             <AudienceCard percent="23%" title="CIOs/CTOs" subtitle="Technology Leaders" />
@@ -318,7 +306,7 @@ export default function SimpplrCaseStudy() {
             </div>
             <div className="flex items-center gap-6">
               <Image 
-                src="/events-first-group_logo_alt.svg" 
+                src="/events-first-group_logo_dark.svg" 
                 alt="Events First Group" 
                 width={80}
                 height={20}
