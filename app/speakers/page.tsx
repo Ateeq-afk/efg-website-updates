@@ -1024,7 +1024,7 @@ function HighlightVideoCard({
           {/* Thumbnail */}
           <img
             src={`https://img.youtube.com/vi/${videoId}/hqdefault.jpg`}
-            alt="Video thumbnail"
+            alt="Events First Group video highlight thumbnail"
             style={{
               position: "absolute",
               inset: 0,

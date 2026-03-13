@@ -490,7 +490,7 @@ function HeroSection() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="https://cyberfirstseries.com/wp-content/uploads/2024/12/Cyber-First-Series-Pictures-and-Sponsors-30.jpg"
-          alt=""
+          alt="Cyber First Kuwait 2026 cybersecurity summit"
           className="w-full h-full object-cover"
           style={{ filter: "brightness(0.55) saturate(0.85)" }}
         />
@@ -881,7 +881,7 @@ function StatsBar() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="https://cyberfirstseries.com/wp-content/uploads/2024/12/Cyber-First-Series-Pictures-and-Sponsors-29.jpg"
-          alt=""
+          alt="Cyber First Kuwait 2026 cybersecurity summit"
           className="w-full h-full object-cover"
           style={{ filter: "brightness(0.25) saturate(0.7)" }}
         />
@@ -3078,7 +3078,7 @@ function ExpectCard({
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={item.image}
-            alt=""
+            alt="Cyber First Kuwait 2026 cybersecurity summit"
             className="w-full h-full object-cover"
             style={{
               filter: hovered ? "brightness(0.2) saturate(0.5)" : "brightness(0.08) saturate(0.3)",
@@ -3541,7 +3541,7 @@ function WhoShouldAttend() {
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src="https://efg-final.s3.eu-north-1.amazonaws.com/cyberbg.jpg"
-        alt=""
+        alt="Cyber First Kuwait 2026 cybersecurity summit"
         aria-hidden="true"
         className="absolute inset-0 w-full h-full object-cover pointer-events-none"
         style={{ filter: "brightness(0.28) saturate(0.8)" }}
@@ -4117,7 +4117,7 @@ function AwardsSection() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={`${WP}/2024/12/Cyber-First-Series-Pictures-and-Sponsors-28.jpg`}
-            alt=""
+            alt="Cyber First Kuwait 2026 cybersecurity summit"
             aria-hidden="true"
             className="absolute inset-0 w-full h-full object-cover pointer-events-none"
             style={{ filter: "brightness(0.15) saturate(0.6)" }}
@@ -4458,7 +4458,7 @@ function SplitCTA() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="https://cyberfirstseries.com/wp-content/uploads/2024/12/Cyber-First-Series-Pictures-and-Sponsors-28.jpg"
-          alt=""
+          alt="Cyber First Kuwait 2026 cybersecurity summit"
           className="w-full h-full object-cover"
           style={{ filter: "brightness(0.15) saturate(0.6)" }}
         />

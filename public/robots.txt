@@ -9,8 +9,14 @@ Sitemap: https://eventsfirstgroup.com/sitemap.xml
 
 # Disallow admin/internal paths
 Disallow: /api/
+Disallow: /admin/
 Disallow: /login
 Disallow: /signup
 Disallow: /portal
 Disallow: /profile
+Disallow: /complete-profile
+Disallow: /callback
 Disallow: /_next/
+
+# Crawl-delay for polite crawling
+Crawl-delay: 1

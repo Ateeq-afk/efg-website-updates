@@ -5,6 +5,41 @@ import { motion, useInView, AnimatePresence } from "framer-motion";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
+// Video schema for event highlights
+function EventHighlightsSchema({ videos }: { videos: { id: string; title: string }[] }) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Events First Group Event Highlights",
+    description: "Keynotes, panels, and conversations captured live from Events First Group summits",
+    numberOfItems: videos.length,
+    itemListElement: videos.slice(0, 6).map((video, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "VideoObject",
+        name: `Events First Group ${video.title}`,
+        description: "Live capture from Events First Group technology summit",
+        thumbnailUrl: `https://img.youtube.com/vi/${video.id}/hqdefault.jpg`,
+        embedUrl: `https://www.youtube.com/embed/${video.id}`,
+        uploadDate: "2025-01-01",
+        publisher: {
+          "@type": "Organization",
+          name: "Events First Group",
+          url: "https://eventsfirstgroup.com",
+        },
+      },
+    })),
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 // HIGHLIGHT VIDEOS DATA
 // ─────────────────────────────────────────────────────────────────────────────
@@ -70,9 +105,9 @@ function HighlightVideoCard({
       ) : (
         <>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy"
             src={`https://img.youtube.com/vi/${videoId}/hqdefault.jpg`}
-            alt="Video thumbnail"
+            alt="Events First Group conference highlights"
             className="eh-thumb"
           />
           <div className="eh-overlay" />
@@ -110,6 +145,9 @@ export default function EventHighlights() {
 
   return (
     <section ref={sectionRef} className="eh-section">
+      {/* Video Schema for SEO */}
+      <EventHighlightsSchema videos={HIGHLIGHT_VIDEOS} />
+
       {/* Subtle top glow */}
       <div className="eh-glow" />
 

@@ -555,7 +555,7 @@ function HeroImage({
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={src}
-        alt=""
+        alt="Events First Group summit - enterprise technology leaders networking"
         className="w-full h-[120%] object-cover"
         style={{
           filter: "brightness(0.6)",

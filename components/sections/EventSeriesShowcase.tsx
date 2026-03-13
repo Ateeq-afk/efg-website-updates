@@ -386,9 +386,9 @@ function PortalCard({
         }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <img loading="lazy"
           src={series.image}
-          alt=""
+          alt={`${series.title} event series - ${series.tagline}`}
           className="w-full h-full object-cover transition-all duration-800 group-hover:scale-108"
           style={{
             filter: "brightness(0.38) saturate(0.9)",

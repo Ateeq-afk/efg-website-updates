@@ -604,7 +604,7 @@ function StatsBar() {
     <section ref={ref} style={{ position: "relative", padding: "clamp(60px, 8vw, 100px) 0", overflow: "hidden" }}>
       {/* African tech aesthetic background */}
       <div className="absolute inset-0">
-        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1600&q=80" alt="" className="w-full h-full object-cover" style={{ filter: "brightness(0.15) saturate(0.6) sepia(0.1)" }} />
+        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1600&q=80" alt="Cyber First Kenya 2026 cybersecurity conference Nairobi" className="w-full h-full object-cover" style={{ filter: "brightness(0.15) saturate(0.6) sepia(0.1)" }} />
       </div>
       <div className="absolute inset-0 pointer-events-none" style={{ background: `linear-gradient(180deg, rgba(5,8,16,0.9) 0%, rgba(5,8,16,0.6) 50%, rgba(5,8,16,0.95) 100%)` }} />
       <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 50% 50% at 50% 50%, ${C}08, transparent 70%)` }} />
@@ -1953,7 +1953,7 @@ function ExpectCard({
         <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 0 }}>
           <img
             src={item.image}
-            alt=""
+            alt="Cyber First Kenya 2026 cybersecurity conference Nairobi"
             className="w-full h-full object-cover"
             style={{
               filter: hovered ? "brightness(0.2) saturate(0.5)" : "brightness(0.08) saturate(0.3)",
@@ -2061,7 +2061,7 @@ function WhoShouldAttend() {
     >
       <img
         src="https://efg-final.s3.eu-north-1.amazonaws.com/cyberbg.jpg"
-        alt=""
+        alt="Cyber First Kenya 2026 cybersecurity conference Nairobi"
         aria-hidden="true"
         className="absolute inset-0 w-full h-full object-cover pointer-events-none"
         style={{ filter: "brightness(0.28) saturate(0.8)" }}
@@ -2326,7 +2326,7 @@ function SplitCTA() {
       <div className="absolute inset-0">
         <img
           src="https://cyberfirstseries.com/wp-content/uploads/2024/12/Cyber-First-Series-Pictures-and-Sponsors-28.jpg"
-          alt=""
+          alt="Cyber First Kenya 2026 cybersecurity conference Nairobi"
           className="w-full h-full object-cover"
           style={{ filter: "brightness(0.15) saturate(0.6)" }}
         />

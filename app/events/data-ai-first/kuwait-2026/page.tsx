@@ -15,6 +15,7 @@ import { Footer } from "@/components/sections";
 import { NeuralConstellation, DotMatrixGrid } from "@/components/effects";
 import { submitForm, isWorkEmail, COUNTRY_CODES, validatePhone } from "@/lib/form-helpers";
 import type { CountryCode } from "@/lib/form-helpers";
+import { FAQSchema } from "@/lib/schemas";
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 const E = "#0F735E";
@@ -334,7 +335,7 @@ function HeroSection() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/ai-photos.png"
-          alt=""
+          alt="Data AI First Kuwait 2026 artificial intelligence summit"
           aria-hidden="true"
           className="daik-hero-img absolute"
           style={{
@@ -2406,7 +2407,7 @@ function AtmosphereDivider() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="https://images.unsplash.com/photo-1573164713988-8665fc963095?w=1920&q=80"
-          alt=""
+          alt="Data AI First Kuwait 2026 artificial intelligence summit"
           className="w-full h-full object-cover"
           style={{ filter: "brightness(0.25) saturate(0.5)", transform: "scale(1.2)" }}
         />
@@ -3123,7 +3124,7 @@ function AwardsSection() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&q=80"
-            alt=""
+            alt="Data AI First Kuwait 2026 artificial intelligence summit"
             aria-hidden="true"
             className="absolute inset-0 w-full h-full object-cover pointer-events-none"
             style={{ filter: "brightness(0.15) saturate(0.6)" }}
@@ -3480,7 +3481,7 @@ function WhoShouldAttend() {
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&q=80"
-        alt=""
+        alt="Data AI First Kuwait 2026 artificial intelligence summit"
         aria-hidden="true"
         className="absolute inset-0 w-full h-full object-cover pointer-events-none"
         style={{ opacity: 0.07 }}
@@ -4563,6 +4564,12 @@ function FAQSection() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
+  // Map FAQs for schema
+  const faqSchemaItems = FAQS.map(faq => ({
+    question: faq.q,
+    answer: faq.a,
+  }));
+
   return (
     <section
       ref={ref}
@@ -4573,6 +4580,9 @@ function FAQSection() {
         overflow: "hidden",
       }}
     >
+      {/* FAQ Schema for SEO */}
+      <FAQSchema items={faqSchemaItems} />
+
       <div
         className="daik-faq-grid"
         style={{
@@ -5141,7 +5151,7 @@ function SplitCTA() {
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1920&q=80"
-        alt=""
+        alt="Data AI First Kuwait 2026 artificial intelligence summit"
         className="absolute inset-0 w-full h-full object-cover pointer-events-none"
         style={{ filter: "brightness(0.08) saturate(0.3)" }}
       />

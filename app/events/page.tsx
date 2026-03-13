@@ -998,7 +998,7 @@ function SeriesCard({
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={series.image}
-        alt=""
+        alt={`${series.title} - ${series.tagline} - ${series.nextCity}`}
         className="absolute inset-0 w-full h-full object-cover"
         style={{
           filter: hovered
@@ -2123,7 +2123,7 @@ function EventsUpNext() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={ev.image}
-            alt=""
+            alt="Events First Group technology summit"
             style={{
               width: "100%",
               height: "100%",
@@ -4280,7 +4280,7 @@ function HighlightVideoCard({
         <>
           <img
             src={`https://img.youtube.com/vi/${videoId}/hqdefault.jpg`}
-            alt="Video thumbnail"
+            alt="Events First Group event highlights video"
             style={{
               position: "absolute",
               inset: 0,

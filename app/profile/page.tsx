@@ -5,6 +5,18 @@ import { createClient } from "@/lib/supabase"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 
+// Prevent search engine indexing of profile
+function NoIndexMeta() {
+  useEffect(() => {
+    const meta = document.createElement('meta');
+    meta.name = 'robots';
+    meta.content = 'noindex, nofollow';
+    document.head.appendChild(meta);
+    return () => { document.head.removeChild(meta); };
+  }, []);
+  return null;
+}
+
 type Industry = { id: string; name: string }
 type Interest = { id: string; name: string }
 
@@ -185,6 +197,7 @@ export default function ProfilePage() {
 
   return (
     <div className="profile-page">
+      <NoIndexMeta />
       <div className="profile-gradient-mesh" />
       <div className="profile-noise" />
       

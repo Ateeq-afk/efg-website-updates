@@ -1,19 +1,20 @@
 import type { Metadata } from "next";
+import { BreadcrumbSchema } from "@/lib/schemas";
 
 const BASE_URL = "https://eventsfirstgroup.com";
 const PAGE_URL = `${BASE_URL}/events/opex-first`;
 const OG_IMAGE = "https://efg-final.s3.eu-north-1.amazonaws.com/Good/4N8A0290.JPG";
 
 export const metadata: Metadata = {
-  title: "Opex First Series | The Premier Operational Excellence Summit",
+  title: "OPEX First | Operational Excellence Summit Saudi Arabia | COO Conference",
   description:
-    "Opex First brings together COOs, excellence leaders, and transformation architects. Where efficiency meets excellence — redefining operational brilliance across industries.",
+    "The premier Operational Excellence summit in Saudi Arabia & Middle East. OPEX First brings together COOs, excellence leaders, and transformation architects in Riyadh & GCC.",
   keywords: [
-    "operational excellence summit",
-    "OPEX conference",
-    "COO summit",
-    "business transformation conference",
-    "process excellence event",
+    "operational excellence summit Saudi Arabia",
+    "OPEX conference Riyadh",
+    "COO summit Middle East",
+    "business transformation conference GCC",
+    "process excellence event UAE",
     "Opex First",
     "continuous improvement summit",
     "lean six sigma conference",
@@ -56,6 +57,13 @@ export default function OpexFirstLayout({
 }) {
   return (
     <>
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: BASE_URL },
+          { name: "Events", url: `${BASE_URL}/events` },
+          { name: "OPEX First", url: PAGE_URL },
+        ]}
+      />
       {/* EventSeries structured data — JSON-LD */}
       <script
         type="application/ld+json"

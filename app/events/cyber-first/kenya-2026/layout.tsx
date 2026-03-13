@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { BreadcrumbSchema } from "@/lib/schemas";
 
 const BASE_URL = "https://eventsfirstgroup.com";
 const PAGE_URL = `${BASE_URL}/events/cyber-first/kenya-2026`;
@@ -56,6 +57,14 @@ export default function CyberFirstKenyaLayout({
 }) {
   return (
     <>
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: BASE_URL },
+          { name: "Events", url: `${BASE_URL}/events` },
+          { name: "Cyber First", url: `${BASE_URL}/events/cyber-first` },
+          { name: "Kenya 2026", url: PAGE_URL },
+        ]}
+      />
       {/* Event structured data — JSON-LD */}
       <script
         type="application/ld+json"

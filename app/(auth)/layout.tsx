@@ -1,5 +1,19 @@
 "use client"
 
+import { useEffect } from "react"
+
+// Prevent search engine indexing of auth pages
+function NoIndexMeta() {
+  useEffect(() => {
+    const meta = document.createElement('meta');
+    meta.name = 'robots';
+    meta.content = 'noindex, nofollow';
+    document.head.appendChild(meta);
+    return () => { document.head.removeChild(meta); };
+  }, []);
+  return null;
+}
+
 export default function AuthLayout({
   children,
 }: {
@@ -7,6 +21,7 @@ export default function AuthLayout({
 }) {
   return (
     <div className="auth-layout">
+      <NoIndexMeta />
       <div className="auth-gradient-mesh" />
       <div className="auth-noise" />
       <div className="auth-content">

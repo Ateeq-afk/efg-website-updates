@@ -7,6 +7,7 @@ import { useParams } from "next/navigation";
 import { supabase } from "@/lib/supabase/client";
 import type { SponsorWithEvents } from "@/lib/supabase/types";
 import { Footer } from "@/components/sections";
+import { OrganizationSchema, BreadcrumbSchema } from "@/lib/schemas";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // CONSTANTS
@@ -419,6 +420,26 @@ export default function SponsorDetailPage() {
 
   return (
     <div>
+      {/* JSON-LD Structured Data */}
+      {sponsor && (
+        <>
+          <OrganizationSchema
+            name={sponsor.name}
+            description={description || undefined}
+            logo={sponsor.logo_url || undefined}
+            url={sponsor.website_url || undefined}
+            slug={slug}
+          />
+          <BreadcrumbSchema
+            items={[
+              { name: "Home", url: "https://eventsfirstgroup.com" },
+              { name: "Sponsors & Partners", url: "https://eventsfirstgroup.com/sponsors-and-partners" },
+              { name: sponsor.name, url: `https://eventsfirstgroup.com/sponsors-and-partners/${slug}` },
+            ]}
+          />
+        </>
+      )}
+
       {/* ── HEADER SECTION ── */}
       <section
         style={{

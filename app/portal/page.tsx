@@ -5,6 +5,18 @@ import { createClient } from "@/lib/supabase"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 
+// Prevent search engine indexing of portal
+function NoIndexMeta() {
+  useEffect(() => {
+    const meta = document.createElement('meta');
+    meta.name = 'robots';
+    meta.content = 'noindex, nofollow';
+    document.head.appendChild(meta);
+    return () => { document.head.removeChild(meta); };
+  }, []);
+  return null;
+}
+
 type Profile = {
   id: string
   full_name: string
@@ -190,6 +202,7 @@ export default function PortalPage() {
 
   return (
     <div className="portal">
+      <NoIndexMeta />
       {/* Header */}
       <header className="portal-header">
         <div className="header-content">

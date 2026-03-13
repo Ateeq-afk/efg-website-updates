@@ -263,7 +263,7 @@ function MainThumbnail({
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={thumbnail}
-        alt="Video thumbnail"
+        alt="Data AI First summit video thumbnail"
         className="w-full h-full object-cover transition-all"
         style={{
           filter: isHovered

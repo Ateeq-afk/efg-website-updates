@@ -14,6 +14,7 @@ import { useParams } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import type { PostWithAuthor } from "@/lib/supabase";
 import { Footer } from "@/components/sections";
+import { ArticleSchema, BreadcrumbSchema } from "@/lib/schemas";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // CONSTANTS
@@ -1223,6 +1224,25 @@ export default function ArticleDetailPage() {
 
   return (
     <div>
+      {/* JSON-LD Structured Data */}
+      <ArticleSchema
+        title={post.title}
+        description={post.excerpt || post.subtitle || undefined}
+        image={post.cover_image_url || undefined}
+        publishedAt={post.published_at}
+        updatedAt={post.updated_at || undefined}
+        authorName={post.authors?.name}
+        slug={slug}
+        category={CATEGORY_MAP[post.category] || post.category}
+      />
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: "https://eventsfirstgroup.com" },
+          { name: "Insights", url: "https://eventsfirstgroup.com/insights" },
+          { name: post.title, url: `https://eventsfirstgroup.com/insights/${slug}` },
+        ]}
+      />
+
       <ReadingProgressBar />
 
       {/* ── BACK NAV + HEADER ── */}

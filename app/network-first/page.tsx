@@ -7,6 +7,7 @@ import { Footer } from "@/components/sections";
 import NetworkFirst from "@/components/sections/NetworkFirst";
 import { submitForm, isWorkEmail, COUNTRY_CODES, validatePhone } from "@/lib/form-helpers";
 import type { FormType, CountryCode } from "@/lib/form-helpers";
+import { FAQSchema } from "@/lib/schemas";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // DESIGN SYSTEM — White + Gold Only
@@ -313,7 +314,7 @@ function Hero() {
   return (
     <section ref={ref} style={{ position: "relative", height: "100vh", minHeight: 700, overflow: "hidden" }}>
       <motion.div style={{ position: "absolute", inset: 0, y, scale }}>
-        <img src={`${S3}/network-first/gallery-03.jpg`} alt="" style={{ width: "100%", height: "120%", objectFit: "cover", filter: "brightness(0.4)" }} />
+        <img src={`${S3}/network-first/gallery-03.jpg`} alt="Network First executive boardroom session" style={{ width: "100%", height: "120%", objectFit: "cover", filter: "brightness(0.4)" }} />
       </motion.div>
       <div style={{ position: "absolute", inset: 0, background: `linear-gradient(to bottom, ${BG} 0%, transparent 20%, transparent 70%, ${BG} 100%)` }} />
 
@@ -375,7 +376,7 @@ function TrustStrip() {
       <p style={{ fontSize: 11, color: GOLD, letterSpacing: "0.2em", textTransform: "uppercase", textAlign: "center", marginBottom: 24 }}>Trusted By</p>
       <motion.div animate={{ x: ["0%", "-50%"] }} transition={{ duration: 30, repeat: Infinity, ease: "linear" }} style={{ display: "flex", gap: 64, alignItems: "center" }}>
         {[...TRUST_LOGOS, ...TRUST_LOGOS].map((logo, i) => (
-          <img key={i} src={logo.src} alt="" style={{ height: 56, width: "auto", filter: "brightness(0) invert(1)", opacity: 0.85, flexShrink: 0 }} />
+          <img key={i} src={logo.src} alt="Network First executive boardroom session" style={{ height: 56, width: "auto", filter: "brightness(0) invert(1)", opacity: 0.85, flexShrink: 0 }} />
         ))}
       </motion.div>
     </section>
@@ -672,7 +673,7 @@ function TheFormat() {
       >
         <img
           src="/networkfirst/boardroom-executives.jpg"
-          alt=""
+          alt="Network First executive boardroom session"
           style={{ position: "absolute", top: 0, left: 0, width: "55%", height: "100%", objectFit: "cover", filter: "brightness(0.4) saturate(0.7)" }}
           className="format-bg-img"
         />
@@ -816,7 +817,7 @@ function CandidMoments() {
         <motion.div animate={{ x: ["0%", "-50%"] }} transition={{ duration: 45, repeat: Infinity, ease: "linear" }} style={{ display: "flex", gap: 12 }}>
           {[...CANDID_MOMENTS, ...CANDID_MOMENTS].map((src, i) => (
             <div key={i} style={{ flex: "0 0 320px", aspectRatio: "3/2", borderRadius: 12, overflow: "hidden" }}>
-              <img src={src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", filter: "brightness(0.85)" }} />
+              <img src={src} alt="Network First executive boardroom session" style={{ width: "100%", height: "100%", objectFit: "cover", filter: "brightness(0.85)" }} />
             </div>
           ))}
         </motion.div>
@@ -944,7 +945,7 @@ function EditorialBreak({ src }: { src: string }) {
 
   return (
     <motion.div ref={ref} initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 1.2 }} style={{ position: "relative", width: "100%", height: "60vh", minHeight: 360, maxHeight: 600, overflow: "hidden" }}>
-      <motion.img src={src} alt="" style={{ width: "100%", height: "130%", objectFit: "cover", filter: "brightness(0.5)", y }} />
+      <motion.img src={src} alt="Network First executive boardroom session" style={{ width: "100%", height: "130%", objectFit: "cover", filter: "brightness(0.5)", y }} />
       <div style={{ position: "absolute", inset: 0, background: `linear-gradient(to bottom, ${BG} 0%, transparent 15%, transparent 80%, ${BG} 100%)` }} />
     </motion.div>
   );
@@ -1441,7 +1442,7 @@ function UpcomingSection() {
             >
               {/* Background event photo */}
               <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 0 }}>
-                <img src={e.image} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", filter: "brightness(0.2) saturate(0.7)" }} />
+                <img src={e.image} alt="Network First executive boardroom session" style={{ width: "100%", height: "100%", objectFit: "cover", filter: "brightness(0.2) saturate(0.7)" }} />
                 <div style={{ position: "absolute", inset: 0, background: `linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.65) 100%)` }} />
               </div>
               {/* Gold top accent */}
@@ -1911,7 +1912,7 @@ function VideoTestimonials() {
               {/* Thumbnail */}
               <img
                 src={`https://img.youtube.com/vi/${v}/maxresdefault.jpg`}
-                alt=""
+                alt="Network First executive boardroom session"
                 style={{ width: "100%", height: "100%", objectFit: "cover", filter: "brightness(0.6)", transition: "filter 0.4s ease, transform 0.4s ease" }}
                 className="vt-thumb"
               />
@@ -1985,8 +1986,17 @@ function FAQSection() {
     { question: "What topics work best for boardrooms?", answer: "Topics that drive genuine peer conversation: digital transformation, cybersecurity strategy, AI implementation, cloud modernization, leadership challenges. We'll help you refine the angle during our discovery call." },
   ];
 
+  // Map FAQs for schema
+  const faqSchemaItems = faqs.map(faq => ({
+    question: faq.question,
+    answer: faq.answer,
+  }));
+
   return (
     <section ref={ref} style={{ position: "relative", padding: "clamp(100px, 12vw, 140px) 24px", background: BG_ALT, overflow: "hidden" }}>
+      {/* FAQ Schema for SEO */}
+      <FAQSchema items={faqSchemaItems} />
+
       {/* Ambient orb */}
       <div style={{ position: "absolute", top: "30%", right: "-10%", width: 500, height: 500, borderRadius: "50%", background: `radial-gradient(circle, ${GOLD_15} 0%, transparent 70%)`, pointerEvents: "none" }} />
 

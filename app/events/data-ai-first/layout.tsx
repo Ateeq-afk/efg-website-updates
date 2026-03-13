@@ -1,18 +1,20 @@
 import type { Metadata } from "next";
+import { BreadcrumbSchema } from "@/lib/schemas";
 
 const BASE_URL = "https://eventsfirstgroup.com";
 const PAGE_URL = `${BASE_URL}/events/data-ai-first`;
 const OG_IMAGE = "https://efg-final.s3.eu-north-1.amazonaws.com/Good/4N8A0290.JPG";
 
 export const metadata: Metadata = {
-  title: "Data & AI First Series | The Premier Data & AI Leadership Summit",
+  title: "Data & AI First | AI Summit Dubai & Kuwait | CDO Conference Middle East",
   description:
-    "Data & AI First brings together CDOs, AI architects, data scientists, and enterprise leaders. Turning Data & AI into regulated, profitable, and scalable solutions across the region.",
+    "The premier Data & AI leadership summit in the Middle East. Data & AI First brings together CDOs, AI architects, and enterprise leaders in Kuwait, UAE & GCC region.",
   keywords: [
-    "data AI summit",
-    "artificial intelligence conference",
-    "CDO summit",
-    "data analytics conference",
+    "AI summit Dubai",
+    "data AI conference Middle East",
+    "CDO summit GCC",
+    "artificial intelligence conference Kuwait",
+    "data analytics conference UAE",
     "machine learning summit",
     "Data AI First",
     "enterprise AI conference",
@@ -56,6 +58,13 @@ export default function DataAIFirstLayout({
 }) {
   return (
     <>
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: BASE_URL },
+          { name: "Events", url: `${BASE_URL}/events` },
+          { name: "Data & AI First", url: PAGE_URL },
+        ]}
+      />
       {/* EventSeries structured data — JSON-LD */}
       <script
         type="application/ld+json"

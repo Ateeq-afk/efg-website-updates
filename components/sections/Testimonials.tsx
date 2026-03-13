@@ -5,6 +5,40 @@ import { motion, useInView } from "framer-motion";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
+// Video schema for testimonials
+function TestimonialVideoSchema({ videos }: { videos: { id: string; label: string }[] }) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Events First Group Testimonials",
+    description: "Video testimonials from sponsors, delegates and speakers at Events First Group summits",
+    itemListElement: videos.map((video, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "VideoObject",
+        name: `${video.label} - Events First Group Testimonial`,
+        description: "Testimonial from Events First Group summit attendee",
+        thumbnailUrl: `https://img.youtube.com/vi/${video.id}/hqdefault.jpg`,
+        embedUrl: `https://www.youtube.com/embed/${video.id}`,
+        uploadDate: "2025-01-01",
+        publisher: {
+          "@type": "Organization",
+          name: "Events First Group",
+          url: "https://eventsfirstgroup.com",
+        },
+      },
+    })),
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 // VIDEO SHORTS DATA
 // ─────────────────────────────────────────────────────────────────────────────
@@ -74,7 +108,7 @@ function VideoCard({
           <>
             {/* Thumbnail */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <img loading="lazy"
               src={`https://img.youtube.com/vi/${videoId}/oar2.jpg`}
               alt={label}
               style={{
@@ -173,6 +207,9 @@ export default function Testimonials() {
         padding: "clamp(60px, 8vw, 120px) 0 clamp(40px, 5vw, 64px)",
       }}
     >
+      {/* Video Schema for SEO */}
+      <TestimonialVideoSchema videos={videoShorts} />
+
       {/* Ambient background */}
       <div
         className="absolute inset-0 pointer-events-none"

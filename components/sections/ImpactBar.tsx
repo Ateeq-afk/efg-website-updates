@@ -45,11 +45,11 @@ export default function ImpactBar() {
       <div className="absolute inset-0">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
+          loading="lazy"
           src={BG_IMAGE}
-          alt=""
+          alt="Events First Group summit attendees"
           className="w-full h-full object-cover"
           style={{ filter: "brightness(0.32) saturate(0.7)" }}
-          loading="lazy"
         />
       </div>
 

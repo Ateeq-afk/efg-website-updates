@@ -1,24 +1,26 @@
 import type { Metadata } from "next";
+import { BreadcrumbSchema } from "@/lib/schemas";
 
 const BASE_URL = "https://eventsfirstgroup.com";
 const PAGE_URL = `${BASE_URL}/events/ot-security-first`;
 const OG_IMAGE = "https://efg-final.s3.eu-north-1.amazonaws.com/Good/4N8A0290.JPG";
 
 export const metadata: Metadata = {
-  title: "OT Security First Series | Industrial Cybersecurity Summit",
+  title: "OT Security First | Industrial Cybersecurity Summit UAE & Saudi Arabia",
   description:
-    "OT Security First brings together OT/ICS security leaders, critical infrastructure defenders, and industrial cybersecurity experts. Protecting the systems that power our world.",
+    "The premier OT/ICS security summit in the Middle East. OT Security First brings together critical infrastructure defenders and industrial cybersecurity experts in UAE & Saudi Arabia.",
   keywords: [
-    "OT security summit",
-    "industrial cybersecurity conference",
-    "ICS security event",
-    "SCADA security summit",
-    "critical infrastructure security",
+    "OT security summit UAE",
+    "industrial cybersecurity conference Middle East",
+    "ICS security event Saudi Arabia",
+    "SCADA security summit GCC",
+    "critical infrastructure security Dubai",
     "OT Security First",
     "operational technology security",
     "industrial control systems conference",
     "OT cyber defense",
     "energy sector cybersecurity",
+    "oil gas cybersecurity",
   ],
   alternates: {
     canonical: PAGE_URL,
@@ -56,6 +58,13 @@ export default function OTSecurityFirstLayout({
 }) {
   return (
     <>
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: BASE_URL },
+          { name: "Events", url: `${BASE_URL}/events` },
+          { name: "OT Security First", url: PAGE_URL },
+        ]}
+      />
       {/* EventSeries structured data — JSON-LD */}
       <script
         type="application/ld+json"

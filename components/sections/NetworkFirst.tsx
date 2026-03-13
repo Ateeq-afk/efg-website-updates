@@ -127,7 +127,7 @@ export default function NetworkFirst() {
           <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: `linear-gradient(90deg, ${AMBER}, ${AMBER_30}, transparent)`, zIndex: 2 }} />
 
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy"
             src={`${S3}/networkfirst/boardrooms/boardroom-14.jpg`}
             alt="NetworkFirst boardroom"
             style={{ width: "100%", height: "clamp(260px, 32vw, 380px)", objectFit: "cover", display: "block", filter: "brightness(0.4) saturate(0.75)" }}

@@ -129,7 +129,7 @@ function VideoThumbnail({
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={thumbnail}
-        alt="Video thumbnail"
+        alt="Cyber First cybersecurity summit video"
         className="w-full h-full object-cover transition-all"
         style={{
           filter: isHovered

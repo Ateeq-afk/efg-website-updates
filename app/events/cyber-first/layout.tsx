@@ -1,17 +1,20 @@
 import type { Metadata } from "next";
+import { BreadcrumbSchema } from "@/lib/schemas";
 
 const BASE_URL = "https://eventsfirstgroup.com";
 const PAGE_URL = `${BASE_URL}/events/cyber-first`;
 const OG_IMAGE = "https://efg-final.s3.eu-north-1.amazonaws.com/Good/4N8A0030.JPG";
 
 export const metadata: Metadata = {
-  title: "Cyber First Series | The Definitive Cybersecurity Summit",
+  title: "Cyber First | CISO Summit Dubai & Middle East | Cybersecurity Conference",
   description:
-    "Cyber First brings together CISOs, government cyber leaders, and security innovators across Abu Dhabi, Kuwait, Riyadh, Delhi, and Nairobi. The region's most trusted cybersecurity leadership platform.",
+    "The premier CISO summit in Dubai & Middle East. Cyber First brings together CISOs, government cyber leaders, and security innovators across UAE, Kuwait, Saudi Arabia, India & Kenya.",
   keywords: [
-    "cybersecurity summit",
-    "CISO conference",
-    "cybersecurity event series",
+    "CISO summit Dubai",
+    "cybersecurity conference Middle East",
+    "cybersecurity summit UAE",
+    "CISO conference GCC",
+    "cyber security events Dubai",
     "information security summit",
     "enterprise security conference",
     "Cyber First",
@@ -56,6 +59,13 @@ export default function CyberFirstLayout({
 }) {
   return (
     <>
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: BASE_URL },
+          { name: "Events", url: `${BASE_URL}/events` },
+          { name: "Cyber First", url: PAGE_URL },
+        ]}
+      />
       {/* EventSeries structured data — JSON-LD */}
       <script
         type="application/ld+json"

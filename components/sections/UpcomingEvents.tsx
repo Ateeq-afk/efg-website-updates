@@ -243,9 +243,9 @@ function FeaturedEventCard({
           }}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy"
             src={event.image}
-            alt=""
+            alt="Events First Group upcoming event"
             className="w-full h-full object-cover transition-all duration-800"
             style={{
               filter: isHovered

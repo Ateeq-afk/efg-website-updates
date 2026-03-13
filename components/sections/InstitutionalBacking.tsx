@@ -122,10 +122,10 @@ export default function InstitutionalBacking() {
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
+                loading="lazy"
                 src={institution.logo}
                 alt={institution.name}
                 title={institution.name}
-                loading="lazy"
                 style={{
                   maxWidth: "100%",
                   maxHeight: "100%",

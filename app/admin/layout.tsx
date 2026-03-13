@@ -5,6 +5,23 @@ import { createClient } from "@/lib/supabase"
 import { useRouter, usePathname } from "next/navigation"
 import Link from "next/link"
 
+// Prevent search engine indexing of admin pages
+function NoIndexMeta() {
+  useEffect(() => {
+    // Add noindex meta tag
+    const meta = document.createElement('meta');
+    meta.name = 'robots';
+    meta.content = 'noindex, nofollow';
+    document.head.appendChild(meta);
+    
+    return () => {
+      document.head.removeChild(meta);
+    };
+  }, []);
+  
+  return null;
+}
+
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true)
   const [isAdmin, setIsAdmin] = useState(false)
@@ -82,6 +99,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   return (
     <div className="admin-layout">
+      <NoIndexMeta />
       <aside className="admin-sidebar">
         <div className="sidebar-header">
           <Link href="/portal" className="logo">

@@ -172,7 +172,7 @@ export default function WhyEFG() {
             transition={{ duration: 0.8, delay: 0.3, ease: EASE }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <img loading="lazy"
               src={`${GOOD}/4N8A0290.JPG`}
               alt="Packed summit room"
               className="why-bento-img"
@@ -220,7 +220,7 @@ export default function WhyEFG() {
             transition={{ duration: 0.8, delay: 0.7, ease: EASE }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <img loading="lazy"
               src={`${CFK}/cyber21-04-160.jpg`}
               alt="Executive networking"
               className="why-bento-img"
