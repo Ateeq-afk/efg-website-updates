@@ -77,7 +77,37 @@
 
     .logo-efg {
       height: 20px;
-      opacity: 0.6;
+    }
+
+    /* Images */
+    .hero-image {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      border-radius: 16px;
+      margin: 40px 0;
+    }
+
+    .section-image {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-top: 24px;
+    }
+
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .image-grid img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
     }
 
     .badge {
@@ -503,7 +533,7 @@
           <text x="0" y="18" font-family="Inter, sans-serif" font-size="20" font-weight="600" fill="#1A1A1A">SIMPPLR</text>
         </svg>
         <div class="divider"></div>
-        <img src="/events-first-group_logo_alt.svg" alt="Events First Group" class="logo-efg" style="filter: invert(1) brightness(0.3);">
+        <img src="/events-first-group-logo.svg" alt="Events First Group" class="logo-efg">
       </div>
       <div class="badge">Case Study</div>
     </header>
@@ -514,6 +544,13 @@
       <h1 class="hero-title">Driving Enterprise Engagement Through Intimate Executive Dialogue</h1>
       <p class="hero-subtitle">How Simpplr partnered with Events First Group to connect with decision-makers and exceed attendance targets by 130%</p>
     </section>
+
+    <!-- Hero Image -->
+    <img 
+      src="https://images.unsplash.com/photo-1591115765373-5207764f72e4?w=1200&h=600&fit=crop&q=80" 
+      alt="Executive virtual meeting" 
+      class="hero-image"
+    >
 
     <!-- Stats -->
     <section class="stats-grid">
@@ -545,6 +582,10 @@
       <p class="section-text">
         Events First Group designed and executed an exclusive Executive Boardroom experience—a curated, invitation-only virtual roundtable bringing together senior technology and HR leaders for candid discussions on the future of employee experience.
       </p>
+      <div class="image-grid">
+        <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=600&h=400&fit=crop&q=80" alt="Business strategy meeting">
+        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop&q=80" alt="Team collaboration">
+      </div>
     </section>
 
     <!-- Event Overview -->
@@ -578,7 +619,12 @@
       <p class="section-text">
         We curated an audience of senior decision-makers from enterprise organizations across the GCC, focusing on roles with direct influence over employee experience, HR technology, and digital workplace investments.
       </p>
-      <div class="audience-grid">
+      <img 
+        src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1200&h=500&fit=crop&q=80" 
+        alt="Executive leadership team" 
+        class="section-image"
+      >
+      <div class="audience-grid" style="margin-top: 24px;">
         <div class="audience-card">
           <div class="audience-percent">31%</div>
           <div class="audience-title">CHROs</div>
