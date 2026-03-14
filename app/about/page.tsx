@@ -1,9 +1,10 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-import { motion, useInView, AnimatePresence } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { Footer } from "@/components/sections";
 import SectionTransition from "@/components/effects/SectionTransition";
+import { submitForm } from "@/lib/form-helpers";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // CONSTANTS
@@ -985,10 +986,53 @@ function FunCulture() {
 function CareersSection() {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-60px" });
-  const [showForm, setShowForm] = useState(false);
-  const [fileName, setFileName] = useState("");
-  const [dragOver, setDragOver] = useState(false);
-  const fileRef = useRef<HTMLInputElement>(null);
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [role, setRole] = useState("");
+  const [about, setAbout] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState("");
+
+  const inputStyle: React.CSSProperties = {
+    padding: "14px 16px",
+    borderRadius: 10,
+    border: "1px solid var(--gray-border)",
+    background: "rgba(255,255,255,0.03)",
+    color: "white",
+    fontFamily: "var(--font-outfit)",
+    fontSize: 14,
+    outline: "none",
+    transition: "border-color 0.2s ease",
+  };
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setError("");
+    setSubmitting(true);
+
+    const result = await submitForm({
+      type: "careers",
+      full_name: fullName,
+      email,
+      metadata: {
+        role_interest: role,
+        about: about,
+      },
+    });
+
+    setSubmitting(false);
+
+    if (result.success) {
+      setSubmitted(true);
+      setFullName("");
+      setEmail("");
+      setRole("");
+      setAbout("");
+    } else {
+      setError(result.error || "Something went wrong. Please try again.");
+    }
+  }
 
   return (
     <section
@@ -1039,9 +1083,9 @@ function CareersSection() {
                 marginBottom: 24,
               }}
             >
-              We're always looking for sharp, driven people who want to shape the
+              We&apos;re always looking for sharp, driven people who want to shape the
               future of technology events worldwide. If you thrive in fast-paced
-              environments and care about creating experiences that matter — we'd
+              environments and care about creating experiences that matter — we&apos;d
               love to hear from you.
             </p>
             <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 12 }}>
@@ -1056,130 +1100,120 @@ function CareersSection() {
               ))}
             </ul>
 
-            {!showForm && (
-              <button
-                onClick={() => setShowForm(true)}
-                style={{
-                  marginTop: 32,
-                  padding: "14px 32px",
-                  borderRadius: 50,
-                  background: "var(--orange)",
-                  color: "white",
-                  fontFamily: "var(--font-outfit)",
-                  fontSize: 14,
-                  fontWeight: 600,
-                  border: "none",
-                  cursor: "pointer",
-                  transition: "all 0.3s ease",
-                }}
-              >
-                Apply Now →
-              </button>
-            )}
           </motion.div>
 
           {/* Right - Form */}
-          <AnimatePresence>
-            {showForm && (
-              <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 30 }}
-                transition={{ duration: 0.5, ease: EASE }}
-                style={{
-                  background: "rgba(255,255,255,0.02)",
-                  border: "1px solid var(--gray-border)",
-                  borderRadius: 20,
-                  padding: "clamp(24px, 3vw, 32px)",
-                }}
-              >
-                <form onSubmit={(e) => { e.preventDefault(); alert("Application submitted!"); }}>
-                  <div className="careers-form-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
-                    <input
-                      type="text"
-                      placeholder="Full Name"
-                      required
-                      style={{
-                        padding: "14px 16px",
-                        borderRadius: 10,
-                        border: "1px solid var(--gray-border)",
-                        background: "rgba(255,255,255,0.03)",
-                        color: "white",
-                        fontFamily: "var(--font-outfit)",
-                        fontSize: 14,
-                        outline: "none",
-                      }}
-                    />
-                    <input
-                      type="email"
-                      placeholder="Email"
-                      required
-                      style={{
-                        padding: "14px 16px",
-                        borderRadius: 10,
-                        border: "1px solid var(--gray-border)",
-                        background: "rgba(255,255,255,0.03)",
-                        color: "white",
-                        fontFamily: "var(--font-outfit)",
-                        fontSize: 14,
-                        outline: "none",
-                      }}
-                    />
-                  </div>
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.2, ease: EASE }}
+            style={{
+              background: "rgba(255,255,255,0.02)",
+              border: "1px solid var(--gray-border)",
+              borderRadius: 20,
+              padding: "clamp(24px, 3vw, 32px)",
+            }}
+          >
+            {submitted ? (
+              <div style={{ textAlign: "center", padding: "40px 20px" }}>
+                <div style={{ fontSize: 48, marginBottom: 16 }}>&#10003;</div>
+                <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: 22, color: "white", marginBottom: 8 }}>
+                  Application Received
+                </h3>
+                <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: 14, color: "var(--white-muted)", lineHeight: 1.6, marginBottom: 24 }}>
+                  Thanks for your interest in joining EFG. We&apos;ll review your application and get back to you soon.
+                </p>
+                <button
+                  onClick={() => setSubmitted(false)}
+                  style={{
+                    padding: "10px 24px",
+                    borderRadius: 50,
+                    background: "transparent",
+                    color: "var(--orange)",
+                    fontFamily: "var(--font-outfit)",
+                    fontSize: 13,
+                    fontWeight: 500,
+                    border: "1px solid var(--orange)",
+                    cursor: "pointer",
+                    transition: "all 0.3s ease",
+                  }}
+                  onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(232,101,26,0.1)"; e.currentTarget.style.color = "white"; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "var(--orange)"; }}
+                >
+                  Submit another application
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit}>
+                <div className="careers-form-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
                   <input
                     type="text"
-                    placeholder="Role you're interested in"
-                    style={{
-                      width: "100%",
-                      padding: "14px 16px",
-                      borderRadius: 10,
-                      border: "1px solid var(--gray-border)",
-                      background: "rgba(255,255,255,0.03)",
-                      color: "white",
-                      fontFamily: "var(--font-outfit)",
-                      fontSize: 14,
-                      outline: "none",
-                      marginBottom: 16,
-                    }}
+                    placeholder="Full Name *"
+                    required
+                    value={fullName}
+                    onChange={(e) => setFullName(e.target.value)}
+                    style={inputStyle}
+                    onFocus={(e) => e.currentTarget.style.borderColor = "var(--orange)"}
+                    onBlur={(e) => e.currentTarget.style.borderColor = "var(--gray-border)"}
                   />
-                  <textarea
-                    placeholder="Tell us about yourself"
-                    rows={3}
-                    style={{
-                      width: "100%",
-                      padding: "14px 16px",
-                      borderRadius: 10,
-                      border: "1px solid var(--gray-border)",
-                      background: "rgba(255,255,255,0.03)",
-                      color: "white",
-                      fontFamily: "var(--font-outfit)",
-                      fontSize: 14,
-                      outline: "none",
-                      resize: "none",
-                      marginBottom: 16,
-                    }}
+                  <input
+                    type="email"
+                    placeholder="Email *"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    style={inputStyle}
+                    onFocus={(e) => e.currentTarget.style.borderColor = "var(--orange)"}
+                    onBlur={(e) => e.currentTarget.style.borderColor = "var(--gray-border)"}
                   />
-                  <button
-                    type="submit"
-                    style={{
-                      width: "100%",
-                      padding: "14px 32px",
-                      borderRadius: 12,
-                      background: "var(--orange)",
-                      color: "white",
-                      fontFamily: "var(--font-outfit)",
-                      fontSize: 15,
-                      fontWeight: 600,
-                      border: "none",
-                      cursor: "pointer",
-                    }}
-                  >
-                    Submit Application →
-                  </button>
-                </form>
-              </motion.div>
+                </div>
+                <input
+                  type="text"
+                  placeholder="Role you're interested in"
+                  value={role}
+                  onChange={(e) => setRole(e.target.value)}
+                  style={{ ...inputStyle, width: "100%", marginBottom: 16 }}
+                  onFocus={(e) => e.currentTarget.style.borderColor = "var(--orange)"}
+                  onBlur={(e) => e.currentTarget.style.borderColor = "var(--gray-border)"}
+                />
+                <textarea
+                  placeholder="Tell us about yourself"
+                  rows={3}
+                  value={about}
+                  onChange={(e) => setAbout(e.target.value)}
+                  style={{ ...inputStyle, width: "100%", resize: "none" as const, marginBottom: 16 }}
+                  onFocus={(e) => e.currentTarget.style.borderColor = "var(--orange)"}
+                  onBlur={(e) => e.currentTarget.style.borderColor = "var(--gray-border)"}
+                />
+                {error && (
+                  <p style={{ fontFamily: "var(--font-outfit)", fontSize: 13, color: "#ef4444", marginBottom: 12 }}>
+                    {error}
+                  </p>
+                )}
+                <button
+                  type="submit"
+                  disabled={submitting}
+                  style={{
+                    width: "100%",
+                    padding: "14px 32px",
+                    borderRadius: 12,
+                    background: submitting ? "rgba(232,101,26,0.5)" : "var(--orange)",
+                    color: "white",
+                    fontFamily: "var(--font-outfit)",
+                    fontSize: 15,
+                    fontWeight: 600,
+                    border: "none",
+                    cursor: submitting ? "not-allowed" : "pointer",
+                    transition: "all 0.3s ease",
+                  }}
+                  onMouseEnter={(e) => { if (!submitting) e.currentTarget.style.background = "#FF7A2E"; }}
+                  onMouseLeave={(e) => { if (!submitting) e.currentTarget.style.background = "var(--orange)"; }}
+                >
+                  {submitting ? "Submitting..." : "Submit Application →"}
+                </button>
+              </form>
             )}
-          </AnimatePresence>
+          </motion.div>
         </div>
       </div>
 

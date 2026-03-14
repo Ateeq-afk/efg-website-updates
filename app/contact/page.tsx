@@ -15,7 +15,7 @@ const MAX_W = 1320;
 const PAD = "0 clamp(20px, 4vw, 60px)";
 
 const CONTACT = {
-  email: "info@eventsfirstgroup.com",
+  email: "partnerships@eventsfirstgroup.com",
   phone: "+971 4 883 4877",
   whatsapp: "+971 56 910 0679",
   address: "Office M07, The Light Commercial Tower, Arjan, Dubai",

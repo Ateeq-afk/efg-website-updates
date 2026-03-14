@@ -115,11 +115,12 @@ function Tilt({
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
-const MARKET_STATS = [
-  { value: "29.9", prefix: "KES ", suffix: "B", label: "Cybercrime Losses", note: "Economic impact in 2025", highlight: true, trend: "+38%", trendDir: "up" as const },
-  { value: "247", suffix: "%", label: "Annual Threat Increase", note: "Cybersecurity incidents in 2025", trend: "+112%", trendDir: "up" as const },
-  { value: "96", suffix: "%", label: "Talent Shortage", note: "Only 1,700 of 40,000 experts needed", trend: "+4%", trendDir: "up" as const },
-  { value: "4.5", suffix: "B", label: "Threats Detected", note: "Oct–Dec 2025, 441% jump", trend: "+441%", trendDir: "up" as const },
+const THREAT_CARDS = [
+  { value: "30", prefix: "KES ", suffix: "B", label: "Cybercrime Losses", note: "Economic impact in 2025", highlight: true, trend: "+38%", trendDir: "up" as const },
+  { value: "46786", prefix: "", suffix: "+", label: "DDoS Attacks", note: "Highest in East Africa, 3rd on continent", highlight: true, trend: "+112%", trendDir: "up" as const },
+  { value: "95", prefix: "", suffix: "%", label: "Ransomware (Healthcare)", note: "Escalation in attacks", highlight: false, trend: "+67%", trendDir: "up" as const },
+  { value: "96", prefix: "", suffix: "%", label: "Talent Shortage", note: "Only 1,700 of 40,000 experts needed", highlight: false, trend: "+4%", trendDir: "up" as const },
+  { value: "70.9", prefix: "", suffix: "M", label: "System Misconfigurations", note: "Malware attacks enabled", highlight: false, trend: "+22%", trendDir: "up" as const },
 ];
 
 const FOCUS_AREAS = [
@@ -199,13 +200,6 @@ const WHO_ATTEND_INDUSTRIES = [
   { name: "Manufacturing & Industrial", pct: 10 },
 ];
 
-const KEY_THREATS = [
-  { threat: "DDoS Attacks", stat: "46,786+", note: "Highest in East Africa, 3rd on continent" },
-  { threat: "Ransomware (Healthcare)", stat: "95%", note: "Escalation in attacks" },
-  { threat: "Ransomware (Manufacturing)", stat: "26%", note: "Of all incidents" },
-  { threat: "System Misconfigurations", stat: "70.9M", note: "Malware attacks enabled" },
-  { threat: "Security Advisories", stat: "21.8M", note: "Sent by KE-CIRT/CC" },
-];
 
 // Kenya Advisory Board (key government & policy leaders from brochure)
 const ADVISORY_BOARD = [
@@ -300,7 +294,7 @@ const SPEAKERS = [
 ];
 
 // Gallery images — Cyber First series only (Kuwait 2025 S3 + UAE 2025 WordPress)
-const CF_UAE = "https://uae.cyberfirstseries.com/wp-content/uploads/2025/10";
+const CF_UAE = "/images/cyber-first-uae";
 const GALLERY: {
   src: string;
   alt: string;
@@ -314,8 +308,8 @@ const GALLERY: {
     area: "hero",
   },
   {
-    src: `${S3}/events/Cyber+First+Kuwait+2025/Kuwait+Photos/Kuwait+Photos/4X9A1744.jpg`,
-    alt: "Cyber First Kuwait panel",
+    src: "https://efg-final.s3.eu-north-1.amazonaws.com/events/Cyber%20First%20Kuwait%202025/filemail_photos/cyber21-04-324.jpg",
+    alt: "Executive conference session",
     area: "a",
     rotate: -1.5,
     lift: true,
@@ -333,45 +327,14 @@ const GALLERY: {
     lift: true,
   },
   {
-    src: `${S3}/events/Cyber+First+Kuwait+2025/Kuwait+Photos/Kuwait+Photos/4X9A1576.jpg`,
-    alt: "Cyber First Kuwait networking",
+    src: "https://efg-final.s3.eu-north-1.amazonaws.com/events/Cyber%20First%20Kuwait%202025/filemail_photos/cyber21-04-412.jpg",
+    alt: "Conference networking session",
     area: "d",
   },
   {
     src: `${CF_UAE}/ARU01167.jpg`,
     alt: "Executive networking session",
     area: "e",
-  },
-];
-
-// Kenya Growth Projections (1st edition)
-const GROWTH = [
-  {
-    year: 2024,
-    delegates: 280,
-    speakers: 24,
-    sponsors: 22,
-    media: 15,
-    extra: "UAE Edition · 4 Panel Discussions · 6 Supporting Partners",
-    past: true,
-  },
-  {
-    year: 2025,
-    delegates: 310,
-    speakers: 25,
-    sponsors: 25,
-    media: 17,
-    extra: "Kuwait Edition · 6-Hour Live Hackathon · 9 Supporting Partners",
-    past: true,
-  },
-  {
-    year: 2026,
-    delegates: 200,
-    speakers: 20,
-    sponsors: 10,
-    media: 10,
-    extra: "East Africa · Inaugural Nairobi Edition · 4 Panels · 6 Awards",
-    active: true,
   },
 ];
 
@@ -484,13 +447,11 @@ export default function CyberFirstKenya2026() {
       <HeroSection />
       <StatsBar />
       <SiliconSavannahContext />
-      <ThreatLandscape />
       <FocusAreas />
       <AdvisoryBoard />
       <Speakers />
       <AgendaTimeline />
       <SponsorsSection />
-      <GrowthStory />
       <AtmosphereDivider />
       <Gallery />
       <WhatToExpect />
@@ -570,10 +531,22 @@ function HeroSection() {
 
         {/* CTAs */}
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.8, ease: EASE }} style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-          <a href="#get-involved" onClick={(e) => { e.preventDefault(); document.getElementById("get-involved")?.scrollIntoView({ behavior: "smooth" }); }} style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "14px 34px", borderRadius: 50, background: C, color: "white", fontFamily: "var(--font-outfit)", fontSize: 14, fontWeight: 700, textDecoration: "none", boxShadow: `0 4px 24px ${C}35`, cursor: "pointer" }}>
+          <a
+            href="#get-involved"
+            onClick={(e) => { e.preventDefault(); document.getElementById("get-involved")?.scrollIntoView({ behavior: "smooth" }); }}
+            style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "14px 34px", borderRadius: 50, background: C, color: "white", fontFamily: "var(--font-outfit)", fontSize: 14, fontWeight: 700, textDecoration: "none", boxShadow: `0 4px 24px ${C}35`, cursor: "pointer", transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)" }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = C_BRIGHT; e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = `0 12px 40px ${C}50`; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = C; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = `0 4px 24px ${C}35`; }}
+          >
             Reserve Your Seat <span>→</span>
           </a>
-          <a href="#get-involved" onClick={(e) => { e.preventDefault(); document.getElementById("get-involved")?.scrollIntoView({ behavior: "smooth" }); }} style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "14px 28px", borderRadius: 50, background: "rgba(255,255,255,0.04)", color: "rgba(255,255,255,0.8)", fontFamily: "var(--font-outfit)", fontSize: 14, fontWeight: 500, textDecoration: "none", border: "1px solid rgba(255,255,255,0.15)", cursor: "pointer" }}>
+          <a
+            href="#get-involved"
+            onClick={(e) => { e.preventDefault(); document.getElementById("get-involved")?.scrollIntoView({ behavior: "smooth" }); }}
+            style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "14px 28px", borderRadius: 50, background: "rgba(255,255,255,0.04)", color: "rgba(255,255,255,0.8)", fontFamily: "var(--font-outfit)", fontSize: 14, fontWeight: 500, textDecoration: "none", border: "1px solid rgba(255,255,255,0.15)", cursor: "pointer", transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)" }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.1)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.35)"; e.currentTarget.style.color = "white"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.04)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.15)"; e.currentTarget.style.color = "rgba(255,255,255,0.8)"; e.currentTarget.style.transform = "translateY(0)"; }}
+          >
             Become a Sponsor
           </a>
         </motion.div>
@@ -604,7 +577,13 @@ function HeroSection() {
             ))}
           </div>
 
-          <a href="#get-involved" onClick={(e) => { e.preventDefault(); document.getElementById("get-involved")?.scrollIntoView({ behavior: "smooth" }); }} style={{ padding: "12px 28px", borderRadius: 50, background: C, fontFamily: "var(--font-outfit)", fontSize: 14, fontWeight: 600, color: "white", textDecoration: "none", boxShadow: `0 4px 16px ${C}35`, cursor: "pointer" }}>
+          <a
+            href="#get-involved"
+            onClick={(e) => { e.preventDefault(); document.getElementById("get-involved")?.scrollIntoView({ behavior: "smooth" }); }}
+            style={{ padding: "12px 28px", borderRadius: 50, background: C, fontFamily: "var(--font-outfit)", fontSize: 14, fontWeight: 600, color: "white", textDecoration: "none", boxShadow: `0 4px 16px ${C}35`, cursor: "pointer", transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)" }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = C_BRIGHT; e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = `0 12px 40px ${C}50`; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = C; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = `0 4px 16px ${C}35`; }}
+          >
             Register Now →
           </a>
         </div>
@@ -947,6 +926,23 @@ function SiliconSavannahContext() {
       <div className="absolute pointer-events-none cfk-whynow-orb2" style={{ width: 350, height: 350, borderRadius: "50%", background: `radial-gradient(circle at 60% 60%, ${KENYA_ACCENT}12, ${KENYA_ACCENT}04 50%, transparent 70%)`, filter: "blur(70px)", bottom: "10%", right: "8%", zIndex: 1 }} />
       <div className="absolute pointer-events-none cfk-whynow-orb3" style={{ width: 280, height: 280, borderRadius: "50%", background: `radial-gradient(circle at 50% 50%, ${C_BRIGHT}0C, transparent 60%)`, filter: "blur(60px)", top: "55%", left: "45%", zIndex: 1 }} />
 
+      {/* Radar pulse rings — positioned off-center right */}
+      <div className="absolute pointer-events-none" style={{ top: "50%", right: "8%", transform: "translateY(-50%)", zIndex: 1 }}>
+        {[0, 1, 2, 3].map((i) => (
+          <div key={i} className="absolute cfk-radar-ring" style={{
+            width: 300,
+            height: 300,
+            borderRadius: "50%",
+            border: `1px solid ${C_BRIGHT}`,
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            animationDelay: `${i * 1.2}s`,
+          }} />
+        ))}
+        <div style={{ width: 6, height: 6, borderRadius: "50%", background: C_BRIGHT, boxShadow: `0 0 12px ${C_BRIGHT}60, 0 0 30px ${C_BRIGHT}30`, position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }} />
+      </div>
+
       {/* Africa continent outline with threat pulse points */}
       <div className="absolute inset-0 pointer-events-none" style={{ display: "flex", alignItems: "center", justifyContent: "center", zIndex: 2, top: "-5%" }}>
         <svg viewBox="0 0 600 700" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: "min(90vw, 900px)", height: "auto", opacity: 1 }}>
@@ -1163,9 +1159,9 @@ function SiliconSavannahContext() {
             WebkitMaskImage: "radial-gradient(ellipse 80% 70% at 50% 50%, black 20%, transparent 70%)",
             top: -20, bottom: -20, left: -20, right: -20,
           }} />
-        <div className="cfk-whynow-stats" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 20, marginBottom: 56, position: "relative" }}>
-          {MARKET_STATS.map((stat, i) => {
-            const badges = ["Critical", "Severe", "Critical", "Extreme"];
+        <div className="cfk-whynow-stats" style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 18, marginBottom: 56, position: "relative" }}>
+          {THREAT_CARDS.map((stat, i) => {
+            const badges = ["Critical", "Critical", "Severe", "High", "Monitor"];
             return (
             <motion.div
               key={stat.label}
@@ -1329,7 +1325,7 @@ function SiliconSavannahContext() {
 
           {/* Tags */}
           <div style={{ display: "flex", flexWrap: "wrap", gap: 10, justifyContent: "center", marginTop: 8 }}>
-            {["Cybercrimes Act 2025", "CSOC Operations", "Mobile Money Security", "Regional Cloud Hub"].map((tag, i) => (
+            {["Cybercrimes Act 2025", "CSOC Operations", "Mobile Money Security", "KE-CIRT/CC Reports", "Critical Infrastructure"].map((tag, i) => (
               <motion.span
                 key={tag}
                 className="cfk-whynow-tag"
@@ -1358,7 +1354,7 @@ function SiliconSavannahContext() {
                 <path d="M5 3 L5 5.5 L6.5 6.5" stroke="rgba(255,255,255,0.4)" strokeWidth="0.8" strokeLinecap="round" />
               </svg>
               <span style={{ fontFamily: "var(--font-outfit)", fontSize: 10, color: "rgba(255,255,255,0.18)", letterSpacing: "0.3px" }}>
-                Sources: KE-CIRT/CC · Communications Authority of Kenya · 2025
+                Sources: KE-CIRT/CC Annual Report · Communications Authority of Kenya · National Cybersecurity Strategy
               </span>
             </div>
             <div style={{ width: 40, height: 1, background: `linear-gradient(270deg, transparent, rgba(255,255,255,0.06))` }} />
@@ -1441,341 +1437,22 @@ function SiliconSavannahContext() {
           box-shadow: 0 0 16px ${KENYA_ACCENT}10 !important;
           transform: translateY(-1px);
         }
+        @keyframes cfk-radar-pulse {
+          0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0.6; }
+          100% { transform: translate(-50%, -50%) scale(1.8); opacity: 0; }
+        }
+        .cfk-radar-ring {
+          animation: cfk-radar-pulse 4.8s ease-out infinite;
+          opacity: 0;
+        }
+        @media (max-width: 1024px) {
+          .cfk-whynow-stats { grid-template-columns: repeat(3, 1fr) !important; }
+        }
         @media (max-width: 768px) {
           .cfk-whynow-stats { grid-template-columns: 1fr 1fr !important; }
         }
         @media (max-width: 480px) {
           .cfk-whynow-stats { grid-template-columns: 1fr !important; }
-        }
-      `}</style>
-    </section>
-  );
-}
-
-// ─── THREAT LANDSCAPE ────────────────────────────────────────────────────────
-function ThreatLandscape() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
-
-  const DANGER = "#EF4444";
-
-  return (
-    <section ref={ref} style={{ position: "relative", padding: "clamp(90px, 12vw, 140px) 0", overflow: "hidden", background: "#0A0608" }}>
-      {/* Background photo */}
-      <div className="absolute inset-0">
-        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&q=70" alt="" className="w-full h-full object-cover" loading="lazy" decoding="async" style={{ filter: "brightness(0.07) saturate(0.35) contrast(1.4)" }} />
-      </div>
-
-      {/* Gradient overlays */}
-      <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(180deg, rgba(10,6,8,0.96) 0%, rgba(10,6,8,0.4) 35%, rgba(10,6,8,0.4) 65%, rgba(10,6,8,0.96) 100%)" }} />
-
-      {/* Animated floating orbs */}
-      <div className="absolute pointer-events-none cfk-orb-1" style={{ width: 500, height: 500, borderRadius: "50%", background: `radial-gradient(circle at 40% 40%, ${DANGER}20, ${DANGER}08 50%, transparent 70%)`, filter: "blur(80px)", top: "10%", left: "5%", zIndex: 1 }} />
-      <div className="absolute pointer-events-none cfk-orb-2" style={{ width: 400, height: 400, borderRadius: "50%", background: `radial-gradient(circle at 60% 60%, ${C}15, ${C}06 50%, transparent 70%)`, filter: "blur(70px)", bottom: "5%", right: "8%", zIndex: 1 }} />
-      <div className="absolute pointer-events-none cfk-orb-3" style={{ width: 300, height: 300, borderRadius: "50%", background: `radial-gradient(circle at 50% 50%, ${KENYA_ACCENT}12, transparent 60%)`, filter: "blur(60px)", top: "50%", left: "50%", transform: "translate(-50%, -50%)", zIndex: 1 }} />
-
-      {/* Radar pulse rings — positioned off-center right */}
-      <div className="absolute pointer-events-none" style={{ top: "50%", right: "12%", transform: "translateY(-50%)", zIndex: 1 }}>
-        {[0, 1, 2, 3].map((i) => (
-          <div key={i} className="absolute cfk-radar-ring" style={{
-            width: 300,
-            height: 300,
-            borderRadius: "50%",
-            border: `1px solid ${DANGER}`,
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            animationDelay: `${i * 1.2}s`,
-          }} />
-        ))}
-        {/* Center dot */}
-        <div style={{ width: 6, height: 6, borderRadius: "50%", background: DANGER, boxShadow: `0 0 12px ${DANGER}60, 0 0 30px ${DANGER}30`, position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }} />
-      </div>
-
-      {/* Grid pattern with intersection dots */}
-      <div className="absolute inset-0 pointer-events-none" style={{
-        backgroundImage: `
-          linear-gradient(${DANGER}06 1px, transparent 1px),
-          linear-gradient(90deg, ${DANGER}06 1px, transparent 1px),
-          radial-gradient(circle 1.5px at center, ${DANGER}18 1px, transparent 2px)
-        `,
-        backgroundSize: "80px 80px, 80px 80px, 80px 80px",
-        zIndex: 2,
-        maskImage: "radial-gradient(ellipse 75% 65% at 50% 50%, black 15%, transparent 70%)",
-        WebkitMaskImage: "radial-gradient(ellipse 75% 65% at 50% 50%, black 15%, transparent 70%)",
-      }} />
-
-      {/* Moving scan line */}
-      <div className="absolute left-0 right-0 pointer-events-none cfk-scanline" style={{
-        top: 0,
-        height: 2,
-        background: `linear-gradient(90deg, transparent 10%, ${DANGER}20, ${DANGER}35, ${DANGER}20, transparent 90%)`,
-        boxShadow: `0 0 20px ${DANGER}15, 0 0 60px ${DANGER}08`,
-        zIndex: 2,
-        willChange: "transform",
-      }} />
-
-      {/* Top & bottom border lines */}
-      <div className="absolute top-0 left-0 right-0" style={{ height: 1, background: `linear-gradient(90deg, transparent 5%, ${DANGER}25, ${DANGER}40, ${DANGER}25, transparent 95%)` }} />
-      <div className="absolute bottom-0 left-0 right-0" style={{ height: 1, background: `linear-gradient(90deg, transparent 10%, ${DANGER}15, transparent 90%)`, zIndex: 5 }} />
-
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 clamp(20px, 4vw, 60px)", position: "relative", zIndex: 3 }}>
-
-        {/* Header */}
-        <motion.div initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, ease: EASE }} style={{ textAlign: "center", marginBottom: 20 }}>
-          {/* Eyebrow */}
-          <div className="flex items-center justify-center gap-3" style={{ marginBottom: 24 }}>
-            <span style={{ width: 28, height: 1, background: `linear-gradient(90deg, transparent, ${DANGER})` }} />
-            <span style={{ fontFamily: "var(--font-dm)", fontSize: 11, fontWeight: 600, letterSpacing: "3.5px", textTransform: "uppercase", color: DANGER }}>Threat Intelligence</span>
-            <span style={{ width: 28, height: 1, background: `linear-gradient(270deg, transparent, ${DANGER})` }} />
-          </div>
-
-          {/* Two-tier headline */}
-          <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(26px, 3.5vw, 40px)", letterSpacing: "-1.5px", color: "rgba(255,255,255,0.88)", lineHeight: 1.15, margin: "0 0 8px" }}>
-            Kenya&apos;s Cyber Threat Landscape
-          </h2>
-          <h2 className="cfk-threat-headline" style={{
-            fontFamily: "var(--font-display)",
-            fontWeight: 900,
-            fontSize: "clamp(30px, 4vw, 48px)",
-            letterSpacing: "-2px",
-            lineHeight: 1.1,
-            margin: "0 0 12px",
-            background: `linear-gradient(135deg, ${DANGER} 0%, #ffffff 50%, ${DANGER} 100%)`,
-            backgroundSize: "200% 100%",
-            WebkitBackgroundClip: "text",
-            backgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            color: "transparent",
-            filter: `drop-shadow(0 0 30px ${DANGER}20)`,
-          }}>
-            4.5 Billion Threats Detected.
-          </h2>
-
-          {/* Animated underline */}
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={inView ? { scaleX: 1 } : {}}
-            transition={{ duration: 0.8, delay: 0.4, ease: EASE }}
-            style={{ width: 60, height: 2, background: `linear-gradient(90deg, ${DANGER}, ${KENYA_ACCENT}, ${DANGER})`, borderRadius: 2, margin: "0 auto 20px" }}
-          />
-
-          <p style={{ fontFamily: "var(--font-outfit)", fontSize: 16, fontWeight: 400, color: "rgba(255,255,255,0.4)", maxWidth: 580, margin: "0 auto", lineHeight: 1.7 }}>
-            Critical statistics shaping East Africa&apos;s cybersecurity agenda — sourced from KE-CIRT/CC and national threat reports.
-          </p>
-        </motion.div>
-
-        {/* Tags */}
-        <motion.div initial={{ opacity: 0, y: 10 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.3, ease: EASE }} style={{ textAlign: "center", marginBottom: 48 }}>
-          <div className="flex items-center justify-center flex-wrap gap-2">
-            {["KE-CIRT/CC Reports", "Data Protection Act 2019", "Critical Infrastructure", "East Africa Region"].map((tag, ti) => (
-              <motion.span
-                key={tag}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={inView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 0.4, delay: 0.45 + ti * 0.08, ease: EASE }}
-                className="cfk-threat-tag"
-                style={{ padding: "6px 16px", borderRadius: 20, background: `${DANGER}08`, border: `1px solid ${DANGER}18`, fontFamily: "var(--font-outfit)", fontSize: 12, fontWeight: 500, color: `${DANGER}BB`, transition: "all 0.3s ease" }}
-              >{tag}</motion.span>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Animated divider */}
-        <motion.div
-          initial={{ scaleX: 0, opacity: 0 }}
-          animate={inView ? { scaleX: 1, opacity: 1 } : {}}
-          transition={{ duration: 1, delay: 0.5, ease: EASE }}
-          style={{ maxWidth: 1100, margin: "0 auto 48px", position: "relative" }}
-        >
-          <div style={{ height: 1, background: `linear-gradient(90deg, transparent 0%, ${DANGER}15 15%, ${DANGER}30 50%, ${DANGER}15 85%, transparent 100%)` }} />
-          <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%) rotate(45deg)", width: 6, height: 6, background: DANGER, borderRadius: 1, boxShadow: `0 0 12px ${DANGER}40` }} />
-        </motion.div>
-
-        {/* "By The Numbers" label */}
-        <motion.div initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.5, delay: 0.55, ease: EASE }} style={{ textAlign: "center", marginBottom: 28 }}>
-          <span style={{ fontFamily: "var(--font-dm)", fontSize: 9, fontWeight: 600, letterSpacing: "2.5px", textTransform: "uppercase", color: "rgba(255,255,255,0.2)" }}>Key Threat Indicators</span>
-        </motion.div>
-
-        {/* Cards — 5 in a row */}
-        <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.6, ease: EASE }} className="cfk-threats-grid" style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 16 }}>
-          {KEY_THREATS.map((item, i) => (
-            <motion.div
-              key={item.threat}
-              className="cfk-threat-card"
-              initial={{ opacity: 0, y: 24, scale: 0.93 }}
-              animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
-              transition={{ duration: 0.55, delay: 0.7 + i * 0.1, ease: EASE }}
-              style={{
-                padding: i === 0 ? "34px 20px 30px" : "28px 18px 26px",
-                borderRadius: 20,
-                background: i === 0
-                  ? `linear-gradient(145deg, ${DANGER}16 0%, ${DANGER}08 50%, rgba(255,255,255,0.02) 100%)`
-                  : "linear-gradient(155deg, rgba(255,255,255,0.045), rgba(255,255,255,0.012))",
-                backdropFilter: "blur(12px)",
-                border: `1px solid ${i === 0 ? `${DANGER}35` : "rgba(255,255,255,0.07)"}`,
-                position: "relative",
-                overflow: "hidden",
-                textAlign: "center",
-                boxShadow: i === 0
-                  ? `0 8px 36px ${DANGER}15, inset 0 1px 0 ${DANGER}18, 0 0 0 1px ${DANGER}08`
-                  : "0 4px 24px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.04)",
-                transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
-              }}
-            >
-              {/* Top glow for highlight */}
-              {i === 0 && (
-                <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 80% 50% at 50% 0%, ${DANGER}10, transparent 55%)` }} />
-              )}
-
-              {/* Left edge accent for highlight */}
-              {i === 0 && (
-                <div style={{ position: "absolute", top: "15%", bottom: "15%", left: 0, width: 2, background: `linear-gradient(180deg, transparent, ${DANGER}60, transparent)`, borderRadius: "0 2px 2px 0" }} />
-              )}
-
-              {/* Top accent line */}
-              <div style={{ position: "absolute", top: 0, left: i === 0 ? "8%" : "20%", right: i === 0 ? "8%" : "20%", height: i === 0 ? 2 : 1.5, background: `linear-gradient(90deg, transparent, ${i === 0 ? `${DANGER}80` : `${DANGER}35`}, transparent)` }} />
-
-              {/* Status badge */}
-              <div style={{ marginBottom: 14, position: "relative" }}>
-                <span style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 5,
-                  padding: "3px 10px",
-                  borderRadius: 20,
-                  background: i === 0 ? `${DANGER}14` : "rgba(255,255,255,0.03)",
-                  border: `1px solid ${i === 0 ? `${DANGER}25` : "rgba(255,255,255,0.06)"}`,
-                  fontFamily: "var(--font-dm)",
-                  fontSize: 9,
-                  fontWeight: 600,
-                  color: i === 0 ? DANGER : "rgba(255,255,255,0.3)",
-                  letterSpacing: "0.5px",
-                  textTransform: "uppercase",
-                }}>
-                  {i === 0 && <span style={{ width: 4, height: 4, borderRadius: "50%", background: DANGER, flexShrink: 0, boxShadow: `0 0 6px ${DANGER}60` }} />}
-                  {i === 0 ? "Critical" : i < 3 ? "High" : "Monitor"}
-                </span>
-              </div>
-
-              {/* Stat number */}
-              <div className="cfk-threat-num" style={{
-                fontFamily: "var(--font-display)",
-                fontSize: i === 0 ? "clamp(34px, 4.5vw, 46px)" : "clamp(28px, 3.5vw, 36px)",
-                fontWeight: 900,
-                letterSpacing: "-1.5px",
-                lineHeight: 1,
-                position: "relative",
-                transition: "all 0.4s ease",
-                ...(i === 0 ? {
-                  background: `linear-gradient(180deg, #ffffff 20%, ${DANGER} 100%)`,
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  color: "transparent",
-                  filter: `drop-shadow(0 0 20px ${DANGER}25)`,
-                } : {
-                  color: "white",
-                }),
-              }}>
-                {item.stat}
-              </div>
-
-              {/* Animated underline */}
-              <motion.div
-                initial={{ scaleX: 0 }}
-                animate={inView ? { scaleX: 1 } : {}}
-                transition={{ duration: 0.6, delay: 1.2 + i * 0.1, ease: EASE }}
-                style={{ width: i === 0 ? 32 : 20, height: 2, background: i === 0 ? DANGER : `${DANGER}40`, borderRadius: 2, margin: "12px auto 0", transformOrigin: "center" }}
-              />
-
-              {/* Label */}
-              <div style={{ fontFamily: "var(--font-outfit)", fontSize: i === 0 ? 13 : 12, fontWeight: 700, color: i === 0 ? "rgba(255,255,255,0.92)" : "rgba(255,255,255,0.55)", letterSpacing: i === 0 ? "1px" : "0.5px", marginTop: 12, position: "relative", lineHeight: 1.3 }}>
-                {item.threat}
-              </div>
-
-              {/* Note */}
-              <div style={{ fontFamily: "var(--font-outfit)", fontSize: 11, fontWeight: 400, color: i === 0 ? "rgba(255,255,255,0.35)" : "rgba(255,255,255,0.22)", marginTop: 6, position: "relative", lineHeight: 1.4 }}>
-                {item.note}
-              </div>
-
-              {/* Bottom accent */}
-              <div style={{ position: "absolute", bottom: 0, left: i === 0 ? 14 : 24, right: i === 0 ? 14 : 24, height: i === 0 ? 2 : 1, background: i === 0 ? `linear-gradient(90deg, transparent, ${DANGER}45, transparent)` : "linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent)", borderRadius: 1 }} />
-
-              {/* Corner dot for highlight */}
-              {i === 0 && (
-                <div style={{ position: "absolute", top: 14, right: 14, width: 5, height: 5, borderRadius: "50%", background: `${DANGER}30`, boxShadow: `0 0 8px ${DANGER}20` }} />
-              )}
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Source citation */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.5, delay: 1.2, ease: EASE }}
-          style={{ textAlign: "center", marginTop: 32 }}
-        >
-          <span style={{ fontFamily: "var(--font-outfit)", fontSize: 11, fontWeight: 400, color: "rgba(255,255,255,0.18)", letterSpacing: "0.3px" }}>
-            Sources: KE-CIRT/CC Annual Report · Communications Authority of Kenya · National Cybersecurity Strategy
-          </span>
-        </motion.div>
-      </div>
-
-      {/* Bottom fade */}
-      <div className="absolute bottom-0 left-0 right-0 pointer-events-none" style={{ height: 120, background: "linear-gradient(to bottom, transparent, #0C0809)", zIndex: 4 }} />
-
-      <style jsx global>{`
-        @keyframes cfk-orb-float-1 {
-          0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.6; }
-          33% { transform: translate(40px, -30px) scale(1.1); opacity: 0.8; }
-          66% { transform: translate(-25px, 20px) scale(0.9); opacity: 0.5; }
-        }
-        @keyframes cfk-orb-float-2 {
-          0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.5; }
-          40% { transform: translate(-35px, 25px) scale(1.15); opacity: 0.7; }
-          70% { transform: translate(20px, -15px) scale(0.95); opacity: 0.4; }
-        }
-        @keyframes cfk-orb-float-3 {
-          0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.4; }
-          50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.7; }
-        }
-        .cfk-orb-1 { animation: cfk-orb-float-1 18s ease-in-out infinite; }
-        .cfk-orb-2 { animation: cfk-orb-float-2 22s ease-in-out infinite; }
-        .cfk-orb-3 { animation: cfk-orb-float-3 14s ease-in-out infinite; }
-
-        @keyframes cfk-radar-pulse {
-          0% { transform: translate(-50%, -50%) scale(0.15); opacity: 0.7; }
-          100% { transform: translate(-50%, -50%) scale(2.5); opacity: 0; }
-        }
-        .cfk-radar-ring { animation: cfk-radar-pulse 4.8s ease-out infinite; }
-
-        @keyframes cfk-scanline-move {
-          0% { transform: translateY(-2px); }
-          100% { transform: translateY(100vh); }
-        }
-        .cfk-scanline { animation: cfk-scanline-move 8s linear infinite; }
-
-        @keyframes cfk-threat-shimmer {
-          0% { background-position: 200% 0; }
-          100% { background-position: -200% 0; }
-        }
-        .cfk-threat-headline { animation: cfk-threat-shimmer 8s ease-in-out infinite; }
-
-        .cfk-threat-tag:hover { background: ${DANGER}14 !important; border-color: ${DANGER}30 !important; }
-        .cfk-threat-card:hover { transform: translateY(-5px) !important; border-color: ${DANGER}40 !important; box-shadow: 0 16px 48px ${DANGER}18, inset 0 1px 0 ${DANGER}15 !important; }
-        .cfk-threat-card:hover .cfk-threat-num { filter: drop-shadow(0 0 20px ${DANGER}30) !important; }
-        @media (max-width: 1024px) {
-          .cfk-threats-grid { grid-template-columns: repeat(3, 1fr) !important; }
-        }
-        @media (max-width: 768px) {
-          .cfk-threats-grid { grid-template-columns: repeat(2, 1fr) !important; }
-          .cfk-radar-ring, .cfk-orb-1, .cfk-orb-2, .cfk-orb-3 { display: none !important; }
-        }
-        @media (max-width: 480px) {
-          .cfk-threats-grid { gap: 10px !important; }
-          .cfk-threats-grid > div { padding: 20px 14px 18px !important; border-radius: 16px !important; }
         }
       `}</style>
     </section>
@@ -2888,7 +2565,13 @@ function SponsorsSection() {
               textDecoration: "none",
               letterSpacing: "0.3px",
               cursor: "pointer",
+              transition: "all 0.3s ease",
+              padding: "8px 20px",
+              borderRadius: 50,
+              border: "1px solid transparent",
             }}
+            onMouseEnter={(e) => { e.currentTarget.style.color = "white"; e.currentTarget.style.borderColor = `${KENYA_ACCENT}40`; e.currentTarget.style.background = `${C}15`; }}
+            onMouseLeave={(e) => { e.currentTarget.style.color = KENYA_ACCENT; e.currentTarget.style.borderColor = "transparent"; e.currentTarget.style.background = "transparent"; }}
           >
             Become a Partner →
           </a>
@@ -2918,419 +2601,6 @@ function SponsorsSection() {
         @keyframes cfknScrollRight {
           0% { transform: translateX(-50%); }
           100% { transform: translateX(0); }
-        }
-      `}</style>
-    </section>
-  );
-}
-
-// ─── GROWTH STORY ────────────────────────────────────────────────────────────
-function GrowthStory() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
-  const locationLabels = ["Dubai, UAE", "Kuwait City, Kuwait", "Nairobi, Kenya"];
-  const locationFlags = ["🇦🇪", "🇰🇼", "🇰🇪"];
-  const editionLabels = ["Edition 01", "Edition 02", "Edition 03"];
-  const maxDelegates = 310; // for progress bar scaling
-
-  return (
-    <section ref={ref} style={{ background: "#0C0809", padding: "clamp(100px, 12vw, 160px) 0", position: "relative", overflow: "hidden" }}>
-      {/* Background photo */}
-      <div className="absolute inset-0">
-        <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=1200&q=70" alt="" className="w-full h-full object-cover" loading="lazy" decoding="async" style={{ filter: "brightness(0.04) saturate(0.2) contrast(1.2)" }} />
-      </div>
-
-      {/* Gradient overlays */}
-      <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(180deg, rgba(12,8,9,0.97) 0%, rgba(12,8,9,0.45) 35%, rgba(12,8,9,0.45) 65%, rgba(12,8,9,0.97) 100%)" }} />
-
-      {/* Atmospheric glows — 4 orbs */}
-      <div className="absolute inset-0 pointer-events-none cfk-growth-pulse" style={{ background: `radial-gradient(ellipse 55% 50% at 50% 28%, ${C_BRIGHT}0C, transparent 70%)` }} />
-      <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 30% 35% at 8% 40%, ${C}0A, transparent 60%)` }} />
-      <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 25% 30% at 92% 50%, ${C_BRIGHT}08, transparent 60%)` }} />
-      <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 40% 25% at 50% 85%, ${C}06, transparent 60%)` }} />
-
-      {/* Dot matrix pattern */}
-      <div className="absolute inset-0 pointer-events-none" style={{
-        backgroundImage: `radial-gradient(${C_BRIGHT}08 1px, transparent 1px)`,
-        backgroundSize: "28px 28px",
-        maskImage: "radial-gradient(ellipse 65% 55% at 50% 50%, black 15%, transparent 70%)",
-        WebkitMaskImage: "radial-gradient(ellipse 65% 55% at 50% 50%, black 15%, transparent 70%)",
-        opacity: 0.5,
-      }} />
-
-      {/* Scan lines */}
-      <div className="absolute inset-0 pointer-events-none" style={{
-        backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(255,255,255,0.008) 3px, rgba(255,255,255,0.008) 4px)",
-        zIndex: 2,
-      }} />
-
-      {/* Top border with glow */}
-      <div className="absolute top-0 left-0 right-0" style={{ height: 1, background: `linear-gradient(90deg, transparent 5%, ${C_BRIGHT}28, ${C_BRIGHT}18, transparent 95%)` }} />
-
-      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 clamp(20px,5vw,80px)", position: "relative", zIndex: 3 }}>
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: EASE }}
-          style={{ textAlign: "center", marginBottom: 28 }}
-        >
-          <div className="flex items-center justify-center gap-3" style={{ marginBottom: 24 }}>
-            <span style={{ width: 36, height: 1, background: `linear-gradient(90deg, transparent, ${C_BRIGHT})` }} />
-            <span style={{ fontFamily: "var(--font-dm)", fontSize: 11, fontWeight: 600, letterSpacing: "3.5px", textTransform: "uppercase", color: C_BRIGHT }}>Our Journey</span>
-            <span style={{ width: 36, height: 1, background: `linear-gradient(270deg, transparent, ${C_BRIGHT})` }} />
-          </div>
-
-          <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(30px, 4vw, 48px)", letterSpacing: "-1.5px", color: "rgba(255,255,255,0.92)", lineHeight: 1.15, margin: "0 0 6px" }}>
-            From Dubai to{" "}
-            <span style={{ color: C_BRIGHT }}>Nairobi</span>
-          </h2>
-          <h2 className="cfk-growth-headline" style={{
-            fontFamily: "var(--font-display)", fontWeight: 900,
-            fontSize: "clamp(32px, 4.5vw, 54px)", letterSpacing: "-2.5px", lineHeight: 1.1, margin: "0 0 16px",
-            background: `linear-gradient(135deg, ${C_BRIGHT} 0%, #ffffff 50%, ${C_BRIGHT} 100%)`,
-            backgroundSize: "200% 100%",
-            WebkitBackgroundClip: "text", backgroundClip: "text",
-            WebkitTextFillColor: "transparent", color: "transparent",
-          }}>
-            3 Editions. 3 Regions. One Mission.
-          </h2>
-
-          {/* Animated underline */}
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={inView ? { scaleX: 1 } : {}}
-            transition={{ duration: 0.8, delay: 0.3, ease: EASE }}
-            style={{ width: 70, height: 2, background: `linear-gradient(90deg, transparent, ${C_BRIGHT}, ${C}, ${C_BRIGHT}, transparent)`, borderRadius: 2, margin: "0 auto 24px" }}
-          />
-
-          <p style={{ fontFamily: "var(--font-outfit)", fontWeight: 300, fontSize: 16, color: "rgba(255,255,255,0.42)", maxWidth: 540, margin: "0 auto", lineHeight: 1.75 }}>
-            Tracking the Cyber First series as it expands across the Middle East, Gulf, and now East Africa.
-          </p>
-        </motion.div>
-
-        {/* Divider with triple dots */}
-        <motion.div
-          initial={{ scaleX: 0, opacity: 0 }}
-          animate={inView ? { scaleX: 1, opacity: 1 } : {}}
-          transition={{ duration: 1, delay: 0.4, ease: EASE }}
-          style={{ maxWidth: 1100, margin: "48px auto 56px", position: "relative" }}
-        >
-          <div style={{ height: 1, background: `linear-gradient(90deg, transparent 0%, ${C_BRIGHT}12 15%, ${C_BRIGHT}22 50%, ${C_BRIGHT}12 85%, transparent 100%)` }} />
-          <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", display: "flex", gap: 8 }}>
-            {[4, 6, 4].map((s, idx) => (
-              <div key={idx} style={{ width: s, height: s, background: idx === 1 ? C_BRIGHT : `${C_BRIGHT}50`, borderRadius: idx === 1 ? 1 : "50%", transform: idx === 1 ? "rotate(45deg)" : "none", boxShadow: idx === 1 ? `0 0 14px ${C_BRIGHT}45` : "none" }} />
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Cards grid */}
-        <div className="cfk-growth-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24, position: "relative" }}>
-          {/* Progress connector line behind cards */}
-          <div className="cfk-growth-connector" style={{
-            position: "absolute", top: 56, left: "16.67%", right: "16.67%", zIndex: 0,
-          }}>
-            {/* Dashed track */}
-            <div style={{ height: 1, background: `repeating-linear-gradient(90deg, ${C_BRIGHT}18 0px, ${C_BRIGHT}18 8px, transparent 8px, transparent 14px)` }} />
-            {/* Solid overlay gradient */}
-            <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: `linear-gradient(90deg, rgba(255,255,255,0.03), ${C_BRIGHT}20, ${C_BRIGHT}45)`, marginTop: -0.5 }} />
-            {/* Stepping stones */}
-            {[0, 0.5, 1].map((p, pi) => (
-              <div key={p} style={{
-                position: "absolute", left: `${p * 100}%`, top: -4, transform: "translateX(-50%)",
-              }}>
-                <div style={{ width: pi === 2 ? 10 : 8, height: pi === 2 ? 10 : 8, borderRadius: "50%", background: pi === 2 ? C_BRIGHT : `${C_BRIGHT}40`, boxShadow: pi === 2 ? `0 0 12px ${C_BRIGHT}60, 0 0 4px ${C_BRIGHT}30` : "none", border: pi === 2 ? `2px solid ${C_BRIGHT}80` : "none" }} />
-              </div>
-            ))}
-          </div>
-
-          {GROWTH.map((g, i) => (
-            <Tilt key={g.year} max={4}>
-              <motion.div
-                className={`cfk-growth-card ${g.active ? "cfk-growth-card-active" : ""}`}
-                initial={{ opacity: 0, y: 40 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.75, delay: 0.5 + i * 0.2, ease: EASE }}
-                style={{
-                  padding: "44px 32px 34px",
-                  borderRadius: 22,
-                  background: g.active
-                    ? `linear-gradient(160deg, rgba(181,34,48,0.12) 0%, rgba(181,34,48,0.04) 50%, rgba(110,20,25,0.02) 100%)`
-                    : `linear-gradient(160deg, rgba(${20 + i * 4},${16 + i * 2},${18 + i * 2},0.9) 0%, rgba(14,10,12,0.95) 100%)`,
-                  border: `1px solid ${g.active ? C_BRIGHT + "48" : "rgba(255,255,255,0.07)"}`,
-                  borderTop: `1px solid ${g.active ? C_BRIGHT + "55" : "rgba(255,255,255,0.1)"}`,
-                  position: "relative",
-                  overflow: "hidden",
-                  zIndex: 1,
-                  backdropFilter: "blur(20px)",
-                  WebkitBackdropFilter: "blur(20px)",
-                  boxShadow: g.active
-                    ? `0 16px 48px ${C_BRIGHT}16, 0 0 0 1px ${C_BRIGHT}0A inset, inset 0 1px 0 ${C_BRIGHT}1A, 0 0 80px ${C_BRIGHT}06`
-                    : "0 6px 28px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.05)",
-                  transition: "all 0.45s cubic-bezier(0.16, 1, 0.3, 1)",
-                }}
-              >
-                {/* Subtle grid pattern */}
-                <div className="absolute inset-0 pointer-events-none" style={{
-                  backgroundImage: `linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px)`,
-                  backgroundSize: "36px 36px",
-                  opacity: g.active ? 0.7 : 0.35,
-                }} />
-
-                {/* Shimmer sweep on hover */}
-                <div className="cfk-growth-shimmer-sweep absolute inset-0 pointer-events-none" style={{
-                  background: "linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.03) 45%, rgba(255,255,255,0.06) 50%, rgba(255,255,255,0.03) 55%, transparent 60%)",
-                  backgroundSize: "200% 100%",
-                  backgroundPosition: "200% 0",
-                  transition: "background-position 0.8s cubic-bezier(0.16, 1, 0.3, 1)",
-                }} />
-
-                {/* Hover glow overlay */}
-                <div className="cfk-growth-glow absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 80% 60% at 30% 20%, ${C_BRIGHT}00, transparent 70%)`, transition: "all 0.5s ease", opacity: 0 }} />
-
-                {/* Active card ambient glow */}
-                {g.active && (
-                  <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 80% 55% at 50% -10%, ${C_BRIGHT}15, transparent 55%)` }} />
-                )}
-
-                {/* Top neon edge */}
-                <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: g.active ? 2 : 1, background: g.active ? `linear-gradient(90deg, transparent 5%, ${C_BRIGHT}80, ${C_BRIGHT}, ${C_BRIGHT}80, transparent 95%)` : `linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent)`, boxShadow: g.active ? `0 0 16px ${C_BRIGHT}35, 0 0 6px ${C_BRIGHT}25` : "none" }} />
-
-                {/* Left accent bar */}
-                <div className="cfk-growth-bar" style={{ position: "absolute", top: "10%", bottom: "10%", left: 0, width: g.active ? 3 : 2, background: g.active ? `linear-gradient(180deg, transparent, ${C_BRIGHT}80, ${C_BRIGHT}50, transparent)` : `linear-gradient(180deg, transparent, rgba(255,255,255,0.05), transparent)`, borderRadius: "0 3px 3px 0", transition: "all 0.45s ease", boxShadow: g.active ? `3px 0 12px ${C_BRIGHT}18` : "none" }} />
-
-                {/* Corner brackets for active card */}
-                {g.active && <>
-                  <div style={{ position: "absolute", top: 8, left: 8, width: 16, height: 16, borderTop: `1.5px solid ${C_BRIGHT}55`, borderLeft: `1.5px solid ${C_BRIGHT}55`, borderRadius: "4px 0 0 0" }} />
-                  <div style={{ position: "absolute", top: 8, right: 8, width: 16, height: 16, borderTop: `1.5px solid ${C_BRIGHT}55`, borderRight: `1.5px solid ${C_BRIGHT}55`, borderRadius: "0 4px 0 0" }} />
-                  <div style={{ position: "absolute", bottom: 8, left: 8, width: 16, height: 16, borderBottom: `1.5px solid ${C_BRIGHT}55`, borderLeft: `1.5px solid ${C_BRIGHT}55`, borderRadius: "0 0 0 4px" }} />
-                  <div style={{ position: "absolute", bottom: 8, right: 8, width: 16, height: 16, borderBottom: `1.5px solid ${C_BRIGHT}55`, borderRight: `1.5px solid ${C_BRIGHT}55`, borderRadius: "0 0 4px 0" }} />
-                </>}
-
-                {/* Edition label */}
-                <div style={{
-                  fontFamily: "var(--font-dm)", fontSize: 9, fontWeight: 600,
-                  letterSpacing: "2.5px", textTransform: "uppercase",
-                  color: g.active ? `${C_BRIGHT}70` : "rgba(255,255,255,0.12)",
-                  marginBottom: 8, position: "relative", zIndex: 2,
-                }}>
-                  {editionLabels[i]}
-                </div>
-
-                {/* Badge */}
-                <div style={{
-                  position: "absolute", top: 20, right: 20,
-                  padding: "4px 12px", borderRadius: 20, display: "flex", alignItems: "center", gap: 5,
-                  background: g.active ? `${C_BRIGHT}1A` : "rgba(255,255,255,0.03)",
-                  border: `1px solid ${g.active ? C_BRIGHT + "40" : "rgba(255,255,255,0.07)"}`,
-                  backdropFilter: "blur(8px)",
-                }}>
-                  {g.active && <span className="cfk-growth-dot" style={{ width: 5, height: 5, borderRadius: "50%", background: C_BRIGHT, boxShadow: `0 0 6px ${C_BRIGHT}60` }} />}
-                  {!g.active && <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)" strokeWidth="2.5" strokeLinecap="round"><path d="M20 6L9 17l-5-5" /></svg>}
-                  <span style={{
-                    fontFamily: "var(--font-dm)", fontSize: 9, fontWeight: g.active ? 700 : 500,
-                    letterSpacing: g.active ? "1.5px" : "1px", textTransform: "uppercase",
-                    color: g.active ? C_BRIGHT : "rgba(255,255,255,0.3)",
-                  }}>
-                    {g.active ? "Current" : "Completed"}
-                  </span>
-                </div>
-
-                {/* Year — gradient on active, larger */}
-                <div style={{
-                  fontFamily: "var(--font-display)", fontSize: g.active ? 68 : 58, fontWeight: 900,
-                  letterSpacing: "-4px", lineHeight: 1, marginBottom: 2, position: "relative", zIndex: 2,
-                  ...(g.active ? {
-                    background: `linear-gradient(180deg, ${C_BRIGHT} 20%, ${C_DIM} 100%)`,
-                    WebkitBackgroundClip: "text", backgroundClip: "text",
-                    WebkitTextFillColor: "transparent", color: "transparent",
-                    filter: `drop-shadow(0 2px 8px ${C_BRIGHT}18)`,
-                  } : { color: "rgba(255,255,255,0.08)" }),
-                }}>
-                  {g.year}
-                </div>
-
-                {/* Location with flag */}
-                <div style={{
-                  display: "flex", alignItems: "center", gap: 7,
-                  fontFamily: "var(--font-outfit)", fontSize: 13, fontWeight: 400,
-                  color: g.active ? "rgba(255,255,255,0.65)" : "rgba(255,255,255,0.22)",
-                  marginBottom: 28, letterSpacing: "0.3px", position: "relative", zIndex: 2,
-                }}>
-                  <span style={{ fontSize: 15, filter: g.active ? "none" : "grayscale(0.6) opacity(0.5)" }}>{locationFlags[i]}</span>
-                  {locationLabels[i]}
-                </div>
-
-                {/* Stats rows with progress bars */}
-                <div style={{ display: "flex", flexDirection: "column", gap: 0, position: "relative", zIndex: 2 }}>
-                  {([
-                    ["Delegates", g.delegates],
-                    ["Speakers", g.speakers],
-                    ["Sponsors", g.sponsors],
-                    ["Media Partners", g.media],
-                  ] as [string, number][]).map(([label, val], si) => {
-                    const barMax = label === "Delegates" ? 350 : label === "Speakers" ? 30 : label === "Sponsors" ? 30 : 20;
-                    const pct = Math.min((val / barMax) * 100, 100);
-                    return (
-                      <div key={label} style={{
-                        padding: "13px 0 14px",
-                        borderBottom: si < 3 ? `1px solid ${g.active ? C_BRIGHT + "0C" : "rgba(255,255,255,0.035)"}` : "none",
-                      }}>
-                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
-                          <span style={{ fontFamily: "var(--font-outfit)", fontSize: 12, fontWeight: 400, color: g.active ? "rgba(255,255,255,0.5)" : "rgba(255,255,255,0.25)", letterSpacing: "0.2px" }}>
-                            {label}
-                          </span>
-                          <span style={{
-                            fontFamily: "var(--font-display)", fontSize: g.active ? 26 : 21, fontWeight: 800,
-                            color: g.active ? C_BRIGHT : "rgba(255,255,255,0.38)",
-                            letterSpacing: "-0.5px", lineHeight: 1,
-                          }}>
-                            {inView ? <Counter to={val} suffix="+" duration={1400} /> : val}
-                          </span>
-                        </div>
-                        {/* Mini progress bar */}
-                        <div style={{ height: 2, borderRadius: 1, background: g.active ? `${C_BRIGHT}0A` : "rgba(255,255,255,0.02)", overflow: "hidden" }}>
-                          <motion.div
-                            initial={{ width: 0 }}
-                            animate={inView ? { width: `${pct}%` } : {}}
-                            transition={{ duration: 1.2, delay: 0.8 + si * 0.1 + i * 0.15, ease: EASE }}
-                            style={{
-                              height: "100%", borderRadius: 1,
-                              background: g.active
-                                ? `linear-gradient(90deg, ${C_BRIGHT}50, ${C_BRIGHT})`
-                                : `linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.12))`,
-                            }}
-                          />
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-
-                {/* Extra info pill */}
-                <div style={{
-                  marginTop: 16, padding: "13px 16px", borderRadius: 14,
-                  background: g.active ? `linear-gradient(135deg, ${C_BRIGHT}0E, ${C_BRIGHT}06)` : "rgba(255,255,255,0.018)",
-                  border: `1px solid ${g.active ? C_BRIGHT + "20" : "rgba(255,255,255,0.04)"}`,
-                  display: "flex", alignItems: "flex-start", gap: 10,
-                  position: "relative", zIndex: 2,
-                }}>
-                  <div style={{
-                    width: 22, height: 22, borderRadius: 6, flexShrink: 0,
-                    background: g.active ? `${C_BRIGHT}15` : "rgba(255,255,255,0.03)",
-                    border: `1px solid ${g.active ? C_BRIGHT + "25" : "rgba(255,255,255,0.05)"}`,
-                    display: "flex", alignItems: "center", justifyContent: "center",
-                  }}>
-                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke={g.active ? C_BRIGHT : "rgba(255,255,255,0.18)"} strokeWidth="2" strokeLinecap="round">
-                      <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
-                    </svg>
-                  </div>
-                  <span style={{ fontFamily: "var(--font-outfit)", fontSize: 11, fontWeight: 500, color: g.active ? `${C_BRIGHT}BB` : "rgba(255,255,255,0.2)", lineHeight: 1.55 }}>
-                    {g.extra}
-                  </span>
-                </div>
-
-                {/* Bottom corner dot */}
-                <div style={{ position: "absolute", bottom: 14, right: 18, width: 4, height: 4, borderRadius: "50%", background: g.active ? `${C_BRIGHT}40` : "rgba(255,255,255,0.05)" }} />
-              </motion.div>
-            </Tilt>
-          ))}
-        </div>
-
-        {/* Cumulative stats bar — glass container */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 1.2, ease: EASE }}
-          style={{
-            display: "flex", justifyContent: "center", gap: 0, marginTop: 60,
-            background: "linear-gradient(135deg, rgba(255,255,255,0.035), rgba(255,255,255,0.012))",
-            border: `1px solid rgba(255,255,255,0.06)`,
-            borderTop: `1px solid rgba(255,255,255,0.09)`,
-            borderRadius: 18, overflow: "hidden", position: "relative",
-            backdropFilter: "blur(16px)",
-            WebkitBackdropFilter: "blur(16px)",
-          }}
-        >
-          {/* Subtle top glow on stats bar */}
-          <div className="absolute top-0 left-0 right-0 pointer-events-none" style={{ height: 1, background: `linear-gradient(90deg, transparent, ${C_BRIGHT}20, transparent)` }} />
-
-          {[
-            ["Total Delegates", "790+", "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 14c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4"],
-            ["Nations Reached", "5+", "M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7m0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5"],
-            ["Organisations", "120+", "M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"],
-          ].map(([label, val, icon], idx) => (
-            <div key={label} style={{
-              textAlign: "center", flex: 1, padding: "32px 20px 28px",
-              borderRight: idx < 2 ? `1px solid rgba(255,255,255,0.05)` : "none",
-              position: "relative",
-            }}>
-              {/* Icon */}
-              <div style={{ display: "flex", justifyContent: "center", marginBottom: 12 }}>
-                <div style={{
-                  width: 32, height: 32, borderRadius: 8,
-                  background: `${C_BRIGHT}0C`, border: `1px solid ${C_BRIGHT}18`,
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                }}>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={C_BRIGHT} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.8 }}>
-                    <path d={icon} />
-                  </svg>
-                </div>
-              </div>
-              <div style={{ fontFamily: "var(--font-display)", fontSize: 28, fontWeight: 800, color: C_BRIGHT, letterSpacing: "-0.5px", marginBottom: 6 }}>{val}</div>
-              <div style={{ fontFamily: "var(--font-outfit)", fontSize: 10, fontWeight: 500, color: "rgba(255,255,255,0.32)", letterSpacing: "1.2px", textTransform: "uppercase" }}>{label}</div>
-            </div>
-          ))}
-        </motion.div>
-      </div>
-
-      {/* Bottom fade */}
-      <div className="absolute bottom-0 left-0 right-0 pointer-events-none" style={{ height: 120, background: "linear-gradient(to bottom, transparent, #0C0809)", zIndex: 4 }} />
-      <div className="absolute bottom-0 left-0 right-0" style={{ height: 1, background: `linear-gradient(90deg, transparent 10%, ${C_BRIGHT}18, transparent 90%)`, zIndex: 5 }} />
-
-      <style jsx global>{`
-        @keyframes cfk-growth-glow-pulse {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.35; }
-        }
-        @keyframes cfk-growth-shimmer {
-          0% { background-position: 200% 0; }
-          100% { background-position: -200% 0; }
-        }
-        @keyframes cfk-growth-dot-blink {
-          0%, 100% { opacity: 1; box-shadow: 0 0 6px ${C_BRIGHT}60; }
-          50% { opacity: 0.3; box-shadow: 0 0 2px ${C_BRIGHT}20; }
-        }
-        @keyframes cfk-growth-border-pulse {
-          0%, 100% { border-color: ${C_BRIGHT}48; }
-          50% { border-color: ${C_BRIGHT}30; }
-        }
-        .cfk-growth-pulse { animation: cfk-growth-glow-pulse 8s ease-in-out infinite; }
-        .cfk-growth-headline { animation: cfk-growth-shimmer 8s ease-in-out infinite; }
-        .cfk-growth-dot { animation: cfk-growth-dot-blink 2s ease-in-out infinite; }
-        .cfk-growth-card-active { animation: cfk-growth-border-pulse 4s ease-in-out infinite; }
-        .cfk-growth-card:hover {
-          transform: translateY(-7px) !important;
-          border-color: ${C_BRIGHT}38 !important;
-          box-shadow: 0 24px 64px ${C_BRIGHT}14, 0 0 0 1px ${C_BRIGHT}0A inset, inset 0 1px 0 ${C_BRIGHT}14 !important;
-        }
-        .cfk-growth-card:hover .cfk-growth-shimmer-sweep {
-          background-position: -200% 0 !important;
-        }
-        .cfk-growth-card:hover .cfk-growth-glow {
-          opacity: 1 !important;
-          background: radial-gradient(ellipse 80% 60% at 25% 15%, ${C_BRIGHT}0E, transparent 70%) !important;
-        }
-        .cfk-growth-card:hover .cfk-growth-bar {
-          top: 6% !important;
-          bottom: 6% !important;
-          width: 3px !important;
-          background: linear-gradient(180deg, transparent, ${C_BRIGHT}80, ${C_BRIGHT}50, transparent) !important;
-          box-shadow: 3px 0 14px ${C_BRIGHT}22 !important;
-        }
-        @media (max-width: 768px) {
-          .cfk-growth-grid { grid-template-columns: 1fr !important; }
-          .cfk-growth-connector { display: none !important; }
         }
       `}</style>
     </section>
@@ -4289,52 +3559,6 @@ function WhoShouldAttend() {
           </motion.div>
         </div>
 
-        {/* Bottom stats bar — glass container */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.6, ease: EASE }}
-          style={{
-            display: "flex", justifyContent: "center", gap: 0, marginTop: 52,
-            background: "linear-gradient(135deg, rgba(255,255,255,0.035), rgba(255,255,255,0.012))",
-            border: "1px solid rgba(255,255,255,0.06)",
-            borderTop: "1px solid rgba(255,255,255,0.1)",
-            borderRadius: 18, overflow: "hidden", position: "relative",
-            backdropFilter: "blur(16px)",
-            WebkitBackdropFilter: "blur(16px)",
-          }}
-        >
-          {/* Top glow */}
-          <div className="absolute top-0 left-0 right-0 pointer-events-none" style={{ height: 1, background: `linear-gradient(90deg, transparent, ${C_BRIGHT}18, transparent)` }} />
-
-          {[
-            ["200+", "Senior Leaders", "M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 7a4 4 0 100 8 4 4 0 000-8z"],
-            ["6", "Key Industries", "M2 20h20M5 20V8l7-5 7 5v12"],
-            ["1", "Transformative Day", "M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4"],
-          ].map(([val, label, icon], idx) => (
-            <div key={label} style={{
-              textAlign: "center", flex: 1, padding: "30px 20px 26px",
-              borderRight: idx < 2 ? "1px solid rgba(255,255,255,0.05)" : "none",
-              position: "relative",
-            }}>
-              <div style={{ display: "flex", justifyContent: "center", marginBottom: 12 }}>
-                <div style={{
-                  width: 32, height: 32, borderRadius: 9,
-                  background: `${C_BRIGHT}0C`, border: `1px solid ${C_BRIGHT}18`,
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  position: "relative",
-                }}>
-                  <div style={{ position: "absolute", inset: 3, borderRadius: 6, border: `1px solid ${C_BRIGHT}08` }} />
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={C_BRIGHT} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.8 }}>
-                    <path d={icon} />
-                  </svg>
-                </div>
-              </div>
-              <div style={{ fontFamily: "var(--font-display)", fontSize: 28, fontWeight: 800, color: C_BRIGHT, letterSpacing: "-0.5px", marginBottom: 5 }}>{val}</div>
-              <div style={{ fontFamily: "var(--font-outfit)", fontSize: 10, fontWeight: 500, color: "rgba(255,255,255,0.32)", letterSpacing: "1.2px", textTransform: "uppercase" }}>{label}</div>
-            </div>
-          ))}
-        </motion.div>
       </div>
 
       {/* Bottom border */}
@@ -4856,12 +4080,19 @@ function ContactSection() {
                   {CFK_CONTACTS.speaking.role}
                 </p>
                 <div className="flex flex-col gap-3">
-                  <a href={`tel:${CFK_CONTACTS.speaking.phone.replace(/\s/g, "")}`} className="flex items-center gap-3 transition-colors hover:opacity-80">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke={KENYA_ACCENT} strokeWidth="2" strokeLinecap="round">
-                      <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
-                    </svg>
-                    <span style={{ fontFamily: "var(--font-outfit)", fontSize: 14, color: "#909090" }}>{CFK_CONTACTS.speaking.phone}</span>
-                  </a>
+                  <div className="flex items-center gap-3">
+                    <a href={`tel:${CFK_CONTACTS.speaking.phone.replace(/\s/g, "")}`} className="flex items-center gap-3 transition-colors hover:opacity-80">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke={KENYA_ACCENT} strokeWidth="2" strokeLinecap="round">
+                        <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
+                      </svg>
+                      <span style={{ fontFamily: "var(--font-outfit)", fontSize: 14, color: "#909090" }}>{CFK_CONTACTS.speaking.phone}</span>
+                    </a>
+                    <a href={`https://wa.me/${CFK_CONTACTS.speaking.phone.replace(/[\s+]/g, "")}`} target="_blank" rel="noopener noreferrer" className="transition-opacity hover:opacity-80" style={{ marginLeft: 4 }}>
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                      </svg>
+                    </a>
+                  </div>
                   <a href={`mailto:${CFK_CONTACTS.speaking.email}`} className="flex items-center gap-3 transition-colors hover:opacity-80">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke={KENYA_ACCENT} strokeWidth="2" strokeLinecap="round">
                       <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
@@ -5106,10 +4337,20 @@ function RegistrationSection() {
             Be part of the Cyber First Movement and lead the charge toward a strategic, resilient, and innovative digital economy in the Silicon Savannah.
           </p>
           <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
-            <Link href="/contact" style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "18px 40px", borderRadius: 50, background: `linear-gradient(135deg, ${C}, ${C_DIM})`, color: "white", fontFamily: "var(--font-outfit)", fontSize: 16, fontWeight: 700, textDecoration: "none", boxShadow: `0 8px 32px ${C}35` }}>
+            <Link
+              href="/contact"
+              style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "18px 40px", borderRadius: 50, background: `linear-gradient(135deg, ${C}, ${C_DIM})`, color: "white", fontFamily: "var(--font-outfit)", fontSize: 16, fontWeight: 700, textDecoration: "none", boxShadow: `0 8px 32px ${C}35`, transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)" }}
+              onMouseEnter={(e) => { e.currentTarget.style.background = `linear-gradient(135deg, ${C_BRIGHT}, ${C})`; e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = `0 12px 40px ${C}50`; }}
+              onMouseLeave={(e) => { e.currentTarget.style.background = `linear-gradient(135deg, ${C}, ${C_DIM})`; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = `0 8px 32px ${C}35`; }}
+            >
               Register Now <span>→</span>
             </Link>
-            <Link href="/contact" style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "18px 40px", borderRadius: 50, background: "transparent", color: "white", fontFamily: "var(--font-outfit)", fontSize: 16, fontWeight: 500, textDecoration: "none", border: "1px solid rgba(255,255,255,0.2)" }}>
+            <Link
+              href="/contact"
+              style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "18px 40px", borderRadius: 50, background: "transparent", color: "white", fontFamily: "var(--font-outfit)", fontSize: 16, fontWeight: 500, textDecoration: "none", border: "1px solid rgba(255,255,255,0.2)", transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)" }}
+              onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.08)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.4)"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.2)"; e.currentTarget.style.transform = "translateY(0)"; }}
+            >
               Contact Us
             </Link>
           </div>

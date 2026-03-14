@@ -326,10 +326,20 @@ function Hero() {
         <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 0.8 }} style={{ fontSize: "clamp(17px, 2.2vw, 21px)", fontWeight: 400, color: TEXT_50, maxWidth: 600, marginTop: 24, lineHeight: 1.6 }}>Join an exclusive event experience tailored for leaders seeking to expand their network, foster peer connections, and engage in in-depth discussions.</motion.p>
 
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 1.1 }} className="hero-cta-row" style={{ display: "flex", gap: 16, marginTop: 40, flexWrap: "wrap", justifyContent: "center" }}>
-          <Link href="#get-started" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8, padding: "16px 32px", background: GOLD, color: BG, borderRadius: 980, fontSize: 15, fontWeight: 500, textDecoration: "none", minWidth: 180 }}>
+          <Link
+            href="#get-started"
+            style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8, padding: "16px 32px", background: GOLD, color: BG, borderRadius: 980, fontSize: 15, fontWeight: 500, textDecoration: "none", minWidth: 180, transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)" }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = "#D9A96A"; e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = `0 12px 40px ${GOLD_30}`; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = GOLD; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}
+          >
             Host a Boardroom
           </Link>
-          <Link href="#get-started" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8, padding: "16px 32px", background: "transparent", color: TEXT, border: `1px solid ${TEXT_30}`, borderRadius: 980, fontSize: 15, fontWeight: 500, textDecoration: "none", minWidth: 140 }}>
+          <Link
+            href="#get-started"
+            style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8, padding: "16px 32px", background: "transparent", color: TEXT, border: `1px solid ${TEXT_30}`, borderRadius: 980, fontSize: 15, fontWeight: 500, textDecoration: "none", minWidth: 140, transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)" }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.08)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.4)"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = TEXT_30; e.currentTarget.style.transform = "translateY(0)"; }}
+          >
             Request Invite
           </Link>
         </motion.div>
@@ -1560,7 +1570,12 @@ function UrgencyBanner() {
     <section style={{ padding: "56px 24px", background: BG, borderTop: `1px solid ${BORDER}`, borderBottom: `1px solid ${BORDER}` }}>
       <div style={{ maxWidth: 700, margin: "0 auto", textAlign: "center" }}>
         <p style={{ fontSize: "clamp(18px, 3vw, 22px)", color: TEXT, fontWeight: 500, margin: "0 0 24px", lineHeight: 1.4 }}>Limited sponsorship slots available for Q2 2026.</p>
-        <Link href="#get-started" style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "16px 32px", background: GOLD, color: BG, borderRadius: 980, fontSize: 15, fontWeight: 500, textDecoration: "none" }}>
+        <Link
+          href="#get-started"
+          style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "16px 32px", background: GOLD, color: BG, borderRadius: 980, fontSize: 15, fontWeight: 500, textDecoration: "none", transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)" }}
+          onMouseEnter={(e) => { e.currentTarget.style.background = "#D9A96A"; e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = `0 12px 40px ${GOLD_30}`; }}
+          onMouseLeave={(e) => { e.currentTarget.style.background = GOLD; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}
+        >
           Reserve Your Session
         </Link>
       </div>
@@ -1591,7 +1606,13 @@ function PastBoardroomsShowcase() {
           <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(32px, 5vw, 44px)", fontWeight: 600, margin: 0, letterSpacing: "-0.02em", color: TEXT }}>300+ sessions delivered.</h2>
           <div style={{ display: "flex", gap: 4 }}>
             {(["2026", "2025", "2024", "2023"] as const).map((year) => (
-              <button key={year} onClick={() => setActiveYear(year)} style={{ padding: "10px 20px", borderRadius: 980, border: "none", background: activeYear === year ? GOLD : "transparent", color: activeYear === year ? BG : TEXT_50, fontSize: 14, fontWeight: 500, cursor: "pointer" }}>{year}</button>
+              <button
+                key={year}
+                onClick={() => setActiveYear(year)}
+                style={{ padding: "10px 20px", borderRadius: 980, border: "none", background: activeYear === year ? GOLD : "transparent", color: activeYear === year ? BG : TEXT_50, fontSize: 14, fontWeight: 500, cursor: "pointer", transition: "all 0.3s ease" }}
+                onMouseEnter={(e) => { if (activeYear !== year) { e.currentTarget.style.background = GOLD_15; e.currentTarget.style.color = TEXT; } }}
+                onMouseLeave={(e) => { if (activeYear !== year) { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = TEXT_50; } }}
+              >{year}</button>
             ))}
           </div>
         </motion.div>
@@ -2122,7 +2143,7 @@ function FAQSection() {
         >
           <p style={{ fontSize: 15, color: TEXT_50, margin: 0 }}>
             Have more questions?{" "}
-            <a href="mailto:hello@networkfirstme.com" style={{ color: GOLD, textDecoration: "none", fontWeight: 500, borderBottom: `1px solid ${GOLD_30}`, paddingBottom: 2, transition: "border-color 0.3s ease" }}>Get in touch</a>
+            <a href="#get-started" onClick={(e) => { e.preventDefault(); document.getElementById("get-started")?.scrollIntoView({ behavior: "smooth" }); }} style={{ color: GOLD, textDecoration: "none", fontWeight: 500, borderBottom: `1px solid ${GOLD_30}`, paddingBottom: 2, transition: "border-color 0.3s ease", cursor: "pointer" }}>Get in touch</a>
           </p>
         </motion.div>
       </div>
@@ -2363,7 +2384,12 @@ function FinalCTA() {
                     </div>
                     <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: "clamp(22px, 3vw, 28px)", letterSpacing: "-0.5px", color: TEXT, margin: "0 0 8px" }}>Inquiry Submitted</h3>
                     <p style={{ fontFamily: "var(--font-outfit)", fontWeight: 400, fontSize: 14, color: TEXT_50, margin: "0 0 20px", lineHeight: 1.6 }}>Our team will review your submission and get back to you within 2 business days.</p>
-                    <button onClick={resetForm} style={{ fontFamily: "var(--font-outfit)", fontSize: 13, fontWeight: 500, color: GOLD, background: "none", border: "none", cursor: "pointer", padding: 0 }}>
+                    <button
+                      onClick={resetForm}
+                      style={{ fontFamily: "var(--font-outfit)", fontSize: 13, fontWeight: 500, color: GOLD, background: "none", border: "none", cursor: "pointer", padding: "6px 12px", borderRadius: 8, transition: "all 0.3s ease" }}
+                      onMouseEnter={(e) => { e.currentTarget.style.color = TEXT; e.currentTarget.style.background = GOLD_15; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.color = GOLD; e.currentTarget.style.background = "none"; }}
+                    >
                       Submit another inquiry &rarr;
                     </button>
                   </motion.div>

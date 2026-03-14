@@ -36,9 +36,9 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Events First Group | Premium Technology Conferences Worldwide",
+  title: "Events First Group | Executive Technology Summits",
   description:
-    "EFG runs premium technology conferences across Dubai, Riyadh, Abu Dhabi, Doha, Riyadh, and beyond — cybersecurity, OT security, digital transformation, and AI events for enterprise technology leaders.",
+    "Premium executive technology summits across the Middle East, Africa, and Asia. Cyber First, Data & AI First, Opex First, OT Security First — bringing together CISOs, CTOs, and enterprise leaders.",
   keywords: [
     "technology conferences",
     "cybersecurity events",
@@ -49,6 +49,39 @@ export const metadata: Metadata = {
     "digital transformation",
     "AI conferences",
   ],
+  openGraph: {
+    title: "Events First Group | Executive Technology Summits",
+    description:
+      "Premium executive technology summits across the Middle East, Africa, and Asia. Cyber First, Data & AI First, Opex First, OT Security First — bringing together CISOs, CTOs, and enterprise leaders.",
+    url: "https://eventsfirstgroup.com",
+    siteName: "Events First Group",
+    images: [
+      {
+        url: "https://eventsfirstgroup.com/Events-First-logo-02.png",
+        width: 1200,
+        height: 630,
+        alt: "Events First Group",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "Events First Group | Executive Technology Summits",
+    description:
+      "Premium executive technology summits across the Middle East, Africa, and Asia.",
+    images: ["https://eventsfirstgroup.com/Events-First-logo-02.png"],
+  },
+  icons: {
+    icon: [
+      { url: "/favicon_io/favicon-32x32.png", type: "image/png", sizes: "32x32" },
+      { url: "/favicon_io/favicon-16x16.png", type: "image/png", sizes: "16x16" },
+    ],
+    apple: [
+      { url: "/favicon_io/apple-touch-icon.png", sizes: "180x180" },
+    ],
+  },
 };
 
 const websiteJsonLd = {
@@ -72,7 +105,7 @@ const organizationJsonLd = {
   name: "Events First Group",
   alternateName: "EFG",
   url: "https://eventsfirstgroup.com",
-  logo: "https://eventsfirstgroup.com/logo.png",
+  logo: "https://eventsfirstgroup.com/Events-First-logo-02.png",
   description:
     "Events First Group designs executive-grade technology summits across the Middle East, Africa, and Asia. Cyber First, OT Security First, Opex First, and Data & AI First.",
   foundingDate: "2023",
@@ -86,7 +119,7 @@ const organizationJsonLd = {
     "@type": "ContactPoint",
     telephone: "+971-4-883-4877",
     contactType: "customer service",
-    email: "info@eventsfirstgroup.com",
+    email: "partnerships@eventsfirstgroup.com",
     availableLanguage: "English",
   },
   sameAs: [
@@ -106,7 +139,9 @@ export default function RootLayout({
         <meta name="author" content="Events First Group" />
         <meta name="geo.region" content="AE-DU" />
         <meta name="geo.placename" content="Dubai" />
-        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicon_io/favicon-32x32.png" type="image/png" sizes="32x32" />
+        <link rel="icon" href="/favicon_io/favicon-16x16.png" type="image/png" sizes="16x16" />
+        <link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png" sizes="180x180" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}

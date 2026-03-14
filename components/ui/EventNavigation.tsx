@@ -57,7 +57,7 @@ const EVENT_CONFIGS: Record<string, {
     colorBright: "#4DD4FF",
     date: "16 June 2026",
     location: "New Delhi",
-    logo: "/Cyber_India.png",
+    logo: "/Asset-5.svg",
     navLinks: [
       { href: "#overview", label: "Overview" },
       { href: "#speakers", label: "Speakers" },
@@ -147,7 +147,7 @@ export default function EventNavigation() {
                 alt={name} 
                 className="event-nav-logo"
                 style={{ 
-                  height: 110,
+                  height: 70,
                   width: "auto",
                   filter: logoFilter || "none",
                 }} 

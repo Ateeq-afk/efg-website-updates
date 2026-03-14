@@ -506,7 +506,8 @@ export default function HeroSection() {
             <CountdownDisplay date={nextEvent.date} compact />
             <Link
               href="/events/cyber-first/kuwait-2026"
-              style={{ fontSize: 12, fontWeight: 600, color: "var(--orange)", fontFamily: "var(--font-outfit)", whiteSpace: "nowrap" }}
+              className="hero-mobile-register"
+              style={{ fontSize: 12, fontWeight: 600, color: "var(--orange)", fontFamily: "var(--font-outfit)", whiteSpace: "nowrap", transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)" }}
             >
               Register →
             </Link>
@@ -519,6 +520,10 @@ export default function HeroSection() {
         @keyframes shimmer {
           0% { background-position: 100% 50%; }
           100% { background-position: 0% 50%; }
+        }
+        .hero-mobile-register:hover {
+          color: #FF7A2E !important;
+          text-shadow: 0 0 12px rgba(232, 101, 26, 0.4);
         }
         @media (max-width: 640px) {
           .hero-content-wrapper {

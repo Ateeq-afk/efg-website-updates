@@ -40,7 +40,7 @@ const rules = [
       </svg>
     ),
     title: "Chatham House Rule",
-    body: "No recordings. No press. No slides. The freedom to speak about real challenges with the people who actually share them.",
+    body: "No recordings. No press. The freedom to speak about real challenges with the people who actually share them.",
   },
   {
     num: "03",

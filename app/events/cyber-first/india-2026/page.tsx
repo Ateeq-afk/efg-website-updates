@@ -365,11 +365,11 @@ export default function CyberFirstIndia2026() {
       <StatsBar />
       <MarketContext />
       <FocusAreas />
-      <WhoShouldAttend />
-      <AgendaTimeline />
       <SpeakersSection />
+      <AgendaTimeline />
       <SponsorsSection />
       <Gallery />
+      <WhoShouldAttend />
       <AwardsSection />
       <Venue />
       <RegistrationSection />
@@ -570,6 +570,17 @@ function HeroSection() {
                 fontWeight: 700,
                 textDecoration: "none",
                 boxShadow: `0 4px 24px ${C}35`,
+                transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = C_BRIGHT;
+                e.currentTarget.style.transform = "translateY(-2px)";
+                e.currentTarget.style.boxShadow = `0 12px 40px ${C}50`;
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = C;
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.boxShadow = `0 4px 24px ${C}35`;
               }}
             >
               Reserve Your Seat <span>→</span>
@@ -596,6 +607,19 @@ function HeroSection() {
                 textDecoration: "none",
                 border: "1px solid rgba(255,255,255,0.15)",
                 cursor: "pointer",
+                transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "rgba(255,255,255,0.1)";
+                e.currentTarget.style.borderColor = "rgba(255,255,255,0.35)";
+                e.currentTarget.style.color = "white";
+                e.currentTarget.style.transform = "translateY(-2px)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "rgba(255,255,255,0.04)";
+                e.currentTarget.style.borderColor = "rgba(255,255,255,0.15)";
+                e.currentTarget.style.color = "rgba(255,255,255,0.8)";
+                e.currentTarget.style.transform = "translateY(0)";
               }}
             >
               Become a Sponsor
@@ -720,6 +744,17 @@ function HeroSection() {
               textDecoration: "none",
               boxShadow: `0 4px 20px ${C}40`,
               cursor: "pointer",
+              transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = C_BRIGHT;
+              e.currentTarget.style.transform = "translateY(-2px)";
+              e.currentTarget.style.boxShadow = `0 12px 40px ${C}50`;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = C;
+              e.currentTarget.style.transform = "translateY(0)";
+              e.currentTarget.style.boxShadow = `0 4px 20px ${C}40`;
             }}
           >
             Register Now →
@@ -748,7 +783,7 @@ function StatsBar() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true });
   const stats = [
-    { n: 350, suffix: "+", label: "CISOs & CIOs", desc: "C-Suite & Directors", icon: "M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75", badge: "Expected", highlight: true },
+    { n: 200, suffix: "+", label: "CISOs & CIOs", desc: "C-Suite & Directors", icon: "M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75", badge: "Expected", highlight: true },
     { n: 30, suffix: "+", label: "Expert Speakers", desc: "Practitioners & Leaders", icon: "M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z", badge: "Confirmed" },
     { n: 25, suffix: "+", label: "Technology Partners", desc: "Sponsors & Exhibitors", icon: "M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z", badge: "Planned" },
     { n: 1, suffix: "", label: "Focused Day", desc: "Full Summit Experience", icon: "M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z", badge: "16 June" },
@@ -799,7 +834,7 @@ function StatsBar() {
             filter: `drop-shadow(0 0 30px ${C}25)`,
             animation: "shimmer 6s ease-in-out infinite",
           }}>
-            India's Top 350+ Security Leaders.
+            India's Top 200+ Security Leaders.
           </h2>
         </motion.div>
 
@@ -1737,6 +1772,20 @@ function SponsorsSection() {
               color: C_BRIGHT,
               textDecoration: "none",
               letterSpacing: "0.3px",
+              transition: "all 0.3s ease",
+              padding: "8px 20px",
+              borderRadius: 50,
+              border: `1px solid transparent`,
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.color = "white";
+              e.currentTarget.style.borderColor = `${C_BRIGHT}40`;
+              e.currentTarget.style.background = `${C}10`;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.color = C_BRIGHT;
+              e.currentTarget.style.borderColor = "transparent";
+              e.currentTarget.style.background = "transparent";
             }}
           >
             Become a Partner →
@@ -2072,7 +2121,7 @@ function Venue() {
       <div style={{ maxWidth: 1320, margin: "0 auto", padding: "0 clamp(20px, 4vw, 60px)" }}>
         <div className="cfi-venue-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "center" }}>
           <motion.div initial={{ opacity: 0, x: -30 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.8, ease: EASE }} style={{ borderRadius: 20, overflow: "hidden", aspectRatio: "16/10" }}>
-            <img src="/Hotel_delhi.png" alt="The Leela Palace New Delhi" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+            <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=1200&q=80" alt="Luxury hotel outdoor banquet setup" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
           </motion.div>
           <motion.div initial={{ opacity: 0, x: 30 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.8, delay: 0.2, ease: EASE }}>
             <div className="flex items-center gap-3" style={{ marginBottom: 16 }}>
@@ -2401,7 +2450,18 @@ function RegistrationSection() {
                   <p style={{ fontFamily: "var(--font-outfit)", fontWeight: 300, fontSize: 14, color: "#A0A0A0", margin: "0 0 20px", lineHeight: 1.6 }}>
                     Our team will review your submission and get back to you within 2 business days.
                   </p>
-                  <button onClick={resetForm} style={{ fontFamily: "var(--font-outfit)", fontSize: 13, fontWeight: 500, color: C_BRIGHT, background: "none", border: "none", cursor: "pointer", padding: 0 }}>
+                  <button
+                    onClick={resetForm}
+                    style={{ fontFamily: "var(--font-outfit)", fontSize: 13, fontWeight: 500, color: C_BRIGHT, background: "none", border: "none", cursor: "pointer", padding: "6px 12px", borderRadius: 8, transition: "all 0.3s ease" }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = "white";
+                      e.currentTarget.style.background = `${C}15`;
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = C_BRIGHT;
+                      e.currentTarget.style.background = "none";
+                    }}
+                  >
                     Submit another inquiry &rarr;
                   </button>
                 </motion.div>
@@ -2578,13 +2638,6 @@ const CFI_CONTACTS = {
     photo: `${S3_TEAM}/Harini.jpg`,
   },
   sponsorship: [
-    {
-      name: "Mohammed Sahil",
-      role: "Partnership Manager",
-      phone: "+971 56 398 6565",
-      email: "sahil@eventsfirstgroup.com",
-      photo: `${S3_TEAM}/sahil.jpeg`,
-    },
     {
       name: "Kausar Noor",
       role: "Partnership Manager",

@@ -12,7 +12,7 @@ import {
 } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { Footer } from "@/components/sections";
+import { Footer, InquiryForm } from "@/components/sections";
 import { NeuralConstellation, DotMatrixGrid } from "@/components/effects";
 import EventNavigation from "@/components/ui/EventNavigation";
 import { submitForm, isWorkEmail, COUNTRY_CODES, validatePhone } from "@/lib/form-helpers";
@@ -2904,6 +2904,20 @@ function SponsorsSection() {
               color: C_BRIGHT,
               textDecoration: "none",
               letterSpacing: "0.3px",
+              padding: "10px 24px",
+              borderRadius: 50,
+              border: "1px solid transparent",
+              transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.color = "white";
+              e.currentTarget.style.borderColor = `${C}40`;
+              e.currentTarget.style.background = `${C}10`;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.color = C_BRIGHT;
+              e.currentTarget.style.borderColor = "transparent";
+              e.currentTarget.style.background = "transparent";
             }}
           >
             Become a Partner →
@@ -3273,6 +3287,20 @@ function AgendaTimeline() {
                   cursor: "pointer",
                   transition: "all 0.3s cubic-bezier(0.16,1,0.3,1)",
                   letterSpacing: "0.3px",
+                }}
+                onMouseEnter={(e) => {
+                  if (!isActive) {
+                    e.currentTarget.style.background = `${C}15`;
+                    e.currentTarget.style.borderColor = `${C}30`;
+                    e.currentTarget.style.color = "rgba(255,255,255,0.7)";
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!isActive) {
+                    e.currentTarget.style.background = "rgba(255,255,255,0.03)";
+                    e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)";
+                    e.currentTarget.style.color = "#606060";
+                  }
                 }}
               >
                 {f.label}
@@ -4417,32 +4445,6 @@ function AwardsSection() {
 function SplitCTA() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
-  const cd = useCountdown(EVENT_DATE);
-
-  const EFG_ORANGE = "#E8651A";
-
-  // Registration form state
-  const [regForm, setRegForm] = useState({ name: "", email: "", company: "", jobTitle: "" });
-  const [regSubmitted, setRegSubmitted] = useState(false);
-  const [regEmailError, setRegEmailError] = useState<string | null>(null);
-
-  // Sponsor form state
-  const [sponForm, setSponForm] = useState({ name: "", email: "", company: "", interest: "" });
-  const [sponSubmitted, setSponSubmitted] = useState(false);
-
-  const inputStyle = (accent: string): React.CSSProperties => ({
-    width: "100%",
-    padding: "12px 16px",
-    borderRadius: 12,
-    border: `1px solid ${accent}20`,
-    background: `${accent}06`,
-    color: "white",
-    fontFamily: "var(--font-outfit)",
-    fontSize: 13,
-    fontWeight: 400,
-    outline: "none",
-    transition: "border-color 0.3s, background 0.3s",
-  });
 
   return (
     <section
@@ -4479,7 +4481,7 @@ function SplitCTA() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, ease: EASE }}
-          style={{ textAlign: "center", marginBottom: 48 }}
+          style={{ textAlign: "center", marginBottom: 8 }}
         >
           <div className="flex items-center justify-center gap-3" style={{ marginBottom: 16 }}>
             <span style={{ width: 30, height: 1, background: C }} />
@@ -4512,296 +4514,54 @@ function SplitCTA() {
           </h2>
         </motion.div>
 
-        {/* Asymmetric cards: 60/40 */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.2, ease: EASE }}
-          className="cfk-split-cta"
-          style={{ display: "grid", gridTemplateColumns: "3fr 2fr", gap: 16, alignItems: "stretch" }}
-        >
-          {/* ── Register card (larger) ── */}
-          <div
-            style={{
-              padding: "clamp(28px,3.5vw,48px)",
-              borderRadius: 22,
-              background: "linear-gradient(135deg, rgba(232,101,26,0.12), rgba(232,101,26,0.03))",
-              border: "1px solid rgba(232,101,26,0.2)",
-              position: "relative",
-              overflow: "hidden",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-            }}
-          >
-            <div className="absolute top-0 left-0 right-0" style={{ height: 2, background: `linear-gradient(90deg, ${EFG_ORANGE}, ${EFG_ORANGE}60, transparent)` }} />
-            <div
-              className="absolute pointer-events-none"
-              style={{
-                width: 300, height: 300, bottom: -80, right: -60,
-                background: `radial-gradient(ellipse at center, rgba(232,101,26,0.08), transparent 70%)`,
-                filter: "blur(40px)",
-              }}
-            />
-
-            <div style={{ position: "relative" }}>
-              <span style={{ fontFamily: "var(--font-outfit)", fontSize: 10, fontWeight: 700, letterSpacing: "2.5px", textTransform: "uppercase", color: EFG_ORANGE }}>
-                For Delegates
-              </span>
-              <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(22px,2.8vw,36px)", letterSpacing: "-1.5px", color: "white", lineHeight: 1.1, margin: "14px 0 12px" }}>
-                Register for Cyber First<br />Kuwait 2026
-              </h3>
-              <p style={{ fontFamily: "var(--font-outfit)", fontSize: 14, color: "rgba(255,255,255,0.45)", lineHeight: 1.65, margin: "0 0 24px", maxWidth: 420 }}>
-                Join 350+ CISOs, government security leaders, and technology experts. 9 June at Jumeirah Messilah Beach Hotel, Kuwait.
-              </p>
-
-              {/* Countdown */}
-              <div style={{ display: "flex", gap: 12, marginBottom: 28 }}>
-                {[
-                  { val: cd.d, label: "Days" },
-                  { val: cd.h, label: "Hrs" },
-                  { val: cd.m, label: "Min" },
-                  { val: cd.s, label: "Sec" },
-                ].map((u) => (
-                  <div key={u.label} style={{ textAlign: "center", background: "rgba(232,101,26,0.08)", border: "1px solid rgba(232,101,26,0.15)", borderRadius: 12, padding: "10px 14px", minWidth: 56 }}>
-                    <div style={{ fontFamily: "var(--font-display)", fontSize: 22, fontWeight: 800, color: "white", lineHeight: 1 }}>
-                      {String(u.val).padStart(2, "0")}
-                    </div>
-                    <div style={{ fontFamily: "var(--font-outfit)", fontSize: 9, fontWeight: 600, color: "rgba(232,101,26,0.7)", textTransform: "uppercase", letterSpacing: "1px", marginTop: 4 }}>
-                      {u.label}
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Inline Registration Form */}
-              {regSubmitted ? (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  style={{ padding: "24px", borderRadius: 16, background: "rgba(232,101,26,0.08)", border: "1px solid rgba(232,101,26,0.2)", textAlign: "center" }}
-                >
-                  <div style={{ fontSize: 28, marginBottom: 8 }}>&#10003;</div>
-                  <p style={{ fontFamily: "var(--font-outfit)", fontSize: 15, fontWeight: 600, color: "white", margin: "0 0 4px" }}>Registration Received!</p>
-                  <p style={{ fontFamily: "var(--font-outfit)", fontSize: 13, color: "rgba(255,255,255,0.45)", margin: 0 }}>We&apos;ll be in touch shortly.</p>
-                </motion.div>
-              ) : (
-                <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                  <div className="cfk-reg-row" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
-                    <input
-                      placeholder="Full Name"
-                      value={regForm.name}
-                      onChange={(e) => setRegForm({ ...regForm, name: e.target.value })}
-                      style={inputStyle(EFG_ORANGE)}
-                    />
-                    <div>
-                      <input
-                        placeholder="Work Email"
-                        type="email"
-                        value={regForm.email}
-                        onChange={(e) => { setRegForm({ ...regForm, email: e.target.value }); setRegEmailError(null); }}
-                        onBlur={() => { if (regForm.email && !isWorkEmail(regForm.email)) setRegEmailError("Please use your work email address"); }}
-                        style={inputStyle(EFG_ORANGE)}
-                      />
-                      {regEmailError && <p style={{ color: "#ef4444", fontFamily: "var(--font-outfit)", fontSize: 12, margin: "4px 0 0" }}>{regEmailError}</p>}
-                    </div>
-                  </div>
-                  <div className="cfk-reg-row" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
-                    <input
-                      placeholder="Company"
-                      value={regForm.company}
-                      onChange={(e) => setRegForm({ ...regForm, company: e.target.value })}
-                      style={inputStyle(EFG_ORANGE)}
-                    />
-                    <input
-                      placeholder="Job Title"
-                      value={regForm.jobTitle}
-                      onChange={(e) => setRegForm({ ...regForm, jobTitle: e.target.value })}
-                      style={inputStyle(EFG_ORANGE)}
-                    />
-                  </div>
-                  <button
-                    onClick={() => { if (regForm.email && !isWorkEmail(regForm.email)) { setRegEmailError("Please use your work email address"); return; } setRegSubmitted(true); }}
-                    className="cfk-cta-register"
-                    style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      alignSelf: "flex-start",
-                      gap: 8,
-                      padding: "14px 32px",
-                      borderRadius: 50,
-                      background: EFG_ORANGE,
-                      color: "white",
-                      fontFamily: "var(--font-outfit)",
-                      fontSize: 14,
-                      fontWeight: 600,
-                      border: "none",
-                      cursor: "pointer",
-                      boxShadow: "0 4px 28px rgba(232,101,26,0.35)",
-                      transition: "all 0.3s ease",
-                      marginTop: 6,
-                    }}
-                  >
-                    Register Now →
-                  </button>
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* ── Sponsor card (smaller) — redesigned ── */}
-          <div
-            style={{
-              padding: "clamp(28px,3.5vw,48px)",
-              borderRadius: 22,
-              background: `linear-gradient(135deg, ${C}0A, ${C}03)`,
-              border: `1px solid ${C}20`,
-              position: "relative",
-              overflow: "hidden",
-              display: "flex",
-              flexDirection: "column",
-            }}
-          >
-            <div className="absolute top-0 left-0 right-0" style={{ height: 2, background: `linear-gradient(90deg, ${C}, ${C}60, transparent)` }} />
-            <div
-              className="absolute pointer-events-none"
-              style={{
-                width: 250, height: 250, bottom: -60, right: -40,
-                background: `radial-gradient(ellipse at center, ${C}08, transparent 70%)`,
-                filter: "blur(40px)",
-              }}
-            />
-
-            <div style={{ position: "relative", flex: 1, display: "flex", flexDirection: "column" }}>
-              <span style={{ fontFamily: "var(--font-outfit)", fontSize: 10, fontWeight: 700, letterSpacing: "2.5px", textTransform: "uppercase", color: C }}>
-                For Brands & Vendors
-              </span>
-              <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(20px,2.2vw,30px)", letterSpacing: "-1px", color: "white", lineHeight: 1.15, margin: "14px 0 12px" }}>
-                Sponsor or Partner This Edition
-              </h3>
-
-              {/* Trust stat badges */}
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 20 }}>
-                {[
-                  { num: "350+", label: "Delegates" },
-                  { num: "25+", label: "Speakers" },
-                  { num: "22+", label: "Partners" },
-                ].map((s) => (
-                  <div key={s.label} style={{
-                    display: "flex", alignItems: "center", gap: 6,
-                    padding: "6px 12px", borderRadius: 20,
-                    background: `${C}08`, border: `1px solid ${C}15`,
-                  }}>
-                    <span style={{ fontFamily: "var(--font-display)", fontSize: 13, fontWeight: 800, color: C_BRIGHT }}>{s.num}</span>
-                    <span style={{ fontFamily: "var(--font-outfit)", fontSize: 11, fontWeight: 400, color: "rgba(255,255,255,0.4)" }}>{s.label}</span>
-                  </div>
-                ))}
-              </div>
-
-              {/* Sponsor Form */}
-              {sponSubmitted ? (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  style={{ padding: "24px", borderRadius: 16, background: `${C}08`, border: `1px solid ${C}20`, textAlign: "center", marginTop: "auto" }}
-                >
-                  <div style={{ fontSize: 28, marginBottom: 8 }}>&#10003;</div>
-                  <p style={{ fontFamily: "var(--font-outfit)", fontSize: 15, fontWeight: 600, color: "white", margin: "0 0 4px" }}>Inquiry Received!</p>
-                  <p style={{ fontFamily: "var(--font-outfit)", fontSize: 13, color: "rgba(255,255,255,0.45)", margin: 0 }}>Our partnerships team will reach out.</p>
-                </motion.div>
-              ) : (
-                <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: "auto" }}>
-                  <input
-                    placeholder="Full Name"
-                    value={sponForm.name}
-                    onChange={(e) => setSponForm({ ...sponForm, name: e.target.value })}
-                    style={inputStyle(C)}
-                  />
-                  <input
-                    placeholder="Work Email"
-                    type="email"
-                    value={sponForm.email}
-                    onChange={(e) => setSponForm({ ...sponForm, email: e.target.value })}
-                    style={inputStyle(C)}
-                  />
-                  <input
-                    placeholder="Company"
-                    value={sponForm.company}
-                    onChange={(e) => setSponForm({ ...sponForm, company: e.target.value })}
-                    style={inputStyle(C)}
-                  />
-                  <select
-                    value={sponForm.interest}
-                    onChange={(e) => setSponForm({ ...sponForm, interest: e.target.value })}
-                    style={{
-                      ...inputStyle(C),
-                      appearance: "none",
-                      backgroundImage: `url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%2301BBF5' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E")`,
-                      backgroundRepeat: "no-repeat",
-                      backgroundPosition: "right 16px center",
-                      cursor: "pointer",
-                      color: sponForm.interest ? "white" : "rgba(255,255,255,0.4)",
-                    }}
-                  >
-                    <option value="" disabled>Interest</option>
-                    <option value="Title Sponsor">Title Sponsor</option>
-                    <option value="Gold Sponsor">Gold Sponsor</option>
-                    <option value="Silver Sponsor">Silver Sponsor</option>
-                    <option value="Exhibition Partner">Exhibition Partner</option>
-                    <option value="Media Partner">Media Partner</option>
-                    <option value="Other">Other</option>
-                  </select>
-                  <button
-                    onClick={() => setSponSubmitted(true)}
-                    className="cfk-cta-sponsor-btn"
-                    style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      alignSelf: "flex-start",
-                      gap: 8,
-                      padding: "13px 28px",
-                      borderRadius: 50,
-                      background: "transparent",
-                      color: C,
-                      fontFamily: "var(--font-outfit)",
-                      fontSize: 13,
-                      fontWeight: 600,
-                      border: `1px solid ${C}50`,
-                      cursor: "pointer",
-                      transition: "all 0.3s ease",
-                      marginTop: 6,
-                    }}
-                  >
-                    Explore Partnerships →
-                  </button>
-                </div>
-              )}
-            </div>
-          </div>
-        </motion.div>
+        {/* InquiryForm with overridden styles */}
+        <div className="cfk-form-wrapper" style={{ position: "relative", zIndex: 1 }}>
+          <InquiryForm defaultCountry="KW" eventName="Cyber First Kuwait 2026" />
+        </div>
       </div>
 
       <style jsx global>{`
-        .cfk-cta-register:hover {
-          box-shadow: 0 8px 40px rgba(232,101,26,0.5) !important;
-          transform: translateY(-2px);
+        /* Transparent background — let event photo show through */
+        .cfk-form-wrapper #get-involved {
+          background: transparent !important;
         }
-        .cfk-cta-sponsor-btn:hover {
-          background: rgba(1,187,245,0.08) !important;
-          border-color: rgba(1,187,245,0.5) !important;
-          transform: translateY(-2px);
+        .cfk-form-wrapper #get-involved > .absolute {
+          display: none;
         }
+
+        /* Glass morphism on form card */
+        .cfk-form-wrapper .inquiry-split > div:last-child {
+          background: rgba(5, 8, 16, 0.82) !important;
+          backdrop-filter: blur(32px) saturate(1.2) !important;
+          -webkit-backdrop-filter: blur(32px) saturate(1.2) !important;
+          border: 1px solid rgba(1, 187, 245, 0.15) !important;
+          box-shadow: 0 12px 48px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.06) !important;
+        }
+
+        /* Tab pills — Cyber themed cyan */
+        .cfk-form-wrapper button[style*="background: var(--orange)"] {
+          background: ${C} !important;
+          border-color: ${C} !important;
+        }
+
+        /* Form card ambient glow — cyan instead of orange */
+        .cfk-form-wrapper .inquiry-split > div:last-child > .absolute {
+          background: radial-gradient(ellipse, rgba(1,187,245,0.06) 0%, transparent 70%) !important;
+        }
+
+        /* Section label — cyan */
+        .cfk-form-wrapper [style*="var(--orange)"][style*="letter-spacing: 3px"] {
+          color: ${C} !important;
+        }
+
+        /* Perk icons — cyan tint */
+        .cfk-form-wrapper .inquiry-split svg {
+          color: ${C};
+        }
+
         select option {
           background: #0a1628;
           color: white;
-        }
-        @media (max-width: 768px) {
-          .cfk-split-cta {
-            grid-template-columns: 1fr !important;
-          }
-          .cfk-reg-row {
-            grid-template-columns: 1fr !important;
-          }
         }
       `}</style>
     </section>
@@ -5509,6 +5269,20 @@ function RegistrationSection() {
                     transition: "all 0.35s cubic-bezier(0.16, 1, 0.3, 1)",
                     letterSpacing: "0.2px",
                   }}
+                  onMouseEnter={(e) => {
+                    if (!isActive) {
+                      e.currentTarget.style.background = `${C}15`;
+                      e.currentTarget.style.borderColor = `${C}30`;
+                      e.currentTarget.style.color = "rgba(255,255,255,0.7)";
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isActive) {
+                      e.currentTarget.style.background = "rgba(255,255,255,0.04)";
+                      e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
+                      e.currentTarget.style.color = "rgba(255,255,255,0.4)";
+                    }
+                  }}
                 >
                   {t.label}
                 </button>
@@ -5724,6 +5498,13 @@ function RegistrationSection() {
                       border: "none",
                       cursor: "pointer",
                       padding: 0,
+                      transition: "all 0.3s ease",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = "white";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = C;
                     }}
                   >
                     Submit another inquiry &rarr;

@@ -13,6 +13,7 @@ const VALID_TYPES = [
   "contact",
   "awards",
   "networkfirst",
+  "careers",
 ];
 
 const ALLOWED_ORIGINS = [
@@ -243,7 +244,8 @@ export async function POST(request: NextRequest) {
     }
 
     // 8. Email validation (work email required, no free/disposable providers)
-    if (!isValidEmail(email)) {
+    // Careers applications allow personal emails
+    if (type !== "careers" && !isValidEmail(email)) {
       return NextResponse.json(
         { error: "Please use your work email address" },
         { status: 400 }

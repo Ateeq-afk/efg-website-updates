@@ -3,7 +3,7 @@ import { BreadcrumbSchema } from "@/lib/schemas";
 
 const BASE_URL = "https://eventsfirstgroup.com";
 const PAGE_URL = `${BASE_URL}/events/cyber-first/kenya-2026`;
-const OG_IMAGE = "https://efg-final.s3.eu-north-1.amazonaws.com/Good/4N8A0030.JPG";
+const OG_IMAGE = `${BASE_URL}/Cyber-First-East-Africa-Logo-01.png`;
 
 export const metadata: Metadata = {
   title: "Cyber First Kenya 2026 | Nairobi | Beyond Firewalls — July 2026",

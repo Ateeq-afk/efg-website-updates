@@ -8,7 +8,8 @@ export type FormType =
   | "speak"
   | "contact"
   | "awards"
-  | "networkfirst";
+  | "networkfirst"
+  | "careers";
 
 export interface FormPayload {
   type: FormType;
