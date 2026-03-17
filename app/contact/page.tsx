@@ -16,8 +16,8 @@ const PAD = "0 clamp(20px, 4vw, 60px)";
 
 const CONTACT = {
   email: "partnerships@eventsfirstgroup.com",
-  phone: "+971 4 883 4877",
-  whatsapp: "+971 56 910 0679",
+  phone: "+971 54 571 4377",
+  whatsapp: "+971 54 571 4377",
   address: "Office M07, The Light Commercial Tower, Arjan, Dubai",
   linkedin: "https://www.linkedin.com/company/events-first-group/",
   mapsUrl: "https://maps.google.com/?q=The+Light+Commercial+Tower+Arjan+Dubai",

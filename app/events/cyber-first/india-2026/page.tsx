@@ -331,6 +331,13 @@ export default function CyberFirstIndia2026() {
       <style jsx global>{`
         @media (max-width: 1024px) {
           .cfi-hero-info-card { display: none !important; }
+          .cfi-hero-right { width: auto !important; }
+          .cfi-hero-inner { flex-wrap: wrap !important; }
+          .cfi-hero-partners-mobile { display: flex !important; }
+          .cfi-hero-partners-desktop { display: none !important; }
+        }
+        @media (min-width: 1025px) {
+          .cfi-hero-partners-mobile { display: none !important; }
         }
         @media (max-width: 768px) {
           .cfi-hero-section { min-height: 100vh !important; height: auto !important; }
@@ -338,6 +345,7 @@ export default function CyberFirstIndia2026() {
           .cfi-hero-content { padding: 0 !important; }
           .cfi-hero-inner { height: auto !important; min-height: 100vh !important; padding: 100px 20px 180px !important; }
           .cfi-hero-left { padding-bottom: 0 !important; }
+          .cfi-hero-ctas { padding-bottom: 20px !important; }
           .cfi-hero-gradient-side { background: linear-gradient(to bottom, rgba(5,8,16,0.85) 0%, rgba(5,8,16,0.7) 40%, rgba(5,8,16,0.6) 70%, rgba(5,8,16,0.9) 100%) !important; }
           .cfi-bottom-bar { flex-direction: column !important; align-items: center !important; text-align: center !important; gap: 12px !important; padding: 0 16px !important; }
           .cfi-bottom-bar > a { width: 100% !important; text-align: center !important; padding: 12px 24px !important; font-size: 14px !important; }
@@ -544,6 +552,7 @@ function HeroSection() {
 
           {/* CTAs */}
           <motion.div
+            className="cfi-hero-ctas"
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 1.0, ease: EASE }}
@@ -625,46 +634,96 @@ function HeroSection() {
               Become a Sponsor
             </a>
           </motion.div>
+
+          {/* Supporting Partners — mobile */}
+          <motion.div
+            className="cfi-hero-partners-mobile"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 1.2, ease: EASE }}
+            style={{ display: "none", flexDirection: "column", alignItems: "center", gap: 10, marginBottom: 40 }}
+          >
+            <span style={{ fontFamily: "var(--font-outfit)", fontSize: 9, fontWeight: 600, letterSpacing: "2px", textTransform: "uppercase", color: "rgba(255,255,255,0.3)" }}>Supporting Partners</span>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 14, flexWrap: "wrap" }}>
+              {[
+                { name: "CCA", logo: "https://efg-final.s3.eu-north-1.amazonaws.com/CyberFirst_Delhi_Speakers/support+partner+/CCA.png" },
+                { name: "Coder Flow AI", logo: "https://efg-final.s3.eu-north-1.amazonaws.com/CyberFirst_Delhi_Speakers/support+partner+/coder_flowAI.png" },
+                { name: "Crime Free Bharat", logo: "https://efg-final.s3.eu-north-1.amazonaws.com/CyberFirst_Delhi_Speakers/support+partner+/Crime_free_bharat.JPG" },
+                { name: "Cyber World", logo: "https://efg-final.s3.eu-north-1.amazonaws.com/CyberFirst_Delhi_Speakers/support+partner+/Cyber_world.png" },
+              ].map((p) => (
+                <div key={p.name} style={{ height: 44, display: "flex", alignItems: "center" }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={p.logo} alt={p.name} loading="lazy" style={{ maxHeight: "100%", maxWidth: 64, objectFit: "contain", borderRadius: 4 }} />
+                </div>
+              ))}
+            </div>
+          </motion.div>
           </div>
 
-          {/* Right — Glass info card */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 1.2, ease: EASE }}
-            className="cfi-hero-info-card"
-            style={{
-              width: 300,
-              flexShrink: 0,
-              background: "rgba(255,255,255,0.03)",
-              backdropFilter: "blur(20px)",
-              border: `1px solid ${C}20`,
-              borderRadius: 20,
-              padding: "32px 28px",
-              display: "flex",
-              flexDirection: "column",
-              gap: 24,
-            }}
-          >
-            {[
-              { label: "Date", value: "16 June 2026", icon: "M6 2v4m12-4v4M4 8h16M4 8v10a2 2 0 002 2h12a2 2 0 002-2V8" },
-              { label: "Venue", value: "New Delhi, India", icon: "M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z" },
-              { label: "Delegates", value: "200+ CISOs & CIOs", icon: "M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4-4v2m22 4v-2a4 4 0 00-3-3.87M13 7a4 4 0 11-8 0 4 4 0 018 0z" },
-              { label: "Format", value: "Invite-Only Summit", icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" },
-            ].map((item) => (
-              <div key={item.label} style={{ display: "flex", alignItems: "flex-start", gap: 14 }}>
-                <div style={{ width: 36, height: 36, borderRadius: 10, background: `${C}12`, border: `1px solid ${C}18`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={C_BRIGHT} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d={item.icon} />
-                  </svg>
+          {/* Right — Glass info card + Supporting Partners */}
+          <div className="cfi-hero-right" style={{ display: "flex", flexDirection: "column", alignItems: "center", flexShrink: 0, width: 300 }}>
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 1.2, ease: EASE }}
+              className="cfi-hero-info-card"
+              style={{
+                width: "100%",
+                flexShrink: 0,
+                background: "rgba(255,255,255,0.03)",
+                backdropFilter: "blur(20px)",
+                border: `1px solid ${C}20`,
+                borderRadius: 20,
+                padding: "32px 28px",
+                display: "flex",
+                flexDirection: "column",
+                gap: 24,
+              }}
+            >
+              {[
+                { label: "Date", value: "16 June 2026", icon: "M6 2v4m12-4v4M4 8h16M4 8v10a2 2 0 002 2h12a2 2 0 002-2V8" },
+                { label: "Venue", value: "New Delhi, India", icon: "M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z" },
+                { label: "Delegates", value: "200+ CISOs & CIOs", icon: "M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4-4v2m22 4v-2a4 4 0 00-3-3.87M13 7a4 4 0 11-8 0 4 4 0 018 0z" },
+                { label: "Format", value: "Invite-Only Summit", icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" },
+              ].map((item) => (
+                <div key={item.label} style={{ display: "flex", alignItems: "flex-start", gap: 14 }}>
+                  <div style={{ width: 36, height: 36, borderRadius: 10, background: `${C}12`, border: `1px solid ${C}18`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={C_BRIGHT} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d={item.icon} />
+                    </svg>
+                  </div>
+                  <div>
+                    <div style={{ fontFamily: "var(--font-outfit)", fontSize: 10, fontWeight: 600, letterSpacing: "2px", textTransform: "uppercase", color: "rgba(255,255,255,0.35)", marginBottom: 4 }}>{item.label}</div>
+                    <div style={{ fontFamily: "var(--font-outfit)", fontSize: 14, fontWeight: 500, color: "rgba(255,255,255,0.85)", lineHeight: 1.4 }}>{item.value}</div>
+                  </div>
                 </div>
-                <div>
-                  <div style={{ fontFamily: "var(--font-outfit)", fontSize: 10, fontWeight: 600, letterSpacing: "2px", textTransform: "uppercase", color: "rgba(255,255,255,0.35)", marginBottom: 4 }}>{item.label}</div>
-                  <div style={{ fontFamily: "var(--font-outfit)", fontSize: 14, fontWeight: 500, color: "rgba(255,255,255,0.85)", lineHeight: 1.4 }}>{item.value}</div>
-                </div>
+              ))}
+            </motion.div>
+
+            {/* Supporting Partners — desktop */}
+            <motion.div
+              className="cfi-hero-partners-desktop"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 1.4, ease: EASE }}
+              style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12, marginTop: 100, width: "100%" }}
+            >
+              <span style={{ fontFamily: "var(--font-outfit)", fontSize: 9, fontWeight: 600, letterSpacing: "2px", textTransform: "uppercase", color: "rgba(255,255,255,0.3)" }}>Supporting Partners</span>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 16 }}>
+                {[
+                  { name: "CCA", logo: "https://efg-final.s3.eu-north-1.amazonaws.com/CyberFirst_Delhi_Speakers/support+partner+/CCA.png" },
+                  { name: "Coder Flow AI", logo: "https://efg-final.s3.eu-north-1.amazonaws.com/CyberFirst_Delhi_Speakers/support+partner+/coder_flowAI.png" },
+                  { name: "Crime Free Bharat", logo: "https://efg-final.s3.eu-north-1.amazonaws.com/CyberFirst_Delhi_Speakers/support+partner+/Crime_free_bharat.JPG" },
+                  { name: "Cyber World", logo: "https://efg-final.s3.eu-north-1.amazonaws.com/CyberFirst_Delhi_Speakers/support+partner+/Cyber_world.png" },
+                ].map((p) => (
+                  <div key={p.name} style={{ height: 76, display: "flex", alignItems: "center" }}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={p.logo} alt={p.name} loading="lazy" style={{ maxHeight: "100%", maxWidth: 110, objectFit: "contain", borderRadius: 4 }} />
+                  </div>
+                ))}
               </div>
-            ))}
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
       </div>
 
