@@ -2546,6 +2546,7 @@ function RegisterSection() {
       company,
       job_title: jobTitle,
       event_name: "Braze Virtual Roundtable - MENAT",
+      metadata: message ? { message } : undefined,
     });
 
     setSending(false);
