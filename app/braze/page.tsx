@@ -1382,8 +1382,13 @@ function OverviewSection() {
 
         {/* Bottom gradient fade into next section */}
         <div style={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
           height: 80,
-          background: `linear-gradient(to bottom, #FAFAFA, ${B_ORANGE})`,
+          background: `linear-gradient(to bottom, transparent, ${B_ORANGE})`,
+          pointerEvents: "none",
         }} />
       </div>
     </section>
@@ -2249,12 +2254,6 @@ function HostedByBraze() {
       padding: "0",
       position: "relative",
     }}>
-      {/* Transition from purple above */}
-      <div style={{
-        height: 80,
-        background: `linear-gradient(180deg, ${B_DARK_PURPLE}, #FAFAFA)`,
-      }} />
-
       {/* White / light section */}
       <div style={{
         background: "#FAFAFA",
@@ -2262,6 +2261,17 @@ function HostedByBraze() {
         overflow: "hidden",
         padding: "56px 0 72px",
       }}>
+        {/* Transition from purple above */}
+        <div style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: 80,
+          background: `linear-gradient(180deg, ${B_DARK_PURPLE}, transparent)`,
+          pointerEvents: "none",
+          zIndex: 3,
+        }} />
         {/* Supergraphic watermark — right */}
         <div style={{
           position: "absolute",
@@ -2493,8 +2503,14 @@ function HostedByBraze() {
 
       {/* Transition into next section (purple register) */}
       <div style={{
+        position: "absolute",
+        bottom: 0,
+        left: 0,
+        right: 0,
         height: 80,
-        background: `linear-gradient(180deg, #FAFAFA, ${B_DARK_PURPLE})`,
+        background: `linear-gradient(180deg, transparent, ${B_DARK_PURPLE})`,
+        pointerEvents: "none",
+        zIndex: 3,
       }} />
     </section>
   );
