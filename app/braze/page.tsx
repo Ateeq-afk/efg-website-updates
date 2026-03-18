@@ -2780,7 +2780,7 @@ function RegisterSection() {
                     name="phone"
                     type="tel"
                     placeholder="Phone number"
-                    maxLength={selectedCountry.maxLength}
+                    maxLength={selectedCountry.length}
                     style={{ ...inputStyle, flex: 1 }}
                     onFocus={(e) => { e.currentTarget.style.borderColor = B_ORANGE; }}
                     onBlur={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.12)"; }}
