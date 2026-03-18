@@ -2540,13 +2540,11 @@ function RegisterSection() {
     setSending(true);
     const result = await submitForm({
       type: "attend",
-      first_name: firstName,
-      last_name: lastName,
+      full_name: `${firstName} ${lastName}`.trim(),
       email,
       phone: phone ? `${selectedCountry.code} ${phone}` : undefined,
       company,
       job_title: jobTitle,
-      message: message || undefined,
       event_name: "Braze Virtual Roundtable - MENAT",
     });
 
