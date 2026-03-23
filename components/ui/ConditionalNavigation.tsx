@@ -10,7 +10,7 @@ export default function ConditionalNavigation() {
   const [isSubdomain, setIsSubdomain] = useState(false);
 
   useEffect(() => {
-    if (window.location.hostname.startsWith("blaze-webinar.")) {
+    if (window.location.hostname.startsWith("braze-webinar.") || window.location.hostname.startsWith("blaze-webinar.")) {
       setIsSubdomain(true);
     }
   }, []);

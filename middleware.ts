@@ -3,8 +3,8 @@ import { NextRequest, NextResponse } from "next/server";
 export function middleware(request: NextRequest) {
   const hostname = request.headers.get("host") || "";
 
-  // Handle blaze-webinar subdomain → serve /braze page
-  if (hostname.startsWith("blaze-webinar.")) {
+  // Handle braze-webinar subdomain → serve /braze page
+  if (hostname.startsWith("braze-webinar.") || hostname.startsWith("blaze-webinar.")) {
     const url = request.nextUrl.clone();
     const path = url.pathname;
 
