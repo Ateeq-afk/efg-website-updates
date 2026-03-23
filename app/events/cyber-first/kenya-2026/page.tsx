@@ -482,7 +482,7 @@ function HeroSection() {
       {/* Nairobi Skyline Background */}
       <div className="absolute inset-0">
         <img
-          src="https://efg-final.s3.eu-north-1.amazonaws.com/cyber-first-kenya/nairobi-skyline.jpg"
+          src="https://efg-final.s3.eu-north-1.amazonaws.com/cyber-first-kenya/kenya-cyber.png"
           alt="Nairobi Skyline with Cyber Network"
           className="w-full h-full object-cover"
           style={{ filter: "brightness(0.45) saturate(1.1)" }}
