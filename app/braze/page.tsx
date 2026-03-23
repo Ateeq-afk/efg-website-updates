@@ -59,7 +59,6 @@ const ROLES_GROUP_2 = [
   "Lifecycle",
   "Innovation",
   "Technology",
-  "Digital Strategy",
 ];
 
 // ─── PAGE ────────────────────────────────────────────────────────────────────
@@ -136,6 +135,7 @@ export default function BrazeLandingPage() {
           .braze-hero h1 { font-size: clamp(34px, 9vw, 48px) !important; }
           .braze-scroll-indicator { display: none !important; }
           .braze-hero-details { display: none !important; }
+          .braze-hero-event-details { justify-content: center !important; }
           .braze-hero-content { text-align: center !important; align-items: center !important; }
           .braze-hero-meta { justify-content: center !important; }
           .braze-overview-layout { grid-template-columns: 1fr !important; gap: 32px !important; }
@@ -159,7 +159,6 @@ export default function BrazeLandingPage() {
 
       <BrazeNav />
       <HeroSection />
-      <StatsBar />
       <OverviewSection />
       <WhatToExpect />
       <ThemesSection />
@@ -583,48 +582,27 @@ function HeroSection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, ease: EASE }}
-          style={{ display: "flex", flexDirection: "column", maxWidth: 600 }}
+          style={{ display: "flex", flexDirection: "column", maxWidth: 580 }}
         >
-            {/* Co-brand line — refined with subtle backdrop */}
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
+            {/* Virtual Roundtable label */}
+            <motion.span
+              initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1, ease: EASE }}
               style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 14,
-                marginBottom: 44,
-                padding: "10px 20px 10px 0",
-                borderRadius: 40,
-                alignSelf: "flex-start",
-              }}
-            >
-              <Image
-                src="/braze/braze-logo-white.png"
-                alt="Braze"
-                width={110}
-                height={30}
-                style={{ height: 30, width: "auto", opacity: 0.95 }}
-              />
-              <span style={{
-                width: 1,
-                height: 20,
-                background: "rgba(255,255,255,0.3)",
-              }} />
-              <span style={{
                 fontFamily: FONT,
                 fontSize: 11,
                 fontWeight: 700,
-                color: "rgba(255,255,255,0.65)",
-                letterSpacing: "2.5px",
+                color: "rgba(255,255,255,0.7)",
+                letterSpacing: "3px",
                 textTransform: "uppercase",
-              }}>
-                Virtual Roundtable
-              </span>
-            </motion.div>
+                marginBottom: 20,
+              }}
+            >
+              Virtual Roundtable
+            </motion.span>
 
-            {/* Title — larger, more presence */}
+            {/* Title */}
             <motion.h1
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
@@ -632,73 +610,76 @@ function HeroSection() {
               style={{
                 fontFamily: FONT,
                 fontWeight: 900,
-                fontSize: "clamp(48px, 6vw, 76px)",
-                lineHeight: 0.88,
-                letterSpacing: "-0.04em",
+                fontSize: "clamp(30px, 3.5vw, 46px)",
+                lineHeight: 1.1,
+                letterSpacing: "-0.02em",
                 color: "white",
-                margin: "0 0 40px",
-                textShadow: "0 4px 60px rgba(0,0,0,0.06)",
+                margin: "0 0 24px",
+                maxWidth: 540,
+                textShadow: "0 2px 40px rgba(0,0,0,0.08)",
               }}
             >
-              Marketing
-              <br />
-              Through
-              <br />
-              Uncertainty<span style={{ color: B_RED }}>.</span>
+              Marketing Through Uncertainty: How Brands Are Adjusting Customer Engagement Right Now<span style={{ color: B_RED }}>.</span>
             </motion.h1>
 
-            {/* Decorative accent line — thinner, more refined */}
-            <motion.div
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={{ duration: 0.8, delay: 0.5, ease: EASE }}
-              style={{
-                width: 44,
-                height: 2.5,
-                background: "rgba(255,255,255,0.6)",
-                borderRadius: 2,
-                marginBottom: 28,
-                transformOrigin: "left",
-              }}
-            />
-
-            {/* Subtitle — clearer contrast */}
+            {/* Subtitle */}
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.4, ease: EASE }}
               style={{
                 fontFamily: FONT,
-                fontWeight: 700,
-                fontSize: "clamp(17px, 1.5vw, 21px)",
-                color: "white",
-                lineHeight: 1.45,
-                margin: "0 0 12px",
-                maxWidth: 420,
-                textShadow: "0 1px 20px rgba(0,0,0,0.05)",
-              }}
-            >
-              How brands are adjusting customer engagement right now.
-            </motion.p>
-
-            {/* Sub-subtitle — softer, clearly secondary */}
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5, ease: EASE }}
-              style={{
-                fontFamily: FONT,
-                fontWeight: 300,
-                fontSize: "clamp(13px, 1.1vw, 15px)",
-                color: "rgba(255,255,255,0.7)",
-                margin: "0 0 40px",
-                letterSpacing: "0.01em",
+                fontWeight: 400,
+                fontSize: "clamp(15px, 1.3vw, 18px)",
+                color: "rgba(255,255,255,0.9)",
+                lineHeight: 1.6,
+                margin: "0 0 36px",
+                maxWidth: 440,
               }}
             >
               A private virtual roundtable for senior martech leaders in MENAT.
             </motion.p>
 
-            {/* CTA row — button + secondary link */}
+            {/* Event details — inline with dividers */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5, ease: EASE }}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 0,
+                marginBottom: 32,
+                flexWrap: "wrap",
+              }}
+            >
+              {[
+                { icon: <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="11" rx="1.5" stroke="white" strokeWidth="1.2"/><path d="M2 6.5h12M5.5 1.5v3M10.5 1.5v3" stroke="white" strokeWidth="1.2" strokeLinecap="round"/></svg>, text: "8 April 2026" },
+                { icon: <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="white" strokeWidth="1.2"/><path d="M8 4.5V8l2.5 1.5" stroke="white" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/></svg>, text: "60 Min" },
+                { icon: <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="9" rx="1.5" stroke="white" strokeWidth="1.2"/><circle cx="8" cy="7.5" r="2" stroke="white" strokeWidth="1.2"/></svg>, text: "Virtual" },
+              ].map((item, i) => (
+                <React.Fragment key={i}>
+                  {i > 0 && <span style={{ width: 1, height: 16, background: "rgba(255,255,255,0.25)", margin: "0 16px" }} />}
+                  <span
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 8,
+                      fontFamily: FONT,
+                      fontSize: 14,
+                      fontWeight: 600,
+                      color: "white",
+                      letterSpacing: "0.01em",
+                    }}
+                  >
+                    {item.icon}
+                    {item.text}
+                  </span>
+                </React.Fragment>
+              ))}
+            </motion.div>
+
+            {/* CTA row */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -715,32 +696,29 @@ function HeroSection() {
                   display: "inline-flex",
                   alignItems: "center",
                   gap: 10,
-                  padding: "17px 44px",
+                  padding: "16px 40px",
                   borderRadius: 50,
-                  background: "white",
-                  color: B_DARK_PURPLE,
+                  background: B_PURPLE,
+                  color: "white",
                   fontFamily: FONT,
                   fontSize: 14,
                   fontWeight: 700,
                   textDecoration: "none",
                   transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
-                  boxShadow: "0 4px 30px rgba(0,0,0,0.08)",
+                  boxShadow: `0 4px 24px ${B_PURPLE}35`,
                   letterSpacing: "-0.01em",
-                  animation: "braze-cta-pulse 3s ease-in-out infinite",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = "translateY(-3px) scale(1.02)";
-                  e.currentTarget.style.boxShadow = "0 16px 50px rgba(0,0,0,0.15)";
-                  e.currentTarget.style.animation = "none";
+                  e.currentTarget.style.transform = "translateY(-2px) scale(1.02)";
+                  e.currentTarget.style.boxShadow = `0 12px 40px ${B_PURPLE}50`;
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.transform = "translateY(0) scale(1)";
-                  e.currentTarget.style.boxShadow = "0 4px 30px rgba(0,0,0,0.08)";
-                  e.currentTarget.style.animation = "braze-cta-pulse 3s ease-in-out infinite";
+                  e.currentTarget.style.boxShadow = `0 4px 24px ${B_PURPLE}35`;
                 }}
               >
                 Register Your Interest
-                <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
                   <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </a>
@@ -813,31 +791,13 @@ function HeroSection() {
         </svg>
       </motion.div>
 
-      {/* Event details strip — bottom right, with icons */}
+      {/* Event details strip — REMOVED, now in hero content */}
       <motion.div
-        className="braze-hero-details"
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 1, ease: EASE }}
-        style={{
-          position: "absolute",
-          bottom: 120,
-          right: "clamp(20px, 4vw, 60px)",
-          zIndex: 5,
-          display: "flex",
-          alignItems: "center",
-          gap: 28,
-          padding: "12px 26px",
-          borderRadius: 50,
-          background: "rgba(255,255,255,0.08)",
-          backdropFilter: "blur(20px)",
-          WebkitBackdropFilter: "blur(20px)",
-          border: "1px solid rgba(255,255,255,0.12)",
-        }}
+        style={{ display: "none" }}
       >
         {[
           { label: "Q2 2026", icon: <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1.5" y="2.5" width="11" height="10" rx="1.5" stroke="rgba(255,255,255,0.55)" strokeWidth="1"/><line x1="1.5" y1="5.5" x2="12.5" y2="5.5" stroke="rgba(255,255,255,0.55)" strokeWidth="1"/><line x1="4.5" y1="1" x2="4.5" y2="3.5" stroke="rgba(255,255,255,0.55)" strokeWidth="1" strokeLinecap="round"/><line x1="9.5" y1="1" x2="9.5" y2="3.5" stroke="rgba(255,255,255,0.55)" strokeWidth="1" strokeLinecap="round"/></svg> },
-          { label: "90 Min", icon: <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="rgba(255,255,255,0.55)" strokeWidth="1"/><polyline points="7,4 7,7 9.5,8.5" stroke="rgba(255,255,255,0.55)" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/></svg> },
+          { label: "60 Min", icon: <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="rgba(255,255,255,0.55)" strokeWidth="1"/><polyline points="7,4 7,7 9.5,8.5" stroke="rgba(255,255,255,0.55)" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/></svg> },
           { label: "Virtual", icon: <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1.5" y="3" width="11" height="8" rx="1.5" stroke="rgba(255,255,255,0.55)" strokeWidth="1"/><circle cx="7" cy="7" r="1.5" stroke="rgba(255,255,255,0.55)" strokeWidth="1"/></svg> },
         ].map((item, i) => (
           <span
@@ -867,31 +827,17 @@ function HeroSection() {
         ))}
       </motion.div>
 
-      {/* Bottom vignette — smooth multi-stop transition */}
+      {/* Bottom vignette — subtle fade */}
       <div
         style={{
           position: "absolute",
           bottom: 0,
           left: 0,
           right: 0,
-          height: 240,
-          background: `linear-gradient(to bottom, transparent 0%, ${B_DARK_PURPLE}30 30%, ${B_DARK_PURPLE}90 70%, ${B_DARK_PURPLE} 100%)`,
+          height: 120,
+          background: `linear-gradient(to bottom, transparent, #FAFAFA)`,
           pointerEvents: "none",
           zIndex: 3,
-        }}
-      />
-
-      {/* Side vignettes for depth */}
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          bottom: 0,
-          width: "15%",
-          background: "linear-gradient(to right, rgba(0,0,0,0.08), transparent)",
-          pointerEvents: "none",
-          zIndex: 1,
         }}
       />
     </section>
@@ -1062,160 +1008,19 @@ function OverviewSection() {
       ref={ref}
       style={{
         padding: "0",
-        background: B_DARK_PURPLE,
+        background: "#FAFAFA",
         position: "relative",
         overflow: "hidden",
       }}
     >
-      {/* TOP — Bold pull-quote block with warm gradient */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={inView ? { opacity: 1 } : {}}
-        transition={{ duration: 0.7, ease: EASE }}
-        style={{
-          background: `linear-gradient(160deg, ${B_ORANGE} 0%, #FFBA50 50%, ${B_ORANGE} 100%)`,
-          padding: "80px clamp(24px, 5vw, 80px) 64px",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        {/* Supergraphic on quote block */}
-        <div style={{
-          position: "absolute",
-          top: "-40%",
-          right: "-10%",
-          width: "45%",
-          height: "180%",
-          opacity: 0.08,
-          pointerEvents: "none",
-        }}>
-          <Image src="/braze/sg-heat1-5.png" alt="" fill style={{ objectFit: "contain" }} />
-        </div>
-
-        {/* Top fade from purple */}
-        <div style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          height: 80,
-          background: `linear-gradient(to bottom, ${B_PURPLE}30, transparent)`,
-          pointerEvents: "none",
-        }} />
-
-        <div style={{ maxWidth: MAX_W, margin: "0 auto", position: "relative", zIndex: 2 }}>
-          <div style={{ display: "flex", gap: "clamp(20px, 3vw, 36px)" }}>
-            <motion.div
-              initial={{ scaleY: 0 }}
-              animate={inView ? { scaleY: 1 } : {}}
-              transition={{ duration: 0.8, delay: 0.05, ease: EASE }}
-              style={{
-                width: 4,
-                flexShrink: 0,
-                borderRadius: 4,
-                background: B_DARK_PURPLE,
-                opacity: 0.3,
-                transformOrigin: "top",
-              }}
-            />
-            <div>
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.8, delay: 0.1, ease: EASE }}
-                style={{
-                  fontFamily: FONT,
-                  fontWeight: 900,
-                  fontSize: "clamp(26px, 3.5vw, 44px)",
-                  lineHeight: 1.2,
-                  letterSpacing: "-0.03em",
-                  color: "white",
-                  margin: 0,
-                  maxWidth: 700,
-                }}
-              >
-                The brands that adapt their engagement strategy <span style={{ color: B_DARK_PURPLE, fontStyle: "italic" }}>now</span> will define the next era of customer loyalty.
-              </motion.p>
-
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.3, ease: EASE }}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 12,
-                  marginTop: 28,
-                }}
-              >
-                <span style={{ width: 32, height: 2.5, background: B_DARK_PURPLE, borderRadius: 2 }} />
-                <span style={{
-                  fontFamily: FONT,
-                  fontSize: 13,
-                  fontWeight: 700,
-                  letterSpacing: "2px",
-                  textTransform: "uppercase",
-                  color: B_DARK_PURPLE,
-                }}>
-                  Braze x Events First Group
-                </span>
-              </motion.div>
-            </div>
-          </div>
-        </div>
-
-        <div style={{
-          position: "absolute",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          height: 120,
-          background: `linear-gradient(to bottom, transparent, rgba(0,0,0,0.06))`,
-          pointerEvents: "none",
-        }} />
-      </motion.div>
-
-      {/* BOTTOM — About section on WHITE background */}
       <div style={{ background: "#FAFAFA", position: "relative", overflow: "hidden" }}>
-        {/* Orange-to-white gradient transition */}
-        <div style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          height: 120,
-          background: `linear-gradient(to bottom, ${B_ORANGE}18, transparent)`,
-          pointerEvents: "none",
-        }} />
 
-        {/* Dot grid pattern */}
+        {/* Subtle dot grid pattern */}
         <div style={{
           position: "absolute",
           inset: 0,
-          backgroundImage: `radial-gradient(${B_PURPLE}20 1.2px, transparent 1.2px)`,
-          backgroundSize: "28px 28px",
-          pointerEvents: "none",
-        }} />
-
-        {/* Purple radial glow — left */}
-        <div style={{
-          position: "absolute",
-          top: "10%",
-          left: "-15%",
-          width: "60%",
-          height: "100%",
-          background: `radial-gradient(ellipse, ${B_PURPLE}12, transparent 65%)`,
-          pointerEvents: "none",
-        }} />
-
-        {/* Orange radial glow — top right */}
-        <div style={{
-          position: "absolute",
-          top: "-20%",
-          right: "-10%",
-          width: "50%",
-          height: "80%",
-          background: `radial-gradient(ellipse, ${B_ORANGE}10, transparent 65%)`,
+          backgroundImage: `radial-gradient(${B_PURPLE}12 1px, transparent 1px)`,
+          backgroundSize: "32px 32px",
           pointerEvents: "none",
         }} />
 
@@ -1232,8 +1037,8 @@ function OverviewSection() {
           <Image src="/braze/sg-heat1-5.png" alt="" fill style={{ objectFit: "contain" }} />
         </div>
 
-        <div style={{ maxWidth: MAX_W, margin: "0 auto", padding: "80px clamp(20px, 4vw, 60px) 88px", position: "relative", zIndex: 2 }}>
-          <div className="braze-overview-layout" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64, alignItems: "start" }}>
+        <div style={{ maxWidth: MAX_W, margin: "0 auto", padding: "100px clamp(20px, 4vw, 60px) 100px", position: "relative", zIndex: 2 }}>
+          <div className="braze-overview-layout" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 56, alignItems: "center" }}>
             {/* LEFT — Heading + CTA */}
             <div>
               <motion.span
@@ -1264,17 +1069,17 @@ function OverviewSection() {
                 style={{
                   fontFamily: FONT,
                   fontWeight: 900,
-                  fontSize: "clamp(28px, 3.5vw, 46px)",
-                  lineHeight: 1.1,
-                  letterSpacing: "-0.04em",
+                  fontSize: "clamp(26px, 3vw, 40px)",
+                  lineHeight: 1.15,
+                  letterSpacing: "-0.03em",
                   color: B_DARK_PURPLE,
-                  margin: "0 0 32px",
+                  margin: "0 0 36px",
                   paddingLeft: 24,
                   borderImage: `linear-gradient(to bottom, ${B_PURPLE}, ${B_ORANGE}) 1`,
-                  borderLeft: "4px solid",
+                  borderLeft: "3px solid",
                 }}
               >
-                Should Brands Stay Loud or Go Quiet?
+                In Times of Uncertainty, Should Brands Stay Loud or Go Quiet?
               </motion.h2>
 
               <motion.a
@@ -1315,26 +1120,6 @@ function OverviewSection() {
                 </svg>
               </motion.a>
 
-              {/* Seats detail */}
-              <motion.span
-                initial={{ opacity: 0 }}
-                animate={inView ? { opacity: 1 } : {}}
-                transition={{ duration: 0.5, delay: 0.55, ease: EASE }}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 8,
-                  fontFamily: FONT,
-                  fontSize: 13,
-                  fontWeight: 400,
-                  fontStyle: "italic",
-                  color: "rgba(128,30,215,0.5)",
-                  marginTop: 18,
-                }}
-              >
-                <span style={{ width: 16, height: 1.5, background: B_ORANGE, borderRadius: 2, flexShrink: 0 }} />
-                Limited seats ensure an interactive, peer-to-peer discussion.
-              </motion.span>
             </div>
 
             {/* RIGHT — Body text in card */}
@@ -1343,10 +1128,11 @@ function OverviewSection() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.35, ease: EASE }}
               style={{
-                background: "rgba(128,30,215,0.04)",
-                borderRadius: 16,
-                padding: "32px 32px 36px",
-                border: "1px solid rgba(128,30,215,0.06)",
+                background: "rgba(128,30,215,0.03)",
+                borderRadius: 20,
+                padding: "36px 36px 40px",
+                border: "1px solid rgba(128,30,215,0.08)",
+                boxShadow: "0 4px 24px rgba(128,30,215,0.04)",
               }}
             >
               <p
@@ -1354,12 +1140,12 @@ function OverviewSection() {
                   fontFamily: FONT,
                   fontWeight: 400,
                   fontSize: "clamp(15px, 1.2vw, 16px)",
-                  color: "rgba(30,0,70,0.78)",
-                  lineHeight: 1.8,
-                  margin: "0 0 20px",
+                  color: "rgba(30,0,70,0.72)",
+                  lineHeight: 1.75,
+                  margin: "0 0 24px",
                 }}
               >
-                The Middle East region is navigating an evolving landscape. Marketing leaders face <strong style={{ fontWeight: 700, color: B_DARK_PURPLE }}>shifting priorities, messaging challenges, and rapidly changing customer expectations</strong>. Understanding how peers are navigating these changes is critical.
+                The Middle East region is navigating an evolving landscape. Marketing leaders face shifting priorities, messaging challenges, and rapidly changing customer expectations. Understanding how peers are navigating these changes is critical.
               </p>
 
               {/* Separator */}
@@ -1387,8 +1173,8 @@ function OverviewSection() {
           bottom: 0,
           left: 0,
           right: 0,
-          height: 80,
-          background: `linear-gradient(to bottom, transparent, ${B_ORANGE})`,
+          height: 160,
+          background: `linear-gradient(to bottom, transparent 0%, ${B_ORANGE}10 40%, ${B_ORANGE}30 70%, ${B_ORANGE} 100%)`,
           pointerEvents: "none",
         }} />
       </div>
@@ -2079,7 +1865,7 @@ function AttendSection() {
               margin: "0 0 52px",
             }}
           >
-            Built for Senior Leaders.
+            Built for Senior Martech Leaders.
           </motion.h2>
 
           <div className="braze-attend-layout" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 56, alignItems: "start" }}>
@@ -2107,7 +1893,7 @@ function AttendSection() {
                 lineHeight: 1.75,
                 margin: "0 0 36px",
               }}>
-                Limited seats ensure an interactive, peer-to-peer discussion. Secure your spot today.
+                Limited seats available. Secure your spot today.
               </p>
               <a
                 href="#register"
@@ -2480,7 +2266,7 @@ function HostedByBraze() {
                     margin: "0 0 18px",
                   }}
                 >
-                  Braze is the leading customer engagement platform that empowers brands to collect and take action on any amount of data from any source, so they can <strong style={{ fontWeight: 700, color: B_DARK_PURPLE }}>creatively engage with customers in real time</strong>, across channels from one platform.
+                  Braze is the leading customer engagement platform that empowers brands to Be Absolutely Engaging.™ Braze helps brands deliver great customer experiences that drive value both for consumers and for their businesses. Built on a foundation of composable intelligence, BrazeAI™ allows marketers to combine and activate AI agents, models, and features at every touchpoint throughout the Braze Customer Engagement Platform for smarter, faster, and more meaningful customer engagement.
                 </p>
                 <p
                   style={{
@@ -2492,7 +2278,7 @@ function HostedByBraze() {
                     margin: 0,
                   }}
                 >
-                  From Fortune 500 enterprises to innovative startups, Braze is trusted by the world&apos;s leading brands to power <strong style={{ fontWeight: 700, color: B_DARK_PURPLE }}>customer-centric interactions at scale</strong>.
+                  From cross-channel messaging and journey orchestration to AI-powered decisioning and optimization, Braze enables companies to turn action into interaction through autonomous, 1:1 personalized experiences.
                 </p>
               </div>
             </div>
@@ -2539,7 +2325,9 @@ function RegisterSection() {
     const jobTitle = (data.get("jobTitle") as string).trim();
     const message = (data.get("message") as string).trim();
 
-    if (!firstName || !lastName || !email || !company || !jobTitle) {
+    const country = (data.get("country") as string).trim();
+
+    if (!firstName || !lastName || !email || !phone || !company || !jobTitle || !country) {
       setError("Please fill in all required fields.");
       return;
     }
@@ -2547,21 +2335,19 @@ function RegisterSection() {
       setError("Please use a work email address.");
       return;
     }
-    if (phone) {
-      const phoneErr = validatePhone(phone, selectedCountry);
-      if (phoneErr) { setError(phoneErr); return; }
-    }
+    const phoneErr = validatePhone(phone, selectedCountry);
+    if (phoneErr) { setError(phoneErr); return; }
 
     setSending(true);
     const result = await submitForm({
       type: "attend",
       full_name: `${firstName} ${lastName}`.trim(),
       email,
-      phone: phone ? `${selectedCountry.code} ${phone}` : undefined,
+      phone: `${selectedCountry.code} ${phone}`,
       company,
       job_title: jobTitle,
       event_name: "Braze Virtual Roundtable - MENAT",
-      metadata: message ? { message } : undefined,
+      metadata: { ...(message ? { message } : {}), country },
     });
 
     setSending(false);
@@ -2768,7 +2554,7 @@ function RegisterSection() {
                 <input name="email" type="email" placeholder="you@company.com" required style={inputStyle} onFocus={(e) => { e.currentTarget.style.borderColor = B_ORANGE; e.currentTarget.style.boxShadow = `0 0 0 3px ${B_ORANGE}18`; e.currentTarget.style.background = "rgba(255,255,255,0.07)"; }} onBlur={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.12)"; e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.background = "rgba(255,255,255,0.05)"; }} />
               </div>
               <div>
-                <label style={labelStyle}>Phone</label>
+                <label style={labelStyle}>Phone *</label>
                 <div style={{ display: "flex", gap: 8 }}>
                   <select
                     value={selectedCountry.code}
@@ -2795,6 +2581,7 @@ function RegisterSection() {
                     name="phone"
                     type="tel"
                     placeholder="Phone number"
+                    required
                     maxLength={selectedCountry.length}
                     style={{ ...inputStyle, flex: 1 }}
                     onFocus={(e) => { e.currentTarget.style.borderColor = B_ORANGE; }}
@@ -2809,6 +2596,10 @@ function RegisterSection() {
               <div>
                 <label style={labelStyle}>Job Title *</label>
                 <input name="jobTitle" placeholder="Your role" required style={inputStyle} onFocus={(e) => { e.currentTarget.style.borderColor = B_ORANGE; e.currentTarget.style.boxShadow = `0 0 0 3px ${B_ORANGE}18`; e.currentTarget.style.background = "rgba(255,255,255,0.07)"; }} onBlur={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.12)"; e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.background = "rgba(255,255,255,0.05)"; }} />
+              </div>
+              <div style={{ gridColumn: "1 / -1" }}>
+                <label style={labelStyle}>Country *</label>
+                <input name="country" placeholder="Your country" required style={inputStyle} onFocus={(e) => { e.currentTarget.style.borderColor = B_ORANGE; e.currentTarget.style.boxShadow = `0 0 0 3px ${B_ORANGE}18`; e.currentTarget.style.background = "rgba(255,255,255,0.07)"; }} onBlur={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.12)"; e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.background = "rgba(255,255,255,0.05)"; }} />
               </div>
             </div>
 
