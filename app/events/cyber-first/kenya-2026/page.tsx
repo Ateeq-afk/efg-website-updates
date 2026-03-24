@@ -311,20 +311,20 @@ const GALLERY: {
   lift?: boolean;
 }[] = [
   {
-    src: `${CF_UAE}/ARU00511.jpg`,
-    alt: "Cyber First keynote session",
+    src: "https://efg-final.s3.eu-north-1.amazonaws.com/events/Cyber+First+Kuwait+2025/Kuwait+Photos/Kuwait+Photos/4X9A1744.jpg",
+    alt: "Cyber First Kuwait keynote session",
     area: "hero",
   },
   {
-    src: "https://efg-final.s3.eu-north-1.amazonaws.com/events/Cyber%20First%20Kuwait%202025/filemail_photos/cyber21-04-324.jpg",
-    alt: "Executive conference session",
+    src: "https://efg-final.s3.eu-north-1.amazonaws.com/events/OT+Security+First+UAE+2025/OT+First+UAE+Photos/4N8A0412.JPG",
+    alt: "Panel discussion with industry leaders",
     area: "a",
     rotate: -1.5,
     lift: true,
   },
   {
-    src: `${CF_UAE}/ARU00500.jpg`,
-    alt: "Panel discussion",
+    src: `${CF_UAE}/ARU00574.jpg`,
+    alt: "Panel discussion — Cyber First UAE",
     area: "b",
   },
   {
@@ -335,12 +335,12 @@ const GALLERY: {
     lift: true,
   },
   {
-    src: "https://efg-final.s3.eu-north-1.amazonaws.com/events/Cyber%20First%20Kuwait%202025/filemail_photos/cyber21-04-412.jpg",
-    alt: "Conference networking session",
+    src: "https://efg-final.s3.eu-north-1.amazonaws.com/Good/4N8A0290.JPG",
+    alt: "VIP networking session",
     area: "d",
   },
   {
-    src: `${CF_UAE}/ARU01167.jpg`,
+    src: `${CF_UAE}/ARU00722.jpg`,
     alt: "Executive networking session",
     area: "e",
   },
@@ -432,11 +432,13 @@ export default function CyberFirstKenya2026() {
           box-shadow: 0 12px 40px ${C}18, inset 0 1px 0 ${C_BRIGHT}12 !important;
         }
         @media (max-width: 1024px) {
+          .cfk-bento-overview { grid-template-columns: 1fr !important; }
           .cfk-stats-grid { grid-template-columns: repeat(3, 1fr) !important; }
         }
         @media (max-width: 768px) {
           .cfk-hero h1 { font-size: clamp(28px, 9vw, 42px) !important; }
           .cfk-hero-content { padding: 0 20px !important; }
+          .cfk-bento-overview { grid-template-columns: 1fr !important; }
           .cfk-stats-grid { grid-template-columns: repeat(2, 1fr) !important; }
           .cfk-focus-grid { grid-template-columns: 1fr !important; }
           .cfk-focus-grid > div { grid-column: span 1 !important; }
@@ -457,12 +459,12 @@ export default function CyberFirstKenya2026() {
       <SiliconSavannahContext />
       <FocusAreas />
       <AdvisoryBoard />
-      <Speakers />
+      {/* <Speakers /> */}
       <AgendaTimeline />
       <SponsorsSection />
       <AtmosphereDivider />
       <Gallery />
-      <WhatToExpect />
+      {/* <WhatToExpect /> */}
       <WhoShouldAttend />
       <AwardsSection />
       <SplitCTA />
@@ -619,6 +621,8 @@ function HeroSection() {
 function StatsBar() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true });
+  const [expandLandscape, setExpandLandscape] = useState(false);
+  const [expandThreat, setExpandThreat] = useState(false);
 
   const stats = [
     { n: 200, suffix: "+", label: "Delegates", desc: "C-Suite & Directors", badge: "Expected", highlight: true },
@@ -688,85 +692,243 @@ function StatsBar() {
           />
         </motion.div>
 
-        {/* Context paragraphs — two-column glass cards */}
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, delay: 0.15, ease: EASE }} style={{ marginBottom: 28 }}>
-          {/* Two-column row */}
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, marginBottom: 24 }} className="cfk-overview-grid">
-            {/* Left card — The Landscape */}
+        {/* ── Bento Grid: Text Cards + Stat Cards side by side ── */}
+        <div className="cfk-bento-overview" style={{ display: "grid", gridTemplateColumns: "55fr 45fr", gap: 20, marginBottom: 28, alignItems: "stretch" }}>
+
+          {/* LEFT COLUMN — Text Cards stacked */}
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, delay: 0.15, ease: EASE }} style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+            {/* The Landscape */}
             <div style={{
               background: `linear-gradient(135deg, ${C}08, rgba(255,255,255,0.02))`,
               border: `1px solid ${C_BRIGHT}12`,
+              borderLeft: `2px solid ${C_BRIGHT}40`,
               borderRadius: 16,
               padding: "28px 26px",
               position: "relative",
               overflow: "hidden",
             }}>
-              {/* Card top glow */}
               <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: `linear-gradient(90deg, transparent, ${C_BRIGHT}30, transparent)` }} />
-              <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
-                <div style={{ width: 6, height: 6, borderRadius: "50%", background: C_BRIGHT, boxShadow: `0 0 8px ${C_BRIGHT}60` }} />
-                <span style={{ fontFamily: "var(--font-dm)", fontSize: 12, fontWeight: 600, letterSpacing: "2.5px", textTransform: "uppercase", color: `${C_BRIGHT}99` }}>The Landscape</span>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                  <div style={{ width: 6, height: 6, borderRadius: "50%", background: C_BRIGHT, boxShadow: `0 0 8px ${C_BRIGHT}60` }} />
+                  <span style={{ fontFamily: "var(--font-dm)", fontSize: 13, fontWeight: 600, letterSpacing: "3.5px", textTransform: "uppercase", color: `${C_BRIGHT}99` }}>The Landscape</span>
+                </div>
+                <div style={{ textAlign: "right" }}>
+                  <span style={{ fontFamily: "var(--font-display)", fontSize: "clamp(28px, 3vw, 38px)", fontWeight: 900, letterSpacing: "-1px", lineHeight: 1, backgroundImage: `linear-gradient(180deg, #ffffff 30%, ${C_BRIGHT} 100%)`, WebkitBackgroundClip: "text", backgroundClip: "text", WebkitTextFillColor: "transparent", color: "transparent" }}>96%</span>
+                  <span style={{ display: "block", fontFamily: "var(--font-outfit)", fontSize: 10, fontWeight: 600, letterSpacing: "1.5px", textTransform: "uppercase", color: "rgba(255,255,255,0.35)", marginTop: 2 }}>Talent Gap</span>
+                </div>
               </div>
-              <p style={{ fontFamily: "var(--font-outfit)", fontSize: 14.5, fontWeight: 400, color: "rgba(255,255,255,0.5)", lineHeight: 1.85, margin: "0 0 16px" }}>
-                Kenya has solidified its position as a <span style={{ color: "rgba(255,255,255,0.88)", fontWeight: 500 }}>digital powerhouse in Africa</span>, with rapid innovations driving unprecedented economic inclusion. However, this growth has expanded the national attack surface, leading to a surge in sophisticated threats. The execution of security measures remains uneven despite high strategic intent.
+              <p style={{ fontFamily: "var(--font-outfit)", fontSize: 14.5, fontWeight: 400, color: "rgba(255,255,255,0.6)", lineHeight: 1.85, margin: 0 }}>
+                Kenya has solidified its position as a <span style={{ color: "rgba(255,255,255,0.9)", fontWeight: 500 }}>digital powerhouse in Africa</span>, with rapid innovations driving unprecedented economic inclusion. However, this growth has expanded the national attack surface, leading to a surge in sophisticated threats. The execution of security measures remains uneven despite high strategic intent.
               </p>
-              <p style={{ fontFamily: "var(--font-outfit)", fontSize: 14.5, fontWeight: 400, color: "rgba(255,255,255,0.5)", lineHeight: 1.85, margin: 0 }}>
-                Organizations are currently grappling with a severe <span style={{ color: C_BRIGHT, fontWeight: 500 }}>96% talent shortage</span>, with only 1,700 certified experts available to meet a national requirement of over 40,000. The rise of <span style={{ color: "rgba(255,255,255,0.88)", fontWeight: 500 }}>Agentic AI and Deepfakes</span> has introduced a new era of &apos;Algorithmic Warfare&apos; that legacy systems are ill-equipped to handle.
-              </p>
+              <AnimatePresence>
+                {expandLandscape && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.4, ease: EASE }}
+                    style={{ overflow: "hidden" }}
+                  >
+                    <p style={{ fontFamily: "var(--font-outfit)", fontSize: 14.5, fontWeight: 400, color: "rgba(255,255,255,0.6)", lineHeight: 1.85, marginTop: 16, marginBottom: 0, marginLeft: 0, marginRight: 0 }}>
+                      Organizations are currently grappling with a severe <span style={{ color: C_BRIGHT, fontWeight: 500 }}>96% talent shortage</span>, with only 1,700 certified experts available to meet a national requirement of over 40,000. The rise of <span style={{ color: "rgba(255,255,255,0.9)", fontWeight: 500 }}>Agentic AI and Deepfakes</span> has introduced a new era of &apos;Algorithmic Warfare&apos; that legacy systems are ill-equipped to handle.
+                    </p>
+                    <p style={{ fontFamily: "var(--font-outfit)", fontSize: 14.5, fontWeight: 400, color: "rgba(255,255,255,0.6)", lineHeight: 1.85, marginTop: 16, marginBottom: 0, marginLeft: 0, marginRight: 0 }}>
+                      2026 is the pivotal year where cybersecurity transitions from a side project to <span style={{ color: C_BRIGHT, fontWeight: 500 }}>core infrastructure for Africa&apos;s digital economy</span>. As Kenya becomes a strategic gateway for regional cloud infrastructure, the Cyber First East Africa provides the essential intelligence synergy required to protect national sovereignty and ensure sustained economic growth.
+                    </p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+              <button
+                onClick={() => setExpandLandscape(!expandLandscape)}
+                style={{ display: "inline-flex", alignItems: "center", gap: 6, marginTop: 14, padding: 0, border: "none", background: "none", cursor: "pointer", fontFamily: "var(--font-outfit)", fontSize: 13, fontWeight: 600, color: C_BRIGHT, letterSpacing: "0.5px", transition: "all 0.3s ease" }}
+                onMouseEnter={(e) => { e.currentTarget.style.opacity = "0.7"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.opacity = "1"; }}
+              >
+                {expandLandscape ? "Show less" : "Read more"}
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ transform: expandLandscape ? "rotate(180deg)" : "rotate(0deg)", transition: "transform 0.3s ease" }}>
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </button>
             </div>
 
-            {/* Right card — The Threat */}
+            {/* The Threat */}
             <div style={{
               background: `linear-gradient(135deg, ${C}08, rgba(255,255,255,0.02))`,
               border: `1px solid ${C_BRIGHT}12`,
+              borderLeft: `2px solid ${KENYA_ACCENT}40`,
               borderRadius: 16,
               padding: "28px 26px",
               position: "relative",
               overflow: "hidden",
             }}>
-              {/* Card top glow */}
               <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: `linear-gradient(90deg, transparent, ${KENYA_ACCENT}30, transparent)` }} />
-              <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
-                <div style={{ width: 6, height: 6, borderRadius: "50%", background: KENYA_ACCENT, boxShadow: `0 0 8px ${KENYA_ACCENT}60` }} />
-                <span style={{ fontFamily: "var(--font-dm)", fontSize: 12, fontWeight: 600, letterSpacing: "2.5px", textTransform: "uppercase", color: `${KENYA_ACCENT}99` }}>The Threat</span>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                  <div style={{ width: 6, height: 6, borderRadius: "50%", background: KENYA_ACCENT, boxShadow: `0 0 8px ${KENYA_ACCENT}60` }} />
+                  <span style={{ fontFamily: "var(--font-dm)", fontSize: 13, fontWeight: 600, letterSpacing: "3.5px", textTransform: "uppercase", color: `${KENYA_ACCENT}99` }}>The Threat</span>
+                </div>
+                <div style={{ textAlign: "right" }}>
+                  <span style={{ fontFamily: "var(--font-display)", fontSize: "clamp(28px, 3vw, 38px)", fontWeight: 900, letterSpacing: "-1px", lineHeight: 1, backgroundImage: `linear-gradient(180deg, #ffffff 30%, ${KENYA_ACCENT} 100%)`, WebkitBackgroundClip: "text", backgroundClip: "text", WebkitTextFillColor: "transparent", color: "transparent" }}>4.5B</span>
+                  <span style={{ display: "block", fontFamily: "var(--font-outfit)", fontSize: 10, fontWeight: 600, letterSpacing: "1.5px", textTransform: "uppercase", color: "rgba(255,255,255,0.35)", marginTop: 2 }}>Threats Detected</span>
+                </div>
               </div>
-              <p style={{ fontFamily: "var(--font-outfit)", fontSize: 14.5, fontWeight: 400, color: "rgba(255,255,255,0.5)", lineHeight: 1.85, margin: 0, marginBottom: 18 }}>
-                Over <span style={{ color: C_BRIGHT, fontWeight: 500 }}>4.5 billion cyber threats</span> have been detected between October &ndash; December 2025. That is a <span style={{ color: "rgba(255,255,255,0.88)", fontWeight: 500 }}>441% jump</span>. 21.8 million security advisories sent out by KE-CIRT/CC for the need to patch systems, multifactor authentication, configure firewalls.
+              <p style={{ fontFamily: "var(--font-outfit)", fontSize: 14.5, fontWeight: 400, color: "rgba(255,255,255,0.6)", lineHeight: 1.85, margin: 0 }}>
+                Over <span style={{ color: C_BRIGHT, fontWeight: 500 }}>4.5 billion cyber threats</span> have been detected between October &ndash; December 2025. That is a <span style={{ color: "rgba(255,255,255,0.9)", fontWeight: 500 }}>441% jump</span>. 21.8 million security advisories sent out by KE-CIRT/CC for the need to patch systems, multifactor authentication, configure firewalls.
               </p>
-              <div style={{ width: "100%", height: 1, background: `linear-gradient(90deg, transparent, ${C_BRIGHT}15, transparent)`, marginBottom: 18 }} />
-              <p style={{ fontFamily: "var(--font-outfit)", fontSize: 14.5, fontWeight: 400, color: "rgba(255,255,255,0.5)", lineHeight: 1.85, margin: 0 }}>
-                <span style={{ color: "rgba(255,255,255,0.88)", fontWeight: 500 }}>Cyber First East Africa 2026</span> serves as the definitive national nexus for C-level executives, technology leaders, and policymakers to synchronize efforts against a backdrop of escalating digital warfare. Scheduled for 08 July 2026, in Nairobi, this summit is designed to move beyond theoretical discussion, acting as a launchpad for forward-thinking strategies and tangible resilience in the Silicon Savannah.
-              </p>
+              <AnimatePresence>
+                {expandThreat && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.4, ease: EASE }}
+                    style={{ overflow: "hidden" }}
+                  >
+                    <div style={{ width: "100%", height: 1, marginTop: 18, marginBottom: 18, background: `linear-gradient(90deg, transparent, ${C_BRIGHT}15, transparent)` }} />
+                    <p style={{ fontFamily: "var(--font-outfit)", fontSize: 14.5, fontWeight: 400, color: "rgba(255,255,255,0.6)", lineHeight: 1.85, marginTop: 0, marginBottom: 0, marginLeft: 0, marginRight: 0 }}>
+                      <span style={{ color: "rgba(255,255,255,0.9)", fontWeight: 500 }}>Cyber First East Africa 2026</span> serves as the definitive national nexus for C-level executives, technology leaders, and policymakers to synchronize efforts against a backdrop of escalating digital warfare. Scheduled for 08 July 2026, in Nairobi, this summit is designed to move beyond theoretical discussion, acting as a launchpad for forward-thinking strategies and tangible resilience in the Silicon Savannah.
+                    </p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+              <button
+                onClick={() => setExpandThreat(!expandThreat)}
+                style={{ display: "inline-flex", alignItems: "center", gap: 6, marginTop: 14, padding: 0, border: "none", background: "none", cursor: "pointer", fontFamily: "var(--font-outfit)", fontSize: 13, fontWeight: 600, color: KENYA_ACCENT, letterSpacing: "0.5px", transition: "all 0.3s ease" }}
+                onMouseEnter={(e) => { e.currentTarget.style.opacity = "0.7"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.opacity = "1"; }}
+              >
+                {expandThreat ? "Show less" : "Read more"}
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ transform: expandThreat ? "rotate(180deg)" : "rotate(0deg)", transition: "transform 0.3s ease" }}>
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </button>
             </div>
-          </div>
 
-          {/* Full-width closing — glass strip */}
-          <div style={{
-            background: `linear-gradient(90deg, ${C}06, rgba(255,255,255,0.015), ${C}06)`,
-            border: `1px solid ${C_BRIGHT}0A`,
-            borderRadius: 12,
-            padding: "20px 28px",
-            position: "relative",
-            overflow: "hidden",
-          }}>
-            <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: `linear-gradient(90deg, transparent 10%, ${C_BRIGHT}18, transparent 90%)` }} />
-            <p style={{ fontFamily: "var(--font-outfit)", fontSize: 14.5, fontWeight: 400, color: "rgba(255,255,255,0.5)", lineHeight: 1.85, margin: 0, textAlign: "center" }}>
-              2026 is the pivotal year where cybersecurity transitions from a side project to <span style={{ color: C_BRIGHT, fontWeight: 500 }}>core infrastructure for Africa&apos;s digital economy</span>. As Kenya becomes a strategic gateway for regional cloud infrastructure, the Cyber First East Africa provides the essential intelligence synergy required to protect national sovereignty and ensure sustained economic growth.
-            </p>
-          </div>
+          </motion.div>
 
-          {/* Tagline */}
-          <div style={{ marginTop: 28, textAlign: "center" }}>
-            <div style={{ width: 40, height: 1, background: `linear-gradient(90deg, transparent, ${C_BRIGHT}40, transparent)`, margin: "0 auto 16px" }} />
-            <p style={{ fontFamily: "var(--font-outfit)", fontSize: 17, fontWeight: 600, color: "rgba(255,255,255,0.68)", lineHeight: 1.7, margin: 0, fontStyle: "italic" }}>
-              Be a part of the <span style={{ color: C_BRIGHT, textShadow: `0 0 20px ${C_BRIGHT}30` }}>Cyber First Movement</span> and lead the charge toward a strategic, resilient and innovative economy!
-            </p>
-          </div>
-        </motion.div>
+          {/* RIGHT COLUMN — Stat Cards sub-grid */}
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.25, ease: EASE }} className="cfk-stats-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+            {stats.map((s, i) => (
+              <motion.div
+                key={s.label}
+                className="cfk-stat-card"
+                initial={{ opacity: 0, y: 24, scale: 0.93 }}
+                animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+                transition={{ duration: 0.55, delay: 0.35 + i * 0.1, ease: EASE }}
+                style={{
+                  padding: s.highlight ? "32px 22px 30px" : "28px 20px 26px",
+                  borderRadius: 20,
+                  background: s.highlight
+                    ? `linear-gradient(145deg, ${C}1A 0%, ${C}08 50%, rgba(255,255,255,0.02) 100%)`
+                    : "linear-gradient(155deg, rgba(255,255,255,0.045), rgba(255,255,255,0.012))",
+                  backdropFilter: "blur(12px)",
+                  border: `1px solid ${s.highlight ? `${C_BRIGHT}35` : "rgba(255,255,255,0.07)"}`,
+                  position: "relative",
+                  overflow: "hidden",
+                  textAlign: "center",
+                  boxShadow: s.highlight
+                    ? `0 8px 36px ${C}18, inset 0 1px 0 ${C_BRIGHT}18, 0 0 0 1px ${C}10`
+                    : "0 4px 24px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.04)",
+                  transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
+                  ...(i === 0 ? { gridColumn: "1 / -1" } : {}),
+                }}
+              >
+                {/* Top glow for highlight card */}
+                {s.highlight && (
+                  <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 80% 50% at 50% 0%, ${C}12, transparent 55%)` }} />
+                )}
+
+                {/* Left edge accent for highlight */}
+                {s.highlight && (
+                  <div style={{ position: "absolute", top: "15%", bottom: "15%", left: 0, width: 2, background: `linear-gradient(180deg, transparent, ${C_BRIGHT}60, transparent)`, borderRadius: "0 2px 2px 0" }} />
+                )}
+
+                {/* Top accent line */}
+                <div style={{ position: "absolute", top: 0, left: s.highlight ? "8%" : "20%", right: s.highlight ? "8%" : "20%", height: s.highlight ? 2 : 1.5, background: `linear-gradient(90deg, transparent, ${s.highlight ? `${C_BRIGHT}80` : `${C_BRIGHT}35`}, transparent)` }} />
+
+                {/* Badge */}
+                <div style={{ marginBottom: 16, position: "relative" }}>
+                  <span style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 5,
+                    padding: "3px 11px",
+                    borderRadius: 20,
+                    background: s.highlight ? `${C_BRIGHT}14` : "rgba(255,255,255,0.03)",
+                    border: `1px solid ${s.highlight ? `${C_BRIGHT}25` : "rgba(255,255,255,0.06)"}`,
+                    fontFamily: "var(--font-dm)",
+                    fontSize: 13,
+                    fontWeight: 600,
+                    color: s.highlight ? C_BRIGHT : "rgba(255,255,255,0.3)",
+                    letterSpacing: "0.5px",
+                    textTransform: "uppercase",
+                  }}>
+                    {s.highlight && <span style={{ width: 4, height: 4, borderRadius: "50%", background: C_BRIGHT, flexShrink: 0 }} />}
+                    {s.badge}
+                  </span>
+                </div>
+
+                {/* Number */}
+                <div className="cfk-stat-number" style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: s.highlight ? "clamp(44px, 5.5vw, 58px)" : "clamp(34px, 4.5vw, 44px)",
+                  fontWeight: 900,
+                  letterSpacing: "-2px",
+                  lineHeight: 1,
+                  position: "relative",
+                  transition: "all 0.4s ease",
+                  ...(s.highlight ? {
+                    backgroundImage: `linear-gradient(180deg, #ffffff 30%, ${C_BRIGHT} 100%)`,
+                    WebkitBackgroundClip: "text",
+                    backgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    color: "transparent",
+                    filter: `drop-shadow(0 0 24px ${C}30)`,
+                  } : {
+                    color: "white",
+                  }),
+                }}>
+                  {inView ? <Counter to={s.n} suffix={s.suffix} /> : "0"}
+                </div>
+
+                {/* Animated underline under number */}
+                <motion.div
+                  initial={{ scaleX: 0 }}
+                  animate={inView ? { scaleX: 1 } : {}}
+                  transition={{ duration: 0.6, delay: 1.2 + i * 0.1, ease: EASE }}
+                  style={{ width: s.highlight ? 36 : 24, height: 2, background: s.highlight ? C_BRIGHT : `${C_BRIGHT}40`, borderRadius: 2, margin: "10px auto 0", transformOrigin: "center" }}
+                />
+
+                {/* Label */}
+                <div style={{ fontFamily: "var(--font-outfit)", fontSize: s.highlight ? 12 : 10, fontWeight: 700, color: s.highlight ? "rgba(255,255,255,0.92)" : "rgba(255,255,255,0.5)", letterSpacing: s.highlight ? "2px" : "1.5px", textTransform: "uppercase", marginTop: 12, position: "relative" }}>{s.label}</div>
+
+                {/* Description */}
+                <div style={{ fontFamily: "var(--font-outfit)", fontSize: 13, fontWeight: 400, color: s.highlight ? "rgba(255,255,255,0.38)" : "rgba(255,255,255,0.22)", marginTop: 5, position: "relative", lineHeight: 1.4 }}>{s.desc}</div>
+
+                {/* Bottom accent line */}
+                <div style={{ position: "absolute", bottom: 0, left: s.highlight ? 16 : 24, right: s.highlight ? 16 : 24, height: s.highlight ? 2 : 1, background: s.highlight ? `linear-gradient(90deg, transparent, ${C_BRIGHT}45, transparent)` : "linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent)", borderRadius: 1 }} />
+
+                {/* Corner dot accent for highlight */}
+                {s.highlight && (
+                  <div style={{ position: "absolute", top: 14, right: 14, width: 5, height: 5, borderRadius: "50%", background: `${C_BRIGHT}30`, boxShadow: `0 0 8px ${C_BRIGHT}20` }} />
+                )}
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Tagline */}
+        <div style={{ marginTop: 28, textAlign: "center" }}>
+          <div style={{ width: 40, height: 1, background: `linear-gradient(90deg, transparent, ${C_BRIGHT}40, transparent)`, margin: "0 auto 16px" }} />
+          <p style={{ fontFamily: "var(--font-outfit)", fontSize: 17, fontWeight: 600, color: "rgba(255,255,255,0.68)", lineHeight: 1.7, margin: 0, fontStyle: "italic" }}>
+            Be a part of the <span style={{ color: C_BRIGHT, textShadow: `0 0 20px ${C_BRIGHT}30` }}>Cyber First Movement</span> and lead the charge toward a strategic, resilient and innovative economy!
+          </p>
+        </div>
 
         {/* Who Attends tags — staggered entrance */}
         <motion.div initial={{ opacity: 0, y: 10 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.3, ease: EASE }} style={{ textAlign: "center" }}>
-          <span style={{ fontFamily: "var(--font-dm)", fontSize: 12, fontWeight: 600, letterSpacing: "2.5px", textTransform: "uppercase", color: "rgba(255,255,255,0.22)", display: "block", marginBottom: 12 }}>Who Attends</span>
+          <span style={{ fontFamily: "var(--font-dm)", fontSize: 13, fontWeight: 600, letterSpacing: "3.5px", textTransform: "uppercase", color: "rgba(255,255,255,0.22)", display: "block", marginBottom: 12 }}>Who Attends</span>
           <div className="flex items-center justify-center flex-wrap gap-2 cfk-overview-tags">
             {["Invite-Only", "C-Suite & Directors", "Government & Policy", "15+ Industries"].map((tag, ti) => (
               <motion.span
@@ -813,139 +975,6 @@ function StatsBar() {
         </motion.div>
       </div>
 
-      {/* ── Animated divider band ── */}
-      <motion.div
-        initial={{ scaleX: 0, opacity: 0 }}
-        animate={inView ? { scaleX: 1, opacity: 1 } : {}}
-        transition={{ duration: 1, delay: 0.5, ease: EASE }}
-        style={{ maxWidth: 1200, margin: "60px auto 60px", padding: "0 clamp(20px, 4vw, 60px)", position: "relative", zIndex: 3 }}
-      >
-        <div style={{ height: 1, background: `linear-gradient(90deg, transparent 0%, ${C}15 15%, ${C}30 50%, ${C}15 85%, transparent 100%)` }} />
-        {/* Center diamond accent */}
-        <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%) rotate(45deg)", width: 6, height: 6, background: C_BRIGHT, borderRadius: 1, boxShadow: `0 0 12px ${C_BRIGHT}40` }} />
-      </motion.div>
-
-      {/* ── Stat cards grid ── */}
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 clamp(20px, 4vw, 60px)", position: "relative", zIndex: 3 }}>
-        {/* Grid label */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.5, delay: 0.55, ease: EASE }}
-          style={{ textAlign: "center", marginBottom: 28 }}
-        >
-          <span style={{ fontFamily: "var(--font-dm)", fontSize: 13, fontWeight: 600, letterSpacing: "2.5px", textTransform: "uppercase", color: "rgba(255,255,255,0.2)" }}>By The Numbers</span>
-        </motion.div>
-
-        <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.6, ease: EASE }} className="cfk-stats-grid" style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 16 }}>
-          {stats.map((s, i) => (
-            <motion.div
-              key={s.label}
-              className="cfk-stat-card"
-              initial={{ opacity: 0, y: 24, scale: 0.93 }}
-              animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
-              transition={{ duration: 0.55, delay: 0.7 + i * 0.1, ease: EASE }}
-              style={{
-                padding: s.highlight ? "32px 22px 30px" : "28px 20px 26px",
-                borderRadius: 20,
-                background: s.highlight
-                  ? `linear-gradient(145deg, ${C}1A 0%, ${C}08 50%, rgba(255,255,255,0.02) 100%)`
-                  : "linear-gradient(155deg, rgba(255,255,255,0.045), rgba(255,255,255,0.012))",
-                backdropFilter: "blur(12px)",
-                border: `1px solid ${s.highlight ? `${C_BRIGHT}35` : "rgba(255,255,255,0.07)"}`,
-                position: "relative",
-                overflow: "hidden",
-                textAlign: "center",
-                boxShadow: s.highlight
-                  ? `0 8px 36px ${C}18, inset 0 1px 0 ${C_BRIGHT}18, 0 0 0 1px ${C}10`
-                  : "0 4px 24px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.04)",
-                transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
-              }}
-            >
-              {/* Top glow for highlight card */}
-              {s.highlight && (
-                <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 80% 50% at 50% 0%, ${C}12, transparent 55%)` }} />
-              )}
-
-              {/* Left edge accent for highlight */}
-              {s.highlight && (
-                <div style={{ position: "absolute", top: "15%", bottom: "15%", left: 0, width: 2, background: `linear-gradient(180deg, transparent, ${C_BRIGHT}60, transparent)`, borderRadius: "0 2px 2px 0" }} />
-              )}
-
-              {/* Top accent line */}
-              <div style={{ position: "absolute", top: 0, left: s.highlight ? "8%" : "20%", right: s.highlight ? "8%" : "20%", height: s.highlight ? 2 : 1.5, background: `linear-gradient(90deg, transparent, ${s.highlight ? `${C_BRIGHT}80` : `${C_BRIGHT}35`}, transparent)` }} />
-
-              {/* Badge */}
-              <div style={{ marginBottom: 16, position: "relative" }}>
-                <span style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 5,
-                  padding: "3px 11px",
-                  borderRadius: 20,
-                  background: s.highlight ? `${C_BRIGHT}14` : "rgba(255,255,255,0.03)",
-                  border: `1px solid ${s.highlight ? `${C_BRIGHT}25` : "rgba(255,255,255,0.06)"}`,
-                  fontFamily: "var(--font-dm)",
-                  fontSize: 13,
-                  fontWeight: 600,
-                  color: s.highlight ? C_BRIGHT : "rgba(255,255,255,0.3)",
-                  letterSpacing: "0.5px",
-                  textTransform: "uppercase",
-                }}>
-                  {s.highlight && <span style={{ width: 4, height: 4, borderRadius: "50%", background: C_BRIGHT, flexShrink: 0 }} />}
-                  {s.badge}
-                </span>
-              </div>
-
-              {/* Number */}
-              <div className="cfk-stat-number" style={{
-                fontFamily: "var(--font-display)",
-                fontSize: s.highlight ? "clamp(44px, 5.5vw, 58px)" : "clamp(34px, 4.5vw, 44px)",
-                fontWeight: 900,
-                letterSpacing: "-2px",
-                lineHeight: 1,
-                position: "relative",
-                transition: "all 0.4s ease",
-                ...(s.highlight ? {
-                  backgroundImage: `linear-gradient(180deg, #ffffff 30%, ${C_BRIGHT} 100%)`,
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  color: "transparent",
-                  filter: `drop-shadow(0 0 24px ${C}30)`,
-                } : {
-                  color: "white",
-                }),
-              }}>
-                {inView ? <Counter to={s.n} suffix={s.suffix} /> : "0"}
-              </div>
-
-              {/* Animated underline under number */}
-              <motion.div
-                initial={{ scaleX: 0 }}
-                animate={inView ? { scaleX: 1 } : {}}
-                transition={{ duration: 0.6, delay: 1.2 + i * 0.1, ease: EASE }}
-                style={{ width: s.highlight ? 36 : 24, height: 2, background: s.highlight ? C_BRIGHT : `${C_BRIGHT}40`, borderRadius: 2, margin: "10px auto 0", transformOrigin: "center" }}
-              />
-
-              {/* Label */}
-              <div style={{ fontFamily: "var(--font-outfit)", fontSize: s.highlight ? 12 : 10, fontWeight: 700, color: s.highlight ? "rgba(255,255,255,0.92)" : "rgba(255,255,255,0.5)", letterSpacing: s.highlight ? "2px" : "1.5px", textTransform: "uppercase", marginTop: 12, position: "relative" }}>{s.label}</div>
-
-              {/* Description */}
-              <div style={{ fontFamily: "var(--font-outfit)", fontSize: 13, fontWeight: 400, color: s.highlight ? "rgba(255,255,255,0.38)" : "rgba(255,255,255,0.22)", marginTop: 5, position: "relative", lineHeight: 1.4 }}>{s.desc}</div>
-
-              {/* Bottom accent line */}
-              <div style={{ position: "absolute", bottom: 0, left: s.highlight ? 16 : 24, right: s.highlight ? 16 : 24, height: s.highlight ? 2 : 1, background: s.highlight ? `linear-gradient(90deg, transparent, ${C_BRIGHT}45, transparent)` : "linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent)", borderRadius: 1 }} />
-
-              {/* Corner dot accent for highlight */}
-              {s.highlight && (
-                <div style={{ position: "absolute", top: 14, right: 14, width: 5, height: 5, borderRadius: "50%", background: `${C_BRIGHT}30`, boxShadow: `0 0 8px ${C_BRIGHT}20` }} />
-              )}
-            </motion.div>
-          ))}
-        </motion.div>
-      </div>
-
       {/* Bottom fade into next section */}
       <div className="absolute bottom-0 left-0 right-0 pointer-events-none" style={{ height: 120, background: "linear-gradient(to bottom, transparent, #0C0809)", zIndex: 4 }} />
       {/* Bottom border line */}
@@ -963,14 +992,15 @@ function StatsBar() {
         .cfk-overview-glow { animation: cfk-overview-pulse 8s ease-in-out infinite; }
         .cfk-hero-headline { animation: cfk-shimmer 8s ease-in-out infinite; }
         .cfk-tag:hover { background: ${C_BRIGHT}14 !important; border-color: ${C_BRIGHT}30 !important; }
-        .cfk-stat-card:hover { transform: translateY(-5px) !important; border-color: ${C_BRIGHT}40 !important; box-shadow: 0 16px 48px ${C}20, inset 0 1px 0 ${C_BRIGHT}15 !important; }
+        .cfk-stat-card:hover { transform: translateY(-4px) !important; border-color: ${C_BRIGHT}40 !important; box-shadow: 0 16px 48px ${C}20, inset 0 1px 0 ${C_BRIGHT}15 !important; }
         .cfk-stat-card:hover .cfk-stat-number { filter: drop-shadow(0 0 20px ${C_BRIGHT}30) !important; }
         @media (max-width: 1024px) {
+          .cfk-bento-overview { grid-template-columns: 1fr !important; }
           .cfk-stats-grid { grid-template-columns: repeat(3, 1fr) !important; }
           .cfk-event-meta { gap: 16px !important; }
         }
         @media (max-width: 768px) {
-          .cfk-overview-grid { grid-template-columns: 1fr !important; }
+          .cfk-bento-overview { grid-template-columns: 1fr !important; }
           .cfk-stats-grid { grid-template-columns: repeat(2, 1fr) !important; }
           .cfk-overview-tags { gap: 6px !important; }
           .cfk-event-meta { flex-direction: column !important; gap: 10px !important; }
@@ -1143,7 +1173,7 @@ function SiliconSavannahContext() {
           {/* Alert badge */}
           <div className="flex items-center justify-center gap-3" style={{ marginBottom: 10 }}>
             <span className="cfk-whynow-alert-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: C_BRIGHT, boxShadow: `0 0 8px ${C_BRIGHT}60` }} />
-            <span style={{ fontFamily: "var(--font-dm)", fontSize: 12, fontWeight: 700, letterSpacing: "3px", textTransform: "uppercase", color: C_BRIGHT, opacity: 0.9 }}>Live Threat Intelligence</span>
+            <span style={{ fontFamily: "var(--font-dm)", fontSize: 13, fontWeight: 700, letterSpacing: "3.5px", textTransform: "uppercase", color: C_BRIGHT, opacity: 0.9 }}>Live Threat Intelligence</span>
             <span className="cfk-whynow-alert-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: C_BRIGHT, boxShadow: `0 0 8px ${C_BRIGHT}60` }} />
           </div>
           <div style={{ marginBottom: 20, fontFamily: "var(--font-outfit)", fontSize: 13, letterSpacing: "1.5px", textTransform: "uppercase", color: "rgba(255,255,255,0.18)" }}>
@@ -1180,33 +1210,30 @@ function SiliconSavannahContext() {
             style={{ width: 70, height: 2, background: `linear-gradient(90deg, ${C_BRIGHT}, ${KENYA_ACCENT}, ${C_BRIGHT})`, borderRadius: 2, margin: "0 auto 24px" }}
           />
 
-          {/* Two-column: description left, market projection right */}
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, maxWidth: 900, margin: "0 auto", alignItems: "center" }} className="cfk-whynow-intro-grid">
-            <p style={{ fontFamily: "var(--font-outfit)", fontWeight: 300, fontSize: 15, color: "rgba(255,255,255,0.65)", margin: 0, lineHeight: 1.8, textAlign: "left" }}>
-              Kenya&apos;s rapid digital transformation has expanded its attack surface exponentially. 2026 is the pivotal year where cybersecurity becomes <strong style={{ color: KENYA_ACCENT, fontWeight: 500 }}>core infrastructure</strong> for Africa&apos;s digital economy.
+          {/* Market projection — inline strip */}
+          <div style={{
+            maxWidth: 780,
+            margin: "0 auto",
+            padding: "18px 32px",
+            borderRadius: 14,
+            background: `linear-gradient(135deg, ${C}14, ${C_BRIGHT}06, rgba(255,255,255,0.02))`,
+            border: `1px solid ${C_BRIGHT}22`,
+            position: "relative",
+            overflow: "hidden",
+            display: "flex",
+            alignItems: "center",
+            gap: 16,
+          }}>
+            <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: `linear-gradient(90deg, transparent, ${C_BRIGHT}35, transparent)` }} />
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ opacity: 0.6, flexShrink: 0 }}>
+              <path d="M2 11 L5 6 L8 8 L12 3" stroke={KENYA_ACCENT} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              <circle cx="12" cy="3" r="1.5" fill={KENYA_ACCENT} />
+            </svg>
+            <span style={{ fontFamily: "var(--font-dm)", fontSize: 13, fontWeight: 600, letterSpacing: "2px", textTransform: "uppercase", color: `${KENYA_ACCENT}88`, flexShrink: 0 }}>Market Projection</span>
+            <span style={{ width: 1, height: 20, background: `${C_BRIGHT}20`, flexShrink: 0 }} />
+            <p style={{ fontFamily: "var(--font-outfit)", fontWeight: 400, fontSize: 14.5, color: "rgba(255,255,255,0.6)", margin: 0, lineHeight: 1.6 }}>
+              Projected to expand at a CAGR of <span style={{ color: C_BRIGHT, fontWeight: 600 }}>10.54%</span> through 2029, reaching <span style={{ color: KENYA_ACCENT, fontWeight: 600 }}>$92.64 million</span>.
             </p>
-
-            {/* Market projection card */}
-            <div style={{
-              padding: "22px 28px",
-              borderRadius: 14,
-              background: `linear-gradient(135deg, ${C}14, ${C_BRIGHT}06, rgba(255,255,255,0.02))`,
-              border: `1px solid ${C_BRIGHT}22`,
-              position: "relative",
-              overflow: "hidden",
-            }}>
-              <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: `linear-gradient(90deg, transparent, ${C_BRIGHT}35, transparent)` }} />
-              <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ opacity: 0.6 }}>
-                  <path d="M2 11 L5 6 L8 8 L12 3" stroke={KENYA_ACCENT} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  <circle cx="12" cy="3" r="1.5" fill={KENYA_ACCENT} />
-                </svg>
-                <span style={{ fontFamily: "var(--font-dm)", fontSize: 13, fontWeight: 600, letterSpacing: "2px", textTransform: "uppercase", color: `${KENYA_ACCENT}88` }}>Market Projection</span>
-              </div>
-              <p style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "clamp(14px, 1.5vw, 17px)", color: "rgba(255,255,255,0.82)", margin: 0, lineHeight: 1.65, letterSpacing: "-0.3px", textAlign: "left" }}>
-                The market is projected to expand at a CAGR of <span style={{ color: C_BRIGHT, fontWeight: 800 }}>10.54%</span> through 2029, reaching an estimated value of <span style={{ color: KENYA_ACCENT, fontWeight: 800 }}>$92.64 million</span>.
-              </p>
-            </div>
           </div>
         </motion.div>
 
@@ -1223,7 +1250,7 @@ function SiliconSavannahContext() {
               <path d="M7 1 L12 4 L12 9 L7 13 L2 9 L2 4 Z" stroke={C_BRIGHT} strokeWidth="0.8" fill={`${C_BRIGHT}08`} />
               <path d="M7 4 L7 8 M5.5 6 L8.5 6" stroke={C_BRIGHT} strokeWidth="0.8" strokeLinecap="round" opacity="0.6" />
             </svg>
-            <span style={{ fontFamily: "var(--font-dm)", fontSize: 12, fontWeight: 600, letterSpacing: "3px", textTransform: "uppercase", color: "rgba(255,255,255,0.3)" }}>Key Indicators — 2025 Data</span>
+            <span style={{ fontFamily: "var(--font-dm)", fontSize: 13, fontWeight: 600, letterSpacing: "3.5px", textTransform: "uppercase", color: "rgba(255,255,255,0.3)" }}>Key Indicators — 2025 Data</span>
           </div>
           <div style={{ flex: 1, maxWidth: 120, height: 1, background: `linear-gradient(270deg, transparent, ${C}20)` }} />
         </motion.div>
@@ -1369,20 +1396,8 @@ function SiliconSavannahContext() {
           {/* Glass container top accent */}
           <div style={{ position: "absolute", top: 0, left: "15%", right: "15%", height: 1, background: `linear-gradient(90deg, transparent, ${C_BRIGHT}18, transparent)` }} />
 
-          {/* Two-column: analysis left, tags right */}
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 32, alignItems: "center" }} className="cfk-whynow-analysis-grid">
-            {/* Left — analysis text */}
-            <div style={{ textAlign: "left", borderLeft: `2px solid ${C_BRIGHT}30`, paddingLeft: 20, position: "relative" }}>
-              <div style={{ position: "absolute", top: -4, left: -1, width: 2, height: 8, background: C_BRIGHT, borderRadius: 1, boxShadow: `0 0 6px ${C_BRIGHT}40` }} />
-              <div style={{ marginBottom: 10, display: "flex", alignItems: "center", gap: 6 }}>
-                <span style={{ fontFamily: "var(--font-dm)", fontSize: 8, fontWeight: 600, letterSpacing: "2px", textTransform: "uppercase", color: "rgba(255,255,255,0.2)" }}>Analysis</span>
-              </div>
-              <p style={{ fontFamily: "var(--font-outfit)", fontSize: 14.5, fontWeight: 300, color: "rgba(255,255,255,0.65)", lineHeight: 1.75, margin: 0 }}>
-                The rise of <strong style={{ color: C_BRIGHT, fontWeight: 500 }}>Agentic AI and Deepfakes</strong> has introduced a new era of <span style={{ color: "rgba(255,255,255,0.75)", fontStyle: "italic" }}>&apos;Algorithmic Warfare&apos;</span> that legacy systems are ill-equipped to handle — making this summit more urgent than ever.
-              </p>
-            </div>
-
-            {/* Right — tags + source */}
+          {/* Tags + source */}
+          <div style={{ textAlign: "center" }}>
             <div>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 8, justifyContent: "center", marginBottom: 16 }}>
                 {["2022–2027 National Cybersecurity Strategy", "AI-Powered Fraud Prevention", "KE-CIRT/CC Reports", "Internet Service Providers (ISPs)", "CSOC Operations"].map((tag, i) => (
@@ -1473,7 +1488,7 @@ function SiliconSavannahContext() {
         }
         .cfk-whynow-ticker { animation: cfk-whynow-ticker-scroll 40s linear infinite; }
         .cfk-whynow-card:hover {
-          transform: translateY(-5px) !important;
+          transform: translateY(-4px) !important;
           border-color: ${C_BRIGHT}45 !important;
           box-shadow: 0 16px 48px ${C}22, inset 0 1px 0 ${C_BRIGHT}18, 0 0 0 1px ${C_BRIGHT}15 !important;
         }
@@ -1525,7 +1540,7 @@ function FocusAreas() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section ref={ref} style={{ position: "relative", padding: "clamp(60px, 7vw, 90px) 0 clamp(70px, 8vw, 100px)", background: "linear-gradient(180deg, #0A0608 0%, #0D090A 30%, #100B0D 50%, #0D090A 70%, #0A0608 100%)" }}>
+    <section ref={ref} style={{ position: "relative", padding: "clamp(60px, 7vw, 90px) 0", background: "linear-gradient(180deg, #0A0608 0%, #0D090A 30%, #100B0D 50%, #0D090A 70%, #0A0608 100%)" }}>
       {/* Background — city at night */}
       <div className="absolute inset-0" style={{ zIndex: 0 }}>
         <img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=1400&q=75" alt="" className="w-full h-full object-cover" loading="lazy" decoding="async" style={{ filter: "brightness(0.25) saturate(0.35) contrast(1.2)", objectPosition: "center 60%" }} />
@@ -1710,7 +1725,7 @@ function FocusAreas() {
                       <span style={{
                         display: "inline-flex", alignItems: "center", gap: 7,
                         fontFamily: "var(--font-dm)", fontSize: 12, fontWeight: 600,
-                        color: C_BRIGHT, letterSpacing: "2.5px", textTransform: "uppercase",
+                        color: C_BRIGHT, letterSpacing: "3.5px", textTransform: "uppercase",
                         padding: "4px 14px 4px 10px", borderRadius: 20,
                         background: `linear-gradient(135deg, ${C}12, ${C}08)`,
                         border: `1px solid ${C}25`,
@@ -1828,7 +1843,7 @@ function FocusAreas() {
         .cfk-focus-headline { animation: cfk-focus-shimmer 8s ease-in-out infinite; }
         .cfk-focus-card:hover {
           border-color: ${C_BRIGHT}30 !important;
-          transform: translateY(-5px);
+          transform: translateY(-4px);
           box-shadow: 0 24px 70px rgba(0,0,0,0.55), 0 0 0 1px ${C_BRIGHT}12, 0 0 50px ${C}15, inset 0 1px 0 rgba(255,255,255,0.07) !important;
         }
         .cfk-focus-card:hover .cfk-focus-glow {
@@ -1894,7 +1909,7 @@ function AdvisoryBoard() {
       ref={ref}
       style={{
         background: "linear-gradient(180deg, #080505 0%, #0A0607 100%)",
-        padding: "clamp(40px, 5vw, 72px) 0",
+        padding: "clamp(40px, 5vw, 60px) 0",
         position: "relative",
         overflow: "hidden",
       }}
@@ -1911,15 +1926,15 @@ function AdvisoryBoard() {
         >
           <div className="flex items-center justify-center gap-3" style={{ marginBottom: 16 }}>
             <span style={{ width: 30, height: 1, background: KENYA_ACCENT }} />
-            <span style={{ fontFamily: "var(--font-outfit)", fontSize: 13, fontWeight: 600, letterSpacing: "2.5px", textTransform: "uppercase", color: KENYA_ACCENT }}>
+            <span style={{ fontFamily: "var(--font-outfit)", fontSize: 13, fontWeight: 600, letterSpacing: "3.5px", textTransform: "uppercase", color: KENYA_ACCENT }}>
               Leadership
             </span>
             <span style={{ width: 30, height: 1, background: KENYA_ACCENT }} />
           </div>
           <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(28px, 3.8vw, 48px)", letterSpacing: "-1.5px", color: "white", lineHeight: 1.08, margin: "16px 0 0" }}>
-            Advisory Board
+            Advisory Board & Speakers
           </h2>
-          <p style={{ fontFamily: "var(--font-outfit)", fontWeight: 300, fontSize: 15, color: "rgba(255,255,255,0.65)", maxWidth: 500, margin: "14px auto 0", lineHeight: 1.6 }}>
+          <p style={{ fontFamily: "var(--font-outfit)", fontWeight: 300, fontSize: 15, color: "rgba(255,255,255,0.55)", maxWidth: 500, margin: "14px auto 0", lineHeight: 1.6 }}>
             Industry leaders shaping the summit agenda and driving cybersecurity excellence across East Africa.
           </p>
         </motion.div>
@@ -1954,7 +1969,7 @@ function AdvisoryBoard() {
 // ─── SPEAKERS ────────────────────────────────────────────────────────────────
 function Speakers() {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const inView = useInView(ref, { once: true, margin: "-80px" });
   
   return (
     <section id="speakers" ref={ref} style={{ background: "#090506", padding: "clamp(40px,5vw,60px) 0" }}>
@@ -1997,7 +2012,7 @@ function Speakers() {
             >
               Who&apos;s Speaking
             </h2>
-            <p style={{ fontFamily: "var(--font-outfit)", fontSize: 14, color: "#484848", margin: 0 }}>
+            <p style={{ fontFamily: "var(--font-outfit)", fontSize: 14, color: "rgba(255,255,255,0.3)", margin: 0 }}>
               East Africa&apos;s most senior cybersecurity and technology leaders
             </p>
           </div>
@@ -2328,7 +2343,7 @@ function AgendaTimeline() {
       >
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <div style={{ width: 8, height: 8, borderRadius: "50%", background: C_BRIGHT, boxShadow: `0 0 10px ${C_BRIGHT}50` }} />
-          <span style={{ fontFamily: "var(--font-dm)", fontSize: 13, fontWeight: 600, letterSpacing: "2.5px", textTransform: "uppercase", color: C_BRIGHT }}>{label}</span>
+          <span style={{ fontFamily: "var(--font-dm)", fontSize: 13, fontWeight: 600, letterSpacing: "3.5px", textTransform: "uppercase", color: C_BRIGHT }}>{label}</span>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <span style={{ fontFamily: "var(--font-outfit)", fontSize: 13, fontWeight: 400, color: "rgba(255,255,255,0.3)" }}>{timeRange}</span>
@@ -2597,7 +2612,7 @@ function SponsorsSection() {
               fontFamily: "var(--font-outfit)",
               fontWeight: 300,
               fontSize: 16,
-              color: "#707070",
+              color: "rgba(255,255,255,0.35)",
               lineHeight: 1.6,
               maxWidth: 480,
               margin: "14px auto 0",
@@ -2890,7 +2905,7 @@ function Gallery() {
               fontFamily: "var(--font-outfit)",
               fontWeight: 300,
               fontSize: 16,
-              color: "#707070",
+              color: "rgba(255,255,255,0.35)",
               lineHeight: 1.6,
               maxWidth: 460,
               margin: "12px 0 0",
@@ -3043,7 +3058,7 @@ function Gallery() {
 // ─── WHAT TO EXPECT ──────────────────────────────────────────────────────────
 function WhatToExpect() {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const inView = useInView(ref, { once: true, margin: "-80px" });
   const items = [
     {
       icon: "M12 3a9 9 0 110 18 9 9 0 010-18zm0 5a4 4 0 100 8 4 4 0 000-8zm0-3v2m0 14v2",
@@ -3409,7 +3424,7 @@ function ExpectCard({
 // ─── WHO SHOULD ATTEND ───────────────────────────────────────────────────────
 function WhoShouldAttend() {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const inView = useInView(ref, { once: true, margin: "-80px" });
   const [hoveredRole, setHoveredRole] = useState<number | null>(null);
   const [hoveredInd, setHoveredInd] = useState<number | null>(null);
 
@@ -3778,7 +3793,7 @@ function AwardsSection() {
           </motion.div>
           <div className="flex items-center justify-center gap-3" style={{ marginBottom: 14 }}>
             <span style={{ width: 40, height: 1, background: `linear-gradient(90deg, transparent, ${GOLD})` }} />
-            <span style={{ fontFamily: "var(--font-outfit)", fontSize: 13, fontWeight: 600, letterSpacing: "2.5px", textTransform: "uppercase", color: GOLD }}>Awards & Recognition</span>
+            <span style={{ fontFamily: "var(--font-outfit)", fontSize: 13, fontWeight: 600, letterSpacing: "3.5px", textTransform: "uppercase", color: GOLD }}>Awards & Recognition</span>
             <span style={{ width: 40, height: 1, background: `linear-gradient(90deg, ${GOLD}, transparent)` }} />
           </div>
           <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(32px, 4.5vw, 56px)", letterSpacing: "-2px", color: "white", lineHeight: 1.05, margin: "12px 0 18px" }}>
@@ -4053,7 +4068,7 @@ function AwardsSection() {
 // ─── SPLIT CTA ───────────────────────────────────────────────────────────────
 function SplitCTA() {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
     <section
@@ -4087,7 +4102,7 @@ function SplitCTA() {
       >
         <div className="flex items-center justify-center gap-3" style={{ marginBottom: 16 }}>
           <span style={{ width: 30, height: 1, background: C }} />
-          <span style={{ fontFamily: "var(--font-outfit)", fontSize: 13, fontWeight: 600, letterSpacing: "2.5px", textTransform: "uppercase", color: C }}>
+          <span style={{ fontFamily: "var(--font-outfit)", fontSize: 13, fontWeight: 600, letterSpacing: "3.5px", textTransform: "uppercase", color: C }}>
             Join Us
           </span>
           <span style={{ width: 30, height: 1, background: C }} />
@@ -4174,7 +4189,7 @@ function ContactSection() {
         >
           <div className="flex items-center justify-center gap-3">
             <span style={{ width: 30, height: 1, background: KENYA_ACCENT }} />
-            <span style={{ fontFamily: "var(--font-outfit)", fontSize: 13, fontWeight: 600, letterSpacing: "2.5px", textTransform: "uppercase", color: KENYA_ACCENT }}>
+            <span style={{ fontFamily: "var(--font-outfit)", fontSize: 13, fontWeight: 600, letterSpacing: "3.5px", textTransform: "uppercase", color: KENYA_ACCENT }}>
               Get in Touch
             </span>
             <span style={{ width: 30, height: 1, background: KENYA_ACCENT }} />
@@ -4328,7 +4343,7 @@ function ContactSection() {
 function Venue() {
   const sectionRef = useRef<HTMLElement>(null);
   const cardRef = useRef(null);
-  const inView = useInView(cardRef, { once: true, margin: "-60px" });
+  const inView = useInView(cardRef, { once: true, margin: "-80px" });
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -4365,7 +4380,7 @@ function Venue() {
                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
                 <circle cx="12" cy="10" r="3" />
               </svg>
-              <span style={{ fontFamily: "var(--font-outfit)", fontSize: 13, fontWeight: 600, letterSpacing: "2.5px", textTransform: "uppercase", color: KENYA_ACCENT }}>
+              <span style={{ fontFamily: "var(--font-outfit)", fontSize: 13, fontWeight: 600, letterSpacing: "3.5px", textTransform: "uppercase", color: KENYA_ACCENT }}>
                 The Venue
               </span>
             </div>
