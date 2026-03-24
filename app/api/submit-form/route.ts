@@ -19,6 +19,7 @@ const VALID_TYPES = [
 const ALLOWED_ORIGINS = [
   "https://eventsfirstgroup.com",
   "https://www.eventsfirstgroup.com",
+  "https://braze-webinar.eventsfirstgroup.com",
   "http://localhost:3000",
   "http://localhost:3001",
 ];
