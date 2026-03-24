@@ -817,7 +817,7 @@ function HeroSection() {
                   e.currentTarget.style.boxShadow = `0 4px 24px ${B_PURPLE}35`;
                 }}
               >
-                Apply to Join
+                Register Your Interest
                 <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
                   <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
@@ -2488,7 +2488,7 @@ function RegisterSection() {
             margin: "0 0 12px",
           }}
         >
-          Apply to Join.
+          Register Your Interest.
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 16 }}
