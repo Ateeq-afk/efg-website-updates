@@ -374,6 +374,7 @@ export default function CyberFirstIndia2026() {
       <MarketContext />
       <FocusAreas />
       <SpeakersSection />
+      <ConfirmedSpeakers />
       <AgendaTimeline />
       <SponsorsSection />
       <Gallery />
@@ -663,26 +664,41 @@ function HeroSection() {
 
           {/* Right — Glass info card + Supporting Partners */}
           <div className="cfi-hero-right" style={{ display: "flex", flexDirection: "column", alignItems: "center", flexShrink: 0, width: 300 }}>
-            {/* Supporting Partners — desktop */}
+            {/* Supporting Partners — desktop (glass card) */}
             <motion.div
               className="cfi-hero-partners-desktop"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 1.4, ease: EASE }}
-              style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12, width: "100%" }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 1.4, ease: EASE }}
+              style={{
+                width: "100%",
+                background: "rgba(255,255,255,0.03)",
+                backdropFilter: "blur(20px)",
+                border: `1px solid ${C}20`,
+                borderRadius: 20,
+                padding: "24px 24px 20px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 14,
+                marginBottom: 16,
+                position: "relative",
+                overflow: "hidden",
+              }}
             >
-              <span style={{ fontFamily: "var(--font-outfit)", fontSize: 9, fontWeight: 600, letterSpacing: "2px", textTransform: "uppercase", color: "rgba(255,255,255,0.3)" }}>Supporting Partners</span>
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 14 }}>
+              <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: `linear-gradient(90deg, transparent, ${C}30, transparent)` }} />
+              <span style={{ fontFamily: "var(--font-outfit)", fontSize: 10, fontWeight: 600, letterSpacing: "2px", textTransform: "uppercase", color: "rgba(255,255,255,0.35)" }}>Supporting Partners</span>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 14, flexWrap: "wrap" }}>
                 {[
                   { name: "CCA", logo: "https://efg-final.s3.eu-north-1.amazonaws.com/CyberFirst_Delhi_Speakers/support+partner+/CCA.png" },
                   { name: "Coder Flow AI", logo: "https://efg-final.s3.eu-north-1.amazonaws.com/CyberFirst_Delhi_Speakers/support+partner+/coder_flowAI.png" },
                   { name: "Crime Free Bharat", logo: "https://efg-final.s3.eu-north-1.amazonaws.com/CyberFirst_Delhi_Speakers/support+partner+/Crime_free_bharat.JPG" },
                   { name: "Cyber World", logo: "https://efg-final.s3.eu-north-1.amazonaws.com/CyberFirst_Delhi_Speakers/support+partner+/Cyber_world.png" },
                   { name: "Cyber Security Council", logo: "https://efg-final.s3.eu-north-1.amazonaws.com/CyberFirst_Delhi_Speakers/support+partner+/cybersecuritycouncil.png" },
-                ].map((p) => (
-                  <div key={p.name} style={{ height: 76, display: "flex", alignItems: "center" }}>
+                ].map((p, idx) => (
+                  <div key={p.name} style={{ height: 72, width: 72, display: "flex", alignItems: "center", justifyContent: "center", ...(idx === 4 ? { background: "rgba(255,255,255,0.92)", borderRadius: 12, padding: 4 } : {}) }}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={p.logo} alt={p.name} loading="lazy" style={{ maxHeight: "100%", maxWidth: 110, objectFit: "contain", borderRadius: 4 }} />
+                    <img src={p.logo} alt={p.name} loading="lazy" style={{ maxHeight: idx === 4 ? "110%" : "100%", maxWidth: idx === 4 ? "110%" : "100%", objectFit: "contain" }} />
                   </div>
                 ))}
               </div>
@@ -1541,6 +1557,12 @@ const CFI_SPEAKERS = [
     entity: "Supreme Court of India",
     photo: "https://efg-final.s3.eu-north-1.amazonaws.com/CyberFirst_Delhi_Speakers/Pavan_Duggal.jpg",
   },
+  {
+    name: "Lt Cdr Karan Kalra (Retd)",
+    designation: "Chief Information Security Officer (CISO)",
+    entity: "Perpetual-Edge",
+    photo: "",
+  },
 ];
 
 function SpeakersSection() {
@@ -1564,7 +1586,7 @@ function SpeakersSection() {
         </motion.div>
 
         {/* Speaker Cards Grid */}
-        <div className="cfi-speakers-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 28 }}>
+        <div className="cfi-speakers-grid" style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 20 }}>
           {CFI_SPEAKERS.map((speaker, i) => (
             <motion.div
               key={speaker.name}
@@ -1581,13 +1603,23 @@ function SpeakersSection() {
               }}
             >
               {/* Photo */}
-              <div style={{ position: "relative", width: "100%", aspectRatio: "1/1", overflow: "hidden" }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={speaker.photo}
-                  alt={speaker.name}
-                  style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center", filter: "grayscale(1)", transition: "transform 0.5s ease, filter 0.5s ease" }}
-                />
+              <div style={{ position: "relative", width: "100%", aspectRatio: "1/1", overflow: "hidden", background: speaker.photo ? "transparent" : `linear-gradient(135deg, ${C}20, #0A0C12)` }}>
+                {speaker.photo ? (
+                  <>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={speaker.photo}
+                      alt={speaker.name}
+                      style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center", filter: "grayscale(1)", transition: "transform 0.5s ease, filter 0.5s ease" }}
+                    />
+                  </>
+                ) : (
+                  <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke={`${C_BRIGHT}40`} strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" /><circle cx="12" cy="7" r="4" />
+                    </svg>
+                  </div>
+                )}
                 {/* Bottom gradient overlay */}
                 <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "50%", background: "linear-gradient(to top, #080A0F, transparent)", pointerEvents: "none" }} />
               </div>
@@ -1619,11 +1651,122 @@ function SpeakersSection() {
           transform: scale(1.05);
           filter: grayscale(0) !important;
         }
-        @media (max-width: 960px) {
+        @media (max-width: 1100px) {
+          .cfi-speakers-grid { grid-template-columns: repeat(3, 1fr) !important; }
+        }
+        @media (max-width: 768px) {
           .cfi-speakers-grid { grid-template-columns: repeat(2, 1fr) !important; }
         }
         @media (max-width: 520px) {
           .cfi-speakers-grid { grid-template-columns: 1fr !important; max-width: 360px; margin: 0 auto; }
+        }
+      `}</style>
+    </section>
+  );
+}
+
+// ─── CONFIRMED SPEAKERS ──────────────────────────────────────────────────────
+const CFI_CONFIRMED_SPEAKERS = [
+  { name: "Air Vice Marshal (Dr) Devesh Vatsa VSM", designation: "Advisor Cyber Security & Critical Technologies", entity: "Data Security Council of India (DSCI)", photo: "https://efg-final.s3.eu-north-1.amazonaws.com/CyberFirst_Delhi_Speakers/Dr_Devesh_pic.jpeg" },
+  { name: "Prabhu Narayan", designation: "Director & CISO, Department of Economic Affairs (DEA)", entity: "Ministry of Finance, Government of India", photo: "https://efg-final.s3.eu-north-1.amazonaws.com/CyberFirst_Delhi_Speakers/Prabhu-Narayan.jpg" },
+  { name: "M Dhanasekar", designation: "Wing Commander", entity: "Indian Airforce", photo: "https://efg-final.s3.eu-north-1.amazonaws.com/CyberFirst_Delhi_Speakers/Dhanasekar_Pic.png" },
+  { name: "Dr. Susil Kumar Meher", designation: "Head Health IT and CISO", entity: "AIIMS", photo: "https://efg-final.s3.eu-north-1.amazonaws.com/CyberFirst_Delhi_Speakers/Dr_Sushil_Pic.jpg" },
+  { name: "Saurabh Basu", designation: "Scientist E & Head (Enterprise Cyber Security)", entity: "Centre for Development of Telematics (C-DOT), Ministry of Communication, Govt of India", photo: "https://efg-final.s3.eu-north-1.amazonaws.com/CyberFirst_Delhi_Speakers/Saurabh_pic.jpg" },
+  { name: "Dr. Jagannath Sahoo", designation: "Chief Information Security Officer (CISO)", entity: "INOXGFL", photo: "https://efg-final.s3.eu-north-1.amazonaws.com/CyberFirst_Delhi_Speakers/Dr_Jagannath_Sahoo.jpg" },
+  { name: "Dr. Pavan Duggal", designation: "Advocate", entity: "Supreme Court of India", photo: "https://efg-final.s3.eu-north-1.amazonaws.com/CyberFirst_Delhi_Speakers/Pavan_Duggal.jpg" },
+  { name: "Dr Harsha Thennarasu", designation: "Chief Cyber Defence Advisor", entity: "HKIT Security Solutions", photo: "https://efg-final.s3.eu-north-1.amazonaws.com/CyberFirst_Delhi_Speakers/Dr_Harsha.JPG" },
+  { name: "Lt Cdr Karan Kalra (Retd)", designation: "Chief Information Security Officer (CISO)", entity: "Perpetual-Edge", photo: "" },
+];
+
+function ConfirmedSpeakers() {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+
+  return (
+    <section id="confirmed-speakers" ref={ref} style={{ background: "#080A0F", padding: "clamp(60px, 7vw, 90px) 0", position: "relative", overflow: "hidden" }}>
+      <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 60% 40% at 50% 100%, ${C}06, transparent 70%)` }} />
+
+      <div style={{ maxWidth: 1320, margin: "0 auto", padding: "0 clamp(20px, 4vw, 60px)", position: "relative" }}>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, ease: EASE }} style={{ textAlign: "center", marginBottom: 64 }}>
+          <p style={{ fontFamily: "var(--font-outfit)", fontSize: 13, fontWeight: 600, letterSpacing: "3.5px", textTransform: "uppercase", color: C_BRIGHT, marginBottom: 16 }}>
+            Confirmed Speakers
+          </p>
+          <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(32px, 5vw, 48px)", color: "white", margin: 0, lineHeight: 1.15 }}>
+            Featured <span style={{ color: C_BRIGHT }}>Speakers</span>
+          </h2>
+        </motion.div>
+
+        <div className="cfi-cspeakers-grid" style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 20 }}>
+          {CFI_CONFIRMED_SPEAKERS.map((speaker, i) => (
+            <motion.div
+              key={speaker.name}
+              initial={{ opacity: 0, y: 30 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.15 + i * 0.08, ease: EASE }}
+              className="cfi-cspeaker-card"
+              style={{
+                borderRadius: 16,
+                overflow: "hidden",
+                background: "linear-gradient(160deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01))",
+                border: "1px solid rgba(255,255,255,0.07)",
+                transition: "all 0.35s cubic-bezier(0.16, 1, 0.3, 1)",
+              }}
+            >
+              <div style={{ position: "relative", width: "100%", aspectRatio: "1/1", overflow: "hidden", background: speaker.photo ? "transparent" : `linear-gradient(135deg, ${C}20, #0A0C12)` }}>
+                {speaker.photo ? (
+                  <>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={speaker.photo}
+                      alt={speaker.name}
+                      style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center", filter: "grayscale(1)", transition: "transform 0.5s ease, filter 0.5s ease" }}
+                    />
+                  </>
+                ) : (
+                  <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke={`${C_BRIGHT}40`} strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" /><circle cx="12" cy="7" r="4" />
+                    </svg>
+                  </div>
+                )}
+                <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "50%", background: "linear-gradient(to top, #080A0F, transparent)", pointerEvents: "none" }} />
+              </div>
+              <div style={{ padding: "20px 20px 24px", marginTop: -24, position: "relative" }}>
+                <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: 16, color: "white", margin: "0 0 6px", lineHeight: 1.25 }}>
+                  {speaker.name}
+                </h3>
+                <p style={{ fontFamily: "var(--font-outfit)", fontSize: 12, fontWeight: 400, color: C_BRIGHT, margin: "0 0 4px", lineHeight: 1.4 }}>
+                  {speaker.designation}
+                </p>
+                {speaker.entity && (
+                  <p style={{ fontFamily: "var(--font-outfit)", fontSize: 11, fontWeight: 500, color: "rgba(255,255,255,0.4)", margin: 0 }}>
+                    {speaker.entity}
+                  </p>
+                )}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      <style jsx global>{`
+        .cfi-cspeaker-card:hover {
+          transform: translateY(-4px) !important;
+          border-color: ${C_BRIGHT}30 !important;
+          box-shadow: 0 12px 40px ${C}18 !important;
+        }
+        .cfi-cspeaker-card:hover img {
+          transform: scale(1.05);
+          filter: grayscale(0) !important;
+        }
+        @media (max-width: 1100px) {
+          .cfi-cspeakers-grid { grid-template-columns: repeat(3, 1fr) !important; }
+        }
+        @media (max-width: 768px) {
+          .cfi-cspeakers-grid { grid-template-columns: repeat(2, 1fr) !important; }
+        }
+        @media (max-width: 520px) {
+          .cfi-cspeakers-grid { grid-template-columns: 1fr !important; max-width: 360px; margin: 0 auto; }
         }
       `}</style>
     </section>
@@ -2183,7 +2326,7 @@ function Venue() {
       <div style={{ maxWidth: 1320, margin: "0 auto", padding: "0 clamp(20px, 4vw, 60px)" }}>
         <div className="cfi-venue-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "center" }}>
           <motion.div initial={{ opacity: 0, x: -30 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.8, ease: EASE }} style={{ borderRadius: 20, overflow: "hidden", aspectRatio: "16/10" }}>
-            <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=1200&q=80" alt="Luxury hotel outdoor banquet setup" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+            <img src="https://efg-final.s3.eu-north-1.amazonaws.com/CyberFirst_Delhi_Speakers/9a14e6cefad958c880dabffebfedb6cc682048f6-2880x1395.avif" alt="Taj Palace Hotel New Delhi" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
           </motion.div>
           <motion.div initial={{ opacity: 0, x: 30 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.8, delay: 0.2, ease: EASE }}>
             <div className="flex items-center gap-3" style={{ marginBottom: 16 }}>
