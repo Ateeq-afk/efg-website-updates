@@ -661,33 +661,33 @@ function HeroSection() {
           </motion.div>
           </div>
 
-          {/* Right — Glass info card + Supporting Partners */}
-          <div className="cfi-hero-right" style={{ display: "flex", flexDirection: "column", alignItems: "center", flexShrink: 0, width: 300 }}>
-            {/* Supporting Partners — desktop (glass card) */}
+          {/* Right — Supporting Partners glass card */}
+          <div className="cfi-hero-right" style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", flexShrink: 0, width: 400 }}>
             <motion.div
               className="cfi-hero-partners-desktop"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 1.4, ease: EASE }}
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 1.2, ease: EASE }}
               style={{
                 width: "100%",
-                background: "rgba(255,255,255,0.03)",
+                background: "rgba(255,255,255,0.04)",
                 backdropFilter: "blur(20px)",
-                border: `1px solid ${C}20`,
+                border: `1px solid ${C}25`,
                 borderRadius: 20,
-                padding: "24px 24px 20px",
+                padding: "36px 32px",
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                gap: 14,
-                marginBottom: 16,
+                gap: 24,
                 position: "relative",
                 overflow: "hidden",
               }}
             >
-              <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: `linear-gradient(90deg, transparent, ${C}30, transparent)` }} />
-              <span style={{ fontFamily: "var(--font-outfit)", fontSize: 10, fontWeight: 600, letterSpacing: "2px", textTransform: "uppercase", color: "rgba(255,255,255,0.35)" }}>Supporting Partners</span>
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 14, flexWrap: "wrap" }}>
+              <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: `linear-gradient(90deg, transparent, ${C_BRIGHT}40, transparent)` }} />
+              <div style={{ position: "absolute", inset: 0, pointerEvents: "none", background: `radial-gradient(ellipse 70% 60% at 50% 30%, ${C}10, transparent 70%)` }} />
+              <span style={{ fontFamily: "var(--font-outfit)", fontSize: 12, fontWeight: 600, letterSpacing: "2.5px", textTransform: "uppercase", color: C_BRIGHT, position: "relative" }}>Supporting Partners</span>
+              <div style={{ width: 40, height: 1, background: `linear-gradient(90deg, transparent, ${C_BRIGHT}40, transparent)` }} />
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20, position: "relative", width: "100%" }}>
                 {[
                   { name: "CCA", logo: "https://efg-final.s3.eu-north-1.amazonaws.com/CyberFirst_Delhi_Speakers/support+partner+/CCA.png" },
                   { name: "Coder Flow AI", logo: "https://efg-final.s3.eu-north-1.amazonaws.com/CyberFirst_Delhi_Speakers/support+partner+/coder_flowAI.png" },
@@ -695,51 +695,12 @@ function HeroSection() {
                   { name: "Cyber World", logo: "https://efg-final.s3.eu-north-1.amazonaws.com/CyberFirst_Delhi_Speakers/support+partner+/Cyber_world.png" },
                   { name: "Cyber Security Council", logo: "https://efg-final.s3.eu-north-1.amazonaws.com/CyberFirst_Delhi_Speakers/support+partner+/cybersecuritycouncil.png" },
                 ].map((p, idx) => (
-                  <div key={p.name} style={{ height: 72, width: 72, display: "flex", alignItems: "center", justifyContent: "center", ...(idx === 4 ? { background: "rgba(255,255,255,0.92)", borderRadius: 12, padding: 4 } : {}) }}>
+                  <div key={p.name} style={{ height: 80, display: "flex", alignItems: "center", justifyContent: "center" }}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={p.logo} alt={p.name} loading="lazy" style={{ maxHeight: idx === 4 ? "110%" : "100%", maxWidth: idx === 4 ? "110%" : "100%", objectFit: "contain" }} />
+                    <img src={p.logo} alt={p.name} loading="lazy" style={{ maxHeight: "100%", maxWidth: "100%", objectFit: "contain", transform: idx === 4 ? "scale(1.7)" : "scale(1.35)" }} />
                   </div>
                 ))}
               </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 1.2, ease: EASE }}
-              className="cfi-hero-info-card"
-              style={{
-                width: "100%",
-                flexShrink: 0,
-                background: "rgba(255,255,255,0.03)",
-                backdropFilter: "blur(20px)",
-                border: `1px solid ${C}20`,
-                borderRadius: 20,
-                padding: "32px 28px",
-                display: "flex",
-                flexDirection: "column",
-                gap: 24,
-                marginTop: 40,
-              }}
-            >
-              {[
-                { label: "Date", value: "16 June 2026", icon: "M6 2v4m12-4v4M4 8h16M4 8v10a2 2 0 002 2h12a2 2 0 002-2V8" },
-                { label: "Venue", value: "New Delhi, India", icon: "M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z" },
-                { label: "Delegates", value: "200+ CISOs & CIOs", icon: "M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4-4v2m22 4v-2a4 4 0 00-3-3.87M13 7a4 4 0 11-8 0 4 4 0 018 0z" },
-                { label: "Format", value: "Invite-Only Summit", icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" },
-              ].map((item) => (
-                <div key={item.label} style={{ display: "flex", alignItems: "flex-start", gap: 14 }}>
-                  <div style={{ width: 36, height: 36, borderRadius: 10, background: `${C}12`, border: `1px solid ${C}18`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={C_BRIGHT} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                      <path d={item.icon} />
-                    </svg>
-                  </div>
-                  <div>
-                    <div style={{ fontFamily: "var(--font-outfit)", fontSize: 10, fontWeight: 600, letterSpacing: "2px", textTransform: "uppercase", color: "rgba(255,255,255,0.35)", marginBottom: 4 }}>{item.label}</div>
-                    <div style={{ fontFamily: "var(--font-outfit)", fontSize: 14, fontWeight: 500, color: "rgba(255,255,255,0.85)", lineHeight: 1.4 }}>{item.value}</div>
-                  </div>
-                </div>
-              ))}
             </motion.div>
           </div>
         </div>
@@ -1765,13 +1726,13 @@ function SponsorsSection() {
                 <div
                   key={`r1-${i}`}
                   style={{
-                    width: 200,
-                    height: 64,
-                    margin: "0 clamp(14px, 2vw, 28px)",
+                    width: 180,
+                    height: 60,
+                    margin: "0 clamp(18px, 2.5vw, 36px)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    opacity: 0.45,
+                    opacity: 0.55,
                     flexShrink: 0,
                     borderRadius: 8,
                   }}
@@ -1803,13 +1764,13 @@ function SponsorsSection() {
                 <div
                   key={`r2-${i}`}
                   style={{
-                    width: 200,
-                    height: 64,
-                    margin: "0 clamp(14px, 2vw, 28px)",
+                    width: 180,
+                    height: 60,
+                    margin: "0 clamp(18px, 2.5vw, 36px)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    opacity: 0.45,
+                    opacity: 0.55,
                     flexShrink: 0,
                     borderRadius: 8,
                   }}

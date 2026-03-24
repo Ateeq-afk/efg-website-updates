@@ -335,8 +335,8 @@ const GALLERY: {
     lift: true,
   },
   {
-    src: "https://efg-final.s3.eu-north-1.amazonaws.com/Good/4N8A0290.JPG",
-    alt: "VIP networking session",
+    src: "https://efg-final.s3.eu-north-1.amazonaws.com/events/Cyber%20First%20Kuwait%202025/filemail_photos/cyber21-04-410.jpg",
+    alt: "Conference exhibition",
     area: "d",
   },
   {
@@ -512,7 +512,7 @@ function HeroSection() {
         <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, delay: 0.2, ease: EASE }} style={{ display: "inline-flex", alignItems: "center", alignSelf: "flex-start", gap: 10, padding: "8px 16px", borderRadius: 30, background: `linear-gradient(135deg, ${C}15, ${KENYA_ACCENT}10)`, border: `1px solid ${C}30`, marginBottom: 24 }}>
           <span style={{ width: 6, height: 6, borderRadius: "50%", background: C_BRIGHT }} />
           <span style={{ fontFamily: "var(--font-outfit)", fontSize: 13, fontWeight: 600, letterSpacing: "2px", textTransform: "uppercase", color: C_BRIGHT }}>
-            1st Edition · July 2026 · The Silicon Savannah
+            8 July 2026 · Nairobi · The Silicon Savannah
           </span>
         </motion.div>
 
@@ -543,8 +543,8 @@ function HeroSection() {
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.8, ease: EASE }} className="cfk-cta-row" style={{ display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap" }}>
           {/* Buttons */}
           <a
-            href="#get-involved"
-            onClick={(e) => { e.preventDefault(); document.getElementById("get-involved")?.scrollIntoView({ behavior: "smooth" }); }}
+            href="#register"
+            onClick={(e) => { e.preventDefault(); document.getElementById("register")?.scrollIntoView({ behavior: "smooth" }); }}
             style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "14px 34px", borderRadius: 50, background: C, color: "white", fontFamily: "var(--font-outfit)", fontSize: 14, fontWeight: 700, textDecoration: "none", boxShadow: `0 4px 24px ${C}35`, cursor: "pointer", transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)" }}
             onMouseEnter={(e) => { e.currentTarget.style.background = C_BRIGHT; e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = `0 12px 40px ${C}50`; }}
             onMouseLeave={(e) => { e.currentTarget.style.background = C; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = `0 4px 24px ${C}35`; }}
@@ -552,8 +552,8 @@ function HeroSection() {
             Reserve Your Seat <span>→</span>
           </a>
           <a
-            href="#get-involved"
-            onClick={(e) => { e.preventDefault(); document.getElementById("get-involved")?.scrollIntoView({ behavior: "smooth" }); }}
+            href="#register"
+            onClick={(e) => { e.preventDefault(); document.getElementById("register")?.scrollIntoView({ behavior: "smooth" }); }}
             style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "14px 28px", borderRadius: 50, background: "rgba(255,255,255,0.04)", color: "rgba(255,255,255,0.8)", fontFamily: "var(--font-outfit)", fontSize: 14, fontWeight: 500, textDecoration: "none", border: "1px solid rgba(255,255,255,0.15)", cursor: "pointer", transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)" }}
             onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.1)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.35)"; e.currentTarget.style.color = "white"; e.currentTarget.style.transform = "translateY(-2px)"; }}
             onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.04)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.15)"; e.currentTarget.style.color = "rgba(255,255,255,0.8)"; e.currentTarget.style.transform = "translateY(0)"; }}
@@ -561,31 +561,39 @@ function HeroSection() {
             Become a Sponsor
           </a>
 
-          {/* NC4 Logo — pushed to far right, glass card */}
-          <div style={{
-            display: "flex",
+        </motion.div>
+
+        {/* NC4 Official Support Partner — standalone prominent card */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 1, ease: EASE }}
+          style={{
+            display: "inline-flex",
             alignItems: "center",
-            gap: 14,
-            marginLeft: "auto",
-            background: "rgba(255,255,255,0.04)",
-            backdropFilter: "blur(16px)",
-            border: `1px solid ${C}20`,
-            borderRadius: 14,
-            padding: "10px 18px",
+            alignSelf: "flex-start",
+            gap: 18,
+            marginTop: 28,
+            background: "rgba(255,255,255,0.05)",
+            backdropFilter: "blur(20px)",
+            border: `1px solid ${C}25`,
+            borderRadius: 16,
+            padding: "16px 28px",
             position: "relative",
             overflow: "hidden",
-          }}>
-            <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: `linear-gradient(90deg, transparent, ${C}30, transparent)` }} />
-            <div>
-              <span style={{ fontFamily: "var(--font-outfit)", fontSize: 9, fontWeight: 600, letterSpacing: "1.5px", textTransform: "uppercase", color: "rgba(255,255,255,0.35)", display: "block", lineHeight: 1.2 }}>Official Support</span>
-              <span style={{ fontFamily: "var(--font-outfit)", fontSize: 9, fontWeight: 600, letterSpacing: "1.5px", textTransform: "uppercase", color: "rgba(255,255,255,0.35)", display: "block", lineHeight: 1.2 }}>Partner</span>
-            </div>
-            <img
-              src="https://efg-final.s3.eu-north-1.amazonaws.com/cyber-first-kenya/NC4+Logo.jpeg"
-              alt="NC4 - National Computer & Cybercrimes Coordination Committee"
-              style={{ height: 50, width: "auto", borderRadius: 6, objectFit: "contain" }}
-            />
+          }}
+        >
+          <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: `linear-gradient(90deg, transparent, ${KENYA_ACCENT}30, transparent)` }} />
+          <div style={{ position: "absolute", inset: 0, pointerEvents: "none", background: `radial-gradient(ellipse 60% 80% at 80% 50%, ${KENYA_ACCENT}08, transparent 70%)` }} />
+          <div style={{ position: "relative" }}>
+            <span style={{ fontFamily: "var(--font-outfit)", fontSize: 11, fontWeight: 600, letterSpacing: "2px", textTransform: "uppercase", color: KENYA_ACCENT, display: "block" }}>Official Support Partner</span>
           </div>
+          <span style={{ width: 1, height: 44, background: "rgba(255,255,255,0.1)" }} />
+          <img
+            src="https://efg-final.s3.eu-north-1.amazonaws.com/cyber-first-kenya/NC4+Logo.jpeg"
+            alt="NC4 - National Computer & Cybercrimes Coordination Committee"
+            style={{ height: 70, width: "auto", borderRadius: 8, objectFit: "contain" }}
+          />
         </motion.div>
       </div>
 
@@ -597,7 +605,7 @@ function HeroSection() {
               <span className="absolute inline-flex h-full w-full rounded-full animate-ping" style={{ background: KENYA_ACCENT, opacity: 0.75 }} />
               <span className="relative inline-flex rounded-full h-3 w-3" style={{ background: KENYA_ACCENT }} />
             </span>
-            <span style={{ fontFamily: "var(--font-outfit)", fontSize: 13, fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: KENYA_ACCENT }}>1st Edition</span>
+            <span style={{ fontFamily: "var(--font-outfit)", fontSize: 13, fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: KENYA_ACCENT }}>8 July 2026</span>
             <span style={{ color: "rgba(255,255,255,0.15)", margin: "0 4px" }}>|</span>
             <span style={{ fontFamily: "var(--font-outfit)", fontSize: 13, fontWeight: 500, color: "rgba(255,255,255,0.5)" }}>Cyber First East Africa</span>
           </div>
@@ -615,8 +623,8 @@ function HeroSection() {
           </div>
 
           <a
-            href="#get-involved"
-            onClick={(e) => { e.preventDefault(); document.getElementById("get-involved")?.scrollIntoView({ behavior: "smooth" }); }}
+            href="#register"
+            onClick={(e) => { e.preventDefault(); document.getElementById("register")?.scrollIntoView({ behavior: "smooth" }); }}
             style={{ padding: "12px 28px", borderRadius: 50, background: C, fontFamily: "var(--font-outfit)", fontSize: 14, fontWeight: 600, color: "white", textDecoration: "none", boxShadow: `0 4px 16px ${C}35`, cursor: "pointer", transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)" }}
             onMouseEnter={(e) => { e.currentTarget.style.background = C_BRIGHT; e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = `0 12px 40px ${C}50`; }}
             onMouseLeave={(e) => { e.currentTarget.style.background = C; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = `0 4px 16px ${C}35`; }}
@@ -982,7 +990,7 @@ function StatsBar() {
               <span className="absolute inline-flex h-full w-full rounded-full animate-ping" style={{ background: KENYA_ACCENT, opacity: 0.6 }} />
               <span className="relative inline-flex rounded-full h-2 w-2" style={{ background: KENYA_ACCENT }} />
             </span>
-            <span style={{ fontFamily: "var(--font-outfit)", fontSize: 14, fontWeight: 600, color: KENYA_ACCENT, letterSpacing: "0.5px" }}>1st Edition</span>
+            <span style={{ fontFamily: "var(--font-outfit)", fontSize: 14, fontWeight: 600, color: KENYA_ACCENT, letterSpacing: "0.5px" }}>Cyber First East Africa</span>
           </div>
         </motion.div>
       </div>
@@ -1211,7 +1219,7 @@ function SiliconSavannahContext() {
             WebkitTextFillColor: "transparent", color: "transparent",
             filter: `drop-shadow(0 0 30px ${C}25)`,
           }}>
-            KES 29.9 Billion Lost. 4.5 Billion Threats.
+            KES 29.9 Billion Lost.
           </h2>
 
           {/* Animated underline */}
@@ -4128,7 +4136,7 @@ function SplitCTA() {
       </motion.div>
 
       {/* InquiryForm with overridden styles */}
-      <div className="cfk-form-wrapper" style={{ position: "relative", zIndex: 1 }}>
+      <div id="register" className="cfk-form-wrapper" style={{ position: "relative", zIndex: 1 }}>
         <InquiryForm defaultCountry="KE" eventName="Cyber First East Africa 2026" />
       </div>
 
