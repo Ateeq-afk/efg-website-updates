@@ -1766,367 +1766,222 @@ function SiliconSavannahContext() {
   );
 }
 
-// Removed old SiliconSavannahContext code - replaced with new GSAP sticky layout
-
-// ─── FOCUS AREAS ─────────────────────────────────────────────────────────────
+// ─── FOCUS AREAS - FLIP CARDS WITH GSAP ─────────────────────────────────────
 function FocusAreas() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const sectionRef = useRef<HTMLElement>(null);
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const [mounted, setMounted] = useState(false);
+  const [flippedCards, setFlippedCards] = useState<Set<number>>(new Set());
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted || typeof window === "undefined") return;
+
+    const ctx = gsap.context(() => {
+      cardsRef.current.forEach((card, i) => {
+        if (!card) return;
+        
+        ScrollTrigger.create({
+          trigger: card,
+          start: "top 70%",
+          onEnter: () => {
+            gsap.to(card.querySelector('.cfk-flip-inner'), {
+              rotateY: 180,
+              duration: 0.8,
+              ease: "power2.out",
+            });
+            setFlippedCards(prev => new Set([...prev, i]));
+          },
+        });
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, [mounted]);
+
+  const TRACK_IMAGES = [
+    "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80",
+    "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
+    "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=800&q=80",
+    "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80",
+    "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80",
+    "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=800&q=80",
+  ];
 
   return (
-    <section ref={ref} style={{ position: "relative", padding: "clamp(60px, 7vw, 90px) 0", background: "linear-gradient(180deg, #0A0608 0%, #0D090A 30%, #100B0D 50%, #0D090A 70%, #0A0608 100%)" }}>
-      {/* Background — city at night */}
-      <div className="absolute inset-0" style={{ zIndex: 0 }}>
-        <img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=1400&q=75" alt="" className="w-full h-full object-cover" loading="lazy" decoding="async" style={{ filter: "brightness(0.25) saturate(0.35) contrast(1.2)", objectPosition: "center 60%" }} />
-      </div>
-
-      {/* Crimson color tint */}
-      <div className="absolute inset-0 pointer-events-none" style={{ background: `${C_DIM}70`, mixBlendMode: "multiply", zIndex: 0 }} />
-
-      {/* Heavy vignette — keeps edges dark, image peeks through center */}
-      <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 65% 55% at 50% 50%, transparent 15%, rgba(10,6,8,0.8) 50%, rgba(10,6,8,0.97) 100%)", zIndex: 1 }} />
-
-      {/* Top/bottom hard fade — seamless section transitions */}
-      <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(180deg, rgba(10,6,8,1) 0%, rgba(10,6,8,0.7) 12%, transparent 25%, transparent 75%, rgba(10,6,8,0.7) 88%, rgba(10,6,8,1) 100%)", zIndex: 1 }} />
-
-      {/* Primary crimson orb — large, pulsing, centered above cards */}
-      <div className="absolute inset-0 pointer-events-none cfk-focus-pulse" style={{ background: `radial-gradient(ellipse 50% 40% at 50% 30%, ${C}18, ${C}0A 40%, transparent 70%)`, zIndex: 1 }} />
-
-      {/* Warm accent orb — right */}
-      <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 28% 32% at 85% 55%, ${KENYA_ACCENT}0C, transparent 55%)`, zIndex: 1 }} />
-
-      {/* Deep red orb — left lower */}
-      <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 22% 28% at 12% 65%, ${C_DIM}10, transparent 55%)`, zIndex: 1 }} />
-
-      {/* Dot matrix — concentrated in center */}
-      <div className="absolute inset-0 pointer-events-none" style={{
-        backgroundImage: `radial-gradient(circle 1px, ${C_BRIGHT}06 0.5px, transparent 0.5px)`,
-        backgroundSize: "28px 28px",
-        zIndex: 1,
-        mask: "radial-gradient(ellipse 60% 50% at 50% 50%, black, transparent 70%)",
-        WebkitMask: "radial-gradient(ellipse 60% 50% at 50% 50%, black, transparent 70%)",
-      }} />
-
-      {/* Subtle scan lines */}
-      <div className="absolute inset-0 pointer-events-none" style={{
-        backgroundImage: `repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.08) 3px, rgba(0,0,0,0.08) 4px)`,
-        zIndex: 1,
-      }} />
-
-      {/* Top border glow */}
-      <div className="absolute top-0 left-0 right-0" style={{ height: 1, background: `linear-gradient(90deg, transparent 5%, ${C}30, ${C_BRIGHT}20, ${C}30, transparent 95%)`, zIndex: 2 }} />
-      <div className="absolute top-0 left-0 right-0" style={{ height: 40, background: `linear-gradient(180deg, ${C_BRIGHT}04, transparent)`, zIndex: 1 }} />
-
-      <div style={{ maxWidth: 1320, margin: "0 auto", padding: "0 clamp(20px, 4vw, 60px)", position: "relative", zIndex: 3 }}>
+    <section ref={sectionRef} style={{ position: "relative", padding: "clamp(100px, 12vw, 160px) 0", background: "#0A0608", overflow: "hidden" }}>
+      {/* Background glows */}
+      <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse 80% 50% at 50% 20%, ${C}15, transparent 60%)` }} />
+      <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse 60% 40% at 80% 80%, ${KENYA_ACCENT}08, transparent 50%)` }} />
+      
+      <div style={{ maxWidth: 1400, margin: "0 auto", padding: "0 clamp(24px, 5vw, 80px)", position: "relative", zIndex: 2 }}>
         {/* Header */}
-        <motion.div initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, ease: EASE }} style={{ textAlign: "center", marginBottom: 20 }}>
-          <div className="flex items-center justify-center gap-3" style={{ marginBottom: 24 }}>
-            <span style={{ width: 28, height: 1, background: `linear-gradient(90deg, transparent, ${C_BRIGHT})` }} />
-            <span style={{ fontFamily: "var(--font-dm)", fontSize: 13, fontWeight: 600, letterSpacing: "3.5px", textTransform: "uppercase", color: C_BRIGHT }}>Conference Tracks</span>
-            <span style={{ width: 28, height: 1, background: `linear-gradient(270deg, transparent, ${C_BRIGHT})` }} />
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          style={{ textAlign: "center", marginBottom: 80 }}
+        >
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 16, marginBottom: 24 }}>
+            <span style={{ width: 50, height: 1, background: `linear-gradient(90deg, transparent, ${C_BRIGHT})` }} />
+            <span style={{ fontFamily: "var(--font-outfit)", fontSize: 13, fontWeight: 600, letterSpacing: "4px", textTransform: "uppercase", color: C_BRIGHT }}>
+              Conference Tracks
+            </span>
+            <span style={{ width: 50, height: 1, background: `linear-gradient(270deg, transparent, ${C_BRIGHT})` }} />
           </div>
-          <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(26px, 3.5vw, 40px)", letterSpacing: "-1.5px", color: "rgba(255,255,255,0.88)", lineHeight: 1.15, margin: "0 0 8px" }}>
-            What We&apos;re{" "}
-            <span style={{ color: C_BRIGHT }}>Solving</span>
+          
+          <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(40px, 5vw, 64px)", letterSpacing: "-2px", color: "white", margin: "0 0 16px 0", lineHeight: 1.1 }}>
+            What We&apos;re <span style={{ color: C_BRIGHT }}>Solving</span>
           </h2>
-          <h2 className="cfk-focus-headline" style={{
-            fontFamily: "var(--font-display)", fontWeight: 900, fontSize: "clamp(30px, 4vw, 48px)",
-            letterSpacing: "-2px", lineHeight: 1.1, margin: "0 0 12px",
-            backgroundImage: `linear-gradient(135deg, ${C_BRIGHT} 0%, #ffffff 50%, ${C_BRIGHT} 100%)`,
-            backgroundSize: "200% 100%", WebkitBackgroundClip: "text", backgroundClip: "text",
-            WebkitTextFillColor: "transparent", color: "transparent",
-            filter: `drop-shadow(0 0 30px ${C}20)`,
-          }}>
-            15 Topics. One Mission.
-          </h2>
-          <motion.div initial={{ scaleX: 0 }} animate={inView ? { scaleX: 1 } : {}} transition={{ duration: 0.8, delay: 0.3, ease: EASE }} style={{ width: 60, height: 2, background: `linear-gradient(90deg, ${C_BRIGHT}, ${KENYA_ACCENT}, ${C_BRIGHT})`, borderRadius: 2, margin: "0 auto 20px" }} />
-          <p style={{ fontFamily: "var(--font-outfit)", fontWeight: 300, fontSize: 16, color: "rgba(255,255,255,0.55)", maxWidth: 560, margin: "0 auto", lineHeight: 1.7 }}>
-            Practitioner-led sessions built around East Africa&apos;s real threat landscape, regulatory reality, and workforce challenges.
+          
+          <p style={{ fontFamily: "var(--font-outfit)", fontSize: "clamp(16px, 1.5vw, 20px)", fontWeight: 400, color: "rgba(255,255,255,0.6)", maxWidth: 600, margin: "0 auto", lineHeight: 1.7 }}>
+            Six critical tracks addressing East Africa&apos;s most pressing cybersecurity challenges.
           </p>
         </motion.div>
 
-        {/* Divider */}
-        <motion.div initial={{ scaleX: 0, opacity: 0 }} animate={inView ? { scaleX: 1, opacity: 1 } : {}} transition={{ duration: 1, delay: 0.4, ease: EASE }} style={{ maxWidth: 1100, margin: "48px auto 48px", position: "relative" }}>
-          <div style={{ height: 1, background: `linear-gradient(90deg, transparent 0%, ${C}12 15%, ${C}25 50%, ${C}12 85%, transparent 100%)` }} />
-          <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%) rotate(45deg)", width: 6, height: 6, background: C_BRIGHT, borderRadius: 1, boxShadow: `0 0 12px ${C_BRIGHT}40` }} />
-        </motion.div>
-
-        {/* Bento grid: featured + 2x2 + featured */}
-        <div className="cfk-focus-grid" style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
-          {FOCUS_AREAS.map((area, i) => {
-            const isFeatured = i === 0 || i === FOCUS_AREAS.length - 1;
-            return (
-              <motion.div
-                key={area.title}
-                initial={{ opacity: 0, y: 40, scale: 0.97 }}
-                animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
-                transition={{ duration: 0.7, delay: 0.4 + i * 0.1, ease: EASE }}
-                className="cfk-focus-card"
+        {/* Flip Cards Grid */}
+        <div className="cfk-flip-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 28 }}>
+          {FOCUS_AREAS.map((area, i) => (
+            <div
+              key={area.title}
+              ref={(el) => { cardsRef.current[i] = el; }}
+              className="cfk-flip-card"
+              style={{ perspective: 1200, height: 420 }}
+            >
+              <div 
+                className="cfk-flip-inner"
                 style={{
-                  gridColumn: isFeatured ? "1 / -1" : "auto",
                   position: "relative",
-                  padding: isFeatured ? "44px 46px 40px 52px" : "32px 30px 28px 40px",
-                  borderRadius: 20,
-                  background: `linear-gradient(160deg, rgba(${28 + i * 5},${16 + i * 3},${20 + i * 3},0.85) 0%, rgba(18,12,14,0.9) 40%, rgba(12,8,10,0.95) 100%)`,
-                  backdropFilter: "blur(12px)",
-                  WebkitBackdropFilter: "blur(12px)",
-                  border: `1px solid rgba(255,255,255,0.06)`,
-                  borderTop: `1px solid rgba(255,255,255,0.1)`,
-                  overflow: "hidden",
-                  boxShadow: `0 8px 40px rgba(0,0,0,0.5), 0 0 0 0.5px ${C}0A, inset 0 1px 0 rgba(255,255,255,0.06), inset 0 -1px 0 rgba(0,0,0,0.3)`,
-                  transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
+                  width: "100%",
+                  height: "100%",
+                  transformStyle: "preserve-3d",
+                  transition: "transform 0.8s cubic-bezier(0.25, 1, 0.5, 1)",
                 }}
               >
-                {/* Inner ambient glow — top-left warm light */}
-                <div className="cfk-focus-glow absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 50% 45% at 5% 5%, ${C}18, transparent 65%)`, transition: "all 0.5s ease" }} />
-
-                {/* Secondary glow — bottom-right subtle accent */}
-                <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 40% 35% at 95% 90%, ${KENYA_ACCENT}05, transparent 60%)` }} />
-
-                {/* Top neon edge */}
-                <div className="cfk-focus-topline" style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: `linear-gradient(90deg, ${C_BRIGHT}00 5%, ${C_BRIGHT}40 30%, ${C_BRIGHT}50 50%, ${C_BRIGHT}40 70%, ${C_BRIGHT}00 95%)`, transition: "all 0.5s ease" }} />
-
-                {/* Bottom subtle edge */}
-                <div style={{ position: "absolute", bottom: 0, left: "15%", right: "15%", height: 1, background: `linear-gradient(90deg, transparent, ${C_BRIGHT}08, transparent)` }} />
-
-                {/* Grid pattern overlay */}
-                <div className="absolute inset-0 pointer-events-none" style={{
-                  backgroundImage: `linear-gradient(${C_BRIGHT}02 1px, transparent 1px), linear-gradient(90deg, ${C_BRIGHT}02 1px, transparent 1px)`,
-                  backgroundSize: "44px 44px",
-                  mask: "radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 80%)",
-                  WebkitMask: "radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 80%)",
-                }} />
-
-                {/* Large background track number */}
-                <div className="cfk-focus-num" style={{
+                {/* FRONT - Image + Number */}
+                <div style={{
                   position: "absolute",
-                  top: isFeatured ? -20 : -16,
-                  right: isFeatured ? 28 : 16,
-                  fontFamily: "var(--font-display)",
-                  fontSize: isFeatured ? 160 : 120,
-                  fontWeight: 900,
-                  lineHeight: 1,
-                  backgroundImage: `linear-gradient(170deg, ${C_BRIGHT}12, ${C_BRIGHT}04)`,
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  userSelect: "none",
-                  pointerEvents: "none",
-                  transition: "all 0.5s ease",
-                  letterSpacing: "-6px",
+                  inset: 0,
+                  backfaceVisibility: "hidden",
+                  WebkitBackfaceVisibility: "hidden",
+                  borderRadius: 24,
+                  overflow: "hidden",
                 }}>
-                  {String(i + 1).padStart(2, "0")}
-                </div>
-
-                {/* Left accent bar — glowing vertical strip */}
-                <div className="cfk-focus-bar" style={{
-                  position: "absolute", top: "10%", bottom: "10%", left: 0, width: 3,
-                  background: `linear-gradient(180deg, transparent 0%, ${C_BRIGHT}60 25%, ${C_BRIGHT}70 50%, ${KENYA_ACCENT}40 75%, transparent 100%)`,
-                  borderRadius: "0 4px 4px 0",
-                  boxShadow: `0 0 12px ${C_BRIGHT}15, 2px 0 20px ${C_BRIGHT}08`,
-                  transition: "all 0.5s ease",
-                }} />
-
-                {/* Content */}
-                <div style={{ display: "flex", alignItems: "flex-start", gap: isFeatured ? 26 : 18, position: "relative" }}>
-                  {/* Icon container */}
-                  <div className="cfk-focus-icon" style={{
-                    flexShrink: 0,
-                    width: isFeatured ? 56 : 46,
-                    height: isFeatured ? 56 : 46,
-                    borderRadius: 14,
-                    background: `linear-gradient(145deg, ${C}25 0%, ${C}10 100%)`,
-                    border: `1px solid ${C_BRIGHT}1A`,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "flex-start",
-                    marginTop: 4,
-                    boxShadow: `0 4px 16px ${C}15, inset 0 1px 0 rgba(255,255,255,0.05), inset 0 -1px 0 rgba(0,0,0,0.2)`,
-                    transition: "all 0.5s ease",
-                    position: "relative",
+                  <img 
+                    src={TRACK_IMAGES[i]} 
+                    alt={area.title}
+                    style={{ width: "100%", height: "100%", objectFit: "cover", filter: "brightness(0.4) saturate(0.8)" }}
+                  />
+                  {/* Gradient overlay */}
+                  <div style={{ position: "absolute", inset: 0, background: `linear-gradient(180deg, transparent 30%, ${C}90 100%)` }} />
+                  {/* Large number */}
+                  <div style={{
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                    fontFamily: "var(--font-display)",
+                    fontSize: 180,
+                    fontWeight: 900,
+                    color: "rgba(255,255,255,0.1)",
+                    lineHeight: 1,
                   }}>
-                    {/* Icon inner ring */}
-                    <div className="absolute inset-1 rounded-xl pointer-events-none" style={{ border: `1px solid ${C_BRIGHT}08` }} />
-                    <svg width={isFeatured ? "22" : "19"} height={isFeatured ? "22" : "19"} viewBox="0 0 24 24" fill="none" stroke={C_BRIGHT} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.85, filter: `drop-shadow(0 0 5px ${C_BRIGHT}35)`, position: "relative" }}>
-                      <path d={area.icon} />
-                    </svg>
+                    {String(i + 1).padStart(2, "0")}
                   </div>
-
-                  {/* Text content */}
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    {/* Track pill badge */}
-                    <div style={{ marginBottom: 14 }}>
-                      <span style={{
-                        display: "inline-flex", alignItems: "center", gap: 7,
-                        fontFamily: "var(--font-dm)", fontSize: 12, fontWeight: 600,
-                        color: C_BRIGHT, letterSpacing: "3.5px", textTransform: "uppercase",
-                        padding: "4px 14px 4px 10px", borderRadius: 20,
-                        background: `linear-gradient(135deg, ${C}12, ${C}08)`,
-                        border: `1px solid ${C}25`,
-                        boxShadow: `0 2px 8px ${C}08`,
-                      }}>
-                        <span style={{ width: 5, height: 5, borderRadius: "50%", background: C_BRIGHT, boxShadow: `0 0 6px ${C_BRIGHT}, 0 0 12px ${C_BRIGHT}60` }} />
-                        Track {String(i + 1).padStart(2, "0")}
-                      </span>
-                    </div>
-
-                    {/* Title */}
-                    <h3 style={{
-                      fontFamily: "var(--font-display)",
-                      fontSize: isFeatured ? "clamp(19px, 2.1vw, 23px)" : "clamp(15px, 1.5vw, 18px)",
-                      fontWeight: 700,
-                      color: "rgba(255,255,255,0.96)",
-                      margin: "0 0 12px",
-                      letterSpacing: "-0.4px",
-                      lineHeight: 1.35,
-                      maxWidth: isFeatured ? "72%" : "90%",
-                    }}>{area.title}</h3>
-
-                    {/* Gradient accent line with glow */}
-                    <div style={{
-                      width: isFeatured ? 44 : 32, height: 2, borderRadius: 2, marginBottom: 14,
-                      background: `linear-gradient(90deg, ${C_BRIGHT}, ${KENYA_ACCENT}90, ${KENYA_GOLD}40, transparent)`,
-                      boxShadow: `0 0 10px ${C_BRIGHT}18, 0 1px 4px ${C_BRIGHT}10`,
-                    }} />
-
-                    {/* Description */}
-                    <p style={{
+                  {/* Track label */}
+                  <div style={{ position: "absolute", bottom: 28, left: 28, right: 28 }}>
+                    <span style={{
                       fontFamily: "var(--font-outfit)",
-                      fontSize: isFeatured ? 15 : 13.5,
-                      color: "rgba(255,255,255,0.42)",
-                      lineHeight: 1.8,
-                      margin: 0,
-                      maxWidth: isFeatured ? 680 : 440,
-                      letterSpacing: "0.1px",
-                    }}>{area.desc}</p>
-
-                    {/* Tags / keywords for featured cards */}
-                    {isFeatured && (
-                      <div style={{ display: "flex", gap: 8, marginTop: 16, flexWrap: "wrap" }}>
-                        {(i === 0
-                          ? ["APT Defense", "Ransomware", "DDoS Mitigation"]
-                          : ["Cross-border", "Collaboration", "Intelligence Sharing"]
-                        ).map((tag) => (
-                          <span key={tag} style={{
-                            fontFamily: "var(--font-dm)", fontSize: 12, fontWeight: 500,
-                            color: `${KENYA_ACCENT}90`, letterSpacing: "0.5px",
-                            padding: "3px 10px", borderRadius: 6,
-                            background: `${KENYA_ACCENT}08`, border: `1px solid ${KENYA_ACCENT}12`,
-                          }}>{tag}</span>
-                        ))}
-                      </div>
-                    )}
+                      fontSize: 12,
+                      fontWeight: 600,
+                      letterSpacing: "3px",
+                      textTransform: "uppercase",
+                      color: C_BRIGHT,
+                    }}>
+                      Track {String(i + 1).padStart(2, "0")}
+                    </span>
                   </div>
+                  {/* Bottom border glow */}
+                  <div style={{ position: "absolute", bottom: 0, left: "10%", right: "10%", height: 2, background: `linear-gradient(90deg, transparent, ${C_BRIGHT}60, transparent)` }} />
                 </div>
 
-                {/* Corner brackets */}
-                <div style={{ position: "absolute", top: 12, left: 12, width: 18, height: 18, borderTop: `1.5px solid ${C_BRIGHT}18`, borderLeft: `1.5px solid ${C_BRIGHT}18`, borderRadius: "4px 0 0 0" }} />
-                <div style={{ position: "absolute", top: 12, right: 12, width: 18, height: 18, borderTop: `1.5px solid ${C_BRIGHT}10`, borderRight: `1.5px solid ${C_BRIGHT}10`, borderRadius: "0 4px 0 0" }} />
-                <div style={{ position: "absolute", bottom: 12, left: 12, width: 18, height: 18, borderBottom: `1.5px solid ${C_BRIGHT}10`, borderLeft: `1.5px solid ${C_BRIGHT}10`, borderRadius: "0 0 0 4px" }} />
-                <div style={{ position: "absolute", bottom: 12, right: 12, width: 18, height: 18, borderBottom: `1.5px solid ${C_BRIGHT}08`, borderRight: `1.5px solid ${C_BRIGHT}08`, borderRadius: "0 0 4px 0" }} />
-
-                {/* Shimmer sweep on hover — CSS driven */}
-                <div className="cfk-focus-shimmer-sweep absolute inset-0 pointer-events-none" style={{
-                  background: `linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.02) 45%, rgba(255,255,255,0.04) 50%, rgba(255,255,255,0.02) 55%, transparent 60%)`,
-                  backgroundSize: "200% 100%",
-                  backgroundPosition: "-100% 0",
-                  transition: "background-position 0.8s ease",
-                }} />
-              </motion.div>
-            );
-          })}
+                {/* BACK - Title + Description */}
+                <div style={{
+                  position: "absolute",
+                  inset: 0,
+                  backfaceVisibility: "hidden",
+                  WebkitBackfaceVisibility: "hidden",
+                  transform: "rotateY(180deg)",
+                  borderRadius: 24,
+                  background: `linear-gradient(165deg, ${C}40 0%, #0D0809 50%, #0A0608 100%)`,
+                  border: `1px solid ${C_BRIGHT}25`,
+                  padding: 32,
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                }}>
+                  {/* Top accent */}
+                  <div style={{ position: "absolute", top: 0, left: "15%", right: "15%", height: 2, background: `linear-gradient(90deg, transparent, ${C_BRIGHT}50, transparent)`, borderRadius: "24px 24px 0 0" }} />
+                  
+                  {/* Track number */}
+                  <span style={{
+                    fontFamily: "var(--font-outfit)",
+                    fontSize: 13,
+                    fontWeight: 600,
+                    letterSpacing: "4px",
+                    textTransform: "uppercase",
+                    color: C_BRIGHT,
+                    marginBottom: 16,
+                  }}>
+                    Track {String(i + 1).padStart(2, "0")}
+                  </span>
+                  
+                  {/* Title */}
+                  <h3 style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: "clamp(18px, 2vw, 24px)",
+                    fontWeight: 700,
+                    color: "white",
+                    margin: "0 0 16px 0",
+                    lineHeight: 1.3,
+                  }}>
+                    {area.title}
+                  </h3>
+                  
+                  {/* Accent line */}
+                  <div style={{ width: 50, height: 2, background: `linear-gradient(90deg, ${C_BRIGHT}, ${KENYA_ACCENT})`, marginBottom: 20, borderRadius: 2 }} />
+                  
+                  {/* Description */}
+                  <p style={{
+                    fontFamily: "var(--font-outfit)",
+                    fontSize: 15,
+                    fontWeight: 400,
+                    color: "rgba(255,255,255,0.65)",
+                    lineHeight: 1.75,
+                    margin: 0,
+                  }}>
+                    {area.desc}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
-
-        {/* Bottom CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 1.1, ease: EASE }}
-          style={{ textAlign: "center", marginTop: 52 }}
-        >
-          <a
-            href="#agenda"
-            onClick={(e) => { e.preventDefault(); document.getElementById("agenda")?.scrollIntoView({ behavior: "smooth" }); }}
-            className="cfk-tracks-cta"
-            style={{
-              display: "inline-flex", alignItems: "center", gap: 8, padding: "14px 32px",
-              borderRadius: 50, border: `1px solid ${C}25`, background: `${C}06`,
-              fontFamily: "var(--font-outfit)", fontSize: 14, fontWeight: 500,
-              color: C_BRIGHT, textDecoration: "none", transition: "all 0.35s ease", letterSpacing: "0.3px", cursor: "pointer",
-            }}
-          >
-            View Full Agenda <span style={{ fontSize: 16, transition: "transform 0.3s ease" }}>→</span>
-          </a>
-        </motion.div>
       </div>
-
-      {/* Bottom fade */}
-      <div className="absolute bottom-0 left-0 right-0 pointer-events-none" style={{ height: 100, background: "linear-gradient(to bottom, transparent, #0C0809)", zIndex: 4 }} />
-      <div className="absolute bottom-0 left-0 right-0" style={{ height: 1, background: `linear-gradient(90deg, transparent 10%, ${C}12, transparent 90%)`, zIndex: 5 }} />
-
+      
       <style jsx global>{`
-        @keyframes cfk-focus-glow-pulse {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.4; }
+        .cfk-flip-card:hover .cfk-flip-inner {
+          transform: rotateY(180deg) !important;
         }
-        @keyframes cfk-focus-shimmer {
-          0% { background-position: 200% 0; }
-          100% { background-position: -200% 0; }
-        }
-        .cfk-focus-pulse { animation: cfk-focus-glow-pulse 8s ease-in-out infinite; }
-        .cfk-focus-headline { animation: cfk-focus-shimmer 8s ease-in-out infinite; }
-        .cfk-focus-card:hover {
-          border-color: ${C_BRIGHT}30 !important;
-          transform: translateY(-4px);
-          box-shadow: 0 24px 70px rgba(0,0,0,0.55), 0 0 0 1px ${C_BRIGHT}12, 0 0 50px ${C}15, inset 0 1px 0 rgba(255,255,255,0.07) !important;
-        }
-        .cfk-focus-card:hover .cfk-focus-glow {
-          background: radial-gradient(ellipse 55% 45% at 5% 5%, ${C}28, transparent 65%) !important;
-        }
-        .cfk-focus-card:hover .cfk-focus-topline {
-          height: 2px !important;
-          background: linear-gradient(90deg, ${C_BRIGHT}00 2%, ${C_BRIGHT}70 25%, ${C_BRIGHT}90 50%, ${C_BRIGHT}70 75%, ${C_BRIGHT}00 98%) !important;
-          box-shadow: 0 0 24px ${C_BRIGHT}25, 0 2px 16px ${C_BRIGHT}18 !important;
-        }
-        .cfk-focus-card:hover .cfk-focus-bar {
-          top: 5% !important; bottom: 5% !important;
-          background: linear-gradient(180deg, transparent 0%, ${C_BRIGHT}90 20%, ${C_BRIGHT} 50%, ${KENYA_ACCENT}60 80%, transparent 100%) !important;
-          box-shadow: 0 0 18px ${C_BRIGHT}25, 3px 0 24px ${C_BRIGHT}12 !important;
-          width: 3px !important;
-        }
-        .cfk-focus-card:hover .cfk-focus-num {
-          background: linear-gradient(170deg, ${C_BRIGHT}20, ${C_BRIGHT}08) !important;
-          -webkit-background-clip: text !important;
-          background-clip: text !important;
-        }
-        .cfk-focus-card:hover .cfk-focus-icon {
-          background: linear-gradient(145deg, ${C}38, ${C}18) !important;
-          border-color: ${C_BRIGHT}40 !important;
-          box-shadow: 0 0 28px ${C}25, 0 4px 16px ${C}15, inset 0 1px 0 rgba(255,255,255,0.08) !important;
-          transform: scale(1.05);
-        }
-        .cfk-focus-card:hover .cfk-focus-icon svg {
-          opacity: 1 !important;
-          filter: drop-shadow(0 0 8px ${C_BRIGHT}50) !important;
-        }
-        .cfk-focus-card:hover .cfk-focus-shimmer-sweep {
-          background-position: 100% 0 !important;
-        }
-        .cfk-tracks-cta:hover {
-          background: ${C}14 !important;
-          border-color: ${C_BRIGHT}40 !important;
-          box-shadow: 0 4px 24px ${C}15, 0 0 40px ${C}08 !important;
-          transform: translateY(-2px);
-        }
-        .cfk-tracks-cta:hover span { transform: translateX(4px); }
         @media (max-width: 1024px) {
-          .cfk-focus-grid { gap: 14px !important; }
-          .cfk-focus-card { padding: 30px 28px 26px 38px !important; }
+          .cfk-flip-grid { grid-template-columns: repeat(2, 1fr) !important; }
         }
-        @media (max-width: 768px) {
-          .cfk-focus-grid { grid-template-columns: 1fr !important; gap: 12px !important; }
-          .cfk-focus-card { padding: 28px 22px 24px 34px !important; grid-column: auto !important; }
-          .cfk-focus-num { font-size: 70px !important; right: 8px !important; top: -10px !important; }
+        @media (max-width: 640px) {
+          .cfk-flip-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
     </section>
