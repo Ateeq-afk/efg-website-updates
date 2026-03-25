@@ -4166,7 +4166,7 @@ function SplitCTA() {
 
       {/* InquiryForm with overridden styles */}
       <div id="register" className="cfk-form-wrapper" style={{ position: "relative", zIndex: 1 }}>
-        <InquiryForm defaultCountry="KE" eventName="Cyber First East Africa 2026" />
+        <InquiryForm defaultCountry="KE" eventName="Cyber First East Africa 2026" hideLabel />
       </div>
 
       <style jsx global>{`
@@ -4191,6 +4191,21 @@ function SplitCTA() {
         .cfk-form-wrapper button[style*="background: var(--orange)"] {
           background: ${C} !important;
           border-color: ${C} !important;
+        }
+        
+        /* Prominent tab buttons */
+        .cfk-form-wrapper #get-involved > div > div:first-child button {
+          padding: 16px 36px !important;
+          font-size: 16px !important;
+          font-weight: 600 !important;
+          border-radius: 50px !important;
+          letter-spacing: 0.5px !important;
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+          min-width: 140px !important;
+        }
+        .cfk-form-wrapper #get-involved > div > div:first-child button:hover {
+          transform: translateY(-2px) !important;
+          box-shadow: 0 8px 24px rgba(0,0,0,0.3) !important;
         }
 
         /* Form card ambient glow — cyan instead of orange */
@@ -4219,170 +4234,134 @@ function ContactSection() {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
+  // All team members for people-first design
+  const teamMembers = [
+    {
+      ...CFK_CONTACTS.speaking,
+      category: "Speaking Enquiries",
+      photo: CFK_CONTACTS.speaking.photo,
+    },
+    ...CFK_CONTACTS.sponsorship.map((p) => ({
+      ...p,
+      category: "Sponsorship Enquiries",
+    })),
+  ];
+
   return (
     <section
       ref={ref}
       style={{
-        background: "linear-gradient(180deg, #080505 0%, #0C0708 100%)",
-        padding: "clamp(40px, 5vw, 60px) 0",
+        background: "linear-gradient(180deg, #000000 0%, #0A0607 100%)",
+        padding: "clamp(80px, 10vw, 120px) 0",
         position: "relative",
         overflow: "hidden",
       }}
     >
-      <div style={{ maxWidth: 1000, margin: "0 auto", padding: "0 clamp(20px, 4vw, 60px)" }}>
+      {/* Subtle background glow */}
+      <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 60% 40% at 50% 30%, ${C}12, transparent 70%)` }} />
+      
+      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 clamp(24px, 5vw, 80px)" }}>
+        {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, ease: EASE }}
-          style={{ textAlign: "center", marginBottom: 48 }}
+          transition={{ duration: 0.7, ease: EASE }}
+          style={{ textAlign: "center", marginBottom: 64 }}
         >
-          <div className="flex items-center justify-center gap-3">
-            <span style={{ width: 30, height: 1, background: KENYA_ACCENT }} />
-            <span style={{ fontFamily: "var(--font-outfit)", fontSize: 13, fontWeight: 600, letterSpacing: "3.5px", textTransform: "uppercase", color: KENYA_ACCENT }}>
-              Get in Touch
+          <span style={{ fontFamily: "var(--font-dm)", fontSize: 12, fontWeight: 600, letterSpacing: "4px", textTransform: "uppercase", color: C_BRIGHT }}>
+            Your Direct Line
+          </span>
+          <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(36px, 5vw, 56px)", letterSpacing: "-2px", color: "white", lineHeight: 1.05, margin: "16px 0 0" }}>
+            Meet Your{" "}
+            <span style={{ background: `linear-gradient(135deg, ${C_BRIGHT}, ${KENYA_ACCENT})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+              Dedicated Team
             </span>
-            <span style={{ width: 30, height: 1, background: KENYA_ACCENT }} />
-          </div>
-          <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(28px, 3.5vw, 44px)", letterSpacing: "-1.5px", color: "white", lineHeight: 1.1, margin: "16px 0 0" }}>
-            Contact Us
           </h2>
+          <p style={{ fontFamily: "var(--font-outfit)", fontSize: 17, color: "rgba(255,255,255,0.5)", marginTop: 16, maxWidth: 500, marginLeft: "auto", marginRight: "auto" }}>
+            Real people, ready to help you make the most of Cyber First East Africa
+          </p>
         </motion.div>
 
-        <div className="cfk-contact-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 28 }}>
-          {/* Speaking Enquiries */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.1, ease: EASE }}
-            style={{
-              padding: "32px",
-              borderRadius: 20,
-              background: `linear-gradient(145deg, ${KENYA_ACCENT}08, rgba(255,255,255,0.02))`,
-              border: `1px solid ${KENYA_ACCENT}20`,
-            }}
-          >
-            <p style={{ fontFamily: "var(--font-outfit)", fontSize: 12, fontWeight: 600, letterSpacing: "2px", textTransform: "uppercase", color: KENYA_ACCENT, marginBottom: 24 }}>
-              For Speaking Enquiries
-            </p>
-            <div className="flex items-center gap-5">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/sanjana-headshot.png"
-                alt={CFK_CONTACTS.speaking.name}
-                style={{ width: 100, height: 100, objectFit: "contain", flexShrink: 0 }}
-              />
-              <div style={{ flex: 1 }}>
-                <p style={{ fontFamily: "var(--font-display)", fontSize: 20, fontWeight: 700, color: "white", margin: "0 0 2px" }}>
-                  {CFK_CONTACTS.speaking.name}
-                </p>
-                <p style={{ fontFamily: "var(--font-outfit)", fontSize: 13, fontWeight: 500, color: "#E8651A", margin: "0 0 16px" }}>
-                  {CFK_CONTACTS.speaking.role}
-                </p>
-                <div className="flex flex-col gap-3">
-                  <div className="flex items-center gap-3">
-                    <a href={`tel:${CFK_CONTACTS.speaking.phone.replace(/\s/g, "")}`} className="flex items-center gap-3 transition-colors hover:opacity-80">
-                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke={KENYA_ACCENT} strokeWidth="2" strokeLinecap="round">
-                        <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
-                      </svg>
-                      <span style={{ fontFamily: "var(--font-outfit)", fontSize: 14, color: "#909090" }}>{CFK_CONTACTS.speaking.phone}</span>
-                    </a>
-                    <a href={`https://wa.me/${CFK_CONTACTS.speaking.phone.replace(/[\s+]/g, "")}`} target="_blank" rel="noopener noreferrer" className="transition-opacity hover:opacity-80" style={{ marginLeft: 4 }}>
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366">
-                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-                      </svg>
-                    </a>
-                  </div>
-                  <a href={`mailto:${CFK_CONTACTS.speaking.email}`} className="flex items-center gap-3 transition-colors hover:opacity-80">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke={KENYA_ACCENT} strokeWidth="2" strokeLinecap="round">
-                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                      <path d="M22 6l-10 7L2 6" />
-                    </svg>
-                    <span style={{ fontFamily: "var(--font-outfit)", fontSize: 14, color: "#909090" }}>{CFK_CONTACTS.speaking.email}</span>
-                  </a>
-                </div>
+        {/* People Grid - 3 columns */}
+        <div className="cfk-team-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 28 }}>
+          {teamMembers.map((person, i) => (
+            <motion.div
+              key={person.name}
+              initial={{ opacity: 0, y: 50, scale: 0.9 }}
+              animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+              transition={{ duration: 0.8, delay: 0.15 + i * 0.12, ease: [0.22, 1, 0.36, 1] }}
+              className="cfk-person-card"
+              style={{
+                textAlign: "center",
+                padding: "56px 36px 44px",
+                borderRadius: 32,
+                background: "linear-gradient(165deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 50%, rgba(0,0,0,0.1) 100%)",
+                backdropFilter: "blur(40px)",
+                WebkitBackdropFilter: "blur(40px)",
+                border: "1px solid rgba(255,255,255,0.12)",
+                position: "relative",
+                overflow: "hidden",
+                boxShadow: `0 4px 24px rgba(0,0,0,0.4), 0 12px 48px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1), inset 0 -1px 0 rgba(0,0,0,0.2)`,
+              }}
+            >
+              {/* Top shine/reflection */}
+              <div style={{ position: "absolute", top: 0, left: "10%", right: "10%", height: 1, background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)" }} />
+              
+              {/* Category badge */}
+              <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "8px 16px", borderRadius: 100, background: "rgba(0,0,0,0.3)", border: `1px solid ${C_BRIGHT}40`, marginBottom: 32, boxShadow: `0 2px 12px ${C}20, inset 0 1px 0 rgba(255,255,255,0.05)` }}>
+                <span style={{ width: 6, height: 6, borderRadius: "50%", background: C_BRIGHT, boxShadow: `0 0 8px ${C_BRIGHT}` }} />
+                <span style={{ fontFamily: "var(--font-dm)", fontSize: 10, fontWeight: 600, letterSpacing: "2px", textTransform: "uppercase", color: "rgba(255,255,255,0.8)" }}>{person.category}</span>
               </div>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/events-first-group_logo_alt.svg"
-                alt="Events First Group"
-                style={{ width: 120, height: "auto", objectFit: "contain", flexShrink: 0, opacity: 0.85 }}
-              />
-            </div>
-          </motion.div>
 
-          {/* Sponsorship Enquiries */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.2, ease: EASE }}
-            style={{
-              padding: "40px",
-              borderRadius: 20,
-              background: `linear-gradient(145deg, ${KENYA_ACCENT}08, rgba(255,255,255,0.02))`,
-              border: `1px solid ${KENYA_ACCENT}20`,
-            }}
-          >
-            <p style={{ fontFamily: "var(--font-outfit)", fontSize: 13, fontWeight: 600, letterSpacing: "2px", textTransform: "uppercase", color: KENYA_ACCENT, marginBottom: 24 }}>
-              For Sponsorship Enquiries
-            </p>
-            <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-              {CFK_CONTACTS.sponsorship.map((person) => (
-                <div key={person.name} className="flex items-center gap-4">
-                  <div
-                    style={{
-                      width: 64,
-                      height: 64,
-                      borderRadius: "50%",
-                      background: `linear-gradient(135deg, ${KENYA_ACCENT}30, ${KENYA_ACCENT}10)`,
-                      border: `1px solid ${KENYA_ACCENT}30`,
-                      overflow: "hidden",
-                      flexShrink: 0,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
+              {/* Photo */}
+              <div className="cfk-photo-wrapper" style={{ width: 160, height: 160, margin: "0 auto 28px", borderRadius: "50%", position: "relative" }}>
+                <div className="cfk-photo-ring" style={{ position: "absolute", inset: -4, borderRadius: "50%", background: `conic-gradient(from 0deg, ${C_BRIGHT}, ${KENYA_ACCENT}, ${C_BRIGHT})`, opacity: 0.9 }} />
+                <div style={{ position: "absolute", inset: -4, borderRadius: "50%", boxShadow: `0 0 40px ${C_BRIGHT}40, 0 0 80px ${C_BRIGHT}20`, pointerEvents: "none" }} />
+                <div style={{ position: "relative", width: "100%", height: "100%", borderRadius: "50%", padding: 4, background: "#0a0a0a" }}>
+                  <div style={{ width: "100%", height: "100%", borderRadius: "50%", overflow: "hidden", background: "#1a1a1a" }}>
                     {person.photo ? (
                       /* eslint-disable-next-line @next/next/no-img-element */
                       <img src={person.photo} alt={person.name} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center" }} />
                     ) : (
-                      <span style={{ fontFamily: "var(--font-outfit)", fontSize: 20, fontWeight: 600, color: KENYA_ACCENT }}>
-                        {person.name.charAt(0)}
-                      </span>
+                      <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", background: `linear-gradient(135deg, ${C}50, ${C}20)` }}>
+                        <span style={{ fontFamily: "var(--font-display)", fontSize: 56, fontWeight: 700, color: "white" }}>{person.name.charAt(0)}</span>
+                      </div>
                     )}
                   </div>
-                  <div>
-                    <h4 style={{ fontFamily: "var(--font-outfit)", fontWeight: 600, fontSize: 17, color: "white", margin: "0 0 2px" }}>
-                      {person.name}
-                    </h4>
-                    <p style={{ fontFamily: "var(--font-outfit)", fontSize: 13, color: KENYA_ACCENT, margin: "0 0 4px", fontWeight: 500 }}>
-                      {person.role}
-                    </p>
-                    <a href={`mailto:${person.email}`} style={{ fontFamily: "var(--font-outfit)", fontSize: 14, color: "rgba(255,255,255,0.5)", textDecoration: "none" }}>
-                      {person.email}
-                    </a>
-                    <div className="flex items-center gap-2" style={{ marginTop: 4 }}>
-                      <a href={`https://wa.me/${person.phone.replace(/\s+/g, "").replace("+", "")}`} style={{ fontFamily: "var(--font-outfit)", fontSize: 13, color: "rgba(255,255,255,0.55)", textDecoration: "none" }}>
-                        {person.phone}
-                      </a>
-                      <a href={`https://wa.me/${person.phone.replace(/\s+/g, "").replace("+", "")}`} target="_blank" rel="noopener noreferrer" title="WhatsApp">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="#25D366">
-                          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                        </svg>
-                      </a>
-                    </div>
-                  </div>
                 </div>
-              ))}
-            </div>
-          </motion.div>
+              </div>
+
+              {/* Name */}
+              <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: 26, color: "white", margin: "0 0 8px", letterSpacing: "-0.5px", textShadow: "0 2px 20px rgba(0,0,0,0.5)" }}>{person.name}</h3>
+
+              {/* Role */}
+              <p style={{ fontFamily: "var(--font-outfit)", fontSize: 15, fontWeight: 600, background: `linear-gradient(135deg, ${C_BRIGHT}, ${KENYA_ACCENT})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", margin: "0 0 32px" }}>{person.role}</p>
+
+              {/* Contact Actions */}
+              <div style={{ display: "flex", flexDirection: "column", gap: 12, position: "relative", zIndex: 1 }}>
+                <a href={`mailto:${person.email}`} className="cfk-contact-btn" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10, padding: "14px 20px", borderRadius: 14, background: "rgba(255,255,255,0.06)", backdropFilter: "blur(10px)", border: "1px solid rgba(255,255,255,0.1)", fontFamily: "var(--font-outfit)", fontSize: 13, fontWeight: 500, color: "rgba(255,255,255,0.75)", textDecoration: "none", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.05)", transition: "all 0.3s ease" }}>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ opacity: 0.7 }}><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><path d="M22 6l-10 7L2 6" /></svg>
+                  {person.email}
+                </a>
+                <a href={`https://wa.me/${person.phone.replace(/[\s+]/g, "")}`} target="_blank" rel="noopener noreferrer" className="cfk-whatsapp-btn" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10, padding: "16px 20px", borderRadius: 14, background: "linear-gradient(135deg, #25D366 0%, #128C7E 100%)", fontFamily: "var(--font-outfit)", fontSize: 14, fontWeight: 600, color: "white", textDecoration: "none", boxShadow: "0 4px 20px rgba(37, 211, 102, 0.35), 0 8px 32px rgba(37, 211, 102, 0.2), inset 0 1px 0 rgba(255,255,255,0.2)", transition: "all 0.3s ease" }}>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" /></svg>
+                  Chat on WhatsApp
+                </a>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
 
       <style jsx global>{`
-        @media (max-width: 768px) {
-          .cfk-contact-grid { grid-template-columns: 1fr !important; }
-        }
+        .cfk-person-card { transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1) !important; }
+        .cfk-person-card:hover { transform: translateY(-12px) scale(1.02) !important; border-color: rgba(255,255,255,0.2) !important; box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 24px 80px rgba(0,0,0,0.4), 0 0 60px ${C}15, inset 0 1px 0 rgba(255,255,255,0.15) !important; }
+        .cfk-photo-wrapper { transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1); }
+        .cfk-person-card:hover .cfk-photo-wrapper { transform: scale(1.08); }
+        .cfk-contact-btn:hover { background: rgba(255,255,255,0.12) !important; border-color: rgba(255,255,255,0.2) !important; transform: translateY(-2px); }
+        .cfk-whatsapp-btn:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 6px 28px rgba(37, 211, 102, 0.45), 0 12px 40px rgba(37, 211, 102, 0.25), inset 0 1px 0 rgba(255,255,255,0.25) !important; }
+        @media (max-width: 900px) { .cfk-team-grid { grid-template-columns: 1fr !important; max-width: 420px !important; margin: 0 auto !important; } }
+        @media (min-width: 901px) and (max-width: 1100px) { .cfk-team-grid { grid-template-columns: repeat(2, 1fr) !important; } .cfk-team-grid > div:last-child { grid-column: 1 / -1; max-width: 420px; margin: 0 auto; } }
       `}</style>
     </section>
   );
@@ -4392,13 +4371,15 @@ function ContactSection() {
 function Venue() {
   const sectionRef = useRef<HTMLElement>(null);
   const cardRef = useRef(null);
-  const inView = useInView(cardRef, { once: true, margin: "-80px" });
+  const inView = useInView(cardRef, { once: true, margin: "-100px" });
+  const headingInView = useInView(sectionRef, { once: true, margin: "-20%" });
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"],
   });
-  const imgY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
+  const imgY = useTransform(scrollYProgress, [0, 1], ["-5%", "15%"]);
+  const imgScale = useTransform(scrollYProgress, [0, 0.5], [1.1, 1]);
 
   const venueDetails = [
     { icon: "M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0zM12 13a3 3 0 100-6 3 3 0 000 6z", label: "Location", value: "Nairobi, Kenya" },
@@ -4408,113 +4389,70 @@ function Venue() {
   ];
 
   return (
-    <section id="venue" ref={sectionRef} style={{ background: "#090506" }}>
-      <div style={{ position: "relative", height: "65vh", minHeight: 500, overflow: "hidden" }}>
-        <motion.div className="absolute inset-0" style={{ y: imgY }}>
-          <img
-            src="https://images.unsplash.com/photo-1540541338287-41700207dee6?w=1600&q=80"
-            alt="Nairobi Kenya venue"
-            className="w-full h-full object-cover"
-            style={{ filter: "brightness(0.55) saturate(1.1)", minHeight: "120%" }}
-          />
+    <section id="venue" ref={sectionRef} style={{ background: "#050303", position: "relative" }}>
+      {/* Hero Image — Full Bleed, Immersive */}
+      <div style={{ position: "relative", height: "85vh", minHeight: 600, overflow: "hidden" }}>
+        <motion.div className="absolute inset-0" style={{ y: imgY, scale: imgScale }}>
+          <img src="https://images.unsplash.com/photo-1540541338287-41700207dee6?w=1920&q=85" alt="Nairobi Kenya venue" className="w-full h-full object-cover" style={{ filter: "brightness(0.5) saturate(1.15)", minHeight: "130%" }} />
         </motion.div>
 
-        <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(to top, #090506 0%, rgba(10,5,7,0.5) 35%, rgba(10,5,7,0.05) 65%, rgba(10,5,7,0.3) 100%)" }} />
-        <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 80% 40% at 50% 100%, ${KENYA_ACCENT}06, transparent 60%)` }} />
+        <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(to top, #050303 0%, rgba(5,3,3,0.7) 25%, rgba(5,3,3,0) 50%, rgba(5,3,3,0.2) 100%)" }} />
+        <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 100% 60% at 50% 100%, ${C}15, transparent 70%)` }} />
+        <div className="absolute inset-0 pointer-events-none" style={{ boxShadow: "inset 0 0 200px 60px rgba(0,0,0,0.5)" }} />
 
-        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "0 clamp(20px,4vw,60px) 120px", zIndex: 2 }}>
-          <div style={{ maxWidth: 1320, margin: "0 auto" }}>
-            <div className="flex items-center gap-3" style={{ marginBottom: 12 }}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={KENYA_ACCENT} strokeWidth="1.5" strokeLinecap="round">
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
-                <circle cx="12" cy="10" r="3" />
-              </svg>
-              <span style={{ fontFamily: "var(--font-outfit)", fontSize: 13, fontWeight: 600, letterSpacing: "3.5px", textTransform: "uppercase", color: KENYA_ACCENT }}>
-                The Venue
-              </span>
-            </div>
-            <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(32px,4.5vw,56px)", letterSpacing: "-2px", color: "white", lineHeight: 1.05, margin: 0 }}>
-              <span style={{ color: KENYA_ACCENT }}>Nairobi</span>, Kenya
-            </h2>
-          </div>
+        <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", padding: "0 clamp(24px, 5vw, 80px)", zIndex: 2 }}>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={headingInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }} style={{ display: "inline-flex", alignItems: "center", gap: 12, padding: "10px 20px", borderRadius: 100, background: "rgba(0,0,0,0.4)", backdropFilter: "blur(20px)", border: "1px solid rgba(255,255,255,0.1)", marginBottom: 24 }}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={C_BRIGHT} strokeWidth="2" strokeLinecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" /><circle cx="12" cy="10" r="3" /></svg>
+            <span style={{ fontFamily: "var(--font-dm)", fontSize: 11, fontWeight: 600, letterSpacing: "3px", textTransform: "uppercase", color: "rgba(255,255,255,0.8)" }}>The Venue</span>
+          </motion.div>
+          <motion.h2 initial={{ opacity: 0, y: 40, scale: 0.95 }} animate={headingInView ? { opacity: 1, y: 0, scale: 1 } : {}} transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }} style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(56px, 12vw, 140px)", letterSpacing: "-0.04em", color: "white", lineHeight: 0.95, margin: "0 0 16px", textShadow: "0 4px 40px rgba(0,0,0,0.5)" }}>
+            <span style={{ background: `linear-gradient(135deg, ${C_BRIGHT}, ${KENYA_ACCENT})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Nairobi</span>
+          </motion.h2>
+          <motion.p initial={{ opacity: 0, y: 20 }} animate={headingInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }} style={{ fontFamily: "var(--font-outfit)", fontSize: "clamp(18px, 2.5vw, 24px)", fontWeight: 400, color: "rgba(255,255,255,0.6)", margin: 0, letterSpacing: "0.5px" }}>Kenya&apos;s Silicon Savannah</motion.p>
         </div>
+
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1, duration: 0.6 }} style={{ position: "absolute", bottom: 40, left: "50%", transform: "translateX(-50%)", display: "flex", flexDirection: "column", alignItems: "center", gap: 8, zIndex: 2 }}>
+          <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }} style={{ width: 24, height: 40, borderRadius: 12, border: "2px solid rgba(255,255,255,0.3)", display: "flex", justifyContent: "center", paddingTop: 8 }}>
+            <motion.div animate={{ y: [0, 12, 0], opacity: [1, 0.3, 1] }} transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }} style={{ width: 4, height: 8, borderRadius: 2, background: "rgba(255,255,255,0.5)" }} />
+          </motion.div>
+        </motion.div>
       </div>
 
-      <div ref={cardRef} style={{ maxWidth: 1320, margin: "0 auto", padding: "0 clamp(20px,4vw,60px)", position: "relative", zIndex: 3, marginTop: -80 }}>
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, ease: EASE }}
-          style={{
-            background: "rgba(10,5,7,0.55)",
-            backdropFilter: "blur(12px)",
-            WebkitBackdropFilter: "blur(12px)",
-            border: `1px solid ${KENYA_ACCENT}15`,
-            borderRadius: 22,
-            padding: "clamp(28px,3.5vw,44px) clamp(24px,3vw,44px)",
-            boxShadow: `0 0 80px ${KENYA_ACCENT}04, 0 25px 60px rgba(0,0,0,0.4)`,
-          }}
-        >
-          <div className="cfk-venue-inner" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(24px,3vw,40px)", alignItems: "center" }}>
+      {/* Details Card */}
+      <div ref={cardRef} style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(24px, 5vw, 80px)", position: "relative", zIndex: 3, marginTop: -120 }}>
+        <motion.div initial={{ opacity: 0, y: 50, scale: 0.95 }} animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}} transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }} style={{ background: "linear-gradient(165deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 50%, rgba(0,0,0,0.1) 100%)", backdropFilter: "blur(40px)", WebkitBackdropFilter: "blur(40px)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 32, padding: "clamp(36px, 5vw, 56px)", boxShadow: "0 4px 24px rgba(0,0,0,0.3), 0 24px 80px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1)", position: "relative", overflow: "hidden" }}>
+          <div style={{ position: "absolute", top: 0, left: "15%", right: "15%", height: 1, background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)" }} />
+          <div className="cfk-venue-inner" style={{ display: "grid", gridTemplateColumns: "1.2fr 1fr", gap: "clamp(32px, 5vw, 64px)", alignItems: "center" }}>
             <div>
-              <p style={{ fontFamily: "var(--font-outfit)", fontWeight: 300, fontSize: 15, color: "rgba(255,255,255,0.5)", lineHeight: 1.7, margin: "0 0 24px", maxWidth: 420 }}>
-                Kenya&apos;s premier conference destination — hosting East Africa&apos;s leading cybersecurity gathering for its inaugural edition in the heart of Nairobi.
-              </p>
-              <a
-                href="https://maps.google.com/?q=Radisson+Blu+Hotel+Nairobi"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 8,
-                  padding: "12px 26px",
-                  borderRadius: 50,
-                  background: `${KENYA_ACCENT}10`,
-                  color: KENYA_ACCENT,
-                  fontFamily: "var(--font-outfit)",
-                  fontSize: 13,
-                  fontWeight: 600,
-                  textDecoration: "none",
-                  border: `1px solid ${KENYA_ACCENT}30`,
-                  transition: "all 0.3s ease",
-                }}
-              >
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke={KENYA_ACCENT} strokeWidth="1.5" strokeLinecap="round">
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
-                  <circle cx="12" cy="10" r="3" />
-                </svg>
-                Open in Google Maps →
+              <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "clamp(24px, 3vw, 32px)", color: "white", letterSpacing: "-0.5px", margin: "0 0 16px" }}>East Africa&apos;s Premier Cybersecurity Summit</h3>
+              <p style={{ fontFamily: "var(--font-outfit)", fontWeight: 400, fontSize: 16, color: "rgba(255,255,255,0.55)", lineHeight: 1.8, margin: "0 0 32px" }}>Join industry leaders, government officials, and technology innovators in the heart of Kenya&apos;s thriving tech ecosystem.</p>
+              <a href="https://maps.google.com/?q=Nairobi+Kenya" target="_blank" rel="noopener noreferrer" className="cfk-maps-btn" style={{ display: "inline-flex", alignItems: "center", gap: 10, padding: "16px 28px", borderRadius: 16, background: `linear-gradient(135deg, ${C_BRIGHT}, ${C})`, color: "white", fontFamily: "var(--font-outfit)", fontSize: 14, fontWeight: 600, textDecoration: "none", boxShadow: `0 4px 20px ${C}40, inset 0 1px 0 rgba(255,255,255,0.2)`, transition: "all 0.3s cubic-bezier(0.22, 1, 0.36, 1)" }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" /><circle cx="12" cy="10" r="3" /></svg>
+                View on Map
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10" /></svg>
               </a>
             </div>
-
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-              {venueDetails.map((item) => (
-                <div key={item.label} style={{ padding: "18px 16px", background: `${KENYA_ACCENT}05`, border: `1px solid ${KENYA_ACCENT}0A`, borderRadius: 14 }}>
-                  <div className="flex items-center gap-2" style={{ marginBottom: 8 }}>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={KENYA_ACCENT} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.7, flexShrink: 0 }}>
-                      <path d={item.icon} />
-                    </svg>
-                    <span style={{ fontFamily: "var(--font-outfit)", fontSize: 12, fontWeight: 600, color: KENYA_ACCENT, textTransform: "uppercase", letterSpacing: "1.5px" }}>
-                      {item.label}
-                    </span>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+              {venueDetails.map((item, i) => (
+                <motion.div key={item.label} initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: 0.3 + i * 0.08, ease: [0.22, 1, 0.36, 1] }} className="cfk-detail-card" style={{ padding: "24px 20px", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 20, transition: "all 0.3s ease" }}>
+                  <div style={{ width: 40, height: 40, borderRadius: 12, background: `${C}15`, border: `1px solid ${C}25`, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 16 }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={C_BRIGHT} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d={item.icon} /></svg>
                   </div>
-                  <span style={{ fontFamily: "var(--font-outfit)", fontSize: 13, fontWeight: 500, color: "rgba(255,255,255,0.7)", lineHeight: 1.4 }}>
-                    {item.value}
-                  </span>
-                </div>
+                  <span style={{ fontFamily: "var(--font-dm)", fontSize: 10, fontWeight: 600, color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: "2px", display: "block", marginBottom: 6 }}>{item.label}</span>
+                  <span style={{ fontFamily: "var(--font-outfit)", fontSize: 15, fontWeight: 600, color: "rgba(255,255,255,0.9)", lineHeight: 1.4 }}>{item.value}</span>
+                </motion.div>
               ))}
             </div>
           </div>
         </motion.div>
       </div>
 
-      <div style={{ height: "clamp(48px,6vw,80px)" }} />
+      <div style={{ height: "clamp(80px, 10vw, 120px)" }} />
 
       <style jsx global>{`
-        @media (max-width: 768px) {
-          .cfk-venue-inner { grid-template-columns: 1fr !important; }
-        }
+        .cfk-maps-btn:hover { transform: translateY(-3px) !important; box-shadow: 0 8px 32px ${C}50, inset 0 1px 0 rgba(255,255,255,0.25) !important; }
+        .cfk-detail-card:hover { background: rgba(255,255,255,0.06) !important; border-color: rgba(255,255,255,0.1) !important; transform: translateY(-2px); }
+        @media (max-width: 768px) { .cfk-venue-inner { grid-template-columns: 1fr !important; } }
       `}</style>
     </section>
   );

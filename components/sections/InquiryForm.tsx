@@ -143,7 +143,7 @@ function InquiryPerkIcon({ type }: { type: string }) {
 // MAIN COMPONENT
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default function InquiryForm({ defaultCountry, eventName }: { defaultCountry?: string; eventName?: string } = {}) {
+export default function InquiryForm({ defaultCountry, eventName, hideLabel }: { defaultCountry?: string; eventName?: string; hideLabel?: boolean } = {}) {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
   const [activeTab, setActiveTab] = useState<string>("sponsor");
@@ -278,10 +278,10 @@ export default function InquiryForm({ defaultCountry, eventName }: { defaultCoun
           initial={{ opacity: 0, y: 16 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, ease: EASE }}
-          style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 48 }}
+          style={{ display: "flex", alignItems: "center", justifyContent: hideLabel ? "center" : "flex-start", gap: 8, marginBottom: 48 }}
         >
-          <SectionLabel text="Get Involved" />
-          <div style={{ flex: 1 }} />
+          {!hideLabel && <SectionLabel text="Get Involved" />}
+          {!hideLabel && <div style={{ flex: 1 }} />}
           <div style={{ display: "flex", gap: 6 }}>
             {INQUIRY_TABS.map((t) => {
               const isActive = activeTab === t.key;
