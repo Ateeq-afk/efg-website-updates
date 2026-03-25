@@ -2078,13 +2078,23 @@ function AdvisoryBoard() {
       <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse 60% 60% at 100% 50%, ${KENYA_ACCENT}10, transparent 50%)` }} />
 
       <div style={{ display: "flex", height: "100%", alignItems: "center" }}>
-        {/* LEFT - Sticky Heading */}
+        {/* LEFT - Sticky Heading with solid background */}
         <div style={{
-          width: "clamp(300px, 30vw, 450px)",
+          width: "clamp(380px, 35vw, 500px)",
           flexShrink: 0,
-          padding: "0 clamp(32px, 4vw, 64px)",
-          zIndex: 10,
+          padding: "60px clamp(40px, 5vw, 80px)",
+          zIndex: 20,
+          background: "#0A0608",
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          borderRight: `1px solid rgba(255,255,255,0.05)`,
+          position: "relative",
         }}>
+          {/* Right edge glow */}
+          <div style={{ position: "absolute", top: 0, bottom: 0, right: 0, width: 100, background: `linear-gradient(90deg, transparent, ${C}10)`, pointerEvents: "none" }} />
+          
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -2093,13 +2103,13 @@ function AdvisoryBoard() {
           >
             <span style={{
               fontFamily: "var(--font-outfit)",
-              fontSize: 13,
-              fontWeight: 600,
-              letterSpacing: "4px",
+              fontSize: 14,
+              fontWeight: 700,
+              letterSpacing: "5px",
               textTransform: "uppercase",
               color: C_BRIGHT,
               display: "block",
-              marginBottom: 24,
+              marginBottom: 28,
             }}>
               Leadership
             </span>
@@ -2107,38 +2117,38 @@ function AdvisoryBoard() {
             <h2 style={{
               fontFamily: "var(--font-display)",
               fontWeight: 800,
-              fontSize: "clamp(36px, 4.5vw, 56px)",
-              letterSpacing: "-2px",
+              fontSize: "clamp(44px, 5vw, 68px)",
+              letterSpacing: "-3px",
               color: "white",
-              lineHeight: 1.05,
-              margin: "0 0 16px 0",
+              lineHeight: 1.0,
+              margin: "0 0 24px 0",
             }}>
               Advisory<br />Board &<br /><span style={{ color: C_BRIGHT }}>Speakers</span>
             </h2>
             
-            <div style={{ width: 60, height: 3, background: `linear-gradient(90deg, ${C_BRIGHT}, ${KENYA_ACCENT})`, marginBottom: 24, borderRadius: 2 }} />
+            <div style={{ width: 80, height: 4, background: `linear-gradient(90deg, ${C_BRIGHT}, ${KENYA_ACCENT})`, marginBottom: 32, borderRadius: 2 }} />
             
             <p style={{
               fontFamily: "var(--font-outfit)",
-              fontSize: 16,
+              fontSize: 18,
               fontWeight: 400,
-              color: "rgba(255,255,255,0.55)",
-              lineHeight: 1.7,
-              maxWidth: 320,
+              color: "rgba(255,255,255,0.6)",
+              lineHeight: 1.75,
+              maxWidth: 360,
             }}>
               Industry leaders shaping the summit agenda and driving cybersecurity excellence across East Africa.
             </p>
             
             {/* Scroll indicator */}
-            <div style={{ marginTop: 48, display: "flex", alignItems: "center", gap: 12 }}>
-              <span style={{ fontFamily: "var(--font-outfit)", fontSize: 12, fontWeight: 500, color: "rgba(255,255,255,0.35)", letterSpacing: "2px", textTransform: "uppercase" }}>
+            <div style={{ marginTop: 56, display: "flex", alignItems: "center", gap: 14 }}>
+              <span style={{ fontFamily: "var(--font-outfit)", fontSize: 13, fontWeight: 600, color: "rgba(255,255,255,0.4)", letterSpacing: "3px", textTransform: "uppercase" }}>
                 Scroll to explore
               </span>
-              <div style={{ width: 40, height: 1, background: `linear-gradient(90deg, rgba(255,255,255,0.3), transparent)` }} />
+              <div style={{ width: 50, height: 1, background: `linear-gradient(90deg, rgba(255,255,255,0.4), transparent)` }} />
               <motion.span
-                animate={{ x: [0, 10, 0] }}
+                animate={{ x: [0, 12, 0] }}
                 transition={{ repeat: Infinity, duration: 1.5 }}
-                style={{ color: C_BRIGHT, fontSize: 18 }}
+                style={{ color: C_BRIGHT, fontSize: 20, fontWeight: 600 }}
               >
                 →
               </motion.span>
@@ -2151,7 +2161,8 @@ function AdvisoryBoard() {
           ref={trackRef}
           style={{
             display: "flex",
-            gap: 28,
+            gap: 32,
+            paddingLeft: 48,
             paddingRight: 200,
             willChange: "transform",
           }}
@@ -2162,19 +2173,20 @@ function AdvisoryBoard() {
               className="cfk-speaker-card"
               style={{
                 flexShrink: 0,
-                width: 300,
-                height: 420,
-                borderRadius: 24,
+                width: 320,
+                height: 450,
+                borderRadius: 20,
                 overflow: "hidden",
                 position: "relative",
-                background: `linear-gradient(165deg, ${C}30 0%, #0D0809 100%)`,
-                border: `1px solid rgba(255,255,255,0.08)`,
+                background: "#0D0809",
+                border: `1px solid rgba(255,255,255,0.1)`,
                 transformStyle: "preserve-3d",
                 transition: "all 0.5s cubic-bezier(0.25, 1, 0.5, 1)",
+                boxShadow: "0 8px 40px rgba(0,0,0,0.4)",
               }}
             >
-              {/* Photo */}
-              <div style={{ height: "65%", overflow: "hidden", position: "relative" }}>
+              {/* Photo - larger area */}
+              <div style={{ height: "62%", overflow: "hidden", position: "relative" }}>
                 {member.photo ? (
                   <img
                     src={member.photo}
@@ -2183,7 +2195,7 @@ function AdvisoryBoard() {
                       width: "100%",
                       height: "100%",
                       objectFit: "cover",
-                      filter: "brightness(0.9)",
+                      objectPosition: "center top",
                       transition: "transform 0.6s ease",
                     }}
                   />
@@ -2191,64 +2203,55 @@ function AdvisoryBoard() {
                   <div style={{
                     width: "100%",
                     height: "100%",
-                    background: `linear-gradient(135deg, ${C}40, ${C}20)`,
+                    background: `linear-gradient(135deg, ${C}50, ${C}25)`,
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                   }}>
-                    <span style={{ fontSize: 64, color: "rgba(255,255,255,0.15)" }}>👤</span>
+                    <span style={{ fontSize: 72, color: "rgba(255,255,255,0.2)" }}>👤</span>
                   </div>
                 )}
-                {/* Gradient overlay */}
-                <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.8) 100%)" }} />
-                {/* Top shine */}
-                <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 100, background: "linear-gradient(180deg, rgba(255,255,255,0.08), transparent)" }} />
+                {/* Bottom gradient for text readability */}
+                <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 80, background: "linear-gradient(180deg, transparent, rgba(0,0,0,0.6))" }} />
               </div>
               
-              {/* Info */}
-              <div style={{ padding: "20px 24px", position: "relative" }}>
-                {/* Top accent */}
-                <div style={{ position: "absolute", top: 0, left: "15%", right: "15%", height: 1, background: `linear-gradient(90deg, transparent, ${C_BRIGHT}40, transparent)` }} />
-                
+              {/* Info - more padding, larger text */}
+              <div style={{ padding: "24px 28px 28px", background: "#0D0809" }}>
                 <h3 style={{
                   fontFamily: "var(--font-display)",
-                  fontSize: 20,
+                  fontSize: 22,
                   fontWeight: 700,
                   color: "white",
-                  margin: "0 0 6px 0",
+                  margin: "0 0 10px 0",
                   letterSpacing: "-0.5px",
+                  lineHeight: 1.2,
                 }}>
                   {member.name}
                 </h3>
                 <p style={{
                   fontFamily: "var(--font-outfit)",
-                  fontSize: 13,
-                  fontWeight: 500,
+                  fontSize: 14,
+                  fontWeight: 600,
                   color: C_BRIGHT,
-                  margin: "0 0 4px 0",
+                  margin: "0 0 8px 0",
+                  lineHeight: 1.4,
                 }}>
                   {member.title}
                 </p>
                 <p style={{
                   fontFamily: "var(--font-outfit)",
-                  fontSize: 12,
+                  fontSize: 13,
                   fontWeight: 400,
-                  color: "rgba(255,255,255,0.45)",
+                  color: "rgba(255,255,255,0.5)",
                   margin: 0,
+                  lineHeight: 1.4,
                 }}>
                   {member.org}
                 </p>
               </div>
               
-              {/* Hover glow */}
-              <div className="cfk-speaker-glow" style={{
-                position: "absolute",
-                inset: -1,
-                borderRadius: 24,
-                border: `2px solid transparent`,
-                transition: "all 0.4s ease",
-                pointerEvents: "none",
-              }} />
+              {/* Top accent line */}
+              <div style={{ position: "absolute", top: 0, left: "20%", right: "20%", height: 2, background: `linear-gradient(90deg, transparent, ${C_BRIGHT}50, transparent)` }} />
             </div>
           ))}
         </div>
