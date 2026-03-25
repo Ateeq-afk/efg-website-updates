@@ -2006,67 +2006,266 @@ function FocusAreas() {
   );
 }
 
-// ─── ADVISORY BOARD ──────────────────────────────────────────────────────────
+// ─── ADVISORY BOARD - HORIZONTAL SCROLL WITH GSAP ────────────────────────────
 function AdvisoryBoard() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const sectionRef = useRef<HTMLElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted || typeof window === "undefined" || !trackRef.current || !sectionRef.current) return;
+
+    const track = trackRef.current;
+    const cards = track.querySelectorAll('.cfk-speaker-card');
+    
+    const ctx = gsap.context(() => {
+      // Calculate scroll distance
+      const scrollWidth = track.scrollWidth - window.innerWidth + 400;
+      
+      // Horizontal scroll animation
+      gsap.to(track, {
+        x: -scrollWidth,
+        ease: "none",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: `+=${scrollWidth}`,
+          pin: true,
+          scrub: 1,
+          anticipatePin: 1,
+        },
+      });
+
+      // Card animations - scale and opacity based on position
+      cards.forEach((card) => {
+        gsap.fromTo(card,
+          { scale: 0.8, opacity: 0.3, rotateY: -15 },
+          {
+            scale: 1,
+            opacity: 1,
+            rotateY: 0,
+            scrollTrigger: {
+              trigger: card,
+              containerAnimation: gsap.getById?.("horizontal") || undefined,
+              start: "left 80%",
+              end: "left 30%",
+              scrub: true,
+            },
+          }
+        );
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, [mounted]);
 
   return (
     <section
-      ref={ref}
+      ref={sectionRef}
       style={{
-        background: "linear-gradient(180deg, #080505 0%, #0A0607 100%)",
-        padding: "clamp(40px, 5vw, 60px) 0",
+        background: "#0A0608",
         position: "relative",
         overflow: "hidden",
+        height: "100vh",
       }}
     >
-      <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 60% 50% at 50% 0%, ${KENYA_ACCENT}06, transparent 70%)` }} />
-      <DotMatrixGrid color={KENYA_ACCENT} opacity={0.015} spacing={30} />
+      {/* Background effects */}
+      <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse 100% 80% at 0% 50%, ${C}15, transparent 50%)` }} />
+      <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse 60% 60% at 100% 50%, ${KENYA_ACCENT}10, transparent 50%)` }} />
 
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 clamp(20px, 4vw, 60px)", position: "relative", zIndex: 1 }}>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, ease: EASE }}
-          style={{ textAlign: "center", marginBottom: 48 }}
-        >
-          <div className="flex items-center justify-center gap-3" style={{ marginBottom: 16 }}>
-            <span style={{ width: 30, height: 1, background: KENYA_ACCENT }} />
-            <span style={{ fontFamily: "var(--font-outfit)", fontSize: 13, fontWeight: 600, letterSpacing: "3.5px", textTransform: "uppercase", color: KENYA_ACCENT }}>
+      <div style={{ display: "flex", height: "100%", alignItems: "center" }}>
+        {/* LEFT - Sticky Heading */}
+        <div style={{
+          width: "clamp(300px, 30vw, 450px)",
+          flexShrink: 0,
+          padding: "0 clamp(32px, 4vw, 64px)",
+          zIndex: 10,
+        }}>
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <span style={{
+              fontFamily: "var(--font-outfit)",
+              fontSize: 13,
+              fontWeight: 600,
+              letterSpacing: "4px",
+              textTransform: "uppercase",
+              color: C_BRIGHT,
+              display: "block",
+              marginBottom: 24,
+            }}>
               Leadership
             </span>
-            <span style={{ width: 30, height: 1, background: KENYA_ACCENT }} />
-          </div>
-          <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(28px, 3.8vw, 48px)", letterSpacing: "-1.5px", color: "white", lineHeight: 1.08, margin: "16px 0 0" }}>
-            Advisory Board & Speakers
-          </h2>
-          <p style={{ fontFamily: "var(--font-outfit)", fontWeight: 300, fontSize: 15, color: "rgba(255,255,255,0.55)", maxWidth: 500, margin: "14px auto 0", lineHeight: 1.6 }}>
-            Industry leaders shaping the summit agenda and driving cybersecurity excellence across East Africa.
-          </p>
-        </motion.div>
+            
+            <h2 style={{
+              fontFamily: "var(--font-display)",
+              fontWeight: 800,
+              fontSize: "clamp(36px, 4.5vw, 56px)",
+              letterSpacing: "-2px",
+              color: "white",
+              lineHeight: 1.05,
+              margin: "0 0 16px 0",
+            }}>
+              Advisory<br />Board &<br /><span style={{ color: C_BRIGHT }}>Speakers</span>
+            </h2>
+            
+            <div style={{ width: 60, height: 3, background: `linear-gradient(90deg, ${C_BRIGHT}, ${KENYA_ACCENT})`, marginBottom: 24, borderRadius: 2 }} />
+            
+            <p style={{
+              fontFamily: "var(--font-outfit)",
+              fontSize: 16,
+              fontWeight: 400,
+              color: "rgba(255,255,255,0.55)",
+              lineHeight: 1.7,
+              maxWidth: 320,
+            }}>
+              Industry leaders shaping the summit agenda and driving cybersecurity excellence across East Africa.
+            </p>
+            
+            {/* Scroll indicator */}
+            <div style={{ marginTop: 48, display: "flex", alignItems: "center", gap: 12 }}>
+              <span style={{ fontFamily: "var(--font-outfit)", fontSize: 12, fontWeight: 500, color: "rgba(255,255,255,0.35)", letterSpacing: "2px", textTransform: "uppercase" }}>
+                Scroll to explore
+              </span>
+              <div style={{ width: 40, height: 1, background: `linear-gradient(90deg, rgba(255,255,255,0.3), transparent)` }} />
+              <motion.span
+                animate={{ x: [0, 10, 0] }}
+                transition={{ repeat: Infinity, duration: 1.5 }}
+                style={{ color: C_BRIGHT, fontSize: 18 }}
+              >
+                →
+              </motion.span>
+            </div>
+          </motion.div>
+        </div>
 
+        {/* RIGHT - Horizontal Scroll Track */}
         <div
-          className="cfk-advisory-grid"
+          ref={trackRef}
           style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(5, 1fr)",
-            gap: 20,
+            display: "flex",
+            gap: 28,
+            paddingRight: 200,
+            willChange: "transform",
           }}
         >
           {ADVISORY_BOARD.map((member, i) => (
-            <AdvisoryCard key={member.name} member={member} delay={0.05 * i} inView={inView} />
+            <div
+              key={member.name}
+              className="cfk-speaker-card"
+              style={{
+                flexShrink: 0,
+                width: 300,
+                height: 420,
+                borderRadius: 24,
+                overflow: "hidden",
+                position: "relative",
+                background: `linear-gradient(165deg, ${C}30 0%, #0D0809 100%)`,
+                border: `1px solid rgba(255,255,255,0.08)`,
+                transformStyle: "preserve-3d",
+                transition: "all 0.5s cubic-bezier(0.25, 1, 0.5, 1)",
+              }}
+            >
+              {/* Photo */}
+              <div style={{ height: "65%", overflow: "hidden", position: "relative" }}>
+                {member.photo ? (
+                  <img
+                    src={member.photo}
+                    alt={member.name}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      filter: "brightness(0.9)",
+                      transition: "transform 0.6s ease",
+                    }}
+                  />
+                ) : (
+                  <div style={{
+                    width: "100%",
+                    height: "100%",
+                    background: `linear-gradient(135deg, ${C}40, ${C}20)`,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}>
+                    <span style={{ fontSize: 64, color: "rgba(255,255,255,0.15)" }}>👤</span>
+                  </div>
+                )}
+                {/* Gradient overlay */}
+                <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.8) 100%)" }} />
+                {/* Top shine */}
+                <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 100, background: "linear-gradient(180deg, rgba(255,255,255,0.08), transparent)" }} />
+              </div>
+              
+              {/* Info */}
+              <div style={{ padding: "20px 24px", position: "relative" }}>
+                {/* Top accent */}
+                <div style={{ position: "absolute", top: 0, left: "15%", right: "15%", height: 1, background: `linear-gradient(90deg, transparent, ${C_BRIGHT}40, transparent)` }} />
+                
+                <h3 style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: 20,
+                  fontWeight: 700,
+                  color: "white",
+                  margin: "0 0 6px 0",
+                  letterSpacing: "-0.5px",
+                }}>
+                  {member.name}
+                </h3>
+                <p style={{
+                  fontFamily: "var(--font-outfit)",
+                  fontSize: 13,
+                  fontWeight: 500,
+                  color: C_BRIGHT,
+                  margin: "0 0 4px 0",
+                }}>
+                  {member.title}
+                </p>
+                <p style={{
+                  fontFamily: "var(--font-outfit)",
+                  fontSize: 12,
+                  fontWeight: 400,
+                  color: "rgba(255,255,255,0.45)",
+                  margin: 0,
+                }}>
+                  {member.org}
+                </p>
+              </div>
+              
+              {/* Hover glow */}
+              <div className="cfk-speaker-glow" style={{
+                position: "absolute",
+                inset: -1,
+                borderRadius: 24,
+                border: `2px solid transparent`,
+                transition: "all 0.4s ease",
+                pointerEvents: "none",
+              }} />
+            </div>
           ))}
         </div>
       </div>
 
       <style jsx global>{`
-        @media (max-width: 900px) {
-          .cfk-advisory-grid { grid-template-columns: repeat(2, 1fr) !important; }
+        .cfk-speaker-card:hover {
+          transform: translateY(-12px) scale(1.02) !important;
+          border-color: ${C_BRIGHT}40 !important;
+          box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 60px ${C}25 !important;
         }
-        @media (max-width: 500px) {
-          .cfk-advisory-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
-          .cfk-advisory-grid > div { padding: 16px 12px !important; }
+        .cfk-speaker-card:hover img {
+          transform: scale(1.08);
+        }
+        .cfk-speaker-card:hover .cfk-speaker-glow {
+          border-color: ${C_BRIGHT}50;
+          box-shadow: 0 0 40px ${C_BRIGHT}20;
         }
       `}</style>
     </section>
