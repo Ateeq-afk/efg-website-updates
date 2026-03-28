@@ -2691,7 +2691,12 @@ function RegisterSection() {
               </div>
               <div style={{ gridColumn: "1 / -1" }}>
                 <label style={labelStyle}>Country *</label>
-                <input name="country" placeholder="Your country" required style={inputStyle} onFocus={(e) => { e.currentTarget.style.borderColor = B_ORANGE; e.currentTarget.style.boxShadow = `0 0 0 3px ${B_ORANGE}18`; e.currentTarget.style.background = "rgba(255,255,255,0.07)"; }} onBlur={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.12)"; e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.background = "rgba(255,255,255,0.05)"; }} />
+                <select name="country" required style={{ ...inputStyle, cursor: "pointer" }} onFocus={(e) => { e.currentTarget.style.borderColor = B_ORANGE; e.currentTarget.style.boxShadow = `0 0 0 3px ${B_ORANGE}18`; e.currentTarget.style.background = "rgba(255,255,255,0.07)"; }} onBlur={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.12)"; e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.background = "rgba(255,255,255,0.05)"; }}>
+                  <option value="" style={{ background: "#111", color: "#888" }}>Select Country *</option>
+                  {[...new Set(COUNTRY_CODES.map(c => c.name))].sort().map((name) => (
+                    <option key={name} value={name} style={{ background: "#111", color: "#fff" }}>{name}</option>
+                  ))}
+                </select>
               </div>
             </div>
 
