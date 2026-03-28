@@ -128,13 +128,13 @@ export default function BrazeLandingPage() {
         }
         /* ── Large screens (1440+) ── */
         @media (min-width: 1440px) {
-          .braze2-hero { background-size: 110% !important; }
+          .braze2-hero { background-size: cover !important; }
           .braze2-hero-supergraphic { width: 65% !important; }
         }
 
         /* ── Tablet (769–1024) ── */
         @media (max-width: 1024px) {
-          .braze2-hero { background-size: 160% !important; }
+          .braze2-hero { background-size: cover !important; }
           .braze2-overview-layout { gap: 40px !important; }
           .braze2-attend-layout { gap: 40px !important; }
           .braze2-hosted-card { padding: 44px 40px !important; }
@@ -152,8 +152,8 @@ export default function BrazeLandingPage() {
           .braze2-hero {
             min-height: auto !important;
             padding: 80px 20px 32px !important;
-            background-size: 280% !important;
-            background-position: center 30% !important;
+            background-size: cover !important;
+            background-position: center 0% !important;
           }
           .braze2-hero h1 { font-size: clamp(28px, 7.5vw, 40px) !important; margin-bottom: 16px !important; }
           .braze2-hero p { margin-bottom: 20px !important; }
@@ -630,9 +630,9 @@ function HeroSection() {
         minHeight: "100vh",
         display: "flex",
         alignItems: "center",
-        backgroundImage: `url("/braze2/hero-bg.jpg")`,
-        backgroundSize: "130%",
-        backgroundPosition: "center 15%",
+        backgroundImage: `url("/braze2/hero-bg-blank.png")`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
         overflow: "hidden",
         padding: "100px clamp(20px, 4vw, 60px) 100px",
       }}
