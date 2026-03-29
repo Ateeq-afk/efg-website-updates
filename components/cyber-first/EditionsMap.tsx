@@ -72,8 +72,14 @@ export default function EditionsMap() {
       style={{
         background: COLORS.bgBase,
         padding: `${SPACING.sectionPadding} 0`,
+        position: "relative",
+        overflow: "hidden",
       }}
     >
+      {/* Dot grid pattern for depth */}
+      <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: `radial-gradient(${COLORS.cyan}08 1px, transparent 1px)`, backgroundSize: "40px 40px", opacity: 0.5 }} />
+      {/* Subtle cyan glow */}
+      <div className="absolute pointer-events-none" style={{ top: "20%", left: "50%", transform: "translateX(-50%)", width: "60%", height: "50%", background: `radial-gradient(ellipse, ${COLORS.cyan}06, transparent 70%)`, filter: "blur(80px)" }} />
       <div
         style={{
           maxWidth: SPACING.maxWidth,
@@ -81,15 +87,22 @@ export default function EditionsMap() {
           padding: `0 ${SPACING.containerPadding}`,
         }}
       >
-        {/* Header */}
+        {/* Header — animated entrance */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7, ease: ANIMATION.ease }}
-          style={{ textAlign: "center", marginBottom: 40 }}
+          style={{ textAlign: "center", marginBottom: 48 }}
         >
           <div className="flex items-center justify-center gap-3">
-            <span style={{ width: 30, height: 1, background: COLORS.cyan }} />
+            <motion.span
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              style={{ width: 30, height: 1, background: COLORS.cyan, transformOrigin: "right" }}
+            />
             <span
               style={{
                 ...TYPOGRAPHY.sectionLabel,
@@ -99,7 +112,13 @@ export default function EditionsMap() {
             >
               Editions
             </span>
-            <span style={{ width: 30, height: 1, background: COLORS.cyan }} />
+            <motion.span
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              style={{ width: 30, height: 1, background: COLORS.cyan, transformOrigin: "left" }}
+            />
           </div>
 
           <h2
@@ -114,11 +133,13 @@ export default function EditionsMap() {
           </h2>
         </motion.div>
 
-        {/* Flagship Banner */}
+        {/* Flagship Banner — 3D scale-up reveal */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.8, delay: 0.15, ease: ANIMATION.ease }}
+          initial={{ opacity: 0, y: 40, scale: 0.97, rotateX: 3 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1, rotateX: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          style={{ perspective: 1200 }}
         >
           <FlagshipCard />
         </motion.div>
@@ -136,15 +157,15 @@ export default function EditionsMap() {
           {supporting.map((edition, index) => (
             <motion.div
               key={edition.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={
-                isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
-              }
+              initial={{ opacity: 0, y: 30, scale: 0.96, rotateX: 4 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1, rotateX: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
               transition={{
-                duration: 0.6,
-                delay: 0.4 + index * 0.1,
-                ease: ANIMATION.ease,
+                duration: 0.7,
+                delay: index * 0.15,
+                ease: [0.16, 1, 0.3, 1],
               }}
+              style={{ perspective: 1000 }}
             >
               <SupportingCard edition={edition} />
             </motion.div>
@@ -194,16 +215,21 @@ function FlagshipCard() {
         border: isHovered
           ? `1px solid ${COLORS.borderAccentHover}`
           : `1px solid ${COLORS.borderAccent}`,
-        transform: isHovered ? "translateY(-3px)" : "translateY(0)",
+        transform: isHovered ? "translateY(-6px)" : "translateY(0)",
         boxShadow: isHovered
-          ? `${SHADOWS.xl}, 0 0 80px ${COLORS.cyanSubtle}`
-          : "none",
+          ? `0 24px 80px rgba(0,0,0,0.4), 0 0 60px ${COLORS.cyanSubtle}, inset 0 1px 0 rgba(255,255,255,0.05)`
+          : `0 4px 20px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.03)`,
         transition: "all 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
         textDecoration: "none",
+        backdropFilter: "blur(8px)",
+        WebkitBackdropFilter: "blur(8px)",
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
+      {/* Top accent shimmer line */}
+      <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: `linear-gradient(90deg, transparent, ${COLORS.cyan}50, transparent)`, zIndex: 10, opacity: isHovered ? 1 : 0.5, transition: "opacity 0.4s ease" }} />
+
       {/* Background Image */}
       <div className="absolute inset-0">
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -213,8 +239,8 @@ function FlagshipCard() {
           className="w-full h-full object-cover"
           style={{
             filter: isHovered
-              ? "brightness(0.3) saturate(0.7)"
-              : "brightness(0.18) saturate(0.4)",
+              ? "brightness(0.4) saturate(0.8)"
+              : "brightness(0.25) saturate(0.5)",
             transform: isHovered ? "scale(1.04)" : "scale(1)",
             transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1)",
           }}
@@ -415,11 +441,15 @@ function SupportingCard({
         border: isHovered
             ? `1px solid ${COLORS.borderAccent}`
             : `1px solid ${COLORS.borderSubtle}`,
-        transform: isHovered ? "translateY(-3px)" : "translateY(0)",
-        boxShadow: isHovered ? SHADOWS.cardHover : "none",
+        transform: isHovered ? "translateY(-6px) scale(1.01)" : "translateY(0) scale(1)",
+        boxShadow: isHovered
+          ? `0 20px 60px rgba(0,0,0,0.4), 0 0 40px ${COLORS.cyanSubtle}, inset 0 1px 0 rgba(255,255,255,0.05)`
+          : `0 2px 12px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.02)`,
         transitionDuration: "0.5s",
         transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
         opacity: 1,
+        backdropFilter: "blur(8px)",
+        WebkitBackdropFilter: "blur(8px)",
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -433,13 +463,19 @@ function SupportingCard({
           className="w-full h-full object-cover"
           style={{
             filter: isHovered
-              ? `brightness(0.3) saturate(${isCompleted ? "0.3" : "0.6"})`
-              : `brightness(0.15) saturate(${isCompleted ? "0" : "0.3"})`,
+              ? `brightness(0.4) saturate(${isCompleted ? "0.4" : "0.7"})`
+              : `brightness(0.22) saturate(${isCompleted ? "0.1" : "0.4"})`,
             transform: isHovered ? "scale(1.06)" : "scale(1)",
             transition: "all 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
           }}
         />
       </div>
+
+      {/* Top accent line */}
+      <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1.5, background: `linear-gradient(90deg, transparent, ${COLORS.cyan}40, transparent)`, zIndex: 10, opacity: isHovered ? 1 : 0.4, transition: "opacity 0.4s ease" }} />
+
+      {/* Inner glow orb */}
+      <div className="absolute pointer-events-none" style={{ top: -20, right: -10, width: 100, height: 60, borderRadius: "50%", background: `radial-gradient(circle, ${COLORS.cyan}0A, transparent 70%)`, filter: "blur(20px)", opacity: isHovered ? 1 : 0.5, transition: "opacity 0.4s ease" }} />
 
       {/* Gradient */}
       <div
