@@ -88,7 +88,7 @@ export default function DASponsors() {
           >
             Partner with
             <br />
-            <span style={{ color: EMERALD_BRIGHT }}>Data & AI First</span>
+            <span style={{ color: EMERALD_BRIGHT }}>Digital First</span>
           </h2>
 
           <p

@@ -3,7 +3,7 @@ import ComingSoonEvent from "@/components/events/ComingSoonEvent";
 export default function DigitalFirstQatar2026() {
   return (
     <ComingSoonEvent
-      seriesName="Data & AI First"
+      seriesName="Digital First"
       eventTitle="Digital First Qatar"
       color="#0F735E"
       colorBright="#14A882"

@@ -286,12 +286,12 @@ const SPONSORS = {
     { name: "Acronis", logo: `${S3_LOGOS}/acronis.png` },
     { name: "Bitdefender", logo: `${S3_LOGOS}/bitdefender.png` },
     { name: "Sahara Net", logo: `${S3_LOGOS}/sahara-net.png` },
-    { name: "Deepinfo", logo: `${S3_LOGOS}/deepinfo.png` },
+    { name: "Deepinfo", logo: `${S3_LOGOS}/Deepinfo.png` },
   ],
   specialized: [
     { name: "Gorilla Technology", logo: `${S3_LOGOS}/Gorilla.png` },
     { name: "Cyber Talents", logo: `${S3_LOGOS}/cyber-talents.png` },
-    { name: "GTB Technologies", logo: `${S3_LOGOS}/gtb.png` },
+    { name: "GTB Technologies", logo: `${S3_LOGOS}/gtb-technologies.png` },
   ],
   supporting: [
     { name: "Kuwait College of Science & Technology", logo: null },

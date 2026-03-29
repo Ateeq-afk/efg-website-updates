@@ -8,9 +8,9 @@ import { EMERALD, EMERALD_BRIGHT, EASE } from "./constants";
 const faqs = [
   {
     id: 1,
-    question: "What is Data & AI First?",
+    question: "What is Digital First?",
     answer:
-      "Data & AI First is a summit series by Events First Group designed for enterprise leaders driving AI transformation. It brings together Chief Data Officers, AI architects, government strategists, and solution providers for a full day of practitioner-led sessions, workshops, and curated meetings.",
+      "Digital First is a summit series by Events First Group designed for enterprise leaders driving AI transformation. It brings together Chief Data Officers, AI architects, government strategists, and solution providers for a full day of practitioner-led sessions, workshops, and curated meetings.",
   },
   {
     id: 2,
@@ -22,7 +22,7 @@ const faqs = [
     id: 3,
     question: "When and where is the first edition?",
     answer:
-      "Data & AI First launches June 10, 2026 in Kuwait City, Kuwait — with Abu Dhabi, Riyadh, and Doha editions scheduled for 2027.",
+      "Digital First launches June 10, 2026 in Kuwait City, Kuwait — with Abu Dhabi, Riyadh, and Doha editions scheduled for 2027.",
   },
   {
     id: 4,

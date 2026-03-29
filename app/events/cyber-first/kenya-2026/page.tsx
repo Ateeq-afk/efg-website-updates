@@ -671,25 +671,25 @@ function HeroSection() {
 
         {/* Main Headline - Beyond Firewalls */}
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.3 }}>
-          <h1 style={{ 
-            fontFamily: "var(--font-display)", 
-            fontWeight: 800, 
-            fontSize: "clamp(56px, 10vw, 130px)", 
-            lineHeight: 0.9, 
-            letterSpacing: "-0.03em", 
-            color: "#FFFFFF", 
+          <h1 style={{
+            fontFamily: "var(--font-display)",
+            fontWeight: 800,
+            fontSize: "clamp(42px, 7vw, 90px)",
+            lineHeight: 0.9,
+            letterSpacing: "-0.03em",
+            color: "#FFFFFF",
             margin: 0,
           }}>
             Beyond
           </h1>
-          <h1 style={{ 
-            fontFamily: "var(--font-display)", 
-            fontWeight: 800, 
-            fontSize: "clamp(56px, 10vw, 130px)", 
-            lineHeight: 0.9, 
-            letterSpacing: "-0.03em", 
-            color: C_BRIGHT, 
-            margin: "0 0 28px 0",
+          <h1 style={{
+            fontFamily: "var(--font-display)",
+            fontWeight: 800,
+            fontSize: "clamp(42px, 7vw, 90px)",
+            lineHeight: 0.9,
+            letterSpacing: "-0.03em",
+            color: C_BRIGHT,
+            margin: "0 0 20px 0",
           }}>
             Firewalls
           </h1>
@@ -704,11 +704,11 @@ function HeroSection() {
             fontFamily: "var(--font-display)", 
             fontWeight: 500, 
             fontStyle: "italic",
-            fontSize: "clamp(22px, 3.5vw, 40px)", 
-            lineHeight: 1.2, 
-            color: C_BRIGHT, 
-            margin: "0 0 20px 0", 
-            maxWidth: 580,
+            fontSize: "clamp(18px, 2.5vw, 30px)",
+            lineHeight: 1.2,
+            color: C_BRIGHT,
+            margin: "0 0 16px 0",
+            maxWidth: 520,
           }}
         >
           Strategic Cyber Defense for Kenya&apos;s Digital Age
@@ -722,11 +722,11 @@ function HeroSection() {
           style={{ 
             fontFamily: "var(--font-outfit)", 
             fontWeight: 400, 
-            fontSize: "clamp(15px, 1.4vw, 18px)", 
-            color: "rgba(255,255,255,0.65)", 
-            lineHeight: 1.65, 
-            maxWidth: 500, 
-            margin: "0 0 40px 0",
+            fontSize: "clamp(14px, 1.2vw, 16px)",
+            color: "rgba(255,255,255,0.65)",
+            lineHeight: 1.6,
+            maxWidth: 460,
+            margin: "0 0 28px 0",
           }}
         >
           East Africa&apos;s premier cybersecurity summit bringing together C-level executives, technology leaders, and policymakers.
@@ -746,14 +746,14 @@ function HeroSection() {
             style={{ 
               display: "inline-flex", 
               alignItems: "center", 
-              gap: 12, 
-              padding: "18px 38px", 
-              borderRadius: 50, 
-              background: C, 
-              color: "white", 
-              fontFamily: "var(--font-outfit)", 
-              fontSize: 16, 
-              fontWeight: 600, 
+              gap: 8,
+              padding: "clamp(12px, 1.5vw, 16px) clamp(24px, 3vw, 36px)",
+              borderRadius: 50,
+              background: C,
+              color: "white",
+              fontFamily: "var(--font-outfit)",
+              fontSize: "clamp(13px, 1.1vw, 15px)",
+              fontWeight: 600,
               textDecoration: "none", 
               cursor: "pointer", 
               transition: "all 0.3s ease",
@@ -762,7 +762,7 @@ function HeroSection() {
             onMouseEnter={(e) => { e.currentTarget.style.background = C_BRIGHT; e.currentTarget.style.transform = "translateY(-2px)"; }}
             onMouseLeave={(e) => { e.currentTarget.style.background = C; e.currentTarget.style.transform = "translateY(0)"; }}
           >
-            Reserve Your Seat <span style={{ fontSize: 18 }}>→</span>
+            Reserve Your Seat <span>→</span>
           </a>
           
           {/* Become a Sponsor */}
@@ -772,13 +772,13 @@ function HeroSection() {
             style={{ 
               display: "inline-flex", 
               alignItems: "center", 
-              padding: "18px 34px", 
-              borderRadius: 50, 
-              background: "rgba(255,255,255,0.06)", 
-              color: "rgba(255,255,255,0.9)", 
-              fontFamily: "var(--font-outfit)", 
-              fontSize: 16, 
-              fontWeight: 500, 
+              padding: "clamp(12px, 1.5vw, 16px) clamp(22px, 2.8vw, 32px)",
+              borderRadius: 50,
+              background: "rgba(255,255,255,0.06)",
+              color: "rgba(255,255,255,0.9)",
+              fontFamily: "var(--font-outfit)",
+              fontSize: "clamp(13px, 1.1vw, 15px)",
+              fontWeight: 500,
               textDecoration: "none", 
               border: "1px solid rgba(255,255,255,0.18)", 
               cursor: "pointer", 

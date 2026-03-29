@@ -18,8 +18,8 @@ const EVENT_CONFIGS: Record<string, {
   navLinks: { href: string; label: string }[];
 }> = {
   "/events/data-ai-first/kuwait-2026": {
-    name: "Data & AI First Kuwait 2026",
-    shortName: "Data & AI First",
+    name: "Digital First Kuwait 2026",
+    shortName: "Digital First",
     color: "#0F735E",
     colorBright: "#14A882",
     date: "10 June 2026",
@@ -287,26 +287,32 @@ export default function EventNavigation() {
           <div className="hidden lg:flex items-center gap-4">
             <Link
               href="/"
-              className="transition-all duration-200"
+              className="transition-all duration-200 flex items-center gap-2"
               style={{
                 fontFamily: "var(--font-outfit)",
                 fontSize: 13,
                 fontWeight: 500,
-                color: "rgba(255,255,255,0.5)",
-                padding: "8px 16px",
+                color: "#E8651A",
+                opacity: 0.75,
+                padding: "10px 20px",
                 borderRadius: 50,
-                border: "1px solid rgba(255,255,255,0.1)",
+                border: "1px solid rgba(232,101,26,0.3)",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "rgba(255,255,255,0.25)";
-                e.currentTarget.style.color = "rgba(255,255,255,0.8)";
+                e.currentTarget.style.borderColor = "#E8651A";
+                e.currentTarget.style.opacity = "1";
+                e.currentTarget.style.boxShadow = "0 0 20px rgba(232,101,26,0.15)";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
-                e.currentTarget.style.color = "rgba(255,255,255,0.5)";
+                e.currentTarget.style.borderColor = "rgba(232,101,26,0.3)";
+                e.currentTarget.style.opacity = "0.75";
+                e.currentTarget.style.boxShadow = "none";
               }}
             >
-              ← Events First Group
+              <span>←</span>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="https://efg-final.s3.eu-north-1.amazonaws.com/Events+First+logo+icon-01.svg" alt="EFG" style={{ width: 16, height: 16 }} />
+              Events First Group
             </Link>
             <a
               href="#register"
@@ -433,14 +439,22 @@ export default function EventNavigation() {
                 <Link
                   href="/"
                   onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center gap-2"
                   style={{
                     fontFamily: "var(--font-outfit)",
                     fontSize: 14,
                     fontWeight: 500,
-                    color: "rgba(255,255,255,0.5)",
+                    color: "#E8651A",
+                    opacity: 0.8,
+                    padding: "10px 24px",
+                    borderRadius: 50,
+                    border: "1px solid rgba(232,101,26,0.25)",
                   }}
                 >
-                  ← Back to Events First Group
+                  <span>←</span>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src="https://efg-final.s3.eu-north-1.amazonaws.com/Events+First+logo+icon-01.svg" alt="EFG" style={{ width: 16, height: 16 }} />
+                  Events First Group
                 </Link>
               </motion.div>
             </div>

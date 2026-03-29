@@ -17,6 +17,17 @@ const S3 = "https://efg-final.s3.eu-north-1.amazonaws.com/sponsors-logo";
 // ─────────────────────────────────────────────────────────────────────────────
 
 const ALL_LOGOS = [
+  // Priority brands first — larger display
+  { src: `${S3}/Microsoft_logo.png`, name: "Microsoft", priority: true },
+  { src: `${S3}/Oracle.png`, name: "Oracle", priority: true },
+  { src: `${S3}/Google-Cloud-Security.png`, name: "Google Cloud Security", priority: true },
+  { src: `${S3}/sap-signavio.png`, name: "SAP Signavio", priority: true },
+  { src: `${S3}/paloalto.png`, name: "Palo Alto Networks", priority: true },
+  { src: `${S3}/kaspersky.png`, name: "Kaspersky", priority: true },
+  { src: `${S3}/fortinet.png`, name: "Fortinet", priority: true },
+  { src: `${S3}/sentinelone.png`, name: "SentinelOne", priority: true },
+  { src: `${S3}/EY.png`, name: "EY", priority: true },
+  // Rest alphabetical
   { src: `${S3}/abu-dhabi-university.png`, name: "Abu Dhabi University" },
   { src: `${S3}/Acronis.png`, name: "Acronis" },
   { src: `${S3}/adgm-academy.png`, name: "ADGM Academy" },
@@ -49,9 +60,7 @@ const ALL_LOGOS = [
   { src: `${S3}/DREAM.png`, name: "DREAM" },
   { src: `${S3}/DTS-solutions.png`, name: "DTS Solutions" },
   { src: `${S3}/edge-group.png`, name: "Edge Group" },
-  { src: `${S3}/EY.png`, name: "EY" },
   { src: `${S3}/filigran.png`, name: "Filigran" },
-  { src: `${S3}/fortinet.png`, name: "Fortinet" },
   { src: `${S3}/GBM.png`, name: "GBM" },
   { src: `${S3}/Gen-x-systems.png`, name: "Gen-X Systems" },
   { src: `${S3}/Gorilla.png`, name: "Gorilla" },
@@ -62,7 +71,6 @@ const ALL_LOGOS = [
   { src: `${S3}/isaca-uae-chapter.png`, name: "ISACA UAE Chapter" },
   { src: `${S3}/ISRAR.png`, name: "ISRAR" },
   { src: `${S3}/KAfaa.png`, name: "KAfaa" },
-  { src: `${S3}/kaspersky.png`, name: "Kaspersky" },
   { src: `${S3}/keysight-technologies.png`, name: "Keysight Technologies" },
   { src: `${S3}/kron-technologies.png`, name: "Kron Technologies" },
   { src: `${S3}/ManageEngine.png`, name: "ManageEngine" },
@@ -73,20 +81,17 @@ const ALL_LOGOS = [
   { src: `${S3}/nozomi-networks.png`, name: "Nozomi Networks" },
   { src: `${S3}/OPSWAT-logo.png`, name: "OPSWAT" },
   { src: `${S3}/ot-security-professionals.png`, name: "OT Security Professionals" },
-  { src: `${S3}/paloalto.png`, name: "Palo Alto Networks" },
   { src: `${S3}/Paramount.png`, name: "Paramount" },
   { src: `${S3}/PENTERA.png`, name: "Pentera" },
   { src: `${S3}/profit.co.png`, name: "Profit.co" },
   { src: `${S3}/redsand.png`, name: "Red Sand" },
   { src: `${S3}/RICS.png`, name: "RICS" },
   { src: `${S3}/sahara-net.png`, name: "Sahara Net" },
-  { src: `${S3}/sap-signavio.png`, name: "SAP Signavio" },
   { src: `${S3}/sechard.png`, name: "Sechard" },
   { src: `${S3}/seclab.png`, name: "SecLab" },
   { src: `${S3}/secureb4.png`, name: "SecureB4" },
   { src: `${S3}/secureworks.png`, name: "Secureworks" },
   { src: `${S3}/Securonix-logo.png`, name: "Securonix" },
-  { src: `${S3}/sentinelone.png`, name: "SentinelOne" },
   { src: `${S3}/sis.png`, name: "SIS" },
   { src: `${S3}/Sonicwall.png`, name: "SonicWall" },
   { src: `${S3}/SS%26C.png`, name: "SS&C" },
@@ -99,7 +104,6 @@ const ALL_LOGOS = [
   { src: `${S3}/YOKOGAWA.png`, name: "Yokogawa" },
   { src: `${S3}/EC-Council.png`, name: "EC-Council" },
   { src: `${S3}/GAFAI.png`, name: "GAFAI" },
-  { src: `${S3}/Google-Cloud-Security.png`, name: "Google Cloud Security" },
   { src: `${S3}/IPC.png`, name: "IPC" },
   { src: `${S3}/UAE-Cyber-Security-Council.png`, name: "UAE Cyber Security Council" },
   { src: `${S3}/Control-Engineering.png`, name: "Control Engineering" },
@@ -118,10 +122,12 @@ const ALL_LOGOS = [
   { src: `${S3}/The-Hacker-News.jpg`, name: "The Hacker News" },
 ];
 
-// Split into 3 rows
-const ROW_1 = ALL_LOGOS.slice(0, 33);
-const ROW_2 = ALL_LOGOS.slice(33, 66);
-const ROW_3 = ALL_LOGOS.slice(66);
+// Row 1: priority brands only (first 9), rest split evenly into rows 2 & 3
+const ROW_1 = ALL_LOGOS.slice(0, 9);
+const remaining = ALL_LOGOS.slice(9);
+const half = Math.ceil(remaining.length / 2);
+const ROW_2 = remaining.slice(0, half);
+const ROW_3 = remaining.slice(half);
 
 // ─────────────────────────────────────────────────────────────────────────────
 // MAIN COMPONENT
@@ -216,13 +222,13 @@ export default function SponsorsPartners() {
                   key={`r1-${i}`}
                   className="sp-logo-item"
                   style={{
-                    width: 180,
-                    height: 56,
+                    width: (logo as typeof ROW_1[number] & { priority?: boolean }).priority ? 220 : 180,
+                    height: (logo as typeof ROW_1[number] & { priority?: boolean }).priority ? 70 : 56,
                     margin: "0 clamp(14px, 2vw, 28px)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    opacity: 0.5,
+                    opacity: (logo as typeof ROW_1[number] & { priority?: boolean }).priority ? 0.75 : 0.5,
                     cursor: "default",
                     flexShrink: 0,
                     borderRadius: 8,

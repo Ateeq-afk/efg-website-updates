@@ -56,7 +56,7 @@ const eventSeries = [
   },
   {
     id: "data-ai-first",
-    title: "Data & AI First",
+    title: "Digital First",
     tagline: "Intelligence at Scale",
     description:
       "Data strategy, artificial intelligence, and machine learning — for the leaders building the intelligent, autonomous enterprise.",

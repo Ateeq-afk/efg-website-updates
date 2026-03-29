@@ -41,7 +41,7 @@ const eventSeries = [
   },
   {
     href: "/events/data-ai-first",
-    label: "Data & AI First",
+    label: "Digital First",
     color: "#0F735E",
     editions: [
       { href: "/events/data-ai-first/kuwait-2026", label: "Kuwait" },

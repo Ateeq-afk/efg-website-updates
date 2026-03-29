@@ -11,7 +11,7 @@ const editions = [
   {
     id: 1,
     number: "01",
-    edition: "1st Edition",
+    edition: "",
     name: "Opex First KSA",
     city: "Riyadh",
     country: "KSA",

@@ -7,7 +7,7 @@ import { EMERALD, EMERALD_BRIGHT, EASE, WIDE } from "./constants";
 /* ─── Main highlight video ─── */
 const mainVideo = {
   id: "Bc3L3iTsaIg",
-  title: "Data & AI First Highlights",
+  title: "Digital First Highlights",
   thumbnail: "https://img.youtube.com/vi/Bc3L3iTsaIg/maxresdefault.jpg",
 };
 

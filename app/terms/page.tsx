@@ -37,7 +37,7 @@ const sections = [
     title: "4. Intellectual Property",
     content: [
       "All content on this website — including text, graphics, logos, images, videos, event branding, and software — is the property of Events First Group or its licensors and is protected by applicable intellectual property laws.",
-      "You may not reproduce, distribute, modify, or create derivative works from any content on this website without our prior written consent. The EFG name, logo, and all event series names (Cyber First, OT Security First, Data & AI First, Opex First) are trademarks of Events First Group.",
+      "You may not reproduce, distribute, modify, or create derivative works from any content on this website without our prior written consent. The EFG name, logo, and all event series names (Cyber First, OT Security First, Digital First, Opex First) are trademarks of Events First Group.",
     ],
   },
   {

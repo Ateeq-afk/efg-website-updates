@@ -11,7 +11,7 @@ export default function DigitalResilienceKSA2026() {
       eventDate="2026-10-10T09:00:00+03:00"
       dateDisplay="October 10, 2026"
       location="Riyadh, Saudi Arabia"
-      edition="1ST EDITION"
+      edition=""
     />
   );
 }

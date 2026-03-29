@@ -337,20 +337,24 @@ export default function CyberFirstIndia2026() {
           .cfi-hero-section { min-height: 100vh !important; height: auto !important; }
           .cfi-hero-section h1 { font-size: clamp(26px, 7vw, 38px) !important; max-width: 100% !important; letter-spacing: -0.02em !important; }
           .cfi-hero-content { padding: 0 !important; }
-          .cfi-hero-inner { height: auto !important; min-height: 100vh !important; padding: 100px 20px 180px !important; }
+          .cfi-hero-inner { height: auto !important; min-height: auto !important; padding: 100px 20px 30px !important; }
           .cfi-hero-left { padding-bottom: 0 !important; }
           .cfi-hero-ctas { padding-bottom: 20px !important; }
           .cfi-hero-gradient-side { background: linear-gradient(to bottom, rgba(5,8,16,0.85) 0%, rgba(5,8,16,0.7) 40%, rgba(5,8,16,0.6) 70%, rgba(5,8,16,0.9) 100%) !important; }
-          .cfi-partners-strip { align-self: stretch !important; padding: 14px 16px !important; flex-direction: column !important; align-items: center !important; gap: 10px !important; border-radius: 12px !important; margin-top: 20px !important; }
-          .cfi-partners-strip img { transform: scale(1) !important; }
-          .cfi-partners-strip > div:last-child { justify-content: center !important; gap: 12px !important; }
+          .cfi-partners-strip { position: relative !important; bottom: auto !important; right: auto !important; padding: 20px 16px !important; gap: 14px !important; margin-bottom: 80px !important; }
+          .cfi-partners-strip span { font-size: 11px !important; text-decoration: none !important; }
+          .cfi-partners-strip img { transform: scale(1.6) !important; }
+          .cfi-partners-strip > div:last-child { gap: 16px !important; flex-wrap: wrap !important; justify-content: center !important; }
+          .cfi-partners-strip > div:last-child > div { height: 55px !important; }
           .cfi-partners-divider { display: none !important; }
           .cfi-bottom-bar { flex-direction: column !important; align-items: center !important; text-align: center !important; gap: 12px !important; padding: 0 16px !important; }
           .cfi-bottom-bar > a { width: 100% !important; text-align: center !important; padding: 12px 24px !important; font-size: 14px !important; }
         }
         @media (max-width: 480px) {
           .cfi-hero-section h1 { font-size: clamp(24px, 7vw, 32px) !important; }
-          .cfi-hero-inner { padding: 90px 16px 180px !important; }
+          .cfi-hero-inner { padding: 90px 16px 24px !important; }
+          .cfi-partners-strip > div:last-child > div { height: 48px !important; }
+          .cfi-partners-strip img { transform: scale(1.4) !important; }
         }
         @media (max-width: 480px) {
           .cfi-stats-grid > div { padding: 12px 8px !important; }

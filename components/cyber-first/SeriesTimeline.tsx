@@ -8,7 +8,7 @@ import { COLORS, TYPOGRAPHY, ANIMATION, RADIUS, SHADOWS, SPACING } from "@/lib/c
 const timeline = [
   {
     id: 1,
-    label: "1st Edition",
+    label: "",
     name: "Cyber First Kuwait",
     date: "Apr 2025",
     city: "Kuwait City",

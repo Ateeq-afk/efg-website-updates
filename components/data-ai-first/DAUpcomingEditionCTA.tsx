@@ -15,7 +15,7 @@ const TABS = [
   {
     key: "attend",
     label: "Attend",
-    heading: "Data & AI First\nKuwait",
+    heading: "Digital First\nKuwait",
     description:
       "The leadership summit dedicated to building AI-driven organizations. Join us in Kuwait.",
     perks: [
@@ -23,7 +23,7 @@ const TABS = [
       { icon: "calendar", text: "Full-day immersive programme" },
       { icon: "shield", text: "Exclusive networking reception" },
     ],
-    trust: "200+ senior leaders expected at Data & AI First Kuwait",
+    trust: "200+ senior leaders expected at Digital First Kuwait",
     fields: [
       { name: "name", label: "Full Name", type: "text", placeholder: "Your full name" },
       { name: "email", label: "Work Email", type: "email", placeholder: "you@company.com" },
@@ -37,7 +37,7 @@ const TABS = [
   {
     key: "sponsor",
     label: "Sponsor",
-    heading: "Partner with\nData & AI First",
+    heading: "Partner with\nDigital First",
     description:
       "Put your brand in the room with top CDOs, CTOs, and AI leaders. Sponsorship packages are designed for maximum visibility and qualified lead generation.",
     perks: [
@@ -45,7 +45,7 @@ const TABS = [
       { icon: "target", text: "Qualified lead generation" },
       { icon: "eye", text: "Premium brand visibility worldwide" },
     ],
-    trust: "30+ technology leaders have partnered with Data & AI First",
+    trust: "30+ technology leaders have partnered with Digital First",
     fields: [
       { name: "name", label: "Full Name", type: "text", placeholder: "Your full name" },
       { name: "email", label: "Work Email", type: "email", placeholder: "you@company.com" },
@@ -67,7 +67,7 @@ const TABS = [
       { icon: "globe", text: "Reach 200+ senior data & AI leaders" },
       { icon: "award", text: "Join our speaker alumni network" },
     ],
-    trust: "30+ practitioners have spoken at Data & AI First",
+    trust: "30+ practitioners have spoken at Digital First",
     fields: [
       { name: "name", label: "Full Name", type: "text", placeholder: "Your full name" },
       { name: "email", label: "Work Email", type: "email", placeholder: "you@company.com" },
@@ -190,7 +190,7 @@ export default function DAUpcomingEditionCTA() {
       company: formData.company || "",
       job_title: formData.title || "",
       phone: combinedPhone,
-      event_name: "Data & AI First Kuwait 2026",
+      event_name: "Digital First Kuwait 2026",
       metadata: meta,
     });
 
@@ -541,7 +541,7 @@ export default function DAUpcomingEditionCTA() {
                       </h3>
                       <p style={{ fontFamily: "var(--font-outfit)", fontSize: 14, color: "#606060", maxWidth: 300, margin: "0 auto 20px", lineHeight: 1.6 }}>
                         {activeTab === "attend"
-                          ? "We\u2019ll notify you when full registration opens for Data & AI First Kuwait. Expect early-bird access and the full agenda in your inbox."
+                          ? "We\u2019ll notify you when full registration opens for Digital First Kuwait. Expect early-bird access and the full agenda in your inbox."
                           : "Our team will review your submission and get back to you within 2 working hours."}
                       </p>
                       <button
@@ -703,7 +703,7 @@ export default function DAUpcomingEditionCTA() {
                       </button>
 
                       <p style={{ fontFamily: "var(--font-outfit)", fontSize: 11, color: "#4a4a4a", textAlign: "center", marginTop: 14, lineHeight: 1.5 }}>
-                        By submitting, you agree to receive updates about Data & AI First.
+                        By submitting, you agree to receive updates about Digital First.
                       </p>
                     </motion.form>
                   )}

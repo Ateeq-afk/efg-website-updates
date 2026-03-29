@@ -7,7 +7,7 @@ const OG_IMAGE = "https://efg-final.s3.eu-north-1.amazonaws.com/about-us-photos/
 export const metadata: Metadata = {
   title: "About Us | Events First Group — The Story Behind the Summits",
   description:
-    "Events First Group designs executive-grade technology summits across the Middle East, Africa, and Asia. Founded in 2023 in Dubai, we've reached 5,000+ technology leaders through Cyber First, OT Security First, Opex First, and Data & AI First.",
+    "Events First Group designs executive-grade technology summits across the Middle East, Africa, and Asia. Founded in 2023 in Dubai, we've reached 5,000+ technology leaders through Cyber First, OT Security First, Opex First, and Digital First.",
   keywords: [
     "Events First Group",
     "about EFG",
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "About Events First Group",
     description:
-      "The team behind Cyber First, OT Security First, Opex First, and Data & AI First summits.",
+      "The team behind Cyber First, OT Security First, Opex First, and Digital First summits.",
     images: [OG_IMAGE],
   },
 };

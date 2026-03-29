@@ -64,8 +64,8 @@ type Member = { name: string; role: string; initials: string; photo?: string; is
 // All team members including founders
 const teamMembers: Member[] = [
   // Leadership
-  { name: "Yasir", role: "Chief Growth Officer", initials: "Y", photo: `${S3}/yasir.jpeg?v=2` },
-  { name: "Shyam", role: "Chief Growth Officer", initials: "S", photo: `${S3}/shyam.jpg?v=3` },
+  { name: "Yasir", role: "Chief Growth Partner", initials: "Y", photo: `${S3}/yasir.jpeg?v=2` },
+  { name: "Shyam", role: "Chief Growth Partner", initials: "S", photo: `${S3}/shyam.jpg?v=3` },
   { name: "Ateeq", role: "Marketing Head", initials: "A", photo: "https://efg-final.s3.eu-north-1.amazonaws.com/team/ateeq.png" },
   // Partnership
   { name: "Mohammed Hassan", role: "Partnership Manager", initials: "MH", photo: `${S3}/hassan.jpg`, photoPos: "top" },

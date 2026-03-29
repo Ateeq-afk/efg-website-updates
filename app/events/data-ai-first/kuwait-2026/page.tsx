@@ -469,7 +469,7 @@ function HeroSection() {
               color: "white",
             }}
           >
-            Data & AI First
+            Digital First
             <br />
             <span style={{ color: E_BRIGHT }}>Kuwait</span>
             <span style={{ color: E, marginLeft: 12, fontSize: "0.6em" }}>2026</span>
@@ -2958,7 +2958,7 @@ function AwardsSection() {
             fontSize: "clamp(28px,3.8vw,48px)", letterSpacing: "-1.5px",
             color: "white", lineHeight: 1.08, margin: "12px 0 0",
           }}>
-            Data &amp; AI First Awards 2026
+            Digital First Awards 2026
           </h2>
           <p style={{
             fontFamily: "var(--font-outfit)", fontSize: 14, fontWeight: 400,
@@ -3015,7 +3015,7 @@ function AwardsSection() {
             fontSize: "clamp(13px,1.1vw,15px)", color: "rgba(255,255,255,0.45)",
             lineHeight: 1.7, margin: 0,
           }}>
-            The Data &amp; AI First Awards 2026 celebrate outstanding individuals and organisations driving AI transformation, data innovation, and governance leadership across Kuwait&rsquo;s public and private sectors.
+            The Digital First Awards 2026 celebrate outstanding individuals and organisations driving AI transformation, data innovation, and governance leadership across Kuwait&rsquo;s public and private sectors.
           </p>
         </motion.div>
 
@@ -3167,7 +3167,7 @@ function AwardsSection() {
               fontSize: "clamp(13px,1.1vw,15px)", color: "rgba(255,255,255,0.5)",
               lineHeight: 1.7, margin: "0 0 32px",
             }}>
-              Data &amp; AI First Awards recognise organisations and leaders demonstrating exceptional contributions to Kuwait&rsquo;s data and AI ecosystem.
+              Digital First Awards recognise organisations and leaders demonstrating exceptional contributions to Kuwait&rsquo;s data and AI ecosystem.
             </p>
 
             <h4 style={{
@@ -4165,7 +4165,7 @@ function PastEventsGallery() {
             From Our Recent Events
           </h2>
           <p style={{ fontFamily: "var(--font-outfit)", fontSize: 15, fontWeight: 400, color: "rgba(255,255,255,0.5)", marginTop: 12, maxWidth: 500, margin: "12px auto 0" }}>
-            A glimpse of what to expect at Data & AI First Kuwait
+            A glimpse of what to expect at Digital First Kuwait
           </p>
         </motion.div>
 
@@ -4553,8 +4553,8 @@ function SponsorsSection() {
 
 const FAQS = [
   {
-    q: "What is Data & AI First?",
-    a: "Data & AI First is a premier summit series by Events First Group designed for enterprise leaders driving AI transformation. It brings together Chief Data Officers, AI architects, government strategists, and solution providers for a full day of practitioner-led sessions, workshops, and curated meetings.",
+    q: "What is Digital First?",
+    a: "Digital First is a premier summit series by Events First Group designed for enterprise leaders driving AI transformation. It brings together Chief Data Officers, AI architects, government strategists, and solution providers for a full day of practitioner-led sessions, workshops, and curated meetings.",
   },
   {
     q: "Who should attend?",
@@ -4765,7 +4765,7 @@ function ApplicationForm() {
       job_title: String(fd.get("title") || ""),
       phone: combinedPhone,
       metadata: { message: String(fd.get("message") || "") },
-      event_name: "Data & AI First Kuwait 2026",
+      event_name: "Digital First Kuwait 2026",
     });
     setLoading(false);
     if (result.success) setSubmitted(true);
@@ -4987,7 +4987,7 @@ function PartnershipForm() {
       job_title: String(fd.get("title") || ""),
       phone: combinedPhone,
       metadata: { message: String(fd.get("message") || "") },
-      event_name: "Data & AI First Kuwait 2026",
+      event_name: "Digital First Kuwait 2026",
     });
     setLoading(false);
     if (result.success) setSubmitted(true);
@@ -5232,13 +5232,13 @@ function SplitCTA() {
             <span style={{ width: 30, height: 1, background: E }} />
           </div>
           <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(28px,4vw,52px)", letterSpacing: "-1.5px", color: "white", lineHeight: 1.08, margin: "12px 0 0" }}>
-            Be Part of Data & AI First Kuwait
+            Be Part of Digital First Kuwait
           </h2>
         </motion.div>
 
         {/* InquiryForm with overridden styles */}
         <div className="daik-form-wrapper" style={{ position: "relative", zIndex: 1 }}>
-          <InquiryForm defaultCountry="KW" eventName="Data & AI First Kuwait 2026" />
+          <InquiryForm defaultCountry="KW" eventName="Digital First Kuwait 2026" />
         </div>
       </div>
 
@@ -5394,7 +5394,7 @@ function Venue() {
               </h3>
             </div>
             <p style={{ fontFamily: "var(--font-outfit)", fontSize: 15, fontWeight: 400, color: "rgba(255,255,255,0.55)", lineHeight: 1.75, margin: 0 }}>
-              Data & AI First Kuwait 2026 will be hosted at Jumeirah Messilah Beach Hotel — Kuwait's premier beachfront resort offering world-class conference facilities with stunning waterfront views.
+              Digital First Kuwait 2026 will be hosted at Jumeirah Messilah Beach Hotel — Kuwait's premier beachfront resort offering world-class conference facilities with stunning waterfront views.
             </p>
             
             {/* Venue confirmed badge */}

@@ -50,7 +50,7 @@ const features = [
 ];
 
 const stats = [
-  { value: 25000, suffix: "+", label: "Senior Delegates", hasComma: true },
+  { value: 15000, suffix: "+", label: "Senior Delegates", hasComma: true },
   { value: 96, suffix: "%", label: "Return Rate", hasComma: false },
 ];
 
@@ -197,7 +197,7 @@ export default function WhyEFG() {
           {/* Feature 1: Curated */}
           <BentoFeature feature={features[0]} index={0} isInView={isInView} />
 
-          {/* Stat 1: 25,000+ */}
+          {/* Stat 1: 15,000+ */}
           <BentoStat stat={stats[0]} index={0} isInView={isInView} />
 
           {/* Feature 2: Actionable */}

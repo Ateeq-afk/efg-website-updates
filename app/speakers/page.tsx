@@ -388,7 +388,7 @@ const SPEAKER_FORM = {
     { name: "phone", label: "Phone Number", type: "tel", placeholder: "+971 xxxx xxxx" },
     { name: "company", label: "Company", type: "text", placeholder: "Company name" },
     { name: "title", label: "Job Title", type: "text", placeholder: "Your role" },
-    { name: "interest", label: "Event Interest", type: "select", placeholder: "Select an event series", options: ["Cyber First", "OT Security First", "Data & AI First", "Opex First", "Other"] },
+    { name: "interest", label: "Event Interest", type: "select", placeholder: "Select an event series", options: ["Cyber First", "OT Security First", "Digital First", "Opex First", "Other"] },
     { name: "topic", label: "Proposed Topic", type: "text", placeholder: "Brief topic or area of expertise" },
     { name: "message", label: "Message (Optional)", type: "textarea", placeholder: "Tell us about your background..." },
   ],

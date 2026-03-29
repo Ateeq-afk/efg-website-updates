@@ -30,9 +30,9 @@ const upcomingEvents: UpcomingEvent[] = [
   },
   {
     id: "data-first-kuwait",
-    series: "Data & AI First",
+    series: "Digital First",
     seriesColor: "#0F735E",
-    title: "Data & AI First Kuwait",
+    title: "Digital First Kuwait",
     date: new Date("2026-06-10T09:00:00"),
     location: "Kuwait City, Kuwait",
     href: "/events/data-ai-first/kuwait-2026",

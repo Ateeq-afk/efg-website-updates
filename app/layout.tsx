@@ -38,7 +38,7 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: "Events First Group | Executive Technology Summits",
   description:
-    "Premium executive technology summits across the Middle East, Africa, and Asia. Cyber First, Data & AI First, Opex First, OT Security First — bringing together CISOs, CTOs, and enterprise leaders.",
+    "Premium executive technology summits across the Middle East, Africa, and Asia. Cyber First, Digital First, Opex First, OT Security First — bringing together CISOs, CTOs, and enterprise leaders.",
   keywords: [
     "technology conferences",
     "cybersecurity events",
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Events First Group | Executive Technology Summits",
     description:
-      "Premium executive technology summits across the Middle East, Africa, and Asia. Cyber First, Data & AI First, Opex First, OT Security First — bringing together CISOs, CTOs, and enterprise leaders.",
+      "Premium executive technology summits across the Middle East, Africa, and Asia. Cyber First, Digital First, Opex First, OT Security First — bringing together CISOs, CTOs, and enterprise leaders.",
     url: "https://eventsfirstgroup.com",
     siteName: "Events First Group",
     images: [
@@ -106,7 +106,7 @@ const organizationJsonLd = {
   url: "https://eventsfirstgroup.com",
   logo: "https://efg-final.s3.eu-north-1.amazonaws.com/Events+First+logo+icon-01.svg",
   description:
-    "Events First Group designs executive-grade technology summits across the Middle East, Africa, and Asia. Cyber First, OT Security First, Opex First, and Data & AI First.",
+    "Events First Group designs executive-grade technology summits across the Middle East, Africa, and Asia. Cyber First, OT Security First, Opex First, and Digital First.",
   foundingDate: "2023",
   address: {
     "@type": "PostalAddress",

@@ -110,7 +110,7 @@ export default function DAHero() {
             color: EMERALD,
           }}
         >
-          Data & AI First Series
+          Digital First Series
         </motion.span>
 
         {/* Main title */}
@@ -170,7 +170,7 @@ export default function DAHero() {
       {/* Ticker Bar */}
       <SeriesTickerBar
         accentColor={EMERALD}
-        eventName="Data & AI First Kuwait"
+        eventName="Digital First Kuwait"
         location="Kuwait City, Kuwait"
         targetDate={new Date("2026-06-10T09:00:00")}
         ctaText="Register"

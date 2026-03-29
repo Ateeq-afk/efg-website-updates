@@ -6,9 +6,9 @@ const PAGE_URL = `${BASE_URL}/events/data-ai-first`;
 const OG_IMAGE = "https://efg-final.s3.eu-north-1.amazonaws.com/Good/4N8A0290.JPG";
 
 export const metadata: Metadata = {
-  title: "Data & AI First | AI Summit Dubai & Kuwait | CDO Conference Middle East",
+  title: "Digital First | AI Summit Dubai & Kuwait | CDO Conference Middle East",
   description:
-    "The premier Data & AI leadership summit in the Middle East. Data & AI First brings together CDOs, AI architects, and enterprise leaders in Kuwait, UAE & GCC region.",
+    "The premier Data & AI leadership summit in the Middle East. Digital First brings together CDOs, AI architects, and enterprise leaders in Kuwait, UAE & GCC region.",
   keywords: [
     "AI summit Dubai",
     "data AI conference Middle East",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     canonical: PAGE_URL,
   },
   openGraph: {
-    title: "Data & AI First Series — The Premier Data & AI Leadership Summit",
+    title: "Digital First Series — The Premier Data & AI Leadership Summit",
     description:
       "CDOs, AI architects, and enterprise leaders. Intelligence amplified — shaping the AI-driven future.",
     url: PAGE_URL,
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
         url: OG_IMAGE,
         width: 1200,
         height: 630,
-        alt: "Data & AI First Series — Data & AI Summit",
+        alt: "Digital First Series — Data & AI Summit",
       },
     ],
     locale: "en_US",
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Data & AI First Series — The Premier Data & AI Leadership Summit",
+    title: "Digital First Series — The Premier Data & AI Leadership Summit",
     description:
       "CDOs, AI architects, and enterprise leaders shaping the AI-driven future.",
     images: [OG_IMAGE],
@@ -62,7 +62,7 @@ export default function DataAIFirstLayout({
         items={[
           { name: "Home", url: BASE_URL },
           { name: "Events", url: `${BASE_URL}/events` },
-          { name: "Data & AI First", url: PAGE_URL },
+          { name: "Digital First", url: PAGE_URL },
         ]}
       />
       {/* EventSeries structured data — JSON-LD */}
@@ -72,7 +72,7 @@ export default function DataAIFirstLayout({
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "EventSeries",
-            name: "Data & AI First Series",
+            name: "Digital First Series",
             description:
               "The premier Data & AI leadership summit series bringing together CDOs, AI architects, data scientists, and enterprise leaders to shape the AI-driven future.",
             url: PAGE_URL,

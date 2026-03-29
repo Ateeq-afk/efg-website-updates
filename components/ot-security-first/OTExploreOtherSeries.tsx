@@ -20,7 +20,7 @@ const otherSeries = [
   },
   {
     id: "data-ai",
-    name: "Data & AI First",
+    name: "Digital First",
     tagline: "Intelligence at the Speed of Business",
     color: "#EEEEEE",
     image:

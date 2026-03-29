@@ -7,8 +7,16 @@ import Link from "next/link";
 const OT_CRIMSON = "#D34B9A";
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-// 8 speakers with S3-hosted photos from Supabase
+// Speakers with S3-hosted photos from Supabase
 const speakers = [
+  {
+    id: 0,
+    name: "H.E. Dr. Mohamed Al Kuwaiti",
+    title: "Head of Cyber Security",
+    company: "UAE Government",
+    photo:
+      "https://efg-final.s3.eu-north-1.amazonaws.com/Speakers-photos/OT-Security-First/dr-mohamed-hamad-al-kuwaiti.jpg",
+  },
   {
     id: 1,
     name: "Ali Al Kaf Alhashmi",

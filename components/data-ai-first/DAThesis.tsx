@@ -361,7 +361,7 @@ function ThesisPhoto() {
             margin: "0 0 4px",
           }}
         >
-          Data & AI First
+          Digital First
         </p>
         <p
           style={{

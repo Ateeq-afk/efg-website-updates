@@ -119,7 +119,7 @@ export default function DAAudience() {
             marginTop: 16,
           }}
         >
-          Data & AI First is designed for the people who decide how
+          Digital First is designed for the people who decide how
           organizations adopt AI. Not observers — operators.
         </motion.p>
       </div>

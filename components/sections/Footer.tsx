@@ -10,7 +10,7 @@ const footerLinks = {
   events: [
     { label: "Cyber First", href: "/events/cyber-first" },
     { label: "OT Security First", href: "/events/ot-security-first" },
-    { label: "Data & AI First", href: "/events/data-ai-first" },
+    { label: "Digital First", href: "/events/data-ai-first" },
     { label: "Opex First", href: "/events/opex-first" },
     { label: "NetworkFirst", href: "/network-first" },
   ],

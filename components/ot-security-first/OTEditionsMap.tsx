@@ -10,7 +10,7 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 const featured = {
   city: "Abu Dhabi",
   country: "UAE",
-  edition: "1st Edition",
+  edition: "",
   date: "Feb 4, 2026",
   venue: "Rosewood Abu Dhabi",
   image:

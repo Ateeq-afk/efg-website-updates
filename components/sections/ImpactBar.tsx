@@ -9,7 +9,7 @@ const BG_IMAGE = `${S3_BASE}/4N8A0290.JPG`;
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 const metrics = [
-  { value: 25000, suffix: "+", label: "Senior Delegates", hasComma: true },
+  { value: 15000, suffix: "+", label: "Senior Delegates", hasComma: true },
   { value: 16,   suffix: "",  label: "Editions Delivered", hasComma: false },
   { value: 6,    suffix: "",  label: "Nations", hasComma: false },
   { value: 12,   suffix: "+",  label: "Cities Worldwide", hasComma: false },
