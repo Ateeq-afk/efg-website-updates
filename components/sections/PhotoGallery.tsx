@@ -53,12 +53,12 @@ const categories: Category[] = [
     id: "speakers",
     label: "The Voices",
     subtitle: "C-Suite & CISO Speakers",
-    heroImage: `${OT}/4N8A0394.JPG`,
+    heroImage: `${OPEX}/4N8A1666.JPG`,
     images: [
-      { src: `${OT}/4N8A0394.JPG`, caption: "OT Security First — keynote address" },
-      { src: `${OPEX}/4N8A1666.JPG`, caption: "Opex First UAE — operations expert" },
+      { src: `${OPEX}/4N8A1666.JPG`, caption: "Opex First UAE — keynote address" },
       { src: `${CFK}/cyber21-04-550.jpg`, caption: "Cyber First — executive keynote" },
-      { src: `${GOOD}/4N8A0122.JPG`, caption: "Industry leader — main stage address" },
+      { src: `${GOOD}/4N8A0122.JPG`, caption: "Industry leader — main stage" },
+      { src: `${OPEX}/4N8A1660.JPG`, caption: "C-Suite speaker — live session" },
     ],
   },
   {
