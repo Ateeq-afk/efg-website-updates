@@ -442,7 +442,7 @@ function AboutStory() {
         padding: "clamp(60px, 8vw, 100px) 0",
       }}
     >
-      <div style={{ maxWidth: 800, margin: "0 auto", padding: PAD }}>
+      <div style={{ maxWidth: MAX_W, margin: "0 auto", padding: PAD }}>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
