@@ -1500,6 +1500,8 @@ const CFI_SPEAKERS = [
   { name: "Dr. Pavan Duggal", designation: "Advocate", entity: "Supreme Court of India", photo: "https://efg-final.s3.eu-north-1.amazonaws.com/CyberFirst_Delhi_Speakers/Pavan_Duggal.jpg" },
   { name: "Dr Harsha Thennarasu", designation: "Chief Cyber Defence Advisor", entity: "HKIT Security Solutions", photo: "https://efg-final.s3.eu-north-1.amazonaws.com/CyberFirst_Delhi_Speakers/Dr_Harsha.JPG" },
   { name: "Lt Cdr Karan Kalra (Retd)", designation: "Chief Information Security Officer (CISO)", entity: "Perpetual-Edge", photo: "https://efg-final.s3.eu-north-1.amazonaws.com/CyberFirst_Delhi_Speakers/Dr-Karan.jpg" },
+  { name: "Anuj Kumar", designation: "Chairman", entity: "Center for Research on Cybercrime & Cyber Law", photo: "https://efg-final.s3.eu-north-1.amazonaws.com/CyberFirst_Delhi_Speakers/Anuj+_Pic.jpg" },
+  { name: "Jaspreet Singh", designation: "Chief Revenue Officer", entity: "Grant Thornton Bharat LLP", photo: "https://efg-final.s3.eu-north-1.amazonaws.com/CyberFirst_Delhi_Speakers/Jaspreet_Pic.jpg" },
 ];
 
 function SpeakersSection() {
