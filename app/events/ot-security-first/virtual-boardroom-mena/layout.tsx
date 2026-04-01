@@ -1,0 +1,112 @@
+import type { Metadata } from "next";
+import { BreadcrumbSchema } from "@/lib/schemas";
+
+const BASE_URL = "https://eventsfirstgroup.com";
+const PAGE_URL = `${BASE_URL}/events/ot-security-first/virtual-boardroom-mena`;
+const OG_IMAGE =
+  "https://efg-final.s3.eu-north-1.amazonaws.com/logos/Untitled-2-01.png";
+
+export const metadata: Metadata = {
+  title:
+    "OT Security in the Age of AI Threats | Virtual Forum MENA 2026",
+  description:
+    "A closed, senior-level virtual forum for OT security professionals across MENA's energy and utilities sector. 100 verified professionals, 3 focused panel discussions, May 19 2026.",
+  keywords: [
+    "OT security virtual forum",
+    "MENA OT cybersecurity",
+    "ICS security webinar",
+    "SCADA security virtual event",
+    "AI threats OT",
+    "critical infrastructure cybersecurity",
+    "energy sector cybersecurity MENA",
+    "OT Security First",
+    "virtual forum 2026",
+    "industrial cybersecurity webinar",
+  ],
+  alternates: {
+    canonical: PAGE_URL,
+  },
+  openGraph: {
+    title: "OT Security in the Age of AI Threats — Virtual Forum MENA",
+    description:
+      "100 verified OT security professionals. May 19, 2026. A strategic virtual dialogue on industrial cyber resilience across MENA.",
+    url: PAGE_URL,
+    siteName: "Events First Group",
+    images: [
+      {
+        url: OG_IMAGE,
+        width: 1200,
+        height: 630,
+        alt: "OT Security First — Virtual Forum MENA 2026",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "OT Security in the Age of AI Threats — Virtual Forum MENA",
+    description:
+      "100 verified OT security professionals. May 19, 2026 — MENA Region.",
+    images: [OG_IMAGE],
+  },
+};
+
+export default function OTVirtualForumLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <>
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: BASE_URL },
+          { name: "Events", url: `${BASE_URL}/events` },
+          {
+            name: "OT Security First",
+            url: `${BASE_URL}/events/ot-security-first`,
+          },
+          { name: "Virtual Forum MENA", url: PAGE_URL },
+        ]}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Event",
+            name: "OT Security in the Age of AI Threats — Virtual Forum MENA 2026",
+            description:
+              "A closed, senior-level virtual forum for OT security professionals across MENA's energy and utilities sector.",
+            startDate: "2026-05-19T14:00:00+04:00",
+            endDate: "2026-05-19T16:00:00+04:00",
+            eventStatus: "https://schema.org/EventScheduled",
+            eventAttendanceMode:
+              "https://schema.org/OnlineEventAttendanceMode",
+            location: {
+              "@type": "VirtualLocation",
+              url: PAGE_URL,
+            },
+            image: [OG_IMAGE],
+            organizer: {
+              "@type": "Organization",
+              name: "Events First Group",
+              url: BASE_URL,
+            },
+            offers: {
+              "@type": "Offer",
+              url: PAGE_URL,
+              availability: "https://schema.org/InStock",
+              validFrom: "2026-01-01",
+            },
+            typicalAgeRange: "25-",
+            keywords:
+              "OT security, ICS security, SCADA, AI threats, MENA, virtual forum, critical infrastructure, energy cybersecurity",
+          }),
+        }}
+      />
+      {children}
+    </>
+  );
+}

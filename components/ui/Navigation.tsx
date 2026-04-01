@@ -35,6 +35,7 @@ const eventSeries = [
     label: "OT Security First",
     color: "#D34B9A",
     editions: [
+      { href: "/events/ot-security-first/virtual-boardroom-mena", label: "Virtual Boardroom MENA", virtual: true },
       { href: "/events/ot-security-first/jubail-2026", label: "Jubail, KSA" },
       { href: "/events/ot-security-first/oman-2026", label: "Oman" },
     ]
@@ -237,6 +238,9 @@ export default function Navigation() {
                                       >
                                         <span className="w-[4px] h-[4px] rounded-full" style={{ background: event.color, opacity: 0.6 }} />
                                         {edition.label}
+                                        {"virtual" in edition && edition.virtual && (
+                                          <span style={{ fontSize: 9, fontWeight: 600, letterSpacing: "0.5px", textTransform: "uppercase", color: event.color, background: `${event.color}15`, padding: "2px 6px", borderRadius: 4, marginLeft: 4 }}>Virtual</span>
+                                        )}
                                       </Link>
                                     ))}
                                   </motion.div>

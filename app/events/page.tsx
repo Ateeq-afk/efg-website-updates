@@ -167,6 +167,25 @@ const allEvents = [
     status: "open" as SeriesStatus,
   },
   {
+    id: "ot-virtual-boardroom-mena",
+    category: "ot-security-first",
+    title: "OT Security Virtual Boardroom MENA",
+    tagline: "OT Security in the Age of AI Threats",
+    description:
+      "A closed, senior-level virtual forum for 100 OT security professionals across MENA's energy and utilities sector. 3 focused panel discussions.",
+    color: "#D34B9A",
+    image:
+      "https://efg-final.s3.eu-north-1.amazonaws.com/logos/Untitled-2-01.png",
+    href: "/events/ot-security-first/virtual-boardroom-mena",
+    date: "2026-05-19",
+    nextDate: "19 May 2026",
+    nextCity: "Virtual",
+    editions: "",
+    regions: "MENA",
+    attendees: "100",
+    status: "open" as SeriesStatus,
+  },
+  {
     id: "ot-security-jubail",
     category: "ot-security-first",
     title: "OT Security Jubail",

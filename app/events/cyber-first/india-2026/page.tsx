@@ -1502,6 +1502,8 @@ const CFI_SPEAKERS = [
   { name: "Lt Cdr Karan Kalra (Retd)", designation: "Chief Information Security Officer (CISO)", entity: "Perpetual-Edge", photo: "https://efg-final.s3.eu-north-1.amazonaws.com/CyberFirst_Delhi_Speakers/Dr-Karan.jpg" },
   { name: "Anuj Kumar", designation: "Chairman", entity: "Center for Research on Cybercrime & Cyber Law", photo: "https://efg-final.s3.eu-north-1.amazonaws.com/CyberFirst_Delhi_Speakers/Anuj+_Pic.jpg" },
   { name: "Jaspreet Singh", designation: "Chief Revenue Officer", entity: "Grant Thornton Bharat LLP", photo: "https://efg-final.s3.eu-north-1.amazonaws.com/CyberFirst_Delhi_Speakers/Jaspreet_Pic.jpg" },
+  { name: "Akanksha Garg", designation: "Data Protection Officer and Head Digital Products PMO", entity: "HDFC Securities", photo: "https://efg-final.s3.eu-north-1.amazonaws.com/CyberFirst_Delhi_Speakers/Akansha_Garg.jpeg" },
+  { name: "Cmde(Dr) JS Dhanoa (Retd)", designation: "Former CIO", entity: "Indian Navy", photo: "https://efg-final.s3.eu-north-1.amazonaws.com/CyberFirst_Delhi_Speakers/Cmde(Dr)_JS_Dhanoa_(Retd).jpeg" },
 ];
 
 function SpeakersSection() {

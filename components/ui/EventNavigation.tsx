@@ -109,6 +109,38 @@ const EVENT_CONFIGS: Record<string, {
     location: "Riyadh, KSA",
     navLinks: [{ href: "#register-interest", label: "Register Interest" }],
   },
+  "/events/ot-security-first/johannesburg-2026": {
+    name: "OT Security First South Africa 2026",
+    shortName: "OT Security First SA",
+    color: "#E03C32",
+    colorBright: "#FF4D44",
+    date: "2026",
+    location: "Johannesburg, SA",
+    logo: "https://efg-final.s3.eu-north-1.amazonaws.com/logos/Untitled-2-01.png",
+    navLinks: [
+      { href: "#overview", label: "Overview" },
+      { href: "#speakers", label: "Speakers" },
+      { href: "#sponsors", label: "Sponsors" },
+      { href: "#agenda", label: "Agenda" },
+      { href: "#venue", label: "Venue" },
+    ],
+  },
+  "/events/ot-security-first/virtual-boardroom-mena": {
+    name: "OT Security Virtual Forum MENA",
+    shortName: "OT Security Forum",
+    color: "#00C9FF",
+    colorBright: "#4DD9FF",
+    date: "19 May 2025",
+    location: "Virtual · MENA",
+    logo: "https://efg-final.s3.eu-north-1.amazonaws.com/logos/Untitled-2-01.png",
+    navLinks: [
+      { href: "#overview", label: "Overview" },
+      { href: "#themes", label: "Themes" },
+      { href: "#panels", label: "Panels" },
+      { href: "#attend", label: "Who Attends" },
+      { href: "#register", label: "Register" },
+    ],
+  },
   "/events/ot-security-first/jubail-2026": {
     name: "OT Security Jubail 2026",
     shortName: "OT Security Jubail",
@@ -204,17 +236,21 @@ export default function EventNavigation() {
             style={{ cursor: "pointer" }}
           >
             {logo ? (
-              /* eslint-disable-next-line @next/next/no-img-element */
-              <img 
-                src={logo} 
-                alt={name} 
-                className="event-nav-logo"
-                style={{ 
-                  height: 70,
-                  width: "auto",
-                  filter: logoFilter || "none",
-                }} 
-              />
+              <span className="event-nav-logo-wrap" style={{ position: "relative", display: "inline-block", overflow: "hidden", ["--event-color-shimmer" as string]: `${colorBright}25` }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={logo}
+                  alt={name}
+                  className="event-nav-logo"
+                  style={{
+                    height: 70,
+                    width: "auto",
+                    filter: logoFilter || "none",
+                    display: "block",
+                  }}
+                />
+                <span className="event-nav-logo-shimmer" />
+              </span>
             ) : (
               <>
                 {/* Event accent bar */}
@@ -463,6 +499,20 @@ export default function EventNavigation() {
       </AnimatePresence>
       
       <style jsx global>{`
+        @keyframes nav-logo-shimmer {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
+        }
+        .event-nav-logo-shimmer {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(110deg, transparent 30%, var(--event-color-shimmer) 50%, transparent 70%);
+          animation: nav-logo-shimmer 4s ease-in-out infinite;
+          pointer-events: none;
+        }
         @media (max-width: 768px) {
           .event-nav-logo {
             height: 60px !important;
