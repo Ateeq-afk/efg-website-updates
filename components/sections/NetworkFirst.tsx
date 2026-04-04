@@ -105,8 +105,8 @@ export default function NetworkFirst() {
           <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(32px, 5vw, 48px)", fontWeight: 800, lineHeight: 1.1, margin: "0 0 16px", letterSpacing: "-0.03em", color: TEXT }}>
             A Different Kind of Room<span style={{ color: AMBER }}>.</span>
           </h2>
-          <p style={{ fontSize: 15, color: TEXT_30, margin: "0 auto", maxWidth: 520, lineHeight: 1.65 }}>
-            15-seat executive roundtables. Hand-selected leaders. No keynotes, no slides, no recordings. Just the conversations that actually move industries.
+          <p style={{ fontSize: 15, color: TEXT_30, margin: "0 auto", maxWidth: 560, lineHeight: 1.65 }}>
+            15-seat executive roundtables. Hand-selected CISOs, CTOs, and C-suite leaders. No keynotes, no slides, no recordings. Sponsor-hosted, invite-only boardroom sessions where the conversations that actually move industries happen &mdash; across Dubai, Riyadh, Kuwait, and Doha.
           </p>
         </motion.div>
 

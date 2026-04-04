@@ -11,9 +11,11 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 
 // Typographic reveal words
 const headlineWords = [
-  { text: "We don't", dim: false },
-  { text: "organize", dim: false },
-  { text: "events.", dim: false },
+  { text: "The region's", dim: false },
+  { text: "leading", dim: false },
+  { text: "technology", dim: false },
+  { text: "summit", dim: false },
+  { text: "organizer.", dim: false },
   { text: "We architect", dim: true },
   { text: "the moments", dim: true },
   { text: "where", dim: true },
@@ -27,25 +29,25 @@ const features = [
     id: "curated",
     title: "Curated Audiences",
     description:
-      "Every attendee is a senior decision-maker. No fillers — just the people who shape budgets, strategy, and direction.",
+      "Every attendee is a senior decision-maker — CISOs, CDOs, CTOs, and enterprise leaders. No fillers. Just the people who shape cybersecurity budgets, AI strategy, and digital transformation direction.",
   },
   {
     id: "actionable",
     title: "Actionable Intelligence",
     description:
-      "Frameworks you implement on Monday, not buzzwords you forget by Friday. Every session vetted for real-world value.",
+      "Frameworks you implement on Monday, not buzzwords you forget by Friday. Every keynote, panel, and boardroom session vetted for real-world value in cybersecurity, OT security, and operational excellence.",
   },
   {
     id: "global",
     title: "Local Depth, Global Reach",
     description:
-      "Deep roots in every market we serve. Local context meets international expertise across 6 nations.",
+      "Deep roots in every market we serve — Kuwait, Qatar, Saudi Arabia, UAE, India, and Kenya. Local context meets international expertise across the Middle East, Africa, and Asia.",
   },
   {
     id: "community",
     title: "Year-Round Community",
     description:
-      "The network you build here stays active between events — relationships that compound over time.",
+      "The network you build at our technology summits stays active between events. 5,000+ senior technology leaders and 200+ speakers — relationships that compound over time.",
   },
 ];
 
@@ -174,7 +176,7 @@ export default function WhyEFG() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img loading="lazy"
               src={`${GOOD}/4N8A0290.JPG`}
-              alt="Packed summit room"
+              alt="Packed auditorium at Events First Group cybersecurity summit in Kuwait"
               className="why-bento-img"
             />
             <div className="why-bento-photo-overlay" />
@@ -222,7 +224,7 @@ export default function WhyEFG() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img loading="lazy"
               src={`${CFK}/cyber21-04-160.jpg`}
-              alt="Executive networking"
+              alt="CISO and enterprise leaders networking at Cyber First Kuwait summit"
               className="why-bento-img"
             />
             <div className="why-bento-photo-overlay" />

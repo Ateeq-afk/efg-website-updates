@@ -92,7 +92,7 @@ export default function ImpactBar() {
             textTransform: "uppercase", color: "var(--orange)",
             fontFamily: "var(--font-outfit)",
           }}>
-            By The Numbers
+            Events First Group By The Numbers
           </span>
         </motion.div>
 

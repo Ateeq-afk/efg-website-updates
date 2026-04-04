@@ -71,9 +71,11 @@ const INITIAL_SHOW = 6;
 
 function HighlightVideoCard({
   videoId,
+  title,
   index,
 }: {
   videoId: string;
+  title: string;
   index: number;
 }) {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -107,7 +109,7 @@ function HighlightVideoCard({
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img loading="lazy"
             src={`https://img.youtube.com/vi/${videoId}/hqdefault.jpg`}
-            alt="Events First Group conference highlights"
+            alt={`${title} — Events First Group technology summit video`}
             className="eh-thumb"
           />
           <div className="eh-overlay" />
@@ -191,6 +193,7 @@ export default function EventHighlights() {
               <HighlightVideoCard
                 key={video.id}
                 videoId={video.id}
+                title={video.title}
                 index={i}
               />
             ))}

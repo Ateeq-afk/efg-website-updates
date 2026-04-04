@@ -18,8 +18,9 @@ const eventSeries = [
     id: "cyber-first",
     title: "Cyber First",
     tagline: "Defending the Digital Frontier",
+    name: "Cyber First",
     description:
-      "Where CISOs, security architects, and cyber leaders gather to shape the future of enterprise defense.",
+      "The Middle East's leading invite-only cybersecurity summit series. Cyber First brings together 300-500 CISOs, government cyber leaders, and security innovators across Kuwait, Qatar, KSA, India, and Kenya for keynotes, panels, and executive networking.",
     editions: 6,
     nations: 4,
     stats: "Kuwait · Qatar · KSA · UAE",
@@ -31,8 +32,9 @@ const eventSeries = [
     id: "ot-security-first",
     title: "OT Security First",
     tagline: "Securing Critical Infrastructure",
+    name: "OT Security First",
     description:
-      "Bridging IT and OT security for the industries that keep the world running — energy, manufacturing, utilities.",
+      "The region's only dedicated OT security and critical infrastructure cybersecurity conference. Covering ICS, SCADA, and industrial control systems security for energy, manufacturing, and utilities sectors across Saudi Arabia and Oman.",
     editions: 3,
     nations: 2,
     stats: "Saudi Arabia · Oman",
@@ -44,8 +46,9 @@ const eventSeries = [
     id: "opex-first",
     title: "Opex First",
     tagline: "Engineering Operational Excellence",
+    name: "Opex First",
     description:
-      "Process transformation, automation, and the frameworks driving efficiency at scale across the modern enterprise.",
+      "The premier operational excellence conference in Saudi Arabia and the GCC. COOs, process excellence leaders, and transformation architects focused on process intelligence, automation, and continuous improvement.",
     editions: 3,
     nations: 3,
     stats: "Dubai · Doha · Riyadh",
@@ -58,8 +61,9 @@ const eventSeries = [
     id: "data-ai-first",
     title: "Digital First",
     tagline: "Intelligence at Scale",
+    name: "Digital First",
     description:
-      "Data strategy, artificial intelligence, and machine learning — for the leaders building the intelligent, autonomous enterprise.",
+      "A C-level data and AI conference series for CDOs, chief analytics officers, and enterprise leaders driving digital transformation. Covering AI strategy, machine learning, and data governance across Kuwait and Qatar.",
     editions: 2,
     nations: 2,
     stats: "Kuwait · Qatar",
