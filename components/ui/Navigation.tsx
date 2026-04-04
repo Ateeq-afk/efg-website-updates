@@ -278,7 +278,7 @@ export default function Navigation() {
               e.currentTarget.style.boxShadow = "none";
             }}
           >
-            Upcoming Events
+            Browse 2026 Events
           </Link>
 
           {/* Mobile Hamburger */}
@@ -390,7 +390,7 @@ export default function Navigation() {
                 }}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                Upcoming Events
+                Browse 2026 Events
               </Link>
             </motion.div>
           </motion.div>

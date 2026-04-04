@@ -101,9 +101,8 @@ export default function Footer() {
             {/* Social Icons */}
             <div className="flex items-center gap-3.5" style={{ marginTop: 24 }}>
               <SocialIcon href="https://www.linkedin.com/company/events-first-group/" icon="linkedin" />
-              <SocialIcon href="https://twitter.com" icon="twitter" />
-              <SocialIcon href="https://youtube.com" icon="youtube" />
-              <SocialIcon href="https://instagram.com" icon="instagram" />
+              <SocialIcon href="https://www.youtube.com/@eventsfirstgroup" icon="youtube" />
+              <SocialIcon href="https://www.instagram.com/eventsfirstgroup/" icon="instagram" />
             </div>
           </div>
 

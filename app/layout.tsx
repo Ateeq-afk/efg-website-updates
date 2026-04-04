@@ -127,6 +127,8 @@ const organizationJsonLd = {
   },
   sameAs: [
     "https://www.linkedin.com/company/events-first-group/",
+    "https://www.youtube.com/@eventsfirstgroup",
+    "https://www.instagram.com/eventsfirstgroup/",
   ],
 };
 
