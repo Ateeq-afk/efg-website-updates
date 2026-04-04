@@ -194,11 +194,13 @@ function StatNumber({
   value: number; suffix: string; label: string;
   hasComma: boolean; delay: number; isInView: boolean;
 }) {
-  const [display, setDisplay] = useState(0);
-  const [landed, setLanded] = useState(false);
+  const [display, setDisplay] = useState(value);
+  const [landed, setLanded] = useState(true);
 
   useEffect(() => {
     if (!isInView) return;
+    setDisplay(0);
+    setLanded(false);
     const timer = setTimeout(() => {
       const controls = animate(0, value, {
         duration: 2,

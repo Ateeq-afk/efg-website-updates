@@ -238,7 +238,7 @@ export default function SponsorsPartners() {
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={logo.src}
-                    alt={logo.name}
+                    alt={`${logo.name} — Events First Group summit sponsor`}
                     loading="lazy"
                     style={{
                       maxHeight: "100%",
@@ -277,7 +277,7 @@ export default function SponsorsPartners() {
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={logo.src}
-                    alt={logo.name}
+                    alt={`${logo.name} — Events First Group summit sponsor`}
                     loading="lazy"
                     style={{
                       maxHeight: "100%",
@@ -316,7 +316,7 @@ export default function SponsorsPartners() {
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={logo.src}
-                    alt={logo.name}
+                    alt={`${logo.name} — Events First Group summit sponsor`}
                     loading="lazy"
                     style={{
                       maxHeight: "100%",
